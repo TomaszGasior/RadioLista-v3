@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+
+			"folder_exclude_patterns": [
+				"bin",
+				"vendor",
+				"var",
+			],
+			"file_exclude_patterns": [
+				".gitignore",
+				"composer.lock",
+				"symfony.lock",
+				"*.sublime-project",
+				".web-server-pid",
+			],
+		}
+	]
+}
