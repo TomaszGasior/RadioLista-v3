@@ -1,3 +1,4 @@
+*.sublime-workspace
 
 ###> symfony/framework-bundle ###
 /.env
@@ -6,4 +7,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-*.sublime-workspace
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
