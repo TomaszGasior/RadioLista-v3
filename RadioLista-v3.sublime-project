@@ -10,12 +10,38 @@
 				"var",
 			],
 			"file_exclude_patterns": [
+				"*.sublime-project",
 				".gitignore",
+				".web-server-pid",
+				"composer.json",
 				"composer.lock",
 				"symfony.lock",
-				"*.sublime-project",
-				".web-server-pid",
 			],
-		}
-	]
+		},
+		{
+			"path": "vendor",
+
+			"folder_exclude_patterns": [
+				"bin",
+			],
+			"file_include_patterns": [
+				"*.php",
+			],
+			"file_exclude_patterns": [
+				"autoload*.php",
+				"*Test.php",
+			],
+		},
+	],
+
+	"settings":
+	{
+		"default_line_ending": "unix",
+		"ensure_newline_at_eof_on_save": true,
+		"rulers": [80, 120],
+		"tab_size": 4,
+		"translate_tabs_to_spaces": false,
+		"trim_trailing_white_space_on_save": true,
+		"word_wrap": "auto",
+	}
 }
