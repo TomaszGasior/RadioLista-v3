@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="RadioTables")
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
  */
 class RadioTable
