@@ -18,9 +18,10 @@ class RadioTable
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="radioTables")
+     * @ORM\JoinColumn(name="ownerId", nullable=false)
      */
-    private $ownerId;
+    private $owner;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -72,14 +73,14 @@ class RadioTable
         return $this->id;
     }
 
-    public function getOwnerId(): ?int
+    public function getOwner(): ?User
     {
-        return $this->ownerId;
+        return $this->owner;
     }
 
-    public function setOwnerId(int $ownerId): self
+    public function setOwner(?User $owner): self
     {
-        $this->ownerId = $ownerId;
+        $this->owner = $owner;
 
         return $this;
     }
