@@ -161,13 +161,6 @@ class RadioTable
         return $this->lastUpdateTime;
     }
 
-    public function setLastUpdateTime(\DateTimeInterface $lastUpdateTime): self
-    {
-        $this->lastUpdateTime = $lastUpdateTime;
-
-        return $this;
-    }
-
     public function getUseKhz(): ?bool
     {
         return $this->useKhz;
@@ -183,12 +176,5 @@ class RadioTable
     public function getRadioStationsCount(): ?int
     {
         return $this->radioStationsCount;
-    }
-
-    public function setRadioStationsCount(int $radioStationsCount): self
-    {
-        $this->radioStationsCount = $radioStationsCount;
-
-        return $this;
     }
 }

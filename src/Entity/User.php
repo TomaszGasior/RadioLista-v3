@@ -91,23 +91,9 @@ class User
         return $this->lastActivityDate;
     }
 
-    public function setLastActivityDate(\DateTimeInterface $lastActivityDate): self
-    {
-        $this->lastActivityDate = $lastActivityDate;
-
-        return $this;
-    }
-
     public function getRegisterDate(): ?\DateTimeInterface
     {
         return $this->registerDate;
-    }
-
-    public function setRegisterDate(\DateTimeInterface $registerDate): self
-    {
-        $this->registerDate = $registerDate;
-
-        return $this;
     }
 
     public function getAboutMe(): ?string
@@ -137,24 +123,5 @@ class User
     public function getRadioTablesCount(): ?int
     {
         return $this->radioTablesCount;
-    }
-
-    public function setRadioTablesCount(?int $radioTablesCount): self
-    {
-        $this->radioTablesCount = $radioTablesCount;
-
-        return $this;
-    }
-
-    public function getOldPassCompat(): ?bool
-    {
-        return $this->oldPassCompat;
-    }
-
-    public function setOldPassCompat(?bool $oldPassCompat): self
-    {
-        $this->oldPassCompat = $oldPassCompat;
-
-        return $this;
     }
 }
