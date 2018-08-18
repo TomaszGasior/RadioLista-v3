@@ -18,9 +18,10 @@ class RadioStation
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable", inversedBy="radioStations")
+     * @ORM\JoinColumn(name="radioTableId", nullable=false)
      */
-    private $radioTableId;
+    private $radioTable;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -97,14 +98,14 @@ class RadioStation
         return $this->id;
     }
 
-    public function getRadioTableId(): ?int
+    public function getRadioTable(): ?RadioTable
     {
-        return $this->radioTableId;
+        return $this->radioTable;
     }
 
-    public function setRadioTableId(int $radioTableId): self
+    public function setRadioTable(?RadioTable $radioTable): self
     {
-        $this->radioTableId = $radioTableId;
+        $this->radioTable = $radioTable;
 
         return $this;
     }

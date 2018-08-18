@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -67,6 +69,16 @@ class RadioTable
      * @ORM\Column(type="integer")
      */
     private $radioStationsCount;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RadioStation", mappedBy="radioTable")
+     */
+    private $radioStations;
+
+    public function __construct()
+    {
+        $this->radioStations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,5 +189,13 @@ class RadioTable
     public function getRadioStationsCount(): ?int
     {
         return $this->radioStationsCount;
+    }
+
+    /**
+     * @return Collection|RadioStation[]
+     */
+    public function getRadioStations(): Collection
+    {
+        return $this->radioStations;
     }
 }
