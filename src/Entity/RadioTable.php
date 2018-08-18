@@ -23,7 +23,7 @@ class RadioTable
     private $ownerId;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
 

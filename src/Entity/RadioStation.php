@@ -53,7 +53,7 @@ class RadioStation
     private $power;
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=true)
+     * @ORM\Column(type="string", length=1)
      */
     private $polarization;
 
