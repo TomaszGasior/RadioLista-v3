@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class PagesController extends AbstractController
 {
     /**
-     * @Route("/strona-glowna", name="homepage")
-     * @Route("")
+     * @Route("", name="homepage")
+     * @Route("/strona-glowna")
      */
     public function homepage()
     {
