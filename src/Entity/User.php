@@ -60,7 +60,7 @@ class User
     private $oldPassCompat;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="owner", orphanRemoval=true)
      */
     private $radioTables;
 
