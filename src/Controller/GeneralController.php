@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PagesController extends AbstractController
+class GeneralController extends AbstractController
 {
     /**
      * @Route("", name="homepage")
@@ -13,7 +13,7 @@ class PagesController extends AbstractController
      */
     public function homepage()
     {
-        return $this->render('pages/homepage.html.twig');
+        return $this->render('general/homepage.html.twig');
     }
 
     /**
@@ -21,7 +21,7 @@ class PagesController extends AbstractController
      */
     public function aboutService()
     {
-        return $this->render('pages/about-service.html.twig');
+        return $this->render('general/about-service.html.twig');
     }
 
     /**
@@ -29,7 +29,7 @@ class PagesController extends AbstractController
      */
     public function termsOfService()
     {
-        return $this->render('pages/terms-of-service.html.twig');
+        return $this->render('general/terms-of-service.html.twig');
     }
 
     /**
@@ -37,7 +37,7 @@ class PagesController extends AbstractController
      */
     public function contactForm()
     {
-        return $this->render('pages/contact.html.twig');
+        return $this->render('general/contact.html.twig');
     }
 
     /**
@@ -45,7 +45,7 @@ class PagesController extends AbstractController
      */
     public function radioTablesList()
     {
-        return $this->render('pages/radiotables-list.html.twig');
+        return $this->render('general/radiotables-list.html.twig');
     }
 
     /**
@@ -53,6 +53,6 @@ class PagesController extends AbstractController
      */
     public function radioTablesSearch()
     {
-        return $this->render('pages/radiotables-search.html.twig');
+        return $this->render('general/radiotables-search.html.twig');
     }
 }

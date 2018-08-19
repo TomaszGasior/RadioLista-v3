@@ -18,9 +18,9 @@ security:
         main:
             anonymous: true
             form_login:
-                login_path: user-session_login
-                check_path: user-session_login
+                login_path: session_login
+                check_path: session_login
                 default_target_path: user_radiotables
             logout:
-                path: user-session_logout
+                path: session_logout
                 target: homepage

@@ -27,12 +27,12 @@
                         <li><a class="username">{{ app.user.name }}</a></li>
                         <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
                         <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
-                        <li><a href="{{ path('user-session_logout') }}">Wyloguj się</a></li>
+                        <li><a href="{{ path('session_logout') }}">Wyloguj się</a></li>
                     </ul>
                     {% else %}
                     <ul>
-                        <li><a href="{{ path('user-session_login') }}">Zaloguj się</a></li>
-                        <li><a href="{{ path('user-session_register') }}">Zarejestruj się</a></li>
+                        <li><a href="{{ path('session_login') }}">Zaloguj się</a></li>
+                        <li><a href="{{ path('session_register') }}">Zarejestruj się</a></li>
                     </ul>
                     {% endif %}
 
