@@ -21,9 +21,10 @@
                 <h1><a href="{{ path('homepage') }}">RadioLista &mdash; wykazy radiowe w Internecie</a></h1>
                 <nav>
                     <h2>Nawigacja</h2>
-                    {% if false %}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <ul>
-                        <li><a class="username">username</a></li>
+                        <li><a class="username">{{ app.user.name }}</a></li>
                         <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
                         <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
                         <li><a href="{{ path('user-session_logout') }}">Wyloguj się</a></li>
