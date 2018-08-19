@@ -3,5 +3,38 @@
 {% block page_title %}Regulamin{% endblock %}
 
 {% block page_content %}
-<p>{{ _self }}</p>
+<header>
+	<h2>Regulamin</h2>
+</header>
+
+<div class="serviceTermsColumns">
+	<article>
+		<h3>Regulamin serwisu</h3>
+		<ol>
+			<li>Użytkownik, korzystając z&nbsp;serwisu, akceptuje niniejszy regulamin, nawet jeśli nie&nbsp;zapoznał się z&nbsp;jego treścią.</li>
+			<li>Usługa oferowana przez serwis RadioLista jest całkowicie darmowa.</li>
+			<li>Podczas przeglądania serwisu, zgodnie z&nbsp;polityką prywatności, na komputerze użytkownika są wykorzystywane mechanizmy składowania danych w&nbsp;przeglądarce internetowej.</li>
+			<li>Twórca serwisu nie upublicznia danych użytkowników. Twórca serwisu zastrzega sobie prawo do ich udostępnienia organom ścigania.</li>
+			<li>Hasło użytkownika przechowywane jest w&nbsp;formie zaszyfrowanej bez możliwości jego odzyskania.</li>
+			<li>Użytkownik nie może utrudniać funkcjonowania serwisu oraz nie może publikować treści łamiących polskie prawo, nielogicznych, wulgarnych.</li>
+			<li>Twórca serwisu zastrzega sobie prawo do usunięcia konta użytkownika, jeśli przez bardzo długi czas nie wykazywał żadnej merytorycznej aktywności, złamał przepisy polskiego prawa lub zasady niniejszego regulaminu.</li>
+			<li>Twórca serwisu dołożył wszelkich starań, aby działał on prawidłowo, jednak nie ponosi odpowiedzialności za skutki wynikające z&nbsp;korzystania z&nbsp;serwisu.</li>
+			<li>Twórca serwisu nie ponosi odpowiedzialności za treści publikowane przez użytkowników. Za zawartość odpowiedzialność ponosi wyłącznie publikujący ją użytkownik.</li>
+			<li>Twórca serwisu nie ponosi odpowiedzialności za upublicznienie lub utratę danych w&nbsp;wyniku włamań, awarii, problemów technicznych, katastrof.</li>
+			<li>Twórca serwisu zastrzega sobie prawo do zmiany treści niniejszego regulaminu.</li>
+		</ol>
+	</article>
+
+	<article>
+		<h3>Polityka prywatności</h3>
+		<ol>
+			<li>Serwis RadioLista używa mechanizmów składowania danych po stronie przeglądarki internetowej.</li>
+			<li>Mechanizm „ciasteczek” jest używany i&nbsp;wymagany do utrzymywania sesji użytkownika po zalogowaniu. Jeśli użytkownik wyłączy mechanizm „ciasteczek”, zalogowanie się nie&nbsp;będzie możliwe.</li>
+			<li>Mechanizm „ciasteczek” jest wykorzystywany do identyfikowania osoby odwiedzającej witrynę, również niezalogowanej, w&nbsp;celu analizowania ruchu w&nbsp;serwisie z&nbsp;wykorzystaniem statystyk odwiedzin.</li>
+			<li>Mechanizm „session storage”, jeśli jest dostępny, jest używany do zapamiętania ostatnio używanej karty w&nbsp;interfejsie użytkownika opartym na kartach.</li>
+		</ol>
+	</article>
+</div>
+
+<p>Ostatnia aktualizacja regulaminu i polityki prywatności: {{ '2016-03-20'|date }}.</p>
 {% endblock %}
