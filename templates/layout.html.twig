@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html class="{% block html_classes %}{% endblock %}" lang="pl">
+    <head>
+        <meta name="viewport" content="initial-scale=1">
+        <meta name="description" content="RadioLista to miejsce, gdzie opublikować możesz wykazy radiowe i telewizyjne — bandscany, regularne wykazy odbieranych stacji czy prywatne listy ulubionych stacji.">
+
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
+
+        <title>{% block head_title %}{% block page_title %}Strona{% endblock %} — RadioLista{% endblock %}</title>
+
+        {% block head_closing %}{% endblock %}
+
+        <!--[if IE]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+    <body class="custBg">
+        <header class="main">
+            <div>
+                <h1><a href="{{ path('homepage') }}">RadioLista &mdash; wykazy radiowe w Internecie</a></h1>
+                <nav>
+                    <h2>Nawigacja</h2>
+                    {% if false %}
+                    <ul>
+                        <li><a class="username">username</a></li>
+                        <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
+                        <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
+                        <li><a href="{{ path('user-session_logout') }}">Wyloguj się</a></li>
+                    </ul>
+                    {% else %}
+                    <ul>
+                        <li><a href="{{ path('user-session_login') }}">Zaloguj się</a></li>
+                        <li><a href="{{ path('user-session_register') }}">Zarejestruj się</a></li>
+                    </ul>
+                    {% endif %}
+
+                    {% block navigation_menu %}{% endblock %}
+                </nav>
+            </div>
+
+            {% if notification is defined %}
+                <span id="notification" class="{% if true %}good{% else %}bad{% endif %}" role="alert">
+                    <span>{{ notification }}</span>
+                </span>
+                <script>
+                    document.getElementById("notification").id = "notification_JSOn";
+                    setTimeout(function(){
+                        document.getElementById("notification_JSOn").className += " hidden"
+                    }, 10000);
+                </script>
+            {% endif %}
+        </header>
+
+        <main>
+            <section>
+                {% block page_content %}{% endblock %}
+            </section>
+        </main>
+
+        <footer class="main custTxt">
+            <p>&copy; Tomasz Gąsior 2012-2018</p>
+            <ul>
+                <li><a href="{{ path('about-service') }}">O stronie</a></li>
+                <li><a href="{{ path('contact-form') }}">Kontakt</a></li>
+                <li><a href="{{ path('terms-of-service') }}">Regulamin</a></li>
+                <li><a href="{{ path('radiotables-list') }}">Wszystkie wykazy</a></li>
+            </ul>
+        </footer>
+
+        {% block body_closing %}{% endblock %}
+
+        <!--[if IE]><div style="background:black;background:rgba(0,0,0,0.4);position:fixed;left:0;right:0;top:0;bottom:0;">.</div><p style="background:white;color:red;padding:1em;border:2px dashed red;font-size:1.6em;position:fixed;top:20%;left:10%;right:10%;">Używasz przestarzałej wersji przeglądarki Internet Explorer. Zainstaluj aktualizację do najnowszej wersji IE lub pobierz inną przeglądarkę.</p><![endif]-->
+    </body>
+</html>
