@@ -1,0 +1,104 @@
+/* Theme: Bieszczady. */
+/* no source */
+
+html.theme_bieszczady .custBg {
+	background: #D1D1D1 url('themes/bg_bieszczady.jpg') no-repeat center / cover fixed;
+}
+html.theme_bieszczady .custTxt {
+	color: #000;
+}
+html.theme_bieszczady div.radioTable tbody tr:hover {
+	background: #E5E5E5;
+}
+html.theme_bieszczady header.main {
+	background: rgba( 255,255,255, 0.5 );
+}
+
+/* Theme: Wood. */
+/* http://blog.pogotowie3d.pl/index.php/darmowa-tekstura-drewna-olcha-sliwa-wallis/ */
+
+html.theme_wood .custBg {
+	background: #C89776 url('themes/bg_wood.jpg') repeat fixed;
+}
+html.theme_wood .custTxt {
+	color: #000;
+}
+html.theme_wood div.radioTable tbody tr:hover  {
+	background: #E6C1A8;
+}
+html.theme_wood div.radioTable td, section.radioTableInfo dl, section.radioTableInfo dl dd:not(:last-child) {
+	border-color: rgba( 170,92,36, 0.2 );
+}
+html.theme_wood header.main {
+	background: rgba( 255,255,255, 0.65 );
+}
+
+/* Theme: Rainbow. */
+/* http://www.publicdomainpictures.net/view-image.php?image=25019&picture=dark-clouds-and-rainbow/ */
+
+html.theme_rainbow .custBg {
+	background: #919692 url('themes/bg_rainbow.jpg') no-repeat center / cover fixed;
+}
+html.theme_rainbow .custTxt {
+	color: #0B0024;
+	text-shadow: 0 0 2px #999;
+}
+html.theme_rainbow div.radioTable div#rdsPopup_JSOn, html.theme_night div.radioTable span.rds {
+	text-shadow: none;
+}
+html.theme_rainbow div.radioTable td, section.radioTableInfo dl, section.radioTableInfo dl dd:not(:last-child) {
+	border-color: rgba( 0,0,0, 0.1 );
+}
+html.theme_rainbow header.main {
+	background: rgba( 255,255,255, 0.45 );
+}
+
+/* Theme: Night. */
+/* http://magdeleine.co/photo-by-caleb-ralston-n-491/ */
+
+html.theme_night .custBg {
+	background: #314b5e url('themes/bg_night.jpg') no-repeat center / cover fixed;
+}
+html.theme_night .custTxt {
+	color: #eee;
+	text-shadow: 0 0 2px #111;
+}
+html.theme_night .custTxt a {
+	border-color: rgba( 255,255,255, 0.6 );
+}
+html.theme_night div.radioTable div#rdsPopup_JSOn, html.theme_night div.radioTable span.rds {
+	text-shadow: none;
+}
+html.theme_night div.radioTable tbody tr:hover  {
+	background: rgba( 0,0,0, 0.35 );
+}
+html.theme_night div.radioTable td, section.radioTableInfo dl, section.radioTableInfo dl dd:not(:last-child) {
+	border-color: rgba( 255,255,255, 0.1 );
+}
+html.theme_night div.radioTable tr.marker4, html.theme_night div.radioTable tr.marker5, html.theme_night div.radioTable tr.marker6 {
+	color: #000;
+	text-shadow: 0 0 2px #aaa;
+}
+html.theme_night header.main {
+	background: rgba( 255,255,255, 0.8 );
+	box-shadow: 0 0 3px #555;
+}
+html.theme_night footer.main {
+	border-color: #444;
+}
+
+
+/* Preview. */
+
+.preview_bieszczady {
+	background: url('themes/preview.jpg') 0 0px;
+}
+.preview_wood {
+	background: url('themes/preview.jpg') 0 -130px;
+}
+.preview_rainbow {
+	background: url('themes/preview.jpg') 0 -260px;
+}
+.preview_night {
+	background: url('themes/preview.jpg') 0 -390px;
+}

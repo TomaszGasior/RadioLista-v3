@@ -1,0 +1,1526 @@
+/* General styles. */
+
+@font-face {
+	font-family: "LatoLatinWeb";
+	src: url('fonts/LatoLatin-Regular.woff') format('woff'), url('fonts/LatoLatin-Regular.ttf') format('truetype');
+	font-style: normal; font-weight: normal; text-rendering: optimizeLegibility;
+}
+@font-face {
+	font-family: "LatoLatinWeb";
+	src: url('fonts/LatoLatin-Heavy.woff') format('woff'), url('fonts/LatoLatin-Heavy.ttf') format('truetype');
+	font-style: normal; font-weight: bold; text-rendering: optimizeLegibility;
+}
+@font-face {
+	font-family: "LatoLatinWeb";
+	src: url('fonts/LatoLatin-Italic.woff') format('woff'), url('fonts/LatoLatin-Italic.ttf') format('truetype');
+	font-style: italic; font-weight: normal; text-rendering: optimizeLegibility;
+}
+@font-face {
+	font-family: "Inconsolata";
+	src: url('fonts/Inconsolata.woff') format('woff'), url('fonts/Inconsolata.ttf') format('truetype');
+}
+
+body {
+	font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
+	color: black;
+	/*background: #F2FFEB radial-gradient( #FFF, #E7FFDB ) fixed;*/
+	background: #F2FFEB radial-gradient( #FFF, #EEFFE6 ) fixed;
+
+	/* Old temporal background color caused by Firefox's performace issues. */
+	/*background: #F7FFF3;*/
+
+	cursor: default;
+	overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #D66200;
+	transition: linear 0.1s color;
+
+	text-decoration: none;
+	border: none;
+	outline: none;
+}
+a:hover {
+	text-decoration: underline;
+	color: #0084FF;
+}
+a:active {
+	color: #64BE00;
+}
+a:focus:not(:hover):not(:active) {
+	text-decoration: underline;
+	outline: 1px dashed #F07F1F;
+	outline-offset: 2px;
+}
+
+
+/* Site width. */
+
+header.main div, main {
+	max-width: 1000px;
+}
+@media ( min-width: 1600px ) {
+	header.main div, main {
+		max-width: 1300px;
+	}
+}
+
+
+/* Header and footer. */
+
+header.main {
+	background: rgba( 255,255,255, 0.6 );
+	box-shadow: 0 0 5px rgba( 0,0,0, 0.2 );  /* box-shadow version for Chrome and IE. */
+	padding: 0.6em 2em;
+}
+@supports ( (-moz-user-select: none) or (-o-transition: none) ) {
+	header.main {
+		box-shadow: 0 0 4px rgba( 0,0,0, 0.18 );  /* box-shadow version for Firefox and Opera 12. */
+	}
+}
+
+header.main div {
+	width: 100%;
+	display: table;
+	margin: auto;
+}
+header.main div > * {
+	display: table-cell;
+	vertical-align: top;
+}
+header.main div > *:first-child {
+	width: 1px; /* Mean: use minimal size. */
+}
+
+header.main h1 a {
+	background: url('img/logo.png') no-repeat;
+	width: 245px;
+	height: 62px;
+
+	display: block;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+header.main nav h2 {
+	display: none;
+}
+header.main nav ul {
+	margin: 0;
+	padding-left: 0;
+	list-style-type: none;
+	text-align: right;
+}
+header.main nav li {
+	display: inline;
+}
+header.main nav li:not(:first-child):before {
+	margin-left: 0.4em;
+	margin-right: 0.4em;
+	content: " | ";
+	color: #000 !important;
+	opacity: 0.1;
+	font-size: 0.9em;
+	vertical-align: 1px;
+}
+header.main nav a {
+	text-shadow: 0 0 2px #eee;
+	color: #5D9A3F;
+
+	display: inline-block;
+}
+header.main nav a:hover {
+	color: #EE6D00;
+}
+header.main nav ul:first-of-type {
+	margin: 0.55em 0 0.6em;
+	font-size: 0.8em;
+	color: #8E8E8E;
+}
+header.main nav ul:first-of-type a {
+	color: inherit;
+}
+header.main nav ul:first-of-type a.username {
+	font-weight: bold;
+}
+
+footer.main {
+	font-size: 0.8em;
+	text-align: center;
+
+	border-top: 1px solid rgba( 0,0,0, 0.11 );
+	padding: 1em 0 2.6em 0;
+	margin-top: 2em;
+}
+footer.main ul {
+	display: inline;
+	margin-top: 0;
+	padding-left: 0;
+	list-style-type: none;
+}
+footer.main p, footer.main li {
+	display: inline-block;
+	width: auto;
+	margin: 0 10px;
+}
+
+@keyframes notificationShow {
+	from { top: -800px; }
+	to { top: 76px;  }
+}
+@keyframes notificationHide {
+	from { top: 76px; }
+	to { top: -100px; opacity: 0.1; }
+}
+
+span#notification {
+	display: block;
+
+	text-align: center;
+	font-weight: bold;
+}
+span#notification span {
+	background: #ECFFE3;
+	color: #EE6D00;
+	padding: 0.2em 2em;
+}
+span#notification_JSOn {
+	position: absolute;
+	top: 76px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	height: 1px;
+
+	animation-name: notificationShow;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+}
+span#notification_JSOn span {
+	display: inline-block;
+	min-width: 400px;
+	max-width: 800px;
+
+	text-align: center;
+	font-weight: bold;
+	background: rgba( 255,247,189, 0.6 );
+	padding: 0.8em 1.5em;
+	box-shadow: 0 0 3px rgba( 0,0,0, 0.2 );
+	border-radius: 2px;
+	color: #000;
+}
+span#notification_JSOn.bad span {
+	background: rgba( 255,0,0, 0.7 );
+	color: #FFF;
+}
+span#notification_JSOn.hidden {
+	top: -100px;
+
+	animation-name: notificationHide;
+	animation-duration: 0.75s;
+	animation-timing-function: ease-in;
+}
+
+
+/* Main content and page title. */
+
+main {
+	padding: 0.5em 2em;
+	margin: auto;
+	min-height: 500px;
+
+	display: block; /* Opera 12. */
+}
+
+main > section > header h2 {
+	color: #EE6D00;
+	margin: 0.5em 0 1.5rem 0;
+	font-size: 2em;
+	text-shadow: 0 0 2px #eee;
+
+	font-weight: normal;
+}
+
+main h3 {
+	font-size: 1.6em;
+	margin: 1rem 0;
+	text-shadow: 0 0 2px #eee;
+
+	font-weight: normal;
+}
+
+
+/* Forms - tabbed interface. */
+
+div#useTabbedUI_JSOn > div {
+	background: rgba( 255,255,255, 0.37 );
+	padding: 0.5em 1.2em;
+	border: 1px solid #D2D2D2;
+}
+div#useTabbedUI_JSOn > div:not(.currentTab) {
+	display: none;
+}
+
+div#useTabbedUI_JSOn > ul.tabsNavigator {
+	padding-left: 0;
+	list-style-type: none;
+	margin-bottom: -1px;
+
+	vertical-align: bottom;
+}
+
+div#useTabbedUI_JSOn > ul.tabsNavigator li {
+	display: inline;
+}
+div#useTabbedUI_JSOn > ul.tabsNavigator li button {
+	margin-right: 0.4em;
+	padding: 0.6em 0.9em 0.2em 0.9em;
+	background: rgba( 255,255,255, 0.37 );
+	border: 1px solid #D2D2D2;
+	border-bottom-color: rgba( 255,255,255, 0.8 );
+
+	white-space: nowrap;
+	display: inline-block;
+	outline-style: none;
+	color: inherit;
+	transition-property: opacity;
+	width: auto;
+	font-weight: normal;
+	margin-top: 0;
+}
+div#useTabbedUI_JSOn > ul.tabsNavigator li button:focus:not(:hover):not(:active) {
+	opacity: 1;
+	outline-style: dashed;
+}
+div#useTabbedUI_JSOn > ul.tabsNavigator li button:not(.currentTabNavigator) {
+	opacity: 0.63;
+	border-bottom: 0;
+	padding-top: 0.2em;
+}
+
+
+/* Forms - elements. */
+
+input, textarea, select, button, div.fakeCheckbox {
+	font-size: 0.88em;
+	width: 100%;
+	padding: 5px 11px;
+	background: #F3F3F3;
+	color: black;
+	box-shadow: inset 2px 2px 2px #DEDEDE;
+	border: 1px solid #C2C2C2;
+
+	outline: none;
+	font: inherit;
+	box-sizing: border-box;
+}
+input::-webkit-calendar-picker-indicator { /* Remove ugly arrow from inputs with datalist attribute. */
+	display: none;
+}
+
+input:hover, textarea:hover, select:hover, button:hover {
+	cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+	outline: 1px solid #F07F1F;
+}
+input:focus, textarea:focus {
+	cursor: text;
+}
+
+textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+input[type="number"] {
+	width: 80px;
+	text-align: center;
+	margin-right: 0.2em;
+}
+input[type="number"].decimal {
+	width: 100px;
+}
+input[type="search"], input[type="search"]::-webkit-search-cancel-button { /* Search input in WebKit. */
+	-webkit-appearance: none;
+}
+
+
+select {
+	-moz-appearance: none; /* Hide default arrow and apply customized arrow.  */
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg height='16px' width='35px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+	background-position: center right;
+	background-repeat: no-repeat;
+}
+select::-ms-expand {  /* Such as appearance:none but for IE. */
+    display: none;
+}
+@supports ( -moz-user-select: none ) {  /* Set less horizontal padding for Firefox. */
+	select {
+		padding-left: 7px;
+		padding-right: 7px;
+	}
+}
+
+option[selected] {
+	font-weight: bold;
+}
+option[selected]:after {
+	content: " (wybrane)";
+	font-weight: normal;
+	opacity: 0.5;
+}
+
+select:-moz-focusring {  /* Dirty hack for removing dotted border inside select in Firefox. */
+    color: black;
+    color: rgba(0,0,0,0);
+    text-shadow: 0 0 0 black;
+}
+option {
+	text-shadow: none !important;
+	color: black !important;
+}
+
+button {
+	max-width: 40%;
+	margin: 1em auto 0;
+	background: #F2FFC6;
+	color: #F07F1F;
+	font-weight: bold;
+	transition: linear 0.1s background-color;
+
+	display: block;
+	box-shadow: none;
+}
+button::-moz-focus-inner {
+	border: none !important;  /* Removes Firefox dotted border inside button. */
+}
+button:hover:not(:disabled), button:focus {
+	background: #F07F1F;
+	color: #F2FFC6;
+}
+button:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	width: auto;
+	cursor: pointer !important;
+	margin-top: 7px;
+}
+input.hiddenCheckbox_JSOn {
+	opacity: 0;
+	outline: none !important; /* Opera 12. */
+	padding: 0; /* Opera 12. */
+
+	width: 17px;
+	height: 17px;
+	margin: 0 !important;
+	margin: 0 -18px 0 0 !important;  /* Move real checkbox over fake checkbox. */
+	vertical-align: bottom;
+	position: relative;  /* Real checkbox is unvisible, but must be at top layer of page. */
+	z-index: 2;
+}
+
+div.fakeCheckbox {
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	padding: 0;
+}
+div.fakeCheckbox span {
+	display: block;
+	width: 9px;
+	height: 9px;
+	margin: 3px 0 0 3px;
+
+	padding-top: 10px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+input:focus + div.fakeCheckbox {
+	outline: 1px solid #F07F1F;
+}
+input:checked + div.fakeCheckbox span {
+	background: #FF7500;
+}
+input[type="radio"] + div.fakeCheckbox, input[type="radio"] + div.fakeCheckbox span {
+	border-radius: 8px;
+}
+
+input.jscolor {  /* Special input for JSColor script. */
+	max-width: 200px;
+}
+input.jscolor:not([style=""]) { /* Dirty hack for box-shadow removing. */
+	box-shadow: none;
+}
+
+label {
+	display: block;
+	cursor: pointer;
+}
+
+
+/* Forms - descriptions list tag. */
+
+form dl dt {
+	width: 40%;
+	box-sizing: border-box;
+
+	float: left;
+	clear: both;
+}
+
+form dl dd {
+	float: left;
+	width: 60%;
+	margin-left: 0;
+}
+
+form dl dt, form dl dd {
+	margin-bottom: 0.78em;
+}
+
+form dl:after {  /* This pseudoelement fix behavior of dl tag caused by floating. */
+	content: ".";
+	opacity: 0;
+	display: block;
+	clear: both;
+}
+form dl {
+	margin-bottom: -0.78em; /* Remove area from dl:after and margin from dt and dd tags. */
+}
+
+form dt.checkboxes {
+	float: right;
+	width: 60%;
+	padding-right: 0;
+}
+form dt.checkboxes + dd {
+	float: left;
+	width: 40%;
+	text-align: right;
+}
+form dt.checkboxes + dd div.fakeCheckbox {
+	margin: 7px 15px 0 0;
+}
+form dt.checkboxes label {
+	margin-right: 0;
+}
+
+@media all and ( min-width: 800px ) {
+	form dl.checkboxesWithFullWidth dt.checkboxes {
+		width: 95%;
+	}
+	form dl.checkboxesWithFullWidth dt.checkboxes + dd {
+		width: 5%;
+	}
+}
+
+form dl dt label {
+	margin: 5px 20px 0 0;
+}
+form dl dd input[type="checkbox"], form dl dd input[type="radio"] {
+	margin-top: 8px;
+	margin-right: 15px;
+}
+
+form dl + button {
+	margin: 0.2em auto 1em;
+	background: #E9FFD3;
+	color: #4F9D00;
+}
+form dl + button:hover:not(:disabled), form dl + button:focus {
+	background: #61C100;
+}
+
+
+/* Radiotable. */
+
+div.radioTable {
+	margin: 0 -0.4em;  /* Visually reset vertical padding of table cells (table > tbody > td). */
+	font-size: 0.96em;
+
+	overflow-x: auto;
+	position: relative;
+
+	background-size: 40px 100%;
+	background-repeat: no-repeat;
+}
+
+div.radioTable.overflowRight {
+	background-image: linear-gradient( 90deg, transparent, rgba( 0,0,0, 0.1 ) );
+	background-position: right;
+}
+div.radioTable.overflowLeft {
+	background-image: linear-gradient( 90deg, rgba( 0,0,0, 0.1 ), transparent );
+	background-position: left;
+}
+div.radioTable.overflowLeft.overflowRight {
+	background-image: linear-gradient( 90deg, transparent, rgba( 0,0,0, 0.1 ) ), linear-gradient( 90deg, rgba( 0,0,0, 0.1 ), transparent );
+	background-position: right, left;
+}
+
+
+div.radioTable table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+div.radioTable td, div.radioTable th {
+	padding: 0.31em 0.5em;
+	text-align: left;
+}
+div.radioTable th {
+	padding-bottom: 0.5em;
+	color: #477E2D;
+	font-weight: normal;
+}
+div.radioTable td {
+	border-top: 1px solid rgba( 0,0,0, 0.05 );
+}
+@supports( -webkit-app-region: initial ) {
+	/* Version of rows separator for webkit-based browsers. */
+	div.radioTable td {
+		border-top: 1px solid rgba( 0,0,0, 0.025 );
+	}
+}
+
+div.radioTable th:focus, div.radioTable th.sortedA, div.radioTable th.sortedZ {
+	text-decoration: underline;
+	outline: none !important;
+}
+@supports( -o-transition: none ) {  /* Opera 12. */
+	div.radioTable th:focus, div.radioTable th.sortedA, div.radioTable th.sortedZ {
+		outline: hidden !important;
+	}
+}
+div.radioTable th:after {
+	position: absolute;
+	padding-left: 2px;
+	opacity: 0.8;
+	text-decoration: none !important;
+}
+div.radioTable th.sortedA:after {
+	content: "↓";
+}
+div.radioTable th.sortedZ:after {
+	content: "↑";
+}
+div.radioTable th[data-sort] {
+	cursor: pointer;
+}
+
+div.radioTable tbody tr {
+	transition: background 0.1s, box-shadow 0.5s;
+}
+div.radioTable tbody tr:hover {
+	background: rgba( 250,230,205, 0.8 );
+}
+
+div.radioTable tr.marker1 {
+	font-weight: bold;
+}
+div.radioTable tr.marker2 {
+	font-style: italic;
+}
+div.radioTable tr.marker3 {
+	text-decoration: line-through;
+}
+div.radioTable tr.marker4 {
+	background: rgba( 255,209,209, 0.65 ) !important;
+}
+div.radioTable tr.marker5 {
+	background: rgba( 175,255,150, 0.65 ) !important;
+}
+div.radioTable tr.marker6 {
+	background: rgba( 156,230,255, 0.65 ) !important;
+}
+
+div.radioTable span.quality {
+	color: rgba( 0,0,0, 0 );
+	display: block;
+	text-shadow: none !important;  /* Some radiotables themes adds text shadow to table. */
+
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+div.radioTable span.quality:before {
+	text-shadow: 0 0 2px #CCC;
+	margin-right: -10px;
+	letter-spacing: 2px;
+
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+div.radioTable span.quality.q5:before {
+	color: #0BB300;
+	content: "●●●●●";
+}
+div.radioTable span.quality.q4:before {
+	color: #A8D300;
+	content: "●●●●";
+}
+div.radioTable span.quality.q3:before {
+	color: #BDAC00;
+	content: "●●●";
+}
+div.radioTable span.quality.q2:before {
+	color: #FF5E00;
+	content: "●●";
+}
+div.radioTable span.quality.q1:before {
+	color: #FF0017;
+	content: "●";
+}
+
+div.radioTable small {
+	font-size: 0.7em;
+	vertical-align: 2px;
+}
+
+div.radioTable abbr {
+	text-decoration: none;
+	border-bottom: 1px dotted #ccc;
+}
+
+div.radioTable span.rds {
+	white-space: pre;
+	background: rgba( 160,160,160, 0.2 );
+	font-family: Inconsolata, Consolas, "Source Code Pro", "Lucida Console", monospace;
+	color: black;
+	padding: 1px 3px;
+	transition: background 0.2s, color 0.2s;
+
+	font-weight: normal; /* Reset markers styles. */
+	font-style: normal;
+	text-decoration: none;
+}
+div.radioTable span.rds:hover, div.radioTable span.rds:focus {
+	background: rgba( 0,0,0, 0.7 );
+	color: #fff;
+
+	outline: none;
+}
+
+div.radioTable span.niApply2:before { /* Indent for columns with numeric values in radiotable. */
+	content: '00';
+	opacity: 0;
+}
+div.radioTable span.niApply1:before {
+	content: '0';
+	opacity: 0;
+}
+
+
+/* RDS popup. */
+
+div#rdsPopup_JSOn {
+	background: #fff;
+	color: #000;
+	border: 1px solid #eee;
+	box-shadow: 0 0 3px rgba( 0,0,0, 0.4 );
+	width: 430px;
+
+	opacity: 0;
+	animation-name: rdsPopupShow;
+	animation-duration: 0.3s;
+	animation-delay: 0.3s;
+	animation-fill-mode: forwards;
+
+	position: fixed;
+	/* left and top property will be set by JS script. */
+}
+
+div#rdsPopup_JSOn h3 {
+	background: #eee;
+	color: #555;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	text-align: center;
+
+	padding: 0.1em 0;
+	margin: 0;
+}
+
+div#rdsPopup_JSOn dl {
+	font-size: 0.8em;
+	margin: 1.2em 1.2em;
+	margin-bottom: -0.5em;
+}
+div#rdsPopup_JSOn dl:after {
+	clear: both;
+	display: block;
+	content: ".";
+	opacity: 0;
+}
+div#rdsPopup_JSOn dl dt {
+	float: left;
+	width: 12%;
+	margin-bottom: 0.5em;
+
+	font-weight: bold;
+	clear: left;
+}
+div#rdsPopup_JSOn dl dt:after {
+	content: ":";
+}
+div#rdsPopup_JSOn dl dd {
+	float: left;
+	width: 88%;
+	margin-bottom: 0.5em;
+
+	margin-left: 0;
+}
+
+div#rdsPopup_JSOn dl dd span {
+	display: inline-block;
+	margin: 0 9px 4px 0;
+	border-bottom: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
+
+	white-space: pre;
+	background: rgba( 160,160,160, 0.2 );
+	font-family: Inconsolata, Consolas, "Source Code Pro", "Lucida Console", monospace;
+}
+
+div#rdsPopup_JSOn dl dd div {
+	margin-bottom: 3px;
+}
+div#rdsPopup_JSOn dl dd div span {
+	border-top: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
+	border-bottom: 1px solid transparent;
+
+	display: inline;
+	white-space: pre-wrap !important;
+	margin: 0;
+}
+
+@keyframes rdsPopupShow {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+
+/* Radiotable informations section. */
+
+section.radioTableInfo {
+	margin-top: 1.5em;
+	line-height: 1.5em;
+}
+section.radioTableInfo h3 {
+	display: none;
+}
+section.radioTableInfo p {
+	margin: 0.4em 0;
+}
+
+section.radioTableInfo dl {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+
+	border-top: 1px solid rgba( 0,0,0, 0.05 );
+	font-size: 0.9em;
+	margin-top: 1.5rem;
+	padding: 0.8em 2em 0 2em;
+	box-sizing: border-box;
+}
+section.radioTableInfo dl > * {
+	display: table-cell;
+	vertical-align: middle;
+
+	padding: 0 0.5em;
+}
+section.radioTableInfo dl dt {
+	text-align: right;
+}
+section.radioTableInfo dl dd {
+	text-align: left;
+}
+section.radioTableInfo dl dt:after {
+	content: ":";
+}
+section.radioTableInfo dl dd:not(:last-child) {
+	border-right: 1px solid rgba( 0,0,0, 0.05 );
+}
+
+
+/* User profile page. */
+
+section.userProfile.userInfo {
+	margin-bottom: 1.5em;
+	line-height: 1.5em;
+}
+section.userProfile h3 {
+	color: #5D9A3F;
+	line-height: 1.1em;
+}
+
+section.userProfile.userInfo dl {
+	display: table;
+	margin: auto;
+	text-align: center;
+	font-style: italic;
+}
+section.userProfile.userInfo dl > * {
+	display: table-cell;
+	vertical-align: middle;
+}
+section.userProfile.userInfo dl dt:after {
+	content: ":";
+}
+section.userProfile.userInfo dl dt:not(:first-child) {
+	padding-left: 1.8em;
+}
+section.userProfile.userInfo dl dd {
+	padding-left: 0.8em;
+}
+
+
+/* Customized styles for whole site specified by <html> tag class. */
+
+html.fullWidth header.main div, html.fullWidth main {
+	max-width: 100%;
+}
+@media (min-width: 900px) {
+	html.fullWidth header.main, html.fullWidth main {
+		padding-left: 4%;
+		padding-right: 4%;
+	}
+}
+
+html.customizedRadioTable header.main {
+	background: rgba( 255,255,255, 0.9 );
+}
+html.customizedRadioTable div.radioTable span.quality:before {
+	text-shadow: 0 0 1px #000;
+}
+html.customizedRadioTable div.radioTable span.rds:not(:focus):not(:hover) {
+	background: rgba( 200,200,200, 0.8 );
+}
+html.customizedRadioTable div.radioTable tbody tr:hover {
+	background: rgba( 200,200,200, 0.5 );
+}
+html.customizedRadioTable .custTxt th {
+	color: inherit;
+	opacity: 0.8;
+	text-shadow: 0 0 0 red;
+}
+html.customizedRadioTable .custTxt a {
+	color: inherit;
+	border-bottom: 1px dotted currentColor;
+}
+html.customizedRadioTable .custTxt a:focus {
+	outline-color: currentColor;
+}
+
+
+/* Columns order form in radiotable settings. */
+
+dl.radioTableColumnsForm_JSOn {
+	width: 80%;
+	margin: 1.7em auto 0.8em auto;
+}
+
+dl.radioTableColumnsForm_JSOn > * {
+	background: #F3F3F3;
+	box-shadow: inset 2px 2px 2px #DEDEDE;
+	border: 1px solid #C2C2C2;
+	height: 3em;
+	padding: 0.5em 1em;
+
+	position: relative;
+	box-sizing: border-box;
+	white-space: nowrap;
+}
+dl.radioTableColumnsForm_JSOn dt {
+	padding-top: 0.9em;
+	border-right: none;
+	width: 30%;
+
+	right: -3px;
+	z-index: 5;
+}
+dl.radioTableColumnsForm_JSOn dd {
+	text-align: right;
+	border-left: none;
+	width: 70%;
+
+	left: -3px;
+	z-index: 4;
+}
+dl.radioTableColumnsForm_JSOn dt.hiddenColumn, dl.radioTableColumnsForm_JSOn dd.hiddenColumn {
+	background: #FBFBFB;
+	box-shadow: inset 2px 2px 2px #efefef;
+	border-color: #dfdfdf;
+}
+dl.radioTableColumnsForm_JSOn dt.hiddenColumn label {
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+
+dl.radioTableColumnsForm_JSOn label {
+	margin: -1px 0 0 0;
+}
+dl.radioTableColumnsForm_JSOn label:hover {
+	cursor: inherit !important;
+}
+dl.radioTableColumnsForm_JSOn button {
+	display: inline;
+	width: auto;
+	height: 2em;
+	width: 85px;
+	margin: 0 0 0 0.6em;
+}
+
+
+/* User radiotables list. */
+
+dl.radioTablesList > dt, dl.radioTablesList > dd {
+	background: rgba( 255,255,255, 0.37 );
+	border: 1px solid #D2D2D2;
+	padding: 0 1.4em;
+
+	margin: 0;
+	white-space: nowrap;
+}
+dl.radioTablesList > dt {
+	padding-top: 1em;
+	border-bottom: none;
+
+	margin-top: 1.3em;
+
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	color: #E96B00;          /* For dots from text-overflow. */
+}
+dl.radioTablesList > dt a {
+	font-size: 1.6em;
+}
+
+dl.radioTablesList > dd {
+	padding-bottom: 1em;
+	border-top: none;
+}
+dl.radioTablesList > dd dl {
+	margin: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+dl.radioTablesList > dd dt, dl.radioTablesList > dd dd {
+	font-size: 0.8em;
+
+	display: inline;
+	margin-left: 0;
+}
+dl.radioTablesList > dd dt:after {
+	content: ":";
+}
+dl.radioTablesList > dd dt:not(:first-child) {
+	margin-left: 1em;
+}
+
+dl.radioTablesList.withActions > dd ul {
+	text-align: right;
+	line-height: 0; /* Dirty hack for proper bottom padding. */
+
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+dl.radioTablesList.withActions > dd ul li {
+	position: relative;
+	top: -1.5em;
+	display: inline-block;
+}
+dl.radioTablesList.withActions > dd ul li:not(:first-child):before {
+	margin-left: 0.4em;
+	margin-right: 0.4em;
+	content: "|";
+	color: #000 !important;
+	opacity: 0.1;
+	font-size: 0.9em;
+	vertical-align: 1px;
+}
+dl.radioTablesList.withActions > dd ul li a {
+	text-shadow: 0 0 2px #eee;
+	color: #5D9A3F;
+}
+dl.radioTablesList.withActions > dd ul li a:hover {
+	color: #EE6D00;
+}
+dl.radioTablesList.withActions > dd dl {
+	padding-right: 180px;    /* Space for actions anchors located in ul. */
+}
+dl.radioTablesList.withActions > dt {
+	padding-right: 200px;    /* Space for actions anchors located in ul. */
+}
+
+
+/* User login/register screen. */
+
+div.userLoginScreen {
+	max-width: 400px;
+	margin: auto;
+}
+
+div.userLoginScreen dl > *:not(.checkboxes) {
+	float: none;
+	width: 100%;
+	margin-top: 0.78em !important;
+}
+
+@media all and ( min-width: 800px ) {
+	div.userLoginScreen dl dt.checkboxes + dd {
+		width: 9%;
+	}
+	div.userLoginScreen dl dt.checkboxes {
+		width: 91%;
+	}
+}
+
+header.userLoginScreen {
+	visibility: hidden;
+	height: 10px;
+}
+
+
+/* RDS fields in radiostaton editing form. */
+
+dl.radioStationRdsEdit textarea, dl.radioStationRdsEdit input {
+	font-family: Inconsolata, Consolas, monospace;
+}
+
+
+/* Icons in radiotable status form. */
+
+dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes + dd {
+	width: 20%;
+	padding: 0.9em 0;
+}
+dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes {
+	width: 80%;
+	padding: 0.9em 0;
+}
+
+dl.radioTableStatusForm dd {
+	background-repeat: no-repeat;
+	background-image: url('img/rlstatus.png'); /* http://ionicons.com/ */
+}
+dl.radioTableStatusForm dd:nth-of-type(1) {
+	background-position: 40% -2px;
+}
+dl.radioTableStatusForm dd:nth-of-type(2) {
+	background-position: 40% -66px;
+}
+dl.radioTableStatusForm dd:nth-of-type(3) {
+	background-position: 40% -130px;
+}
+
+
+/* Searching form. */
+
+form.searchForm {
+	width: 100%;
+	display: table;
+	margin: 1.5em 0;
+}
+form.searchForm dl, form.searchForm button {
+	display: table-cell;
+	max-width: 100%;
+	margin: 0;
+}
+form.searchForm dl {
+	width: 100%;
+}
+form.searchForm button {
+	width: 80px;
+}
+
+form.searchForm dl:after {
+	display: none;
+}
+form.searchForm dl dt {
+	display: none;
+}
+form.searchForm dl dd {
+	margin-right: 0.6em;
+
+	float: none;
+	width: auto;
+}
+
+
+/* Theme selection is radiotable settings. */
+
+@media (max-width: 849px) {
+	dl.radioTableThemeSelection_JSOn dd {
+		background: none;   /* Disable preview as background, when is used fallback selection. */
+	}
+}
+@media (min-width: 850px) {
+
+	dl.radioTableThemeSelection_JSOn {
+		margin: 1.5em 0 -0.5em 0;
+	}
+	dl.radioTableThemeSelection_JSOn > * {
+		float: left !important;
+		width: 130px !important;
+		height: 130px !important;
+		clear: none;
+		margin: 0 10px 0 0;
+		box-sizing: border-box;
+
+		border: 1px solid #eee;
+		padding-top: 93px;
+	}
+
+	dl.radioTableThemeSelection_JSOn dt {
+		text-align: left;
+		padding-left: 33px;
+		font-size: 0.8em;
+
+		position: relative;
+		margin-right: -140px;
+	}
+	dl.radioTableThemeSelection_JSOn dd {
+		text-align: left !important;
+		padding-left: 10px;
+		background-color: #eee;
+	}
+
+	dl.radioTableThemeSelection_JSOn dt label {
+		margin: 6px 0 0 0;
+		text-shadow: 0 0 2px #fff;
+	}
+	dl.radioTableThemeSelection_JSOn dt label span {
+		display: none;
+	}
+
+}
+
+
+/* Button for default radiotable appearance. */
+
+button#defaultRadioTableAppearance {
+	display: none;
+}
+button#defaultRadioTableAppearance_JSOn {
+	width: auto;
+	font-size: 0.8em;
+	margin-right: 0;
+}
+@media ( min-width: 700px ) {
+	button#defaultRadioTableAppearance_JSOn {
+		margin-top: -160px;
+		margin-right: 0;
+		float: right;
+	}
+	@media ( max-width: 850px ) {
+		button#defaultRadioTableAppearance_JSOn {
+			width: 100px;
+			margin-top: -177px;
+		}
+	}
+}
+
+
+/* Radiostation select box during copying and removing. */
+
+dl.radioStationsSelectBox {
+	max-height: 500px;
+	overflow-y: auto;
+	margin-bottom: 1.5em;
+}
+dl.radioStationsSelectBox:after {
+	display: none;
+}
+
+
+/* Information boxes. */
+
+p.information {
+	box-shadow: 0 0 2px #eee;
+	padding: 2em 155px 2em 2em;
+	background: rgba( 180,240,255, 0.35 ) url('img/infosymbol.png') no-repeat right bottom;
+	/* https://www.iconfinder.com/icons/763457/circle_detail_help_info_information_more_outline_stroke_icon */
+}
+p.information a {
+	color: #0088C6;
+}
+div#useTabbedUI_JSOn p.information {
+	box-shadow: none;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+
+/* Homepage styles. */
+
+header.home {
+	display: none;
+}
+
+@media ( min-width: 900px ) {
+	div.homeColumns {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+	div.homeColumns > div {
+		display: table-cell;
+	}
+	div.homeColumns > div:first-child {
+		padding-right: 1em;
+	}
+	div.homeColumns > div:last-child {
+		padding-left: 1em;
+	}
+}
+
+section.home {
+	background: rgba( 255,255,255, 0.4 );
+	box-shadow: 0 0 2px rgba( 0,0,0, 0.15 );
+	padding: 0.2em 1.3em 0.4em;
+	margin: 2em 0;
+}
+section.home h3 {
+	font-size: 1.4em;
+	padding-bottom: 4px;
+	border-bottom: 1px solid rgba( 200,200,200, 0.3 );
+	color: #4A673C;
+}
+
+section.home p {
+	line-height: 1.35em;
+}
+
+section.home ol {
+	list-style: none;
+	padding-left: 0;
+}
+section.home ol li {
+	display: table;
+	table-layout: fixed;
+	margin: 0.3em 0;
+	padding: 0.05em 0;
+	width: 100%;
+}
+section.home ol li > * {
+	display: table-cell;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+section.home ol li time {
+	text-overflow: clip;
+	width: 30%;
+	text-align: right;
+	color: rgba( 0,0,0, 0.4 );
+	font-size: 0.7em;
+	vertical-align: middle;
+}
+section.home ol span {
+	display: none;
+}
+
+section.home dl:after {
+	margin-bottom: -0.4em;
+}
+section.home dt label {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+section.home.sprzGrob {
+	text-align: center;
+	padding: 0;
+}
+section.home.sprzGrob a {
+	color: #0a8eff;
+	text-shadow: 0 0 3px rgba( 0,0,0, 0.2 );
+	font-weight: bold;
+	font-size: 1.2em;
+
+	padding: 0.7em;
+	display: block;
+}
+section.home.sprzGrob h3 {
+	font-size: 0.7em;
+	text-shadow: 0 0 3px white;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	opacity: 0.3;
+
+	border: 0;
+	margin: 0;
+	line-height: 0;
+	padding-bottom: 1px;
+}
+
+
+/* List of sorting in all radiotables list. */
+
+ul.radioTablesAllSort {
+	padding-left: 0;
+	display: table;
+	margin: auto;
+}
+ul.radioTablesAllSort li {
+	display: table-cell;
+	text-align: center;
+}
+ul.radioTablesAllSort li:not(:first-child) {
+	padding-left: 2em;
+}
+ul.radioTablesAllSort li a {
+	color: #5D9A3F;
+}
+ul.radioTablesAllSort li a.selected {
+	font-weight: bold;
+}
+
+
+/* Contact form page. */
+
+form.contactForm {
+	max-width: 700px;
+	margin: auto;
+}
+form.contactForm textarea {
+	min-height: 170px;
+}
+
+form.contactForm p {
+	line-height: 1.5em;
+	margin-bottom: 1.7em;
+}
+
+
+/* Service terms page. */
+
+div.serviceTermsColumns {
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+@media ( min-width: 900px ) {
+	div.serviceTermsColumns {
+		display: table;
+	}
+	div.serviceTermsColumns > * {
+		display: table-cell;
+		line-height: 1.5em;
+	}
+	div.serviceTermsColumns article:last-child {
+		width: 37%;
+		padding-left: 3em;
+	}
+	div.serviceTermsColumns h3 {
+		margin-top: 0;
+	}
+}
+
+div.serviceTermsColumns ol {
+	padding-left: 1.5em;
+}
+div.serviceTermsColumns ol li {
+	padding-left: 0.3em;
+	margin: 0.3em 0;
+}
+
+div.serviceTermsColumns + p {
+	font-style: italic;
+	text-align: center;
+}
+
+
+/* About page box. */
+
+div.aboutPage {
+	line-height: 1.6em;
+	max-width: 700px;
+	margin: auto;
+
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+div.aboutPage p {
+	margin: 0.3em 0;
+}
+
+
+/* CKEditor. */
+
+.cke_chrome {
+	box-shadow: none !important;
+	border: none !important;
+}
+.cke_chrome.cke_focus {
+	outline: 1px solid #F07F1F !important;
+}
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a {
+	font-family: inherit !important;
+}
+
+.cke_chrome .cke_inner {
+	background: rgba( 224,224,224, 0.3 ) !important;
+}
+.cke_chrome .cke_wysiwyg_div {
+	padding: 2px 11px !important;
+	background: #F3F3F3 !important;
+	border: 1px solid #C2C2C2 !important;
+	box-shadow: inset 2px 2px 2px #DEDEDE !important;
+}
+.cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
+	box-shadow: none !important;
+	border: 1px solid #C2C2C2 !important;
+	background: none !important;
+}
+.cke_chrome span.cke_top {
+	border-bottom: none !important;
+}
+.cke_chrome span.cke_bottom {
+	border-top: none !important;
+}
+.cke_chrome .cke_wordcount {
+	text-transform: lowercase;
+	padding: 1px 0.7em 0 0;
+}
+.cke_chrome .cke_wordcount span {
+	cursor: default !important;
+}
+
+.cke_chrome .cke_wysiwyg_div p, .cke_chrome .cke_wysiwyg_div ul, .cke_chrome .cke_wysiwyg_div ol {
+	margin: 0.8em 0;
+}
+
+.cke_dialog_body {
+	box-shadow: 0 0 6px #222 !important;
+}
+.cke_dialog_body .cke_resizer {
+	display: none !important;
+}
+.cke_dialog_body option[value="anchor"] {
+	display: none !important;
+}
+select.cke_dialog_ui_input_select {
+	-moz-appearance: menulist;
+	-webkit-appearance: menulist;
+	background-image: none;
+}
