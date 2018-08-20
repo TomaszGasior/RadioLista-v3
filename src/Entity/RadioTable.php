@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RadioTable
 {
+    public const SORTING_FREQUENCY      = 'frequency';
+    public const SORTING_NAME           = 'name';
+    public const SORTING_PRIVATE_NUMBER = 'privateNumber';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
