@@ -4,3 +4,5 @@ twig:
     strict_variables: '%kernel.debug%'
     date:
         format: 'j F Y'
+    form_themes:
+        - 'form/fields.html.twig'

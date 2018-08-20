@@ -1,0 +1,19 @@
+{% block form_row %}
+<dt>
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+</dt>
+<dd>
+    {{ form_widget(form) }}
+</dd>
+{% endblock form_row %}
+
+{% block checkbox_row %}
+<dt class="checkboxes">
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+</dt>
+<dd>
+    {{ form_widget(form) }}
+</dd>
+{% endblock checkbox_row %}
