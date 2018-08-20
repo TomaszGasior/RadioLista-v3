@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\RadioTable;
+use App\Form\RadioTableSettingsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RadioTableController extends AbstractController
@@ -24,11 +27,21 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/ustawienia-wykazu", name="radiotable_settings")
+     * @Route("/ustawienia-wykazu/{id}", name="radiotable_settings")
      */
-    public function settings()
+    public function settings(RadioTable $radioTable, Request $request)
     {
-        return $this->render('radiotable/settings.html.twig');
+        $form = $this->createForm(RadioTableSettingsType::class, $radioTable);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            dump($form->getData());exit;
+        }
+
+        return $this->render('radiotable/settings.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
