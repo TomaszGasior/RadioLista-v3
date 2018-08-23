@@ -15,7 +15,7 @@ function createColumnsOrderUI() {
 		temporaryArray    = [];
 	for( var i=0; i<interfaceCount; i++ ) {
 		temporaryArray['dd']    = interfaceDDTags[i];
-		temporaryArray['dt']    = interfaceDDTags[i].previousSibling;
+		temporaryArray['dt']    = interfaceDDTags[i].previousElementSibling;
 		temporaryArray['input'] = interfaceDDTags[i].firstElementChild;
 
 		// Validate interface elements array content. Exit when is not valid.
