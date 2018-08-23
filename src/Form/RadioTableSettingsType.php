@@ -5,8 +5,11 @@ namespace App\Form;
 use App\Entity\RadioTable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioTableSettingsType extends AbstractType
@@ -35,9 +38,19 @@ class RadioTableSettingsType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Opis wykazu',
             ])
-            // ->add('status')
-            // ->add('columns')
-            // ->add('appearance')
+            ->add('status', ChoiceType::class, [
+                'expanded' => true,
+                'choices' => [
+                    'Publiczny — wykaz może zobaczyć każdy'     => RadioTable::STATUS_PUBLIC,
+                    'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
+                        => RadioTable::STATUS_UNLISTED,
+                    'Prywatny — wykaz możesz zobaczyć tylko ty' => RadioTable::STATUS_PRIVATE,
+                ],
+            ])
+            ->add('columns', null, [
+                'entry_type' => IntegerType::class,
+                // Label for each children is defined in finishView().
+            ])
         ;
     }
 
@@ -46,5 +59,27 @@ class RadioTableSettingsType extends AbstractType
         $resolver->setDefaults([
             'data_class' => RadioTable::class,
         ]);
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        $columnsNames = [
+            'privateNumber' => 'Numer w odbiorniku',
+            'frequency'     => 'Częstotliwość',
+            'name'          => 'Nazwa',
+            'radioGroup'    => 'Grupa medialna',
+            'country'       => 'Kraj',
+            'location'      => 'Lokalizacja nadajnika',
+            'power'         => 'Moc nadajnika',
+            'polarization'  => 'Polaryzacja',
+            'type'          => 'Rodzaj programu',
+            'locality'      => 'Lokalność programu',
+            'quality'       => 'Jakość odbioru',
+            'rds'           => 'RDS',
+            'comment'       => 'Komentarz',
+        ];
+        foreach ($view->children['columns']->children as $name => $childrenView) {
+            $childrenView->vars['label'] = $columnsNames[$name];
+        }
     }
 }
