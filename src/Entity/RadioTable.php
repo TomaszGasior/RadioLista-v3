@@ -16,6 +16,10 @@ class RadioTable
     public const SORTING_NAME           = 'name';
     public const SORTING_PRIVATE_NUMBER = 'privateNumber';
 
+    public const STATUS_PUBLIC   = 1;
+    public const STATUS_UNLISTED = 0;
+    public const STATUS_PRIVATE  = -1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
