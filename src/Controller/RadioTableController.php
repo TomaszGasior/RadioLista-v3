@@ -51,9 +51,6 @@ class RadioTableController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $radioTable = $form->getData();
-
-            $entityManager->persist($radioTable);
             $entityManager->flush();
         }
 
