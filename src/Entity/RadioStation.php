@@ -23,14 +23,22 @@ class RadioStation
     public const QUALITY_VERY_BAD  = 1;
 
     public const TYPE_MUSIC       = 1;
-    public const TYPE_UNIVERSAL   = 2;
-    public const TYPE_INFORMATION = 3;
+    public const TYPE_INFORMATION = 2;
+    public const TYPE_UNIVERSAL   = 3;
     public const TYPE_RELIGIOUS   = 4;
-    public const TYPE_OTHER       = 5;
+    public const TYPE_OTHER       = 0;
 
     public const LOCALITY_COUNTRY = 1;
     public const LOCALITY_LOCAL   = 2;
     public const LOCALITY_NETWORK = 3;
+
+    public const MARKER_1    = 1;
+    public const MARKER_2    = 2;
+    public const MARKER_3    = 3;
+    public const MARKER_4    = 4;
+    public const MARKER_5    = 5;
+    public const MARKER_6    = 6;
+    public const MARKER_NONE = null;
 
     /**
      * @ORM\Id()
@@ -93,7 +101,7 @@ class RadioStation
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $marker;
+    private $marker = self::MARKER_NONE;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
