@@ -10,6 +10,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RadioStation
 {
+    public const POLARIZATION_HORIZONTAL = 'H';
+    public const POLARIZATION_VERTICAL   = 'V';
+    public const POLARIZATION_CIRCULAR   = 'C';
+    public const POLARIZATION_VARIOUS    = 'M';
+    public const POLARIZATION_NONE       = '';
+
+    public const QUALITY_VERY_GOOD = 5;
+    public const QUALITY_GOOD      = 4;
+    public const QUALITY_MIDDLE    = 3;
+    public const QUALITY_BAD       = 2;
+    public const QUALITY_VERY_BAD  = 1;
+
+    public const TYPE_MUSIC       = 1;
+    public const TYPE_UNIVERSAL   = 2;
+    public const TYPE_INFORMATION = 3;
+    public const TYPE_RELIGIOUS   = 4;
+    public const TYPE_OTHER       = 5;
+
+    public const LOCALITY_COUNTRY = 1;
+    public const LOCALITY_LOCAL   = 2;
+    public const LOCALITY_NETWORK = 3;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -56,7 +78,7 @@ class RadioStation
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private $polarization;
+    private $polarization = self::POLARIZATION_NONE;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -66,7 +88,7 @@ class RadioStation
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $quality;
+    private $quality = self::QUALITY_VERY_GOOD;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -76,17 +98,24 @@ class RadioStation
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $type;
+    private $type = self::TYPE_MUSIC;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $locality;
+    private $locality = [
+        'type' => self::LOCALITY_COUNTRY,
+        'city' => '',
+    ];
 
     /**
      * @ORM\Column(type="array")
      */
-    private $rds;
+    private $rds = [
+        'rt'  => '',
+        'ps'  => '',
+        'pty' => '',
+    ];
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
