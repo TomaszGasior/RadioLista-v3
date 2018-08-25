@@ -41,17 +41,31 @@ class RadioTable
     /**
      * @ORM\Column(type="smallint")
      */
-    private $status;
+    private $status = self::STATUS_PUBLIC;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $columns;
+    private $columns = [
+        'frequency'     =>  1,
+        'privateNumber' => -2,
+        'name'          =>  3,
+        'radioGroup'    =>  4,
+        'country'       => -5,
+        'location'      =>  6,
+        'power'         => -7,
+        'polarization'  => -8,
+        'type'          =>  9,
+        'locality'      =>  10,
+        'quality'       =>  11,
+        'rds'           =>  12,
+        'comment'       => -13,
+    ];
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private $sorting;
+    private $sorting = self::SORTING_FREQUENCY;
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=true)
@@ -61,7 +75,13 @@ class RadioTable
     /**
      * @ORM\Column(type="array")
      */
-    private $appearance;
+    private $appearance = [
+        'th'   => '',
+        'bg'   => '',
+        'fg'   => '',
+        'img'  => '',
+        'full' => false,
+    ];
 
     /**
      * @ORM\Column(type="datetime")
@@ -71,12 +91,12 @@ class RadioTable
     /**
      * @ORM\Column(type="boolean")
      */
-    private $useKhz;
+    private $useKhz = false;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $radioStationsCount;
+    private $radioStationsCount = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RadioStation", mappedBy="radioTable")
@@ -85,6 +105,7 @@ class RadioTable
 
     public function __construct()
     {
+        $this->lastUpdateTime = new \DateTime;
         $this->radioStations = new ArrayCollection();
     }
 
@@ -177,7 +198,7 @@ class RadioTable
         return $this;
     }
 
-    public function getLastUpdateTime(): ?\DateTimeInterface
+    public function getLastUpdateTime(): \DateTimeInterface
     {
         return $this->lastUpdateTime;
     }
