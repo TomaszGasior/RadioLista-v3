@@ -8,8 +8,9 @@ security:
     encoders:
         rl_v2:
             algorithm: bcrypt
+            cost: 12
         rl_v1:
-            algorithm: sha1
+            id: App\Security\RLv1Encoder
 
     firewalls:
         dev:

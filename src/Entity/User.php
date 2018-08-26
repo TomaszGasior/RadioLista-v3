@@ -160,6 +160,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     public function getSalt(): ?string
     {
+        if ($this->oldPassCompat) {
+            return $this->registerDate->format('Y-m-d');
+        }
+
         return null;
     }
 
@@ -180,6 +184,9 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
             $this->id,
             $this->name,
             $this->password,
+
+            $this->registerDate,
+            $this->oldPassCompat
         ]);
     }
 
@@ -189,7 +196,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
             $this->id,
             $this->name,
             $this->password,
-        ) = unserialize($serialized, ['allowed_classes' => false]);
+
+            $this->registerDate,
+            $this->oldPassCompat
+        ) = unserialize($serialized, ['allowed_classes' => ['DateTime']]);
     }
 
     // EncoderAwareInterface
