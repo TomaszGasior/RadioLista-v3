@@ -3,40 +3,40 @@
 {% block page_title %}Tworzenie wykazu{% endblock %}
 
 {% block head_closing %}
-<script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
 {% endblock %}
 
 {% block page_content %}
-<header>
-    <h2>Utwórz wykaz</h2>
-</header>
+    <header>
+        <h2>Utwórz wykaz</h2>
+    </header>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
 
-<div id="useTabbedUI">
-	<div>
-		<h3>Główne</h3>
+    <div id="useTabbedUI">
+        <div>
+            <h3>Główne</h3>
 
-		<p class="information">W nazwie i opisie wykazu warto umieścić lokalizację (np. miejscowość lub województwo). Te&nbsp;informacje są używane przy przeszukiwaniu wykazów. Można je później zmienić.</p>
+            <p class="information">W nazwie i opisie wykazu warto umieścić lokalizację (np. miejscowość lub województwo). Te&nbsp;informacje są używane przy przeszukiwaniu wykazów. Można je później zmienić.</p>
 
-		<dl>
-			{{ form_row(form.name) }}
-			{{ form_row(form.useKhz) }}
-			{{ form_row(form.sorting) }}
-			{{ form_row(form.description) }}
-		</dl>
-	</div>
+            <dl>
+                {{ form_row(form.name) }}
+                {{ form_row(form.useKhz) }}
+                {{ form_row(form.sorting) }}
+                {{ form_row(form.description) }}
+            </dl>
+        </div>
 
-	<div>
-		<h3>Widoczność</h3>
+        <div>
+            <h3>Widoczność</h3>
 
-		<dl class="radioTableStatusForm checkboxesWithFullWidth">
-			{{ form_row(form.status) }}
-		</dl>
-	</div>
-</div>
+            <dl class="radioTableStatusForm checkboxesWithFullWidth">
+                {{ form_row(form.status) }}
+            </dl>
+        </div>
+    </div>
 
-<button>Utwórz wykaz</button>
+    <button>Utwórz wykaz</button>
 
-{{ form_end(form) }}
+    {{ form_end(form) }}
 {% endblock %}

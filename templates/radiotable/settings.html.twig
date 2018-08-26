@@ -3,49 +3,49 @@
 {% block page_title %}Ustawienia wykazu{% endblock %}
 
 {% block head_closing %}
-<script src="{{ asset('scripts/formsUI.js') }}" defer></script>
-<script src="{{ asset('scripts/radioTableColumnsUI.js') }}" defer></script>
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+    <script src="{{ asset('scripts/radioTableColumnsUI.js') }}" defer></script>
 {% endblock %}
 
 {% block page_content %}
-<header>
-    <h2>Ustawienia wykazu</h2>
-</header>
+    <header>
+        <h2>Ustawienia wykazu</h2>
+    </header>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
 
-<div id="useTabbedUI">
-	<div>
-		<h3>Główne</h3>
+    <div id="useTabbedUI">
+        <div>
+            <h3>Główne</h3>
 
-		<dl>
-			{{ form_row(form.name) }}
-			{{ form_row(form.useKhz) }}
-			{{ form_row(form.sorting) }}
-			{{ form_row(form.description) }}
-		</dl>
-	</div>
+            <dl>
+                {{ form_row(form.name) }}
+                {{ form_row(form.useKhz) }}
+                {{ form_row(form.sorting) }}
+                {{ form_row(form.description) }}
+            </dl>
+        </div>
 
-	<div>
-		<h3>Widoczność</h3>
+        <div>
+            <h3>Widoczność</h3>
 
-		<dl class="radioTableStatusForm checkboxesWithFullWidth">
-			{{ form_row(form.status) }}
-		</dl>
-	</div>
+            <dl class="radioTableStatusForm checkboxesWithFullWidth">
+                {{ form_row(form.status) }}
+            </dl>
+        </div>
 
-	<div>
-		<h3>Kolumny</h3>
+        <div>
+            <h3>Kolumny</h3>
 
-		<noscript><p class="information">Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Liczby nie mogą się powtarzać i&nbsp;nie można używać zera. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
+            <noscript><p class="information">Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Liczby nie mogą się powtarzać i&nbsp;nie można używać zera. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
 
-		<dl class="radioTableColumnsForm">
-			{{ form_row(form.columns) }}
-		</dl>
-	</div>
-</div>
+            <dl class="radioTableColumnsForm">
+                {{ form_row(form.columns) }}
+            </dl>
+        </div>
+    </div>
 
-<button>Zapisz</button>
+    <button>Zapisz</button>
 
-{{ form_end(form) }}
+    {{ form_end(form) }}
 {% endblock %}

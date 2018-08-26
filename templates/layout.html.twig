@@ -8,7 +8,11 @@
         <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
 
-        <title>{% block head_title %}{% block page_title %}Strona{% endblock %} — RadioLista{% endblock %}</title>
+        {% if block("page_title") %}
+            <title>{% block page_title %}{% endblock %} — RadioLista</title>
+        {% else %}
+            <title>RadioLista — wykazy radiowe w Internecie</title>
+        {% endif %}
 
         {% block head_closing %}{% endblock %}
 
@@ -18,22 +22,22 @@
     <body class="custBg">
         <header class="main">
             <div>
-                <h1><a href="{{ path('homepage') }}">RadioLista &mdash; wykazy radiowe w Internecie</a></h1>
+                <h1><a href="{{ path('homepage') }}">RadioLista — wykazy radiowe w Internecie</a></h1>
                 <nav>
                     <h2>Nawigacja</h2>
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <ul>
-                        <li><a class="username">{{ app.user.name }}</a></li>
-                        <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
-                        <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
-                        <li><a href="{{ path('session_logout') }}">Wyloguj się</a></li>
-                    </ul>
-                    {% else %}
-                    <ul>
-                        <li><a href="{{ path('session_login') }}">Zaloguj się</a></li>
-                        <li><a href="{{ path('session_register') }}">Zarejestruj się</a></li>
-                    </ul>
+                        <ul>
+                            <li><a class="username">{{ app.user.name }}</a></li>
+                            <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
+                            <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
+                            <li><a href="{{ path('session_logout') }}">Wyloguj się</a></li>
+                        </ul>
+                        {% else %}
+                        <ul>
+                            <li><a href="{{ path('session_login') }}">Zaloguj się</a></li>
+                            <li><a href="{{ path('session_register') }}">Zarejestruj się</a></li>
+                        </ul>
                     {% endif %}
 
                     {% block navigation_menu %}{% endblock %}

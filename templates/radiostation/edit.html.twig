@@ -3,77 +3,77 @@
 {% block page_title %}Edycja stacji{% endblock %}
 
 {% block head_closing %}
-<script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
 {% endblock %}
 
 {% block page_content %}
-<header>
-    <h2>Edycja stacji</h2>
-</header>
+    <header>
+        <h2>Edycja stacji</h2>
+    </header>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
 
-<div id="useTabbedUI">
-	<div>
-		<h3>Główne</h3>
+    <div id="useTabbedUI">
+        <div>
+            <h3>Główne</h3>
 
-		<dl>
-			{{ form_row(form.frequency) }}
-			{{ form_row(form.name) }}
-			{{ form_row(form.radioGroup) }}
-			{{ form_row(form.country) }}
-			{{ form_row(form.quality) }}
-		</dl>
-	</div>
-	<div>
-		<h3>Nadawanie i audycje</h3>
+            <dl>
+                {{ form_row(form.frequency) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.radioGroup) }}
+                {{ form_row(form.country) }}
+                {{ form_row(form.quality) }}
+            </dl>
+        </div>
+        <div>
+            <h3>Nadawanie i audycje</h3>
 
-		<dl>
-			{{ form_row(form.location) }}
-			{{ form_row(form.power) }}
-			{{ form_row(form.polarization) }}
-			{{ form_row(form.type) }}
-			{{ form_row(form.localityType, {'attr': {'class': 'localityType'}}) }}
-			{{ form_row(form.localityCity, {'attr': {'class': 'localityCity'}}) }}
-		</dl>
+            <dl>
+                {{ form_row(form.location) }}
+                {{ form_row(form.power) }}
+                {{ form_row(form.polarization) }}
+                {{ form_row(form.type) }}
+                {{ form_row(form.localityType, {'attr': {'class': 'localityType'}}) }}
+                {{ form_row(form.localityCity, {'attr': {'class': 'localityCity'}}) }}
+            </dl>
 
-		<script>
-			var localityInput     = document.querySelector('select.localityType');
-			var localityInput_dd  = document.querySelector('input.localityCity').parentElement;
-			var localityInput_dt  = localityInput_dd.previousElementSibling;
+            <script>
+                var localityInput     = document.querySelector('select.localityType');
+                var localityInput_dd  = document.querySelector('input.localityCity').parentElement;
+                var localityInput_dt  = localityInput_dd.previousElementSibling;
 
-			function toogleLocalityTextInput() {
-				localityInput_dd.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
-				localityInput_dt.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
-			}
-			toogleLocalityTextInput();
-			localityInput.onchange = toogleLocalityTextInput;
-			localityInput.onblur   = toogleLocalityTextInput;
-		</script>
-	</div>
-	<div>
-		<h3>Osobiste</h3>
+                function toogleLocalityTextInput() {
+                    localityInput_dd.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
+                    localityInput_dt.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
+                }
+                toogleLocalityTextInput();
+                localityInput.onchange = toogleLocalityTextInput;
+                localityInput.onblur   = toogleLocalityTextInput;
+            </script>
+        </div>
+        <div>
+            <h3>Osobiste</h3>
 
-		<dl>
-			{{ form_row(form.privateNumber) }}
-			{{ form_row(form.marker) }}
-			{{ form_row(form.comment) }}
-		</dl>
-	</div>
-	<div>
-		<h3>RDS</h3>
+            <dl>
+                {{ form_row(form.privateNumber) }}
+                {{ form_row(form.marker) }}
+                {{ form_row(form.comment) }}
+            </dl>
+        </div>
+        <div>
+            <h3>RDS</h3>
 
-		<p class="information">Poszczególne klatki PS oraz części RT rodziel znakiem pionowej kreski.</p>
+            <p class="information">Poszczególne klatki PS oraz części RT rodziel znakiem pionowej kreski.</p>
 
-		<dl>
-			{{ form_row(form.rdsPs) }}
-			{{ form_row(form.rdsRt) }}
-			{{ form_row(form.rdsPty) }}
-		</dl>
-	</div>
-</div>
+            <dl>
+                {{ form_row(form.rdsPs) }}
+                {{ form_row(form.rdsRt) }}
+                {{ form_row(form.rdsPty) }}
+            </dl>
+        </div>
+    </div>
 
-<button>Zapisz stację</button>
+    <button>Zapisz stację</button>
 
-{{ form_end(form) }}
+    {{ form_end(form) }}
 {% endblock %}
