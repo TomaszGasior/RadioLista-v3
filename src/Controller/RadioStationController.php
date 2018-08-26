@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioStationController extends AbstractController
 {
     /**
-     * @Route("/dodaj-stacje", name="radiostation_add")
+     * @Route("/dodaj-stacje/{id}", name="radiostation_add")
      */
-    public function add()
+    public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('radiostation/add.html.twig');
+        $radioStation = new RadioStation;
+
+        $form = $this->createForm(RadioStationEditType::class, $radioStation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $radioStation->setRadioTable($radioTable);
+
+            $entityManager->persist($radioStation);
+            $entityManager->flush();
+        }
+
+        return $this->render('radiostation/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

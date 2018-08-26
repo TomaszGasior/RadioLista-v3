@@ -2,6 +2,20 @@
 
 {% block page_title %}Dodawanie stacji{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+{% endblock %}
+
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Dodawanie stacji</h2>
+    </header>
+
+    {{ form_start(form) }}
+
+    {% include 'radiostation/_form-tabs.html.twig' %}
+
+    <button>Zapisz stację</button>
+
+    {{ form_end(form) }}
 {% endblock %}
