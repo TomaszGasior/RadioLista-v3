@@ -22,6 +22,12 @@ security:
                 login_path: session_login
                 check_path: session_login
                 default_target_path: user_radiotables
+                username_parameter: session_log_in[username]
+                password_parameter: session_log_in[password]
             logout:
                 path: session_logout
                 target: homepage
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800   # 1 week.
+                remember_me_parameter: session_log_in[rememberMe]

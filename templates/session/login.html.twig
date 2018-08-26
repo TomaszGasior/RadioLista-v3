@@ -2,18 +2,38 @@
 
 {% block page_title %}Logowanie{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+{% endblock %}
+
 {% block page_content %}
+    <header class="userLoginScreen">
+        <h2>Konto użytkownika — logowanie i rejestracja</h2>
+    </header>
+
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    {{ form_start(logInForm) }}
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
+    <div id="useTabbedUI" class="userLoginScreen">
+        <div>
+            <h3>Zaloguj się</h3>
 
-        <button type="submit">login</button>
-    </form>
+            <dl>
+                {{ form_row(logInForm.username, {'attr': {'autofocus': ''}}) }}
+                {{ form_row(logInForm.password) }}
+
+                {# Avoid spaces around the checkbox to style it properly. #}
+                {% spaceless %}
+                    {{ form_row(logInForm.rememberMe) }}
+                {% endspaceless %}
+            </dl>
+
+            <button>Zaloguj się</button>
+        </div>
+    </div>
+
+    {{ form_end(logInForm) }}
 {% endblock %}
