@@ -1,0 +1,13 @@
+{%- block decimal_unit_widget -%}
+    {%- set type = "number" -%}
+    {%- set attr = attr|merge({'class': 'decimal', 'step': '0.05', 'min': '0', 'max': '99999'}) -%}
+    {{ block('number_widget') }}
+    {{ unit_label }}
+    <script>
+        {# Enforce leading zeros in typed values ("87.6" -> "87.60"). Works only in Webkit/Blink. ;-( #}
+        {# Do not use "input" event — it looks better but makes manual writing harder. #}
+        document.getElementById('{{ id }}').addEventListener('change', function(){
+            this.value = this.valueAsNumber.toFixed(2);
+        });
+    </script>
+{%- endblock decimal_unit_widget -%}
