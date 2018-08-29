@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\RadioStation;
+use App\Form\Extension\DecimalUnitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +16,9 @@ class RadioStationEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('frequency', null, [
+            ->add('frequency', DecimalUnitType::class, [
                 'label' => 'Częstotliwość',
+                'unit_label' => 'MHz',
             ])
             ->add('name', null, [
                 'label' => 'Nazwa',
@@ -41,8 +42,10 @@ class RadioStationEditType extends AbstractType
             ->add('location', null, [
                 'label' => 'Lokalizacja nadajnika',
             ])
-            ->add('power', null, [
+            ->add('power', DecimalUnitType::class, [
                 'label' => 'Moc nadajnika',
+                'unit_label' => 'kW',
+                'required' => false,
             ])
             ->add('polarization', ChoiceType::class, [
                 'label' => 'Polaryzacja',
