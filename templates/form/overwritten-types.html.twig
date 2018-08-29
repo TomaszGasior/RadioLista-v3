@@ -15,6 +15,7 @@
         {{ form_widget(form) }}
     </dd>
 {% endblock checkbox_row %}
+
 {% block radio_row %}
     {{ block('checkbox_row') }}
 {% endblock radio_row %}
@@ -30,8 +31,3 @@
         {{ form_row(form) }}
     {% endif %}
 {% endblock choice_row %}
-
-{% block collection_row %}
-    {# Do not render additional block for label for collection. #}
-    {{ block('form_rows') }}
-{% endblock collection_row %}

@@ -30,9 +30,4 @@ class DecimalUnitType extends AbstractType
             return 2;
         });
     }
-
-    public function getBlockPrefix()
-    {
-        return 'decimal_unit';
-    }
 }

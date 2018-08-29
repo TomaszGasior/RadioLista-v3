@@ -11,3 +11,8 @@
         });
     </script>
 {%- endblock decimal_unit_widget -%}
+
+{% block labeled_collection_row %}
+    {# Do not render collection label. #}
+    {{ block('form_rows') }}
+{% endblock labeled_collection_row %}
