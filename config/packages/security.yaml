@@ -24,6 +24,9 @@ security:
                 default_target_path: user_radiotables
                 username_parameter: session_log_in[username]
                 password_parameter: session_log_in[password]
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: session_log_in[_token]
+                csrf_token_id: session_log_in
             logout:
                 path: session_logout
                 target: homepage
