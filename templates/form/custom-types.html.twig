@@ -3,16 +3,17 @@
     {%- set attr = attr|merge({'class': 'decimal', 'step': '0.05', 'min': '0', 'max': '99999'}) -%}
     {{ block('number_widget') }}
     {{ unit_label }}
+
     <script>
-        {# Enforce leading zeros in typed values ("87.6" -> "87.60"). Works only in Webkit/Blink. ;-( #}
-        {# Do not use "input" event — it looks better but makes manual writing harder. #}
+        {# Enforce leading zeros in typed values ("87.6" -> "87.60"). Works only in Webkit/Blink. :( #}
+        {# Do not use "input" event — it looks better but makes manual typing harder. #}
         document.getElementById('{{ id }}').addEventListener('change', function(){
             this.value = this.valueAsNumber.toFixed(2);
         });
     </script>
 {%- endblock decimal_unit_widget -%}
 
-{% block labeled_collection_row %}
+{%- block labeled_collection_row -%}
     {# Do not render collection label. #}
     {{ block('form_rows') }}
-{% endblock labeled_collection_row %}
+{%- endblock labeled_collection_row -%}
