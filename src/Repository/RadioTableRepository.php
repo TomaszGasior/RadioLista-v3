@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\RadioTable;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +18,38 @@ class RadioTableRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, RadioTable::class);
+    }
+
+    public function findPublicOrderedByRadioStationsCount()
+    {
+        return $this->findBy(
+            ['status' => RadioTable::STATUS_PUBLIC],
+            ['radioStationsCount' => 'DESC']
+        );
+    }
+
+    public function findPublicOrderedByLastUpdateTime()
+    {
+        return $this->findBy(
+            ['status' => RadioTable::STATUS_PUBLIC],
+            ['lastUpdateTime' => 'DESC']
+        );
+    }
+
+    public function findPublicOrderedByUseKhz()
+    {
+        return $this->findBy(
+            ['status' => RadioTable::STATUS_PUBLIC],
+            ['useKhz' => 'DESC']
+        );
+    }
+
+    public function findOwnedByUser(User $user)
+    {
+        return $this->findBy(
+            ['owner' => $user],
+            ['lastUpdateTime' => 'DESC']
+        );
     }
 
 //    /**
