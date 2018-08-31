@@ -13,9 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioTableController extends AbstractController
 {
     /**
-     * @Route("/wykaz", name="radiotable_show")
+     * @Route("/wykaz/{id}", name="radiotable_show")
      */
-    public function show()
+    public function show(RadioTable $radioTable)
     {
         return $this->render('radiotable/show.html.twig');
     }
