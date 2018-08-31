@@ -17,3 +17,15 @@
     {# Do not render collection label. #}
     {{ block('form_rows') }}
 {%- endblock labeled_collection_row -%}
+
+{%- block text_hints_widget -%}
+    {%- set hints_list_id = id ~ '_hints' -%}
+    <datalist id="{{ hints_list_id }}">
+        {%- for hint in hints -%}
+            <option>{{ hint }}</option>
+        {%- endfor -%}
+    </datalist>
+
+    {%- set attr = attr|merge({'list': hints_list_id}) -%}
+    {{ block('form_widget') }}
+{%- endblock text_hints_widget -%}
