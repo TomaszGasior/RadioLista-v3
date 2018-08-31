@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil", name="user_profile")
+     * @Route("/profil/{name}", name="user_profile")
      */
-    public function publicProfile()
+    public function publicProfile(User $user)
     {
         return $this->render('user/public-profile.html.twig');
     }
@@ -18,9 +20,13 @@ class UserController extends AbstractController
     /**
      * @Route("/moje-wykazy", name="user_radiotables")
      */
-    public function myRadioTables()
+    public function myRadioTables(RadioTableRepository $radioTableRepository)
     {
-        return $this->render('user/my-radiotables.html.twig');
+        $radioTablesList = $radioTableRepository->findOwnedByUser($this->getUser());
+
+        return $this->render('user/my-radiotables.html.twig', [
+            'radioTablesList' => $radioTablesList,
+        ]);
     }
 
     /**

@@ -3,5 +3,17 @@
 {% block page_title %}Moje wykazy{% endblock %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Moje wykazy</h2>
+    </header>
+
+    {% if radioTablesList is empty %}
+        <p class="information">Nie posiadasz jeszcze żadnego wykazu. <a href="{{ path('radiotable_create') }}">To najlepszy moment, żeby to zmienić!</a></p>
+    {% else %}
+        {% set showRadioTableOwner = false %}
+        {% set showRadioTableVisibility = true %}
+        {% set showRadioTableActions = true %}
+        {% include '_shared/radiotables-list.html.twig' %}
+    {% endif %}
 {% endblock %}
+
