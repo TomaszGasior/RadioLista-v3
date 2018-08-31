@@ -14,7 +14,13 @@ class UserController extends AbstractController
      */
     public function publicProfile(User $user)
     {
-        return $this->render('user/public-profile.html.twig');
+        if (!$user->getPublicProfile()) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('user/public-profile.html.twig', [
+            'user' => $user,
+        ]);
     }
 
     /**

@@ -1,7 +1,34 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}login użytkownika{% endblock %}
+{% block page_title %}{{ user.name }}{% endblock %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2><strong>{{ user.name }}</strong> — profil użytkownika</h2>
+    </header>
+
+    {% if user.aboutMe is not empty %}
+        <section class="userProfile userInfo">
+            <h3>Informacje o użytkowniku</h3>
+
+            {{ user.aboutMe|raw }}
+            <dl>
+                <dt>Data ostatniej aktywności</dt>
+                <dd>{{ user.lastActivityDate|date }}</dd>
+                <dt>Data założenia konta</dt>
+                <dd>{{ user.registerDate|date }}</dd>
+            </dl>
+        </section>
+    {% endif %}
+
+    <section class="userProfile">
+        <h3>Wykazy tego użytkownika</h3>
+
+        {% if user.radioTables is not empty %}
+            {% set radioTablesList = user.radioTables %}
+            {% include '_shared/radiotables-list.html.twig' %}
+        {% else %}
+            <p class="information">Ten użytkownik nie utworzył jeszcze żadnego wykazu.</a></p>
+        {% endif %}
+    </section>
 {% endblock %}
