@@ -1,0 +1,54 @@
+{% if showRadioTableOwner is not defined %}
+    {% set showRadioTableOwner = true %}
+{% endif %}
+{% if showRadioTableVisibility is not defined %}
+    {% set showRadioTableVisibility = false %}
+{% endif %}
+{% if showRadioTableActions is not defined %}
+    {% set showRadioTableActions = false %}
+{% endif %}
+
+{% set status_labels = {
+    (constant('STATUS_PUBLIC', radioTablesList[0])): 'publiczny',
+    (constant('STATUS_PRIVATE', radioTablesList[0])): 'prywatny',
+    (constant('STATUS_UNLISTED', radioTablesList[0])): 'niepubliczny',
+} %}
+
+<dl class="radioTablesList withActions">
+    {% for radioTable in radioTablesList %}
+        <dt><a href="{{ path('radiotable_show', {id: radioTable.id}) }}">{{ radioTable.name }}</a></dt>
+
+        <dd>
+            <dl>
+                {% if showRadioTableVisibility %}
+                    <dt>Widoczność</dt>
+                    <dd>{{ status_labels[radioTable.status] }}</dd>
+                {% endif %}
+
+                {% if showRadioTableOwner and radioTable.owner.publicProfile %}
+                    <dt>Autor</dt>
+                    <dd><a href="{{ path('user_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
+                {% endif %}
+
+                <dt>Liczba stacji</dt>
+                <dd>{{ radioTable.radioStationsCount }}</dd>
+
+                <dt>Data aktualizacji</dt>
+                <dd>{{ radioTable.lastUpdateTime|date }}</dd>
+
+                <dt>Jednostka</dt>
+                <dd>{{ radioTable.useKhz ? 'kHz' : 'MHz' }}</dd>
+            </dl>
+
+            {% if showRadioTableActions %}
+                {% spaceless %}
+                    <ul>
+                        <li><a href="{{ path('radiotable_show', {id: radioTable.id}) }}">Zobacz</a></li>
+                        <li><a href="{{ path('radiotable_settings', {id: radioTable.id}) }}">Zmień</a></li>
+                        <li><a href="{{ path('radiotable_remove', {id: radioTable.id}) }}">Usuń</a></li>
+                    </ul>
+                {% endspaceless %}
+            {% endif %}
+        </dd>
+    {% endfor %}
+</dl>
