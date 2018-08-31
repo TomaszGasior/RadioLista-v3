@@ -3,5 +3,25 @@
 {% block page_title %}Wszystkie wykazy{% endblock %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Wszystkie wykazy RadioListy</h2>
+
+        {% set sorting_modes = {
+            1: 'Sortuj według liczby stacji',
+            2: 'Sortuj według daty aktualizacji',
+            3: 'Sortuj według jednostki',
+        } %}
+        <ul class="radioTablesAllSort">
+            {% for id, label in sorting_modes %}
+                <li>
+                    <a {{ app.request.get('sorting') == id ? 'class="selected"' : '' }}
+                        href="{{ path('radiotables-list', {'sorting': id}) }}">
+                        {{ label }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </header>
+
+    {% include '_shared/radiotables-list.html.twig' %}
 {% endblock %}
