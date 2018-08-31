@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\RadioStation;
 use App\Form\Extension\DecimalUnitType;
+use App\Form\Extension\TextHintsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,14 +21,58 @@ class RadioStationEditType extends AbstractType
                 'label' => 'Częstotliwość',
                 'unit_label' => 'MHz',
             ])
-            ->add('name', null, [
+            ->add('name', TextHintsType::class, [
                 'label' => 'Nazwa',
+                'hints' => [
+                    'Polskie Radio Jedynka',
+                    'Polskie Radio Dwójka',
+                    'Polskie Radio Trójka',
+                    'Polskie Radio Czwórka',
+                    'Polskie Radio 24',
+                    'RMF FM',
+                    'RMF Classic',
+                    'RMF Maxxx',
+                    'Zet',
+                    'Chillizet',
+                    'Meloradio',
+                    'AntyRadio',
+                    'Eska',
+                    'Wawa',
+                    'Vox FM',
+                    'Plus',
+                    'Tok FM',
+                    'Złote Przeboje',
+                    'Pogoda',
+                    'Rock Radio',
+                    'Muzo.FM',
+                    'Maryja',
+                ],
             ])
-            ->add('radioGroup', null, [
+            ->add('radioGroup', TextHintsType::class, [
                 'label' => 'Grupa medialna',
+                'required' => false,
+                'hints' => [
+                    'Polskie Radio',
+                    'Audytorium 17',
+                    'Grupa RMF',
+                    'Eurozet',
+                    'Grupa Radiowa Time',
+                    'Grupa Radiowa Agory',
+                ],
             ])
-            ->add('country', null, [
+            ->add('country', TextHintsType::class, [
                 'label' => 'Kraj',
+                'required' => false,
+                'hints' => [
+                    'Polska',
+                    'Białoruś',
+                    'Czechy',
+                    'Litwa',
+                    'Niemcy',
+                    'Ukraina',
+                    'Rosja',
+                    'Słowacja',
+                ],
             ])
             ->add('quality', ChoiceType::class, [
                 'label' => 'Jakość odbioru',
@@ -77,9 +122,28 @@ class RadioStationEditType extends AbstractType
                     'sieciowy'      => RadioStation::LOCALITY_NETWORK,
                 ],
             ])
-            ->add('localityCity', null, [
+            ->add('localityCity', TextHintsType::class, [
                 'property_path' => 'locality[city]',
                 'label' => 'Lokalność — miasto/województwo',
+                'required' => false,
+                'hints' => [
+                    'dolnośląskie',
+                    'kujawsko-pomorskie',
+                    'lubelskie',
+                    'lubuskie',
+                    'łódzkie',
+                    'małopolskie',
+                    'mazowieckie',
+                    'opolskie',
+                    'podkarpackie',
+                    'podlaskie',
+                    'pomorskie',
+                    'śląskie',
+                    'świętokrzyskie',
+                    'warmińsko-mazurskie',
+                    'wielkopolskie',
+                    'zachodniopomorskie',
+                ],
             ])
             ->add('privateNumber', null, [
                 'label' => 'Numer w odbiorniku',
