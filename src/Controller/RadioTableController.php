@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RadioTable;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableSettingsType;
+use App\Renderer\RadioTableRenderer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,17 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/wykaz/{id}", name="radiotable_show")
      */
-    public function show(RadioTable $radioTable)
+    public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer)
     {
-        return $this->render('radiotable/show.html.twig');
+        $radioTableCode = $radioTableRenderer->render(
+            $radioTable,
+            null
+        );
+
+        return $this->render('radiotable/show.html.twig', [
+            'radioTable' => $radioTable,
+            'radioTableCode' => $radioTableCode,
+        ]);
     }
 
     /**
