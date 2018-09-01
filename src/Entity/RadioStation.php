@@ -48,7 +48,7 @@ class RadioStation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable", inversedBy="radioStations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable")
      * @ORM\JoinColumn(name="radioTableId", nullable=false)
      */
     private $radioTable;
