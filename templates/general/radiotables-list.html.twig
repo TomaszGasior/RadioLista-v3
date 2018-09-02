@@ -15,7 +15,7 @@
             {% for id, label in sorting_modes %}
                 <li>
                     <a {{ app.request.get('sorting') == id ? 'class="selected"' : '' }}
-                        href="{{ path('radiotables-list', {'sorting': id}) }}">
+                        href="{{ path('all_radiotables', {'sorting': id}) }}">
                         {{ label }}
                     </a>
                 </li>

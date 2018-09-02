@@ -19,16 +19,16 @@ security:
         main:
             anonymous: true
             form_login:
-                login_path: session_login
-                check_path: session_login
-                default_target_path: user_radiotables
+                login_path: security.login
+                check_path: security.login
+                default_target_path: user.my_radiotables
                 username_parameter: session_log_in[username]
                 password_parameter: session_log_in[password]
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: session_log_in[_token]
                 csrf_token_id: session_log_in
             logout:
-                path: session_logout
+                path: security.logout
                 target: homepage
             remember_me:
                 secret: '%kernel.secret%'

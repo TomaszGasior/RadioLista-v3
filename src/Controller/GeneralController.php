@@ -19,7 +19,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/o-stronie", name="about-service")
+     * @Route("/o-stronie", name="about_service")
      */
     public function aboutService()
     {
@@ -27,7 +27,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/regulamin", name="terms-of-service")
+     * @Route("/regulamin", name="terms_of_service")
      */
     public function termsOfService()
     {
@@ -35,7 +35,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/kontakt", name="contact-form")
+     * @Route("/kontakt", name="contact")
      */
     public function contactForm()
     {
@@ -43,7 +43,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/wszystkie-wykazy/{sorting}", name="radiotables-list", requirements={"sorting": "1|2|3"})
+     * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"})
      */
     public function radioTablesList(RadioTableRepository $radioTableRepository, $sorting = 1)
     {
@@ -65,7 +65,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/szukaj", name="radiotables-search")
+     * @Route("/szukaj", name="search_radiotables")
      */
     public function radioTablesSearch()
     {

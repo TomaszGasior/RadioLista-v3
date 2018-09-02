@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil/{name}", name="user_profile")
+     * @Route("/profil/{name}", name="user.public_profile")
      */
     public function publicProfile(User $user)
     {
@@ -24,7 +24,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moje-wykazy", name="user_radiotables")
+     * @Route("/moje-wykazy", name="user.my_radiotables")
      */
     public function myRadioTables(RadioTableRepository $radioTableRepository)
     {
@@ -36,10 +36,18 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/ustawienia-konta", name="user_settings")
+     * @Route("/ustawienia-konta", name="user.my_account_settings")
      */
     public function accountSettings()
     {
         return $this->render('user/account-settings.html.twig');
+    }
+
+    /**
+     * @Route("/rejestracja", name="user.register")
+     */
+    public function register()
+    {
+        return $this->render('session/register.html.twig');
     }
 }

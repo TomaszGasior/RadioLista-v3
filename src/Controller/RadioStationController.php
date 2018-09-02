@@ -6,6 +6,7 @@ use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioStationController extends AbstractController
 {
     /**
-     * @Route("/dodaj-stacje/{id}", name="radiostation_add")
+     * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
+     * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      */
     public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager)
     {
@@ -35,7 +37,7 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/edytuj-stacje/{id}", name="radiostation_edit")
+     * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
      */
     public function edit(RadioStation $radioStation, Request $request, EntityManagerInterface $entityManager)
     {
@@ -52,7 +54,7 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/kopiuj-stacje", name="radiostation_copy")
+     * @Route("/kopiuj-stacje", name="radiostation.copy")
      */
     public function copy()
     {

@@ -23,11 +23,11 @@
                 <dd>{{ radioTable.lastUpdateTime|date }}</dd>
                 {% if radioTable.owner.publicProfile %}
                     <dt>Autor</dt>
-                    <dd><a href="{{ path('user_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
+                    <dd><a href="{{ path('user.public_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
                 {% endif %}
             </dl>
         </section>
     {% else %}
-        <p class="information">Ten wykaz jest pusty. <a href="{{ path('radiostation_add', {id: radioTable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.</p>
+        <p class="information">Ten wykaz jest pusty. <a href="{{ path('radiostation.add', {id: radioTable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.</p>
     {% endif %}
 {% endblock %}

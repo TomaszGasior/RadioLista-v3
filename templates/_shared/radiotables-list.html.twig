@@ -16,7 +16,7 @@
 
 <dl class="radioTablesList withActions">
     {% for radioTable in radioTablesList %}
-        <dt><a href="{{ path('radiotable_show', {id: radioTable.id}) }}">{{ radioTable.name }}</a></dt>
+        <dt><a href="{{ path('radiotable.show', {id: radioTable.id}) }}">{{ radioTable.name }}</a></dt>
 
         <dd>
             <dl>
@@ -27,7 +27,7 @@
 
                 {% if showRadioTableOwner and radioTable.owner.publicProfile %}
                     <dt>Autor</dt>
-                    <dd><a href="{{ path('user_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
+                    <dd><a href="{{ path('user.public_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
                 {% endif %}
 
                 <dt>Liczba stacji</dt>
@@ -43,9 +43,9 @@
             {% if showRadioTableActions %}
                 {% spaceless %}
                     <ul>
-                        <li><a href="{{ path('radiotable_show', {id: radioTable.id}) }}">Zobacz</a></li>
-                        <li><a href="{{ path('radiotable_settings', {id: radioTable.id}) }}">Zmień</a></li>
-                        <li><a href="{{ path('radiotable_remove', {id: radioTable.id}) }}">Usuń</a></li>
+                        <li><a href="{{ path('radiotable.show', {id: radioTable.id}) }}">Zobacz</a></li>
+                        <li><a href="{{ path('radiotable.settings', {id: radioTable.id}) }}">Zmień</a></li>
+                        <li><a href="{{ path('radiotable.remove', {id: radioTable.id}) }}">Usuń</a></li>
                     </ul>
                 {% endspaceless %}
             {% endif %}

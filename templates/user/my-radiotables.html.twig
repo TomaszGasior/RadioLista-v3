@@ -8,7 +8,7 @@
     </header>
 
     {% if radioTablesList is empty %}
-        <p class="information">Nie posiadasz jeszcze żadnego wykazu. <a href="{{ path('radiotable_create') }}">To najlepszy moment, żeby to zmienić!</a></p>
+        <p class="information">Nie posiadasz jeszcze żadnego wykazu. <a href="{{ path('radiotable.create') }}">To najlepszy moment, żeby to zmienić!</a></p>
     {% else %}
         {% set showRadioTableOwner = false %}
         {% set showRadioTableVisibility = true %}

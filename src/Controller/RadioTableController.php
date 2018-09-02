@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioTableController extends AbstractController
 {
     /**
-     * @Route("/wykaz/{id}", name="radiotable_show")
+     * @Route("/wykaz/{id}", name="radiotable.show")
      */
     public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer)
     {
@@ -30,7 +30,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/utworz-wykaz", name="radiotable_create")
+     * @Route("/utworz-wykaz", name="radiotable.create")
      */
     public function create(Request $request, EntityManagerInterface $entityManager)
     {
@@ -52,7 +52,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/ustawienia-wykazu/{id}", name="radiotable_settings")
+     * @Route("/ustawienia-wykazu/{id}", name="radiotable.settings")
      */
     public function settings(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager)
     {
@@ -69,7 +69,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/usun-wykaz", name="radiotable_remove")
+     * @Route("/usun-wykaz", name="radiotable.remove")
      */
     public function remove()
     {

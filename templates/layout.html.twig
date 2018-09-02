@@ -29,14 +29,14 @@
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <ul>
                             <li><a class="username">{{ app.user.name }}</a></li>
-                            <li><a href="{{ path('user_radiotables') }}">Moje wykazy</a></li>
-                            <li><a href="{{ path('user_settings') }}">Moje konto</a></li>
-                            <li><a href="{{ path('session_logout') }}">Wyloguj się</a></li>
+                            <li><a href="{{ path('user.my_radiotables') }}">Moje wykazy</a></li>
+                            <li><a href="{{ path('user.my_account_settings') }}">Moje konto</a></li>
+                            <li><a href="{{ path('security.logout') }}">Wyloguj się</a></li>
                         </ul>
                         {% else %}
                         <ul>
-                            <li><a href="{{ path('session_login') }}">Zaloguj się</a></li>
-                            <li><a href="{{ path('session_register') }}">Zarejestruj się</a></li>
+                            <li><a href="{{ path('security.login') }}">Zaloguj się</a></li>
+                            <li><a href="{{ path('user.register') }}">Zarejestruj się</a></li>
                         </ul>
                     {% endif %}
 
@@ -66,10 +66,10 @@
         <footer class="main custTxt">
             <p>&copy; Tomasz Gąsior 2012-2018</p>
             <ul>
-                <li><a href="{{ path('about-service') }}">O stronie</a></li>
-                <li><a href="{{ path('contact-form') }}">Kontakt</a></li>
-                <li><a href="{{ path('terms-of-service') }}">Regulamin</a></li>
-                <li><a href="{{ path('radiotables-list') }}">Wszystkie wykazy</a></li>
+                <li><a href="{{ path('about_service') }}">O stronie</a></li>
+                <li><a href="{{ path('contact') }}">Kontakt</a></li>
+                <li><a href="{{ path('terms_of_service') }}">Regulamin</a></li>
+                <li><a href="{{ path('all_radiotables') }}">Wszystkie wykazy</a></li>
             </ul>
         </footer>
 

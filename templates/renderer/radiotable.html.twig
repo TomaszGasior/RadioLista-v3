@@ -69,7 +69,7 @@
 
                         {% elseif column == 'name' %}
                             {% if showRadioStationEditLink %}
-                                <a href="{{ path('radiostation_edit', {id: radioStation.id}) }}">{{ radioStation.name }}</a>
+                                <a href="{{ path('radiostation.edit', {id: radioStation.id}) }}">{{ radioStation.name }}</a>
                             {% else %}
                                 {{ radioStation.name }}
                             {% endif %}
