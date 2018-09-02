@@ -19,7 +19,7 @@ class RadioTableRenderer
         $this->radioStationRepository = $radioStationRepository;
     }
 
-    public function render(RadioTable $radioTable, ?int $options = null)
+    public function render(RadioTable $radioTable, ?int $options = null): string
     {
         if ($radioTable->getRadioStationsCount() == 0) {
             return '';
@@ -28,7 +28,7 @@ class RadioTableRenderer
         return $this->process($radioTable, $options);
     }
 
-    private function process(RadioTable $radioTable, ?int $options)
+    private function process(RadioTable $radioTable, ?int $options): string
     {
         // RadioTable::$columns defines order and visibility of radiotable columns. This is
         // an array with columns names as keys and position numbers as values. Columns will be

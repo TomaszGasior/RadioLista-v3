@@ -9,6 +9,7 @@ use App\Renderer\RadioTableRenderer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RadioTableController extends AbstractController
@@ -16,7 +17,7 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/wykaz/{id}", name="radiotable.show")
      */
-    public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer)
+    public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer): Response
     {
         $radioTableCode = $radioTableRenderer->render(
             $radioTable,
@@ -32,7 +33,7 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/utworz-wykaz", name="radiotable.create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager)
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $radioTable = new RadioTable;
 
@@ -54,7 +55,7 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/ustawienia-wykazu/{id}", name="radiotable.settings")
      */
-    public function settings(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager)
+    public function settings(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RadioTableSettingsType::class, $radioTable);
         $form->handleRequest($request);
@@ -71,7 +72,7 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/usun-wykaz", name="radiotable.remove")
      */
-    public function remove()
+    public function remove(): Response
     {
         return $this->render('radiotable/remove.html.twig');
     }

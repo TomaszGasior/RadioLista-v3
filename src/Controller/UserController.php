@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
@@ -13,7 +14,7 @@ class UserController extends AbstractController
     /**
      * @Route("/profil/{name}", name="user.public_profile")
      */
-    public function publicProfile(User $user, RadioTablesListRenderer $radioTablesListRenderer)
+    public function publicProfile(User $user, RadioTablesListRenderer $radioTablesListRenderer): Response
     {
         if (!$user->getPublicProfile()) {
             throw $this->createNotFoundException();
@@ -34,7 +35,7 @@ class UserController extends AbstractController
      * @Route("/moje-wykazy", name="user.my_radiotables")
      */
     public function myRadioTables(RadioTableRepository $radioTableRepository,
-                                  RadioTablesListRenderer $radioTablesListRenderer)
+                                  RadioTablesListRenderer $radioTablesListRenderer): Response
     {
         $radioTables = $radioTableRepository->findOwnedByUser($this->getUser());
         $radioTablesList = $radioTablesListRenderer->render(
@@ -50,7 +51,7 @@ class UserController extends AbstractController
     /**
      * @Route("/ustawienia-konta", name="user.my_account_settings")
      */
-    public function myAccountSettings()
+    public function myAccountSettings(): Response
     {
         return $this->render('user/my_account_settings.html.twig');
     }
@@ -58,7 +59,7 @@ class UserController extends AbstractController
     /**
      * @Route("/rejestracja", name="user.register")
      */
-    public function register()
+    public function register(): Response
     {
         return $this->render('user/register.html.twig');
     }

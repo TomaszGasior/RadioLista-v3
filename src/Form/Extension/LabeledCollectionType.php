@@ -10,12 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LabeledCollectionType extends AbstractType
 {
-    public function getParent()
+    public function getParent(): string
     {
         return CollectionType::class;
     }
 
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         foreach ($view->children as $name => $childrenView) {
             if (isset($options['entry_labels'][$name])) {
@@ -24,7 +24,7 @@ class LabeledCollectionType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'entry_labels' => [],

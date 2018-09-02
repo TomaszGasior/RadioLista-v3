@@ -18,7 +18,7 @@ class RadioTablesListRenderer
         $this->twig = $twig;
     }
 
-    public function render(iterable $radioTables, ?int $options = self::OPTION_SHOW_OWNER)
+    public function render(iterable $radioTables, ?int $options = self::OPTION_SHOW_OWNER): string
     {
         if (empty($radioTables)) {
             return '';
@@ -27,7 +27,7 @@ class RadioTablesListRenderer
         return $this->process($radioTables, $options);
     }
 
-    private function process(iterable $radioTables, ?int $options)
+    private function process(iterable $radioTables, ?int $options): string
     {
         return $this->twig->render('renderer/radiotables_list.html.twig', [
             'radiotables' => $radioTables,

@@ -20,7 +20,7 @@ class RadioTableRepository extends ServiceEntityRepository
         parent::__construct($registry, RadioTable::class);
     }
 
-    public function findPublicOrderedByRadioStationsCount()
+    public function findPublicOrderedByRadioStationsCount(): array
     {
         return $this->findBy(
             ['status' => RadioTable::STATUS_PUBLIC],
@@ -28,7 +28,7 @@ class RadioTableRepository extends ServiceEntityRepository
         );
     }
 
-    public function findPublicOrderedByLastUpdateTime()
+    public function findPublicOrderedByLastUpdateTime(): array
     {
         return $this->findBy(
             ['status' => RadioTable::STATUS_PUBLIC],
@@ -36,7 +36,7 @@ class RadioTableRepository extends ServiceEntityRepository
         );
     }
 
-    public function findPublicOrderedByUseKhz()
+    public function findPublicOrderedByUseKhz(): array
     {
         return $this->findBy(
             ['status' => RadioTable::STATUS_PUBLIC],
@@ -44,40 +44,11 @@ class RadioTableRepository extends ServiceEntityRepository
         );
     }
 
-    public function findOwnedByUser(User $user)
+    public function findOwnedByUser(User $user): array
     {
         return $this->findBy(
             ['owner' => $user],
             ['lastUpdateTime' => 'DESC']
         );
     }
-
-//    /**
-//     * @return RadioTable[] Returns an array of RadioTable objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?RadioTable
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

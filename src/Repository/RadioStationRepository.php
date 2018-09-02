@@ -20,7 +20,7 @@ class RadioStationRepository extends ServiceEntityRepository
         parent::__construct($registry, RadioStation::class);
     }
 
-    public function findForRadioTable(RadioTable $radioTable)
+    public function findForRadioTable(RadioTable $radioTable): array
     {
         switch ($radioTable->getSorting()) {
             case RadioTable::SORTING_NAME:
@@ -49,37 +49,7 @@ class RadioStationRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult()
                 ;
-                break;
         }
 
     }
-
-//    /**
-//     * @return RadioStation[] Returns an array of RadioStation objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?RadioStation
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

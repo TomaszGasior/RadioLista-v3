@@ -13,12 +13,12 @@ class RLv1Encoder extends MessageDigestPasswordEncoder
         parent::__construct('sha1', false, 1);
     }
 
-    protected function mergePasswordAndSalt($password, $salt)
+    protected function mergePasswordAndSalt($password, $salt): string
     {
         return $salt . $password;
     }
 
-    protected function demergePasswordAndSalt($mergedPasswordSalt)
+    protected function demergePasswordAndSalt($mergedPasswordSalt): string
     {
         throw new \RuntimeException;
     }

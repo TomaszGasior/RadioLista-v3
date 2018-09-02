@@ -10,17 +10,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TextHintsType extends AbstractType
 {
-    public function getParent()
+    public function getParent(): string
     {
         return TextType::class;
     }
 
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['hints'] = $options['hints'];
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'hints' => [],

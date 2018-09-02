@@ -6,6 +6,7 @@ use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GeneralController extends AbstractController
@@ -14,7 +15,7 @@ class GeneralController extends AbstractController
      * @Route("", name="homepage")
      * @Route("/strona-glowna")
      */
-    public function homepage()
+    public function homepage(): Response
     {
         return $this->render('general/homepage.html.twig');
     }
@@ -22,7 +23,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/o-stronie", name="about_service")
      */
-    public function aboutService()
+    public function aboutService(): Response
     {
         return $this->render('general/about_service.html.twig');
     }
@@ -30,7 +31,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/regulamin", name="terms_of_service")
      */
-    public function termsOfService()
+    public function termsOfService(): Response
     {
         return $this->render('general/terms_of_service.html.twig');
     }
@@ -38,7 +39,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/kontakt", name="contact")
      */
-    public function contactForm()
+    public function contactForm(): Response
     {
         return $this->render('general/contact.html.twig');
     }
@@ -47,7 +48,7 @@ class GeneralController extends AbstractController
      * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"})
      */
     public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1,
-                                   RadioTablesListRenderer $radioTablesListRenderer)
+                                   RadioTablesListRenderer $radioTablesListRenderer): Response
     {
         switch ($sorting) {
             case 1:
@@ -74,7 +75,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/szukaj", name="search_radiotables")
      */
-    public function searchRadioTables()
+    public function searchRadioTables(): Response
     {
         return $this->render('general/search_radiotables.html.twig');
     }

@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RadioStationController extends AbstractController
@@ -17,7 +18,7 @@ class RadioStationController extends AbstractController
      * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      */
-    public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager)
+    public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
         $radioStation = new RadioStation;
 
@@ -39,7 +40,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
      */
-    public function edit(RadioStation $radioStation, Request $request, EntityManagerInterface $entityManager)
+    public function edit(RadioStation $radioStation, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
@@ -56,7 +57,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/kopiuj-stacje", name="radiostation.copy")
      */
-    public function copy()
+    public function copy(): Response
     {
         return $this->render('radiostation/copy.html.twig');
     }

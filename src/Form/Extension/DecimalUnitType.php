@@ -10,17 +10,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DecimalUnitType extends AbstractType
 {
-    public function getParent()
+    public function getParent(): string
     {
         return NumberType::class;
     }
 
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['unit_label'] = $options['unit_label'];
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'unit_label' => '',
