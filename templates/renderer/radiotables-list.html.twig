@@ -1,31 +1,21 @@
-{% if showRadioTableOwner is not defined %}
-    {% set showRadioTableOwner = true %}
-{% endif %}
-{% if showRadioTableVisibility is not defined %}
-    {% set showRadioTableVisibility = false %}
-{% endif %}
-{% if showRadioTableActions is not defined %}
-    {% set showRadioTableActions = false %}
-{% endif %}
-
 {% set status_labels = {
-    (constant('STATUS_PUBLIC', radioTablesList[0])): 'publiczny',
-    (constant('STATUS_PRIVATE', radioTablesList[0])): 'prywatny',
-    (constant('STATUS_UNLISTED', radioTablesList[0])): 'niepubliczny',
+    (constant('App\\Entity\\RadioTable::STATUS_PUBLIC')): 'publiczny',
+    (constant('App\\Entity\\RadioTable::STATUS_PRIVATE')): 'prywatny',
+    (constant('App\\Entity\\RadioTable::STATUS_UNLISTED')): 'niepubliczny',
 } %}
 
 <dl class="radioTablesList withActions">
-    {% for radioTable in radioTablesList %}
+    {% for radioTable in radioTables %}
         <dt><a href="{{ path('radiotable.show', {id: radioTable.id}) }}">{{ radioTable.name }}</a></dt>
 
         <dd>
             <dl>
-                {% if showRadioTableVisibility %}
+                {% if showVisibility %}
                     <dt>Widoczność</dt>
                     <dd>{{ status_labels[radioTable.status] }}</dd>
                 {% endif %}
 
-                {% if showRadioTableOwner and radioTable.owner.publicProfile %}
+                {% if showOwner and radioTable.owner.publicProfile %}
                     <dt>Autor</dt>
                     <dd><a href="{{ path('user.public_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
                 {% endif %}
@@ -40,7 +30,7 @@
                 <dd>{{ radioTable.useKhz ? 'kHz' : 'MHz' }}</dd>
             </dl>
 
-            {% if showRadioTableActions %}
+            {% if showActions %}
                 {% spaceless %}
                     <ul>
                         <li><a href="{{ path('radiotable.show', {id: radioTable.id}) }}">Zobacz</a></li>
