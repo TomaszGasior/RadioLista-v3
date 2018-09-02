@@ -28,7 +28,13 @@
 
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <ul>
-                            <li><a class="username">{{ app.user.name }}</a></li>
+                            {% if app.user.publicProfile %}
+                                <li><a class="username" href="{{ path('user.public_profile', {name: app.user.name}) }}">
+                                    {{ app.user.name }}
+                                </a></li>
+                            {% else %}
+                                <li><a class="username">{{ app.user.name }}</a></li>
+                            {% endif %}
                             <li><a href="{{ path('user.my_radiotables') }}">Moje wykazy</a></li>
                             <li><a href="{{ path('user.my_account_settings') }}">Moje konto</a></li>
                             <li><a href="{{ path('security.logout') }}">Wyloguj się</a></li>
