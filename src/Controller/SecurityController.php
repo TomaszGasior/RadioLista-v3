@@ -12,7 +12,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logowanie", name="security.login")
      */
-    public function logIn(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils)
     {
         $logInForm = $this->createForm(SessionLogInType::class, [
             'username' => $authenticationUtils->getLastUsername(),
@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/wyloguj", name="security.logout")
      */
-    public function logOut()
+    public function logout()
     {
     }
 }

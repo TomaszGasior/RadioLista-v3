@@ -45,7 +45,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"})
      */
-    public function radioTablesList(RadioTableRepository $radioTableRepository, $sorting = 1)
+    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1)
     {
         switch ($sorting) {
             case 1:
@@ -67,7 +67,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/szukaj", name="search_radiotables")
      */
-    public function radioTablesSearch()
+    public function searchRadioTables()
     {
         return $this->render('general/radiotables-search.html.twig');
     }

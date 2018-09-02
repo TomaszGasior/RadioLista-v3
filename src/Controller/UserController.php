@@ -38,7 +38,7 @@ class UserController extends AbstractController
     /**
      * @Route("/ustawienia-konta", name="user.my_account_settings")
      */
-    public function accountSettings()
+    public function myAccountSettings()
     {
         return $this->render('user/account-settings.html.twig');
     }
