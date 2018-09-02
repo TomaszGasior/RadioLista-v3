@@ -24,11 +24,10 @@
     <section class="userProfile">
         <h3>Wykazy tego użytkownika</h3>
 
-        {% if user.radioTables is not empty %}
-            {% set radioTablesList = user.radioTables %}
-            {% include '_shared/radiotables-list.html.twig' %}
-        {% else %}
+        {% if radioTablesList is empty %}
             <p class="information">Ten użytkownik nie utworzył jeszcze żadnego wykazu.</a></p>
+        {% else %}
+            {{ radioTablesList|raw }}
         {% endif %}
     </section>
 {% endblock %}

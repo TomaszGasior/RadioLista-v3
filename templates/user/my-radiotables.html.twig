@@ -10,10 +10,7 @@
     {% if radioTablesList is empty %}
         <p class="information">Nie posiadasz jeszcze żadnego wykazu. <a href="{{ path('radiotable.create') }}">To najlepszy moment, żeby to zmienić!</a></p>
     {% else %}
-        {% set showRadioTableOwner = false %}
-        {% set showRadioTableVisibility = true %}
-        {% set showRadioTableActions = true %}
-        {% include '_shared/radiotables-list.html.twig' %}
+        {{ radioTablesList|raw }}
     {% endif %}
 {% endblock %}
 
