@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,19 +46,25 @@ class GeneralController extends AbstractController
     /**
      * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"})
      */
-    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1)
+    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1,
+                                   RadioTablesListRenderer $radioTablesListRenderer)
     {
         switch ($sorting) {
             case 1:
-                $radioTablesList = $radioTableRepository->findPublicOrderedByRadioStationsCount();
+                $radioTables = $radioTableRepository->findPublicOrderedByRadioStationsCount();
                 break;
             case 2:
-                $radioTablesList = $radioTableRepository->findPublicOrderedByLastUpdateTime();
+                $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime();
                 break;
             case 3:
-                $radioTablesList = $radioTableRepository->findPublicOrderedByUseKhz();
+                $radioTables = $radioTableRepository->findPublicOrderedByUseKhz();
                 break;
         }
+
+        $radioTablesList = $radioTablesListRenderer->render(
+            $radioTables,
+            RadioTablesListRenderer::OPTION_SHOW_OWNER
+        );
 
         return $this->render('general/radiotables-list.html.twig', [
             'radioTablesList' => $radioTablesList,
