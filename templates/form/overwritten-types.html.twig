@@ -1,33 +1,33 @@
-{%- block form_row -%}
+{% block form_row %}
     <dt>
-        {{- form_label(form) -}}
+        {{ form_label(form) }}
     </dt>
     <dd>
-        {{- form_widget(form) -}}
+        {{ form_widget(form) }}
     </dd>
-{%- endblock form_row -%}
+{% endblock form_row %}
 
-{%- block checkbox_row -%}
+{% block checkbox_row %}
     <dt class="checkboxes">
-        {{- form_label(form) -}}
+        {{ form_label(form) }}
     </dt>
     <dd>
-        {{- form_widget(form) -}}
+        {{ form_widget(form) }}
     </dd>
-{%- endblock checkbox_row -%}
+{% endblock checkbox_row %}
 
-{%- block radio_row -%}
-    {{- block('checkbox_row') -}}
-{%- endblock radio_row -%}
+{% block radio_row %}
+    {{ block('checkbox_row') }}
+{% endblock radio_row %}
 
-{%- block choice_row -%}
-    {%- if expanded -%}
+{% block choice_row %}
+    {% if expanded %}
         {# Do not render additional block for label when "expanded". #}
-        {%- for child in form -%}
+        {% for child in form %}
             {# Use proper markup for nested radio fields when "expanded". #}
-            {{- form_row(child) -}}
-        {%- endfor -%}
-    {%- else -%}
-        {{- form_row(form) -}}
-    {%- endif -%}
-{%- endblock choice_row -%}
+            {{ form_row(child) }}
+        {% endfor %}
+    {% else %}
+        {{ form_row(form) }}
+    {% endif %}
+{% endblock choice_row %}

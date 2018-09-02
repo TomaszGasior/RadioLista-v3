@@ -1,6 +1,6 @@
-{%- block decimal_unit_widget -%}
-    {%- set type = "number" -%}
-    {%- set attr = attr|merge({'class': 'decimal', 'step': '0.05', 'min': '0', 'max': '99999'}) -%}
+{% block decimal_unit_widget %}
+    {% set type = "number" %}
+    {% set attr = attr|merge({'class': 'decimal', 'step': '0.05', 'min': '0', 'max': '99999'}) %}
     {{ block('number_widget') }}
     {{ unit_label }}
 
@@ -11,21 +11,21 @@
             this.value = this.valueAsNumber.toFixed(2);
         });
     </script>
-{%- endblock decimal_unit_widget -%}
+{% endblock decimal_unit_widget %}
 
-{%- block labeled_collection_row -%}
+{% block labeled_collection_row %}
     {# Do not render collection label. #}
     {{ block('form_rows') }}
-{%- endblock labeled_collection_row -%}
+{% endblock labeled_collection_row %}
 
-{%- block text_hints_widget -%}
-    {%- set hints_list_id = id ~ '_hints' -%}
+{% block text_hints_widget %}
+    {% set hints_list_id = id ~ '_hints' %}
     <datalist id="{{ hints_list_id }}">
-        {%- for hint in hints -%}
+        {% for hint in hints %}
             <option>{{ hint }}</option>
-        {%- endfor -%}
+        {% endfor %}
     </datalist>
 
-    {%- set attr = attr|merge({'list': hints_list_id}) -%}
+    {% set attr = attr|merge({'list': hints_list_id}) %}
     {{ block('form_widget') }}
-{%- endblock text_hints_widget -%}
+{% endblock text_hints_widget %}
