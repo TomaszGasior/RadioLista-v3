@@ -24,7 +24,7 @@ class GeneralController extends AbstractController
      */
     public function aboutService()
     {
-        return $this->render('general/about-service.html.twig');
+        return $this->render('general/about_service.html.twig');
     }
 
     /**
@@ -32,7 +32,7 @@ class GeneralController extends AbstractController
      */
     public function termsOfService()
     {
-        return $this->render('general/terms-of-service.html.twig');
+        return $this->render('general/terms_of_service.html.twig');
     }
 
     /**
@@ -66,7 +66,7 @@ class GeneralController extends AbstractController
             RadioTablesListRenderer::OPTION_SHOW_OWNER
         );
 
-        return $this->render('general/radiotables-list.html.twig', [
+        return $this->render('general/all_radiotables.html.twig', [
             'radioTablesList' => $radioTablesList,
         ]);
     }
@@ -76,6 +76,6 @@ class GeneralController extends AbstractController
      */
     public function searchRadioTables()
     {
-        return $this->render('general/radiotables-search.html.twig');
+        return $this->render('general/search_radiotables.html.twig');
     }
 }

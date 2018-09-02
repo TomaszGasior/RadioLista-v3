@@ -5,5 +5,5 @@ twig:
     date:
         format: 'j F Y'
     form_themes:
-        - 'form/overwritten-types.html.twig'
-        - 'form/custom-types.html.twig'
+        - 'form/overwritten_types.html.twig'
+        - 'form/custom_types.html.twig'

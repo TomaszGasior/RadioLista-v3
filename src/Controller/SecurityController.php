@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
             'action' => $this->generateUrl('security.login'),
         ]);
 
-        return $this->render('session/login.html.twig', [
+        return $this->render('security/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError(),
             'logInForm' => $logInForm->createView(),
         ]);
@@ -31,5 +31,6 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
+        throw new \Exception;
     }
 }

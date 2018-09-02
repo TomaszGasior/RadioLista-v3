@@ -24,7 +24,7 @@ class UserController extends AbstractController
             null
         );
 
-        return $this->render('user/public-profile.html.twig', [
+        return $this->render('user/public_profile.html.twig', [
             'user' => $user,
             'radioTablesList' => $radioTablesList,
         ]);
@@ -42,7 +42,7 @@ class UserController extends AbstractController
             RadioTablesListRenderer::OPTION_SHOW_VISIBILITY | RadioTablesListRenderer::OPTION_SHOW_ACTIONS
         );
 
-        return $this->render('user/my-radiotables.html.twig', [
+        return $this->render('user/my_radiotables.html.twig', [
             'radioTablesList' => $radioTablesList,
         ]);
     }
@@ -52,7 +52,7 @@ class UserController extends AbstractController
      */
     public function myAccountSettings()
     {
-        return $this->render('user/account-settings.html.twig');
+        return $this->render('user/my_account_settings.html.twig');
     }
 
     /**
@@ -60,6 +60,6 @@ class UserController extends AbstractController
      */
     public function register()
     {
-        return $this->render('session/register.html.twig');
+        return $this->render('user/register.html.twig');
     }
 }
