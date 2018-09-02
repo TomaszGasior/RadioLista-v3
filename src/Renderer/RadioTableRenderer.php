@@ -43,10 +43,10 @@ class RadioTableRenderer
         $radioStations = $this->radioStationRepository->findForRadioTable($radioTable);
 
         return $this->twig->render('renderer/radiotable.html.twig', [
-            'radiotable' => $radioTable,
-            'radiostations' => $radioStations,
-            'show_edit_links' => ($options & self::OPTION_SHOW_EDIT_LINKS),
+            'radiotable'      => $radioTable,
+            'radiostations'   => $radioStations,
             'visible_columns' => $visibleColumns,
+            'show_edit_links' => ($options & self::OPTION_SHOW_EDIT_LINKS),
         ]);
     }
 }

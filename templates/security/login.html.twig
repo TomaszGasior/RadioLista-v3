@@ -25,7 +25,6 @@
                 {{ form_row(login_form.username, {'attr': {'autofocus': ''}}) }}
                 {{ form_row(login_form.password) }}
 
-                {# Avoid spaces around the checkbox to style it properly. #}
                 {% spaceless %}
                     {{ form_row(login_form.rememberMe) }}
                 {% endspaceless %}

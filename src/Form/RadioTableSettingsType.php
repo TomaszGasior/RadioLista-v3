@@ -19,7 +19,7 @@ class RadioTableSettingsType extends RadioTableCreateType
 
         $builder
             ->add('columns', LabeledCollectionType::class, [
-                'entry_type' => IntegerType::class,
+                'entry_type'   => IntegerType::class,
                 'entry_labels' => [
                     'privateNumber' => 'Numer w odbiorniku',
                     'frequency'     => 'Częstotliwość',

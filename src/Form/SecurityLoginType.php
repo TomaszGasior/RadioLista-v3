@@ -21,7 +21,7 @@ class SecurityLoginType extends AbstractType
                 'label' => 'Hasło',
             ])
             ->add('rememberMe', CheckboxType::class, [
-                'label' => 'Zapamiętaj mnie',
+                'label'    => 'Zapamiętaj mnie',
                 'required' => false,
             ])
         ;
