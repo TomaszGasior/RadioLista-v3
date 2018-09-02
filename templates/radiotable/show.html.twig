@@ -1,33 +1,33 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}{{ radioTable.name }}{% endblock %}
+{% block page_title %}{{ radiotable.name }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h2 class="custTxt">{{ radioTable.name }}</h2>
+        <h2 class="custTxt">{{ radiotable.name }}</h2>
     </header>
 
-    {% if radioTable.radioStationsCount > 0 %}
+    {% if radiotable.radioStationsCount > 0 %}
         <div class="radioTable custTxt">
-            {{ radioTableCode|raw }}
+            {{ radiotable_code|raw }}
         </div>
 
         <section class="radioTableInfo custTxt">
             <h3>Informacje o wykazie</h3>
 
-            {{ radioTable.description|raw }}
+            {{ radiotable.description|raw }}
             <dl>
                 <dt>Liczba stacji</dt>
-                <dd>{{ radioTable.radioStationsCount }}</dd>
+                <dd>{{ radiotable.radioStationsCount }}</dd>
                 <dt>Data aktualizacji</dt>
-                <dd>{{ radioTable.lastUpdateTime|date }}</dd>
-                {% if radioTable.owner.publicProfile %}
+                <dd>{{ radiotable.lastUpdateTime|date }}</dd>
+                {% if radiotable.owner.publicProfile %}
                     <dt>Autor</dt>
-                    <dd><a href="{{ path('user.public_profile', {name: radioTable.owner.name}) }}">{{ radioTable.owner.name }}</a></dd>
+                    <dd><a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">{{ radiotable.owner.name }}</a></dd>
                 {% endif %}
             </dl>
         </section>
     {% else %}
-        <p class="information">Ten wykaz jest pusty. <a href="{{ path('radiostation.add', {id: radioTable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.</p>
+        <p class="information">Ten wykaz jest pusty. <a href="{{ path('radiostation.add', {id: radiotable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.</p>
     {% endif %}
 {% endblock %}

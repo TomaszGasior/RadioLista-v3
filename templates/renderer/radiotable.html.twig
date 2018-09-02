@@ -1,6 +1,6 @@
 {% set columns_labels = {
     privateNumber: 'Nr',
-    frequency:     radioTable.useKhz ? 'kHz' : 'MHz',
+    frequency:     radiotable.useKhz ? 'kHz' : 'MHz',
     name:          'Nazwa',
     radioGroup:    'Grupa',
     country:       'Kraj',
@@ -51,7 +51,7 @@
 <table>
     <thead>
         <tr>
-            {% for column in radioTableColumns %}
+            {% for column in visible_columns %}
                 <th {% if columns_sorting.column is defined %}data-sort="{{ columns_sorting.column }}"{% endif %}>
                     {{ columns_labels[column] }}
                 </th>
@@ -60,48 +60,48 @@
     </thead>
 
     <tbody>
-        {% for radioStation in radioStations %}
+        {% for radiostation in radiostations %}
             <tr>
-                {% for column in radioTableColumns %}
+                {% for column in visible_columns %}
                     <td>
                         {% if column == 'radioGroup' or column == 'country' or column == 'location' or column == 'comment' %}
-                            {{ attribute(radioStation, column) }}
+                            {{ attribute(radiostation, column) }}
 
                         {% elseif column == 'name' %}
-                            {% if showRadioStationEditLink %}
-                                <a href="{{ path('radiostation.edit', {id: radioStation.id}) }}">{{ radioStation.name }}</a>
+                            {% if show_edit_links %}
+                                <a href="{{ path('radiostation.edit', {id: radiostation.id}) }}">{{ radiostation.name }}</a>
                             {% else %}
-                                {{ radioStation.name }}
+                                {{ radiostation.name }}
                             {% endif %}
 
-                        {% elseif column == 'privateNumber' and radioStation.privateNumber %}
-                            <span class="ni ni2">{{ radioStation.privateNumber }}</span>
+                        {% elseif column == 'privateNumber' and radiostation.privateNumber %}
+                            <span class="ni ni2">{{ radiostation.privateNumber }}</span>
 
                         {% elseif column == 'frequency' %}
-                            <span class="ni">{{ radioStation.frequency }}</span>
+                            <span class="ni">{{ radiostation.frequency }}</span>
 
-                        {% elseif column == 'power' and radioStation.power %}
-                            <span class="ni ni3">{{ radioStation.power }}</span>
+                        {% elseif column == 'power' and radiostation.power %}
+                            <span class="ni ni3">{{ radiostation.power }}</span>
 
-                        {% elseif column == 'polarization' and radioStation.polarization %}
-                            <abbr title="{{ polarization_labels[radioStation.polarization] }}">{{ radioStation.polarization }}</abbr>
+                        {% elseif column == 'polarization' and radiostation.polarization %}
+                            <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ radiostation.polarization }}</abbr>
 
                         {% elseif column == 'type' %}
-                            {{ types_labels[radioStation.type] }}
+                            {{ types_labels[radiostation.type] }}
 
                         {% elseif column == 'locality' %}
-                            {% if radioStation.locality.type == constant('LOCALITY_COUNTRY', radioStation) %}
+                            {% if radiostation.locality.type == constant('LOCALITY_COUNTRY', radiostation) %}
                                 ogólnokrajowy
-                            {% elseif radioStation.locality.city %}
-                                {{ radioStation.locality.city }}
-                                {% if radioStation.locality.type == constant('LOCALITY_NETWORK', radioStation) %}
+                            {% elseif radiostation.locality.city %}
+                                {{ radiostation.locality.city }}
+                                {% if radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) %}
                                     <small title="sieć">(s)</small>
                                 {% endif %}
                             {% endif %}
 
                         {% elseif column == 'quality' %}
-                            <span class="quality q{{ radioStation.quality }}" title="{{ quality_labels[radioStation.quality] }}">
-                                {{ radioStation.quality }}
+                            <span class="quality q{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
+                                {{ radiostation.quality }}
                             </span>
 
                         {% elseif column == 'rds' %}

@@ -30,11 +30,11 @@ class RadioTablesListRenderer
     private function process(iterable $radioTables, ?int $options)
     {
         return $this->twig->render('renderer/radiotables_list.html.twig', [
-            'radioTables' => $radioTables,
+            'radiotables' => $radioTables,
 
-            'showOwner'      => ($options & self::OPTION_SHOW_OWNER),
-            'showActions'    => ($options & self::OPTION_SHOW_VISIBILITY),
-            'showVisibility' => ($options & self::OPTION_SHOW_ACTIONS),
+            'show_owner'      => ($options & self::OPTION_SHOW_OWNER),
+            'show_actions'    => ($options & self::OPTION_SHOW_VISIBILITY),
+            'show_visibility' => ($options & self::OPTION_SHOW_ACTIONS),
         ]);
     }
 }

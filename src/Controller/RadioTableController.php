@@ -24,8 +24,8 @@ class RadioTableController extends AbstractController
         );
 
         return $this->render('radiotable/show.html.twig', [
-            'radioTable' => $radioTable,
-            'radioTableCode' => $radioTableCode,
+            'radiotable' => $radioTable,
+            'radiotable_code' => $radioTableCode,
         ]);
     }
 

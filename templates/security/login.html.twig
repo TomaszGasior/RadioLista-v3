@@ -15,19 +15,19 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {{ form_start(logInForm) }}
+    {{ form_start(login_form) }}
 
     <div id="useTabbedUI" class="userLoginScreen">
         <div>
             <h3>Zaloguj się</h3>
 
             <dl>
-                {{ form_row(logInForm.username, {'attr': {'autofocus': ''}}) }}
-                {{ form_row(logInForm.password) }}
+                {{ form_row(login_form.username, {'attr': {'autofocus': ''}}) }}
+                {{ form_row(login_form.password) }}
 
                 {# Avoid spaces around the checkbox to style it properly. #}
                 {% spaceless %}
-                    {{ form_row(logInForm.rememberMe) }}
+                    {{ form_row(login_form.rememberMe) }}
                 {% endspaceless %}
             </dl>
 
@@ -35,5 +35,5 @@
         </div>
     </div>
 
-    {{ form_end(logInForm) }}
+    {{ form_end(login_form) }}
 {% endblock %}

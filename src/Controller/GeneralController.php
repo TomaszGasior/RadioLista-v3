@@ -67,7 +67,7 @@ class GeneralController extends AbstractController
         );
 
         return $this->render('general/all_radiotables.html.twig', [
-            'radioTablesList' => $radioTablesList,
+            'radiotables_list' => $radioTablesList,
         ]);
     }
 

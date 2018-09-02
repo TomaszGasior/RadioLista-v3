@@ -26,7 +26,7 @@ class UserController extends AbstractController
 
         return $this->render('user/public_profile.html.twig', [
             'user' => $user,
-            'radioTablesList' => $radioTablesList,
+            'radiotables_list' => $radioTablesList,
         ]);
     }
 
@@ -43,7 +43,7 @@ class UserController extends AbstractController
         );
 
         return $this->render('user/my_radiotables.html.twig', [
-            'radioTablesList' => $radioTablesList,
+            'radiotables_list' => $radioTablesList,
         ]);
     }
 
