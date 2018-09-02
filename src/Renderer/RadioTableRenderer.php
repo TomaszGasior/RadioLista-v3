@@ -7,19 +7,19 @@ use App\Repository\RadioStationRepository;
 
 class RadioTableRenderer
 {
-    public const OPTION_SHOW_EDIT_LINKS = 0b00001;
-    public const OPTION_USE_CACHE       = 0b00010;
+    public const OPTION_USE_CACHE       = 0b00001;
+    public const OPTION_SHOW_EDIT_LINKS = 0b00010;
 
-    private $templating;
+    private $twig;
     private $radioStationRepository;
 
-    public function __construct(\Twig_Environment $templating, RadioStationRepository $radioStationRepository)
+    public function __construct(\Twig_Environment $twig, RadioStationRepository $radioStationRepository)
     {
-        $this->templating = $templating;
+        $this->twig = $twig;
         $this->radioStationRepository = $radioStationRepository;
     }
 
-    public function render(RadioTable $radioTable, int $options = null)
+    public function render(RadioTable $radioTable, ?int $options = null)
     {
         if ($radioTable->getRadioStationsCount() == 0) {
             return '';
@@ -28,7 +28,7 @@ class RadioTableRenderer
         return $this->process($radioTable, $options);
     }
 
-    private function process(RadioTable $radioTable, int $options = null)
+    private function process(RadioTable $radioTable, ?int $options)
     {
         // RadioTable::$columns defines order and visibility of radiotable columns. This is
         // an array with columns names as keys and position numbers as values. Columns will be
@@ -42,7 +42,7 @@ class RadioTableRenderer
 
         $radioStations = $this->radioStationRepository->findForRadioTable($radioTable);
 
-        return $this->templating->render('renderer/radiotable.html.twig', [
+        return $this->twig->render('renderer/radiotable.html.twig', [
             'radioTable' => $radioTable,
             'radioStations' => $radioStations,
             'showRadioStationEditLink' => ($options & self::OPTION_SHOW_EDIT_LINKS),
