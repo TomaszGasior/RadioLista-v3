@@ -22,15 +22,15 @@ security:
                 login_path: security.login
                 check_path: security.login
                 default_target_path: user.my_radiotables
-                username_parameter: session_log_in[username]
-                password_parameter: session_log_in[password]
+                username_parameter: security_login[username]
+                password_parameter: security_login[password]
                 csrf_token_generator: security.csrf.token_manager
-                csrf_parameter: session_log_in[_token]
-                csrf_token_id: session_log_in
+                csrf_parameter: security_login[_token]
+                csrf_token_id: security_login
             logout:
                 path: security.logout
                 target: homepage
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800   # 1 week.
-                remember_me_parameter: session_log_in[rememberMe]
+                remember_me_parameter: security_login[rememberMe]
