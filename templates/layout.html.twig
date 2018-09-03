@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
 
-        {% if block("page_title") %}
+        {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
         {% else %}
             <title>RadioLista — wykazy radiowe w Internecie</title>
@@ -46,7 +46,7 @@
                         </ul>
                     {% endif %}
 
-                    {% block navigation_menu %}{% endblock %}
+                    {% block context_menu %}{% endblock %}
                 </nav>
             </div>
 
