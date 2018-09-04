@@ -33,7 +33,8 @@ class RadioStationController extends AbstractController
         }
 
         return $this->render('radiostation/add.html.twig', [
-            'form' => $form->createView(),
+            'form'       => $form->createView(),
+            'radiotable' => $radioTable,
         ]);
     }
 
@@ -50,15 +51,30 @@ class RadioStationController extends AbstractController
         }
 
         return $this->render('radiostation/edit.html.twig', [
-            'form' => $form->createView(),
+            'form'         => $form->createView(),
+            'radiostation' => $radioStation,
         ]);
     }
 
     /**
-     * @Route("/kopiuj-stacje", name="radiostation.copy")
+     * @Route("/kopiuj-stacje/{radioTableId}", name="radiostation.copy")
+     * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      */
-    public function copy(): Response
+    public function copy(RadioTable $radioTable): Response
     {
-        return $this->render('radiostation/copy.html.twig');
+        return $this->render('radiostation/copy.html.twig', [
+            'radiotable' => $radioTable,
+        ]);
+    }
+
+    /**
+     * @Route("/usun-stacje/{id}", name="radiostation.remove")
+     */
+    public function remove(RadioStation $radioStation): Response
+    {
+        return $this->redirectToRoute('radiotable.remove', [
+            'id' => $radioStation->getRadioTable()->getId(),
+            'r'  => $radioStation->getId(),
+        ]);
     }
 }

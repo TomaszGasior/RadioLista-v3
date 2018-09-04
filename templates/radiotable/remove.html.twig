@@ -2,6 +2,14 @@
 
 {% block page_title %}Usuwanie wykazu{% endblock %}
 
+{% block context_menu %}
+    <ul>
+        <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
+        <li><a href="{{ path('radiotable.export', {id: radiotable.id}) }}">Eksport wykazu</a></li>
+        <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Ustawienia wykazu</a></li>
+    </ul>
+{% endblock %}
+
 {% block page_content %}
     <p>{{ _self }}</p>
 {% endblock %}

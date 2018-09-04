@@ -48,7 +48,7 @@ class RadioTableController extends AbstractController
         }
 
         return $this->render('radiotable/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -65,15 +65,29 @@ class RadioTableController extends AbstractController
         }
 
         return $this->render('radiotable/settings.html.twig', [
-            'form' => $form->createView()
+            'form'       => $form->createView(),
+            'radiotable' => $radioTable,
         ]);
     }
 
     /**
-     * @Route("/usun-wykaz", name="radiotable.remove")
+     * @Route("/eksport-wykazu/{id}", name="radiotable.export")
      */
-    public function remove(): Response
+    public function export(RadioTable $radioTable): Response
     {
-        return $this->render('radiotable/remove.html.twig');
+        return $this->redirectToRoute('radiotable.settings', [
+            'id'  => $radioTable->getId(),
+            'tab' => 4,
+        ]);
+    }
+
+    /**
+     * @Route("/usun-wykaz/{id}", name="radiotable.remove")
+     */
+    public function remove(RadioTable $radioTable): Response
+    {
+        return $this->render('radiotable/remove.html.twig', [
+            'radiotable' => $radioTable,
+        ]);
     }
 }

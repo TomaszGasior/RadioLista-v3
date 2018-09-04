@@ -6,6 +6,14 @@
     <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
 {% endblock %}
 
+{% block context_menu %}
+    <ul>
+        <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
+        <li><a href="{{ path('radiostation.copy', {radioTableId: radiotable.id}) }}">Kopiuj stację</a></li>
+        <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Ustawienia wykazu</a></li>
+    </ul>
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h2>Dodawanie stacji</h2>

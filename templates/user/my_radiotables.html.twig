@@ -2,6 +2,12 @@
 
 {% block page_title %}Moje wykazy{% endblock %}
 
+{% block context_menu %}
+    <ul>
+        <li><a href="{{ path('radiotable.create') }}">Utwórz wykaz</a></li>
+    </ul>
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h2>Moje wykazy</h2>

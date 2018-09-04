@@ -2,6 +2,13 @@
 
 {% block page_title %}{{ radiotable.name }}{% endblock %}
 
+{% block context_menu %}
+    <ul>
+        <li><a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj stację</a></li>
+        <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Ustawienia wykazu</a></li>
+    </ul>
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h2 class="custTxt">{{ radiotable.name }}</h2>
