@@ -21,7 +21,8 @@ class RadioTableController extends AbstractController
     {
         $radioTableCode = $radioTableRenderer->render(
             $radioTable,
-            null
+            ($this->getUser() == $radioTable->getOwner()) ? RadioTableRenderer::OPTION_SHOW_EDIT_LINKS
+            : RadioTableRenderer::OPTION_USE_CACHE
         );
 
         return $this->render('radiotable/show.html.twig', [

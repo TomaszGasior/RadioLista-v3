@@ -2,6 +2,10 @@
 
 {% block page_title %}{{ radiotable.name }}{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/radioTable.js') }}" defer></script>
+{% endblock %}
+
 {% block context_menu %}
     <ul>
         <li><a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj stację</a></li>
