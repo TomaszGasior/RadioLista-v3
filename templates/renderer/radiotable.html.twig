@@ -52,7 +52,7 @@
     <thead>
         <tr>
             {% for column in visible_columns %}
-                <th {% if columns_sorting.column is defined %}data-sort="{{ columns_sorting.column }}"{% endif %}>
+                <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
                     {{ columns_labels[column] }}
                 </th>
             {% endfor %}
@@ -105,7 +105,15 @@
                             </span>
 
                         {% elseif column == 'rds' %}
-                            {# #}
+                            {% set rds = {} %}
+                            {% for key, value in radiostation.rds %}
+                                {% set rds = rds|merge({ ("#{key}"): value|replace({"\n": '', "\r": '', "\t": ''}) }) %}
+                            {% endfor %}
+                            {% set ps_frames = rds.ps|split('|')|format_rds_frames %}
+                            {% if ps_frames|first|trim %}
+                                <span data-pty="{{ rds.pty }}" data-rt="{{ rds.rt }}" data-ps="{{ ps_frames|join('|') }}"
+                                      class="rds rdsPopup">{{ ps_frames|first }}</span>
+                            {% endif %}
 
                         {% endif %}
                     </td>
