@@ -100,8 +100,9 @@
                             {% endif %}
 
                         {% elseif column == 'quality' %}
+                            {# Skip whitespace for proper CSS styling. #}
                             <span class="quality q{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
-                                {{ radiostation.quality }}
+                                {{- radiostation.quality -}}
                             </span>
 
                         {% elseif column == 'rds' %}
