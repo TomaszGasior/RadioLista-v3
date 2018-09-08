@@ -4,6 +4,10 @@
 
 {% block head_closing %}
     <script src="{{ asset('scripts/radioTable.js') }}" defer></script>
+
+    {% if radiotable.status != constant('STATUS_PUBLIC', radiotable) %}
+        <meta name="robots" content="noindex, noarchive">
+    {% endif %}
 {% endblock %}
 
 {% block context_menu %}
