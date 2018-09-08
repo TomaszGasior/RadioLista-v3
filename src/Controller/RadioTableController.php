@@ -7,6 +7,7 @@ use App\Form\RadioTableCreateType;
 use App\Form\RadioTableSettingsType;
 use App\Renderer\RadioTableRenderer;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,15 @@ class RadioTableController extends AbstractController
 {
     /**
      * @Route("/wykaz/{id}", name="radiotable.show")
+     * @IsGranted("RADIOTABLE_SHOW", subject="radioTable", statusCode=404)
      */
     public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer): Response
     {
+        $userOwnsThisRadioTable = $this->isGranted('RADIOTABLE_MODIFY', $radioTable);
+
         $radioTableCode = $radioTableRenderer->render(
             $radioTable,
-            ($this->getUser() == $radioTable->getOwner()) ? RadioTableRenderer::OPTION_SHOW_EDIT_LINKS
+            $userOwnsThisRadioTable ? RadioTableRenderer::OPTION_SHOW_EDIT_LINKS
             : RadioTableRenderer::OPTION_USE_CACHE
         );
 
@@ -33,6 +37,7 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/utworz-wykaz", name="radiotable.create")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -55,6 +60,7 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/ustawienia-wykazu/{id}", name="radiotable.settings")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function settings(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -73,6 +79,7 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/eksport-wykazu/{id}", name="radiotable.export")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function export(RadioTable $radioTable): Response
     {
@@ -84,6 +91,7 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/usun-wykaz/{id}", name="radiotable.remove")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function remove(RadioTable $radioTable): Response
     {

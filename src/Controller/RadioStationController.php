@@ -6,6 +6,7 @@ use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -40,6 +42,7 @@ class RadioStationController extends AbstractController
 
     /**
      * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
      */
     public function edit(RadioStation $radioStation, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -59,6 +62,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/kopiuj-stacje/{radioTableId}", name="radiostation.copy")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function copy(RadioTable $radioTable): Response
     {
@@ -69,6 +73,7 @@ class RadioStationController extends AbstractController
 
     /**
      * @Route("/usun-stacje/{id}", name="radiostation.remove")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
      */
     public function remove(RadioStation $radioStation): Response
     {
