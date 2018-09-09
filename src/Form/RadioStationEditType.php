@@ -174,13 +174,13 @@ class RadioStationEditType extends AbstractType
                 'required' => false,
             ])
             ->add('rdsRt', TextareaType::class, [
-                'property_path' => 'rds[Rt]',
+                'property_path' => 'rds[rt]',
 
                 'label'    => 'Radio Text',
                 'required' => false,
             ])
             ->add('rdsPty', null, [
-                'property_path' => 'rds[Pty]',
+                'property_path' => 'rds[pty]',
 
                 'label' => 'Program Type',
             ])
