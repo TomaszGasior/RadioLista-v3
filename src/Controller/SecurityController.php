@@ -13,7 +13,7 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/logowanie", name="security.login")
-     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')", statusCode=400)
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

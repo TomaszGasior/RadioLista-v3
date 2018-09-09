@@ -59,7 +59,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/rejestracja", name="user.register")
-     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')", statusCode=400)
      */
     public function register(): Response
     {
