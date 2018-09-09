@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Security;
+namespace App\Security\Encoder;
 
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-
-// Encoder used for backward compatibility with passwords hashed in RLv1.
 
 class RLv1Encoder extends MessageDigestPasswordEncoder
 {
