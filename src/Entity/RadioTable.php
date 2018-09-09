@@ -182,7 +182,12 @@ class RadioTable
 
     public function getAppearance(): ?array
     {
-        return $this->appearance;
+        // Dirty hack used for backward compatibility with radiotables created in RLv1,
+        // improperly ported to RLv2. Sometimes "appearance" array is not filled in
+        // with proper default keys. Fix it dynamically to avoid "notice" warnings.
+        $fallback = array_fill_keys(['th', 'bg', 'fg', 'img', 'full'], null);
+
+        return $this->appearance + $fallback;
     }
 
     public function setAppearance(array $appearance): self
