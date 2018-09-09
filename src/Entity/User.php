@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="Users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
@@ -22,7 +21,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $name;
 
@@ -52,9 +51,9 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $publicProfile;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false, options={"default": 0})
      */
-    private $radioTablesCount;
+    private $radioTablesCount = 0;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -68,6 +67,9 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     public function __construct()
     {
+        $this->lastActivityDate = new \DateTime;
+        $this->registerDate = new \DateTime;
+
         $this->radioTables = new ArrayCollection();
     }
 

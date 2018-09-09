@@ -5,7 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="RadioStations")
+ * @ORM\Table(indexes={
+       @ORM\Index(name="SortByFrequency", columns={"id", "frequency"}),
+       @ORM\Index(name="SortByName", columns={"id", "name"}),
+   })
  * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
  */
 class RadioStation
@@ -49,7 +52,7 @@ class RadioStation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable")
-     * @ORM\JoinColumn(name="radioTableId", nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
     private $radioTable;
 
@@ -84,7 +87,7 @@ class RadioStation
     private $power;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     private $polarization = self::POLARIZATION_NONE;
 
@@ -140,7 +143,7 @@ class RadioStation
         return $this->radioTable;
     }
 
-    public function setRadioTable(?RadioTable $radioTable): self
+    public function setRadioTable(RadioTable $radioTable): self
     {
         $this->radioTable = $radioTable;
 

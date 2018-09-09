@@ -7,7 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="RadioTables")
+ * @ORM\Table(indexes={
+       @ORM\Index(name="Search", columns={"name", "description"}, flags={"fulltext"}),
+   })
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
  */
 class RadioTable
@@ -29,7 +31,7 @@ class RadioTable
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="radioTables")
-     * @ORM\JoinColumn(name="ownerId", nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
     private $owner;
 
@@ -89,12 +91,12 @@ class RadioTable
     private $lastUpdateTime;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": false})
      */
     private $useKhz = false;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"default": 0})
      */
     private $radioStationsCount = 0;
 
@@ -113,7 +115,7 @@ class RadioTable
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): self
+    public function setOwner(User $owner): self
     {
         $this->owner = $owner;
 
