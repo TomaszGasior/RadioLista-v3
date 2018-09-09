@@ -3,6 +3,7 @@
 {% block page_title %}Ustawienia wykazu{% endblock %}
 
 {% block head_closing %}
+    <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
     <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
     <script src="{{ asset('scripts/radioTableColumnsUI.js') }}" defer></script>
 {% endblock %}
@@ -50,6 +51,56 @@
             <dl class="radioTableColumnsForm">
                 {{ form_row(form.columns) }}
             </dl>
+        </div>
+
+        <div>
+            <h3>Wygląd</h3>
+
+            <dl class="radioTableThemeSelection">
+                {{ form_row(form.appearanceTheme) }}
+            </dl>
+
+            <dl class="radioTableAppearanceFields">
+                {# style="" is used as dirty hack for box-shadow removing. #}
+                {{ form_row(form.appearanceBackgroundColor, {attr: {
+                    'class': 'jscolor',
+                    'style': '',
+                    'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+                }}) }}
+                {{ form_row(form.appearanceColor, {attr: {
+                    'class': 'jscolor',
+                    'style': '',
+                    'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+                }}) }}
+                {{ form_row(form.appearanceBackgroundImage) }}
+                {{ form_row(form.appearanceFullWidth) }}
+            </dl>
+
+            <button type="button" id="defaultRadioTableAppearance">Przywróć domyślny wygląd</button>
+
+            <script>
+                var selectionList = document.querySelector('dl.radioTableThemeSelection')
+                var previewBoxes  = selectionList.querySelectorAll('dl.radioTableThemeSelection dd');
+                selectionList.className = 'radioTableThemeSelection_JSOn';
+                for( i in previewBoxes ) {
+                    if( previewBoxes[i].tagName != 'DD' ) break;
+                    if( previewBoxes[i].children[0].name )
+                        previewBoxes[i].className = 'preview_' + previewBoxes[i].children[0].value;
+                }
+
+                var colorInputs = document.querySelectorAll('input[type="color"]');
+                for( var i=0; i<colorInputs.length; i++ )
+                    colorInputs[i].type = 'text';
+
+                document.getElementById('defaultRadioTableAppearance').id = 'defaultRadioTableAppearance_JSOn';
+                document.getElementById('defaultRadioTableAppearance_JSOn').onclick = function() {
+                    var appearanceForm = document.querySelectorAll('.radioTableAppearanceFields input');
+                    for( i in appearanceForm ) {
+                        appearanceForm[i].value = '';
+                        appearanceForm[i].style = '';
+                    }
+                }
+            </script>
         </div>
     </div>
 

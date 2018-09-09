@@ -1,5 +1,29 @@
 {% extends 'layout.html.twig' %}
 
+{% set custom_css = '' %}
+
+{% if radiotable.appearance.th is empty %}
+    {% if radiotable.appearance.fg %}
+        {% set custom_css = custom_css ~ '.custTxt{ color: ' ~ radiotable.appearance.fg ~ ' }' %}
+    {% endif %}
+
+    {% if radiotable.appearance.bg %}
+        {% set custom_css = custom_css ~ '.custBg { background: ' ~ radiotable.appearance.bg %}
+
+        {% if radiotable.appearance.img %}
+            {% set custom_css = custom_css ~ ' url(' ~ radiotable.appearance.img ~ ') center fixed' %}
+        {% endif %}
+
+        {% set custom_css = custom_css ~ ' }' %}
+    {% endif %}
+{% endif %}
+
+{% block html_classes %}
+    {% if custom_css or radiotable.appearance.th %}customizedRadioTable{% endif %}
+    {% if radiotable.appearance.th %}theme_{{ radiotable.appearance.th }}{% endif %}
+    {% if radiotable.appearance.full %}fullWidth{% endif %}
+{% endblock %}
+
 {% block page_title %}{{ radiotable.name }}{% endblock %}
 
 {% block head_closing %}
@@ -7,6 +31,11 @@
 
     {% if radiotable.status != constant('STATUS_PUBLIC', radiotable) %}
         <meta name="robots" content="noindex, noarchive">
+    {% endif %}
+
+    {% if custom_css %}<style>{{ custom_css }}</style>{% endif %}
+    {% if radiotable.appearance.th %}
+        <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
     {% endif %}
 {% endblock %}
 
