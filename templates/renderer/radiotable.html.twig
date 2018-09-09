@@ -61,7 +61,7 @@
 
     <tbody>
         {% for radiostation in radiostations %}
-            <tr>
+            <tr {% if radiostation.marker %}class="marker{{ radiostation.marker }}"{% endif %}>
                 {% for column in visible_columns %}
                     <td>
                         {% if column == 'radioGroup' or column == 'country' or column == 'location' or column == 'comment' %}
