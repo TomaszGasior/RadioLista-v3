@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\EntityListeners({"App\EventListener\UserListener"})
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {

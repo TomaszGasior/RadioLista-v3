@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
        @ORM\Index(name="Search", columns={"name", "description"}, flags={"fulltext"}),
    })
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
+ * @ORM\EntityListeners({"App\EventListener\RadioTableListener"})
  */
 class RadioTable
 {
