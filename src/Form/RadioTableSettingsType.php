@@ -22,6 +22,14 @@ class RadioTableSettingsType extends RadioTableCreateType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('sorting', ChoiceType::class, [
+                'label'   => 'Domyślne sortowanie',
+                'choices' => [
+                    'częstotliwość'      => RadioTable::SORTING_FREQUENCY,
+                    'nazwa'              => RadioTable::SORTING_NAME,
+                    'numer w odbiorniku' => RadioTable::SORTING_PRIVATE_NUMBER,
+                ],
+            ])
             ->add('columns', LabeledCollectionType::class, [
                 'entry_type'   => IntegerType::class,
                 'entry_labels' => [

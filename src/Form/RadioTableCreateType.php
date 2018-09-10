@@ -24,14 +24,6 @@ class RadioTableCreateType extends AbstractType
                     'MHz' => 0,
                 ]
             ])
-            ->add('sorting', ChoiceType::class, [
-                'label'   => 'Domyślne sortowanie',
-                'choices' => [
-                    'częstotliwość'      => RadioTable::SORTING_FREQUENCY,
-                    'nazwa'              => RadioTable::SORTING_NAME,
-                    'numer w odbiorniku' => RadioTable::SORTING_PRIVATE_NUMBER,
-                ],
-            ])
             ->add('description', TextareaType::class, [
                 'label'    => 'Opis wykazu',
                 'required' => false,
