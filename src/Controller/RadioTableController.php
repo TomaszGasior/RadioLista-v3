@@ -37,7 +37,7 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/utworz-wykaz", name="radiotable.create")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
