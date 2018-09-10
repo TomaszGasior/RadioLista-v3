@@ -111,6 +111,13 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         return $this->lastActivityDate;
     }
 
+    public function refreshLastActivityDate(): self
+    {
+        $this->lastActivityDate = new \DateTime;
+
+        return $this;
+    }
+
     public function getRegisterDate(): ?\DateTimeInterface
     {
         return $this->registerDate;
@@ -143,6 +150,20 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getRadioTablesCount(): ?int
     {
         return $this->radioTablesCount;
+    }
+
+    public function increaseRadioTablesCount(): self
+    {
+        ++$this->radioTablesCount;
+
+        return $this;
+    }
+
+    public function decreaseRadioTablesCount(): self
+    {
+        --$this->radioTablesCount;
+
+        return $this;
     }
 
     /**
