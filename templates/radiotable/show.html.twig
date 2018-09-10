@@ -74,6 +74,11 @@
             </dl>
         </section>
     {% else %}
-        <p class="information">Ten wykaz jest pusty. <a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.</p>
+        <p class="information">
+            Ten wykaz jest pusty.
+            {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
+                <a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.
+            {% endif %}
+        </p>
     {% endif %}
 {% endblock %}
