@@ -34,3 +34,6 @@ security:
                 secret: '%kernel.secret%'
                 lifetime: 604800   # 1 week.
                 remember_me_parameter: security_login[rememberMe]
+
+    # Required for App\EventListener\RehashRLv1UserPassword.
+    erase_credentials: false
