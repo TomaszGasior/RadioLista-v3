@@ -183,6 +183,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+        $this->password = null;
 
         if ($this->oldPassCompat) {
             $this->oldPassCompat = false;
@@ -214,6 +215,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     public function eraseCredentials(): void
     {
+        $this->plainPassword = null;
     }
 
     // Serializable
