@@ -32,12 +32,11 @@ class UserListener
      */
     public function encodePlainPassword(User $user): void
     {
-        if (null === $user->getPlainPassword()) {
-            return;
+        if ($user->getPlainPassword()) {
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword($user, $user->getPlainPassword())
+            );
         }
 
-        $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $user->getPlainPassword())
-        );
     }
 }
