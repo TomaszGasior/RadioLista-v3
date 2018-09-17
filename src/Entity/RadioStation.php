@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
        @ORM\Index(name="SortByName", columns={"id", "name"}),
    })
  * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
- * @ORM\EntityListeners({"App\EventListener\RadioStationListener"})
+ * @ORM\EntityListeners({"App\EventListener\EntityListener\RadioStationListener"})
  */
 class RadioStation
 {

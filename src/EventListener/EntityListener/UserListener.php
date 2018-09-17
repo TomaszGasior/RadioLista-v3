@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EventListener\EntityListener;
 
 use App\Entity\User;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\PreFlush;
 use Doctrine\ORM\Mapping\PreUpdate;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserListener
+class UserListener extends AbstractEntityListener
 {
     private $passwordEncoder;
 
@@ -30,7 +30,7 @@ class UserListener
     /**
      * @PreFlush
      */
-    public function encodePassword(User $user): void
+    public function encodePlainPassword(User $user): void
     {
         if (null === $user->getPlainPassword()) {
             return;
