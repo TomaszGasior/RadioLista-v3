@@ -66,6 +66,8 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     private $radioTables;
 
+    private $plainPassword;
+
     public function __construct()
     {
         $this->lastActivityDate = new \DateTime;
@@ -173,6 +175,18 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getRadioTables(): Collection
     {
         return $this->radioTables;
+    }
+
+    // Not persisted — used by entity listener to prepare hashed password.
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     // UserInterface
