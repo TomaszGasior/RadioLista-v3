@@ -102,10 +102,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     {
         $this->password = $password;
 
-        if ($this->oldPassCompat) {
-            $this->oldPassCompat = false;
-        }
-
         return $this;
     }
 
@@ -184,9 +180,15 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(?string $plainPassword): void
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        if ($this->oldPassCompat) {
+            $this->oldPassCompat = false;
+        }
+
+        return $this;
     }
 
     // UserInterface
