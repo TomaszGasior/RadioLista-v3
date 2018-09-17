@@ -8,8 +8,10 @@ use Doctrine\ORM\Mapping\PreFlush;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreRemove;
 
-class RadioTableListener extends AbstractEntityListener
+class RadioTableListener
 {
+    use EntityListenerTrait;
+
     /**
      * @PreFlush
      * @PreRemove

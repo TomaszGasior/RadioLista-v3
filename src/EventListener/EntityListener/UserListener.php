@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\PreFlush;
 use Doctrine\ORM\Mapping\PreUpdate;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserListener extends AbstractEntityListener
+class UserListener
 {
     private $passwordEncoder;
 

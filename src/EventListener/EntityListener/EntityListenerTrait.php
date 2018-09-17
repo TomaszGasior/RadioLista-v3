@@ -4,12 +4,12 @@ namespace App\EventListener\EntityListener;
 
 use Doctrine\Common\EventArgs;
 
-abstract class AbstractEntityListener
+trait EntityListenerTrait
 {
     // There is need to manually enforce update of associated entities,
     // for example when User entity is modified inside RadioTable entity event.
-    // It's because associations aren't tracked consistently inside Doctrine's events.
-    protected function forceEntityUpdate(object $entity, EventArgs $args): void
+    // It's because associations are not tracked consistently inside Doctrine's events.
+    private function forceEntityUpdate(object $entity, EventArgs $args): void
     {
         $entityManager = $args->getEntityManager();
 
