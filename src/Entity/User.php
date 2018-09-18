@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\EventListener\EntityListener\UserListener"})
+ * @UniqueEntity("name")
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
@@ -23,11 +26,15 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=50)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $password;
 
@@ -43,6 +50,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=true)
+     * @Assert\Length(max=1000)
      */
     private $aboutMe;
 

@@ -59,61 +59,108 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50)
      */
     private $radioGroup;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50)
      */
     private $country;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2)
+     * @Assert\NotBlank()
+     * @Assert\Type("numeric")
      */
     private $frequency;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=100)
      */
     private $location;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
+     * @Assert\Type("numeric")
      */
     private $power;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
+     * @Assert\Choice({
+     *     RadioStation::POLARIZATION_HORIZONTAL,
+     *     RadioStation::POLARIZATION_VERTICAL,
+     *     RadioStation::POLARIZATION_CIRCULAR,
+     *     RadioStation::POLARIZATION_VARIOUS,
+     *     RadioStation::POLARIZATION_NONE,
+     * })
      */
     private $polarization = self::POLARIZATION_NONE;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type("int")
      */
     private $privateNumber;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Choice({
+     *     RadioStation::QUALITY_VERY_GOOD,
+     *     RadioStation::QUALITY_GOOD,
+     *     RadioStation::QUALITY_MIDDLE,
+     *     RadioStation::QUALITY_BAD,
+     *     RadioStation::QUALITY_VERY_BAD,
+     * })
      */
     private $quality = self::QUALITY_VERY_GOOD;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Choice({
+     *     RadioStation::MARKER_1,
+     *     RadioStation::MARKER_2,
+     *     RadioStation::MARKER_3,
+     *     RadioStation::MARKER_4,
+     *     RadioStation::MARKER_5,
+     *     RadioStation::MARKER_6,
+     *     RadioStation::MARKER_NONE,
+     * })
      */
     private $marker = self::MARKER_NONE;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Choice({
+     *     RadioStation::TYPE_MUSIC,
+     *     RadioStation::TYPE_INFORMATION,
+     *     RadioStation::TYPE_UNIVERSAL,
+     *     RadioStation::TYPE_RELIGIOUS,
+     *     RadioStation::TYPE_OTHER,
+     * })
      */
     private $type = self::TYPE_MUSIC;
 
     /**
      * @ORM\Column(type="array")
+     * @Assert\Collection({
+     *     "type" = @Assert\Choice({
+     *         RadioStation::LOCALITY_COUNTRY,
+     *         RadioStation::LOCALITY_LOCAL,
+     *         RadioStation::LOCALITY_NETWORK,
+     *     }),
+     *     "city" = @Assert\Type("text"),
+     * })
      */
     private $locality = [
         'type' => self::LOCALITY_COUNTRY,
@@ -122,6 +169,11 @@ class RadioStation
 
     /**
      * @ORM\Column(type="array")
+     * @Assert\Collection({
+     *     "rt"  = @Assert\Type("text"),
+     *     "ps"  = @Assert\Type("text"),
+     *     "pty" = @Assert\Type("text"),
+     * })
      */
     private $rds = [
         'rt'  => '',
@@ -131,6 +183,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Assert\Length(max=500)
      */
     private $comment;
 

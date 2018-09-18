@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(indexes={
@@ -38,16 +39,38 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $name;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\Choice({
+     *     RadioTable::STATUS_PUBLIC,
+     *     RadioTable::STATUS_UNLISTED,
+     *     RadioTable::STATUS_PRIVATE,
+     * })
      */
     private $status = self::STATUS_PUBLIC;
 
     /**
      * @ORM\Column(type="array")
+     * @Assert\Collection({
+     *     "frequency"     = @Assert\Type("int"),
+     *     "privateNumber" = @Assert\Type("int"),
+     *     "name"          = @Assert\Type("int"),
+     *     "radioGroup"    = @Assert\Type("int"),
+     *     "country"       = @Assert\Type("int"),
+     *     "location"      = @Assert\Type("int"),
+     *     "power"         = @Assert\Type("int"),
+     *     "polarization"  = @Assert\Type("int"),
+     *     "type"          = @Assert\Type("int"),
+     *     "locality"      = @Assert\Type("int"),
+     *     "quality"       = @Assert\Type("int"),
+     *     "rds"           = @Assert\Type("int"),
+     *     "comment"       = @Assert\Type("int"),
+     * })
      */
     private $columns = [
         'frequency'     =>  1,
@@ -67,16 +90,29 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\Choice({
+     *     RadioTable::SORTING_FREQUENCY,
+     *     RadioTable::SORTING_NAME,
+     *     RadioTable::SORTING_PRIVATE_NUMBER,
+     * })
      */
     private $sorting = self::SORTING_FREQUENCY;
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=true)
+     * @Assert\Length(max=1000)
      */
     private $description;
 
     /**
      * @ORM\Column(type="array")
+     * @Assert\Collection({
+     *     'th'   = @Assert\Type("string")
+     *     'bg'   = @Assert\Type("string")
+     *     'fg'   = @Assert\Type("string")
+     *     'img'  = @Assert\Type("string")
+     *     'full' = @Assert\Type("string")
+     * })
      */
     private $appearance = [
         'th'   => '',
