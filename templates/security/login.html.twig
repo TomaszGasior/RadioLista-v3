@@ -11,10 +11,6 @@
         <h2>Konto użytkownika — logowanie i rejestracja</h2>
     </header>
 
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
     {{ form_start(login_form) }}
 
     <div id="useTabbedUI" class="userLoginScreen">

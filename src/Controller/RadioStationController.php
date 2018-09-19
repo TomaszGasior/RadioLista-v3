@@ -20,18 +20,27 @@ class RadioStationController extends AbstractController
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
-    public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
+    public function add(RadioTable $radioTable, Request $request,
+                        EntityManagerInterface $entityManager): Response
     {
         $radioStation = new RadioStation;
 
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $radioStation->setRadioTable($radioTable);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $radioStation->setRadioTable($radioTable);
 
-            $entityManager->persist($radioStation);
-            $entityManager->flush();
+                $entityManager->persist($radioStation);
+                $entityManager->flush();
+
+                $this->addFlash('notice', 'Stacja została dodana.');
+                return $this->redirectToRoute('radiostation.edit', ['id' => $radioStation->getId()]);
+            }
+            else {
+                $this->addFlash('error', $form->getErrors(true));
+            }
         }
 
         return $this->render('radiostation/add.html.twig', [
@@ -44,13 +53,21 @@ class RadioStationController extends AbstractController
      * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
      */
-    public function edit(RadioStation $radioStation, Request $request, EntityManagerInterface $entityManager): Response
+    public function edit(RadioStation $radioStation, Request $request,
+                         EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $entityManager->flush();
+
+                $this->addFlash('notice', 'Stacja została zapisana.');
+            }
+            else {
+                $this->addFlash('error', $form->getErrors(true));
+            }
         }
 
         return $this->render('radiostation/edit.html.twig', [
