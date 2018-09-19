@@ -50,9 +50,13 @@
                 </nav>
             </div>
 
-            {% if notification is defined %}
-                <span id="notification" class="{% if true %}good{% else %}bad{% endif %}" role="alert">
-                    <span>{{ notification }}</span>
+            {% set notifications = app.flashes %}
+            {% if notifications %}
+                {# Show only first notification for compatibility with RLv2 concept. #}
+                {% set label = notifications|keys|first %}
+                {% set message = notifications|first|first %}
+                <span id="notification" class="{% if label == "notice" %}good{% else %}bad{% endif %}" role="alert">
+                    <span>{{ message }}</span>
                 </span>
                 <script>
                     document.getElementById("notification").id = "notification_JSOn";
