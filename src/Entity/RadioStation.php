@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(indexes={
@@ -153,7 +154,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Collection({
+     * @Assert\Collection(fields = {
      *     "type" = @Assert\Choice({
      *         RadioStation::LOCALITY_COUNTRY,
      *         RadioStation::LOCALITY_LOCAL,
@@ -169,7 +170,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Collection({
+     * @Assert\Collection(fields = {
      *     "rt"  = @Assert\Type("text"),
      *     "ps"  = @Assert\Type("text"),
      *     "pty" = @Assert\Type("text"),

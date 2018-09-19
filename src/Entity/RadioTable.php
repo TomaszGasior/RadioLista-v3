@@ -56,7 +56,7 @@ class RadioTable
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Collection({
+     * @Assert\Collection(fields = {
      *     "frequency"     = @Assert\Type("int"),
      *     "privateNumber" = @Assert\Type("int"),
      *     "name"          = @Assert\Type("int"),
@@ -106,12 +106,12 @@ class RadioTable
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Collection({
-     *     'th'   = @Assert\Type("string")
-     *     'bg'   = @Assert\Type("string")
-     *     'fg'   = @Assert\Type("string")
-     *     'img'  = @Assert\Type("string")
-     *     'full' = @Assert\Type("string")
+     * @Assert\Collection(fields = {
+     *     "th"   = @Assert\Type("string"),
+     *     "bg"   = @Assert\Type("string"),
+     *     "fg"   = @Assert\Type("string"),
+     *     "img"  = @Assert\Type("string"),
+     *     "full" = @Assert\Type("bool"),
      * })
      */
     private $appearance = [
