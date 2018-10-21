@@ -26,15 +26,15 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=50)
+     * @Assert\NotBlank(groups={"Default", "Registration"})
+     * @Assert\Length(max=50, groups={"Default", "Registration"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=100)
+     * @Assert\NotBlank(groups={"Default"})
+     * @Assert\Length(max=50, groups={"Default"})
      */
     private $password;
 
@@ -74,7 +74,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     private $radioTables;
 
-    private $plainPassword;
+    /**
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Length(max=50, groups={"Registration"})
+     */
+    private $plainPassword;   // Keep validation rules in sync with $password.
 
     public function __construct()
     {
@@ -202,7 +206,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     // UserInterface
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->name;
     }
