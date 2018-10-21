@@ -28,19 +28,14 @@ class RadioStationController extends AbstractController
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $radioStation->setRadioTable($radioTable);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $radioStation->setRadioTable($radioTable);
 
-                $entityManager->persist($radioStation);
-                $entityManager->flush();
+            $entityManager->persist($radioStation);
+            $entityManager->flush();
 
-                $this->addFlash('notice', 'Stacja została dodana.');
-                return $this->redirectToRoute('radiostation.edit', ['id' => $radioStation->getId()]);
-            }
-            else {
-                $this->addFlash('error', $form->getErrors(true));
-            }
+            $this->addFlash('notice', 'Stacja została dodana.');
+            return $this->redirectToRoute('radiostation.edit', ['id' => $radioStation->getId()]);
         }
 
         return $this->render('radiostation/add.html.twig', [
@@ -59,15 +54,10 @@ class RadioStationController extends AbstractController
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
 
-                $this->addFlash('notice', 'Stacja została zapisana.');
-            }
-            else {
-                $this->addFlash('error', $form->getErrors(true));
-            }
+            $this->addFlash('notice', 'Stacja została zapisana.');
         }
 
         return $this->render('radiostation/edit.html.twig', [

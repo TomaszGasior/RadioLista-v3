@@ -71,17 +71,12 @@ class UserController extends AbstractController
         $form = $this->createForm(UserRegisterType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $entityManager->persist($user);
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-                $this->addFlash('notice', 'Twoje konto zostało utworzone.');
-                return $this->redirectToRoute('security.login');
-            }
-            else {
-                $this->addFlash('error', $form->getErrors(true));
-            }
+            $this->addFlash('notice', 'Twoje konto zostało utworzone.');
+            return $this->redirectToRoute('security.login');
         }
 
         return $this->render('user/register.html.twig', [

@@ -46,19 +46,14 @@ class RadioTableController extends AbstractController
         $form = $this->createForm(RadioTableCreateType::class, $radioTable);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $radioTable->setOwner($this->getUser());
+        if ($form->isSubmitted() && $form->isValid()) {
+            $radioTable->setOwner($this->getUser());
 
-                $entityManager->persist($radioTable);
-                $entityManager->flush();
+            $entityManager->persist($radioTable);
+            $entityManager->flush();
 
-                $this->addFlash('notice', 'Wykaz został utworzony.');
-                return $this->redirectToRoute('user.my_radiotables');
-            }
-            else {
-                $this->addFlash('error', $form->getErrors(true));
-            }
+            $this->addFlash('notice', 'Wykaz został utworzony.');
+            return $this->redirectToRoute('user.my_radiotables');
         }
 
         return $this->render('radiotable/create.html.twig', [
@@ -76,15 +71,10 @@ class RadioTableController extends AbstractController
         $form = $this->createForm(RadioTableSettingsType::class, $radioTable);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
 
-                $this->addFlash('notice', 'Zmiany zostały zapisane.');
-            }
-            else {
-                $this->addFlash('error', $form->getErrors(true));
-            }
+            $this->addFlash('notice', 'Zmiany zostały zapisane.');
         }
 
         return $this->render('radiotable/settings.html.twig', [
