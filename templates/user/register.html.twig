@@ -2,6 +2,33 @@
 
 {% block page_title %}Rejestracja{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+{% endblock %}
+
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header class="userLoginScreen">
+        <h2>Konto użytkownika — logowanie i rejestracja</h2>
+    </header>
+
+    {{ form_start(register_form) }}
+
+    <div id="useTabbedUI" class="userLoginScreen">
+        <div>
+            <h3>Zarejestruj się</h3>
+
+            <dl>
+                {{ form_row(register_form.name) }}
+                {{ form_row(register_form.plainPassword) }}
+
+                {% spaceless %}
+                    {{ form_row(register_form.acceptServiceTerms) }}
+                {% endspaceless %}
+            </dl>
+
+            <button>Zarejestruj się</button>
+        </div>
+    </div>
+
+    {{ form_end(register_form) }}
 {% endblock %}
