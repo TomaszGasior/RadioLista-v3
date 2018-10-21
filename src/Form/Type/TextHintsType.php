@@ -1,33 +1,29 @@
 <?php
 
-namespace App\Form\Extension;
+namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LabeledCollectionType extends AbstractType
+class TextHintsType extends AbstractType
 {
     public function getParent(): string
     {
-        return CollectionType::class;
+        return TextType::class;
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        foreach ($view->children as $name => $childrenView) {
-            if (isset($options['entry_labels'][$name])) {
-                $childrenView->vars['label'] = $options['entry_labels'][$name];
-            }
-        }
+        $view->vars['hints'] = $options['hints'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entry_labels' => [],
+            'hints' => [],
         ]);
     }
 }

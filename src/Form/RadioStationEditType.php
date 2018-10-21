@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\RadioStation;
-use App\Form\Extension\DecimalUnitType;
-use App\Form\Extension\TextHintsType;
+use App\Form\Type\DecimalUnitType;
+use App\Form\Type\TextHintsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

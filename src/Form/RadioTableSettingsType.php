@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\RadioTable;
-use App\Form\Extension\LabeledCollectionType;
+use App\Form\Type\LabeledCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
