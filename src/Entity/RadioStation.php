@@ -160,7 +160,7 @@ class RadioStation
      *         RadioStation::LOCALITY_LOCAL,
      *         RadioStation::LOCALITY_NETWORK,
      *     }),
-     *     "city" = @Assert\Type("text"),
+     *     "city" = @Assert\Type("string"),
      * })
      */
     private $locality = [
