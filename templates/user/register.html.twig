@@ -11,18 +11,18 @@
         <h2>Konto użytkownika — logowanie i rejestracja</h2>
     </header>
 
-    {{ form_start(register_form) }}
+    {{ form_start(form) }}
 
     <div id="useTabbedUI" class="userLoginScreen">
         <div>
             <h3>Zarejestruj się</h3>
 
             <dl>
-                {{ form_row(register_form.name) }}
-                {{ form_row(register_form.plainPassword) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.plainPassword) }}
 
                 {% spaceless %}
-                    {{ form_row(register_form.acceptServiceTerms) }}
+                    {{ form_row(form.acceptServiceTerms) }}
                 {% endspaceless %}
             </dl>
 
@@ -30,5 +30,5 @@
         </div>
     </div>
 
-    {{ form_end(register_form) }}
+    {{ form_end(form) }}
 {% endblock %}

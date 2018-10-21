@@ -68,11 +68,11 @@ class UserController extends AbstractController
     {
         $user = new User;
 
-        $registerForm = $this->createForm(UserRegisterType::class, $user);
-        $registerForm->handleRequest($request);
+        $form = $this->createForm(UserRegisterType::class, $user);
+        $form->handleRequest($request);
 
-        if ($registerForm->isSubmitted()) {
-            if ($registerForm->isValid()) {
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
                 $entityManager->persist($user);
                 $entityManager->flush();
 
@@ -80,12 +80,12 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('security.login');
             }
             else {
-                $this->addFlash('error', $registerForm->getErrors(true));
+                $this->addFlash('error', $form->getErrors(true));
             }
         }
 
         return $this->render('user/register.html.twig', [
-            'register_form' => $registerForm->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }
