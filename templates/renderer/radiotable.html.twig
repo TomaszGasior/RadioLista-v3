@@ -78,10 +78,10 @@
                             <span class="ni ni2">{{ radiostation.privateNumber }}</span>
 
                         {% elseif column == 'frequency' %}
-                            <span class="ni">{{ radiostation.frequency }}</span>
+                            <span class="ni">{{ radiostation.frequency|number_format }}</span>
 
                         {% elseif column == 'power' and radiostation.power %}
-                            <span class="ni ni3">{{ radiostation.power }}</span>
+                            <span class="ni ni3">{{ radiostation.power|number_format }}</span>
 
                         {% elseif column == 'polarization' and radiostation.polarization %}
                             <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ radiostation.polarization }}</abbr>
