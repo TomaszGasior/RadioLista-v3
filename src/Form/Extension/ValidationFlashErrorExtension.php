@@ -27,7 +27,9 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
                 $session = $this->requestStack->getCurrentRequest()->getSession();
 
                 if (!$form->isValid()) {
-                    $session->getFlashBag()->add('error', $form->getErrors(true));
+                    $error = $form->getErrors(true)[0];
+
+                    $session->getFlashBag()->add('error', $error->getMessage());
                 }
             }
         });
