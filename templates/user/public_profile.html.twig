@@ -14,9 +14,9 @@
             {{ user.aboutMe|raw }}
             <dl>
                 <dt>Data ostatniej aktywności</dt>
-                <dd>{{ user.lastActivityDate|date }}</dd>
+                <dd>{{ user.lastActivityDate|date_format }}</dd>
                 <dt>Data założenia konta</dt>
-                <dd>{{ user.registerDate|date }}</dd>
+                <dd>{{ user.registerDate|date_format }}</dd>
             </dl>
         </section>
     {% endif %}

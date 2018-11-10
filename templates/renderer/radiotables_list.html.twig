@@ -24,7 +24,7 @@
                 <dd>{{ radiotable.radioStationsCount }}</dd>
 
                 <dt>Data aktualizacji</dt>
-                <dd>{{ radiotable.lastUpdateTime|date }}</dd>
+                <dd>{{ radiotable.lastUpdateTime|date_format }}</dd>
 
                 <dt>Jednostka</dt>
                 <dd>{{ radiotable.useKhz ? 'kHz' : 'MHz' }}</dd>
