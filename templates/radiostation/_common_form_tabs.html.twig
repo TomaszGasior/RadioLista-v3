@@ -3,7 +3,7 @@
         <h3>Główne</h3>
 
         <dl>
-            {{ form_row(form.frequency) }}
+            {{ form_row(form.frequency, {'unit_label': radiostation.radioTable.useKhz ? 'kHz' : 'MHz'}) }}
             {{ form_row(form.name) }}
             {{ form_row(form.radioGroup) }}
             {{ form_row(form.country) }}

@@ -18,8 +18,8 @@ class RadioStationEditType extends AbstractType
     {
         $builder
             ->add('frequency', DecimalUnitType::class, [
-                'label'      => 'Częstotliwość',
-                'unit_label' => 'MHz',
+                'label' => 'Częstotliwość',
+                // Unit label "MHz" or "kHz" needs to be set in template.
             ])
             ->add('name', TextHintsType::class, [
                 'label' => 'Nazwa',

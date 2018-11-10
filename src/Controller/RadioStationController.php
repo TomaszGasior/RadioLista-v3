@@ -24,13 +24,12 @@ class RadioStationController extends AbstractController
                         EntityManagerInterface $entityManager): Response
     {
         $radioStation = new RadioStation;
+        $radioStation->setRadioTable($radioTable);
 
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $radioStation->setRadioTable($radioTable);
-
             $entityManager->persist($radioStation);
             $entityManager->flush();
 
@@ -39,8 +38,8 @@ class RadioStationController extends AbstractController
         }
 
         return $this->render('radiostation/add.html.twig', [
-            'form'       => $form->createView(),
-            'radiotable' => $radioTable,
+            'form'         => $form->createView(),
+            'radiostation' => $radioStation,
         ]);
     }
 
