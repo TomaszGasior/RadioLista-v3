@@ -6,6 +6,13 @@
     <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
 {% endblock %}
 
+{% form_theme form _self %}
+{% block _user_register_acceptServiceTerms_label %}
+    {{ block('form_label')|replace(
+        {'regulamin': '<a href="' ~ path('terms_of_service') ~ '" tabindex="-1" target="_blank">regulamin</a>'}
+    )|raw }}
+{% endblock %}
+
 {% block page_content %}
     <header class="userLoginScreen">
         <h2>Konto użytkownika — logowanie i rejestracja</h2>
