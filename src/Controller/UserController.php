@@ -53,7 +53,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/ustawienia-konta", name="user.my_account_settings")
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function myAccountSettings(): Response
     {
