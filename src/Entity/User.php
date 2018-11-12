@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\EventListener\EntityListener\UserListener"})
- * @UniqueEntity("name")
+ * @UniqueEntity("name", groups={"Default", "Registration"})
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
