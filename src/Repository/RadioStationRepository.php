@@ -38,8 +38,8 @@ class RadioStationRepository extends ServiceEntityRepository
             case RadioTable::SORTING_PRIVATE_NUMBER:
                 return $this->createQueryBuilder('radioStation')
                     ->addSelect(
-                        // It's needed to move radiostations without private number to the end of the radiotable.
-                        'CASE WHEN radioStation.privateNumber = 0 THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
+                        // Move radiostations without private number to the end of the radiotable.
+                        'CASE WHEN radioStation.privateNumber IS NULL THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
                     )
                     ->andWhere('radioStation.radioTable = :radioTable')
                     ->setParameter('radioTable', $radioTable)
@@ -50,6 +50,5 @@ class RadioStationRepository extends ServiceEntityRepository
                     ->getResult()
                 ;
         }
-
     }
 }

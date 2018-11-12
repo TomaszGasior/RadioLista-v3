@@ -74,13 +74,13 @@
                                 {{ radiostation.name }}
                             {% endif %}
 
-                        {% elseif column == 'privateNumber' and radiostation.privateNumber %}
+                        {% elseif column == 'privateNumber' and radiostation.privateNumber is not null %}
                             <span class="ni ni2">{{ radiostation.privateNumber }}</span>
 
                         {% elseif column == 'frequency' %}
                             <span class="ni">{{ radiostation.frequency|number_format }}</span>
 
-                        {% elseif column == 'power' and radiostation.power %}
+                        {% elseif column == 'power' and radiostation.power is not null %}
                             <span class="ni ni3">{{ radiostation.power|number_format }}</span>
 
                         {% elseif column == 'polarization' and radiostation.polarization %}
