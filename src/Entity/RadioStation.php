@@ -81,6 +81,7 @@ class RadioStation
      * @ORM\Column(type="decimal", precision=7, scale=2)
      * @Assert\NotBlank()
      * @Assert\Type("numeric")
+     * @Assert\GreaterThan(0)
      */
     private $frequency;
 
@@ -93,6 +94,7 @@ class RadioStation
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
      * @Assert\Type("numeric")
+     * @Assert\GreaterThan(0)
      */
     private $power;
 
@@ -111,6 +113,7 @@ class RadioStation
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
+     * @Assert\GreaterThan(0)
      */
     private $privateNumber;
 
