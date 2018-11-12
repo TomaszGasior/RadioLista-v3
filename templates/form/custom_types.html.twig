@@ -1,6 +1,6 @@
 {% block decimal_unit_widget %}
     {% set type = "number" %}
-    {% set attr = attr|merge({'class': 'decimal', 'step': '0.05', 'min': '0', 'max': '99999'}) %}
+    {% set attr = attr|merge({'class': 'decimal', 'step': '0.05'}) %}
     {{ block('number_widget') }}
     {{ unit_label }}
 
