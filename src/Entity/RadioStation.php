@@ -174,9 +174,9 @@ class RadioStation
     /**
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
-     *     "rt"  = @Assert\Type("text"),
-     *     "ps"  = @Assert\Type("text"),
-     *     "pty" = @Assert\Type("text"),
+     *     "rt"  = @Assert\Type("string"),
+     *     "ps"  = @Assert\Type("string"),
+     *     "pty" = @Assert\Type("string"),
      * })
      */
     private $rds = [
