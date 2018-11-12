@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "508ba730a446911ff27de07769797cd5",
+    "content-hash": "b4485b3a9f8ac93d2ec6e65f35d0c1d3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2280,16 +2280,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.1.1",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "9fb60f232af0764d58002e7872acb43a74506d25"
+                "reference": "803c49664ddc7cbc4be02f41491766be32c90a7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/9fb60f232af0764d58002e7872acb43a74506d25",
-                "reference": "9fb60f232af0764d58002e7872acb43a74506d25",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/803c49664ddc7cbc4be02f41491766be32c90a7f",
+                "reference": "803c49664ddc7cbc4be02f41491766be32c90a7f",
                 "shasum": ""
             },
             "require": {
@@ -2323,7 +2323,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-09-03T08:17:12+00:00"
+            "time": "2018-11-12T12:25:13+00:00"
         },
         {
             "name": "symfony/form",
@@ -4418,7 +4418,8 @@
     "platform": {
         "php": "^7.1.3",
         "ext-ctype": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }
