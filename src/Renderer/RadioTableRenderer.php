@@ -52,13 +52,17 @@ class RadioTableRenderer
         ]);
     }
 
+    /**
+     * @internal
+     */
     public function formatRDSFrames(array $frames): array
     {
-        foreach($frames as &$frame) {
+        foreach($frames as $key => &$frame) {
             $frame      = str_replace('_', ' ', $frame);
             $emptyChars = 8 - mb_strlen($frame);
 
             if ('' == trim($frame)) {
+                unset($frames[$key]);
                 continue;
             }
 
