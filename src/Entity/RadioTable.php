@@ -57,9 +57,15 @@ class RadioTable
     /**
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
-     *     "frequency"     = @Assert\Type("int"),
+     *     "frequency"     = {
+     *         @Assert\Type("int"),
+     *         @Assert\GreaterThan(0, message="Częstotliwość musi być widoczna."),
+     *     },
      *     "privateNumber" = @Assert\Type("int"),
-     *     "name"          = @Assert\Type("int"),
+     *     "name"          = {
+     *         @Assert\Type("int"),
+     *         @Assert\GreaterThan(0, message="Nazwa musi być widoczna."),
+     *     },
      *     "radioGroup"    = @Assert\Type("int"),
      *     "country"       = @Assert\Type("int"),
      *     "location"      = @Assert\Type("int"),

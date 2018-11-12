@@ -154,7 +154,7 @@ function createColumnsOrderUI() {
 		thisElement['buttonHideShow'].addEventListener( 'click', hideShowColumn );
 
 		// Disable "hide" button when it is needed.
-		if( thisElement['input'].name == 'columns[frequency]' || thisElement['input'].name == 'columns[name]' )
+		if( thisElement['input'].name == 'radio_table_settings[columns][frequency]' || thisElement['input'].name == 'radio_table_settings[columns][name]' )
 			thisElement['buttonHideShow'].disabled = true;
 
 		// Append buttons to <DD> tags.
