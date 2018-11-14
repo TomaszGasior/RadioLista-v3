@@ -25,7 +25,7 @@
             <h3>Zarejestruj się</h3>
 
             <dl>
-                {{ form_row(form.name) }}
+                {{ form_row(form.name, {attr: {title: "Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka."}}) }}
                 {{ form_row(form.plainPassword) }}
 
                 {% spaceless %}

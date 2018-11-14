@@ -28,6 +28,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(groups={"Default", "Registration"})
      * @Assert\Length(max=50, groups={"Default", "Registration"})
+     * @assert\Regex("/^[a-z0-9_\.\-]{1,30}$/", groups={"Default", "Registration"})
      */
     private $name;
 
