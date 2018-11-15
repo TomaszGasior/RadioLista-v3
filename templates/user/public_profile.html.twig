@@ -2,6 +2,11 @@
 
 {% block page_title %}{{ user.name }}{% endblock %}
 
+{% block head_closing %}
+    {# User name is case insensitive. #}
+    <link rel="canonical" href="{{ path('user.public_profile', {name: user.name}) }}">
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h2><strong>{{ user.name }}</strong> — profil użytkownika</h2>
