@@ -35,9 +35,15 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(groups={"Default"})
-     * @Assert\Length(max=50, groups={"Default"})
+     * @Assert\Length(max=100, groups={"Default"})
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Length(max=100, groups={"Registration"})
+     */
+    private $plainPassword; // Keep validation rules in sync with $password.
 
     /**
      * @ORM\Column(type="date")
@@ -74,12 +80,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="owner", orphanRemoval=true)
      */
     private $radioTables;
-
-    /**
-     * @Assert\NotBlank(groups={"Registration"})
-     * @Assert\Length(max=50, groups={"Registration"})
-     */
-    private $plainPassword;   // Keep validation rules in sync with $password.
 
     public function __construct()
     {
