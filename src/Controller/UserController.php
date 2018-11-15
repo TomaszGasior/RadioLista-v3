@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegisterType;
+use App\Form\UserSettingsType;
 use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,9 +56,20 @@ class UserController extends AbstractController
      * @Route("/ustawienia-konta", name="user.my_account_settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myAccountSettings(): Response
+    public function myAccountSettings(EntityManagerInterface $entityManager, Request $request): Response
     {
-        return $this->render('user/my_account_settings.html.twig');
+        $form = $this->createForm(UserSettingsType::class, $this->getUser());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Zmiany zostały zapisane.');
+        }
+
+        return $this->render('user/my_account_settings.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

@@ -2,6 +2,61 @@
 
 {% block page_title %}Ustawienia konta{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+{% endblock %}
+
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Ustawienia konta</h2>
+    </header>
+
+    {{ form_start(form) }}
+
+    <div id="useTabbedUI">
+        <div>
+            <h3>Moje konto</h3>
+
+            <dl>
+                <dt>Nazwa użytkownika</dt>
+                <dd>{{ app.user.name }}</dd>
+
+                <dt>Data ostatniej aktywności</dt>
+                <dd>{{ app.user.lastActivityDate|date_format }}</dd>
+
+                <dt>Data założenia konta</dt>
+                <dd>{{ app.user.registerDate|date_format }}</dd>
+
+                <dt>Stan profilu publicznego</dt>
+                <dd>{{ app.user.publicProfile ? 'włączony' : 'wyłączony' }}</dd>
+
+                <dt>Liczba utworzonych wykazów</dt>
+                <dd>{{ app.user.radioTablesCount }}</dd>
+            </dl>
+        </div>
+        <div>
+            <h3>Profil publiczny</h3>
+
+            <p class="information">Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i&nbsp;spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem.</p>
+
+            <dl>
+                {{ form_row(form.aboutMe) }}
+                {{ form_row(form.publicProfile) }}
+            </dl>
+        </div>
+        <div>
+            <h3>Zmiana hasła</h3>
+
+            <p class="information">Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.</p>
+
+            <dl>
+                {{ form_row(form.currentPassword) }}
+                {{ form_row(form.newPassword) }}
+            </dl>
+        </div>
+    </div>
+
+    <button>Zapisz</button>
+
+    {{ form_end(form) }}
 {% endblock %}
