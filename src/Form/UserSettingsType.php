@@ -9,9 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserSettingsType extends AbstractType
 {
@@ -28,16 +29,21 @@ class UserSettingsType extends AbstractType
             ->add('currentPassword', PasswordType::class, [
                 'label'       => 'Obecne hasło',
                 'mapped'      => false,
-                // 'required' => false,
+                'required'    => false,
                 'constraints' => [
-                    new SecurityAssert\UserPassword,
+                    new SecurityAssert\UserPassword([
+                        'groups' => 'ChangingPasswordTab',
+                    ]),
                 ],
             ])
-            ->add('newPassword', RepeatedType::class, [
-                'property_path' => 'password',
-
-                'type' => PasswordType::class,
-                // 'required' => false,
+            ->add('plainPassword', RepeatedType::class, [
+                'type'        => PasswordType::class,
+                'required'    => false,
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'groups' => 'ChangingPasswordTab',
+                    ]),
+                ],
 
                 'first_options' => [
                     'label' => 'Nowe hasło',
@@ -52,7 +58,14 @@ class UserSettingsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class'        => User::class,
+            'validation_groups' => function(FormInterface $form){
+                if ($form->get('currentPassword')->getData() || $form->get('plainPassword')->getData()) {
+                    return ['ChangingPasswordTab', 'RedefinePassword'];
+                }
+
+                return 'Default';
+            },
         ]);
     }
 }
