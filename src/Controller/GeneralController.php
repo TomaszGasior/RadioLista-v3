@@ -18,9 +18,14 @@ class GeneralController extends AbstractController
      */
     public function homepage(RadioTableRepository $radioTableRepository): Response
     {
+        $form = $this->createForm(RadioTableSearchType::class, null, [
+            'action' => $this->generateUrl('search_radiotables'),
+        ]);
+
         return $this->render('general/homepage.html.twig', [
             'last_updated_radiotables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(5),
             'last_created_radiotables' => $radioTableRepository->findPublicOrderedByIdDesc(5),
+            'search_form'              => $form->createView(),
         ]);
     }
 
