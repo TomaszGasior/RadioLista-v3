@@ -47,7 +47,7 @@ class UserRegisterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'        => User::class,
-            'validation_groups' => ['Registration'],
+            'validation_groups' => ['Registration', 'RedefinePassword'],
         ]);
     }
 }
