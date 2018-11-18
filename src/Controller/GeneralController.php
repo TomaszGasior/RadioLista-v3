@@ -54,7 +54,8 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"})
+     * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"},
+     *     condition="request.query.get('a') == ''")
      */
     public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1,
                                    RadioTablesListRenderer $radioTablesListRenderer): Response
