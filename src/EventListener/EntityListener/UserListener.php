@@ -37,6 +37,5 @@ class UserListener
                 $this->passwordEncoder->encodePassword($user, $user->getPlainPassword())
             );
         }
-
     }
 }
