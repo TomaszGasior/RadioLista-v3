@@ -15,9 +15,12 @@ class GeneralController extends AbstractController
      * @Route("", name="homepage")
      * @Route("/strona-glowna")
      */
-    public function homepage(): Response
+    public function homepage(RadioTableRepository $radioTableRepository): Response
     {
-        return $this->render('general/homepage.html.twig');
+        return $this->render('general/homepage.html.twig', [
+            'last_updated_radiotables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(5),
+            'last_created_radiotables' => $radioTableRepository->findPublicOrderedByIdDesc(5),
+        ]);
     }
 
     /**

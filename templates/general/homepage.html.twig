@@ -1,5 +1,47 @@
 {% extends 'layout.html.twig' %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header class="home">
+        <h2>Strona główna</h2>
+    </header>
+
+    <div class="homeColumns">
+        <div>
+            <section class="home">
+                <h3>Czym jest RadioLista?</h3>
+
+                <p>W serwisie RadioLista osoby interesujące się mediami mogą publikować różnorodne wykazy radiowe i&nbsp;telewi&shy;zyjne &mdash; bandscany, regularne wykazy odbieranych stacji czy&nbsp;też prywatne listy ulubionych programów.</p>
+            </section>
+
+            <section class="home">
+                <h3>Wyszukaj wykazy</h3>
+            </section>
+        </div>
+
+        <div>
+            <section class="home">
+                <h3>Ostatnio zmodyfikowane wykazy</h3>
+                <ol>
+                    {% for radiotable in last_updated_radiotables %}
+                        <li>
+                            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">{{ radiotable.name }}</a>
+                            <span> &mdash; </span>{{ radiotable.lastUpdateTime|date_format }}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </section>
+
+            <section class="home">
+                <h3>Ostatnio utworzone wykazy</h3>
+                <ol>
+                    {% for radiotable in last_created_radiotables %}
+                        <li>
+                            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">{{ radiotable.name }}</a>
+                            <span> &mdash; </span>{{ radiotable.lastUpdateTime|date_format }}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </section>
+        </div>
+    </div>
 {% endblock %}
