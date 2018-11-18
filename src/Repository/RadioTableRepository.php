@@ -45,20 +45,32 @@ class RadioTableRepository extends ServiceEntityRepository
         );
     }
 
-    public function findOwnedByUser(User $user): array
-    {
-        return $this->findBy(
-            ['owner' => $user],
-            ['lastUpdateTime' => 'DESC']
-        );
-    }
-
     public function findPublicOrderedByIdDesc(int $limit = null): array
     {
         return $this->findBy(
             ['status' => RadioTable::STATUS_PUBLIC],
             ['id' => 'DESC'],
             $limit
+        );
+    }
+
+    public function findPublicBySearchTerm(string $searchTerm): array
+    {
+        return $this->createQueryBuilder('radioTable')
+            ->andWhere('radioTable.status = :status')
+            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm BOOLEAN) > 0.0')
+            ->setParameter('searchTerm', $searchTerm)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findOwnedByUser(User $user): array
+    {
+        return $this->findBy(
+            ['owner' => $user],
+            ['lastUpdateTime' => 'DESC']
         );
     }
 }
