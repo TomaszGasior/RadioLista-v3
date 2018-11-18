@@ -28,11 +28,12 @@ class RadioTableRepository extends ServiceEntityRepository
         );
     }
 
-    public function findPublicOrderedByLastUpdateTime(): array
+    public function findPublicOrderedByLastUpdateTime(int $limit = null): array
     {
         return $this->findBy(
             ['status' => RadioTable::STATUS_PUBLIC],
-            ['lastUpdateTime' => 'DESC']
+            ['lastUpdateTime' => 'DESC'],
+            $limit
         );
     }
 
@@ -49,6 +50,15 @@ class RadioTableRepository extends ServiceEntityRepository
         return $this->findBy(
             ['owner' => $user],
             ['lastUpdateTime' => 'DESC']
+        );
+    }
+
+    public function findPublicOrderedByIdDesc(int $limit = null): array
+    {
+        return $this->findBy(
+            ['status' => RadioTable::STATUS_PUBLIC],
+            ['id' => 'DESC'],
+            $limit
         );
     }
 }
