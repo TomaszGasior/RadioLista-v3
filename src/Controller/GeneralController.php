@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\RadioTableSearchType;
 use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -78,8 +79,30 @@ class GeneralController extends AbstractController
     /**
      * @Route("/szukaj", name="search_radiotables")
      */
-    public function searchRadioTables(): Response
+    public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request,
+                                      RadioTablesListRenderer $radioTablesListRenderer): Response
     {
-        return $this->render('general/search_radiotables.html.twig');
+        $form = $this->createForm(RadioTableSearchType::class);
+        $form->handleRequest($request);
+
+        $searchTerm = $form->get('searchTerm')->getData();
+
+        // Redirect to homepage when search term is empty or incorrect ("*" causes MySQL error).
+        if (!$searchTerm || $searchTerm === '*') {
+            return $this->redirectToRoute('homepage');
+        }
+
+        $radioTables = $radioTableRepository->findPublicBySearchTerm($searchTerm);
+
+        $radioTablesList = $radioTablesListRenderer->render(
+            $radioTables,
+            RadioTablesListRenderer::OPTION_SHOW_OWNER
+        );
+
+        return $this->render('general/search_radiotables.html.twig', [
+            'radiotables_list' => $radioTablesList,
+            'search_term'      => $searchTerm,
+            'search_form'      => $form->createView(),
+        ]);
     }
 }
