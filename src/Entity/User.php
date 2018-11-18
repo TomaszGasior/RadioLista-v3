@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\EventListener\EntityListener\UserListener"})
- * @UniqueEntity("name", groups={"Default", "Registration"})
+ * @UniqueEntity("name", groups={"Default", "RedefinePassword"})
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
@@ -26,9 +26,9 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(groups={"Default", "Registration"})
-     * @Assert\Length(max=50, groups={"Default", "Registration"})
-     * @assert\Regex("/^[a-z0-9_\.\-]{1,30}$/", groups={"Default", "Registration"})
+     * @Assert\NotBlank(groups={"Default", "RedefinePassword"})
+     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"})
+     * @assert\Regex("/^[a-z0-9_\.\-]{1,30}$/", groups={"Default", "RedefinePassword"})
      */
     private $name;
 
@@ -40,8 +40,8 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(groups={"Registration"})
-     * @Assert\Length(max=100, groups={"Registration"})
+     * @Assert\NotBlank(groups={"RedefinePassword"})
+     * @Assert\Length(max=100, groups={"RedefinePassword"})
      */
     private $plainPassword; // Keep validation rules in sync with $password.
 
@@ -196,7 +196,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
-        $this->password = null;
 
         if ($this->oldPassCompat) {
             $this->oldPassCompat = false;
