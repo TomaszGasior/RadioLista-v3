@@ -120,7 +120,7 @@ class RadioTable
      *     "th"   = @Assert\Type("string"),
      *     "bg"   = @Assert\Type("string"),
      *     "fg"   = @Assert\Type("string"),
-     *     "img"  = @Assert\Type("string"),
+     *     "img"  = {@Assert\Type("string"), @Assert\Url},
      *     "full" = @Assert\Type("bool"),
      * })
      */
