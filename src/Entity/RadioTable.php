@@ -71,42 +71,31 @@ class RadioTable
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Collection(fields = {
-     *     "frequency"     = {
-     *         @Assert\Type("int"),
-     *         @Assert\GreaterThan(0, message="Częstotliwość musi być widoczna."),
-     *     },
-     *     "privateNumber" = @Assert\Type("int"),
-     *     "name"          = {
-     *         @Assert\Type("int"),
-     *         @Assert\GreaterThan(0, message="Nazwa musi być widoczna."),
-     *     },
-     *     "radioGroup"    = @Assert\Type("int"),
-     *     "country"       = @Assert\Type("int"),
-     *     "location"      = @Assert\Type("int"),
-     *     "power"         = @Assert\Type("int"),
-     *     "polarization"  = @Assert\Type("int"),
-     *     "type"          = @Assert\Type("int"),
-     *     "locality"      = @Assert\Type("int"),
-     *     "quality"       = @Assert\Type("int"),
-     *     "rds"           = @Assert\Type("int"),
-     *     "comment"       = @Assert\Type("int"),
-     * })
+     * @Assert\Choice({
+     *     RadioTable::COLUMN_FREQUENCY,
+     *     RadioTable::COLUMN_PRIVATE_NUMBER,
+     *     RadioTable::COLUMN_NAME,
+     *     RadioTable::COLUMN_RADIO_GROUP,
+     *     RadioTable::COLUMN_COUNTRY,
+     *     RadioTable::COLUMN_LOCATION,
+     *     RadioTable::COLUMN_POWER,
+     *     RadioTable::COLUMN_POLARIZATION,
+     *     RadioTable::COLUMN_TYPE,
+     *     RadioTable::COLUMN_LOCALITY,
+     *     RadioTable::COLUMN_QUALITY,
+     *     RadioTable::COLUMN_RDS,
+     *     RadioTable::COLUMN_COMMENT,
+     * }, multiple=true)
      */
     private $columns = [
-        'frequency'     =>  1,
-        'privateNumber' => -2,
-        'name'          =>  3,
-        'radioGroup'    =>  4,
-        'country'       => -5,
-        'location'      =>  6,
-        'power'         => -7,
-        'polarization'  => -8,
-        'type'          =>  9,
-        'locality'      =>  10,
-        'quality'       =>  11,
-        'rds'           =>  12,
-        'comment'       => -13,
+        self::COLUMN_FREQUENCY,
+        self::COLUMN_NAME,
+        self::COLUMN_RADIO_GROUP,
+        self::COLUMN_LOCATION,
+        self::COLUMN_TYPE,
+        self::COLUMN_LOCALITY,
+        self::COLUMN_QUALITY,
+        self::COLUMN_RDS,
     ];
 
     /**
