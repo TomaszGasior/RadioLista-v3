@@ -51,7 +51,7 @@
 <table>
     <thead>
         <tr>
-            {% for column in visible_columns %}
+            {% for column in radiotable.columns %}
                 <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
                     {{ columns_labels[column] }}
                 </th>
@@ -62,7 +62,7 @@
     <tbody>
         {% for radiostation in radiostations %}
             <tr {% if radiostation.marker %}class="marker{{ radiostation.marker }}"{% endif %}>
-                {% for column in visible_columns %}
+                {% for column in radiotable.columns %}
                     <td>
                         {% if column == 'radioGroup' or column == 'country' or column == 'location' or column == 'comment' %}
                             {{ attribute(radiostation, column) }}

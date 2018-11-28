@@ -30,16 +30,6 @@ class RadioTableRenderer
 
     private function process(RadioTable $radioTable, ?int $options): string
     {
-        // RadioTable::$columns defines order and visibility of radiotable columns. This is
-        // an array with columns names as keys and position numbers as values. Columns will be
-        // sorted by position number. Columns with negative position number won't be visible.
-        $visibleColumns = array_filter(
-            $radioTable->getColumns(),
-            function($position){ return $position > 0; }
-        );
-        asort($visibleColumns);
-        $visibleColumns = array_keys($visibleColumns);
-
         $radioStations = $this->radioStationRepository->findForRadioTable($radioTable);
 
         $this->twig->addFilter(new \Twig_Filter('format_rds_frames', [$this, 'formatRDSFrames']));
@@ -47,7 +37,6 @@ class RadioTableRenderer
         return $this->twig->render('renderer/radiotable.html.twig', [
             'radiotable'      => $radioTable,
             'radiostations'   => $radioStations,
-            'visible_columns' => $visibleColumns,
             'show_edit_links' => ($options & self::OPTION_SHOW_EDIT_LINKS),
         ]);
     }
