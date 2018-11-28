@@ -16,9 +16,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RadioTable
 {
-    public const SORTING_FREQUENCY      = 'frequency';
-    public const SORTING_NAME           = 'name';
-    public const SORTING_PRIVATE_NUMBER = 'privateNumber';
+    public const COLUMN_FREQUENCY      = 'frequency';
+    public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
+    public const COLUMN_NAME           = 'name';
+    public const COLUMN_RADIO_GROUP    = 'radioGroup';
+    public const COLUMN_COUNTRY        = 'country';
+    public const COLUMN_LOCATION       = 'location';
+    public const COLUMN_POWER          = 'power';
+    public const COLUMN_POLARIZATION   = 'polarization';
+    public const COLUMN_TYPE           = 'type';
+    public const COLUMN_LOCALITY       = 'locality';
+    public const COLUMN_QUALITY        = 'quality';
+    public const COLUMN_RDS            = 'rds';
+    public const COLUMN_COMMENT        = 'comment';
+    // Keep in sync with RadioStation's fields names.
+
+    public const SORTING_FREQUENCY      = self::COLUMN_FREQUENCY;
+    public const SORTING_NAME           = self::COLUMN_NAME;
+    public const SORTING_PRIVATE_NUMBER = self::COLUMN_PRIVATE_NUMBER;
 
     public const STATUS_PUBLIC   = 1;
     public const STATUS_UNLISTED = 0;
