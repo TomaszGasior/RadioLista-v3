@@ -85,7 +85,7 @@ class RadioTable
      *     RadioTable::COLUMN_QUALITY,
      *     RadioTable::COLUMN_RDS,
      *     RadioTable::COLUMN_COMMENT,
-     * }, multiple=true)
+     * }, multiple=true, min=2)
      */
     private $columns = [
         self::COLUMN_FREQUENCY,
