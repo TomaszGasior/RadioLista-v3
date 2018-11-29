@@ -22,7 +22,8 @@
 			"path": "vendor",
 
 			"folder_exclude_patterns": [
-				"bin",
+                "bin",
+				"Test",
 			],
 			"file_include_patterns": [
 				"*.php",
