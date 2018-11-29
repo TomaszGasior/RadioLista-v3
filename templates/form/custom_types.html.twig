@@ -13,10 +13,10 @@
     </script>
 {% endblock decimal_unit_widget %}
 
-{% block labeled_collection_row %}
-    {# Do not render collection label. #}
+{% block radio_table_columns_row %}
+    {# Do not render label for radiotable columns widget. #}
     {{ block('form_rows') }}
-{% endblock labeled_collection_row %}
+{% endblock radio_table_columns_row %}
 
 {% block text_hints_widget %}
     {% set hints_list_id = id ~ '_hints' %}
