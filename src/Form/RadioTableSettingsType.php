@@ -3,12 +3,11 @@
 namespace App\Form;
 
 use App\Entity\RadioTable;
-use App\Form\Type\LabeledCollectionType;
+use App\Form\Type\RadioTableColumnsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -30,22 +29,21 @@ class RadioTableSettingsType extends RadioTableCreateType
                     'numer w odbiorniku' => RadioTable::SORTING_PRIVATE_NUMBER,
                 ],
             ])
-            ->add('columns', LabeledCollectionType::class, [
-                'entry_type'   => IntegerType::class,
-                'entry_labels' => [
-                    'privateNumber' => 'Numer w odbiorniku',
-                    'frequency'     => 'Częstotliwość',
-                    'name'          => 'Nazwa',
-                    'radioGroup'    => 'Grupa medialna',
-                    'country'       => 'Kraj',
-                    'location'      => 'Lokalizacja nadajnika',
-                    'power'         => 'Moc nadajnika',
-                    'polarization'  => 'Polaryzacja',
-                    'type'          => 'Rodzaj programu',
-                    'locality'      => 'Lokalność programu',
-                    'quality'       => 'Jakość odbioru',
-                    'rds'           => 'RDS',
-                    'comment'       => 'Komentarz',
+            ->add('columns', RadioTableColumnsType::class, [
+                'column_labels' => [
+                    RadioTable::COLUMN_PRIVATE_NUMBER => 'Numer w odbiorniku',
+                    RadioTable::COLUMN_FREQUENCY      => 'Częstotliwość',
+                    RadioTable::COLUMN_NAME           => 'Nazwa',
+                    RadioTable::COLUMN_RADIO_GROUP    => 'Grupa medialna',
+                    RadioTable::COLUMN_COUNTRY        => 'Kraj',
+                    RadioTable::COLUMN_LOCATION       => 'Lokalizacja nadajnika',
+                    RadioTable::COLUMN_POWER          => 'Moc nadajnika',
+                    RadioTable::COLUMN_POLARIZATION   => 'Polaryzacja',
+                    RadioTable::COLUMN_TYPE           => 'Rodzaj programu',
+                    RadioTable::COLUMN_LOCALITY       => 'Lokalność programu',
+                    RadioTable::COLUMN_QUALITY        => 'Jakość odbioru',
+                    RadioTable::COLUMN_RDS            => 'RDS',
+                    RadioTable::COLUMN_COMMENT        => 'Komentarz',
                 ],
             ])
             ->add('appearanceTheme', ChoiceType::class, [
