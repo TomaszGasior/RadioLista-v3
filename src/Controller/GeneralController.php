@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ContactFormType;
 use App\Form\RadioTableSearchType;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,9 +48,30 @@ class GeneralController extends AbstractController
     /**
      * @Route("/kontakt", name="contact")
      */
-    public function contactForm(): Response
+    public function contactForm(\Swift_Mailer $mailer, Request $request): Response
     {
-        return $this->render('general/contact.html.twig');
+        $form = $this->createForm(ContactFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+
+            $message = (new \Swift_Message($data['subject']))
+                ->setFrom($data['email'])
+                ->setTo('')
+                ->setBody($data['content']);
+
+            if ($mailer->send($message)) {
+                $this->addFlash('notice', 'Wiadomość została wysłana!');
+            }
+            else {
+                $this->addFlash('error', 'Wystąpił błąd. Spróbuj ponownie później.');
+            }
+        }
+
+        return $this->render('general/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

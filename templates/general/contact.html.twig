@@ -3,5 +3,21 @@
 {% block page_title %}Kontakt{% endblock %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Kontakt z autorem</h2>
+    </header>
+
+    {{ form_start(form, {attr: {class: 'contactForm'}}) }}
+
+    <p>Jeśli masz jakiekolwiek pytania lub sugestie nt. RadioListy, bądź chcesz zgłosić błąd, skorzystaj z&nbsp;poniższego formularza w&nbsp;celu kontaktu z&nbsp;autorem serwisu.</p>
+
+    <dl>
+        {{ form_row(form.subject) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.content) }}
+    </dl>
+
+    <button>Wyślij wiadomość</button>
+
+    {{ form_end(form) }}
 {% endblock %}
