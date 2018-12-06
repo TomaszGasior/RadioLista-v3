@@ -14,9 +14,10 @@
     <button>Szukaj</button>
     {{ form_end(search_form) }}
 
-    {% if radiotables_list is empty %}
-        <p class="information">Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki&nbsp;*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów.</a></p>
+    {% if radiotables %}
+        {% set show_owner = true %}
+        {% include 'common/radiotables_list.html.twig' %}
     {% else %}
-        {{ radiotables_list|raw }}
+        <p class="information">Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki&nbsp;*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów.</p>
     {% endif %}
 {% endblock %}

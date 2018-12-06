@@ -57,8 +57,7 @@ class GeneralController extends AbstractController
      * @Route("/wszystkie-wykazy/{sorting}", name="all_radiotables", requirements={"sorting": "1|2|3"},
      *     condition="request.query.get('a') == ''")
      */
-    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1,
-                                   RadioTablesListRenderer $radioTablesListRenderer): Response
+    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1): Response
     {
         switch ($sorting) {
             case 1:
@@ -72,21 +71,15 @@ class GeneralController extends AbstractController
                 break;
         }
 
-        $radioTablesList = $radioTablesListRenderer->render(
-            $radioTables,
-            RadioTablesListRenderer::OPTION_SHOW_OWNER
-        );
-
         return $this->render('general/all_radiotables.html.twig', [
-            'radiotables_list' => $radioTablesList,
+            'radiotables' => $radioTables,
         ]);
     }
 
     /**
      * @Route("/szukaj", name="search_radiotables")
      */
-    public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request,
-                                      RadioTablesListRenderer $radioTablesListRenderer): Response
+    public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request): Response
     {
         $form = $this->createForm(RadioTableSearchType::class);
         $form->handleRequest($request);
@@ -100,15 +93,10 @@ class GeneralController extends AbstractController
 
         $radioTables = $radioTableRepository->findPublicBySearchTerm($searchTerm);
 
-        $radioTablesList = $radioTablesListRenderer->render(
-            $radioTables,
-            RadioTablesListRenderer::OPTION_SHOW_OWNER
-        );
-
         return $this->render('general/search_radiotables.html.twig', [
-            'radiotables_list' => $radioTablesList,
-            'search_term'      => $searchTerm,
-            'search_form'      => $form->createView(),
+            'radiotables' => $radioTables,
+            'search_term' => $searchTerm,
+            'search_form' => $form->createView(),
         ]);
     }
 }

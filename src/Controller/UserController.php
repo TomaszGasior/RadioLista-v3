@@ -21,16 +21,11 @@ class UserController extends AbstractController
      * @Route("/profil/{name}", name="user.public_profile")
      * @IsGranted("USER_PUBLIC_PROFILE", subject="user", statusCode=404)
      */
-    public function publicProfile(User $user, RadioTablesListRenderer $radioTablesListRenderer): Response
+    public function publicProfile(User $user): Response
     {
-        $radioTablesList = $radioTablesListRenderer->render(
-            $user->getRadioTables(),
-            null
-        );
-
         return $this->render('user/public_profile.html.twig', [
-            'user'             => $user,
-            'radiotables_list' => $radioTablesList,
+            'user'        => $user,
+            'radiotables' => $user->getRadioTables(),
         ]);
     }
 
@@ -38,17 +33,12 @@ class UserController extends AbstractController
      * @Route("/moje-wykazy", name="user.my_radiotables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myRadioTables(RadioTableRepository $radioTableRepository,
-                                  RadioTablesListRenderer $radioTablesListRenderer): Response
+    public function myRadioTables(RadioTableRepository $radioTableRepository): Response
     {
         $radioTables = $radioTableRepository->findOwnedByUser($this->getUser());
-        $radioTablesList = $radioTablesListRenderer->render(
-            $radioTables,
-            RadioTablesListRenderer::OPTION_SHOW_VISIBILITY | RadioTablesListRenderer::OPTION_SHOW_ACTIONS
-        );
 
         return $this->render('user/my_radiotables.html.twig', [
-            'radiotables_list' => $radioTablesList,
+            'radiotables' => $radioTables,
         ]);
     }
 

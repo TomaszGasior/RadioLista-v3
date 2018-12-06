@@ -23,5 +23,6 @@
         </ul>
     </header>
 
-    {{ radiotables_list|raw }}
+    {% set show_owner = true %}
+    {% include 'common/radiotables_list.html.twig' %}
 {% endblock %}
