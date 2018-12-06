@@ -56,6 +56,11 @@ class RadioTableRepository extends ServiceEntityRepository
 
     public function findPublicBySearchTerm(string $searchTerm): array
     {
+        // Search term equal to "*" causes MySQL error.
+        if ('*' === $searchTerm) {
+            return [];
+        }
+
         return $this->createQueryBuilder('radioTable')
             ->andWhere('radioTable.status = :status')
             ->setParameter('status', RadioTable::STATUS_PUBLIC)

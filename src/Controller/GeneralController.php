@@ -85,8 +85,7 @@ class GeneralController extends AbstractController
 
         $searchTerm = $form->get('searchTerm')->getData();
 
-        // Redirect to homepage when search term is empty or incorrect ("*" causes MySQL error).
-        if (!$searchTerm || $searchTerm === '*') {
+        if (!$searchTerm) {
             return $this->redirectToRoute('homepage');
         }
 
