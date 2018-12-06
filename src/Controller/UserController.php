@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
-use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;

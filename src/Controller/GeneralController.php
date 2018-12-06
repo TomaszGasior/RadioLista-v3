@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\RadioTableSearchType;
-use App\Renderer\RadioTablesListRenderer;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
