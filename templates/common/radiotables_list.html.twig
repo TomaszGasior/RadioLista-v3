@@ -1,0 +1,47 @@
+{% set status_labels = {
+    (constant('App\\Entity\\RadioTable::STATUS_PUBLIC')):   'publiczny',
+    (constant('App\\Entity\\RadioTable::STATUS_PRIVATE')):  'prywatny',
+    (constant('App\\Entity\\RadioTable::STATUS_UNLISTED')): 'niepubliczny',
+} %}
+{% set show_visibility = show_visibility|default(false) %}
+{% set show_owner = show_owner|default(false) %}
+{% set show_actions = show_actions|default(false) %}
+
+<dl class="radioTablesList withActions">
+    {% for radiotable in radiotables %}
+        <dt><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">{{ radiotable.name }}</a></dt>
+
+        <dd>
+            <dl>
+                {% if show_visibility %}
+                    <dt>Widoczność</dt>
+                    <dd>{{ status_labels[radiotable.status] }}</dd>
+                {% endif %}
+
+                {% if show_owner and radiotable.owner.publicProfile %}
+                    <dt>Autor</dt>
+                    <dd><a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">{{ radiotable.owner.name }}</a></dd>
+                {% endif %}
+
+                <dt>Liczba stacji</dt>
+                <dd>{{ radiotable.radioStationsCount }}</dd>
+
+                <dt>Data aktualizacji</dt>
+                <dd>{{ radiotable.lastUpdateTime|date_format }}</dd>
+
+                <dt>Jednostka</dt>
+                <dd>{{ radiotable.useKhz ? 'kHz' : 'MHz' }}</dd>
+            </dl>
+
+            {% if show_actions %}
+                {% spaceless %}
+                    <ul>
+                        <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz</a></li>
+                        <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Zmień</a></li>
+                        <li><a href="{{ path('radiotable.remove', {id: radiotable.id}) }}">Usuń</a></li>
+                    </ul>
+                {% endspaceless %}
+            {% endif %}
+        </dd>
+    {% endfor %}
+</dl>
