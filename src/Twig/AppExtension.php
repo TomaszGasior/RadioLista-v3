@@ -14,6 +14,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('date_format', [$this, 'formatDateAsTimeHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
+            new \Twig_Filter('format_rds_frames', [$this, 'formatRDSFrames']),
         ];
     }
 
@@ -27,5 +28,27 @@ class AppExtension extends AbstractExtension
         return '<time datetime="' . $date->format('Y-m-d') . '">' .
                $formatter->format($date->getTimestamp()) .
                '</time>';
+    }
+
+    public function formatRDSFrames(array $frames): array
+    {
+        foreach($frames as $key => &$frame) {
+            $frame      = str_replace('_', ' ', $frame);
+            $emptyChars = 8 - mb_strlen($frame);
+
+            if ('' == trim($frame)) {
+                unset($frames[$key]);
+                continue;
+            }
+
+            if ($emptyChars > 0) {
+                $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
+            }
+            elseif ($emptyChars < 0) {
+                $frame = htmlspecialchars(substr($frame, 0, 8));
+            }
+        }
+
+        return $frames;
     }
 }
