@@ -55,7 +55,7 @@
 
     {% if radiotable.radioStationsCount > 0 %}
         <div class="radioTable custTxt">
-            {{ radiotable_code|raw }}
+            {% include 'radiotable/table/_radiotable.html.twig' %}
         </div>
 
         <section class="radioTableInfo custTxt">

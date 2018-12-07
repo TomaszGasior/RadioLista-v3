@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\RadioTable;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableSettingsType;
-use App\Renderer\RadioTableRenderer;
+use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,19 +19,13 @@ class RadioTableController extends AbstractController
      * @Route("/wykaz/{id}", name="radiotable.show")
      * @IsGranted("RADIOTABLE_SHOW", subject="radioTable", statusCode=404)
      */
-    public function show(RadioTable $radioTable, RadioTableRenderer $radioTableRenderer): Response
+    public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
     {
-        $userOwnsThisRadioTable = $this->isGranted('RADIOTABLE_MODIFY', $radioTable);
-
-        $radioTableCode = $radioTableRenderer->render(
-            $radioTable,
-            $userOwnsThisRadioTable ? RadioTableRenderer::OPTION_SHOW_EDIT_LINKS
-            : RadioTableRenderer::OPTION_USE_CACHE
-        );
+        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
         return $this->render('radiotable/show.html.twig', [
-            'radiotable'      => $radioTable,
-            'radiotable_code' => $radioTableCode,
+            'radiotable'    => $radioTable,
+            'radiostations' => $radioStations,
         ]);
     }
 
