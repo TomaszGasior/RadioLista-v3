@@ -1,0 +1,123 @@
+{% set columns_labels = {
+    (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')):      radiotable.useKhz ? 'kHz' : 'MHz',
+    (constant('App\\Entity\\RadioTable::COLUMN_PRIVATE_NUMBER')): 'Nr',
+    (constant('App\\Entity\\RadioTable::COLUMN_NAME')):           'Nazwa',
+    (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')):    'Grupa',
+    (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')):        'Kraj',
+    (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')):       'Lokalizacja',
+    (constant('App\\Entity\\RadioTable::COLUMN_POWER')):          'Moc',
+    (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')):   'Pol.',
+    (constant('App\\Entity\\RadioTable::COLUMN_TYPE')):           'Rodzaj',
+    (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')):       'Lokalność',
+    (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')):        'Jakość',
+    (constant('App\\Entity\\RadioTable::COLUMN_RDS')):            'RDS',
+    (constant('App\\Entity\\RadioTable::COLUMN_COMMENT')):        'Komentarz',
+} %}
+{% set polarization_labels = {
+    (constant('App\\Entity\\RadioStation::POLARIZATION_HORIZONTAL')): 'pozioma',
+    (constant('App\\Entity\\RadioStation::POLARIZATION_VERTICAL')):   'pionowa',
+    (constant('App\\Entity\\RadioStation::POLARIZATION_CIRCULAR')):   'kołowa',
+    (constant('App\\Entity\\RadioStation::POLARIZATION_VARIOUS')):    'różne',
+} %}
+{% set types_labels = {
+    (constant('App\\Entity\\RadioStation::TYPE_MUSIC')):       'muzyczny',
+    (constant('App\\Entity\\RadioStation::TYPE_UNIVERSAL')):   'uniwersalny',
+    (constant('App\\Entity\\RadioStation::TYPE_INFORMATION')): 'informacyjny',
+    (constant('App\\Entity\\RadioStation::TYPE_RELIGIOUS')):   'katolicki',
+    (constant('App\\Entity\\RadioStation::TYPE_OTHER')):       'inny',
+} %}
+{% set quality_labels = {
+    (constant('App\\Entity\\RadioStation::QUALITY_VERY_GOOD')): 'bardzo dobra',
+    (constant('App\\Entity\\RadioStation::QUALITY_GOOD')):      'dobra',
+    (constant('App\\Entity\\RadioStation::QUALITY_MIDDLE')):    'dostateczna',
+    (constant('App\\Entity\\RadioStation::QUALITY_BAD')):       'zła',
+    (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')):  'bardzo zła',
+} %}
+{% set columns_sorting = {
+    (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')):      'N',
+    (constant('App\\Entity\\RadioTable::COLUMN_PRIVATE_NUMBER')): 'N',
+    (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')):        'N',
+    (constant('App\\Entity\\RadioTable::COLUMN_POWER')):          'N',
+    (constant('App\\Entity\\RadioTable::COLUMN_NAME')):           'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')):    'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')):        'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')):       'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')):   'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_TYPE')):           'T',
+    (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')):       'T',
+} %}
+
+<table>
+    <thead>
+        <tr>
+            {% for column in radiotable.columns %}
+                <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
+                    {{ columns_labels[column] }}
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for radiostation in radiostations %}
+            <tr {% if radiostation.marker %}class="marker{{ radiostation.marker }}"{% endif %}>
+                {% for column in radiotable.columns %}
+                    <td>
+                        {% if column == 'radioGroup' or column == 'country' or column == 'location' or column == 'comment' %}
+                            {{ attribute(radiostation, column) }}
+
+                        {% elseif column == 'name' %}
+                            {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
+                                <a href="{{ path('radiostation.edit', {id: radiostation.id}) }}">{{ radiostation.name }}</a>
+                            {% else %}
+                                {{ radiostation.name }}
+                            {% endif %}
+
+                        {% elseif column == 'privateNumber' and radiostation.privateNumber is not null %}
+                            <span class="ni ni2">{{ radiostation.privateNumber }}</span>
+
+                        {% elseif column == 'frequency' %}
+                            <span class="ni">{{ radiostation.frequency|number_format }}</span>
+
+                        {% elseif column == 'power' and radiostation.power is not null %}
+                            <span class="ni ni3">{{ radiostation.power|number_format }}</span>
+
+                        {% elseif column == 'polarization' and radiostation.polarization %}
+                            <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ radiostation.polarization }}</abbr>
+
+                        {% elseif column == 'type' %}
+                            {{ types_labels[radiostation.type] }}
+
+                        {% elseif column == 'locality' %}
+                            {% if radiostation.locality.type == constant('LOCALITY_COUNTRY', radiostation) %}
+                                ogólnokrajowy
+                            {% elseif radiostation.locality.city %}
+                                {{ radiostation.locality.city }}
+                                {% if radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) %}
+                                    <small title="sieć">(s)</small>
+                                {% endif %}
+                            {% endif %}
+
+                        {% elseif column == 'quality' %}
+                            {# Skip whitespace for proper CSS styling. #}
+                            <span class="quality q{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
+                                {{- radiostation.quality -}}
+                            </span>
+
+                        {% elseif column == 'rds' %}
+                            {% set rt = radiostation.rds.rt|replace({"\n": '', "\r": '', "\t": ''}) %}
+                            {% set pty = radiostation.rds.pty|replace({"\n": '', "\r": '', "\t": ''}) %}
+                            {% set ps_frames = radiostation.rds.ps|replace({"\n": '', "\r": '', "\t": ''})|split('|')|format_rds_frames %}
+                            {% if ps_frames|first|trim %}
+                                {# Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. #}
+                                <span data-pty="{{ pty|e|e }}" data-rt="{{ rt|e|e }}" data-ps="{{ ps_frames|join('|')|e|e }}"
+                                      class="rds rdsPopup">{{ ps_frames|first }}</span>
+                            {% endif %}
+
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
