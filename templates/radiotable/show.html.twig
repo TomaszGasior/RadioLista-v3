@@ -55,7 +55,44 @@
 
     {% if radiotable.radioStationsCount > 0 %}
         <div class="radioTable custTxt">
-            {% include 'radiotable/table/_radiotable.html.twig' %}
+            {% embed 'radiotable/table/radiotable.html.twig' %}
+                {%- block heading_cell -%}
+                    {%- set columns_sorting = {
+                        (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')):      'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_PRIVATE_NUMBER')): 'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')):        'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_POWER')):          'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_NAME')):           'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')):    'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')):        'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')):       'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')):   'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_TYPE')):           'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')):       'T',
+                    } -%}
+                    <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
+                        {{- columns_labels[column] -}}
+                    </th>
+                {%- endblock -%}
+
+                {%- block row_start -%}
+                    <tr {% if radiostation.marker %}class="marker{{ radiostation.marker }}"{% endif %}>
+                {%- endblock -%}
+
+                {%- block radiostation_name -%}
+                    {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
+                        <a href="{{ path('radiostation.edit', {id: radiostation.id}) }}">{{ radiostation.name }}</a>
+                    {% else %}
+                        {{ radiostation.name }}
+                    {% endif %}
+                {%- endblock -%}
+
+                {%- block radiostation_rds %}
+                    {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
+                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}"
+                          class="rds rdsPopup">{{ rds_ps_frames|first }}</span>
+                {%- endblock -%}
+            {% endembed %}
         </div>
 
         <section class="radioTableInfo custTxt">
