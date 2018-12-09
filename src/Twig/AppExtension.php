@@ -2,9 +2,9 @@
 
 namespace App\Twig;
 
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
@@ -14,11 +14,11 @@ class AppExtension extends AbstractExtension
             new TwigFilter('date_format', [$this, 'formatDateAsTimeHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
-            new \Twig_Filter('format_rds_frames', [$this, 'formatRDSFrames']),
+            new TwigFilter('format_rds_frames', [$this, 'formatRDSFrames']),
         ];
     }
 
-    public function formatDateAsTimeHTML(\Twig_Environment $twig, $date): string
+    public function formatDateAsTimeHTML(Environment $twig, $date): string
     {
         $date = twig_date_converter($twig, $date);
 
