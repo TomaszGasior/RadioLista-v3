@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RadioTableController extends AbstractController
@@ -75,6 +76,47 @@ class RadioTableController extends AbstractController
             'form'       => $form->createView(),
             'radiotable' => $radioTable,
         ]);
+    }
+
+    /**
+     * @Route("/eksport-wykazu/{id}/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     */
+    public function download(RadioTable $radioTable, string $_format,
+                             RadioStationRepository $radioStationRepository): Response
+    {
+        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
+
+        switch ($_format) {
+            case 'html':
+                $response = $this->render('radiotable/standalone.html.twig', [
+                    'radiotable'    => $radioTable,
+                    'radiostations' => $radioStations,
+                ]);
+                $response->headers->set('Content-Type', 'text/html');
+                break;
+            case 'csv':
+                $response = $this->render('radiotable/table/radiotable.csv.twig', [
+                    'radiotable'    => $radioTable,
+                    'radiostations' => $radioStations,
+                ]);
+                $response->headers->set('Content-Type', 'text/csv');
+                break;
+            case 'pdf':
+                throw new \Exception;
+                $response->headers->set('Content-Type', 'application/pdf');
+                break;
+        }
+
+        $response->headers->set(
+            'Content-Disposition',
+            $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                date('Y-m-d_H-i-s') . '.' . $_format
+            )
+        );
+
+        return $response;
     }
 
     /**
