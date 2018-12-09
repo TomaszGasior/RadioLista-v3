@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="RadioLista – {{ url('homepage') }}">
+        <title>{{ radiotable.name }} – RadioLista</title>
+        <style>
+            body { margin: 0.1em 3% 2em 3%; background: #fefefe; color: #222; font: 16px "Lato", "Droid Sans", "Source Sans Pro", "Segoe UI", "Tahoma", "Arial", sans-serif; cursor: default; }
+            header h1 { font-weight: normal; text-align: center; }
+            table { width: 100%; border-collapse: collapse; }
+            table th { text-align: left; }
+            table td { border-top: 1px solid #ebebeb; }
+            table th, table td { padding: 0.35em 0.5em; }
+            table tbody tr { transition: all ease-out 0.1s; }
+            table tbody tr:hover { background: #eee; }
+            span.rds { white-space: pre; font-family: "Consolas", "Source Code Pro", "Lucida Console", monospace; background: #dedede; padding: 0 3px; }
+            span.niApply1:before { content: '0'; opacity: 0; }
+            span.niApply2:before { content: '00'; opacity: 0; }
+            footer { font-size: 0.85em; text-align: center; }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>{{ radiotable.name }}</h1>
+        </header>
+
+        {% include 'radiotable/table/radiotable.html.twig' %}
+
+        <footer>
+            <p>Wykaz wygenerowano w serwisie <a href="{{ url('homepage') }}">RadioLista</a> dnia {{ 'now'|date_format }}.</p>
+        </footer>
+
+        <script>
+            var numericElements = document.querySelectorAll('span.ni');
+            for( key in numericElements ) {
+                if( isNaN(key) ) break;
+                var value = parseInt(numericElements[key].innerHTML);
+                if( numericElements[key].classList[1] == 'ni2' ) {
+                    if( value < 10 ) numericElements[key].classList.add('niApply1');
+                } else {
+                    if( value < 10 ) numericElements[key].classList.add('niApply2');
+                    else if( value < 100 ) numericElements[key].classList.add('niApply1');
+                }
+            }
+        </script>
+    </body>
+</html>
