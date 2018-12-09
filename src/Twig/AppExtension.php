@@ -8,6 +8,12 @@ use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
+    public function __construct(Environment $twig)
+    {
+        $twig->getExtension('Twig_Extension_Core')
+            ->setEscaper('csv', [$this, 'escapeCSV']);
+    }
+
     public function getFilters(): array
     {
         return [
@@ -50,5 +56,15 @@ class AppExtension extends AbstractExtension
         }
 
         return $frames;
+    }
+
+    public function escapeCSV(Environment $twig, $data): string
+    {
+        $handle = fopen('php://temp', 'w');
+
+        fputcsv($handle, [$data]);
+        rewind($handle);
+
+        return substr(fgets($handle), 0, -1); // Trim ending newline char.
     }
 }
