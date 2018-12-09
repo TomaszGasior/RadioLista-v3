@@ -21,6 +21,7 @@ class AppExtension extends AbstractExtension
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
             new TwigFilter('format_rds_frames', [$this, 'formatRDSFrames']),
+            new TwigFilter('strip_newlines', [$this, 'stripNewLineChars']),
         ];
     }
 
@@ -56,6 +57,11 @@ class AppExtension extends AbstractExtension
         }
 
         return $frames;
+    }
+
+    public function stripNewLineChars(?string $string): string
+    {
+        return preg_replace('/\R/u', '', $string);
     }
 
     public function escapeCSV(Environment $twig, $data): string
