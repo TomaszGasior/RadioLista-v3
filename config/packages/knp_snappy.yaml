@@ -2,7 +2,11 @@ knp_snappy:
     pdf:
         enabled:    true
         binary:     '%env(WKHTMLTOPDF_PATH)%'
-        options:    []
+        options:
+            orientation: Landscape
+            margin-left: 0
+            margin-right: 0
+            zoom: 1.15
     image:
         enabled:    true
         binary:     '%env(WKHTMLTOIMAGE_PATH)%'
