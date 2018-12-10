@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-intl": "*",
         "beberlei/DoctrineExtensions": "^1.1",
+        "knplabs/knp-snappy-bundle": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "^4.1",
         "symfony/console": "^4.1",
