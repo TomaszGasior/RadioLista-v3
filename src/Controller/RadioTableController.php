@@ -88,36 +88,37 @@ class RadioTableController extends AbstractController
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
+        $templateVars = [
+            'radiotable'    => $radioTable,
+            'radiostations' => $radioStations,
+        ];
+        $response = new Response;
+
         switch ($_format) {
             case 'html':
-                $response = $this->render('radiotable/standalone.html.twig', [
-                    'radiotable'    => $radioTable,
-                    'radiostations' => $radioStations,
-                ]);
-                $response->headers->set('Content-Type', 'text/html');
+                $type = 'text/html';
+                $content = $this->renderView('radiotable/standalone.html.twig', $templateVars);
                 break;
             case 'csv':
-                $response = $this->render('radiotable/table/radiotable.csv.twig', [
-                    'radiotable'    => $radioTable,
-                    'radiostations' => $radioStations,
-                ]);
-                $response->headers->set('Content-Type', 'text/csv');
+                $type = 'text/csv';
+                $content = $this->renderView('radiotable/table/radiotable.csv.twig', $templateVars);
                 break;
             case 'pdf':
-                $response = new Response($pdfRenderer->getOutputFromHtml(
-                    $this->renderView('radiotable/standalone.html.twig', [
-                        'radiotable'    => $radioTable,
-                        'radiostations' => $radioStations,
-                    ])
-                ));
-                $response->headers->set('Content-Type', 'application/pdf');
+                $type = 'application/pdf';
+                $content = $pdfRenderer->getOutputFromHtml(
+                    $this->renderView('radiotable/standalone.html.twig', $templateVars)
+                );
                 break;
         }
 
+        $response->setContent($content);
+
+        $response->headers->set('Content-Type', $type);
         $response->headers->set(
             'Content-Disposition',
             $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                $radioTable->getName() . '.' . $_format,
                 date('Y-m-d_H-i-s') . '.' . $_format
             )
         );
