@@ -7,6 +7,7 @@ use App\Form\RadioTableCreateType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Snappy\Pdf;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +83,7 @@ class RadioTableController extends AbstractController
      * @Route("/eksport-wykazu/{id}/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
-    public function download(RadioTable $radioTable, string $_format,
+    public function download(RadioTable $radioTable, string $_format, Pdf $pdfRenderer,
                              RadioStationRepository $radioStationRepository): Response
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
@@ -103,7 +104,12 @@ class RadioTableController extends AbstractController
                 $response->headers->set('Content-Type', 'text/csv');
                 break;
             case 'pdf':
-                throw new \Exception;
+                $response = new Response($pdfRenderer->getOutputFromHtml(
+                    $this->renderView('radiotable/standalone.html.twig', [
+                        'radiotable'    => $radioTable,
+                        'radiostations' => $radioStations,
+                    ])
+                ));
                 $response->headers->set('Content-Type', 'application/pdf');
                 break;
         }
