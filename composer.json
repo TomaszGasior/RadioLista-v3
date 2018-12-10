@@ -16,6 +16,7 @@
         "symfony/framework-bundle": "^4.1",
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "^4.1",
+        "symfony/translation": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symfony/validator": "^4.1",
         "symfony/yaml": "^4.1"
