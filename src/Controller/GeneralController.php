@@ -58,7 +58,7 @@ class GeneralController extends AbstractController
 
             $message = (new \Swift_Message($data['subject']))
                 ->setFrom($data['email'])
-                ->setTo('')
+                ->setTo($this->getParameter('contact_address'))
                 ->setBody($data['content']);
 
             if ($mailer->send($message)) {
