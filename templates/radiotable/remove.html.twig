@@ -2,6 +2,10 @@
 
 {% block page_title %}Usuwanie wykazu{% endblock %}
 
+{% block head_closing %}
+    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
+{% endblock %}
+
 {% block context_menu %}
     <ul>
         <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
@@ -11,5 +15,36 @@
 {% endblock %}
 
 {% block page_content %}
-    <p>{{ _self }}</p>
+    <header>
+        <h2>Usuwanie wykazu</h2>
+    </header>
+
+    {{ form_start(form) }}
+
+    <div id="useTabbedUI">
+        <div>
+            <h3>Usuwanie wykazu</h3>
+
+            <p class="information">Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.</p>
+
+            <dl class="removingConfirm checkboxesWithFullWidth">
+                {% spaceless %}
+                    {{ form_row(form.confirm, {
+                        label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
+                    }) }}
+                {% endspaceless %}
+            </dl>
+
+            <button>Usuń wykaz</button>
+
+            <script>
+                document.querySelector('dl.removingConfirm input').onchange = function() {
+                    if( this.checked && !window.confirm('Czy na pewno?') )
+                        this.checked = false;
+                }
+            </script>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
 {% endblock %}

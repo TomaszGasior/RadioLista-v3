@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use App\Form\RadioTableCreateType;
+use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -142,9 +143,29 @@ class RadioTableController extends AbstractController
      * @Route("/usun-wykaz/{id}", name="radiotable.remove")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
-    public function remove(RadioTable $radioTable): Response
+    public function remove(RadioTable $radioTable, Request $request,
+                           EntityManagerInterface $entityManager): Response
     {
+        $form = $this->createForm(RadioTableRemoveType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $confirmed = (true === $form->getData()['confirm']);
+
+            if ($confirmed) {
+                $entityManager->remove($radioTable);
+                $entityManager->flush();
+
+                $this->addFlash('notice', 'Wykaz został bezpowrotnie usunięty.');
+                return $this->redirectToRoute('user.my_radiotables');
+            }
+            else {
+                $this->addFlash('error', 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!');
+            }
+        }
+
         return $this->render('radiotable/remove.html.twig', [
+            'form'       => $form->createView(),
             'radiotable' => $radioTable,
         ]);
     }
