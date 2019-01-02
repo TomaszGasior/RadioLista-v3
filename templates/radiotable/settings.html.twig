@@ -102,6 +102,31 @@
                 }
             </script>
         </div>
+
+        <div>
+            <h3>Eksport</h3>
+
+            {% if radiotable.radioStationsCount > 0 %}
+                <p class="information">Wskaż format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane są szczegółowe informacje o&nbsp;RDS oraz wyróżnienia wizualne.</p>
+
+                <ul>
+                    <li>
+                        HTML – plik strony internetowej otwierany w&nbsp;przeglądarce
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}">Pobierz plik HTML</a>
+                    </li>
+                    <li>
+                        CSV – zestaw danych do zaimportowania w arkuszu kalkulacyjnym
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}">Pobierz plik CSV</a>
+                    </li>
+                    <li>
+                        PDF – dokument elektroniczny do przeglądania i&nbsp;druku
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}">Pobierz plik PDF</a>
+                    </li>
+                </ul>
+            {% else %}
+                <p class="information">Ten wykaz jest pusty. Nie można go wyeksportować.</p>
+            {% endif %}
+        </div>
     </div>
 
     <button>Zapisz</button>
