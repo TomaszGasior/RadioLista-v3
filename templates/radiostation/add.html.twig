@@ -9,7 +9,6 @@
 {% block context_menu %}
     <ul>
         <li><a href="{{ path('radiotable.show', {id: radiostation.radioTable.id}) }}">Zobacz wykaz</a></li>
-        <li><a href="{{ path('radiostation.copy', {radioTableId: radiostation.radioTable.id}) }}">Kopiuj stację</a></li>
         <li><a href="{{ path('radiotable.settings', {id: radiostation.radioTable.id}) }}">Ustawienia wykazu</a></li>
     </ul>
 {% endblock %}
