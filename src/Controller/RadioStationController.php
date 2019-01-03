@@ -21,9 +21,10 @@ class RadioStationController extends AbstractController
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function add(RadioTable $radioTable, Request $request,
-                        EntityManagerInterface $entityManager): Response
+                        EntityManagerInterface $entityManager,
+                        RadioStation $template = null): Response
     {
-        $radioStation = new RadioStation;
+        $radioStation = $template ? $template : new RadioStation;
         $radioStation->setRadioTable($radioTable);
 
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
@@ -66,14 +67,18 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/kopiuj-stacje/{radioTableId}", name="radiostation.copy")
-     * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @Route("/kopiuj-stacje/{id}", name="radiostation.copy")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
      */
-    public function copy(RadioTable $radioTable): Response
+    public function copy(RadioStation $radioStation): Response
     {
-        return $this->render('radiostation/copy.html.twig', [
-            'radiotable' => $radioTable,
+        $template = clone $radioStation;
+
+        $this->addFlash('notice', 'Dane stacji zostały wypełnione.');
+
+        return $this->forward(__CLASS__ . '::add', [
+            'radioTableId' => $radioStation->getRadioTable()->getId(),
+            'template'     => $template,
         ]);
     }
 
