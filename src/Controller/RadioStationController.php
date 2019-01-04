@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\RadioTableController;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
@@ -88,9 +89,11 @@ class RadioStationController extends AbstractController
      */
     public function remove(RadioStation $radioStation): Response
     {
-        return $this->redirectToRoute('radiotable.remove', [
-            'id' => $radioStation->getRadioTable()->getId(),
-            'r'  => $radioStation->getId(),
+        $this->addFlash('notice', 'Stacja została zaznaczona do usunięcia.');
+
+        return $this->forward(RadioTableController::class . '::remove', [
+            'id'                   => $radioStation->getRadioTable()->getId(),
+            'radioStationToRemove' => $radioStation,
         ]);
     }
 }
