@@ -16,20 +16,37 @@
 
 {% block page_content %}
     <header>
-        <h2>Usuwanie wykazu</h2>
+        <h2>Usuwanie wykazu i stacji</h2>
     </header>
 
-    {{ form_start(form) }}
-
     <div id="useTabbedUI">
+        <div>
+            <h3>Usuwanie stacji</h3>
+
+            {% if radiotable.radioStationsCount > 0 %}
+                {{ form_start(form_radiostation) }}
+
+                <dl class="radioStationsSelectBox checkboxesWithFullWidth">
+                    {{ form_row(form_radiostation.chosenToRemove) }}
+                </dl>
+
+                <button>Usuń zaznaczone stacje</button>
+
+                {{ form_end(form_radiostation) }}
+            {% else %}
+                <p class="information">Ten wykaz jest pusty. Nie ma czego usuwać&hellip;</p>
+            {% endif %}
+        </div>
         <div>
             <h3>Usuwanie wykazu</h3>
 
             <p class="information">Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.</p>
 
+            {{ form_start(form_radiotable) }}
+
             <dl class="removingConfirm checkboxesWithFullWidth">
                 {% spaceless %}
-                    {{ form_row(form.confirm, {
+                    {{ form_row(form_radiotable.confirm, {
                         label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
                     }) }}
                 {% endspaceless %}
@@ -37,14 +54,14 @@
 
             <button>Usuń wykaz</button>
 
+            {{ form_end(form_radiotable) }}
+
             <script>
-                document.querySelector('dl.removingConfirm input').onchange = function() {
-                    if( this.checked && !window.confirm('Czy na pewno?') )
-                        this.checked = false;
-                }
+                //document.querySelector('dl.removingConfirm input').onchange = function() {
+                //    if( this.checked && !window.confirm('Czy na pewno?') )
+                //        this.checked = false;
+                //}
             </script>
         </div>
     </div>
-
-    {{ form_end(form) }}
 {% endblock %}
