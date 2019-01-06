@@ -96,7 +96,6 @@ class RadioTableController extends AbstractController
             'radiotable'    => $radioTable,
             'radiostations' => $radioStations,
         ];
-        $response = new Response;
 
         switch ($_format) {
             case 'html':
@@ -115,7 +114,7 @@ class RadioTableController extends AbstractController
                 break;
         }
 
-        $response->setContent($content);
+        $response = new Response($content);
 
         $response->headers->set('Content-Type', $type);
         $response->headers->set(
