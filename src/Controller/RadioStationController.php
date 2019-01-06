@@ -19,6 +19,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
+     * @ParamConverter("template", class="stdClass")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function add(RadioTable $radioTable, Request $request,
