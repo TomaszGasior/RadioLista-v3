@@ -52,11 +52,10 @@
 
             {% set notifications = app.flashes %}
             {% if notifications %}
-                {# Show only first notification for compatibility with RLv2 concept. #}
-                {% set label = notifications|keys|first %}
-                {% set message = notifications|first|first %}
-                <span id="notification" class="{% if label == "notice" %}good{% else %}bad{% endif %}" role="alert">
-                    <span>{{ message }}</span>
+                {% set notification_type = notifications|keys|last %}
+                {% set notification_text = notifications|last|last %}
+                <span id="notification" class="{{ notification_type }}" role="alert">
+                    <span>{{ notification_text }}</span>
                 </span>
                 <script>
                     document.getElementById("notification").id = "notification_JSOn";

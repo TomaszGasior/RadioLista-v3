@@ -212,7 +212,7 @@ span#notification_JSOn span {
 	border-radius: 2px;
 	color: #000;
 }
-span#notification_JSOn.bad span {
+span#notification_JSOn.error span {
 	background: rgba( 255,0,0, 0.7 );
 	color: #FFF;
 }
