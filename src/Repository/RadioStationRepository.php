@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -50,5 +51,13 @@ class RadioStationRepository extends ServiceEntityRepository
                     ->getResult()
                 ;
         }
+    }
+
+    public function getQueryForRadioTable(RadioTable $radioTable): QueryBuilder
+    {
+        return $this->createQueryBuilder('radioStation')
+            ->andWhere('radioStation.radioTable = :radioTable')
+            ->setParameter('radioTable', $radioTable)
+            ->orderBy('radioStation.frequency');
     }
 }
