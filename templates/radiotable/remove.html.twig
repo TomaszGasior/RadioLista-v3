@@ -14,6 +14,13 @@
     </ul>
 {% endblock %}
 
+{% form_theme form_radiostation _self %}
+{% block _radio_station_remove_chosenToRemove_entry_label %}
+    {% set unit_label = use_KHz ? 'kHz' : 'MHz' %}
+    {% set label = label ~ ' (' ~ frequency|number_format ~ ' ' ~ unit_label ~ ')' %}
+    {{ block('form_label') }}
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h2>Usuwanie wykazu i stacji</h2>

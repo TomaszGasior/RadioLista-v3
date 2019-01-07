@@ -147,7 +147,6 @@ class RadioTableController extends AbstractController
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
     public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
-                           RadioStationRepository $radioStationRepository,
                            RadioStation $radioStationToRemove = null): Response
     {
         // This action handles both radiotable removing and radiostation removing.
@@ -157,7 +156,7 @@ class RadioTableController extends AbstractController
 
         $form_RadioStation = $this->createForm(RadioStationRemoveType::class,
             $radioStationToRemove ? ['chosenToRemove' => [$radioStationToRemove]] : null,
-            ['radiostations' => $radioStationRepository->findForRadioTable($radioTable)]
+            ['radiotable' => $radioTable]
         );
         $form_RadioStation->handleRequest($request);
 
@@ -176,8 +175,7 @@ class RadioTableController extends AbstractController
             }
         }
         elseif ($form_RadioStation->isSubmitted()) {
-            // Doctrine's ArrayCollection.
-            $chosenToRemove = $form_RadioStation->getData()['chosenToRemove'] ?? null;
+            $chosenToRemove = $form_RadioStation->getData()['chosenToRemove'];
 
             if (count($chosenToRemove) > 0) {
                 foreach ($chosenToRemove as $radioStation) {
@@ -186,6 +184,13 @@ class RadioTableController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('notice', 'Wybrane stacje zostały usunięte.');
+
+                // Redirect to after successful radiostations removing.
+                // * Form needs to be reloaded to not display removed radiostations.
+                // * URL needs to be changed to avoid 404 error if page was forwarded from RadioStationController.
+                return $this->redirectToRoute('radiotable.remove', [
+                    'id' => $radioTable->getId(),
+                ]);
             }
         }
 
