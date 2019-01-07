@@ -13,6 +13,12 @@ trait EntityListenerTrait
     {
         $entityManager = $args->getEntityManager();
 
+        // Don't try to enforce update if entity is not managed by Doctrine
+        // (this happens when associated entity was removed right now).
+        if (false === $entityManager->contains($entity)) {
+            return;
+        }
+
         $entityManager->getUnitOfWork()->recomputeSingleEntityChangeSet(
             $entityManager->getClassMetadata(get_class($entity)),
             $entity
