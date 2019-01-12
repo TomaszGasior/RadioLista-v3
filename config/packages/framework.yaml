@@ -15,3 +15,8 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    request:
+        formats:
+            pdf: application/pdf
+            csv: text/csv

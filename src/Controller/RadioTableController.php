@@ -99,15 +99,12 @@ class RadioTableController extends AbstractController
 
         switch ($_format) {
             case 'html':
-                $type = 'text/html';
                 $content = $this->renderView('radiotable/standalone.html.twig', $templateVars);
                 break;
             case 'csv':
-                $type = 'text/csv';
                 $content = $this->renderView('radiotable/table/radiotable.csv.twig', $templateVars);
                 break;
             case 'pdf':
-                $type = 'application/pdf';
                 $content = $pdfRenderer->getOutputFromHtml(
                     $this->renderView('radiotable/standalone.html.twig', $templateVars)
                 );
@@ -116,15 +113,10 @@ class RadioTableController extends AbstractController
 
         $response = new Response($content);
 
-        $response->headers->set('Content-Type', $type);
-        $response->headers->set(
-            'Content-Disposition',
-            $response->headers->makeDisposition(
-                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                $radioTable->getName() . '.' . $_format,
-                date('Y-m-d_H-i-s') . '.' . $_format
-            )
-        );
+        $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $radioTable->getName() . '.' . $_format, date('Y-m-d_H-i-s') . '.' . $_format
+        ));
 
         return $response;
     }
