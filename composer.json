@@ -25,9 +25,11 @@
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
+        "symfony/debug-bundle": "^4.1",
         "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.6",
         "symfony/profiler-pack": "^1.0",
+        "symfony/var-dumper": "^4.1",
         "symfony/web-server-bundle": "^4.1"
     },
     "config": {
