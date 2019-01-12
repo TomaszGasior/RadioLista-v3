@@ -35,8 +35,8 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
         });
     }
 
-    public function getExtendedType()
+    static public function getExtendedTypes()
     {
-        return FormType::class;
+        return [FormType::class];
     }
 }
