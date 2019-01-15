@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -32,9 +33,9 @@ class UserController extends AbstractController
      * @Route("/moje-wykazy", name="user.my_radiotables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myRadioTables(RadioTableRepository $radioTableRepository): Response
+    public function myRadioTables(UserInterface $user, RadioTableRepository $radioTableRepository): Response
     {
-        $radioTables = $radioTableRepository->findOwnedByUser($this->getUser());
+        $radioTables = $radioTableRepository->findOwnedByUser($user);
 
         return $this->render('user/my_radiotables.html.twig', [
             'radiotables' => $radioTables,
@@ -45,9 +46,10 @@ class UserController extends AbstractController
      * @Route("/ustawienia-konta", name="user.my_account_settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myAccountSettings(EntityManagerInterface $entityManager, Request $request): Response
+    public function myAccountSettings(EntityManagerInterface $entityManager, Request $request,
+                                      UserInterface $user): Response
     {
-        $form = $this->createForm(UserSettingsType::class, $this->getUser());
+        $form = $this->createForm(UserSettingsType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
