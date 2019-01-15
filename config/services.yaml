@@ -39,6 +39,7 @@ services:
     App\EventListener\SecurityFlashNotice:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
+
     App\EventListener\RehashRLv1UserPassword:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
