@@ -58,6 +58,7 @@ class RadioStationRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('radioStation')
             ->andWhere('radioStation.radioTable = :radioTable')
             ->setParameter('radioTable', $radioTable)
-            ->orderBy('radioStation.frequency');
+            ->orderBy('radioStation.frequency')
+        ;
     }
 }
