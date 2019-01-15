@@ -16,7 +16,6 @@
                 "*.sublime-project",
                 ".gitignore",
                 ".web-server-pid",
-                "composer.json",
                 "composer.lock",
                 "symfony.lock",
             ],
@@ -27,6 +26,7 @@
             "folder_exclude_patterns": [
                 "bin",
                 "Test",
+                "Tests",
             ],
             "file_include_patterns": [
                 "*.php",
