@@ -4,6 +4,9 @@
 
 namespace App\Command;
 
+use App\Entity\RadioStation;
+use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Repository\RadioStationRepository;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,6 +37,11 @@ class RLv2ToRLv3ConvCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        // Disable lifecycle events.
+        $this->entityManager->getClassMetadata(User::class)->entityListeners = [];
+        $this->entityManager->getClassMetadata(RadioTable::class)->entityListeners = [];
+        $this->entityManager->getClassMetadata(RadioStation::class)->entityListeners = [];
+
         $io = new SymfonyStyle($input, $output);
         $io->title('Convert database contents from RLv2 to RLv3');
 
