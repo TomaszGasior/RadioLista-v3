@@ -39,6 +39,9 @@
     <span class="ni">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radiostation_power -%}
+    <span class="ni ni3">{{ parent() }}</span>
+{%- endblock -%}
+{%- block radiostation_polarization -%}
     <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ parent() }}</abbr>
 {%- endblock -%}
 {%- block radiostation_locality_network %}
