@@ -9,8 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(indexes={
-       @ORM\Index(name="Search", columns={"name", "description"}, flags={"fulltext"}),
-   })
+ *     @ORM\Index(name="idx_status", columns={"status"}),
+ *     @ORM\Index(name="idx_search_term", columns={"name", "description"}, flags={"fulltext"}),
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
  * @ORM\EntityListeners({"App\EventListener\EntityListener\RadioTableListener"})
  */
