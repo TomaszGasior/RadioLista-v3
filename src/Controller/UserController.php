@@ -21,11 +21,13 @@ class UserController extends AbstractController
      * @Route("/profil/{name}", name="user.public_profile")
      * @IsGranted("USER_PUBLIC_PROFILE", subject="user", statusCode=404)
      */
-    public function publicProfile(User $user): Response
+    public function publicProfile(User $user, RadioTableRepository $radioTableRepository): Response
     {
+        $radioTables = $radioTableRepository->findPublicOwnedByUser($user);
+
         return $this->render('user/public_profile.html.twig', [
             'user'        => $user,
-            'radiotables' => $user->getRadioTables(),
+            'radiotables' => $radioTables,
         ]);
     }
 
@@ -33,12 +35,10 @@ class UserController extends AbstractController
      * @Route("/moje-wykazy", name="user.my_radiotables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myRadioTables(UserInterface $user, RadioTableRepository $radioTableRepository): Response
+    public function myRadioTables(UserInterface $user): Response
     {
-        $radioTables = $radioTableRepository->findOwnedByUser($user);
-
         return $this->render('user/my_radiotables.html.twig', [
-            'radiotables' => $radioTables,
+            'radiotables' => $user->getRadioTables(),
         ]);
     }
 
