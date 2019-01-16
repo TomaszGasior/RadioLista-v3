@@ -7,9 +7,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(indexes={
-       @ORM\Index(name="SortByFrequency", columns={"id", "frequency"}),
-       @ORM\Index(name="SortByName", columns={"id", "name"}),
-   })
+ *     @ORM\Index(name="idx_sort_frequency", columns={"radioTableId", "frequency"}),
+ *     @ORM\Index(name="idx_sort_name", columns={"radioTableId", "name", "frequency"}),
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
  * @ORM\EntityListeners({"App\EventListener\EntityListener\RadioStationListener"})
  */
