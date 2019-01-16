@@ -78,6 +78,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="owner", orphanRemoval=true)
+     * @ORM\OrderBy({"radioStationsCount" = "DESC"})
      */
     private $radioTables;
 
