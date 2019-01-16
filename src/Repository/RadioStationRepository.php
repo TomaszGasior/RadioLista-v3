@@ -23,34 +23,30 @@ class RadioStationRepository extends ServiceEntityRepository
 
     public function findForRadioTable(RadioTable $radioTable): array
     {
+        $query = $this->createQueryBuilder('radioStation')
+            ->andWhere('radioStation.radioTable = :radioTable')
+            ->setParameter('radioTable', $radioTable);
+
         switch ($radioTable->getSorting()) {
             case RadioTable::SORTING_NAME:
-                return $this->findBy(
-                    ['radioTable' => $radioTable],
-                    [RadioTable::SORTING_NAME => 'ASC', RadioTable::SORTING_FREQUENCY => 'ASC']
-                );
-
-            case RadioTable::SORTING_FREQUENCY:
-                return $this->findBy(
-                    ['radioTable' => $radioTable],
-                    [RadioTable::SORTING_FREQUENCY => 'ASC']
-                );
+                $query->addOrderBy('radioStation.name', 'ASC');
+                break;
 
             case RadioTable::SORTING_PRIVATE_NUMBER:
-                return $this->createQueryBuilder('radioStation')
+                $query
                     ->addSelect(
                         // Move radiostations without private number to the end of the radiotable.
                         'CASE WHEN radioStation.privateNumber IS NULL THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
                     )
-                    ->andWhere('radioStation.radioTable = :radioTable')
-                    ->setParameter('radioTable', $radioTable)
                     ->addOrderBy('privateNumberEmpty', 'ASC')
                     ->addOrderBy('radioStation.privateNumber', 'ASC')
-                    ->addOrderBy('radioStation.frequency', 'ASC')
-                    ->getQuery()
-                    ->getResult()
                 ;
+                break;
         }
+
+        $query->addOrderBy('radioStation.frequency', 'ASC');
+
+        return $query->getQuery()->getResult();
     }
 
     public function getQueryForRadioTable(RadioTable $radioTable): QueryBuilder
