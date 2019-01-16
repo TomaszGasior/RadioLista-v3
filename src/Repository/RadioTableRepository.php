@@ -22,36 +22,42 @@ class RadioTableRepository extends ServiceEntityRepository
 
     public function findPublicOrderedByRadioStationsCount(): array
     {
-        return $this->findBy(
-            ['status' => RadioTable::STATUS_PUBLIC],
-            ['radioStationsCount' => 'DESC']
-        );
+        return $this->findAllPublic('radioStationsCount', null);
     }
 
     public function findPublicOrderedByLastUpdateTime(int $limit = null): array
     {
-        return $this->findBy(
-            ['status' => RadioTable::STATUS_PUBLIC],
-            ['lastUpdateTime' => 'DESC'],
-            $limit
-        );
+        return $this->findAllPublic('lastUpdateTime', $limit);
     }
 
     public function findPublicOrderedByUseKhz(): array
     {
-        return $this->findBy(
-            ['status' => RadioTable::STATUS_PUBLIC],
-            ['useKhz' => 'DESC']
-        );
+        return $this->findAllPublic('useKhz', null);
     }
 
     public function findPublicOrderedByIdDesc(int $limit = null): array
     {
-        return $this->findBy(
-            ['status' => RadioTable::STATUS_PUBLIC],
-            ['id' => 'DESC'],
-            $limit
-        );
+        return $this->findAllPublic('id', $limit);
+    }
+
+    private function findAllPublic(string $orderBy, ?int $limit): array
+    {
+        $query = $this->createQueryBuilder('radioTable')
+            ->andWhere('radioTable.status = :status')
+            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->orderBy('radioTable.'.$orderBy, 'DESC')
+        ;
+
+        if ($limit) {
+            $query->setMaxResults($limit);
+        }
+        else {
+            // If there is no limit, result will be probably used on the radiotables list.
+            // Optimize query for fetching radiotable owners.
+            $query->innerJoin('radioTable.owner', 'user')->addSelect('user');
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     public function findPublicBySearchTerm(string $searchTerm): array
