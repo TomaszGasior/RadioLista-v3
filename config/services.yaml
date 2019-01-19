@@ -35,11 +35,3 @@ services:
         tags:
             - { name: form.type_extension, priority: -100,
                 extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
-
-    App\EventListener\SecurityFlashNotice:
-        tags:
-            - { name: kernel.event_listener, event: security.interactive_login }
-
-    App\EventListener\RehashRLv1UserPassword:
-        tags:
-            - { name: kernel.event_listener, event: security.interactive_login }

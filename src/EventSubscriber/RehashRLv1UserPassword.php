@@ -1,11 +1,13 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
-class RehashRLv1UserPassword
+class RehashRLv1UserPassword implements EventSubscriberInterface
 {
     private $entityManager;
 
@@ -30,5 +32,10 @@ class RehashRLv1UserPassword
             $user->setPlainPassword($plainPassword);
             $this->entityManager->flush($user);
         }
+    }
+
+    static public function getSubscribedEvents()
+    {
+        return [SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin'];
     }
 }
