@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\EntityListeners({"App\EventListener\EntityListener\UserListener"})
+ * @ORM\EntityListeners({"App\Doctrine\EntityListener\UserListener"})
  * @UniqueEntity("name", groups={"Default", "RedefinePassword"})
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface

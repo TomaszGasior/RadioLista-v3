@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener\EntityListener;
+namespace App\Doctrine\EntityListener;
 
 use Doctrine\Common\EventArgs;
 

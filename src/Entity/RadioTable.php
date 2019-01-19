@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(name="idx_search_term", columns={"name", "description"}, flags={"fulltext"}),
  * })
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
- * @ORM\EntityListeners({"App\EventListener\EntityListener\RadioTableListener"})
+ * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioTableListener"})
  */
 class RadioTable
 {

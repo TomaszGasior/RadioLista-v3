@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(name="idx_sort_name", columns={"radioTableId", "name", "frequency"}),
  * })
  * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
- * @ORM\EntityListeners({"App\EventListener\EntityListener\RadioStationListener"})
+ * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioStationListener"})
  */
 class RadioStation
 {
