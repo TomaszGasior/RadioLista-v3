@@ -223,6 +223,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     public function getRoles(): array
     {
+        if (1 === $this->id) {
+            return ['ROLE_USER', 'ROLE_ADMIN'];
+        }
+
         return ['ROLE_USER'];
     }
 
