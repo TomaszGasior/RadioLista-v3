@@ -2,32 +2,28 @@
 
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Regular.woff') format('woff'), url('fonts/LatoLatin-Regular.ttf') format('truetype');
-    font-style: normal; font-weight: normal; text-rendering: optimizeLegibility;
+    src: url('fonts/LatoLatin-Regular.woff2'), url('fonts/LatoLatin-Regular.woff');
 }
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Heavy.woff') format('woff'), url('fonts/LatoLatin-Heavy.ttf') format('truetype');
-    font-style: normal; font-weight: bold; text-rendering: optimizeLegibility;
+    src: url('fonts/LatoLatin-Heavy.woff2');
+    font-weight: bold;
 }
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Italic.woff') format('woff'), url('fonts/LatoLatin-Italic.ttf') format('truetype');
-    font-style: italic; font-weight: normal; text-rendering: optimizeLegibility;
+    src: url('fonts/LatoLatin-Italic.woff2');
+    font-style: italic;
 }
 @font-face {
     font-family: "Inconsolata";
-    src: url('fonts/Inconsolata.woff') format('woff'), url('fonts/Inconsolata.ttf') format('truetype');
+    src: url('fonts/Inconsolata.woff2');
 }
 
 body {
     font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
-    color: black;
-    /*background: #F2FFEB radial-gradient( #FFF, #E7FFDB ) fixed;*/
-    background: #F2FFEB radial-gradient( #FFF, #EEFFE6 ) fixed;
-
-    /* Old temporal background color caused by Firefox's performace issues. */
-    /*background: #F7FFF3;*/
+    color: #000;
+    text-rendering: optimizeLegibility;
+    background: #F7FFF3;
 
     cursor: default;
     overflow-y: scroll;
