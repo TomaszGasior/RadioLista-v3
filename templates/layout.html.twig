@@ -5,7 +5,8 @@
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista to miejsce, gdzie opublikować możesz wykazy radiowe i telewizyjne — bandscany, regularne wykazy odbieranych stacji czy prywatne listy ulubionych stacji.">
 
-        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        <base href="{{ app.request.schemeAndHttpHost }}">
+        <link rel="stylesheet" href="{{ asset('main.css') }}">
         <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
 
         {% if block('page_title') %}
@@ -15,8 +16,6 @@
         {% endif %}
 
         {% block head_closing %}{% endblock %}
-
-        <!--[if IE]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </head>
 
     <body class="custBg">
