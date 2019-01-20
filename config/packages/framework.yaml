@@ -20,3 +20,7 @@ framework:
         formats:
             pdf: application/pdf
             csv: text/csv
+
+    assets:
+        base_path: 'assets'
+        version: 3

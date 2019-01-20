@@ -1,0 +1,53 @@
+/* general */
+
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Regular.woff2'), url('fonts/LatoLatin-Regular.woff');
+}
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Heavy.woff2');
+    font-weight: bold;
+}
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Italic.woff2');
+    font-style: italic;
+}
+@font-face {
+    font-family: "Inconsolata";
+    src: url('fonts/Inconsolata.woff2');
+}
+
+body {
+    font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
+    color: #000;
+    text-rendering: optimizeLegibility;
+    background: #F7FFF3;
+
+    cursor: default;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #D66200;
+    transition: linear 0.1s color;
+
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0084FF;
+}
+a:active {
+    color: #64BE00;
+}
+a:focus:not(:hover):not(:active) {
+    text-decoration: underline;
+    outline: 1px dashed #F07F1F;
+    outline-offset: 2px;
+}
