@@ -1,108 +1,108 @@
 /* General styles. */
 
 @media ( max-width: 700px ) {
-	body {
-		background-image: none !important;
-		/* Disable background images in radiotable themes. */
-	}
+    body {
+        background-image: none !important;
+        /* Disable background images in radiotable themes. */
+    }
 }
 
 
 /* Horizontal site paddings. */
 
 @media ( max-width: 650px ) {
-	header.main, main {
-		padding-left: 5%;
-		padding-right: 5%;
+    header.main, main {
+        padding-left: 5%;
+        padding-right: 5%;
 
-		min-width: 270px;
-	}
+        min-width: 270px;
+    }
 }
 
 
 /* Header and footer. */
 
 header.main h1 a {
-	width: 72px; /* Make site logo smaller. */
+    width: 72px; /* Make site logo smaller. */
 }
 
 header.main nav ul {
-	line-height: 2em;
+    line-height: 2em;
 }
 header.main nav li:before {
-	display: none;
+    display: none;
 }
 header.main nav li {
-	margin-left: 0.7em;
+    margin-left: 0.7em;
 }
 header.main nav ul:first-of-type {
-	margin: 0.1em 0 0.2em;
+    margin: 0.1em 0 0.2em;
 }
 
 footer.main {
-	line-height: 2em;
+    line-height: 2em;
 }
 
 @media ( max-width: 600px ) {
-	@keyframes notificationShow {
-		from { bottom: -800px; }
-		to { bottom: 90px; }
-	}
-	@keyframes notificationHide {
-		from { bottom: 90px; }
-		to { bottom: -100px; opacity: 0.1; }
-	}
+    @keyframes notificationShow {
+        from { bottom: -800px; }
+        to { bottom: 90px; }
+    }
+    @keyframes notificationHide {
+        from { bottom: 90px; }
+        to { bottom: -100px; opacity: 0.1; }
+    }
 
-	span#notification_JSOn {
-		position: fixed;
-		bottom: 90px;
-		top: auto;
-	}
-	span#notification_JSOn.hidden {
-		bottom: -100px;
-		top: auto;
-	}
-	span#notification_JSOn span {
-		min-width: auto;
-		max-width: auto;
-		border-radius: 0;
+    span#notification_JSOn {
+        position: fixed;
+        bottom: 90px;
+        top: auto;
+    }
+    span#notification_JSOn.hidden {
+        bottom: -100px;
+        top: auto;
+    }
+    span#notification_JSOn span {
+        min-width: auto;
+        max-width: auto;
+        border-radius: 0;
 
-		width: 80%;
-	}
+        width: 80%;
+    }
 }
 
 
 /* Main content and page title. */
 
 main {
-	min-height: auto;
+    min-height: auto;
 }
 
 @media ( max-width: 500px ) {
-	main > section > header h2 {
-		font-size: 1.7em;
-	}
+    main > section > header h2 {
+        font-size: 1.7em;
+    }
 }
 
 
 /* Forms - tabbed interface. */
 
 div#useTabbedUI_JSOn > ul.tabsNavigator {
-	margin-bottom: 2px;
+    margin-bottom: 2px;
 }
 
 div#useTabbedUI_JSOn > ul.tabsNavigator li button {
-	margin: 0 0.5em 0.3em 0;
+    margin: 0 0.5em 0.3em 0;
 
-	border-bottom: 1px solid #D2D2D2 !important;
-	padding: 0.3em 0.6em !important;
+    border-bottom: 1px solid #D2D2D2 !important;
+    padding: 0.3em 0.6em !important;
 }
 div#useTabbedUI_JSOn > ul.tabsNavigator li:last-child button {
-	margin-right: 0;
+    margin-right: 0;
 }
 div#useTabbedUI_JSOn > ul.tabsNavigator li button.currentTabNavigator {
-	background: #FFF6EE;
-	font-weight: bold;
+    background: #FFF6EE;
+    font-weight: bold;
 }
 
 
@@ -110,186 +110,186 @@ div#useTabbedUI_JSOn > ul.tabsNavigator li button.currentTabNavigator {
 /* Forms - elements. */
 
 button {
-	max-width: 70%;
+    max-width: 70%;
 }
 
 
 /* Forms - descriptions list tag. */
 
 @media ( max-width: 700px ) {
-	form dl:not(.radioTableColumnsForm_JSOn) > * {
-		float: none;
-		width: 100%;
-	}
+    form dl:not(.radioTableColumnsForm_JSOn) > * {
+        float: none;
+        width: 100%;
+    }
 }
 
 form dl dt.checkboxes + dd {
-	float: left;
-	width: 10%;
+    float: left;
+    width: 10%;
 }
 form dl dt.checkboxes {
-	float: right;
-	width: 90%;
+    float: right;
+    width: 90%;
 }
 @media ( max-width: 450px ) {
-	form dl dt.checkboxes + dd {
-		float: left;
-		width: 13%;
-	}
-	form dl dt.checkboxes {
-		float: right;
-		width: 87%;
-	}
+    form dl dt.checkboxes + dd {
+        float: left;
+        width: 13%;
+    }
+    form dl dt.checkboxes {
+        float: right;
+        width: 87%;
+    }
 }
 @media ( max-width: 370px ) {
-	form dl dt.checkboxes + dd {
-		float: left;
-		width: 16%;
-	}
-	form dl dt.checkboxes {
-		float: right;
-		width: 84%;
-	}
+    form dl dt.checkboxes + dd {
+        float: left;
+        width: 16%;
+    }
+    form dl dt.checkboxes {
+        float: right;
+        width: 84%;
+    }
 }
 
 
 /* Columns order form in radiotable settings. */
 
 dl.radioTableColumnsForm_JSOn {
-	width: auto;
+    width: auto;
 }
 @media ( max-width: 600px ) {
-	dl.radioTableColumnsForm_JSOn {
-		position: relative;
-		margin-left: -1.25em;
-		margin-right: -1.25em;
-	}
-	dl.radioTableColumnsForm_JSOn button {
-		width: 65px;
-		font-size: 0.8em;
-		height: 2.5em;
-		padding: 0;
-	}
+    dl.radioTableColumnsForm_JSOn {
+        position: relative;
+        margin-left: -1.25em;
+        margin-right: -1.25em;
+    }
+    dl.radioTableColumnsForm_JSOn button {
+        width: 65px;
+        font-size: 0.8em;
+        height: 2.5em;
+        padding: 0;
+    }
 
-	@media ( max-width: 500px ) {
-		dl.radioTableColumnsForm_JSOn > * {
-			height: 6em;
-		}
-		dl.radioTableColumnsForm_JSOn dt {
-			width: 13%;
-		}
-		dl.radioTableColumnsForm_JSOn dd {
-			width: 87%;
-			padding-top: 3em;
-		}
-		dl.radioTableColumnsForm_JSOn button {
-			width: 30%;
-		}
-	}
+    @media ( max-width: 500px ) {
+        dl.radioTableColumnsForm_JSOn > * {
+            height: 6em;
+        }
+        dl.radioTableColumnsForm_JSOn dt {
+            width: 13%;
+        }
+        dl.radioTableColumnsForm_JSOn dd {
+            width: 87%;
+            padding-top: 3em;
+        }
+        dl.radioTableColumnsForm_JSOn button {
+            width: 30%;
+        }
+    }
 }
 
 
 /* Radiotable informations section. */
 
 section.radioTableInfo dl {
-	display: block;
+    display: block;
 }
 section.radioTableInfo dl:after {
-	content: ".";
-	opacity: 0;
-	display: block;
-	clear: both;
-	margin-bottom: -3em;
+    content: ".";
+    opacity: 0;
+    display: block;
+    clear: both;
+    margin-bottom: -3em;
 }
 
 section.radioTableInfo dl > * {
-	display: block;
-	float: left;
-	margin: 0.5em 0;
-	line-height: 1em;
-	box-sizing: border-box;
+    display: block;
+    float: left;
+    margin: 0.5em 0;
+    line-height: 1em;
+    box-sizing: border-box;
 }
 section.radioTableInfo dl dt {
-	clear: both;
-	width: 50%;
+    clear: both;
+    width: 50%;
 }
 section.radioTableInfo dl dd {
-	border: 0 !important;
-	width: 50%;
+    border: 0 !important;
+    width: 50%;
 }
 
 /* User profile page. */
 
 @media ( max-width: 500px ) {
-	section.userProfile.userInfo dl > * {
-		display: block;
-		margin: 0;
-		padding: 0 !important;
-	}
+    section.userProfile.userInfo dl > * {
+        display: block;
+        margin: 0;
+        padding: 0 !important;
+    }
 }
 
 
 /* User radiotables list. */
 
 dl.radioTablesList.withActions > dd ul, dl.radioTablesList.withActions > dd ul li {
-	position: static;
-	text-align: left;
-	line-height: inherit;
+    position: static;
+    text-align: left;
+    line-height: inherit;
 }
 dl.radioTablesList.withActions > dd ul li {
-	margin-top: 0.5em;
+    margin-top: 0.5em;
 }
 dl.radioTablesList.withActions > dd ul li:not(:first-child):before {
-	visibility: hidden;
+    visibility: hidden;
 }
 dl.radioTablesList.withActions > dd ul li a {
-	padding: 0.3em 0;
+    padding: 0.3em 0;
 }
 
 dl.radioTablesList.withActions > dd dl, dl.radioTablesList.withActions > dt {
-	padding-right: 0;
+    padding-right: 0;
 }
 
 
 /* Information boxes. */
 
 p.information {
-	padding: 1.2em;
+    padding: 1.2em;
 }
 
 
 /* Icons in radiotable status form. */
 
 dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes + dd {
-	width: 40%;
+    width: 40%;
 }
 dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes {
-	width: 60%;
+    width: 60%;
 }
 
 @media ( max-width: 500px ) {
 
-	dl.radioTableStatusForm dd {
-		background-position-x: 24% !important;
-	}
-	@media ( max-width: 370px ) {
-		dl.radioTableStatusForm dd {
-			background-position-x: 0 !important;
-		}
-	}
+    dl.radioTableStatusForm dd {
+        background-position-x: 24% !important;
+    }
+    @media ( max-width: 370px ) {
+        dl.radioTableStatusForm dd {
+            background-position-x: 0 !important;
+        }
+    }
 
-	/* background-position-x property is not supported by Firefox <49 and Opera 12. */
-	@supports ( not (background-position-x: 0) ) {
-		dl.radioTableStatusForm dd {
-			background: none;
-		}
-		dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes + dd {
-			width: 20%;
-		}
-		dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes {
-			width: 80%;
-		}
-	}
+    /* background-position-x property is not supported by Firefox <49 and Opera 12. */
+    @supports ( not (background-position-x: 0) ) {
+        dl.radioTableStatusForm dd {
+            background: none;
+        }
+        dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes + dd {
+            width: 20%;
+        }
+        dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes {
+            width: 80%;
+        }
+    }
 
 }
 
@@ -297,15 +297,15 @@ dl.radioTableStatusForm.checkboxesWithFullWidth dt.checkboxes {
 /* Homepage styles. */
 
 @media ( max-width: 530px ) {
-	section.home h3 {
-		-ms-hyphens: auto;
-		-moz-hyphens: auto;
-		-webkit-hyphens: auto;
-		hyphens: auto;
-	}
-	section.home ol li a, section.home ol li time {
-		display: block;
-		width: auto;
-		text-align: left;
-	}
+    section.home h3 {
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+    section.home ol li a, section.home ol li time {
+        display: block;
+        width: auto;
+        text-align: left;
+    }
 }

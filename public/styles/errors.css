@@ -1,83 +1,83 @@
 /* General styles. */
 
 @font-face {
-	font-family: "LatoLatinWeb";
-	src: url('fonts/LatoLatin-Regular.woff') format('woff'), url('fonts/LatoLatin-Regular.ttf') format('truetype');
-	font-style: normal; font-weight: normal; text-rendering: optimizeLegibility;
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Regular.woff') format('woff'), url('fonts/LatoLatin-Regular.ttf') format('truetype');
+    font-style: normal; font-weight: normal; text-rendering: optimizeLegibility;
 }
 @font-face {
-	font-family: "LatoLatinWeb";
-	src: url('fonts/LatoLatin-Heavy.woff') format('woff'), url('fonts/LatoLatin-Heavy.ttf') format('truetype');
-	font-style: normal; font-weight: bold; text-rendering: optimizeLegibility;
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Heavy.woff') format('woff'), url('fonts/LatoLatin-Heavy.ttf') format('truetype');
+    font-style: normal; font-weight: bold; text-rendering: optimizeLegibility;
 }
 @font-face {
-	font-family: "LatoLatinWeb";
-	src: url('fonts/LatoLatin-Italic.woff') format('woff'), url('fonts/LatoLatin-Italic.ttf') format('truetype');
-	font-style: italic; font-weight: normal; text-rendering: optimizeLegibility;
+    font-family: "LatoLatinWeb";
+    src: url('fonts/LatoLatin-Italic.woff') format('woff'), url('fonts/LatoLatin-Italic.ttf') format('truetype');
+    font-style: italic; font-weight: normal; text-rendering: optimizeLegibility;
 }
 
 body {
-	background: #111;
-	font: 20px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
-	color: #CCC;
-	cursor: default;
+    background: #111;
+    font: 20px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
+    color: #CCC;
+    cursor: default;
 }
 
 @media all and ( max-height: 600px ) and ( max-width: 400px ) {
-	body { font-size: 0.9em; }
+    body { font-size: 0.9em; }
 }
 
 
 /* Header. */
 
 header {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-bottom: 10%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10%;
 }
 
 header h1 a {
-	background: url('img/logo.png') no-repeat;
-	background-size: contain;
-	height: 50px;
-	width: 200px;
+    background: url('img/logo.png') no-repeat;
+    background-size: contain;
+    height: 50px;
+    width: 200px;
 
-	margin: auto;
-	display: block;
-	text-indent: -9999px;
-	overflow: hidden;
+    margin: auto;
+    display: block;
+    text-indent: -9999px;
+    overflow: hidden;
 }
 
 @media all and ( max-height: 600px ) {
-	header h1 a {
-		width: 100px;
-		height: 25px;
-	}
+    header h1 a {
+        width: 100px;
+        height: 25px;
+    }
 }
 
 
 /* Error information. */
 
 section {
-	max-width: 650px;
-	padding: 0 15px;
-	margin: auto;
-	text-align: center;
-	margin-top: 10%;
+    max-width: 650px;
+    padding: 0 15px;
+    margin: auto;
+    text-align: center;
+    margin-top: 10%;
 }
 section p {
-	line-height: 1.45em;
+    line-height: 1.45em;
 }
 
 section:before {
-	content: "Ciemność, widzę ciemność!";
-	opacity: 0.2;
-	font-size: 2.2em;
+    content: "Ciemność, widzę ciemność!";
+    opacity: 0.2;
+    font-size: 2.2em;
 }
 
 section h2 {
-	font-weight: normal;
-	font-size: 1.5em;
+    font-weight: normal;
+    font-size: 1.5em;
 }
