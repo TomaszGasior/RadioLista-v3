@@ -20,12 +20,14 @@ class DecimalUnitType extends AbstractType
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
+        $view->vars['step'] = $options['step'];
         $view->vars['unit_label'] = $options['unit_label'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'step' => 0.05,
             'unit_label' => '',
         ]);
     }

@@ -19,7 +19,6 @@ class RadioStationEditType extends AbstractType
         $builder
             ->add('frequency', DecimalUnitType::class, [
                 'label' => 'Częstotliwość',
-                'attr'  => ['min' => '1'],
                 // Unit label "MHz" or "kHz" needs to be set in template.
             ])
             ->add('name', TextHintsType::class, [
@@ -91,7 +90,7 @@ class RadioStationEditType extends AbstractType
             ->add('power', DecimalUnitType::class, [
                 'label'      => 'Moc nadajnika',
                 'unit_label' => 'kW',
-                'attr'       => ['min' => '1'],
+                'step'       => 0.01,
                 'required'   => false,
             ])
             ->add('polarization', ChoiceType::class, [

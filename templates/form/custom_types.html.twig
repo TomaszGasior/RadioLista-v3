@@ -1,14 +1,18 @@
 {% block decimal_unit_widget %}
     {% set type = "number" %}
-    {% set attr = attr|merge({'class': 'decimal', 'step': '0.05'}) %}
+    {% set attr = attr|merge({'class': 'decimal', 'step': step, 'min': step}) %}
     {{ block('number_widget') }}
     {{ unit_label }}
 
     <script>
-        {# Enforce leading zeros in typed values ("87.6" -> "87.60"). Works only in Webkit/Blink. :( #}
-        {# Do not use "input" event — it looks better but makes manual typing harder. #}
+        {# Enforce leading zeros in typed values ("87.6" -> "87.60"). #}
+        {# Do not use "input" event — it looks better but makes manual typing hard. #}
+        {# Works only in Webkit/Blink. Additional "if" needed for MSEdge/IE. #}
+        {# See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6367416/ #}
         document.getElementById('{{ id }}').addEventListener('change', function(){
-            this.value = this.valueAsNumber.toFixed(2);
+            if (this.valueAsNumber) {
+                this.value = this.valueAsNumber.toFixed(2);
+            }
         });
     </script>
 {% endblock decimal_unit_widget %}
