@@ -30,8 +30,3 @@ services:
         resource: '../src/Doctrine/EntityListener/*'
         tags:
             - { name: 'doctrine.orm.entity_listener', lazy: true }
-
-    App\Form\Extension\ValidationFlashErrorExtension:
-        tags:
-            - { name: form.type_extension, priority: -100,
-                extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
