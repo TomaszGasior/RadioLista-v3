@@ -41,7 +41,7 @@
     "settings":
     {
         "default_line_ending": "unix",
-        "detect_indentation": false,
+        "detect_indentation": true,
         "ensure_newline_at_eof_on_save": true,
         "rulers": [80, 120],
         "tab_size": 4,
