@@ -1,19 +1,15 @@
 {% block form_row %}
-    <dt>
-        {{ form_label(form) }}
-    </dt>
-    <dd>
-        {{ form_widget(form) }}
-    </dd>
+    <div class="form-item form-regular">
+        <div>{{ form_label(form) }}</div>
+        <div>{{ form_widget(form) }}</div>
+    </div>
 {% endblock form_row %}
 
 {% block checkbox_row %}
-    <dt class="checkboxes">
-        {{ form_label(form) }}
-    </dt>
-    <dd>
+    <div class="form-item form-checkbox">
         {{ form_widget(form) }}
-    </dd>
+        {{ form_label(form) }}
+    </div>
 {% endblock checkbox_row %}
 
 {% block radio_row %}

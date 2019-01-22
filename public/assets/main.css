@@ -51,3 +51,421 @@ a:focus:not(:hover):not(:active) {
     outline: 1px dashed #F07F1F;
     outline-offset: 2px;
 }
+
+.sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+/* site width */
+
+.site-width {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+@media (min-width: 1600px)
+{
+    .site-width {
+        max-width: 1300px;
+    }
+}
+
+
+/* site header */
+
+.site-header {
+    background: rgba(255,255,255, 0.6);
+    box-shadow: 0 0 5px rgba(0,0,0, 0.2);
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+}
+@supports (-moz-user-select: none)
+{
+    .site-header {
+        /* box-shadow version for Firefox */
+        box-shadow: 0 0 4px rgba(0,0,0, 0.18);
+    }
+}
+.site-header > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.site-header h1 a {
+    background: url('images/logo.png') no-repeat;
+    width: 245px;
+    height: 62px;
+
+    display: block;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.site-header h1 {
+    margin: 0;
+}
+
+
+/* site navigation */
+
+.site-navigation {
+    text-align: right;
+}
+.site-navigation ul {
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+.site-navigation li {
+    display: inline;
+}
+.site-navigation li:before {
+    margin: 0 0.4em;
+    content: " | ";
+    color: rgba(0,0,0, 0.1);
+    font-size: 0.9em;
+    vertical-align: 1px;
+}
+.site-navigation li:first-child:before {
+    display: none;
+}
+.site-navigation a {
+    text-shadow: 0 0 2px #eee;
+    color: #5D9A3F;
+
+    display: inline-block;
+}
+.site-navigation a:hover {
+    color: #EE6D00;
+}
+.site-navigation .user-menu {
+    margin: 0.55em 0 0.6em;
+    font-size: 0.8em;
+    color: #8E8E8E;
+}
+.site-navigation .user-menu a {
+    color: inherit;
+}
+.site-navigation .user-menu .username {
+    font-weight: bold;
+}
+
+
+/* site footer */
+
+.site-footer {
+    font-size: 0.8em;
+    text-align: center;
+
+    border-top: 1px solid rgba(0,0,0, 0.11);
+    padding: 1em 0 2.6em 0;
+    margin-top: 2em;
+}
+.site-footer ul {
+    display: inline;
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+.site-footer p, .site-footer li {
+    display: inline-block;
+    margin: 0 0.73em;
+}
+
+
+/* notification */
+
+.notification-wrapper {
+    display: block;
+
+    text-align: center;
+    font-weight: bold;
+}
+.notification {
+    padding: 0.2em 2em;
+
+    background: rgba(255,247,189, 0.6);
+    color: #000;
+}
+.notification.error {
+    background: rgba(255,0,0, 0.7);
+    color: #FFF;
+}
+
+@keyframes notification_show {
+    from {
+        top: -800px;
+    }
+    to {
+        top: 76px;
+    }
+}
+@keyframes notification_hide {
+    from {
+        top: 76px;
+    }
+    to {
+        top: -100px;
+        opacity: 0.1;
+    }
+}
+
+.notification-wrapper.JS {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 1px;
+
+    animation-name: notification_show;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+.notification-wrapper.JS .notification {
+    display: inline-block;
+    min-width: 400px;
+    max-width: 800px;
+
+    text-align: center;
+    font-weight: bold;
+    padding: 0.8em 1.5em;
+    box-shadow: 0 0 3px rgba(0,0,0, 0.2);
+    border-radius: 2px;
+}
+.notification-wrapper.JS.hidden {
+    top: -100px;
+
+    animation-name: notification_hide;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-in;
+}
+
+
+/* main content */
+
+.main-content {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: auto;
+    min-height: 500px;
+}
+
+.main-content > header h2 {
+    color: #EE6D00;
+    margin: 0.5em 0 1.5rem 0;
+    font-size: 2em;
+    text-shadow: 0 0 2px #eee;
+
+    font-weight: normal;
+}
+
+.main-content h3 {
+    font-size: 1.6em;
+    margin: 1rem 0;
+    text-shadow: 0 0 2px #eee;
+
+    font-weight: normal;
+}
+
+
+/* form widgets */
+
+input, textarea, select, button {
+    font-size: 0.88em;
+    width: 100%;
+    padding: 5px 11px;
+    background: #F3F3F3;
+    box-shadow: inset 2px 2px 2px #DEDEDE;
+    border: 1px solid #C2C2C2;
+
+    outline: none;
+    font: inherit;
+    color: inherit;
+    box-sizing: border-box;
+}
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: 1px solid #F07F1F;
+}
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+input[type="number"] {
+    width: 80px;
+    text-align: center;
+    margin-right: 0.2em;
+}
+input[type="number"].decimal {
+    width: 100px;
+}
+@supports(-webkit-app-region: initial)
+{
+    input[type="search"]::-webkit-search-cancel-button {
+        /* remove "X" from search input in WebKit */
+        -webkit-appearance: none;
+    }
+    input::-webkit-calendar-picker-indicator {
+        /* remove ugly arrow in inputs with datalist attribute in WebKit */
+        display: none;
+    }
+}
+
+select {
+    /* hide default select arrow */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg height='16px' width='35px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+select::-ms-expand {
+    /* "appearance: none" for Internet Explorer */
+    display: none;
+}
+@supports (-moz-user-select: none)
+{
+    /* smaller horizontal padding for Firefox */
+    select {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    /* dirty hack for removing dotted border inside select in Firefox */
+    select:-moz-focusring {
+        color: rgba(0,0,0, 0) !important;
+        text-shadow: 0 0 0 #000 !important;
+    }
+    option {
+        color: #000 !important;
+        text-shadow: none !important;
+    }
+}
+
+button {
+    max-width: 40%;
+    margin: 1em auto 0;
+    background: #F2FFC6;
+    color: #F07F1F;
+    font-weight: bold;
+    transition: linear 0.1s background-color;
+
+    display: block;
+    box-shadow: none;
+}
+button:hover:not(:disabled), button:focus {
+    background: #F07F1F;
+    color: #F2FFC6;
+}
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+@supports (-moz-user-select: none)
+{
+    /* remove Firefox dotted border inside button */
+    button::-moz-focus-inner {
+        border: none !important;
+    }
+}
+
+
+/* form widgets — checkboxes + labels */
+
+input[type="checkbox"], input[type="radio"] {
+    width: auto;
+    padding: 0;
+    margin: 0;
+
+    /* hide real checkbox and keep it above fake checkbox */
+    position: absolute;
+    opacity: 0;
+}
+
+input[type="checkbox"] + label:before, input[type="radio"] + label:before {
+    content: " ";
+
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    padding: 0;
+
+    vertical-align: -3px;
+    margin-right: 0.6em;
+
+    /* copied from form widgets styles */
+    background: #F3F3F3;
+    box-shadow: inset 2px 2px 2px #DEDEDE;
+    border: 1px solid #C2C2C2;
+}
+input[type="radio"] + label:before {
+    border-radius: 10px;
+}
+input[type="checkbox"]:focus + label:before, input[type="radio"]:focus + label:before {
+    /* copied from form widgets styles */
+    outline: 1px solid #F07F1F;
+}
+input[type="checkbox"]:checked + label:before, input[type="radio"]:checked + label:before {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+}
+input[type="checkbox"]:checked + label:before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1.852 1.852'%3E%3Cpath fill='%23FF7500' d='M0 0h1.852v1.852H0z'/%3E%3C/svg%3E");
+}
+input[type="radio"]:checked + label:before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1.852 1.852'%3E%3Ccircle fill='%23FF7500' cx='19.798' cy='24.486' r='.926' transform='translate%28-18.872 -23.56%29'/%3E%3C/svg%3E");
+}
+
+
+/* form widgets — special */
+
+input.jscolor {
+    max-width: 200px;
+}
+input.jscolor:not([style=""]) {
+    /* dirty hack to remove box-shadow when color is filled */
+    box-shadow: none;
+}
+
+
+/* form items lists */
+
+.form-item {
+    width: 100%;
+}
+
+.form-item.form-regular {
+    display: flex;
+    margin: 0.7em 0;
+}
+.form-item.form-regular:first-child {
+    margin-top: 1em;
+}
+.form-item.form-regular:last-child {
+    margin-bottom: 1em;
+}
+.form-item.form-regular > *:first-child {
+    width: 40%;
+}
+.form-item.form-regular > *:last-child {
+    flex: 1;
+}
+
+.form-item.form-checkbox {
+    margin: 0.9em 0;
+}
+
+.form-item label {
+    display: block;
+}
+.form-item.form-regular label {
+    margin-top: 5px;
+}

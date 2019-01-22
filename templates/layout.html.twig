@@ -18,34 +18,36 @@
         {% block head_closing %}{% endblock %}
     </head>
 
-    <body class="custBg">
-        <header class="main">
-            <div>
+    <body>
+        <header class="site-header">
+            <div class="site-width">
                 <h1><a href="{{ path('homepage') }}">RadioLista — wykazy radiowe w Internecie</a></h1>
-                <nav>
-                    <h2>Nawigacja</h2>
+                <nav class="site-navigation">
+                    <h2 class="sr-only">Nawigacja</h2>
 
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        <ul>
-                            {% if app.user.publicProfile %}
-                                <li><a class="username" href="{{ path('user.public_profile', {name: app.user.name}) }}">
+                    <ul class="user-menu">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li class="username">
+                                {% if app.user.publicProfile %}
+                                    <a href="{{ path('user.public_profile', {name: app.user.name}) }}">
+                                        {{ app.user.name }}
+                                    </a>
+                                {% else %}
                                     {{ app.user.name }}
-                                </a></li>
-                            {% else %}
-                                <li><a class="username">{{ app.user.name }}</a></li>
-                            {% endif %}
+                                {% endif %}
+                            </li>
                             <li><a href="{{ path('user.my_radiotables') }}">Moje wykazy</a></li>
                             <li><a href="{{ path('user.my_account_settings') }}">Moje konto</a></li>
                             <li><a href="{{ path('security.logout') }}">Wyloguj się</a></li>
-                        </ul>
                         {% else %}
-                        <ul>
                             <li><a href="{{ path('security.login') }}">Zaloguj się</a></li>
                             <li><a href="{{ path('user.register') }}">Zarejestruj się</a></li>
-                        </ul>
-                    {% endif %}
+                        {% endif %}
+                    </ul>
 
-                    {% block context_menu %}{% endblock %}
+                    <div class="context-menu">
+                        {% block context_menu %}{% endblock %}
+                    </div>
                 </nav>
             </div>
 
@@ -53,25 +55,28 @@
             {% if notifications %}
                 {% set notification_type = notifications|keys|last %}
                 {% set notification_text = notifications|last|last %}
-                <span id="notification" class="{{ notification_type }}" role="alert">
-                    <span>{{ notification_text }}</span>
+                <span class="notification-wrapper" role="alert">
+                    <span class="notification {{ notification_type }}">
+                        {{ notification_text }}
+                    </span>
                 </span>
                 <script>
-                    document.getElementById("notification").id = "notification_JSOn";
+                (function(){
+                    var notification = document.querySelector('.notification-wrapper');
+                    notification.classList.add('JS');
                     setTimeout(function(){
-                        document.getElementById("notification_JSOn").className += " hidden"
+                        notification.classList.add('hidden');
                     }, 10000);
+                })();
                 </script>
             {% endif %}
         </header>
 
-        <main>
-            <section>
-                {% block page_content %}{% endblock %}
-            </section>
+        <main class="main-content site-width">
+            {% block page_content %}{% endblock %}
         </main>
 
-        <footer class="main custTxt">
+        <footer class="site-footer">
             <p>&copy; Tomasz Gąsior 2012-2019</p>
             <ul>
                 <li><a href="{{ path('about_service') }}">O stronie</a></li>
@@ -82,7 +87,5 @@
         </footer>
 
         {% block body_closing %}{% endblock %}
-
-        <!--[if IE]><div style="background:black;background:rgba(0,0,0,0.4);position:fixed;left:0;right:0;top:0;bottom:0;">.</div><p style="background:white;color:red;padding:1em;border:2px dashed red;font-size:1.6em;position:fixed;top:20%;left:10%;right:10%;">Używasz przestarzałej wersji przeglądarki Internet Explorer. Zainstaluj aktualizację do najnowszej wersji IE lub pobierz inną przeglądarkę.</p><![endif]-->
     </body>
 </html>
