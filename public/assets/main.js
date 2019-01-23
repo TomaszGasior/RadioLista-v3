@@ -1,4 +1,107 @@
 (function(){
+    function SortableTable(table)
+    {
+        if (!table) {
+            return;
+        }
+
+        this.headers = Array.from(table.querySelectorAll('thead th'));
+        this.body = table.querySelector('tbody');
+        this.rows = Array.from(this.body.querySelectorAll('tr'));
+
+        this.order = 1; // 1 = ascending, -1 = descending
+        this.lastColumnIndex = -1;
+
+        this.compareRows = function(columnIndex, sortingType, row1, row2)
+        {
+            var value1 = row1.children[columnIndex].textContent;
+            var value2 = row2.children[columnIndex].textContent;
+
+            if ('N' === sortingType) {
+                if('' !== value1) {
+                    value1 = parseFloat(value1.replace(',', '.'));
+                }
+                if('' !== value2) {
+                    value2 = parseFloat(value2.replace(',','.'));
+                }
+            }
+
+            if (value1 === value2) {
+                return row1.dataset.index - row2.dataset.index;
+            }
+            if ('' === value1) {
+                return 1;
+            }
+            if ('' === value2) {
+                return -1;
+            }
+
+            if ('T' === sortingType) {
+                var result = value1.localeCompare(value2, [], {usage: 'sort'});
+            }
+            else {
+                var result = (value1 > value2 ? 1 : -1);
+            }
+
+            return result * this.order;
+        };
+        this.onHeaderClick = function(event)
+        {
+            var header = event.target;
+            var columnIndex = header.cellIndex;
+            var sortingType = header.dataset.sort;
+
+            header.blur();
+
+            this.order = (columnIndex === this.lastColumnIndex) ? (this.order * -1) : 1;
+            this.lastColumnIndex = columnIndex;
+
+            this.rows.sort(this.compareRows.bind(this, columnIndex, sortingType));
+            this.rows.forEach(function(row){
+                this.body.appendChild(row);
+            }.bind(this));
+
+            this.headers.forEach(function(header){
+                header.classList.remove('sorted-asc');
+                header.classList.remove('sorted-desc');
+            });
+            header.classList.add(this.order == 1 ? 'sorted-asc' : 'sorted-desc');
+        };
+        this.onHeaderKeydown = function(event)
+        {
+            const ENTER_KEY = 13;
+            const SPACE_KEY = 32;
+
+            if (event.keyCode != ENTER_KEY && event.keyCode != SPACE_KEY) {
+                return;
+            }
+
+            var header = event.target;
+
+            event.preventDefault();
+            header.dispatchEvent(new Event('click'));
+            header.focus();
+        }
+        this.setupMarkup = function()
+        {
+            this.rows.forEach(function(row){
+                // Save initial value of row.rowIndex. It's needed for comparing equal values.
+                row.dataset.index = row.rowIndex;
+            });
+
+            this.headers.forEach(function(header){
+                if (header.dataset.sort) {
+                    header.addEventListener('click', this.onHeaderClick.bind(this));
+                    header.addEventListener('keydown', this.onHeaderKeydown);
+                    header.role = 'button';
+                    header.tabIndex = 0;
+                }
+            }.bind(this));
+        };
+
+        this.setupMarkup();
+    }
+
     function TabbedUI(tabbedUIContainer)
     {
         if (!tabbedUIContainer) {
@@ -100,6 +203,7 @@
     document.addEventListener('DOMContentLoaded', function(){
         document.documentElement.classList.add('JS');
 
+        new SortableTable(document.querySelector('table.sortable'));
         new TabbedUI(document.querySelector('.tabbed-ui'));
         new Notification(document.querySelector('.notification-wrapper'));
     });

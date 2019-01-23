@@ -56,6 +56,8 @@
     {% if radiotable.radioStationsCount > 0 %}
         <div class="radiotable-container">
             {% embed 'radiotable/table/radiotable.html.twig' %}
+                {%- block table_class 'radiotable sortable' -%}
+
                 {%- block heading_cell -%}
                     {%- set columns_sorting = {
                         (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')):      'N',
