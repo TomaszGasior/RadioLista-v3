@@ -376,6 +376,14 @@ button:disabled {
     }
 }
 
+fieldset {
+    padding: 0;
+    border: none;
+
+    /* undo "magic" top margin from fieldset */
+    margin: -0.9em 0 0;
+}
+
 
 /* form widgets — checkboxes + labels */
 

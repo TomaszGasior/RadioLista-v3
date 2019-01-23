@@ -30,6 +30,7 @@ class RadioTableCreateType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,
+                'label'    => 'Widoczność wykazu',
                 'choices'  => [
                     'Publiczny — wykaz może zobaczyć każdy'     => RadioTable::STATUS_PUBLIC,
                     'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'

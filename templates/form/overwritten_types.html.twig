@@ -18,11 +18,12 @@
 
 {% block choice_row %}
     {% if expanded %}
-        {# Do not render additional block for label when "expanded". #}
-        {% for child in form %}
-            {# Use proper markup for nested radio fields when "expanded". #}
-            {{ form_row(child) }}
-        {% endfor %}
+        <fieldset>
+            <legend class="sr-only">{{ form_label(form) }}</legend>
+            {% for child in form %}
+                {{ form_row(child) }}
+            {% endfor %}
+        </fieldset>
     {% else %}
         {{ form_row(form) }}
     {% endif %}
