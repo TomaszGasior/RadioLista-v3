@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html class="{% block html_classes %}{% endblock %}" lang="pl">
+<html class="{% block html_classes %}{% endblock %}" lang="{{ app.request.locale }}">
     <head>
         <meta name="viewport" content="initial-scale=1">
-        <meta name="description" content="RadioLista to miejsce, gdzie opublikować możesz wykazy radiowe i telewizyjne — bandscany, regularne wykazy odbieranych stacji czy prywatne listy ulubionych stacji.">
+        <meta name="description" content="RadioLista — twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji.">
 
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="stylesheet" href="{{ asset('main.css') }}">
@@ -13,7 +13,7 @@
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
         {% else %}
-            <title>RadioLista — wykazy radiowe w Internecie</title>
+            <title>RadioLista — bandscany i wykazy radiowe</title>
         {% endif %}
 
         {% block head_closing %}{% endblock %}
