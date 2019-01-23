@@ -529,3 +529,184 @@ input.jscolor:not([style=""]) {
     border-bottom: 0;
     padding-top: 0.2em;
 }
+
+
+/* radiotable — wrapper */
+
+.radiotable-container {
+    /* reset visual vertical padding of table cells */
+    margin: 0 -0.4em;
+
+    overflow-x: auto;
+    position: relative;
+    background-size: 40px 100%;
+    background-repeat: no-repeat;
+}
+
+
+/* radiotable */
+
+table.radiotable {
+    width: 100%;
+    border-collapse: collapse;
+
+    font-size: 0.96em;
+}
+
+table.radiotable td, table.radiotable th {
+    padding: 0.31em 0.5em;
+    text-align: left;
+}
+table.radiotable th {
+    padding-bottom: 0.5em;
+    color: #477E2D;
+    font-weight: normal;
+}
+table.radiotable td {
+    border-top: 1px solid rgba(0,0,0, 0.05);
+}
+@supports(-webkit-app-region: initial)
+{
+    /* color for WebKit */
+    table.radiotable td {
+        border-top: 1px solid rgba(0,0,0, 0.025);
+    }
+}
+
+table.radiotable tbody tr {
+    transition: background 0.1s, box-shadow 0.5s;
+}
+table.radiotable tbody tr:hover {
+    background: rgba(250,230,205, 0.8);
+}
+
+
+/* radiotable — special cells */
+
+table.radiotable tr.marker-1 {
+    font-weight: bold;
+}
+table.radiotable tr.marker-2 {
+    font-style: italic;
+}
+table.radiotable tr.marker-3 {
+    text-decoration: line-through;
+}
+table.radiotable tr.marker-4 {
+    background: rgba(255,209,209, 0.65) !important;
+}
+table.radiotable tr.marker-5 {
+    background: rgba(175,255,150, 0.65) !important;
+}
+table.radiotable tr.marker-6 {
+    background: rgba(156,230,255, 0.65) !important;
+}
+
+table.radiotable .quality {
+    color: rgba(0,0,0, 0);
+    display: block;
+
+    /* override from themes */
+    text-shadow: none !important;
+}
+@supports (-moz-user-select: none)
+{
+    table.radiotable .quality::-moz-selection {
+        opacity: 0;
+    }
+}
+table.radiotable .quality::selection {
+    opacity: 0;
+}
+table.radiotable .quality:before {
+    text-shadow: 0 0 2px #CCC;
+    margin-right: -10px;
+    letter-spacing: 2px;
+}
+table.radiotable .quality.quality-5:before {
+    color: #0BB300;
+    content: "●●●●●";
+}
+table.radiotable .quality.quality-4:before {
+    color: #A8D300;
+    content: "●●●●";
+}
+table.radiotable .quality.quality-3:before {
+    color: #BDAC00;
+    content: "●●●";
+}
+table.radiotable .quality.quality-2:before {
+    color: #FF5E00;
+    content: "●●";
+}
+table.radiotable .quality.quality-1:before {
+    color: #FF0017;
+    content: "●";
+}
+
+table.radiotable span.rds {
+    white-space: pre;
+    background: rgba(160,160,160, 0.2);
+    font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
+    color: black;
+    padding: 1px 3px;
+    transition: background 0.2s, color 0.2s;
+
+    /* reset markers styles */
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+}
+table.radiotable span.rds:hover, table.radiotable span.rds:focus {
+    background: rgba( 0,0,0, 0.7 );
+    color: #fff;
+    outline: none;
+}
+
+table.radiotable small {
+    font-size: 0.7em;
+    vertical-align: 2px;
+}
+table.radiotable abbr {
+    text-decoration: none;
+    border-bottom: 1px dotted #ccc;
+}
+
+
+/* radiotable — info section */
+
+.radiotable-info {
+    margin-top: 1.8em;
+    line-height: 1.5em;
+}
+.radiotable-info p {
+    margin: 0.4em 0;
+}
+
+.radiotable-info dl {
+    display: flex;
+    width: 100%;
+
+    border-top: 1px solid rgba(0,0,0, 0.05);
+    font-size: 0.9em;
+    margin-top: 1.5em;
+    padding: 0.8em 2em 0 2em;
+    box-sizing: border-box;
+}
+.radiotable-info dl > * {
+    flex: 1;
+    margin: 0;
+    padding: 0 0.5em;
+}
+.radiotable-info dt {
+    text-align: right;
+}
+.radiotable-info dt:after {
+    content: ":";
+}
+.radiotable-info dd {
+    text-align: left;
+}
+.radiotable-info dd:not(:last-child) {
+    border-right: 1px solid rgba(0,0,0, 0.05);
+}

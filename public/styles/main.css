@@ -1,30 +1,3 @@
-/* General styles. */
-
-
-
-
-
-
-/* Forms - tabbed interface. */
-
-
-
-label {
-    display: block;
-    cursor: pointer;
-}
-
-
-/* Forms - descriptions list tag. */
-
-form dl dt label {
-    margin: 5px 20px 0 0;
-}
-form dl dd input[type="checkbox"], form dl dd input[type="radio"] {
-    margin-top: 8px;
-    margin-right: 15px;
-}
-
 form dl + button {
     margin: 0.2em auto 1em;
     background: #E9FFD3;
@@ -37,16 +10,7 @@ form dl + button:hover:not(:disabled), form dl + button:focus {
 
 /* Radiotable. */
 
-div.radioTable {
-    margin: 0 -0.4em;  /* Visually reset vertical padding of table cells (table > tbody > td). */
-    font-size: 0.96em;
 
-    overflow-x: auto;
-    position: relative;
-
-    background-size: 40px 100%;
-    background-repeat: no-repeat;
-}
 
 div.radioTable.overflowRight {
     background-image: linear-gradient( 90deg, transparent, rgba( 0,0,0, 0.1 ) );
@@ -62,29 +26,7 @@ div.radioTable.overflowLeft.overflowRight {
 }
 
 
-div.radioTable table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
-div.radioTable td, div.radioTable th {
-    padding: 0.31em 0.5em;
-    text-align: left;
-}
-div.radioTable th {
-    padding-bottom: 0.5em;
-    color: #477E2D;
-    font-weight: normal;
-}
-div.radioTable td {
-    border-top: 1px solid rgba( 0,0,0, 0.05 );
-}
-@supports( -webkit-app-region: initial ) {
-    /* Version of rows separator for webkit-based browsers. */
-    div.radioTable td {
-        border-top: 1px solid rgba( 0,0,0, 0.025 );
-    }
-}
 
 div.radioTable th:focus, div.radioTable th.sortedA, div.radioTable th.sortedZ {
     text-decoration: underline;
@@ -111,99 +53,9 @@ div.radioTable th[data-sort] {
     cursor: pointer;
 }
 
-div.radioTable tbody tr {
-    transition: background 0.1s, box-shadow 0.5s;
-}
-div.radioTable tbody tr:hover {
-    background: rgba( 250,230,205, 0.8 );
-}
 
-div.radioTable tr.marker1 {
-    font-weight: bold;
-}
-div.radioTable tr.marker2 {
-    font-style: italic;
-}
-div.radioTable tr.marker3 {
-    text-decoration: line-through;
-}
-div.radioTable tr.marker4 {
-    background: rgba( 255,209,209, 0.65 ) !important;
-}
-div.radioTable tr.marker5 {
-    background: rgba( 175,255,150, 0.65 ) !important;
-}
-div.radioTable tr.marker6 {
-    background: rgba( 156,230,255, 0.65 ) !important;
-}
 
-div.radioTable span.quality {
-    color: rgba( 0,0,0, 0 );
-    display: block;
-    text-shadow: none !important;  /* Some radiotables themes adds text shadow to table. */
 
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-}
-div.radioTable span.quality:before {
-    text-shadow: 0 0 2px #CCC;
-    margin-right: -10px;
-    letter-spacing: 2px;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-}
-div.radioTable span.quality.q5:before {
-    color: #0BB300;
-    content: "●●●●●";
-}
-div.radioTable span.quality.q4:before {
-    color: #A8D300;
-    content: "●●●●";
-}
-div.radioTable span.quality.q3:before {
-    color: #BDAC00;
-    content: "●●●";
-}
-div.radioTable span.quality.q2:before {
-    color: #FF5E00;
-    content: "●●";
-}
-div.radioTable span.quality.q1:before {
-    color: #FF0017;
-    content: "●";
-}
-
-div.radioTable small {
-    font-size: 0.7em;
-    vertical-align: 2px;
-}
-
-div.radioTable abbr {
-    text-decoration: none;
-    border-bottom: 1px dotted #ccc;
-}
-
-div.radioTable span.rds {
-    white-space: pre;
-    background: rgba( 160,160,160, 0.2 );
-    font-family: Inconsolata, Consolas, "Source Code Pro", "Lucida Console", monospace;
-    color: black;
-    padding: 1px 3px;
-    transition: background 0.2s, color 0.2s;
-
-    font-weight: normal; /* Reset markers styles. */
-    font-style: normal;
-    text-decoration: none;
-}
-div.radioTable span.rds:hover, div.radioTable span.rds:focus {
-    background: rgba( 0,0,0, 0.7 );
-    color: #fff;
-
-    outline: none;
-}
 
 div.radioTable span.niApply2:before { /* Indent for columns with numeric values in radiotable. */
     content: '00';
@@ -300,50 +152,6 @@ div#rdsPopup_JSOn dl dd div span {
 @keyframes rdsPopupShow {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-
-/* Radiotable informations section. */
-
-section.radioTableInfo {
-    margin-top: 1.5em;
-    line-height: 1.5em;
-}
-section.radioTableInfo h3 {
-    display: none;
-}
-section.radioTableInfo p {
-    margin: 0.4em 0;
-}
-
-section.radioTableInfo dl {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-
-    border-top: 1px solid rgba( 0,0,0, 0.05 );
-    font-size: 0.9em;
-    margin-top: 1.5rem;
-    padding: 0.8em 2em 0 2em;
-    box-sizing: border-box;
-}
-section.radioTableInfo dl > * {
-    display: table-cell;
-    vertical-align: middle;
-
-    padding: 0 0.5em;
-}
-section.radioTableInfo dl dt {
-    text-align: right;
-}
-section.radioTableInfo dl dd {
-    text-align: left;
-}
-section.radioTableInfo dl dt:after {
-    content: ":";
-}
-section.radioTableInfo dl dd:not(:last-child) {
-    border-right: 1px solid rgba( 0,0,0, 0.05 );
 }
 
 

@@ -50,11 +50,11 @@
 
 {% block page_content %}
     <header>
-        <h2 class="custTxt">{{ radiotable.name }}</h2>
+        <h2>{{ radiotable.name }}</h2>
     </header>
 
     {% if radiotable.radioStationsCount > 0 %}
-        <div class="radioTable custTxt">
+        <div class="radiotable-container">
             {% embed 'radiotable/table/radiotable.html.twig' %}
                 {%- block heading_cell -%}
                     {%- set columns_sorting = {
@@ -76,7 +76,7 @@
                 {%- endblock -%}
 
                 {%- block row_start -%}
-                    <tr {% if radiostation.marker %}class="marker{{ radiostation.marker }}"{% endif %}>
+                    <tr {% if radiostation.marker %}class="marker-{{ radiostation.marker }}"{% endif %}>
                 {%- endblock -%}
 
                 {%- block radiostation_name -%}
@@ -95,8 +95,8 @@
             {% endembed %}
         </div>
 
-        <section class="radioTableInfo custTxt">
-            <h3>Informacje o wykazie</h3>
+        <section class="radiotable-info">
+            <h3 class="sr-only">Informacje o wykazie</h3>
 
             {{ radiotable.description|raw }}
             <dl>
