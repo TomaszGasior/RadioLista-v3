@@ -469,3 +469,55 @@ input.jscolor:not([style=""]) {
 .form-item.form-regular label {
     margin-top: 5px;
 }
+
+
+/* tabbed UI */
+
+.tabbed-ui.JS > div {
+    background: rgba(255,255,255, 0.37);
+    padding: 0.5em 1.2em;
+    border: 1px solid #D2D2D2;
+}
+.tabbed-ui.JS > div:not(.tabbed-ui-current) {
+    display: none;
+}
+
+.tabbed-ui-navigator {
+    padding-left: 0;
+    list-style-type: none;
+    margin: 0 0 -1px;
+
+    vertical-align: bottom;
+}
+.tabbed-ui-navigator li {
+    display: inline;
+}
+.tabbed-ui-navigator button {
+    margin-right: 0.4em;
+    padding: 0.6em 0.9em 0.2em 0.9em;
+    background: rgba(255,255,255, 0.37);
+    border: 1px solid #D2D2D2;
+    border-bottom-color: rgba(255,255,255, 0.8);
+
+    white-space: nowrap;
+    display: inline-block;
+    outline-style: none;
+    color: inherit;
+    transition-property: opacity;
+    width: auto;
+    font-weight: normal;
+    margin-top: 0;
+}
+.tabbed-ui-navigator button:hover {
+    background: #fff;
+    color: inherit;
+}
+.tabbed-ui-navigator button:focus:not(:hover):not(:active) {
+    opacity: 1;
+    outline-style: dashed;
+}
+.tabbed-ui-navigator button:not(.tabbed-ui-current) {
+    opacity: 0.63;
+    border-bottom: 0;
+    padding-top: 0.2em;
+}

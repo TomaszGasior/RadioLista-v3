@@ -4,7 +4,6 @@
 
 {% block head_closing %}
     <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
-    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
     <script src="{{ asset('scripts/radioTableColumnsUI.js') }}" defer></script>
 {% endblock %}
 
@@ -22,24 +21,22 @@
 
     {{ form_start(form) }}
 
-    <div id="useTabbedUI">
+    <div class="tabbed-ui">
         <div>
             <h3>Główne</h3>
 
-            <dl>
-                {{ form_row(form.name) }}
-                {{ form_row(form.useKhz) }}
-                {{ form_row(form.sorting) }}
-                {{ form_row(form.description) }}
-            </dl>
+            {{ form_row(form.name) }}
+            {{ form_row(form.useKhz) }}
+            {{ form_row(form.sorting) }}
+            {{ form_row(form.description) }}
         </div>
 
         <div>
             <h3>Widoczność</h3>
 
-            <dl class="radioTableStatusForm checkboxesWithFullWidth">
+            <div class="radioTableStatusForm">
                 {{ form_row(form.status) }}
-            </dl>
+            </div>
         </div>
 
         <div>
@@ -47,19 +44,19 @@
 
             <noscript><p class="information">Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
 
-            <dl class="radioTableColumnsForm">
+            <div class="radioTableColumnsForm">
                 {{ form_row(form.columns) }}
-            </dl>
+            </div>
         </div>
 
         <div>
             <h3>Wygląd</h3>
 
-            <dl class="radioTableThemeSelection">
+            <div class="radioTableThemeSelection">
                 {{ form_row(form.appearanceTheme) }}
-            </dl>
+            </div>
 
-            <dl class="radioTableAppearanceFields">
+            <div class="radioTableAppearanceFields">
                 {# style="" is used as dirty hack for box-shadow removing. #}
                 {{ form_row(form.appearanceBackgroundColor, {attr: {
                     'class': 'jscolor',
@@ -73,7 +70,7 @@
                 }}) }}
                 {{ form_row(form.appearanceBackgroundImage) }}
                 {{ form_row(form.appearanceFullWidth) }}
-            </dl>
+            </div>
 
             <button type="button" id="defaultRadioTableAppearance">Przywróć domyślny wygląd</button>
 

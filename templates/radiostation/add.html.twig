@@ -2,10 +2,6 @@
 
 {% block page_title %}Dodawanie stacji{% endblock %}
 
-{% block head_closing %}
-    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
-{% endblock %}
-
 {% block context_menu %}
     <ul>
         <li><a href="{{ path('radiotable.show', {id: radiostation.radioTable.id}) }}">Zobacz wykaz</a></li>

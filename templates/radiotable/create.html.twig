@@ -2,10 +2,6 @@
 
 {% block page_title %}Tworzenie wykazu{% endblock %}
 
-{% block head_closing %}
-    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
-{% endblock %}
-
 {% block page_content %}
     <header>
         <h2>Utwórz wykaz</h2>
@@ -13,25 +9,23 @@
 
     {{ form_start(form) }}
 
-    <div id="useTabbedUI">
+    <div class="tabbed-ui">
         <div>
             <h3>Główne</h3>
 
             <p class="information">W nazwie i opisie wykazu warto umieścić lokalizację (np. miejscowość lub województwo). Te&nbsp;informacje są używane przy przeszukiwaniu wykazów. Można je później zmienić.</p>
 
-            <dl>
-                {{ form_row(form.name) }}
-                {{ form_row(form.useKhz) }}
-                {{ form_row(form.description) }}
-            </dl>
+            {{ form_row(form.name) }}
+            {{ form_row(form.useKhz) }}
+            {{ form_row(form.description) }}
         </div>
 
         <div>
             <h3>Widoczność</h3>
 
-            <dl class="radioTableStatusForm checkboxesWithFullWidth">
+            <div class="radioTableStatusForm">
                 {{ form_row(form.status) }}
-            </dl>
+            </div>
         </div>
     </div>
 

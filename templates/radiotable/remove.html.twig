@@ -2,10 +2,6 @@
 
 {% block page_title %}Usuwanie wykazu{% endblock %}
 
-{% block head_closing %}
-    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
-{% endblock %}
-
 {% block context_menu %}
     <ul>
         <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
@@ -26,16 +22,16 @@
         <h2>Usuwanie wykazu i stacji</h2>
     </header>
 
-    <div id="useTabbedUI">
+    <div class="tabbed-ui">
         <div>
             <h3>Usuwanie stacji</h3>
 
             {% if radiotable.radioStationsCount > 0 %}
                 {{ form_start(form_radiostation) }}
 
-                <dl class="radioStationsSelectBox checkboxesWithFullWidth">
+                <div class="radioStationsSelectBox">
                     {{ form_row(form_radiostation.chosenToRemove) }}
-                </dl>
+                </div>
 
                 <button>Usuń zaznaczone stacje</button>
 
@@ -51,13 +47,11 @@
 
             {{ form_start(form_radiotable) }}
 
-            <dl class="removingConfirm checkboxesWithFullWidth">
-                {% spaceless %}
-                    {{ form_row(form_radiotable.confirm, {
-                        label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
-                    }) }}
-                {% endspaceless %}
-            </dl>
+            <div class="removingConfirm">
+                {{ form_row(form_radiotable.confirm, {
+                    label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
+                }) }}
+            </div>
 
             <button>Usuń wykaz</button>
 

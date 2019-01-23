@@ -7,51 +7,7 @@
 
 /* Forms - tabbed interface. */
 
-div#useTabbedUI_JSOn > div {
-    background: rgba( 255,255,255, 0.37 );
-    padding: 0.5em 1.2em;
-    border: 1px solid #D2D2D2;
-}
-div#useTabbedUI_JSOn > div:not(.currentTab) {
-    display: none;
-}
 
-div#useTabbedUI_JSOn > ul.tabsNavigator {
-    padding-left: 0;
-    list-style-type: none;
-    margin-bottom: -1px;
-
-    vertical-align: bottom;
-}
-
-div#useTabbedUI_JSOn > ul.tabsNavigator li {
-    display: inline;
-}
-div#useTabbedUI_JSOn > ul.tabsNavigator li button {
-    margin-right: 0.4em;
-    padding: 0.6em 0.9em 0.2em 0.9em;
-    background: rgba( 255,255,255, 0.37 );
-    border: 1px solid #D2D2D2;
-    border-bottom-color: rgba( 255,255,255, 0.8 );
-
-    white-space: nowrap;
-    display: inline-block;
-    outline-style: none;
-    color: inherit;
-    transition-property: opacity;
-    width: auto;
-    font-weight: normal;
-    margin-top: 0;
-}
-div#useTabbedUI_JSOn > ul.tabsNavigator li button:focus:not(:hover):not(:active) {
-    opacity: 1;
-    outline-style: dashed;
-}
-div#useTabbedUI_JSOn > ul.tabsNavigator li button:not(.currentTabNavigator) {
-    opacity: 0.63;
-    border-bottom: 0;
-    padding-top: 0.2em;
-}
 
 label {
     display: block;

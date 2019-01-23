@@ -2,29 +2,20 @@
 
 {% block page_title %}Logowanie{% endblock %}
 
-{% block head_closing %}
-    <script src="{{ asset('scripts/formsUI.js') }}" defer></script>
-{% endblock %}
-
 {% block page_content %}
-    <header class="userLoginScreen">
+    <header class="sr-only">
         <h2>Konto użytkownika — logowanie i rejestracja</h2>
     </header>
 
     {{ form_start(form) }}
 
-    <div id="useTabbedUI" class="userLoginScreen">
+    <div class="tabbed-ui userLoginScreen">
         <div>
             <h3>Zaloguj się</h3>
 
-            <dl>
-                {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
-                {{ form_row(form.password) }}
-
-                {% spaceless %}
-                    {{ form_row(form.rememberMe) }}
-                {% endspaceless %}
-            </dl>
+            {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
+            {{ form_row(form.password) }}
+            {{ form_row(form.rememberMe) }}
 
             <button>Zaloguj się</button>
         </div>

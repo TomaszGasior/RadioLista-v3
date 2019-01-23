@@ -8,6 +8,7 @@
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="stylesheet" href="{{ asset('main.css') }}">
         <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
+        <script src="{{ asset('main.js') }}" defer></script>
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
