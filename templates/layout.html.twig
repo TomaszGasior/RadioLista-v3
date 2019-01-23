@@ -8,7 +8,7 @@
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="stylesheet" href="{{ asset('main.css') }}">
         <link rel="stylesheet" media="all and (max-width: 800px)" href="{{ asset('styles/mobile.css') }}">
-        <script src="{{ asset('main.js') }}" defer></script>
+        <script src="{{ asset('main.js') }}"></script>
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
@@ -61,15 +61,6 @@
                         {{ notification_text }}
                     </span>
                 </span>
-                <script>
-                (function(){
-                    var notification = document.querySelector('.notification-wrapper');
-                    notification.classList.add('JS');
-                    setTimeout(function(){
-                        notification.classList.add('hidden');
-                    }, 10000);
-                })();
-                </script>
             {% endif %}
         </header>
 

@@ -215,7 +215,7 @@ a:focus:not(:hover):not(:active) {
     }
 }
 
-.notification-wrapper.JS {
+.JS .notification-wrapper {
     position: absolute;
     top: 76px;
     left: 0;
@@ -227,7 +227,7 @@ a:focus:not(:hover):not(:active) {
     animation-duration: 1s;
     animation-timing-function: ease-out;
 }
-.notification-wrapper.JS .notification {
+.JS .notification-wrapper .notification {
     display: inline-block;
     min-width: 400px;
     max-width: 800px;
@@ -238,7 +238,7 @@ a:focus:not(:hover):not(:active) {
     box-shadow: 0 0 3px rgba(0,0,0, 0.2);
     border-radius: 2px;
 }
-.notification-wrapper.JS.hidden {
+.JS .notification-wrapper.hidden {
     top: -100px;
 
     animation-name: notification_hide;
@@ -481,12 +481,12 @@ input.jscolor:not([style=""]) {
 
 /* tabbed UI */
 
-.tabbed-ui.JS > div {
+.JS .tabbed-ui > div {
     background: rgba(255,255,255, 0.37);
     padding: 0.5em 1.2em;
     border: 1px solid #D2D2D2;
 }
-.tabbed-ui.JS > div:not(.tabbed-ui-current) {
+.JS .tabbed-ui > div:not(.tabbed-ui-current) {
     display: none;
 }
 
