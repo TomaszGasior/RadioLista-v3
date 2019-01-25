@@ -538,9 +538,24 @@ input.jscolor:not([style=""]) {
     margin: 0 -0.4em;
 
     overflow-x: auto;
+
     position: relative;
     background-size: 40px 100%;
     background-repeat: no-repeat;
+}
+
+.radiotable-container.overflow-right {
+    background-image: linear-gradient(90deg, rgba(0,0,0, 0), rgba(250,230,205, 0.4));
+    background-position: right;
+}
+.radiotable-container.overflow-left {
+    background-image: linear-gradient(90deg, rgba(250,230,205, 0.4), rgba(0,0,0, 0));
+    background-position: left;
+}
+.radiotable-container.overflow-left.overflow-right {
+    background-image: linear-gradient(90deg, rgba(0,0,0, 0), rgba(250,230,205, 0.4)),
+                      linear-gradient(90deg, rgba(250,230,205, 0.4), rgba(0,0,0, 0));
+    background-position: right, left;
 }
 
 
@@ -712,6 +727,90 @@ table.radiotable abbr {
 }
 
 
+/* radiotable — RDS popup */
+
+@keyframes rds_popup_show
+{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.rds-popup {
+    background: #fff;
+    color: #000;
+    border: 1px solid #eee;
+    box-shadow: 0 0 3px rgba(0,0,0, 0.4);
+    width: 430px;
+
+    animation-name: rds_popup_show;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.15s;
+    animation-fill-mode: both;
+}
+
+.rds-popup h3 {
+    background: #eee;
+    color: #555;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.1em 0;
+    margin: 0;
+}
+
+.rds-popup dl {
+    font-size: 0.8em;
+    margin: 1.2em;
+}
+.rds-popup dl > div {
+    margin-bottom: 0.5em;
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+.rds-popup dl > div[hidden] {
+    /* weird fix of weird bug */
+    display: none;
+}
+.rds-popup dt {
+    min-width: 12%;
+    font-weight: bold;
+}
+.rds-popup dt:after {
+    content: ":";
+}
+.rds-popup dd {
+    margin-left: 0;
+}
+
+.rds-popup dd span {
+    display: inline-block;
+    margin: 0 9px 4px 0;
+    border-bottom: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
+
+    white-space: pre;
+    background: rgba(160,160,160, 0.2);
+    font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
+}
+
+.rds-popup dd div {
+    margin-bottom: 3px;
+}
+.rds-popup dd div span {
+    border-top: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
+    border-bottom: 1px solid transparent;
+
+    display: inline;
+    white-space: pre-wrap !important;
+    margin: 0;
+}
+
+
 /* sortable table */
 
 table.sortable th[data-sort] {
@@ -737,4 +836,16 @@ table.sortable th[data-sort].sorted-asc:after {
 }
 table.sortable th[data-sort].sorted-desc:after {
     content: "↑";
+}
+
+
+/* number indentation in tables */
+
+.number-indent-apply-1:before {
+    content: "0";
+    opacity: 0;
+}
+.number-indent-apply-2:before {
+    content: "00";
+    opacity: 0;
 }

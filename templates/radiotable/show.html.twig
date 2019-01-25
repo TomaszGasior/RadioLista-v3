@@ -27,8 +27,6 @@
 {% block page_title %}{{ radiotable.name }}{% endblock %}
 
 {% block head_closing %}
-    <script src="{{ asset('scripts/radioTable.js') }}" defer></script>
-
     {% if radiotable.status != constant('STATUS_PUBLIC', radiotable) %}
         <meta name="robots" content="noindex, noarchive">
     {% endif %}
@@ -37,6 +35,8 @@
     {% if radiotable.appearance.th %}
         <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
     {% endif %}
+
+    <script src="{{ asset('radiotable.js') }}"></script>
 {% endblock %}
 
 {% block context_menu %}
@@ -92,9 +92,29 @@
                 {%- block radiostation_rds %}
                     {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
                     <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}"
-                          class="rds rdsPopup">{{ rds_ps_frames|first }}</span>
+                          class="rds rds-popup-enabled">{{ rds_ps_frames|first }}</span>
                 {%- endblock -%}
             {% endembed %}
+
+            <template class="rds-popup-template">
+                <section class="rds-popup" role="alert">
+                    <h3>Informacje o RDS</h3>
+                    <dl>
+                        <div class="rds-popup-ps-row">
+                            <dt>PS</dt>
+                            <dd class="rds-popup-ps-value"></dd>
+                        </div>
+                        <div class="rds-popup-rt-row">
+                            <dt>RT</dt>
+                            <dd class="rds-popup-rt-value"></dd>
+                        </div>
+                        <div class="rds-popup-pty-row">
+                            <dt>PTY</dt>
+                            <dd class="rds-popup-pty-value"></dd>
+                        </div>
+                    </dl>
+                </section>
+            </template>
         </div>
 
         <section class="radiotable-info">
