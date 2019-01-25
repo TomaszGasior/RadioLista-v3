@@ -1,10 +1,6 @@
 (function(){
     function SortableTable(table)
     {
-        if (!table) {
-            return;
-        }
-
         this.headers = Array.from(table.querySelectorAll('thead th'));
         this.body = table.querySelector('tbody');
         this.rows = Array.from(this.body.querySelectorAll('tr'));
@@ -81,11 +77,11 @@
             event.preventDefault();
             header.dispatchEvent(new Event('click'));
             header.focus();
-        }
+        };
         this.setupMarkup = function()
         {
             this.rows.forEach(function(row){
-                // Save initial value of row.rowIndex. It's needed for comparing equal values.
+                // It's needed for comparing equal values.
                 row.dataset.index = row.rowIndex;
             });
 
@@ -102,14 +98,10 @@
         this.setupMarkup();
     }
 
-    function TabbedUI(tabbedUIContainer)
+    function TabbedUI(container)
     {
-        if (!tabbedUIContainer) {
-            return;
-        }
-
-        this.container = tabbedUIContainer;
-        this.panels = Array.from(tabbedUIContainer.children);
+        this.container = container;
+        this.panels = Array.from(container.children);
         this.navigator = null;
         this.buttons = [];
 
@@ -183,28 +175,30 @@
             });
 
             this.changePanel(defaultPanelNumber);
-        }
+        };
 
         this.setupNavigator();
         this.setupPanels();
     }
 
-    function Notification(notification)
-    {
-        if (!notification) {
-            return;
-        }
-
-        setTimeout(function(){
-            notification.classList.add('hidden');
-        }, 10000);
-    }
-
     document.addEventListener('DOMContentLoaded', function(){
         document.documentElement.classList.add('JS');
 
-        new SortableTable(document.querySelector('table.sortable'));
-        new TabbedUI(document.querySelector('.tabbed-ui'));
-        new Notification(document.querySelector('.notification-wrapper'));
+        var sortableTable = document.querySelector('table.sortable');
+        var tabbedUI = document.querySelector('.tabbed-ui');
+        var notification = document.querySelector('.notification-wrapper');
+
+        if (sortableTable) {
+            new SortableTable(sortableTable);
+        }
+        if (tabbedUI) {
+            new TabbedUI(tabbedUI);
+        }
+
+        if (notification) {
+            setTimeout(function(){
+                notification.classList.add('hidden');
+            }, 10000);
+        }
     });
 })();

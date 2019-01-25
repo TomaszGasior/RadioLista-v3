@@ -197,7 +197,8 @@ a:focus:not(:hover):not(:active) {
     color: #FFF;
 }
 
-@keyframes notification_show {
+@keyframes notification_show
+{
     from {
         top: -800px;
     }
@@ -205,7 +206,8 @@ a:focus:not(:hover):not(:active) {
         top: 76px;
     }
 }
-@keyframes notification_hide {
+@keyframes notification_hide
+{
     from {
         top: 76px;
     }
