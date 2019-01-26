@@ -5,6 +5,8 @@ knp_snappy:
         options:
             orientation: Landscape
             margin-left: 0
+            margin-top: 9
+            margin-bottom: 8
             margin-right: 0
             zoom: 1.15
     image:
