@@ -16,7 +16,7 @@ class RehashRLv1UserPassword implements EventSubscriberInterface
         $this->entityManager = $entityManager;
     }
 
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $token = $event->getAuthenticationToken();
 
@@ -34,7 +34,7 @@ class RehashRLv1UserPassword implements EventSubscriberInterface
         }
     }
 
-    static public function getSubscribedEvents()
+    static public function getSubscribedEvents(): array
     {
         return [SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin'];
     }

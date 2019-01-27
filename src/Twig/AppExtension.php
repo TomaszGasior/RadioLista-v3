@@ -10,8 +10,10 @@ class AppExtension extends AbstractExtension
 {
     public function __construct(Environment $twig)
     {
-        $twig->getExtension('Twig_Extension_Core')
-            ->setEscaper('csv', [$this, 'escapeCSV']);
+        $twig
+            ->getExtension('Twig_Extension_Core')
+            ->setEscaper('csv', [$this, 'escapeCSV'])
+        ;
     }
 
     public function getFilters(): array

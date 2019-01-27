@@ -50,11 +50,11 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
         return array_values($enabledColumns);
     }
 
-    private function getAllPossibleColumnsNames()
+    private function getAllPossibleColumnsNames(): array
     {
         $allColumnsConstants = array_filter(
             (new \ReflectionClass(RadioTable::class))->getConstants(),
-            function($constantName){ return (strpos($constantName, 'COLUMN_') === 0); },
+            function($constantName){ return (0 === strpos($constantName, 'COLUMN_')); },
             ARRAY_FILTER_USE_KEY
         );
 

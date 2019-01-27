@@ -18,7 +18,7 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
         $this->requestStack = $requestStack;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event){
             $form = $event->getForm();
@@ -37,7 +37,7 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
         });
     }
 
-    static public function getExtendedTypes()
+    static public function getExtendedTypes(): array
     {
         return [FormType::class];
     }

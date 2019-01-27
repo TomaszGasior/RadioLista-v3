@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 
 class RLv2NamingStrategy extends DefaultNamingStrategy
 {
-    public function classToTableName($className)
+    public function classToTableName($className): string
     {
         return parent::classToTableName($className) . 's';
     }
 
-    public function joinColumnName($propertyName, $className = null)
+    public function joinColumnName($propertyName, $className = null): string
     {
         return $propertyName . 'Id';
     }

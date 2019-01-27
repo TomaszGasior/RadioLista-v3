@@ -22,8 +22,7 @@ class RadioStationController extends AbstractController
      * @ParamConverter("template", class="stdClass")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
      */
-    public function add(RadioTable $radioTable, Request $request,
-                        EntityManagerInterface $entityManager,
+    public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                         RadioStation $template = null): Response
     {
         $radioStation = $template ? $template : new RadioStation;

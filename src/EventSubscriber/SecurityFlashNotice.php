@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class SecurityFlashNotice implements EventSubscriberInterface
 {
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         if ($event->getAuthenticationToken() instanceof RememberMeToken) {
             return;
@@ -23,7 +23,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         $session->getFlashBag()->add('notice', 'Zalogowano się pomyślnie.');
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(GetResponseForExceptionEvent $event): void
     {
         if (false === ($event->getException() instanceof AccessDeniedException)) {
             return;
@@ -33,7 +33,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         $session->getFlashBag()->add('error', 'Zaloguj się, aby mieć dostęp do tej strony.');
     }
 
-    public function onKernelFinishRequest(FinishRequestEvent $event)
+    public function onKernelFinishRequest(FinishRequestEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -45,7 +45,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         $session->getFlashBag()->add('notice', 'Wylogowano się pomyślnie.');
     }
 
-    static public function getSubscribedEvents()
+    static public function getSubscribedEvents(): array
     {
         return [
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
