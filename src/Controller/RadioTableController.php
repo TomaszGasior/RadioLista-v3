@@ -154,7 +154,7 @@ class RadioTableController extends AbstractController
         );
         $form_RadioStation->handleRequest($request);
 
-        if ($form_RadioTable->isSubmitted()) {
+        if ($form_RadioTable->isSubmitted() && $form_RadioTable->isValid()) {
             $confirmed = (true === $form_RadioTable->getData()['confirm']);
 
             if ($confirmed) {
@@ -168,7 +168,7 @@ class RadioTableController extends AbstractController
                 $this->addFlash('error', 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!');
             }
         }
-        elseif ($form_RadioStation->isSubmitted()) {
+        elseif ($form_RadioStation->isSubmitted() && $form_RadioStation->isValid()) {
             $chosenToRemove = $form_RadioStation->getData()['chosenToRemove'];
 
             if (count($chosenToRemove) > 0) {

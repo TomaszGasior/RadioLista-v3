@@ -53,7 +53,7 @@ class GeneralController extends AbstractController
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $message = (new \Swift_Message($data['subject']))
