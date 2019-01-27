@@ -35,7 +35,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(groups={"Default"})
-     * @Assert\Length(max=100, groups={"Default"})
      */
     private $password;
 
@@ -43,7 +42,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @Assert\NotBlank(groups={"RedefinePassword"})
      * @Assert\Length(max=100, groups={"RedefinePassword"})
      */
-    private $plainPassword; // Keep validation rules in sync with $password.
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="date")
@@ -107,14 +106,9 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function setPasswordHash(string $passwordHash): self
     {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+        $this->password = $passwordHash;
 
         return $this;
     }
@@ -187,7 +181,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         return $this->radioTables;
     }
 
-    // Not persisted — used by entity listener to prepare hashed password.
+    // Not persisted
 
     public function getPlainPassword(): ?string
     {
@@ -210,6 +204,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getUsername(): ?string
     {
         return $this->name;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 
     public function getSalt(): ?string

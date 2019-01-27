@@ -33,9 +33,10 @@ class UserListener
     public function encodePlainPassword(User $user): void
     {
         if ($user->getPlainPassword()) {
-            $user->setPassword(
+            $user->setPasswordHash(
                 $this->passwordEncoder->encodePassword($user, $user->getPlainPassword())
             );
+            $user->eraseCredentials();
         }
     }
 }
