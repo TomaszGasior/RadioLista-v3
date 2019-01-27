@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class RadioTableController extends AbstractController
 {
@@ -40,8 +39,7 @@ class RadioTableController extends AbstractController
      * @Route("/utworz-wykaz", name="radiotable.create")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager,
-                           UserInterface $user): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $radioTable = new RadioTable;
 
@@ -49,7 +47,7 @@ class RadioTableController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $radioTable->setOwner($user);
+            $radioTable->setOwner($this->getUser());
 
             $entityManager->persist($radioTable);
             $entityManager->flush();
