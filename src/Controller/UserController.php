@@ -55,7 +55,12 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Zmiany zostały zapisane.');
+            if ($form->get('plainPassword')->getData()) {
+                $this->addFlash('notice', 'Nowe hasło zostało zapisane.');
+            }
+            else {
+                $this->addFlash('notice', 'Zmiany zostały zapisane.');
+            }
         }
 
         return $this->render('user/my_account_settings.html.twig', [
