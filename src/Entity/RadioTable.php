@@ -55,7 +55,7 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Nazwa wykazu nie może być pusta.")
      * @Assert\Length(max=100)
      */
     private $name;
@@ -119,9 +119,18 @@ class RadioTable
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
      *     "th"   = @Assert\Type("string"),
-     *     "bg"   = @Assert\Type("string"),
-     *     "fg"   = @Assert\Type("string"),
-     *     "img"  = {@Assert\Type("string"), @Assert\Url},
+     *     "bg"   = {
+     *         @Assert\Type("string"),
+     *         @Assert\Regex("/^#[0-9a-f]{6}$/i", message="Kolor tła jest niepoprawny."),
+     *     },
+     *     "fg"   = {
+     *         @Assert\Type("string"),
+     *         @Assert\Regex("/^#[0-9a-f]{6}$/i", message="Kolor tekstu jest niepoprawny."),
+     *     },
+     *     "img"  = {
+     *         @Assert\Type("string"),
+     *         @Assert\Url(message="Adres URL obrazu tła jest nieprawidłowy.")
+     *     },
      *     "full" = @Assert\Type("bool"),
      * })
      */

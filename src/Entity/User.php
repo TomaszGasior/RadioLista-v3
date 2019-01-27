@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\Doctrine\EntityListener\UserListener"})
- * @UniqueEntity("name", groups={"Default", "RedefinePassword"})
+ * @UniqueEntity(
+ *     "name", groups={"Default", "RedefinePassword"},
+ *     message="Wybrana nazwa użytkownika jest już zajęta."
+ * )
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
@@ -26,9 +29,13 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(groups={"Default", "RedefinePassword"})
+     * @Assert\NotBlank(groups={"Default", "RedefinePassword"}, message="Nazwa użytkownika nie może być pusta.")
      * @Assert\Length(max=50, groups={"Default", "RedefinePassword"})
-     * @assert\Regex("/^[a-zA-Z0-9_\.\-]{1,30}$/", groups={"Default", "RedefinePassword"})
+     * @Assert\Regex(
+     *     "/^[a-zA-Z0-9_\.\-]{1,30}$/",
+     *     groups={"Default", "RedefinePassword"},
+     *     message="Nazwa użytkownika zawiera niedozwolone znaki.",
+     * )
      */
     private $name;
 
@@ -39,8 +46,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(groups={"RedefinePassword"})
-     * @Assert\Length(max=100, groups={"RedefinePassword"})
+     * @Assert\NotBlank(groups={"RedefinePassword"}, message="Hasło nie może być puste.")
+     * @Assert\Length(
+     *     max=100, min=10, groups={"RedefinePassword"},
+     *     minMessage="Hasło musi mieć co najmniej 10 znaków.",
+     * )
      */
     private $plainPassword;
 
@@ -56,7 +66,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=true)
-     * @Assert\Length(max=1000)
+     * @Assert\Length(max=1000, groups={"Default", "RedefinePassword"})
      */
     private $aboutMe;
 

@@ -60,7 +60,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Nazwa stacji nie może być pusta.")
      * @Assert\Length(max=100)
      */
     private $name;
@@ -79,9 +79,9 @@ class RadioStation
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Częstotliwość stacji nie może być pusta.")
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(0, message="Częstotliwość musi być większa niż zero.")
      */
     private $frequency;
 
@@ -94,7 +94,7 @@ class RadioStation
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(0, message="Moc musi być większa niż zero.")
      */
     private $power;
 
@@ -113,7 +113,7 @@ class RadioStation
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(0, message="Numer w odbiorniku musi być większy niż zero.")
      */
     private $privateNumber;
 
