@@ -23,14 +23,16 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event){
             $form = $event->getForm();
 
-            if ($form->isRoot()) {
+            if ($form->isRoot() && false === $form->isValid()) {
                 $session = $this->requestStack->getCurrentRequest()->getSession();
+                $message = $form->getErrors(true)[0]->getMessage();
 
-                if (!$form->isValid()) {
-                    $error = $form->getErrors(true)[0];
-
-                    $session->getFlashBag()->add('error', $error->getMessage());
+                // Set generic error message if current text isn't specified by this application.
+                if (false !== stripos($message, 'this') || false !== stripos($message, 'value')) {
+                    $message = 'Formularz został wypełniony niepoprawnie.';
                 }
+
+                $session->getFlashBag()->add('error', $message);
             }
         });
     }
