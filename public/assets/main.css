@@ -293,6 +293,9 @@ input, textarea, select, button {
 }
 input:focus, textarea:focus, select:focus, button:focus {
     outline: 1px solid #F07F1F;
+
+    /* needed for WebKit/Blink */
+    outline-offset: 0px;
 }
 textarea {
     resize: vertical;
@@ -327,6 +330,9 @@ select {
     background-image: url("data:image/svg+xml,%3Csvg height='16px' width='35px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
     background-position: center right;
     background-repeat: no-repeat;
+
+    /* needed for WebKit */
+    border-radius: 0;
 }
 select::-ms-expand {
     /* "appearance: none" for Internet Explorer */
