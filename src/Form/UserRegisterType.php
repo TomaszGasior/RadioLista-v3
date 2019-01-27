@@ -28,6 +28,7 @@ class UserRegisterType extends AbstractType
                 'second_options' => [
                     'label' => 'Hasło ponownie',
                 ],
+                'invalid_message' => 'Podane hasła nie są identyczne.',
             ])
             ->add('acceptServiceTerms', CheckboxType::class, [
                 'label'       => 'Akceptuję regulamin serwisu RadioLista',

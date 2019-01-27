@@ -33,17 +33,13 @@ class UserSettingsType extends AbstractType
                 'constraints' => [
                     new SecurityAssert\UserPassword([
                         'groups' => 'ChangingPasswordTab',
+                        'message' => 'Podane aktualne hasło jest niepoprawne.',
                     ]),
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type'        => PasswordType::class,
                 'required'    => false,
-                'constraints' => [
-                    new Assert\NotBlank([
-                        'groups' => 'ChangingPasswordTab',
-                    ]),
-                ],
 
                 'first_options' => [
                     'label' => 'Nowe hasło',
@@ -51,6 +47,7 @@ class UserSettingsType extends AbstractType
                 'second_options' => [
                     'label' => 'Nowe hasło ponownie',
                 ],
+                'invalid_message' => 'Podane hasła nie są identyczne.',
             ])
         ;
     }
