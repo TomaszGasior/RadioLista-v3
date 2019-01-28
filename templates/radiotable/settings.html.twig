@@ -4,7 +4,7 @@
 
 {% block head_closing %}
     <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
-    <script src="{{ asset('scripts/radioTableColumnsUI.js') }}" defer></script>
+    <script src="{{ asset('radiotable-settings.js') }}"></script>
 {% endblock %}
 
 {% block context_menu %}
@@ -44,8 +44,14 @@
 
             <noscript><p class="information">Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
 
-            <div class="radioTableColumnsForm">
+            <div class="radiotable-columns">
                 {{ form_row(form.columns) }}
+
+                <template class="radiotable-columns-buttons-template">
+                    <button type="button" class="toggle" data-show-label="Pokaż" data-hide-label="Ukryj"></button>
+                    <button type="button" class="move-up">Do góry</button>
+                    <button type="button" class="move-down">W dół</button>
+                </template>
             </div>
         </div>
 

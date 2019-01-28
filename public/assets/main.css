@@ -857,3 +857,42 @@ table.sortable th[data-sort].sorted-desc:after {
     content: "00";
     opacity: 0;
 }
+
+
+/* radiotable settings, columns UI */
+
+.JS .radiotable-columns {
+    width: 80%;
+    margin: 1em auto;
+}
+.JS .radiotable-columns .form-item {
+    background: #F3F3F3;
+    box-shadow: inset 2px 2px 2px #DEDEDE;
+    border: 1px solid #C2C2C2;
+    padding: 0.5em 1em;
+    box-sizing: border-box;
+    align-items: center;
+}
+.JS .radiotable-columns .form-item label {
+    margin-top: 0;
+}
+.JS .radiotable-columns .form-item > :last-child {
+    text-align: right;
+}
+.JS .radiotable-columns .form-item.hidden-column {
+    background: #FBFBFB;
+    box-shadow: inset 2px 2px 2px #efefef;
+    border-color: #dfdfdf;
+}
+.JS .radiotable-columns .form-item.hidden-column label {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.JS .radiotable-columns .form-item button {
+    display: inline;
+    width: auto;
+    height: 2em;
+    width: 85px;
+    margin: 0 0 0 0.6em;
+    white-space: nowrap;
+}

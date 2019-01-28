@@ -48,6 +48,11 @@ class RadioTableColumnsType extends AbstractType
         foreach ($view->children as $name => $childrenView) {
             if (isset($options['column_labels'][$name])) {
                 $childrenView->vars['label'] = $options['column_labels'][$name];
+
+                // Frequency and name columns have to be always visible.
+                if (in_array($name, ['frequency', 'name'])) {
+                    $childrenView->vars['attr']['min'] = 1;
+                }
             }
         }
     }
