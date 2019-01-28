@@ -101,7 +101,7 @@
         this.setupPopup = function()
         {
             this.popup = document.importNode(
-                container.querySelector('.rds-popup-template').content, true
+                this.container.querySelector('.rds-popup-template').content, true
             ).firstElementChild;
 
             this.rowPS = this.popup.querySelector('.rds-popup-ps-row');
