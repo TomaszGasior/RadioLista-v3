@@ -424,6 +424,7 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before {
 }
 input[type="radio"] + label:before {
     border-radius: 10px;
+    -moz-outline-radius: 10px;
 }
 input[type="checkbox"]:focus + label:before, input[type="radio"]:focus + label:before {
     /* copied from form widgets styles */
