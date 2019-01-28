@@ -86,7 +86,12 @@ class RadioTable
      *     RadioTable::COLUMN_QUALITY,
      *     RadioTable::COLUMN_RDS,
      *     RadioTable::COLUMN_COMMENT,
-     * }, multiple=true, min=2)
+     * }, multiple=true)
+     * @Assert\Expression(
+     *     "frequency in value && name in value",
+     *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME},
+     *     message="Kolumny częstotliwości i nazwy muszą być widoczne."
+     * )
      */
     private $columns = [
         self::COLUMN_FREQUENCY,
