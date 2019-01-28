@@ -387,6 +387,7 @@ button:disabled {
 fieldset {
     padding: 0;
     border: none;
+    padding: 0.3em 0;
 
     /* undo "magic" top margin from fieldset */
     margin: -0.9em 0 0;
