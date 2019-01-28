@@ -48,7 +48,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/kontakt", name="contact")
      */
-    public function contactForm(\Swift_Mailer $mailer, Request $request): Response
+    public function contactForm(\Swift_Mailer $mailer, Request $request, $contactAddress): Response
     {
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
@@ -58,7 +58,7 @@ class GeneralController extends AbstractController
 
             $message = (new \Swift_Message($data['subject']))
                 ->setFrom($data['email'])
-                ->setTo($this->getParameter('contact_address'))
+                ->setTo($contactAddress)
                 ->setBody($data['content']);
 
             if ($mailer->send($message)) {
