@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="pl">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
         <meta name="generator" content="RadioLista – {{ app.request.schemeAndHttpHost }}">
@@ -41,17 +41,40 @@
             table tbody tr:hover {
                 background: #eee;
             }
-            span.rds {
+            .quality {
+                color: rgba(0,0,0, 0);
+            }
+            .quality:before {
+                margin-right: -10px;
+                letter-spacing: 2px;
+                color: #222;
+            }
+            .quality.quality-5:before {
+                content: "●●●●●";
+            }
+            .quality.quality-4:before {
+                content: "●●●●";
+            }
+            .quality.quality-3:before {
+                content: "●●●";
+            }
+            .quality.quality-2:before {
+                content: "●●";
+            }
+            .quality.quality-1:before {
+                content: "●";
+            }
+            .rds {
                 white-space: pre;
                 font-family: 'Inconsolata', 'Consolas', 'Source Code Pro', 'Lucida Console', monospace;
                 background: #dedede;
                 padding: 0 3px;
             }
-            span.number-indent-apply-1:before {
+            .number-indent-apply-1:before {
                 content: '0';
                 opacity: 0;
             }
-            span.number-indent-apply-2:before {
+            .number-indent-apply-2:before {
                 content: '00';
                 opacity: 0;
             }
@@ -79,23 +102,22 @@
         </footer>
 
         <script>
-        {# Keep this script in sync with "main.js". -#}
-        {#- Use for(key in array) syntax instead .forEach() and avoid Array.from() -#}
-        {#- for compatibility with wkhtmltopdf which is used for PDF convertion. -#}
+        {# Keep this script in sync with main.js. -#}
         (function(table){
+            {# Needed for old browsers and wkhtmltopdf. -#}
+            NodeList.prototype.forEach = Array.prototype.forEach;
+
             this.elementsIndent1 = table.querySelectorAll('.number-indent-1');
             this.elementsIndent2 = table.querySelectorAll('.number-indent-2');
 
-            for (key in this.elementsIndent1) {
-                var element = this.elementsIndent1[key];
+            this.elementsIndent1.forEach(function(element){
                 var value = parseInt(element.textContent);
 
                 if (value < 10) {
                    element.classList.add('number-indent-apply-1');
                 }
-            }
-            for (key in this.elementsIndent2) {
-                var element = this.elementsIndent2[key];
+            });
+            this.elementsIndent2.forEach(function(element){
                 var value = parseInt(element.textContent);
 
                 if (value < 10) {
@@ -104,8 +126,9 @@
                 else if (value < 100) {
                     element.classList.add('number-indent-apply-1');
                 }
-            }
+            });
         })(document.querySelector('table'));
         </script>
-    </body>
+    {# Disable Symfony debug toolbar. -#}
+    </body{{ app.debug ? ' ' : '' }}>
 </html>
