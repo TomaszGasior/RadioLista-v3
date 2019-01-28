@@ -59,7 +59,8 @@ class GeneralController extends AbstractController
             $message = (new \Swift_Message($data['subject']))
                 ->setFrom($data['email'])
                 ->setTo($contactAddress)
-                ->setBody($data['content']);
+                ->setBody($data['content'])
+            ;
 
             if ($mailer->send($message)) {
                 $this->addFlash('notice', 'Wiadomość została wysłana!');
