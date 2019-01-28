@@ -1,4 +1,5 @@
 twig:
+    exception_controller: App\Controller\DarkErrorController::show
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'

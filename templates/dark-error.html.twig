@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="stylesheet" href="{{ asset('error.css') }}">
+        <title>RadioLista — bandscany i wykazy radiowe</title>
+    </head>
+
+    <body>
+        <div class="logo">
+            <a href="{{ url('homepage') }}">RadioLista — wykazy radiowe w Internecie</a>
+        </div>
+
+        {% set error_title = 'Wystąpił poważny błąd.' %}
+        {% set error_text = 'Wystąpił nieprzewidziany błąd aplikacji.|Proszę skontaktować się z autorem RadioListy.' %}
+
+        {% if message == "DatabaseConnection" %}
+            {% set error_title = 'Drobne problemy techniczne.' %}
+            {% set error_text = 'Nie udało się połączyć z bazą danych serwisu.|Proszę odczekać kilka minut i odświeżyć stronę.' %}
+        {% endif %}
+        {% if message == "RadioTableNotFound" %}
+            {% set error_title = 'Wykaz nie istnieje.' %}
+            {% set error_text = 'Poszukiwany wykaz nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
+        {% endif %}
+        {% if message == "NotFound" %}
+            {% set error_title = 'Strona nie istnieje.' %}
+            {% set error_text = 'Poszukiwana strona serwisu nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
+        {% endif %}
+
+        <div class="content" data-banner-text="Ciemność, widzę ciemność!">
+            <h1>{{ error_title }}</h1>
+            <p>{{ error_text|replace({'|': '<br>'})|raw }}</p>
+        </div>
+    </body>
+</html>
+
+<!--
+    This is very interesting paragraph for Internet Explorer users.
+
+    Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non, consectetuer lobortis quis, varius in, purus. Integer ultrices posuere cubilia Curae, Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae, dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu, faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam. Nullam viverra consectetuer. Quisque cursus et, porttitor risus. Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+-->
