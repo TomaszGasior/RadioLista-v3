@@ -45,8 +45,10 @@
         <p class="information">Poszczególne klatki PS oraz części RT rodziel znakiem pionowej kreski.</p>
         <noscript><p class="information">Aby zobaczyć wyskakujące okno z&nbsp;informacjami o&nbsp;RDS, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
 
-        {{ form_row(form.rdsPs) }}
-        {{ form_row(form.rdsRt) }}
-        {{ form_row(form.rdsPty) }}
+        <div class="radiostation-rds">
+            {{ form_row(form.rdsPs) }}
+            {{ form_row(form.rdsRt) }}
+            {{ form_row(form.rdsPty) }}
+        </div>
     </div>
 </div>

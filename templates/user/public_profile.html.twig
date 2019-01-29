@@ -13,20 +13,24 @@
     </header>
 
     {% if user.aboutMe is not empty %}
-        <section class="userProfile userInfo">
+        <section class="user-profile-page user-profile-details">
             <h3>Informacje o użytkowniku</h3>
 
             {{ user.aboutMe|raw }}
             <dl>
-                <dt>Data ostatniej aktywności</dt>
-                <dd>{{ user.lastActivityDate|date_format }}</dd>
-                <dt>Data założenia konta</dt>
-                <dd>{{ user.registerDate|date_format }}</dd>
+                <div>
+                    <dt>Data ostatniej aktywności</dt>
+                    <dd>{{ user.lastActivityDate|date_format }}</dd>
+                </div>
+                <div>
+                    <dt>Data założenia konta</dt>
+                    <dd>{{ user.registerDate|date_format }}</dd>
+                </div>
             </dl>
         </section>
     {% endif %}
 
-    <section class="userProfile">
+    <section class="user-profile-page">
         <h3>Wykazy tego użytkownika</h3>
 
         {% if radiotables %}

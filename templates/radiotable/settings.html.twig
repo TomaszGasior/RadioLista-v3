@@ -11,6 +11,7 @@
     <ul>
         <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
         <li><a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj stację</a></li>
+        <li><a href="{{ path('radiotable.remove', {id: radiotable.id}) }}">Usuń wykaz</a></li>
     </ul>
 {% endblock %}
 

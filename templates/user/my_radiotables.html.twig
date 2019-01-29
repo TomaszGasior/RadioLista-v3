@@ -15,7 +15,6 @@
 
     {% if radiotables %}
         {% set show_visibility = true %}
-        {% set show_actions = true %}
         {% include 'common/radiotables_list.html.twig' %}
     {% else %}
         <p class="information">Nie posiadasz jeszcze żadnego wykazu. <a href="{{ path('radiotable.create') }}">To najlepszy moment, żeby to zmienić!</a></p>

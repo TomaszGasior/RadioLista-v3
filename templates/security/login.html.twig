@@ -4,21 +4,19 @@
 
 {% block page_content %}
     <header class="sr-only">
-        <h2>Konto użytkownika — logowanie i rejestracja</h2>
+        <h2>Konto użytkownika — logowanie</h2>
     </header>
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui userLoginScreen">
-        <div>
-            <h3>Zaloguj się</h3>
+    <div class="user-login-screen">
+        <h3>Zaloguj się</h3>
 
-            {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
-            {{ form_row(form.password) }}
-            {{ form_row(form.rememberMe) }}
+        {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.rememberMe) }}
 
-            <button>Zaloguj się</button>
-        </div>
+        <button>Zaloguj się</button>
     </div>
 
     {{ form_end(form) }}

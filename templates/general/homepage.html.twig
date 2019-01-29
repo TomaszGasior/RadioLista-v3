@@ -16,10 +16,8 @@
             <section class="home">
                 <h3>Wyszukaj wykazy</h3>
 
-                {{ form_start(search_form, {attr: {class: 'searchForm'}}) }}
-                <dl>
-                    {{ form_row(search_form.searchTerm) }}
-                </dl>
+                {{ form_start(search_form, {attr: {class: 'search-form'}}) }}
+                {{ form_row(search_form.searchTerm) }}
                 <button>Szukaj</button>
                 {{ form_end(search_form) }}
             </section>

@@ -39,17 +39,19 @@ a {
     border: none;
     outline: none;
 }
-a:hover {
-    text-decoration: underline;
-    color: #0084FF;
-}
-a:active {
-    color: #64BE00;
-}
-a:focus:not(:hover):not(:active) {
+a:focus {
     text-decoration: underline;
     outline: 1px dashed #F07F1F;
     outline-offset: 2px;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0084FF;
+    outline: none;
+}
+a:active {
+    color: #64BE00;
+    outline: none;
 }
 
 .sr-only {
@@ -712,17 +714,17 @@ table.radiotable abbr {
 }
 
 
-/* radiotable — info section */
+/* radiotable — details section */
 
-.radiotable-info {
+.radiotable-details {
     margin-top: 1.8em;
     line-height: 1.5em;
 }
-.radiotable-info p {
+.radiotable-details p {
     margin: 0.4em 0;
 }
 
-.radiotable-info dl {
+.radiotable-details dl {
     display: flex;
     width: 100%;
 
@@ -732,21 +734,21 @@ table.radiotable abbr {
     padding: 0.8em 2em 0 2em;
     box-sizing: border-box;
 }
-.radiotable-info dl > * {
+.radiotable-details dl > * {
     flex: 1;
     margin: 0;
     padding: 0 0.5em;
 }
-.radiotable-info dt {
+.radiotable-details dt {
     text-align: right;
 }
-.radiotable-info dt:after {
+.radiotable-details dt:after {
     content: ":";
 }
-.radiotable-info dd {
+.radiotable-details dd {
     text-align: left;
 }
-.radiotable-info dd:not(:last-child) {
+.radiotable-details dd:not(:last-child) {
     border-right: 1px solid rgba(0,0,0, 0.05);
 }
 
@@ -815,7 +817,9 @@ table.radiotable abbr {
 .rds-popup dd span {
     display: inline-block;
     margin: 0 9px 4px 0;
-    border-bottom: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
+
+    /* unvisible border for proper padding sizing */
+    border-bottom: 1px solid rgba(0,0,0, 0);
 
     white-space: pre;
     background: rgba(160,160,160, 0.2);
@@ -826,8 +830,9 @@ table.radiotable abbr {
     margin-bottom: 3px;
 }
 .rds-popup dd div span {
-    border-top: 1px solid transparent;   /* Unvisible border for proper padding sizing. */
-    border-bottom: 1px solid transparent;
+    /* unvisible border for proper padding sizing */
+    border-top: 1px solid rgba(0,0,0, 0);
+    border-bottom: 1px solid rgba(0,0,0, 0);
 
     display: inline;
     white-space: pre-wrap !important;
@@ -875,6 +880,124 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 
+/* radiotables list */
+
+.radiotables-list-item {
+    background: rgba(255,255,255, 0.37);
+    border: 1px solid #D2D2D2;
+    padding: 1em 1.4em;
+    margin: 1.2em 0;
+}
+.radiotables-list-item dd {
+    margin-left: 0;
+}
+
+.radiotables-list-item:focus-within:not(:hover) {
+    background: rgba(255,255,255, 1);
+    border-color: #BABABA;
+}
+
+.radiotables-list-title a, .radiotables-list-details dl {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.radiotables-list-title a {
+    display: block;
+    font-size: 1.6em;
+}
+.radiotables-list-title a:focus {
+    /* make outline visible with overflow */
+    outline-offset: -1px;
+}
+
+.radiotables-list-details dl {
+    margin: 0.4em 0 0.1em;
+    font-size: 0.8em;
+}
+.radiotables-list-details dt, .radiotables-list-details dd {
+    display: inline;
+}
+.radiotables-list-details dt:after {
+    content: ':';
+}
+.radiotables-list-details dt:not(:first-child) {
+    margin-left: 1em;
+}
+
+
+/* information paragraph */
+
+.information {
+    box-shadow: 0 0 2px #eee;
+    padding: 2em 155px 2em 2em;
+    background: rgba(180,240,255, 0.35) url('images/infosymbol.png') no-repeat right bottom;
+    /* https://www.iconfinder.com/icons/763457/circle_detail_help_info_information_more_outline_stroke_icon */
+}
+.information a {
+    color: #0088C6;
+}
+.JS .tabbed-ui .information {
+    box-shadow: none;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+
+/* page — user profile */
+
+.user-profile-page h3 {
+    color: #5D9A3F;
+    line-height: 1.1em;
+}
+
+.user-profile-details {
+    margin-bottom: 1.5em;
+    line-height: 1.5em;
+}
+.user-profile-details div {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+.user-profile-details dl {
+    margin: auto;
+    text-align: center;
+    font-style: italic;
+}
+.user-profile-details dt, .user-profile-details dd {
+    display: inline;
+}
+.user-profile-details dt {
+    margin-right: 0.6em;
+}
+.user-profile-details dd {
+    margin: 0;
+}
+.user-profile-details dt:after {
+    content: ":";
+}
+
+
+/* page — login/register */
+
+.user-login-screen {
+    max-width: 400px;
+    margin: 2.5em auto;
+}
+
+.user-login-screen .form-item.form-regular {
+    flex-direction: column;
+}
+.user-login-screen .form-item.form-regular label {
+    margin-bottom: 0.5em;
+}
+.user-login-screen .form-item.form-checkbox {
+    margin: 1.3em 0;
+}
+
+
 /* radiotable settings, columns UI */
 
 .JS .radiotable-columns {
@@ -911,4 +1034,41 @@ table.sortable th[data-sort].sorted-desc:after {
     width: 85px;
     margin: 0 0 0 0.6em;
     white-space: nowrap;
+}
+
+
+/* radiostation edit/add, rds */
+
+.radiostation-rds input, .radiostation-rds textarea {
+    font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
+}
+
+
+/* search form */
+
+.search-form {
+    display: flex;
+    align-items: start;
+}
+
+.search-form .form-item > :first-child {
+    position: absolute;
+    width: 0px;
+    overflow: hidden;
+    opacity: 0;
+}
+.search-form button {
+    margin-left: 0.6em;
+    width: 80px;
+}
+
+
+/* button in tabbed UI */
+
+.JS .tabbed-ui > div > form > button {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+.JS .tabbed-ui + button {
+    margin-top: 1.3em;
 }

@@ -5,27 +5,25 @@
 {% form_theme form _self %}
 {% block _user_register_acceptServiceTerms_label %}
     {{ block('form_label')|replace(
-        {'regulamin': '<a href="' ~ path('terms_of_service') ~ '" tabindex="-1" target="_blank">regulamin</a>'}
+        {'regulamin': '<a href="' ~ path('terms_of_service') ~ '" target="_blank">regulamin</a>'}
     )|raw }}
 {% endblock %}
 
 {% block page_content %}
     <header class="sr-only">
-        <h2>Konto użytkownika — logowanie i rejestracja</h2>
+        <h2>Konto użytkownika — rejestracja</h2>
     </header>
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui userLoginScreen">
-        <div>
-            <h3>Zarejestruj się</h3>
+    <div class="user-login-screen">
+        <h3>Zarejestruj się</h3>
 
-            {{ form_row(form.name, {attr: {title: "Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka."}}) }}
-            {{ form_row(form.plainPassword) }}
-            {{ form_row(form.acceptServiceTerms) }}
+        {{ form_row(form.name, {attr: {title: "Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka."}}) }}
+        {{ form_row(form.plainPassword) }}
+        {{ form_row(form.acceptServiceTerms) }}
 
-            <button>Zarejestruj się</button>
-        </div>
+        <button>Zarejestruj się</button>
     </div>
 
     {{ form_end(form) }}
