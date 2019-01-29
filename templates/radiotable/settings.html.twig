@@ -59,11 +59,11 @@
         <div>
             <h3>Wygląd</h3>
 
-            <div class="radioTableThemeSelection">
+            <div class="radiotable-settings-theme">
                 {{ form_row(form.appearanceTheme) }}
             </div>
 
-            <div class="radioTableAppearanceFields">
+            <div class="radiotable-settings-appearance">
                 {# style="" is used as dirty hack for box-shadow removing. #}
                 {{ form_row(form.appearanceBackgroundColor, {attr: {
                     'class': 'jscolor',
@@ -79,30 +79,20 @@
                 {{ form_row(form.appearanceFullWidth) }}
             </div>
 
-            <button type="button" id="defaultRadioTableAppearance">Przywróć domyślny wygląd</button>
+            <button type="button" class="radiotable-default-appearance">Przywróć domyślny wygląd</button>
 
             <script>
-                var selectionList = document.querySelector('dl.radioTableThemeSelection')
-                var previewBoxes  = selectionList.querySelectorAll('dl.radioTableThemeSelection dd');
-                selectionList.className = 'radioTableThemeSelection_JSOn';
-                for( i in previewBoxes ) {
-                    if( previewBoxes[i].tagName != 'DD' ) break;
-                    if( previewBoxes[i].children[0].name )
-                        previewBoxes[i].className = 'preview_' + previewBoxes[i].children[0].value;
-                }
+            (function(){
+                var button = document.querySelector('.radiotable-default-appearance');
+                var inputs = Array.from(document.querySelectorAll('.radiotable-settings-appearance input'));
 
-                var colorInputs = document.querySelectorAll('input[type="color"]');
-                for( var i=0; i<colorInputs.length; i++ )
-                    colorInputs[i].type = 'text';
-
-                document.getElementById('defaultRadioTableAppearance').id = 'defaultRadioTableAppearance_JSOn';
-                document.getElementById('defaultRadioTableAppearance_JSOn').onclick = function() {
-                    var appearanceForm = document.querySelectorAll('.radioTableAppearanceFields input');
-                    for( i in appearanceForm ) {
-                        appearanceForm[i].value = '';
-                        appearanceForm[i].style = '';
-                    }
-                }
+                button.addEventListener('click', function(){
+                    inputs.forEach(function(input){
+                        input.value = '';
+                        input.style = '';
+                    });
+                });
+            })();
             </script>
         </div>
 

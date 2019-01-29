@@ -15,21 +15,25 @@
         {{ form_row(form.power) }}
         {{ form_row(form.polarization) }}
         {{ form_row(form.type) }}
-        {{ form_row(form.localityType, {'attr': {'class': 'localityType'}}) }}
-        {{ form_row(form.localityCity, {'attr': {'class': 'localityCity'}}) }}
+        {{ form_row(form.localityType, {'attr': {'class': 'locality-type-input'}}) }}
+        <div class="locality-city-wrapper">
+            {{ form_row(form.localityCity) }}
+        </div>
 
         <script>
-            var localityInput     = document.querySelector('select.localityType');
-            var localityInput_dd  = document.querySelector('input.localityCity').parentElement;
-            var localityInput_dt  = localityInput_dd.previousElementSibling;
+        (function(){
+            const LOCALITY_COUNTRY = '{{ constant('App\\Entity\\RadioStation::LOCALITY_COUNTRY') }}';
+            var localityTypeInput = document.querySelector('.locality-type-input');
+            var localityCityWrapper = document.querySelector('.locality-city-wrapper');
 
-            function toogleLocalityTextInput() {
-                localityInput_dd.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
-                localityInput_dt.hidden = ( localityInput.selectedIndex == 0 ) ? true : false;
-            }
-            toogleLocalityTextInput();
-            localityInput.onchange = toogleLocalityTextInput;
-            localityInput.onblur   = toogleLocalityTextInput;
+            var updateFieldVisibility = function()
+            {
+                localityCityWrapper.hidden = (localityTypeInput.value == LOCALITY_COUNTRY);
+            };
+            updateFieldVisibility();
+            localityTypeInput.addEventListener('change', updateFieldVisibility);
+            localityTypeInput.addEventListener('blur', updateFieldVisibility);
+        })();
         </script>
     </div>
     <div>

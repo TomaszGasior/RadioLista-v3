@@ -47,7 +47,7 @@
 
             {{ form_start(form_radiotable) }}
 
-            <div class="removingConfirm">
+            <div class="radiotable-remove-confirm">
                 {{ form_row(form_radiotable.confirm, {
                     label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
                 }) }}
@@ -58,10 +58,16 @@
             {{ form_end(form_radiotable) }}
 
             <script>
-                document.querySelector('dl.removingConfirm input').onchange = function() {
-                   if( this.checked && !window.confirm('Czy na pewno?') )
-                       this.checked = false;
-                }
+            (function(){
+                document.querySelector('.radiotable-remove-confirm input').addEventListener('change', function(event) {
+                    var input = event.target;
+
+                    if (input.checked && false === window.confirm('Czy na pewno?')) {
+                        input.checked = false;
+                        input.blur();
+                    }
+                });
+            })();
             </script>
         </div>
     </div>
