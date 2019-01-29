@@ -25,7 +25,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
 
     public function onKernelException(GetResponseForExceptionEvent $event): void
     {
-        if (false === ($event->getException() instanceof AccessDeniedException)) {
+        $exception = $event->getException();
+
+        if (false === ($exception instanceof AccessDeniedException) || 404 === $exception->getCode()) {
             return;
         }
 
