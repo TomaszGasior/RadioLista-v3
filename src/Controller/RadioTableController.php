@@ -131,8 +131,8 @@ class RadioTableController extends AbstractController
     public function export(RadioTable $radioTable): Response
     {
         return $this->redirectToRoute('radiotable.settings', [
-            'id'  => $radioTable->getId(),
-            'tab' => 4,
+            'id'        => $radioTable->getId(),
+            '_fragment' => 'export',
         ]);
     }
 
