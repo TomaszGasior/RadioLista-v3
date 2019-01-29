@@ -480,12 +480,6 @@ input.jscolor:not([style=""]) {
     display: flex;
     margin: 0.7em 0;
 }
-.form-item.form-regular:first-child {
-    margin-top: 1em;
-}
-.form-item.form-regular:last-child {
-    margin-bottom: 1em;
-}
 .form-item.form-regular > *:first-child {
     width: 40%;
 }
@@ -509,7 +503,7 @@ input.jscolor:not([style=""]) {
 
 .JS .tabbed-ui > div {
     background: rgba(255,255,255, 0.37);
-    padding: 0.5em 1.2em;
+    padding: 0.5em 1.2em 0.8em;
     border: 1px solid #D2D2D2;
 }
 .JS .tabbed-ui > div:not(.tabbed-ui-current) {
@@ -1067,7 +1061,7 @@ table.sortable th[data-sort].sorted-desc:after {
 
 .JS .tabbed-ui > div > form > button {
     margin-top: 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.7em;
 }
 .JS .tabbed-ui + button {
     margin-top: 1.3em;
