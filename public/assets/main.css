@@ -613,7 +613,7 @@ table.radiotable td {
 table.radiotable tbody tr {
     transition: background 0.1s;
 }
-table.radiotable tbody tr:hover {
+table.radiotable tbody tr:hover, table.radiotable tbody tr:focus-within {
     background: rgba(250,230,205, 0.8);
 }
 
@@ -847,7 +847,7 @@ table.sortable th[data-sort] {
 table.sortable th[data-sort]:focus {
     text-decoration: underline;
     outline: 1px dashed #F07F1F;
-    outline-offset: -1px;
+    outline-offset: -2px;
 }
 table.sortable th[data-sort]:focus:hover {
     outline: none;
@@ -943,7 +943,7 @@ table.sortable th[data-sort].sorted-desc:after {
     background: rgba(255,255,255, 0.9);
 }
 
-.customized-radiotable table.radiotable tbody tr:hover {
+.customized-radiotable table.radiotable tbody tr:hover, .customized-radiotable table.radiotable tbody tr:focus-within {
     background: rgba(200,200,200, 0.4);
 }
 .customized-radiotable table.radiotable .quality:before {
@@ -951,6 +951,9 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 .customized-radiotable table.radiotable span.rds:not(:hover):not(:focus) {
     background: rgba(200,200,200, 0.8);
+}
+.customized-radiotable table.sortable th[data-sort]:focus {
+    outline-color: currentColor;
 }
 
 .customized-radiotable .customizable-color h2 {

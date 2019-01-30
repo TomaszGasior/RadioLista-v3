@@ -6,7 +6,7 @@
 .theme-bieszczady .customizable-color {
     color: #000;
 }
-.theme-bieszczady table.radiotable tbody tr:hover {
+.theme-bieszczady table.radiotable tbody tr:hover, .theme-bieszczady table.radiotable tbody tr:focus-within {
     background: #E5E5E5;
 }
 .theme-bieszczady .site-header {
@@ -22,7 +22,7 @@
 .theme-wood .customizable-color {
     color: #000;
 }
-.theme-wood table.radiotable tbody tr:hover {
+.theme-wood table.radiotable tbody tr:hover, .theme-wood table.radiotable tbody tr:focus-within {
     background: #E6C1A8;
 }
 .theme-wood table.radiotable td, .radiotable-details dl, .radiotable-details dd {
@@ -65,10 +65,10 @@
 .theme-night .customizable-color a {
     border-color: rgba(255,255,255, 0.6);
 }
-.theme-night .rds-popup {
+.theme-night .rds-popup, .theme-night table.radiotable span.rds {
     text-shadow: none;
 }
-.theme-night table.radiotable tbody tr:hover {
+.theme-night table.radiotable tbody tr:hover, .theme-night table.radiotable tbody tr:focus-within {
     background: rgba(0,0,0, 0.35);
 }
 .theme-night table.radiotable td, .radiotable-details dl, .radiotable-details dd {
