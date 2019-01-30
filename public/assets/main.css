@@ -301,7 +301,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 130px;
 }
 input[type="number"] {
     width: 80px;
@@ -342,13 +342,12 @@ select::-ms-expand {
 }
 @supports (-moz-user-select: none)
 {
-    /* smaller horizontal padding for Firefox */
+    /* smaller padding for Firefox */
     select {
-        padding-left: 7px;
-        padding-right: 7px;
+        padding: 4px 7px;
     }
 
-    /* dirty hack for removing dotted border inside select in Firefox */
+    /* dirty hack, remove dotted border inside select in Firefox */
     select:-moz-focusring {
         color: rgba(0,0,0, 0) !important;
         text-shadow: 0 0 0 #000 !important;
