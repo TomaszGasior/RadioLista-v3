@@ -11,7 +11,7 @@
             2: 'Sortuj według daty aktualizacji',
             3: 'Sortuj według jednostki',
         } %}
-        <ul class="radioTablesAllSort">
+        <ul class="all-radiotables-navigation">
             {% for id, label in sorting_modes %}
                 <li>
                     <a {{ app.request.get('sorting') == id ? 'class="selected"' : '' }}

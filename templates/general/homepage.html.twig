@@ -1,52 +1,58 @@
 {% extends 'layout.html.twig' %}
 
 {% block page_content %}
-    <header class="home">
+    <header class="sr-only">
         <h2>Strona główna</h2>
     </header>
 
-    <div class="homeColumns">
-        <div>
-            <section class="home">
-                <h3>Czym jest RadioLista?</h3>
+    <div class="homepage">
+        <section>
+            <h3>Ostatnio zmodyfikowane wykazy</h3>
+            <ol class="homepage-radiotables-list">
+                {% for radiotable in last_updated_radiotables %}
+                    <li>
+                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+                            {{ radiotable.name }}
+                        </a>
+                        <span>
+                            <span class="sr-only"> — ostatnia aktualizacja: </span>
+                            {{ radiotable.lastUpdateTime|date_format }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </section>
 
-                <p>W serwisie RadioLista osoby interesujące się mediami mogą publikować różnorodne wykazy radiowe i&nbsp;telewi&shy;zyjne &mdash; bandscany, regularne wykazy odbieranych stacji czy&nbsp;też prywatne listy ulubionych programów.</p>
-            </section>
+        <section>
+            <h3>Ostatnio utworzone wykazy</h3>
+            <ol class="homepage-radiotables-list">
+                {% for radiotable in last_created_radiotables %}
+                    <li>
+                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+                            {{ radiotable.name }}
+                        </a>
+                        <span>
+                            <span class="sr-only"> — ostatnia aktualizacja: </span>
+                            {{ radiotable.lastUpdateTime|date_format }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </section>
 
-            <section class="home">
-                <h3>Wyszukaj wykazy</h3>
+        <section>
+            <h3>Czym jest RadioLista?</h3>
 
-                {{ form_start(search_form, {attr: {class: 'search-form'}}) }}
-                {{ form_row(search_form.searchTerm) }}
-                <button>Szukaj</button>
-                {{ form_end(search_form) }}
-            </section>
-        </div>
+            <p>W serwisie RadioLista osoby interesujące się mediami mogą&nbsp;publikować różnorodne wykazy radiowe i&nbsp;telewi&shy;zyjne &mdash; bandscany, regularne wykazy odbieranych stacji czy&nbsp;też prywatne listy ulubionych programów.</p>
+        </section>
 
-        <div>
-            <section class="home">
-                <h3>Ostatnio zmodyfikowane wykazy</h3>
-                <ol>
-                    {% for radiotable in last_updated_radiotables %}
-                        <li>
-                            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">{{ radiotable.name }}</a>
-                            <span> &mdash; </span>{{ radiotable.lastUpdateTime|date_format }}
-                        </li>
-                    {% endfor %}
-                </ol>
-            </section>
+        <section>
+            <h3>Wyszukaj wykazy</h3>
 
-            <section class="home">
-                <h3>Ostatnio utworzone wykazy</h3>
-                <ol>
-                    {% for radiotable in last_created_radiotables %}
-                        <li>
-                            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">{{ radiotable.name }}</a>
-                            <span> &mdash; </span>{{ radiotable.lastUpdateTime|date_format }}
-                        </li>
-                    {% endfor %}
-                </ol>
-            </section>
-        </div>
+            {{ form_start(search_form, {attr: {class: 'search-form'}}) }}
+            {{ form_row(search_form.searchTerm) }}
+            <button>Szukaj</button>
+            {{ form_end(search_form) }}
+        </section>
     </div>
 {% endblock %}

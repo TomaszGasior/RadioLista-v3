@@ -4,24 +4,22 @@
 
 {% if radiotable.appearance.th is empty %}
     {% if radiotable.appearance.fg %}
-        {% set custom_css = custom_css ~ '.custTxt{ color: ' ~ radiotable.appearance.fg ~ ' }' %}
+        {% set custom_css = custom_css ~ '.customizable-color { color: ' ~ radiotable.appearance.fg ~ ' }' %}
     {% endif %}
 
     {% if radiotable.appearance.bg %}
-        {% set custom_css = custom_css ~ '.custBg { background: ' ~ radiotable.appearance.bg %}
-
+        {% set custom_css = custom_css ~ '.customizable-background { background: ' ~ radiotable.appearance.bg %}
         {% if radiotable.appearance.img %}
-            {% set custom_css = custom_css ~ ' url(' ~ radiotable.appearance.img ~ ') center fixed' %}
+            {% set custom_css = custom_css ~ ' url("' ~ radiotable.appearance.img ~ '") center fixed' %}
         {% endif %}
-
         {% set custom_css = custom_css ~ ' }' %}
     {% endif %}
 {% endif %}
 
 {% block html_classes %}
-    {% if custom_css or radiotable.appearance.th %}customizedRadioTable{% endif %}
-    {% if radiotable.appearance.th %}theme_{{ radiotable.appearance.th }}{% endif %}
-    {% if radiotable.appearance.full %}fullWidth{% endif %}
+    {%- if custom_css or radiotable.appearance.th %}customized-radiotable{% endif -%}
+    {%- if radiotable.appearance.th %} theme-{{ radiotable.appearance.th }}{% endif -%}
+    {%- if radiotable.appearance.full %} full-width{% endif -%}
 {% endblock %}
 
 {% block page_title %}{{ radiotable.name }}{% endblock %}
@@ -31,9 +29,9 @@
         <meta name="robots" content="noindex, noarchive">
     {% endif %}
 
-    {% if custom_css %}<style>{{ custom_css }}</style>{% endif %}
+    {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
     {% if radiotable.appearance.th %}
-        <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
+        <link rel="stylesheet" href="{{ asset('themes.css') }}">
     {% endif %}
 
     <script src="{{ asset('radiotable.js') }}"></script>
@@ -49,12 +47,12 @@
 {% endblock %}
 
 {% block page_content %}
-    <header>
+    <header class="customizable-color">
         <h2>{{ radiotable.name }}</h2>
     </header>
 
     {% if radiotable.radioStationsCount > 0 %}
-        <div class="radiotable-container">
+        <div class="radiotable-container customizable-color">
             {% embed 'radiotable/table/radiotable.html.twig' %}
                 {%- block table_class 'radiotable sortable' -%}
 
@@ -117,7 +115,7 @@
             </template>
         </div>
 
-        <section class="radiotable-details">
+        <section class="radiotable-details customizable-color">
             <h3 class="sr-only">Informacje o wykazie</h3>
 
             {{ radiotable.description|raw }}

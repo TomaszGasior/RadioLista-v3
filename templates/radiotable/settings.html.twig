@@ -3,7 +3,6 @@
 {% block page_title %}Ustawienia wykazu{% endblock %}
 
 {% block head_closing %}
-    <link rel="stylesheet" href="{{ asset('styles/themes.css') }}">
     <script src="{{ asset('radiotable-settings.js') }}"></script>
 {% endblock %}
 
@@ -35,7 +34,7 @@
         <div>
             <h3>Widoczność</h3>
 
-            <div class="radioTableStatusForm">
+            <div class="radiotable-status">
                 {{ form_row(form.status) }}
             </div>
         </div>
@@ -59,41 +58,20 @@
         <div>
             <h3>Wygląd</h3>
 
-            <div class="radiotable-settings-theme">
-                {{ form_row(form.appearanceTheme) }}
-            </div>
-
-            <div class="radiotable-settings-appearance">
-                {# style="" is used as dirty hack for box-shadow removing. #}
-                {{ form_row(form.appearanceBackgroundColor, {attr: {
-                    'class': 'jscolor',
-                    'style': '',
-                    'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
-                }}) }}
-                {{ form_row(form.appearanceColor, {attr: {
-                    'class': 'jscolor',
-                    'style': '',
-                    'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
-                }}) }}
-                {{ form_row(form.appearanceBackgroundImage) }}
-                {{ form_row(form.appearanceFullWidth) }}
-            </div>
-
-            <button type="button" class="radiotable-default-appearance">Przywróć domyślny wygląd</button>
-
-            <script>
-            (function(){
-                var button = document.querySelector('.radiotable-default-appearance');
-                var inputs = Array.from(document.querySelectorAll('.radiotable-settings-appearance input'));
-
-                button.addEventListener('click', function(){
-                    inputs.forEach(function(input){
-                        input.value = '';
-                        input.style = '';
-                    });
-                });
-            })();
-            </script>
+            {# style="" is used as dirty hack for box-shadow removing. #}
+            {{ form_row(form.appearanceTheme) }}
+            {{ form_row(form.appearanceBackgroundColor, {attr: {
+                'class': 'jscolor',
+                'style': '',
+                'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+            }}) }}
+            {{ form_row(form.appearanceColor, {attr: {
+                'class': 'jscolor',
+                'style': '',
+                'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+            }}) }}
+            {{ form_row(form.appearanceBackgroundImage) }}
+            {{ form_row(form.appearanceFullWidth) }}
         </div>
 
         <div id="export">

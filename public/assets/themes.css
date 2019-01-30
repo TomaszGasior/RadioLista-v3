@@ -1,0 +1,87 @@
+/* theme — bieszczady */
+
+.theme-bieszczady .customizable-background {
+    background: #D1D1D1 url('images/themes/bg_bieszczady.jpg') no-repeat center / cover fixed;
+}
+.theme-bieszczady .customizable-color {
+    color: #000;
+}
+.theme-bieszczady table.radiotable tbody tr:hover {
+    background: #E5E5E5;
+}
+.theme-bieszczady .site-header {
+    background: rgba(255,255,255, 0.5);
+}
+
+/* theme — wood */
+/* http://blog.pogotowie3d.pl/index.php/darmowa-tekstura-drewna-olcha-sliwa-wallis/ */
+
+.theme-wood .customizable-background {
+    background: #C89776 url('images/themes/bg_wood.jpg') repeat fixed;
+}
+.theme-wood .customizable-color {
+    color: #000;
+}
+.theme-wood table.radiotable tbody tr:hover {
+    background: #E6C1A8;
+}
+.theme-wood table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+    border-color: rgba(170,92,36, 0.2);
+}
+.theme-wood .site-header {
+    background: rgba(255,255,255, 0.65);
+}
+
+/* theme — rainbow */
+/* http://www.publicdomainpictures.net/view-image.php?image=25019&picture=dark-clouds-and-rainbow/ */
+
+.theme-rainbow .customizable-background {
+    background: #919692 url('images/themes/bg_rainbow.jpg') no-repeat center / cover fixed;
+}
+.theme-rainbow .customizable-color {
+    color: #0B0024;
+    text-shadow: 0 0 2px #999;
+}
+.theme-rainbow .rds-popup {
+    text-shadow: none;
+}
+.theme-rainbow table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+    border-color: rgba(0,0,0, 0.1);
+}
+.theme-rainbow .site-header {
+    background: rgba(255,255,255, 0.45);
+}
+
+/* theme — night */
+/* http://magdeleine.co/photo-by-caleb-ralston-n-491/ */
+
+.theme-night .customizable-background {
+    background: #314b5e url('images/themes/bg_night.jpg') no-repeat center / cover fixed;
+}
+.theme-night .customizable-color {
+    color: #eee;
+    text-shadow: 0 0 2px #111;
+}
+.theme-night .customizable-color a {
+    border-color: rgba(255,255,255, 0.6);
+}
+.theme-night .rds-popup {
+    text-shadow: none;
+}
+.theme-night table.radiotable tbody tr:hover {
+    background: rgba(0,0,0, 0.35);
+}
+.theme-night table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+    border-color: rgba(255,255,255, 0.1);
+}
+.theme-night table.radiotable tr.marker-4, .theme-night table.radiotable tr.marker-5, .theme-night table.radiotable tr.marker-6 {
+    color: #000;
+    text-shadow: 0 0 2px #aaa;
+}
+.theme-night .site-header {
+    background: rgba(255,255,255, 0.8);
+    box-shadow: 0 0 3px #555;
+}
+.theme-night .site-footer {
+    border-color: #444;
+}

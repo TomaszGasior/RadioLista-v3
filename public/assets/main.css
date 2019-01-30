@@ -611,7 +611,7 @@ table.radiotable td {
 }
 
 table.radiotable tbody tr {
-    transition: background 0.1s, box-shadow 0.5s;
+    transition: background 0.1s;
 }
 table.radiotable tbody tr:hover {
     background: rgba(250,230,205, 0.8);
@@ -744,8 +744,11 @@ table.radiotable abbr {
 .radiotable-details dd {
     text-align: left;
 }
-.radiotable-details dd:not(:last-child) {
+.radiotable-details dd {
     border-right: 1px solid rgba(0,0,0, 0.05);
+}
+.radiotable-details dd:last-child {
+    border-right: none;
 }
 
 
@@ -923,6 +926,62 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 
+/* customized radiotable page */
+
+.full-width .site-width {
+    max-width: 100%;
+}
+@media (min-width: 900px)
+{
+    .full-width .site-width {
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+}
+
+.customized-radiotable .site-header {
+    background: rgba(255,255,255, 0.9);
+}
+
+.customized-radiotable table.radiotable tbody tr:hover {
+    background: rgba(200,200,200, 0.4);
+}
+.customized-radiotable table.radiotable .quality:before {
+    text-shadow: 0 0 1px #000;
+}
+.customized-radiotable table.radiotable span.rds:not(:hover):not(:focus) {
+    background: rgba(200,200,200, 0.8);
+}
+
+.customized-radiotable .customizable-color h2 {
+    color: inherit;
+    text-shadow: none;
+}
+.customized-radiotable .customizable-color table.radiotable th {
+    color: inherit;
+    opacity: 0.8;
+    text-shadow: 0 0 0 rgba(0,0,0, 0.7);
+}
+.customized-radiotable .customizable-color table.radiotable td {
+    border-top: 0;
+    box-shadow: inset 0 2px 2px -3px currentColor;
+}
+@supports (-moz-user-select: none)
+{
+    .customized-radiotable .customizable-color table.radiotable td {
+        box-shadow: inset 0 3px 3px -5px currentColor;
+    }
+}
+.customized-radiotable .customizable-color a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}
+.customized-radiotable .customizable-color a:focus {
+    outline-color: currentColor;
+}
+
+
 /* information paragraph */
 
 .information {
@@ -938,6 +997,95 @@ table.sortable th[data-sort].sorted-desc:after {
     box-shadow: none;
     padding-top: 1.5em;
     padding-bottom: 1.5em;
+}
+
+
+/* search form */
+
+.search-form {
+    display: flex;
+    margin: 1em 0 2em;
+}
+.search-form .form-item {
+    margin: 0;
+}
+.search-form .form-item > :first-child {
+    position: absolute;
+    width: 0px;
+    overflow: hidden;
+    opacity: 0;
+}
+.search-form button {
+    margin: 0;
+    margin-left: 0.6em;
+    width: 80px;
+}
+
+
+/* page — homepage */
+
+.homepage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: start;
+    margin: 1em 0;
+}
+.homepage > * {
+    width: 48.3%;
+    box-sizing: border-box;
+    margin: 1em 0;
+}
+
+.homepage section {
+    background: rgba(255,255,255, 0.4);
+    box-shadow: 0 0 2px rgba(0,0,0, 0.15);
+    padding: 0.2em 1.3em 0.4em;
+}
+.homepage section h3 {
+    font-size: 1.4em;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(200,200,200, 0.3);
+    color: #4A673C;
+}
+.homepage section p {
+    line-height: 1.35em;
+}
+
+.homepage-radiotables-list {
+    list-style: none;
+    padding-left: 0;
+}
+.homepage-radiotables-list li {
+    margin: 0.3em 0;
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.homepage-radiotables-list a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    padding: 0.05em 0;
+    margin-right: 1em;
+    display: block;
+    width: 100%;
+}
+.homepage-radiotables-list span {
+    white-space: nowrap;
+    text-align: right;
+    color: rgba(0,0,0, 0.4);
+    font-size: 0.7em;
+}
+.homepage-radiotables-list a:hover + span, .homepage-radiotables-list a:focus + span {
+    color: rgba(0,0,0, 0.8);
+}
+
+.homepage .search-form {
+    margin: 1.3em 0;
 }
 
 
@@ -994,11 +1142,89 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 
+/* page — all radiotables */
+
+.all-radiotables-navigation {
+    padding-left: 0;
+    margin: 1.5em 0;
+    text-align: center;
+}
+.all-radiotables-navigation li {
+    display: inline-block;
+    margin: 0 1em;
+}
+.all-radiotables-navigation li a {
+    color: #5D9A3F;
+}
+.all-radiotables-navigation li a.selected {
+    font-weight: bold;
+}
+
+
+/* page — contact form */
+
+form.contact-form {
+    max-width: 700px;
+    margin: auto;
+}
+form.contact-form textarea {
+    min-height: 170px;
+}
+
+form.contact-form p {
+    line-height: 1.5em;
+    margin-bottom: 1.7em;
+}
+
+
+/* page — terms of service */
+
+.terms-of-service-page {
+    line-height: 1.5em;
+
+    display: flex;
+}
+.terms-of-service-page > *:first-child {
+    flex: 1;
+}
+.terms-of-service-page > *:last-child {
+    flex-basis: 310px;
+    padding-left: 3em;
+}
+
+.terms-of-service-page ol {
+    padding-left: 1.5em;
+}
+.terms-of-service-page ol li {
+    padding-left: 0.3em;
+    margin: 0.3em 0;
+}
+.terms-of-service-page h3 {
+    margin-top: 0;
+}
+.terms-of-service-page + p {
+    font-style: italic;
+    text-align: center;
+}
+
+
+/* page — about service */
+
+.about-service-page {
+    line-height: 1.6em;
+    max-width: 700px;
+    margin: auto;
+}
+.about-service-page p {
+    margin: 0.5em 0;
+}
+
+
 /* radiotable settings, columns UI */
 
 .JS .radiotable-columns {
     width: 80%;
-    margin: 1em auto;
+    margin: 1.2em auto;
 }
 .JS .radiotable-columns .form-item {
     background: #F3F3F3;
@@ -1038,26 +1264,47 @@ table.sortable th[data-sort].sorted-desc:after {
 .radiostation-rds input, .radiostation-rds textarea {
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
 }
+.radiostation-rds textarea {
+    min-height: 80px;
+}
 
 
-/* search form */
+/* radiotable settings, status */
 
-.search-form {
-    display: flex;
+.radiotable-status .form-item {
+    padding: 1.1em 0 1.1em 82px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+
+    /* http://ionicons.com/ */
+    background-image: url('images/rlstatus.png');
 }
-.search-form .form-item {
-    margin: 0;
+.radiotable-status .form-item:nth-of-type(1) {
+    background-position: 0 -2px;
 }
-.search-form .form-item > :first-child {
-    position: absolute;
-    width: 0px;
-    overflow: hidden;
-    opacity: 0;
+.radiotable-status .form-item:nth-of-type(2) {
+    background-position: 0 -66px;
 }
-.search-form button {
-    margin: 0;
-    margin-left: 0.6em;
-    width: 80px;
+.radiotable-status .form-item:nth-of-type(3) {
+    background-position: 0 -130px;
+}
+
+
+/* radiotable/radiostation remove, list */
+
+.radiostations-remove {
+    max-height: 430px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.radiostations-remove-scrollable {
+    padding: 0.8em 1em;
+    background: #F9FCF9;
+    border: 1px solid #D6EAD0;
+}
+.radiostations-remove:not(.radiostations-remove-scrollable) {
+    /* fix fieldset wrong margin */
+    margin-bottom: -1.2em;
 }
 
 
