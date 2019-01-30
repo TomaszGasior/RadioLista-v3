@@ -7,7 +7,7 @@ use App\Form\Type\RadioTableColumnsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -49,23 +49,22 @@ class RadioTableSettingsType extends RadioTableCreateType
             ->add('appearanceTheme', ChoiceType::class, [
                 'property_path' => 'appearance[th]',
 
-                'expanded' => true,
                 'label'    => 'Motyw',
                 'choices'  => [
-                    'Bez motywu'    => '',
+                    '(brak motywu, własne kolory)' => '',
                     'Górski las'    => 'bieszczady',
                     'Drewno'        => 'wood',
                     'Tęcza i niebo' => 'rainbow',
                     'Widok nocą'    => 'night',
                 ],
             ])
-            ->add('appearanceBackgroundColor', ColorType::class, [
+            ->add('appearanceBackgroundColor', TextType::class, [
                 'property_path' => 'appearance[bg]',
 
                 'label'    => 'Kolor tła',
                 'required' => false,
             ])
-            ->add('appearanceColor', ColorType::class, [
+            ->add('appearanceColor', TextType::class, [
                 'property_path' => 'appearance[fg]',
 
                 'label'    => 'Kolor tekstu',
@@ -80,7 +79,7 @@ class RadioTableSettingsType extends RadioTableCreateType
             ->add('appearanceFullWidth', CheckboxType::class, [
                 'property_path' => 'appearance[full]',
 
-                'label'    => 'Zawsze wykorzystuj pełną szerokość ekranu',
+                'label'    => 'Rozciągnij wykaz na pełną szerokość ekranu',
                 'required' => false,
             ])
         ;
