@@ -488,6 +488,9 @@ input.jscolor:not([style=""]) {
 
 .form-item.form-checkbox {
     margin: 0.9em 0;
+
+    /* needed for inputs and fake checkboxes with position absolute */
+    position: relative;
 }
 
 .form-item label {
