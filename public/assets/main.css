@@ -100,7 +100,9 @@ a:active {
 }
 
 .site-header h1 a {
-    background: url('images/logo.png') no-repeat;
+    background: url('logo.svg') no-repeat;
+    background-size: 238px auto;
+    background-position: 4px 4px;
     width: 245px;
     height: 62px;
 

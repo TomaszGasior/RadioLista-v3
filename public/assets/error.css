@@ -31,7 +31,7 @@ div.logo {
 }
 
 div.logo a {
-    background: url('images/logo.png') no-repeat;
+    background: url('logo.svg') no-repeat;
     background-size: contain;
     height: 50px;
     width: 200px;
