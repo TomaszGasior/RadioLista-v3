@@ -282,7 +282,7 @@ a:active {
 
 /* form widgets */
 
-input, textarea, select, button {
+input, textarea, select, button, a.button {
     font-size: 0.88em;
     width: 100%;
     padding: 5px 11px;
@@ -295,7 +295,7 @@ input, textarea, select, button {
     color: inherit;
     box-sizing: border-box;
 }
-input:focus, textarea:focus, select:focus, button:focus {
+input:focus, textarea:focus, select:focus, button:focus, a.button:focus {
     outline: 1px solid #F07F1F;
 
     /* needed for WebKit/Blink */
@@ -360,7 +360,7 @@ select::-ms-expand {
     }
 }
 
-button {
+button, a.button {
     max-width: 40%;
     margin: 1em auto 0;
     background: #F2FFC6;
@@ -371,7 +371,7 @@ button {
     display: block;
     box-shadow: none;
 }
-button:hover:not(:disabled), button:focus {
+button:hover:not(:disabled), button:focus, a.button:hover, a.button:focus {
     background: #F07F1F;
     color: #F2FFC6;
 }
@@ -385,6 +385,15 @@ button:disabled {
     button::-moz-focus-inner {
         border: none !important;
     }
+}
+
+a.button {
+    text-align: center;
+    width: auto;
+    text-decoration: none;
+
+    display: inline-block;
+    margin: 0;
 }
 
 fieldset {
