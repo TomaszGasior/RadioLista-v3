@@ -8,11 +8,19 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\RememberMeToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
 class SecurityFlashNotice implements EventSubscriberInterface
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         if ($event->getAuthenticationToken() instanceof RememberMeToken) {
@@ -27,7 +35,8 @@ class SecurityFlashNotice implements EventSubscriberInterface
     {
         $exception = $event->getException();
 
-        if (false === ($exception instanceof AccessDeniedException) || 404 === $exception->getCode()) {
+        if (!($exception instanceof AccessDeniedException) || 404 === $exception->getCode()
+            || null !== $this->security->getUser()) {
             return;
         }
 
@@ -51,7 +60,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
     {
         return [
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
-            KernelEvents::EXCEPTION => ['onKernelException', 10], // Before Security.
+            KernelEvents::EXCEPTION => ['onKernelException', 10],
             KernelEvents::FINISH_REQUEST => 'onKernelFinishRequest',
         ];
     }
