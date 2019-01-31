@@ -45,7 +45,7 @@
     <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ parent() }}</abbr>
 {%- endblock -%}
 {%- block radiostation_locality_network %}
-    <small title="sieć">(s)</small>
+    <small title="sieć">{{ parent()|trim }}</small>
 {%- endblock -%}
 {%- block radiostation_rds -%}
     <span class="rds">{{ parent() }}</span>

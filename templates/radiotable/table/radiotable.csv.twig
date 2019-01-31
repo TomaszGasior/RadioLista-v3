@@ -20,6 +20,17 @@
 
 {% endblock -%}
 
+{%- block radiostation_locality -%}
+    {%- if locality_is_network -%}
+        {#- This string needs to be concatenated with "network" mark before escaping. -#}
+        {%- set text = radiostation.locality.city ~ block('radiostation_locality_network') -%}
+        {#- Without this syntax Twig escapes this text automatically using HTML filter. -#}
+        {{- text|escape('csv')|raw -}}
+    {%- else -%}
+        {{ parent() }}
+    {%- endif -%}
+{%- endblock -%}
+
 {%- block radiostation_rds -%}
     {{ parent()|raw|replace({' ': '_'})|raw }}
     {#- This value is escaped with "csv" escaper in parent template. -#}

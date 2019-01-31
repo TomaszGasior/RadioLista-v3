@@ -62,14 +62,16 @@
                     {%- block radiostation_quality radiostation.quality|escape(escape_strategy) -%}
 
                 {%- elseif column == 'locality' -%}
+                    {%- set locality_is_network = radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) -%}
+
                     {%- block radiostation_locality -%}
                         {%- if radiostation.locality.type == constant('LOCALITY_COUNTRY', radiostation) -%}
                             ogólnokrajowy
                         {%- elseif radiostation.locality.city -%}
                             {{- radiostation.locality.city|escape(escape_strategy) -}}
 
-                            {%- if radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) -%}
-                                {%- block radiostation_locality_network %} (s){%- endblock -%}
+                            {%- if locality_is_network -%}
+                                {%- block radiostation_locality_network ' (s)' -%}
                             {%- endif -%}
                         {%- endif -%}
                     {%- endblock -%}
