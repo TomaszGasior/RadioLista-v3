@@ -78,20 +78,20 @@
             <h3>Eksport</h3>
 
             {% if radiotable.radioStationsCount > 0 %}
-                <p class="information">Wskaż format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane są szczegółowe informacje o&nbsp;RDS oraz wyróżnienia wizualne.</p>
+                <p class="information">Wybierz pożądany format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz&nbsp;eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane&nbsp;są&nbsp;szczegółowe informacje o&nbsp;RDS oraz wyróżnienia wizualne.</p>
 
-                <ul>
+                <ul class="radiotable-export-list">
                     <li>
-                        HTML – plik strony internetowej otwierany w&nbsp;przeglądarce
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}">Pobierz plik HTML</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}" class="button">Pobierz dokument PDF</a>
+                        PDF — dokument elektroniczny do przeglądania i&nbsp;druku
                     </li>
                     <li>
-                        CSV – zestaw danych do zaimportowania w arkuszu kalkulacyjnym
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}">Pobierz plik CSV</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}" class="button">Pobierz arkusz CSV</a>
+                        CSV — zestaw danych do zaimportowania i&nbsp;edycji w&nbsp;arkuszu kalkulacyjnym
                     </li>
                     <li>
-                        PDF – dokument elektroniczny do przeglądania i&nbsp;druku
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}">Pobierz plik PDF</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}" class="button">Pobierz stronę HTML</a>
+                        HTML — plik strony internetowej otwierany w&nbsp;przeglądarce
                     </li>
                 </ul>
             {% else %}

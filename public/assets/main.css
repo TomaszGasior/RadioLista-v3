@@ -1278,6 +1278,22 @@ form.contact-form p {
 }
 
 
+/* radiotable settings, export list */
+
+.radiotable-export-list {
+    list-style: none;
+    padding-left: 0;
+}
+.radiotable-export-list li {
+    margin-top: 0.8em;
+}
+.radiotable-export-list a {
+    margin-right: 0.7em;
+    width: 250px;
+    vertical-align: baseline;
+}
+
+
 /* radiostation edit/add, rds */
 
 .radiostation-rds input, .radiostation-rds textarea {
