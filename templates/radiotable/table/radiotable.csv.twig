@@ -36,3 +36,8 @@
     {#- This value is escaped with "csv" escaper in parent template. -#}
     {#- "raw" filter is needed. Without it Twig escapes this value second time. -#}
 {%- endblock -%}
+
+{%- block radiostation_comment -%}
+    {#- Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers. -#}
+    {{ parent()|raw|replace({"\r": ''})|raw }}
+{%- endblock -%}
