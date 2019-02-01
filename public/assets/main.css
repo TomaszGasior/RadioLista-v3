@@ -515,7 +515,7 @@ input.jscolor:not([style=""]) {
 /* tabbed UI */
 
 .JS .tabbed-ui > div {
-    background: rgba(255,255,255, 0.37);
+    background: #FAFFF8;
     padding: 0.5em 1.2em 0.8em;
     border: 1px solid #D2D2D2;
 }
@@ -535,14 +535,15 @@ input.jscolor:not([style=""]) {
 }
 .tabbed-ui-navigator button {
     margin-right: 0.4em;
-    padding: 0.6em 0.9em 0.2em 0.9em;
-    background: rgba(255,255,255, 0.37);
+    padding: 0.2em 0.9em;
+    background: #FAFFF8;
     border: 1px solid #D2D2D2;
-    border-bottom-color: rgba(255,255,255, 0.8);
+    opacity: 0.63;
 
     white-space: nowrap;
     display: inline-block;
     outline-style: none;
+    box-shadow: none;
     color: inherit;
     transition-property: opacity;
     width: auto;
@@ -557,10 +558,11 @@ input.jscolor:not([style=""]) {
     opacity: 1;
     outline-style: dashed;
 }
-.tabbed-ui-navigator button:not(.tabbed-ui-current) {
-    opacity: 0.63;
-    border-bottom: 0;
-    padding-top: 0.2em;
+.tabbed-ui-navigator button.tabbed-ui-current {
+    opacity: 1;
+    border-bottom-color: #FAFFF8;
+    padding-top: 0.6em;
+    background: #FAFFF8;
 }
 
 
@@ -893,7 +895,7 @@ table.sortable th[data-sort].sorted-desc:after {
 /* radiotables list */
 
 .radiotables-list-item {
-    background: rgba(255,255,255, 0.37);
+    background: #FAFFF8;
     border: 1px solid #D2D2D2;
     padding: 1em 1.4em;
     margin: 1.2em 0;
