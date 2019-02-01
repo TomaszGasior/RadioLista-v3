@@ -73,6 +73,14 @@ class AppExtension extends AbstractExtension
         fputcsv($handle, [$data]);
         rewind($handle);
 
-        return substr(fgets($handle), 0, -1); // Trim ending newline char.
+        $text = '';
+
+        while (false === feof($handle)) {
+            $text .= fgets($handle);
+        }
+
+        fclose($handle);
+
+        return substr($text, 0, -1); // Trim ending newline char.
     }
 }
