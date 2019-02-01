@@ -363,13 +363,13 @@ select::-ms-expand {
 button, a.button {
     max-width: 40%;
     margin: 1em auto 0;
-    background: #F2FFC6;
+    background: #F8FFDF;
     color: #F07F1F;
     font-weight: bold;
     transition: linear 0.1s background-color;
-
+    border-color: #DDDDDD;
+    box-shadow: 0 0 2px rgba(0,0,0, 0.08);
     display: block;
-    box-shadow: none;
 }
 button:hover:not(:disabled), button:focus, a.button:hover, a.button:focus {
     background: #F07F1F;
