@@ -50,6 +50,9 @@
 {%- block radiostation_rds -%}
     <span class="rds">{{ parent() }}</span>
 {%- endblock -%}
+{%- block radiostation_comment -%}
+    {{ parent()|nl2br(false) }}
+{%- endblock -%}
 
 {%- block radiostation_quality -%}
     {%- set quality_labels = {

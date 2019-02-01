@@ -85,6 +85,9 @@
                         {%- block radiostation_rds rds_ps_frames|first|escape(escape_strategy) -%}
                     {%- endif -%}
 
+                {%- elseif column == 'comment' -%}
+                    {%- block radiostation_comment radiostation.comment|escape(escape_strategy) -%}
+
                 {%- else -%}
                     {{- attribute(radiostation, column)|escape(escape_strategy) -}}
                 {%- endif -%}
