@@ -36,9 +36,11 @@
                 (function(){
                     var container = document.querySelector('.radiostations-remove');
 
-                    if (container.clientWidth !== container.offsetWidth) {
-                        container.classList.add('radiostations-remove-scrollable');
-                    }
+                    document.addEventListener('DOMContentLoaded', function(){
+                        if (container.clientWidth !== container.offsetWidth) {
+                            container.classList.add('radiostations-remove-scrollable');
+                        }
+                    });
                 })();
                 </script>
 
@@ -68,14 +70,16 @@
 
             <script>
             (function(){
-                document.querySelector('.radiotable-remove-confirm input').addEventListener('change', function(event) {
-                    var input = event.target;
-
-                    if (input.checked && false === window.confirm('Czy na pewno?')) {
+                var input = document.querySelector('.radiotable-remove-confirm input');
+                var confirm = function() {
+                    if (input.checked && false === window.confirm('Czy na pewno? Tej czynności nie można cofnąć!')) {
                         input.checked = false;
                         input.blur();
                     }
-                });
+
+                    input.removeEventListener('change', confirm);
+                };
+                input.addEventListener('change', confirm);
             })();
             </script>
         </div>
