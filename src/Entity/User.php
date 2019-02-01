@@ -30,9 +30,12 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank(groups={"Default", "RedefinePassword"}, message="Nazwa użytkownika nie może być pusta.")
-     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"})
+     * @Assert\Length(
+     *     max=50, groups={"Default", "RedefinePassword"},
+     *     maxMessage="Nazwa użytkownika może mieć maksymalnie 50 znaków.",
+     * )
      * @Assert\Regex(
-     *     "/^[a-zA-Z0-9_\.\-]{1,30}$/",
+     *     "/^[a-zA-Z0-9_\.\-]*$/",
      *     groups={"Default", "RedefinePassword"},
      *     message="Nazwa użytkownika zawiera niedozwolone znaki.",
      * )
@@ -50,6 +53,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @Assert\Length(
      *     max=100, min=10, groups={"RedefinePassword"},
      *     minMessage="Hasło musi mieć co najmniej 10 znaków.",
+     *     maxMessage="Hasło może mieć maksymalnie 100 znaków.",
      * )
      */
     private $plainPassword;
