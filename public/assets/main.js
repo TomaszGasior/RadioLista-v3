@@ -181,9 +181,9 @@
         this.setupPanels();
     }
 
-    document.addEventListener('DOMContentLoaded', function(){
-        document.documentElement.classList.add('JS');
+    document.documentElement.classList.add('JS');
 
+    document.addEventListener('DOMContentLoaded', function(){
         var sortableTable = document.querySelector('table.sortable');
         var tabbedUI = document.querySelector('.tabbed-ui');
         var notification = document.querySelector('.notification-wrapper');
