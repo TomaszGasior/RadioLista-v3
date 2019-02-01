@@ -126,11 +126,11 @@ class RadioTable
      *     "th"   = @Assert\Type("string"),
      *     "bg"   = {
      *         @Assert\Type("string"),
-     *         @Assert\Regex("/^#[0-9a-f]{6}$/i", message="Kolor tła jest niepoprawny."),
+     *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tła jest niepoprawny."),
      *     },
      *     "fg"   = {
      *         @Assert\Type("string"),
-     *         @Assert\Regex("/^#[0-9a-f]{6}$/i", message="Kolor tekstu jest niepoprawny."),
+     *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tekstu jest niepoprawny."),
      *     },
      *     "img"  = {
      *         @Assert\Type("string"),
