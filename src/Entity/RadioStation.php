@@ -19,7 +19,7 @@ class RadioStation
     public const POLARIZATION_VERTICAL   = 'V';
     public const POLARIZATION_CIRCULAR   = 'C';
     public const POLARIZATION_VARIOUS    = 'M';
-    public const POLARIZATION_NONE       = '';
+    public const POLARIZATION_NONE       = null;
 
     public const QUALITY_VERY_GOOD = 5;
     public const QUALITY_GOOD      = 4;
@@ -118,7 +118,7 @@ class RadioStation
     private $privateNumber;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint")
      * @Assert\Choice({
      *     RadioStation::QUALITY_VERY_GOOD,
      *     RadioStation::QUALITY_GOOD,
@@ -144,7 +144,7 @@ class RadioStation
     private $marker = self::MARKER_NONE;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint")
      * @Assert\Choice({
      *     RadioStation::TYPE_MUSIC,
      *     RadioStation::TYPE_INFORMATION,

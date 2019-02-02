@@ -75,17 +75,17 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $aboutMe;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $publicProfile;
 
     /**
-     * @ORM\Column(type="integer", nullable=false, options={"default": 0})
+     * @ORM\Column(type="integer", options={"default": 0})
      */
     private $radioTablesCount = 0;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $oldPassCompat;
 
