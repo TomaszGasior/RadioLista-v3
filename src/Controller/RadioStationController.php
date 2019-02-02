@@ -20,7 +20,8 @@ class RadioStationController extends AbstractController
      * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      * @ParamConverter("template", class="stdClass")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                         RadioStation $template = null): Response
@@ -47,7 +48,8 @@ class RadioStationController extends AbstractController
 
     /**
      * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function edit(RadioStation $radioStation, Request $request,
                          EntityManagerInterface $entityManager): Response
@@ -69,7 +71,8 @@ class RadioStationController extends AbstractController
 
     /**
      * @Route("/kopiuj-stacje/{id}", name="radiostation.copy")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function copy(RadioStation $radioStation): Response
     {
@@ -85,7 +88,8 @@ class RadioStationController extends AbstractController
 
     /**
      * @Route("/usun-stacje/{id}", name="radiostation.remove")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function remove(RadioStation $radioStation): Response
     {

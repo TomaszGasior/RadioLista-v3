@@ -63,7 +63,8 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/ustawienia-wykazu/{id}", name="radiotable.settings")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function settings(RadioTable $radioTable, Request $request,
                              EntityManagerInterface $entityManager): Response
@@ -85,7 +86,8 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/eksport-wykazu/{id}/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function download(RadioTable $radioTable, string $_format, Pdf $pdfRenderer,
                              RadioStationRepository $radioStationRepository): Response
@@ -123,7 +125,8 @@ class RadioTableController extends AbstractController
 
     /**
      * @Route("/eksport-wykazu/{id}", name="radiotable.export")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function export(RadioTable $radioTable): Response
     {
@@ -136,7 +139,8 @@ class RadioTableController extends AbstractController
     /**
      * @Route("/usun-wykaz/{id}", name="radiotable.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                            RadioStation $radioStationToRemove = null): Response
