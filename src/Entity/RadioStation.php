@@ -61,19 +61,19 @@ class RadioStation
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Nazwa stacji nie może być pusta.")
-     * @Assert\Length(max=100)
+     * @Assert\Length(max=100, maxMessage="Nazwa stacji może mieć maksymalnie {{ limit }} znaków.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
+     * @Assert\Length(max=50, maxMessage="Grupa może mieć maksymalnie {{ limit }} znaków.")
      */
     private $radioGroup;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
+     * @Assert\Length(max=50, maxMessage="Kraj może mieć maksymalnie {{ limit }} znaków.")
      */
     private $country;
 
@@ -87,7 +87,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=100)
+     * @Assert\Length(max=100, maxMessage="Lokalizacja może mieć maksymalnie {{ limit }} znaków.")
      */
     private $location;
 
@@ -187,7 +187,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Assert\Length(max=500)
+     * @Assert\Length(max=500, maxMessage="Komentarz może mieć maksymalnie {{ limit }} znaków.")
      */
     private $comment;
 
