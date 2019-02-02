@@ -77,7 +77,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $publicProfile;
+    private $publicProfile = false;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
@@ -87,7 +87,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $oldPassCompat;
+    private $oldPassCompat = false;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="owner", orphanRemoval=true)
