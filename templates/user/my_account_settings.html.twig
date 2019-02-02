@@ -10,24 +10,34 @@
     {{ form_start(form) }}
 
     <div class="tabbed-ui">
-        <div id="my-acc">
+        <div>
             <h3>Moje konto</h3>
 
-            <dl>
-                <dt>Nazwa użytkownika</dt>
-                <dd>{{ app.user.name }}</dd>
+            <dl class="my-account-details">
+                <div>
+                    <dt>Nazwa użytkownika</dt>
+                    <dd>{{ app.user.name }}</dd>
+                </div>
 
-                <dt>Data ostatniej aktywności</dt>
-                <dd>{{ app.user.lastActivityDate|date_format }}</dd>
+                <div>
+                    <dt>Data ostatniej aktywności</dt>
+                    <dd>{{ app.user.lastActivityDate|date_format }}</dd>
+                </div>
 
-                <dt>Data założenia konta</dt>
-                <dd>{{ app.user.registerDate|date_format }}</dd>
+                <div>
+                    <dt>Data założenia konta</dt>
+                    <dd>{{ app.user.registerDate|date_format }}</dd>
+                </div>
 
-                <dt>Stan profilu publicznego</dt>
-                <dd>{{ app.user.publicProfile ? 'włączony' : 'wyłączony' }}</dd>
+                <div>
+                    <dt>Stan profilu publicznego</dt>
+                    <dd>{{ app.user.publicProfile ? 'włączony' : 'wyłączony' }}</dd>
+                </div>
 
-                <dt>Liczba utworzonych wykazów</dt>
-                <dd>{{ app.user.radioTablesCount }}</dd>
+                <div>
+                    <dt>Liczba utworzonych wykazów</dt>
+                    <dd>{{ app.user.radioTablesCount }}</dd>
+                </div>
             </dl>
         </div>
         <div>

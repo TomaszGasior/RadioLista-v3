@@ -1345,6 +1345,20 @@ form.contact-form p {
 }
 
 
+/* my account details list */
+
+.my-account-details > * {
+    display: flex;
+}
+.my-account-details > * > * {
+    flex: 1;
+    margin: 0.3em 0;
+}
+.my-account-details dt:after {
+    content: ":";
+}
+
+
 /* button in tabbed UI */
 
 .JS .tabbed-ui > div > form > button {
