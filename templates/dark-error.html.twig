@@ -19,6 +19,10 @@
             {% set error_title = 'Drobne problemy techniczne.' %}
             {% set error_text = 'Nie udało się połączyć z bazą danych serwisu.|Proszę odczekać kilka minut i odświeżyć stronę.' %}
         {% endif %}
+        {% if message == "UnexpectedRequest" %}
+            {% set error_title = 'Nie można wykonać działania.' %}
+            {% set error_text = 'Brak uprawnień do wykonania działania|lub działanie pozbawione sensu.' %}
+        {% endif %}
         {% if message == "RadioTableNotFound" %}
             {% set error_title = 'Wykaz nie istnieje.' %}
             {% set error_text = 'Poszukiwany wykaz nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}

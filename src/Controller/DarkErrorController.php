@@ -24,12 +24,17 @@ class DarkErrorController extends ExceptionController
         if (is_a($exception->getClass(), ConnectionException::class, true)) {
             $message = 'DatabaseConnection';
         }
-        elseif (is_a($exception->getClass(), HttpException::class, true) and 404 === $exception->getStatusCode()) {
-            $message = 'NotFound';
+        elseif (is_a($exception->getClass(), HttpException::class, true)) {
+            if (403 === $exception->getStatusCode() || 400 === $exception->getStatusCode()) {
+                $message = 'UnexpectedRequest';
+            }
+            elseif (404 === $exception->getStatusCode()) {
+                $message = 'NotFound';
 
-            if (false !== strpos($exception->getMessage(), RadioTable::class)
-                || false !== strpos($exception->getMessage(), 'RADIOTABLE_SHOW')) {
-                $message = 'RadioTableNotFound';
+                if (false !== strpos($exception->getMessage(), RadioTable::class)
+                    || false !== strpos($exception->getMessage(), 'RADIOTABLE_SHOW')) {
+                    $message = 'RadioTableNotFound';
+                }
             }
         }
 
