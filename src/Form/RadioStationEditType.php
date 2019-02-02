@@ -95,7 +95,6 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('polarization', ChoiceType::class, [
                 'label'    => 'Polaryzacja',
-                'required' => false,
                 'choices'  => [
                     '(brak informacji)' => RadioStation::POLARIZATION_NONE,
                     'pozioma'           => RadioStation::POLARIZATION_HORIZONTAL,
@@ -154,7 +153,6 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('marker', ChoiceType::class, [
                 'label'    => 'Wyróżnienie wizualne',
-                'required' => false,
                 'choices'  => [
                     '(brak wyróżnienia)'  => RadioStation::MARKER_NONE,
                     'pogrubienie'         => RadioStation::MARKER_1,
