@@ -120,13 +120,21 @@
 
             {{ radiotable.description|raw }}
             <dl>
-                <dt>Liczba stacji</dt>
-                <dd>{{ radiotable.radioStationsCount }}</dd>
-                <dt>Data aktualizacji</dt>
-                <dd>{{ radiotable.lastUpdateTime|date_format }}</dd>
+                <div>
+                    <dt>Liczba stacji</dt>
+                    <dd>{{ radiotable.radioStationsCount }}</dd>
+                </div>
+                <div>
+                    <dt>Data aktualizacji</dt>
+                    <dd>{{ radiotable.lastUpdateTime|date_format }}</dd>
+                </div>
                 {% if radiotable.owner.publicProfile %}
-                    <dt>Autor</dt>
-                    <dd><a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">{{ radiotable.owner.name }}</a></dd>
+                    <div>
+                        <dt>Autor</dt>
+                        <dd>
+                            <a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">{{ radiotable.owner.name }}</a>
+                        </dd>
+                    </div>
                 {% endif %}
             </dl>
         </section>

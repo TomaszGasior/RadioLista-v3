@@ -223,6 +223,7 @@ a:active {
 
 .JS .notification-wrapper {
     position: absolute;
+    z-index: 100;
     top: 76px;
     left: 0;
     right: 0;
@@ -259,7 +260,7 @@ a:active {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin: auto;
-    min-height: 500px;
+    min-height: 70vh;
 }
 
 .main-content > header h2 {
@@ -728,6 +729,8 @@ table.radiotable abbr {
 .radiotable-details {
     margin-top: 1.8em;
     line-height: 1.5em;
+
+    width: 100%;
 }
 .radiotable-details p {
     margin: 0.4em 0;
@@ -735,6 +738,7 @@ table.radiotable abbr {
 
 .radiotable-details dl {
     display: flex;
+    align-items: center;
     width: 100%;
 
     border-top: 1px solid rgba(0,0,0, 0.05);
@@ -744,9 +748,16 @@ table.radiotable abbr {
     box-sizing: border-box;
 }
 .radiotable-details dl > * {
+    display: flex;
+    align-items: center;
     flex: 1;
-    margin: 0;
+}
+.radiotable-details dl > * > * {
+    flex: 1;
+}
+.radiotable-details dt, .radiotable-details dd {
     padding: 0 0.5em;
+    margin: 0;
 }
 .radiotable-details dt {
     text-align: right;
@@ -756,8 +767,6 @@ table.radiotable abbr {
 }
 .radiotable-details dd {
     text-align: left;
-}
-.radiotable-details dd {
     border-right: 1px solid rgba(0,0,0, 0.05);
 }
 .radiotable-details dd:last-child {
@@ -1117,27 +1126,22 @@ table.sortable th[data-sort].sorted-desc:after {
     line-height: 1.1em;
 }
 
-.user-profile-details {
-    margin-bottom: 1.5em;
+.user-profile-description {
     line-height: 1.5em;
 }
-.user-profile-details div {
-    display: inline-block;
-    margin: 0 1em;
-}
 
-.user-profile-details dl {
-    margin: auto;
-    text-align: center;
+.user-profile-details {
+    display: flex;
+    justify-content: center;
+    margin: 1em auto 1.5em;
     font-style: italic;
 }
+.user-profile-details > * {
+    display: flex;
+    margin: 0 1em;
+}
 .user-profile-details dt, .user-profile-details dd {
-    display: inline;
-}
-.user-profile-details dt {
-    margin-right: 0.6em;
-}
-.user-profile-details dd {
+    padding: 0 0.3em;
     margin: 0;
 }
 .user-profile-details dt:after {
@@ -1153,7 +1157,11 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 .user-login-screen .form-item.form-regular {
+    /* keep these styles in sync with mobile form items list */
     flex-direction: column;
+}
+.user-login-screen .form-item.form-regular > *:first-child {
+    width: auto;
 }
 .user-login-screen .form-item.form-regular label {
     margin-bottom: 0.5em;
@@ -1278,6 +1286,9 @@ form.contact-form p {
     margin: 0 0 0 0.6em;
     white-space: nowrap;
 }
+.JS .radiotable-columns .form-item button:first-of-type {
+    margin-left: 0;
+}
 
 
 /* radiotable settings, export list */
@@ -1367,4 +1378,65 @@ form.contact-form p {
 }
 .JS .tabbed-ui + button {
     margin-top: 1.3em;
+}
+
+
+/* CKEditor */
+
+.cke_chrome {
+    box-shadow: none !important;
+    border: none !important;
+}
+.cke_chrome.cke_focus {
+    outline: 1px solid #F07F1F !important;
+}
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a {
+    font-family: inherit !important;
+}
+
+.cke_chrome .cke_inner {
+    background: rgba(224,224,224, 0.3) !important;
+}
+.cke_chrome .cke_wysiwyg_div {
+    padding: 2px 11px !important;
+    background: #F3F3F3 !important;
+    border: 1px solid #C2C2C2 !important;
+    box-shadow: inset 2px 2px 2px #DEDEDE !important;
+}
+.cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
+    box-shadow: none !important;
+    border: 1px solid #C2C2C2 !important;
+    background: none !important;
+}
+.cke_chrome span.cke_top {
+    border-bottom: none !important;
+}
+.cke_chrome span.cke_bottom {
+    border-top: none !important;
+}
+.cke_chrome .cke_wordcount {
+    text-transform: lowercase;
+    padding: 1px 0.7em 0 0;
+}
+.cke_chrome .cke_wordcount span {
+    cursor: default !important;
+}
+
+.cke_chrome .cke_wysiwyg_div p, .cke_chrome .cke_wysiwyg_div ul, .cke_chrome .cke_wysiwyg_div ol {
+    margin: 0.8em 0;
+}
+
+.cke_dialog_body {
+    box-shadow: 0 0 6px #222 !important;
+}
+.cke_dialog_body .cke_resizer {
+    display: none !important;
+}
+.cke_dialog_body option[value="anchor"] {
+    display: none !important;
+}
+select.cke_dialog_ui_input_select {
+    -moz-appearance: menulist;
+    -webkit-appearance: menulist;
+    background-image: none;
 }

@@ -13,11 +13,11 @@
     </header>
 
     {% if user.aboutMe is not empty %}
-        <section class="user-profile-page user-profile-details">
+        <section class="user-profile-page user-profile-description">
             <h3>Informacje o użytkowniku</h3>
 
             {{ user.aboutMe|raw }}
-            <dl>
+            <dl class="user-profile-details">
                 <div>
                     <dt>Data ostatniej aktywności</dt>
                     <dd>{{ user.lastActivityDate|date_format }}</dd>

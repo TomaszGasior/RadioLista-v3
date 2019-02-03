@@ -1,0 +1,252 @@
+/* site width */
+
+.site-width {
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    /* override style from .full-width */
+    min-width: 320px !important;
+    box-sizing: border-box;
+}
+
+/* site header */
+
+.site-header h1 a {
+    width: 72px;
+}
+
+
+/* site navigation */
+
+.site-navigation {
+    line-height: 1.75em;
+}
+.site-navigation li:before {
+    display: none;
+}
+.site-navigation li {
+    margin-left: 0.7em;
+}
+
+.site-navigation .user-menu {
+    margin: 0.1em 0 0.2em;
+}
+
+
+/* site footer */
+
+.site-footer {
+    line-height: 2em;
+}
+
+
+/* notification */
+
+@keyframes notification_show
+{
+    from {
+        bottom: -800px;
+    }
+    to {
+        bottom: 90px;
+    }
+}
+@keyframes notification_hide
+{
+    from {
+        bottom: 90px;
+    }
+    to {
+        bottom: -100px;
+        opacity: 0.1;
+    }
+}
+
+.JS .notification-wrapper {
+    position: fixed;
+    bottom: 90px;
+    top: auto;
+}
+.JS .notification-wrapper.hidden {
+    bottom: -100px;
+    top: auto;
+}
+.JS .notification-wrapper .notification {
+    min-width: auto;
+    max-width: auto;
+    border-radius: 0;
+
+    width: 80%;
+}
+
+
+/* main content */
+
+.main-content {
+    min-height: auto;
+}
+
+.main-content > header h2 {
+    font-size: 1.7em;
+}
+
+
+/* form widgets */
+
+button {
+    max-width: 70%;
+}
+
+
+/* tabbed UI*/
+
+.tabbed-ui-navigator {
+    margin-bottom: 0.4em;
+}
+
+.tabbed-ui-navigator button {
+    margin-bottom: 0.5em;
+}
+.tabbed-ui-navigator button, .tabbed-ui-navigator button.tabbed-ui-current {
+    padding: 0.2em 0.9em;
+    border: 1px solid #D2D2D2;
+}
+.tabbed-ui-navigator li:last-child button {
+    margin-right: 0;
+}
+.tabbed-ui-navigator button.tabbed-ui-current {
+    font-weight: bold;
+    border-color: #aaa;
+}
+
+
+/* form items list */
+
+.form-item.form-regular {
+    flex-direction: column;
+}
+.form-item.form-regular > *:first-child {
+    width: auto;
+}
+.form-item.form-regular label {
+    margin-bottom: 0.5em;
+}
+
+.form-item.form-checkbox {
+    margin: 1.3em 0;
+}
+
+
+/* radiotable — details section */
+
+.radiotable-details dl {
+    flex-direction: column;
+    align-items: stretch;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.radiotable-details dt, .radiotable-details dd {
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+}
+.radiotable-details dd {
+    border-right: none;
+}
+
+
+/* information paragraph */
+
+.information {
+    padding: 1.5em 1.2em;
+    font-size: 0.9em;
+    background-image: none;
+}
+.JS .tabbed-ui .information {
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+}
+
+
+/* page — user profile */
+
+.user-profile-details {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+@media (max-width: 470px)
+{
+    .user-profile-details > * {
+        flex-direction: column;
+    }
+}
+
+
+/* page — homepage */
+
+.homepage {
+    flex-direction: column;
+}
+.homepage > * {
+    /* keep this to properly cut off radiotables names */
+    width: 100%;
+}
+
+@media (max-width: 450px)
+{
+    .homepage-radiotables-list li {
+        flex-direction: column;
+        align-items: start;
+        margin: 0.5em 0;
+    }
+}
+
+
+/* radiotable settings, columns UI */
+
+.JS .radiotable-columns {
+    width: auto;
+}
+.JS .radiotable-columns .form-item.form-regular {
+    flex-direction: row;
+}
+.JS .radiotable-columns .form-item.form-regular label {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px)
+{
+    .JS .radiotable-columns .form-item.form-regular {
+        flex-direction: column;
+    }
+    .JS .radiotable-columns .form-item.form-regular label {
+        margin-bottom: 0.7em;
+    }
+}
+@media (max-width: 415px)
+{
+    .JS .radiotable-columns .form-item button {
+        width: auto;
+        height: auto;
+        font-size: 0.8em;
+        padding-top: 0.6em;
+        padding-bottom: 0.6em;
+    }
+}
+
+
+/* radiotable settings, status */
+
+.radiotable-status input[type="radio"] + label::before {
+    top: 40%;
+}
+
+
+/* radiotable settings, export list */
+
+.radiotable-export-list a.button {
+    margin: 0.23em 0 0.7em 0;
+    width: 100%;
+    max-width: 100%;
+}
