@@ -1,7 +1,7 @@
 /* theme — bieszczady */
 
 .theme-bieszczady .customizable-background {
-    background: #D1D1D1 url('images/themes/bg_bieszczady.jpg') no-repeat center / cover fixed;
+    background: #D1D1D1 url('themes/bieszczady.jpg') no-repeat center / cover fixed;
 }
 .theme-bieszczady .customizable-color {
     color: #000;
@@ -17,7 +17,7 @@
 /* http://blog.pogotowie3d.pl/index.php/darmowa-tekstura-drewna-olcha-sliwa-wallis/ */
 
 .theme-wood .customizable-background {
-    background: #C89776 url('images/themes/bg_wood.jpg') repeat fixed;
+    background: #C89776 url('themes/wood.jpg') repeat fixed;
 }
 .theme-wood .customizable-color {
     color: #000;
@@ -36,7 +36,7 @@
 /* http://www.publicdomainpictures.net/view-image.php?image=25019&picture=dark-clouds-and-rainbow/ */
 
 .theme-rainbow .customizable-background {
-    background: #919692 url('images/themes/bg_rainbow.jpg') no-repeat center / cover fixed;
+    background: #919692 url('themes/rainbow.jpg') no-repeat center / cover fixed;
 }
 .theme-rainbow .customizable-color {
     color: #0B0024;
@@ -56,7 +56,7 @@
 /* http://magdeleine.co/photo-by-caleb-ralston-n-491/ */
 
 .theme-night .customizable-background {
-    background: #314b5e url('images/themes/bg_night.jpg') no-repeat center / cover fixed;
+    background: #314b5e url('themes/night.jpg') no-repeat center / cover fixed;
 }
 .theme-night .customizable-color {
     color: #eee;
