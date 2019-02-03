@@ -137,6 +137,16 @@ button {
 }
 
 
+/* radiotable — wrapper */
+
+.radiotable-container {
+    margin-left: -5vw;
+    margin-right: -5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+
 /* radiotable — details section */
 
 .radiotable-details dl {
@@ -152,6 +162,13 @@ button {
 }
 .radiotable-details dd {
     border-right: none;
+}
+
+
+/* customized radiotable page */
+
+.customized-radiotable .customizable-background {
+    background-image: none !important;
 }
 
 
@@ -200,6 +217,14 @@ button {
         align-items: start;
         margin: 0.5em 0;
     }
+}
+
+
+/* page — all radiotables */
+
+.all-radiotables-navigation li {
+    display: block;
+    margin: 0.4em 0;
 }
 
 
