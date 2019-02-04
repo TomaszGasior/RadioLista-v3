@@ -6,15 +6,29 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioTableSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('searchTerm', SearchType::class, [
+            ->add('s', SearchType::class, [
                 'label' => 'Szukane wyrażenie',
             ])
+            ->setMethod('GET')
         ;
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return '';
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+        ]);
     }
 }

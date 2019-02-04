@@ -106,7 +106,7 @@ class GeneralController extends AbstractController
         $form = $this->createForm(RadioTableSearchType::class);
         $form->handleRequest($request);
 
-        $searchTerm = $form->get('searchTerm')->getData();
+        $searchTerm = $form->get('s')->getData();
 
         if (!$searchTerm) {
             return $this->redirectToRoute('homepage');
