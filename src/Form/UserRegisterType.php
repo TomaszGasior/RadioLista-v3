@@ -31,12 +31,12 @@ class UserRegisterType extends AbstractType
                 'invalid_message' => 'Podane hasła nie są identyczne.',
             ])
             ->add('acceptServiceTerms', CheckboxType::class, [
-                'label'       => 'Akceptuję regulamin serwisu RadioLista',
-                'mapped'      => false,
-                'required'    => false,
+                'label' => 'Akceptuję regulamin serwisu RadioLista',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new Assert\IsTrue([
-                        'groups'  => 'Registration',
+                        'groups' => 'Registration',
                         'message' => 'Akceptacja regulaminu serwisu jest wymagana.',
                     ]),
                 ],
@@ -47,7 +47,7 @@ class UserRegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class'        => User::class,
+            'data_class' => User::class,
             'validation_groups' => ['Registration', 'RedefinePassword'],
         ]);
     }

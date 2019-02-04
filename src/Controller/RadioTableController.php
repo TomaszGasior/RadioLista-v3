@@ -30,7 +30,7 @@ class RadioTableController extends AbstractController
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
         return $this->render('radiotable/show.html.twig', [
-            'radiotable'    => $radioTable,
+            'radiotable' => $radioTable,
             'radiostations' => $radioStations,
         ]);
     }
@@ -79,7 +79,7 @@ class RadioTableController extends AbstractController
         }
 
         return $this->render('radiotable/settings.html.twig', [
-            'form'       => $form->createView(),
+            'form' => $form->createView(),
             'radiotable' => $radioTable,
         ]);
     }
@@ -95,7 +95,7 @@ class RadioTableController extends AbstractController
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
         $templateVars = [
-            'radiotable'    => $radioTable,
+            'radiotable' => $radioTable,
             'radiostations' => $radioStations,
         ];
 
@@ -131,7 +131,7 @@ class RadioTableController extends AbstractController
     public function export(RadioTable $radioTable): Response
     {
         return $this->redirectToRoute('radiotable.settings', [
-            'id'        => $radioTable->getId(),
+            'id' => $radioTable->getId(),
             '_fragment' => 'export',
         ]);
     }
@@ -191,9 +191,9 @@ class RadioTableController extends AbstractController
         }
 
         return $this->render('radiotable/remove.html.twig', [
-            'form_radiotable'   => $form_RadioTable->createView(),
+            'form_radiotable' => $form_RadioTable->createView(),
             'form_radiostation' => $form_RadioStation->createView(),
-            'radiotable'        => $radioTable,
+            'radiotable' => $radioTable,
         ]);
     }
 }

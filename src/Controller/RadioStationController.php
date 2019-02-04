@@ -41,7 +41,7 @@ class RadioStationController extends AbstractController
         }
 
         return $this->render('radiostation/add.html.twig', [
-            'form'         => $form->createView(),
+            'form' => $form->createView(),
             'radiostation' => $radioStation,
         ]);
     }
@@ -64,7 +64,7 @@ class RadioStationController extends AbstractController
         }
 
         return $this->render('radiostation/edit.html.twig', [
-            'form'         => $form->createView(),
+            'form' => $form->createView(),
             'radiostation' => $radioStation,
         ]);
     }
@@ -82,7 +82,7 @@ class RadioStationController extends AbstractController
 
         return $this->forward(__CLASS__ . '::add', [
             'radioTableId' => $radioStation->getRadioTable()->getId(),
-            'template'     => $template,
+            'template' => $template,
         ]);
     }
 
@@ -96,7 +96,7 @@ class RadioStationController extends AbstractController
         $this->addFlash('notice', 'Stacja została zaznaczona do usunięcia.');
 
         return $this->forward(RadioTableController::class . '::remove', [
-            'id'                   => $radioStation->getRadioTable()->getId(),
+            'id' => $radioStation->getRadioTable()->getId(),
             'radioStationToRemove' => $radioStation,
         ]);
     }

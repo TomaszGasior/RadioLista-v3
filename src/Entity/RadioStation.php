@@ -16,33 +16,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RadioStation
 {
     public const POLARIZATION_HORIZONTAL = 'H';
-    public const POLARIZATION_VERTICAL   = 'V';
-    public const POLARIZATION_CIRCULAR   = 'C';
-    public const POLARIZATION_VARIOUS    = 'M';
-    public const POLARIZATION_NONE       = null;
+    public const POLARIZATION_VERTICAL = 'V';
+    public const POLARIZATION_CIRCULAR = 'C';
+    public const POLARIZATION_VARIOUS = 'M';
+    public const POLARIZATION_NONE = null;
 
     public const QUALITY_VERY_GOOD = 5;
-    public const QUALITY_GOOD      = 4;
-    public const QUALITY_MIDDLE    = 3;
-    public const QUALITY_BAD       = 2;
-    public const QUALITY_VERY_BAD  = 1;
+    public const QUALITY_GOOD = 4;
+    public const QUALITY_MIDDLE = 3;
+    public const QUALITY_BAD = 2;
+    public const QUALITY_VERY_BAD = 1;
 
-    public const TYPE_MUSIC       = 1;
+    public const TYPE_MUSIC = 1;
     public const TYPE_INFORMATION = 2;
-    public const TYPE_UNIVERSAL   = 3;
-    public const TYPE_RELIGIOUS   = 4;
-    public const TYPE_OTHER       = 0;
+    public const TYPE_UNIVERSAL = 3;
+    public const TYPE_RELIGIOUS = 4;
+    public const TYPE_OTHER = 0;
 
     public const LOCALITY_COUNTRY = 1;
-    public const LOCALITY_LOCAL   = 2;
+    public const LOCALITY_LOCAL = 2;
     public const LOCALITY_NETWORK = 3;
 
-    public const MARKER_1    = 1;
-    public const MARKER_2    = 2;
-    public const MARKER_3    = 3;
-    public const MARKER_4    = 4;
-    public const MARKER_5    = 5;
-    public const MARKER_6    = 6;
+    public const MARKER_1 = 1;
+    public const MARKER_2 = 2;
+    public const MARKER_3 = 3;
+    public const MARKER_4 = 4;
+    public const MARKER_5 = 5;
+    public const MARKER_6 = 6;
     public const MARKER_NONE = null;
 
     /**
@@ -180,8 +180,8 @@ class RadioStation
      * })
      */
     private $rds = [
-        'rt'  => '',
-        'ps'  => '',
+        'rt' => '',
+        'ps' => '',
         'pty' => '',
     ];
 

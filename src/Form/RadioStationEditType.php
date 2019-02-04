@@ -49,9 +49,9 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('radioGroup', TextHintsType::class, [
-                'label'    => 'Grupa medialna',
+                'label' => 'Grupa medialna',
                 'required' => false,
-                'hints'    => [
+                'hints' => [
                     'Polskie Radio',
                     'Audytorium 17',
                     'Grupa RMF',
@@ -61,9 +61,9 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('country', TextHintsType::class, [
-                'label'    => 'Kraj',
+                'label' => 'Kraj',
                 'required' => false,
-                'hints'    => [
+                'hints' => [
                     'Polska',
                     'Białoruś',
                     'Czechy',
@@ -75,60 +75,60 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('quality', ChoiceType::class, [
-                'label'   => 'Jakość odbioru',
+                'label' => 'Jakość odbioru',
                 'choices' => [
                     'bardzo dobra' => RadioStation::QUALITY_VERY_GOOD,
-                    'dobra'        => RadioStation::QUALITY_GOOD,
-                    'dostateczna'  => RadioStation::QUALITY_MIDDLE,
-                    'zła'          => RadioStation::QUALITY_BAD,
-                    'bardzo zła'   => RadioStation::QUALITY_VERY_BAD,
+                    'dobra' => RadioStation::QUALITY_GOOD,
+                    'dostateczna' => RadioStation::QUALITY_MIDDLE,
+                    'zła' => RadioStation::QUALITY_BAD,
+                    'bardzo zła' => RadioStation::QUALITY_VERY_BAD,
                 ],
             ])
             ->add('location', null, [
                 'label' => 'Lokalizacja nadajnika',
             ])
             ->add('power', DecimalUnitType::class, [
-                'label'      => 'Moc nadajnika',
+                'label' => 'Moc nadajnika',
                 'unit_label' => 'kW',
-                'step'       => 0.01,
-                'required'   => false,
+                'step' => 0.01,
+                'required' => false,
             ])
             ->add('polarization', ChoiceType::class, [
-                'label'    => 'Polaryzacja',
-                'choices'  => [
+                'label' => 'Polaryzacja',
+                'choices' => [
                     '(brak informacji)' => RadioStation::POLARIZATION_NONE,
-                    'pozioma'           => RadioStation::POLARIZATION_HORIZONTAL,
-                    'pionowa'           => RadioStation::POLARIZATION_VERTICAL,
-                    'kołowa'            => RadioStation::POLARIZATION_CIRCULAR,
-                    'różne'             => RadioStation::POLARIZATION_VARIOUS,
+                    'pozioma' => RadioStation::POLARIZATION_HORIZONTAL,
+                    'pionowa' => RadioStation::POLARIZATION_VERTICAL,
+                    'kołowa' => RadioStation::POLARIZATION_CIRCULAR,
+                    'różne' => RadioStation::POLARIZATION_VARIOUS,
                 ],
             ])
             ->add('type', ChoiceType::class, [
-                'label'   => 'Rodzaj programu',
+                'label' => 'Rodzaj programu',
                 'choices' => [
-                    'muzyczny'     => RadioStation::TYPE_MUSIC,
-                    'uniwersalny'  => RadioStation::TYPE_UNIVERSAL,
+                    'muzyczny' => RadioStation::TYPE_MUSIC,
+                    'uniwersalny' => RadioStation::TYPE_UNIVERSAL,
                     'informacyjny' => RadioStation::TYPE_INFORMATION,
-                    'katolicki'    => RadioStation::TYPE_RELIGIOUS,
-                    'inny'         => RadioStation::TYPE_OTHER,
+                    'katolicki' => RadioStation::TYPE_RELIGIOUS,
+                    'inny' => RadioStation::TYPE_OTHER,
                 ],
             ])
             ->add('localityType', ChoiceType::class, [
                 'property_path' => 'locality[type]',
 
-                'label'   => 'Lokalność programu',
+                'label' => 'Lokalność programu',
                 'choices' => [
                     'ogólnokrajowy' => RadioStation::LOCALITY_COUNTRY,
-                    'lokalny'       => RadioStation::LOCALITY_LOCAL,
-                    'sieciowy'      => RadioStation::LOCALITY_NETWORK,
+                    'lokalny' => RadioStation::LOCALITY_LOCAL,
+                    'sieciowy' => RadioStation::LOCALITY_NETWORK,
                 ],
             ])
             ->add('localityCity', TextHintsType::class, [
                 'property_path' => 'locality[city]',
 
-                'label'    => 'Lokalność — miasto/województwo',
+                'label' => 'Lokalność — miasto/województwo',
                 'required' => false,
-                'hints'    => [
+                'hints' => [
                     'dolnośląskie',
                     'kujawsko-pomorskie',
                     'lubelskie',
@@ -149,37 +149,37 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('privateNumber', null, [
                 'label' => 'Numer w odbiorniku',
-                'attr'  => ['min' => '1'],
+                'attr' => ['min' => '1'],
             ])
             ->add('marker', ChoiceType::class, [
-                'label'    => 'Wyróżnienie wizualne',
-                'choices'  => [
-                    '(brak wyróżnienia)'  => RadioStation::MARKER_NONE,
-                    'pogrubienie'         => RadioStation::MARKER_1,
-                    'pochylenie'          => RadioStation::MARKER_2,
-                    'przekreślenie'       => RadioStation::MARKER_3,
-                    'czerwony kolor tła'  => RadioStation::MARKER_4,
-                    'zielony kolor tła'   => RadioStation::MARKER_5,
+                'label' => 'Wyróżnienie wizualne',
+                'choices' => [
+                    '(brak wyróżnienia)' => RadioStation::MARKER_NONE,
+                    'pogrubienie' => RadioStation::MARKER_1,
+                    'pochylenie' => RadioStation::MARKER_2,
+                    'przekreślenie' => RadioStation::MARKER_3,
+                    'czerwony kolor tła' => RadioStation::MARKER_4,
+                    'zielony kolor tła' => RadioStation::MARKER_5,
                     'niebieski kolor tła' => RadioStation::MARKER_6,
                 ],
             ])
             ->add('comment', TextareaType::class, [
-                'label'    => 'Komentarz',
+                'label' => 'Komentarz',
                 'required' => false,
             ])
             ->add('rdsPs', TextareaType::class, [
                 'property_path' => 'rds[ps]',
 
-                'label'    => 'Programme Service',
+                'label' => 'Programme Service',
                 'required' => false,
-                'trim'     => false,
+                'trim' => false,
             ])
             ->add('rdsRt', TextareaType::class, [
                 'property_path' => 'rds[rt]',
 
-                'label'    => 'Radio Text',
+                'label' => 'Radio Text',
                 'required' => false,
-                'trim'     => false,
+                'trim' => false,
             ])
             ->add('rdsPty', null, [
                 'property_path' => 'rds[pty]',

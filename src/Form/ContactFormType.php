@@ -24,8 +24,8 @@ class ContactFormType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label'       => 'Twój adres e-mail',
-                'required'    => false,
+                'label' => 'Twój adres e-mail',
+                'required' => false,
                 'constraints' => [
                     new Assert\Email([
                         'message' => 'Podany adres e-mail jest niewłaściwy.',
@@ -39,7 +39,7 @@ class ContactFormType extends AbstractType
                         'message' => 'Nie wypełniono treści wiadomości.',
                     ]),
                     new Assert\Length([
-                        'min'        => 10,
+                        'min' => 10,
                         'minMessage' => 'Nie wypełniono treści wiadomości.',
                     ]),
                 ],

@@ -20,16 +20,16 @@ class UserSettingsType extends AbstractType
     {
         $builder
             ->add('aboutMe', TextareaType::class, [
-                'label'    => 'Kilka słów o mnie',
+                'label' => 'Kilka słów o mnie',
                 'required' => false,
             ])
             ->add('publicProfile', null, [
                 'label' => 'Włącz profil publiczny i stronę profilową',
             ])
             ->add('currentPassword', PasswordType::class, [
-                'label'       => 'Obecne hasło',
-                'mapped'      => false,
-                'required'    => false,
+                'label' => 'Obecne hasło',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new SecurityAssert\UserPassword([
                         'groups' => 'ChangingPasswordTab',
@@ -38,8 +38,8 @@ class UserSettingsType extends AbstractType
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
-                'type'        => PasswordType::class,
-                'required'    => false,
+                'type' => PasswordType::class,
+                'required' => false,
 
                 'first_options' => [
                     'label' => 'Nowe hasło',
@@ -55,7 +55,7 @@ class UserSettingsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class'        => User::class,
+            'data_class' => User::class,
             'validation_groups' => function(FormInterface $form){
                 if ($form->get('currentPassword')->getData() || $form->get('plainPassword')->getData()) {
                     return ['ChangingPasswordTab', 'RedefinePassword'];

@@ -25,7 +25,7 @@ class GeneralController extends AbstractController
         return $this->render('general/homepage.html.twig', [
             'last_updated_radiotables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(10),
             'last_created_radiotables' => $radioTableRepository->findPublicOrderedByIdDesc(10),
-            'search_form'              => $form->createView(),
+            'search_form' => $form->createView(),
         ]);
     }
 

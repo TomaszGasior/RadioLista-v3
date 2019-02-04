@@ -42,7 +42,7 @@ class AppExtension extends AbstractExtension
     public function formatRDSFrames(array $frames): array
     {
         foreach($frames as $key => &$frame) {
-            $frame      = str_replace('_', ' ', $frame);
+            $frame = str_replace('_', ' ', $frame);
             $emptyChars = 8 - mb_strlen($frame);
 
             if ('' == trim($frame)) {

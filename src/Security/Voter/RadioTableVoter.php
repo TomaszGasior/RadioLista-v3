@@ -17,7 +17,7 @@ class RadioTableVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
-        $user       = $token->getUser();
+        $user = $token->getUser();
         $radioTable = ($subject instanceof RadioStation) ? $subject->getRadioTable() : $subject;
 
         switch ($attribute) {

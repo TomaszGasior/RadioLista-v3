@@ -12,7 +12,7 @@ class RadioTableRemoveType extends AbstractType
     {
         $builder
             ->add('confirm', CheckboxType::class, [
-                'label'    => 'Usuń cały wykaz na zawsze',
+                'label' => 'Usuń cały wykaz na zawsze',
                 'required' => false,
             ])
         ;

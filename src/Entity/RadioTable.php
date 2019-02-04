@@ -17,28 +17,28 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RadioTable
 {
-    public const COLUMN_FREQUENCY      = 'frequency';
+    public const COLUMN_FREQUENCY = 'frequency';
     public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
-    public const COLUMN_NAME           = 'name';
-    public const COLUMN_RADIO_GROUP    = 'radioGroup';
-    public const COLUMN_COUNTRY        = 'country';
-    public const COLUMN_LOCATION       = 'location';
-    public const COLUMN_POWER          = 'power';
-    public const COLUMN_POLARIZATION   = 'polarization';
-    public const COLUMN_TYPE           = 'type';
-    public const COLUMN_LOCALITY       = 'locality';
-    public const COLUMN_QUALITY        = 'quality';
-    public const COLUMN_RDS            = 'rds';
-    public const COLUMN_COMMENT        = 'comment';
+    public const COLUMN_NAME = 'name';
+    public const COLUMN_RADIO_GROUP = 'radioGroup';
+    public const COLUMN_COUNTRY = 'country';
+    public const COLUMN_LOCATION = 'location';
+    public const COLUMN_POWER = 'power';
+    public const COLUMN_POLARIZATION = 'polarization';
+    public const COLUMN_TYPE = 'type';
+    public const COLUMN_LOCALITY = 'locality';
+    public const COLUMN_QUALITY = 'quality';
+    public const COLUMN_RDS = 'rds';
+    public const COLUMN_COMMENT = 'comment';
     // Keep in sync with RadioStation's fields names.
 
-    public const SORTING_FREQUENCY      = self::COLUMN_FREQUENCY;
-    public const SORTING_NAME           = self::COLUMN_NAME;
+    public const SORTING_FREQUENCY = self::COLUMN_FREQUENCY;
+    public const SORTING_NAME = self::COLUMN_NAME;
     public const SORTING_PRIVATE_NUMBER = self::COLUMN_PRIVATE_NUMBER;
 
-    public const STATUS_PUBLIC   = 1;
+    public const STATUS_PUBLIC = 1;
     public const STATUS_UNLISTED = 0;
-    public const STATUS_PRIVATE  = -1;
+    public const STATUS_PRIVATE = -1;
 
     /**
      * @ORM\Id()
@@ -123,16 +123,16 @@ class RadioTable
     /**
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
-     *     "th"   = @Assert\Type("string"),
-     *     "bg"   = {
+     *     "th" = @Assert\Type("string"),
+     *     "bg" = {
      *         @Assert\Type("string"),
      *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tła jest niepoprawny."),
      *     },
-     *     "fg"   = {
+     *     "fg" = {
      *         @Assert\Type("string"),
      *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tekstu jest niepoprawny."),
      *     },
-     *     "img"  = {
+     *     "img" = {
      *         @Assert\Type("string"),
      *         @Assert\Url(message="Adres URL obrazu tła jest nieprawidłowy.")
      *     },
@@ -140,10 +140,10 @@ class RadioTable
      * })
      */
     private $appearance = [
-        'th'   => '',
-        'bg'   => '',
-        'fg'   => '',
-        'img'  => '',
+        'th' => '',
+        'bg' => '',
+        'fg' => '',
+        'img' => '',
         'full' => false,
     ];
 

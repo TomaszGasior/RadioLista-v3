@@ -27,11 +27,11 @@ class RadioStationRemoveType extends AbstractType
             ->add('chosenToRemove', EntityType::class, [
                 'label' => 'Wskaż stacje do usunięcia',
 
-                'class'         => RadioStation::class,
-                'choice_label'  => 'name',
+                'class' => RadioStation::class,
+                'choice_label' => 'name',
                 'query_builder' => $this->radioStationRepository->getQueryForRadioTable($options['radiotable']),
-                'expanded'      => true,
-                'multiple'      => true,
+                'expanded' => true,
+                'multiple' => true,
             ])
         ;
     }

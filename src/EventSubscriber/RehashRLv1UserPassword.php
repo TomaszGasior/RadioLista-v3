@@ -20,7 +20,7 @@ class RehashRLv1UserPassword implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
-        $user          = $token->getUser();
+        $user = $token->getUser();
         $plainPassword = $token->getCredentials();
 
         // Normally Security takes care about clearing sensitive data from token manager,

@@ -18,21 +18,21 @@ class RadioTableCreateType extends AbstractType
                 'label' => 'Nazwa wykazu',
             ])
             ->add('useKhz', ChoiceType::class, [
-                'label'   => 'Jednostka częstotliwości',
+                'label' => 'Jednostka częstotliwości',
                 'choices' => [
                     'kHz' => 1,
                     'MHz' => 0,
                 ]
             ])
             ->add('description', TextareaType::class, [
-                'label'    => 'Opis wykazu',
+                'label' => 'Opis wykazu',
                 'required' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,
-                'label'    => 'Widoczność wykazu',
+                'label' => 'Widoczność wykazu',
                 'choices'  => [
-                    'Publiczny — wykaz może zobaczyć każdy'     => RadioTable::STATUS_PUBLIC,
+                    'Publiczny — wykaz może zobaczyć każdy' => RadioTable::STATUS_PUBLIC,
                     'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
                         => RadioTable::STATUS_UNLISTED,
                     'Prywatny — wykaz możesz zobaczyć tylko ty' => RadioTable::STATUS_PRIVATE,
