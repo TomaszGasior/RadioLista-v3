@@ -18,7 +18,7 @@ class RLv2CompatController extends AbstractController
         $radioTableId = $request->query->get('id');
 
         if (empty($radioTableId) or !is_numeric($radioTableId)) {
-            return $this->redirectToRoute('homepage');
+            throw $this->createNotFoundException();
         }
 
         return $this->redirectToRoute('radiotable.show', ['id' => $radioTableId], 301);
