@@ -8,6 +8,8 @@ twig:
     form_themes:
         - 'common/form/overwritten_types.html.twig'
         - 'common/form/custom_types.html.twig'
+    globals:
+        version: '%version%'
 
     # number_format defaults for radiostation frequency and power.
     number_format:
