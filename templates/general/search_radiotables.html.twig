@@ -7,10 +7,7 @@
         <h2><strong>„{{ search_term }}”</strong> — wyszukiwanie</h2>
     </header>
 
-    {{ form_start(search_form, {attr: {class: 'search-form'}}) }}
-    {{ form_row(search_form.searchTerm) }}
-    <button>Szukaj</button>
-    {{ form_end(search_form) }}
+    {% include 'common/search_form.html.twig' %}
 
     {% if radiotables %}
         {% set show_owner = true %}

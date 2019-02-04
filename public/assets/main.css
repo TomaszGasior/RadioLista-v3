@@ -1036,15 +1036,6 @@ table.sortable th[data-sort].sorted-desc:after {
     display: flex;
     margin: 1em 0 2em;
 }
-.search-form .form-item {
-    margin: 0;
-}
-.search-form .form-item > :first-child {
-    position: absolute;
-    width: 0px;
-    overflow: hidden;
-    opacity: 0;
-}
 .search-form button {
     margin: 0;
     margin-left: 0.6em;

@@ -1,0 +1,8 @@
+{{ form_start(search_form, {attr: {class: 'search-form'}}) }}
+
+{{ form_label(search_form.searchTerm, null, {label_attr: {class: 'sr-only'}}) }}
+{{ form_widget(search_form.searchTerm) }}
+
+<button>Szukaj</button>
+
+{{ form_end(search_form) }}

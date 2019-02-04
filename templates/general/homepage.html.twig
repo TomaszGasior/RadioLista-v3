@@ -49,10 +49,7 @@
         <section>
             <h3>Wyszukaj wykazy</h3>
 
-            {{ form_start(search_form, {attr: {class: 'search-form'}}) }}
-            {{ form_row(search_form.searchTerm) }}
-            <button>Szukaj</button>
-            {{ form_end(search_form) }}
+            {% include 'common/search_form.html.twig' %}
         </section>
     </div>
 {% endblock %}
