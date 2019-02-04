@@ -6,8 +6,8 @@ twig:
     date:
         format: 'j F Y'
     form_themes:
-        - 'form/overwritten_types.html.twig'
-        - 'form/custom_types.html.twig'
+        - 'common/form/overwritten_types.html.twig'
+        - 'common/form/custom_types.html.twig'
 
     # number_format defaults for radiostation frequency and power.
     number_format:
