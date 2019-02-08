@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -18,6 +19,13 @@ class RadioTableRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, RadioTable::class);
+    }
+
+    static public function getPublicCriteria(): Criteria
+    {
+        return new Criteria(
+            Criteria::expr()->eq('status', RadioTable::STATUS_PUBLIC),
+        );
     }
 
     public function findPublicOrderedByRadioStationsCount(): array
@@ -43,8 +51,7 @@ class RadioTableRepository extends ServiceEntityRepository
     private function findAllPublic(string $orderBy, ?int $limit): array
     {
         $query = $this->createQueryBuilder('radioTable')
-            ->andWhere('radioTable.status = :status')
-            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->addCriteria(self::getPublicCriteria())
             ->orderBy('radioTable.'.$orderBy, 'DESC')
         ;
 
@@ -68,8 +75,7 @@ class RadioTableRepository extends ServiceEntityRepository
         }
 
         return $this->createQueryBuilder('radioTable')
-            ->andWhere('radioTable.status = :status')
-            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->addCriteria(self::getPublicCriteria())
             ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm BOOLEAN) > 0.0')
             ->setParameter('searchTerm', $searchTerm)
             ->getQuery()
