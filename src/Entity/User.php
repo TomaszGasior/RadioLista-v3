@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -89,18 +87,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     private $oldPassCompat = false;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RadioTable", mappedBy="owner", orphanRemoval=true)
-     * @ORM\OrderBy({"radioStationsCount" = "DESC"})
-     */
-    private $radioTables;
-
     public function __construct()
     {
         $this->lastActivityDate = new \DateTime;
         $this->registerDate = new \DateTime;
-
-        $this->radioTables = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,14 +175,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         --$this->radioTablesCount;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|RadioTable[]
-     */
-    public function getRadioTables(): Collection
-    {
-        return $this->radioTables;
     }
 
     // Not persisted

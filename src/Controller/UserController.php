@@ -34,9 +34,9 @@ class UserController extends AbstractController
      * @Route("/moje-wykazy", name="user.my_radiotables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
-    public function myRadioTables(): Response
+    public function myRadioTables(RadioTableRepository $radioTableRepository): Response
     {
-        $radioTables = $this->getUser()->getRadioTables();
+        $radioTables = $radioTableRepository->findAllOwnedByUser($this->getUser());
 
         return $this->render('user/my_radiotables.html.twig', [
             'radiotables' => $radioTables,

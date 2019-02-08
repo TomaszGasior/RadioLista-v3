@@ -85,4 +85,12 @@ class RadioTableRepository extends ServiceEntityRepository
             ['radioStationsCount' => 'DESC']
         );
     }
+
+    public function findAllOwnedByUser(User $user): array
+    {
+        return $this->findBy(
+            ['owner' => $user],
+            ['radioStationsCount' => 'DESC']
+        );
+    }
 }
