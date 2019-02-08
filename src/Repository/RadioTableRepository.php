@@ -78,6 +78,7 @@ class RadioTableRepository extends ServiceEntityRepository
             ->addCriteria(self::getPublicCriteria())
             ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm BOOLEAN) > 0.0')
             ->setParameter('searchTerm', $searchTerm)
+            ->innerJoin('radioTable.owner', 'user')->addSelect('user')
             ->getQuery()
             ->getResult()
         ;
