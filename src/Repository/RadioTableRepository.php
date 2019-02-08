@@ -83,4 +83,12 @@ class RadioTableRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findPublicOwnedByUser(User $user): array
+    {
+        return $this->findBy(
+            ['owner' => $user, 'status' => RadioTable::STATUS_PUBLIC],
+            ['radioStationsCount' => 'DESC']
+        );
+    }
 }

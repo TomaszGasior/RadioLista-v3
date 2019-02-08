@@ -22,9 +22,11 @@ class UserController extends AbstractController
      */
     public function publicProfile(User $user, RadioTableRepository $radioTableRepository): Response
     {
+        $radioTables = $radioTableRepository->findPublicOwnedByUser($user);
+
         return $this->render('user/public_profile.html.twig', [
             'user'=> $user,
-            'radiotables' => $user->getPublicRadioTables(),
+            'radiotables' => $radioTables,
         ]);
     }
 
