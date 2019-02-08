@@ -62,7 +62,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/ustawienia-wykazu/{id}", name="radiotable.settings")
+     * @Route("/wykaz/{id}/ustawienia", name="radiotable.settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -85,7 +85,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/eksport-wykazu/{id}/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
+     * @Route("/wykaz/{id}/eksport/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -124,7 +124,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/eksport-wykazu/{id}", name="radiotable.export")
+     * @Route("/wykaz/{id}/eksport", name="radiotable.export")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -137,7 +137,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/usun-wykaz/{id}", name="radiotable.remove")
+     * @Route("/wykaz/{id}/usun", name="radiotable.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)

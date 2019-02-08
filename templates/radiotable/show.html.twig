@@ -81,7 +81,9 @@
 
                 {%- block radiostation_name -%}
                     {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
-                        <a href="{{ path('radiostation.edit', {id: radiostation.id}) }}">{{ radiostation.name }}</a>
+                        <a href="{{ path('radiostation.edit', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
+                            {{ radiostation.name }}
+                        </a>
                     {% else %}
                         {{ radiostation.name }}
                     {% endif %}

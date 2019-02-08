@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioStationController extends AbstractController
 {
     /**
-     * @Route("/dodaj-stacje/{radioTableId}", name="radiostation.add")
+     * @Route("/wykaz/{radioTableId}/dodaj-stacje", name="radiostation.add")
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      * @ParamConverter("template", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
@@ -37,7 +37,10 @@ class RadioStationController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('notice', 'Stacja została dodana.');
-            return $this->redirectToRoute('radiostation.edit', ['id' => $radioStation->getId()]);
+            return $this->redirectToRoute('radiostation.edit', [
+                'id' => $radioStation->getId(),
+                'radioTableId' => $radioTable->getId(),
+            ]);
         }
 
         return $this->render('radiostation/add.html.twig', [
@@ -47,7 +50,7 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/edytuj-stacje/{id}", name="radiostation.edit")
+     * @Route("/wykaz/{radioTableId}/edytuj-stacje/{id}", name="radiostation.edit")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
@@ -70,7 +73,7 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/kopiuj-stacje/{id}", name="radiostation.copy")
+     * @Route("/wykaz/{radioTableId}/kopiuj-stacje/{id}", name="radiostation.copy")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
@@ -87,7 +90,7 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/usun-stacje/{id}", name="radiostation.remove")
+     * @Route("/wykaz/{radioTableId}/usun-stacje/{id}", name="radiostation.remove")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
      */
