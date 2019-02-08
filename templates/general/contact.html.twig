@@ -9,13 +9,13 @@
 
     {{ form_start(form, {attr: {class: 'contact-form'}}) }}
 
-    <p>Jeśli masz jakiekolwiek pytania lub sugestie nt. RadioListy, bądź chcesz zgłosić błąd, skorzystaj z&nbsp;poniższego formularza w&nbsp;celu kontaktu z&nbsp;autorem serwisu.</p>
+    <p>
+        Jeśli masz jakiekolwiek pytania lub sugestie nt. RadioListy, bądź chcesz zgłosić błąd, skorzystaj z&nbsp;poniższego formularza w&nbsp;celu kontaktu z&nbsp;autorem serwisu.
+    </p>
 
-    <dl>
-        {{ form_row(form.subject) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.content) }}
-    </dl>
+    {{ form_row(form.subject) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.content) }}
 
     <button>Wyślij wiadomość</button>
 

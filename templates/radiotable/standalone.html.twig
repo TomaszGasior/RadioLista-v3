@@ -98,7 +98,9 @@
         {% include 'radiotable/table/radiotable.html.twig' %}
 
         <footer>
-            <p>Wykaz wygenerowano w serwisie <a href="{{ app.request.schemeAndHttpHost }}">RadioLista</a> dnia {{ 'now'|date_format }}.</p>
+            <p>
+                Wykaz wygenerowano w serwisie <a href="{{ app.request.schemeAndHttpHost }}">RadioLista</a> dnia {{ 'now'|date_format }}.
+            </p>
         </footer>
 
         <script>

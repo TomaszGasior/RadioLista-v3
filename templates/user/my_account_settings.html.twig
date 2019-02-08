@@ -43,22 +43,22 @@
         <div>
             <h3>Profil publiczny</h3>
 
-            <p class="information">Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i&nbsp;spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem.</p>
+            <p class="information">
+                Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i&nbsp;spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem.
+            </p>
 
-            <dl>
-                {{ form_row(form.aboutMe) }}
-                {{ form_row(form.publicProfile) }}
-            </dl>
+            {{ form_row(form.aboutMe) }}
+            {{ form_row(form.publicProfile) }}
         </div>
         <div>
             <h3>Zmiana hasła</h3>
 
-            <p class="information">Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.</p>
+            <p class="information">
+                Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.
+            </p>
 
-            <dl>
-                {{ form_row(form.currentPassword) }}
-                {{ form_row(form.plainPassword) }}
-            </dl>
+            {{ form_row(form.currentPassword) }}
+            {{ form_row(form.plainPassword) }}
         </div>
     </div>
 

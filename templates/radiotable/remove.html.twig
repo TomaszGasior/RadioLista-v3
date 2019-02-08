@@ -4,9 +4,21 @@
 
 {% block context_menu %}
     <ul>
-        <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
-        <li><a href="{{ path('radiotable.export', {id: radiotable.id}) }}">Eksport wykazu</a></li>
-        <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Ustawienia wykazu</a></li>
+        <li>
+            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+                Zobacz wykaz
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radiotable.export', {id: radiotable.id}) }}">
+                Eksport wykazu
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">
+                Ustawienia wykazu
+            </a>
+        </li>
     </ul>
 {% endblock %}
 
@@ -48,13 +60,17 @@
 
                 {{ form_end(form_radiostation) }}
             {% else %}
-                <p class="information">Ten wykaz jest pusty. Nie ma czego usuwać&hellip;</p>
+                <p class="information">
+                    Ten wykaz jest pusty. Nie ma czego usuwać&hellip;
+                </p>
             {% endif %}
         </div>
         <div>
             <h3>Usuwanie wykazu</h3>
 
-            <p class="information">Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.</p>
+            <p class="information">
+                Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.
+            </p>
 
             {{ form_start(form_radiotable) }}
 

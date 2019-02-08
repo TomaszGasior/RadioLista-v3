@@ -8,9 +8,21 @@
 
 {% block context_menu %}
     <ul>
-        <li><a href="{{ path('radiotable.show', {id: radiotable.id}) }}">Zobacz wykaz</a></li>
-        <li><a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj stację</a></li>
-        <li><a href="{{ path('radiotable.remove', {id: radiotable.id}) }}">Usuń wykaz</a></li>
+        <li>
+            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+                Zobacz wykaz
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">
+                Dodaj stację
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radiotable.remove', {id: radiotable.id}) }}">
+                Usuń wykaz
+            </a>
+        </li>
     </ul>
 {% endblock %}
 
@@ -42,7 +54,11 @@
         <div>
             <h3>Kolumny</h3>
 
-            <noscript><p class="information">Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.</p></noscript>
+            <noscript>
+                <p class="information">
+                    Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.
+                </p>
+            </noscript>
 
             <div class="radiotable-columns">
                 {{ form_row(form.columns) }}
@@ -78,24 +94,34 @@
             <h3>Eksport</h3>
 
             {% if radiotable.radioStationsCount > 0 %}
-                <p class="information">Wybierz pożądany format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz&nbsp;eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane&nbsp;są&nbsp;szczegółowe informacje o&nbsp;RDS oraz wyróżnienia wizualne.</p>
+                <p class="information">
+                    Wybierz pożądany format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz&nbsp;eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane&nbsp;są&nbsp;szczegółowe informacje o&nbsp;RDS oraz wyróżnienia wizualne.
+                </p>
 
                 <ul class="radiotable-export-list">
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}" class="button">Pobierz dokument PDF</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}" class="button">
+                            Pobierz dokument PDF
+                        </a>
                         PDF — dokument elektroniczny do przeglądania i&nbsp;druku
                     </li>
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}" class="button">Pobierz arkusz CSV</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}" class="button">
+                            Pobierz arkusz CSV
+                        </a>
                         CSV — zestaw danych do zaimportowania i&nbsp;edycji w&nbsp;arkuszu kalkulacyjnym
                     </li>
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}" class="button">Pobierz stronę HTML</a>
+                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}" class="button">
+                            Pobierz stronę HTML
+                        </a>
                         HTML — plik strony internetowej otwierany w&nbsp;przeglądarce
                     </li>
                 </ul>
             {% else %}
-                <p class="information">Ten wykaz jest pusty. Nie można go wyeksportować.</p>
+                <p class="information">
+                    Ten wykaz jest pusty. Nie można go wyeksportować.
+                </p>
             {% endif %}
         </div>
     </div>

@@ -40,8 +40,16 @@
 {% block context_menu %}
     {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
         <ul>
-            <li><a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">Dodaj stację</a></li>
-            <li><a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">Ustawienia wykazu</a></li>
+            <li>
+                <a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">
+                    Dodaj stację
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">
+                    Ustawienia wykazu
+                </a>
+            </li>
         </ul>
     {% endif %}
 {% endblock %}
@@ -134,7 +142,9 @@
                     <div>
                         <dt>Autor</dt>
                         <dd>
-                            <a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">{{ radiotable.owner.name }}</a>
+                            <a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">
+                                {{ radiotable.owner.name }}
+                            </a>
                         </dd>
                     </div>
                 {% endif %}
