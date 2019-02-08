@@ -23,9 +23,16 @@ class RadioStationRepository extends ServiceEntityRepository
 
     public function findForRadioTable(RadioTable $radioTable): array
     {
+        return $this->getQueryBuilderForRadioTable($radioTable)
+            ->getQuery()->getResult();
+    }
+
+    public function getQueryBuilderForRadioTable(RadioTable $radioTable): QueryBuilder
+    {
         $query = $this->createQueryBuilder('radioStation')
             ->andWhere('radioStation.radioTable = :radioTable')
-            ->setParameter('radioTable', $radioTable);
+            ->setParameter('radioTable', $radioTable)
+        ;
 
         switch ($radioTable->getSorting()) {
             case RadioTable::SORTING_NAME:
@@ -46,15 +53,6 @@ class RadioStationRepository extends ServiceEntityRepository
 
         $query->addOrderBy('radioStation.frequency', 'ASC');
 
-        return $query->getQuery()->getResult();
-    }
-
-    public function getQueryForRadioTable(RadioTable $radioTable): QueryBuilder
-    {
-        return $this->createQueryBuilder('radioStation')
-            ->andWhere('radioStation.radioTable = :radioTable')
-            ->setParameter('radioTable', $radioTable)
-            ->orderBy('radioStation.frequency')
-        ;
+        return $query;
     }
 }

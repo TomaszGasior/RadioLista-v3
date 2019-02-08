@@ -29,7 +29,7 @@ class RadioStationRemoveType extends AbstractType
 
                 'class' => RadioStation::class,
                 'choice_label' => 'name',
-                'query_builder' => $this->radioStationRepository->getQueryForRadioTable($options['radiotable']),
+                'query_builder' => $this->radioStationRepository->getQueryBuilderForRadioTable($options['radiotable']),
                 'expanded' => true,
                 'multiple' => true,
             ])
