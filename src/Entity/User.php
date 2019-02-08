@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\RadioTableRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -193,6 +194,17 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getRadioTables(): Collection
     {
         return $this->radioTables;
+    }
+
+    /**
+     * @return Collection|RadioTable[]
+     */
+    public function getPublicRadioTables(): Collection
+    {
+        // Initialize first to keep proper items order.
+        $this->radioTables->initialize();
+
+        return $this->radioTables->matching(RadioTableRepository::getPublicCriteria());
     }
 
     // Not persisted
