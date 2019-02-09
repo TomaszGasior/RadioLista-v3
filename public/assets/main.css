@@ -1354,6 +1354,13 @@ form.contact-form p {
     margin-bottom: -1.2em;
 }
 
+/* radiotable/radiostation remove, warning */
+
+.radiotable-remove-confirm {
+    border: 3px dashed red;
+    padding: 0 1em;
+}
+
 
 /* my account details list */
 
