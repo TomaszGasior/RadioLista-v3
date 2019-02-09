@@ -50,6 +50,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'property_path' => 'appearance[th]',
 
                 'label' => 'Motyw',
+                'required' => false,
                 'choices' => [
                     '(brak motywu, własne kolory)' => '',
                     'Górski las' => 'bieszczady',
