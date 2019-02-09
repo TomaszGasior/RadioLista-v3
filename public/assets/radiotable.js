@@ -2,7 +2,7 @@
     function RDSPopupManager(container)
     {
         this.container = container;
-        this.items = Array.from(container.querySelectorAll('.rds-popup-enabled'));
+        this.items = container.querySelectorAll('.rds-popup-enabled');
 
         this.popup = null;
         this.rowPS = null;
@@ -102,7 +102,7 @@
         {
             this.popup = document.importNode(
                 this.container.querySelector('.rds-popup-template').content, true
-            ).firstElementChild;
+            ).children[0];
 
             this.rowPS = this.popup.querySelector('.rds-popup-ps-row');
             this.rowRT = this.popup.querySelector('.rds-popup-rt-row');
@@ -136,8 +136,8 @@
 
     function NumberIndent(container)
     {
-        this.elementsIndent1 = Array.from(container.querySelectorAll('.number-indent-1'));
-        this.elementsIndent2 = Array.from(container.querySelectorAll('.number-indent-2'));
+        this.elementsIndent1 = container.querySelectorAll('.number-indent-1');
+        this.elementsIndent2 = container.querySelectorAll('.number-indent-2');
 
         this.elementsIndent1.forEach(function(element){
             var value = parseInt(element.textContent);

@@ -1,7 +1,7 @@
 (function(){
     function SortableTable(table)
     {
-        this.headers = Array.from(table.querySelectorAll('thead th'));
+        this.headers = table.querySelectorAll('thead th');
         this.body = table.querySelector('tbody');
         this.rows = Array.from(this.body.querySelectorAll('tr'));
 

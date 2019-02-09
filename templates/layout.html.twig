@@ -8,6 +8,7 @@
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="stylesheet" href="{{ asset('main.css') }}">
         <link rel="stylesheet" media="(max-width: 800px)" href="{{ asset('mobile.css') }}">
+        <script>if (!document.currentScript) { document.write('<script src="{{ asset('ie11.js') }}"></scr' + 'ipt>') }</script>
         <script src="{{ asset('main.js') }}"></script>
 
         {% if block('page_title') %}

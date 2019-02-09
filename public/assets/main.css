@@ -61,6 +61,13 @@ a:active {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
+main {
+    display: block; /* IE11 */
+}
+template {
+    display: none; /* IE11 */
+}
+
 
 /* site width */
 
