@@ -1343,16 +1343,11 @@ form.contact-form p {
     max-height: 430px;
     overflow-y: auto;
     box-sizing: border-box;
-}
-.radiostations-remove-scrollable {
     padding: 0.8em 1em;
     background: #F9FCF9;
     border: 1px solid #D6EAD0;
 }
-.radiostations-remove:not(.radiostations-remove-scrollable) {
-    /* fix fieldset wrong margin */
-    margin-bottom: -1.2em;
-}
+
 
 /* radiotable/radiostation remove, warning */
 

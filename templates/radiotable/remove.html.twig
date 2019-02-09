@@ -47,17 +47,6 @@
                 <div class="radiostations-remove">
                     {{ form_row(form_radiostation.chosenToRemove) }}
                 </div>
-                <script>
-                (function(){
-                    var container = document.querySelector('.radiostations-remove');
-
-                    document.addEventListener('DOMContentLoaded', function(){
-                        if (container.clientWidth !== container.offsetWidth) {
-                            container.classList.add('radiostations-remove-scrollable');
-                        }
-                    });
-                })();
-                </script>
 
                 <button>Usuń zaznaczone stacje</button>
 
