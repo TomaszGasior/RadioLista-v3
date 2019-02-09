@@ -171,6 +171,13 @@
 
                 if (currentHash && panel.id == currentHash) {
                     defaultPanelNumber = i;
+
+                    var scrollToTop = function()
+                    {
+                        window.scroll(0, 0);
+                        window.removeEventListener('scroll', scrollToTop);
+                    };
+                    window.addEventListener('scroll', scrollToTop);
                 }
             });
 
