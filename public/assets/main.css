@@ -262,11 +262,22 @@ a:active {
 
 .main-content > header h1 {
     color: #EE6D00;
-    margin: 0.5em 0 1.5rem 0;
+    margin: 1.05rem 0 1.5rem;
     font-size: 2em;
     text-shadow: 0 0 2px #eee;
 
     font-weight: normal;
+}
+.main-content > header h1.separated-title {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.main-content > header h1 .additional {
+    font-size: 0.4em;
+    color: #000;
+    opacity: 0.4;
+    padding-left: 2px;
+    padding-top: 0.3rem;
 }
 
 .main-content h2 {

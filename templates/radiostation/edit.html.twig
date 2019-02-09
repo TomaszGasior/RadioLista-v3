@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Edycja stacji{% endblock %}
+{% block page_title %}Edytuj stację{% endblock %}
 
 {% block context_menu %}
     <ul>
@@ -24,7 +24,10 @@
 
 {% block page_content %}
     <header>
-        <h1>Edycja stacji</h1>
+        <h1 class="separated-title">
+            <span>Edytuj stację „{{ radiostation.name }}”</span>
+            <span class="additional"><span class="sr-only">wykaz</span> {{ radiostation.radioTable.name }}</span>
+        </h1>
     </header>
 
     {{ form_start(form) }}

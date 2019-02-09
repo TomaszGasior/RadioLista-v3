@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Usuwanie wykazu{% endblock %}
+{% block page_title %}Usuń wykaz lub stacje{% endblock %}
 
 {% block context_menu %}
     <ul>
@@ -31,7 +31,10 @@
 
 {% block page_content %}
     <header>
-        <h1>Usuwanie wykazu i stacji</h1>
+        <h1 class="separated-title">
+            <span>Usuń wykaz lub stacje</span>
+            <span class="additional">{{ radiotable.name }}</span>
+        </h1>
     </header>
 
     <div class="tabbed-ui">

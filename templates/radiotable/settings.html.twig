@@ -28,7 +28,10 @@
 
 {% block page_content %}
     <header>
-        <h1>Ustawienia wykazu</h1>
+        <h1 class="separated-title">
+            <span>Ustawienia wykazu</span>
+            <span class="additional">{{ radiotable.name }}</span>
+        </h1>
     </header>
 
     {{ form_start(form) }}
