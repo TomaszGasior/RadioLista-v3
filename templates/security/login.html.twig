@@ -4,13 +4,13 @@
 
 {% block page_content %}
     <header class="sr-only">
-        <h2>Konto użytkownika — logowanie</h2>
+        <h1>Konto użytkownika — logowanie</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="user-login-screen">
-        <h3>Zaloguj się</h3>
+        <h2>Zaloguj się</h2>
 
         {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
         {{ form_row(form.password) }}

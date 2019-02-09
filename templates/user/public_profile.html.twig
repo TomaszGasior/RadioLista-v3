@@ -9,12 +9,12 @@
 
 {% block page_content %}
     <header>
-        <h2><strong>{{ user.name }}</strong> — profil użytkownika</h2>
+        <h1><strong>{{ user.name }}</strong> — profil użytkownika</h1>
     </header>
 
     {% if user.aboutMe is not empty %}
         <section class="user-profile-page user-profile-description">
-            <h3>Informacje o użytkowniku</h3>
+            <h2>Informacje o użytkowniku</h2>
 
             {{ user.aboutMe|raw }}
             <dl class="user-profile-details">
@@ -31,7 +31,7 @@
     {% endif %}
 
     <section class="user-profile-page">
-        <h3>Wykazy tego użytkownika</h3>
+        <h2>Wykazy tego użytkownika</h2>
 
         {% if radiotables %}
             {% include 'common/radiotables_list.html.twig' %}

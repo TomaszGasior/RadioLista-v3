@@ -2,12 +2,12 @@
 
 {% block page_content %}
     <header class="sr-only">
-        <h2>Strona główna</h2>
+        <h1>RadioLista — bandscany i wykazy radiowe</h1>
     </header>
 
     <div class="homepage">
         <section>
-            <h3>Ostatnio zmodyfikowane wykazy</h3>
+            <h2>Ostatnio zmodyfikowane wykazy</h2>
             <ol class="homepage-radiotables-list">
                 {% for radiotable in last_updated_radiotables %}
                     <li>
@@ -24,7 +24,7 @@
         </section>
 
         <section>
-            <h3>Ostatnio utworzone wykazy</h3>
+            <h2>Ostatnio utworzone wykazy</h2>
             <ol class="homepage-radiotables-list">
                 {% for radiotable in last_created_radiotables %}
                     <li>
@@ -41,7 +41,7 @@
         </section>
 
         <section>
-            <h3>Czym jest RadioLista?</h3>
+            <h2>Czym jest RadioLista?</h2>
 
             <p>
                 W serwisie RadioLista osoby interesujące się mediami mogą&nbsp;publikować różnorodne wykazy radiowe i&nbsp;telewi&shy;zyjne &mdash; bandscany, regularne wykazy odbieranych stacji czy&nbsp;też prywatne listy ulubionych programów.
@@ -49,7 +49,7 @@
         </section>
 
         <section>
-            <h3>Wyszukaj wykazy</h3>
+            <h2>Wyszukaj wykazy</h2>
 
             {% include 'common/search_form.html.twig' %}
         </section>

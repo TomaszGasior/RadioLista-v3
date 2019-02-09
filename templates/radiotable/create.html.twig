@@ -4,14 +4,14 @@
 
 {% block page_content %}
     <header>
-        <h2>Utwórz wykaz</h2>
+        <h1>Utwórz wykaz</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="tabbed-ui">
         <div>
-            <h3>Główne</h3>
+            <h2>Główne</h2>
 
             <p class="information">
                 W nazwie i opisie wykazu warto umieścić lokalizację (np.&nbsp;miejscowość lub województwo). Te&nbsp;informacje są&nbsp;używane przy&nbsp;przeszukiwaniu wykazów. Można je później zmienić.
@@ -23,7 +23,7 @@
         </div>
 
         <div>
-            <h3>Widoczność</h3>
+            <h2>Widoczność</h2>
 
             <div class="radiotable-status">
                 {{ form_row(form.status) }}

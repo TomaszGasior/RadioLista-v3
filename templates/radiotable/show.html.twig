@@ -56,7 +56,7 @@
 
 {% block page_content %}
     <header class="customizable-color">
-        <h2>{{ radiotable.name }}</h2>
+        <h1>{{ radiotable.name }}</h1>
     </header>
 
     {% if radiotable.radioStationsCount > 0 %}
@@ -106,7 +106,7 @@
 
             <template class="rds-popup-template">
                 <section class="rds-popup" role="alert">
-                    <h3>Informacje o RDS</h3>
+                    <h2>Informacje o RDS</h2>
                     <dl>
                         <div class="rds-popup-ps-row">
                             <dt>PS</dt>
@@ -126,7 +126,7 @@
         </div>
 
         <section class="radiotable-details customizable-color">
-            <h3 class="sr-only">Informacje o wykazie</h3>
+            <h3 class="sr-only">Informacje o wykazie</h2>
 
             {{ radiotable.description|raw }}
             <dl>

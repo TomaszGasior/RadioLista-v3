@@ -138,7 +138,7 @@
             this.navigator.setAttribute('role', 'tablist');
 
             this.panels.forEach(function(panel, i){
-                var title = panel.querySelector('h3').innerHTML;
+                var title = panel.querySelector('h2').innerHTML;
                 var item = document.createElement('li');
                 var button = document.createElement('button');
 

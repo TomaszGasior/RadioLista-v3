@@ -31,12 +31,12 @@
 
 {% block page_content %}
     <header>
-        <h2>Usuwanie wykazu i stacji</h2>
+        <h1>Usuwanie wykazu i stacji</h1>
     </header>
 
     <div class="tabbed-ui">
         <div>
-            <h3>Usuwanie stacji</h3>
+            <h2>Usuwanie stacji</h2>
 
             {% if radiotable.radioStationsCount > 0 %}
                 {{ form_start(form_radiostation) }}
@@ -66,7 +66,7 @@
             {% endif %}
         </div>
         <div>
-            <h3>Usuwanie wykazu</h3>
+            <h2>Usuwanie wykazu</h2>
 
             <p class="information">
                 Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.

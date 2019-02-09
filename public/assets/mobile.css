@@ -11,7 +11,7 @@
 
 /* site header */
 
-.site-header h1 a {
+.site-header .site-logo {
     width: 72px;
 }
 
@@ -86,7 +86,7 @@
     min-height: auto;
 }
 
-.main-content > header h2 {
+.main-content > header h1 {
     font-size: 1.7em;
 }
 

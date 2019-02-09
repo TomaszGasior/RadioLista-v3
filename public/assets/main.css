@@ -99,7 +99,7 @@ a:active {
     justify-content: space-between;
 }
 
-.site-header h1 a {
+.site-header .site-logo {
     background: url('logo.svg') no-repeat;
     background-size: 238px auto;
     background-position: 4px 4px;
@@ -109,9 +109,6 @@ a:active {
     display: block;
     text-indent: -9999px;
     overflow: hidden;
-}
-.site-header h1 {
-    margin: 0;
 }
 
 
@@ -263,7 +260,7 @@ a:active {
     min-height: 70vh;
 }
 
-.main-content > header h2 {
+.main-content > header h1 {
     color: #EE6D00;
     margin: 0.5em 0 1.5rem 0;
     font-size: 2em;
@@ -272,7 +269,7 @@ a:active {
     font-weight: normal;
 }
 
-.main-content h3 {
+.main-content h2 {
     font-size: 1.6em;
     margin: 1rem 0;
     text-shadow: 0 0 2px #eee;
@@ -800,7 +797,7 @@ table.radiotable abbr {
     animation-fill-mode: both;
 }
 
-.rds-popup h3 {
+.rds-popup h2 {
     background: #eee;
     color: #555;
     font-size: 0.9em;
@@ -978,7 +975,7 @@ table.sortable th[data-sort].sorted-desc:after {
     outline-color: currentColor;
 }
 
-.customized-radiotable .customizable-color h2 {
+.customized-radiotable .customizable-color h1 {
     color: inherit;
     text-shadow: none;
 }
@@ -1063,7 +1060,7 @@ table.sortable th[data-sort].sorted-desc:after {
     box-shadow: 0 0 2px rgba(0,0,0, 0.15);
     padding: 0.2em 1.3em 0.4em;
 }
-.homepage section h3 {
+.homepage section h2 {
     font-size: 1.4em;
     padding-bottom: 4px;
     border-bottom: 1px solid rgba(200,200,200, 0.3);
@@ -1112,7 +1109,7 @@ table.sortable th[data-sort].sorted-desc:after {
 
 /* page — user profile */
 
-.user-profile-page h3 {
+.user-profile-page h2 {
     color: #5D9A3F;
     line-height: 1.1em;
 }
@@ -1219,7 +1216,7 @@ form.contact-form p {
     padding-left: 0.3em;
     margin: 0.3em 0;
 }
-.terms-of-service-page h3 {
+.terms-of-service-page h2 {
     margin-top: 0;
 }
 .terms-of-service-page + p {

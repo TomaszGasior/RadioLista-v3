@@ -22,9 +22,10 @@
     <body class="customizable-background">
         <header class="site-header">
             <div class="site-width">
-                <h1><a href="{{ path('homepage') }}">RadioLista — wykazy radiowe w Internecie</a></h1>
+                <a href="{{ path('homepage') }}" class="site-logo">RadioLista</a>
+
                 <nav class="site-navigation">
-                    <h2 class="sr-only">Nawigacja</h2>
+                    <h2 class="sr-only">Nawigacja</h1>
 
                     <ul class="user-menu">
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

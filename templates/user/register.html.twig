@@ -11,13 +11,13 @@
 
 {% block page_content %}
     <header class="sr-only">
-        <h2>Konto użytkownika — rejestracja</h2>
+        <h1>Konto użytkownika — rejestracja</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="user-login-screen">
-        <h3>Zarejestruj się</h3>
+        <h2>Zarejestruj się</h2>
 
         {{ form_row(form.name, {attr: {title: "Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka."}}) }}
         {{ form_row(form.plainPassword) }}

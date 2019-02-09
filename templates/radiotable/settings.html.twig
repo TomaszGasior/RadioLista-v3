@@ -28,14 +28,14 @@
 
 {% block page_content %}
     <header>
-        <h2>Ustawienia wykazu</h2>
+        <h1>Ustawienia wykazu</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="tabbed-ui">
         <div>
-            <h3>Główne</h3>
+            <h2>Główne</h2>
 
             {{ form_row(form.name) }}
             {{ form_row(form.useKhz) }}
@@ -44,7 +44,7 @@
         </div>
 
         <div>
-            <h3>Widoczność</h3>
+            <h2>Widoczność</h2>
 
             <div class="radiotable-status">
                 {{ form_row(form.status) }}
@@ -52,7 +52,7 @@
         </div>
 
         <div>
-            <h3>Kolumny</h3>
+            <h2>Kolumny</h2>
 
             <noscript>
                 <p class="information">
@@ -72,7 +72,7 @@
         </div>
 
         <div>
-            <h3>Wygląd</h3>
+            <h2>Wygląd</h2>
 
             {# style="" is used as dirty hack for box-shadow removing. #}
             {{ form_row(form.appearanceTheme) }}
@@ -91,7 +91,7 @@
         </div>
 
         <div id="export">
-            <h3>Eksport</h3>
+            <h2>Eksport</h2>
 
             {% if radiotable.radioStationsCount > 0 %}
                 <p class="information">
