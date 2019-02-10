@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
-        "beberlei/DoctrineExtensions": "^1.1",
+        "beberlei/doctrineextensions": "^1.1",
         "doctrine/doctrine-bundle": "^1.10",
         "doctrine/orm": "^2.6",
         "knplabs/knp-snappy-bundle": "^1.5",
