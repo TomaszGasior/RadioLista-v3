@@ -8,9 +8,8 @@
                 "bin",
                 "vendor",
                 "var",
-                "public/styles/fonts",
-                "public/styles/img",
-                "public/styles/themes",
+                "public/assets/fonts",
+                "public/assets/themes",
             ],
             "file_exclude_patterns": [
                 "*.sublime-project",
@@ -18,6 +17,7 @@
                 ".web-server-pid",
                 "composer.lock",
                 "symfony.lock",
+                "logo.svg",
             ],
         },
         {
@@ -47,6 +47,6 @@
         "tab_size": 4,
         "translate_tabs_to_spaces": true,
         "trim_trailing_white_space_on_save": true,
-        "word_wrap": "auto",
+        "word_wrap": true,
     }
 }
