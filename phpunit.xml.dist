@@ -14,7 +14,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="RadioLista-v3">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
