@@ -9,10 +9,10 @@ class BasicApplicationTest extends WebTestCase
     /**
      * @dataProvider urlProvider
      */
-    public function testApplicationWorks(string $url): void
+    public function testApplicationSeemsToWork(string $url): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', $url);
+        $client->request('GET', $url);
 
         $response = $client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
