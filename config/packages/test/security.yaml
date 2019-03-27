@@ -1,0 +1,8 @@
+security:
+    firewalls:
+        main:
+            http_basic: ~
+    encoders:
+        rl_v2:
+            algorithm: bcrypt
+            cost: 4
