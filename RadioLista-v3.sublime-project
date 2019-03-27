@@ -15,6 +15,7 @@
                 "*.sublime-project",
                 ".gitignore",
                 ".web-server-pid",
+                ".hidden",
                 "composer.lock",
                 "symfony.lock",
                 "logo.svg",
