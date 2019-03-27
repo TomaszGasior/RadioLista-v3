@@ -11,6 +11,8 @@ class UserFixtures extends AbstractFixture
 
     private const DEFAULT_USER_NAME = 'radiolista';
     private const DEFAULT_USER_PASS = 'radiolista';
+    private const TEST_USER_NAME = 'test_user';
+    private const TEST_USER_PASS = 'test_user';
 
     protected function createEntity(Generator $faker, int $i): object
     {
@@ -23,6 +25,11 @@ class UserFixtures extends AbstractFixture
             $user->setName(self::DEFAULT_USER_NAME);
             $user->setPublicProfile(true);
             $user->setPlainPassword(self::DEFAULT_USER_PASS);
+        }
+        elseif (2 === $i) {
+            $user->setName(self::TEST_USER_NAME);
+            $user->setPublicProfile(false);
+            $user->setPlainPassword(self::TEST_USER_PASS);
         }
         else {
             $user->setPlainPassword($user->getName());
