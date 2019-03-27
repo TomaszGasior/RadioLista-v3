@@ -11,7 +11,7 @@ class AppExtensionTest extends TestCase
     /**
      * @dataProvider rdsProvider
      */
-    public function testFormatRdsFrames($frames, $formattedFrames): void
+    public function testFormatRdsFrames(array $frames, array $formattedFrames): void
     {
         $appExtension = $this->getInstance();
 
@@ -50,7 +50,7 @@ class AppExtensionTest extends TestCase
     /**
      * @dataProvider csvProvider
      */
-    public function testCsvEscaper($sourceString, $escapedString): void
+    public function testCsvEscaper(string $sourceString, string $escapedString): void
     {
         $appExtension = $this->getInstance();
         $twigEnvironment = $this->createMock(Environment::class);

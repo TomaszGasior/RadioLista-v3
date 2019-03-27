@@ -9,7 +9,7 @@ class GeneralControllerTest extends WebTestCase
     /**
      * @dataProvider urlProvider
      */
-    public function testGeneralPagesWork($url): void
+    public function testGeneralPagesWork(string $url): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', $url);

@@ -48,8 +48,7 @@ class RehashRLv1UserPasswordTest extends TestCase
             ->method('eraseCredentials')
         ;
 
-        $request = $this->createMock(Request::class);
-        $securityEvent = new InteractiveLoginEvent($request, $token);
+        $securityEvent = new InteractiveLoginEvent(new Request, $token);
 
         $subscriber = new RehashRLv1UserPassword($entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
@@ -87,8 +86,7 @@ class RehashRLv1UserPasswordTest extends TestCase
             ->method('eraseCredentials')
         ;
 
-        $request = $this->createMock(Request::class);
-        $securityEvent = new InteractiveLoginEvent($request, $token);
+        $securityEvent = new InteractiveLoginEvent(new Request, $token);
 
         $subscriber = new RehashRLv1UserPassword($entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
