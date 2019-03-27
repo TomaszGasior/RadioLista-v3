@@ -2,20 +2,17 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\RadioTable;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableControllerTest extends WebTestCase
 {
-    public function testRadioTableWorks(): void
+    /**
+     * @dataProvider radioTableProvider
+     */
+    public function testRadioTableWorks(RadioTable $radioTable, array $radioStations): void
     {
         $client = static::createClient();
-
-        $radioTableRepository = self::$container->get('App\\Repository\\RadioTableRepository');
-        $radioStationRepository = self::$container->get('App\\Repository\\RadioStationRepository');
-
-        $radioTable = $radioTableRepository->findOneBy([]);
-        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
-
         $crawler = $client->request('GET', '/wykaz/' . $radioTable->getId());
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -34,5 +31,19 @@ class RadioTableControllerTest extends WebTestCase
             $frequency = str_replace('.', ',', $radioStation->getFrequency());
             $this->assertContains($frequency, $table);
         }
+    }
+
+    public function radioTableProvider(): array
+    {
+        self::bootKernel();
+        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
+        $radioStationRepository = self::$container->get('App\Repository\RadioStationRepository');
+
+        $radioTable = $radioTableRepository->findOneBy([]);
+        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
+
+        return [
+            [$radioTable, $radioStations]
+        ];
     }
 }
