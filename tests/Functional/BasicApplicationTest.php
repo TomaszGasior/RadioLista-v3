@@ -23,7 +23,7 @@ class BasicApplicationTest extends WebTestCase
         $this->assertContains('</html>', $response->getContent());
     }
 
-    public function urlProvider(): array
+    public function urlProvider(): iterable
     {
         self::bootKernel();
         $userRepository = self::$container->get('App\Repository\UserRepository');
@@ -32,29 +32,22 @@ class BasicApplicationTest extends WebTestCase
         $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime(10);
         $users = $userRepository->findByPublicProfile(true, null, 10);
 
-        $basicURLs = [
-            [''],
-            ['/strona-glowna'],
-            ['/o-stronie'],
-            ['/regulamin'],
-            ['/kontakt'],
-            ['/wszystkie-wykazy'],
-            ['/wszystkie-wykazy/2'],
-            ['/wszystkie-wykazy/3'],
-            ['/logowanie'],
-            ['/rejestracja'],
-        ];
-
-        $radioTableURLs = [];
-        $usersURLs = [];
+        yield [''];
+        yield ['/strona-glowna'];
+        yield ['/o-stronie'];
+        yield ['/regulamin'];
+        yield ['/kontakt'];
+        yield ['/wszystkie-wykazy'];
+        yield ['/wszystkie-wykazy/2'];
+        yield ['/wszystkie-wykazy/3'];
+        yield ['/logowanie'];
+        yield ['/rejestracja'];
 
         foreach ($radioTables as $radioTable) {
-            $radioTableURLs[] = ['/wykaz/' . $radioTable->getId()];
+            yield ['/wykaz/' . $radioTable->getId()];
         }
         foreach ($users as $user) {
-            $userURLs[] = ['/profil/' . $user->getName()];
+            yield ['/profil/' . $user->getName()];
         }
-
-        return array_merge($basicURLs, $radioTableURLs, $userURLs);
     }
 }
