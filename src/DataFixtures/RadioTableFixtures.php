@@ -21,6 +21,13 @@ class RadioTableFixtures extends AbstractFixture implements DependentFixtureInte
 
             return $radioTable;
         }
+        elseif (4 === $i) {
+            $radioTable->setName('Wykaz radiowy #' . $i);
+            $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, 2));
+            $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
+
+            return $radioTable;
+        }
 
         $radioTable->setName($faker->words(rand(3, 8), true));
         $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class));
