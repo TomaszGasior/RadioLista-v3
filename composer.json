@@ -22,7 +22,8 @@
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/twig-bundle": "^4.1",
         "symfony/validator": "^4.1",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "^4.1",
+        "tgalopin/html-sanitizer-bundle": "^1.1"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
