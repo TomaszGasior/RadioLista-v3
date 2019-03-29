@@ -6,7 +6,7 @@ html_sanitizer:
             # to learn more about which extensions you would like to enable.
             extensions:
                 - 'basic'
-                # - 'list'
+                - 'list'
                 # - 'table'
                 # - 'image'
                 # - 'code'
