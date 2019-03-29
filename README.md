@@ -26,6 +26,12 @@ Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://12
 * Wyszukiwarka wykazów (ta funkcja wymaga bazy MySQL zamiast domyślnej SQLite).
 * Eksport wykazu do pliku PDF (funkcja ta wymaga instalacji i konfiguracji programu `wkhtmltopdf`).
 
+### Uwagi dla użytkowników Windows
+
+* Należy globalnie zainstalować interpreter PHP 7.3: https://windows.php.net/download#php-7.3. W pliku konfiguracyjnym `php.ini` należy włączyć rozszerzenia `intl` i `pdo_sqlite`. Poradnik: http://kizu514.com/blog/install-php7-and-composer-on-windows-10/.
+* Należy zainstalować programy git i composer: https://git-scm.com/download/win, https://getcomposer.org/download/.
+* Polecenia należy uruchomić w programie „Wiersz polecenia” systemu Windows. Zamiast `bin/console` należy używać składni `php bin/console`.
+
 Testy
 ---
 
