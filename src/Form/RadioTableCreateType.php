@@ -27,6 +27,7 @@ class RadioTableCreateType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Opis wykazu',
                 'required' => false,
+                'sanitize_html' => true,
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,

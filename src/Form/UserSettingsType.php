@@ -22,6 +22,7 @@ class UserSettingsType extends AbstractType
             ->add('aboutMe', TextareaType::class, [
                 'label' => 'Kilka słów o mnie',
                 'required' => false,
+                'sanitize_html' => true,
             ])
             ->add('publicProfile', null, [
                 'label' => 'Włącz profil publiczny i stronę profilową',
