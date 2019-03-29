@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for page in ['homepage', 'all_radiotables', 'about_service'] %}
+        <url>
+            <loc>{{ url(page) }}</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.6</priority>
+        </url>
+    {% endfor %}
+
+    {% for radiotable in radiotables %}
+        <url>
+            <loc>{{ url('radiotable.show', {id: radiotable.id}) }}</loc>
+            <lastmod>{{ radiotable.lastUpdateTime|date('c') }}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+</urlset>
