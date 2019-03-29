@@ -9,7 +9,7 @@ Zadaniem projektu RadioLista-v3 jest przeportowanie obecnej wersji serwisu do fr
 Instalacja lokalna
 ---
 
-Do lokalnej instalacji wymagane są: PHP w wersji 7.3, composer oraz git. Aby uruchomić aplikację RadioLista-v3, należy sklonować repozytorium, przygotować bazę danych SQLite oraz uruchomić serwer WWW, wykonując w CLI następujące polecenia:
+Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `intl` i `pdo_sqlite`), composer oraz git. Aby uruchomić aplikację RadioLista-v3, należy sklonować repozytorium, przygotować bazę danych SQLite oraz uruchomić serwer WWW, wykonując w CLI następujące polecenia:
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
@@ -20,6 +20,11 @@ Do lokalnej instalacji wymagane są: PHP w wersji 7.3, composer oraz git. Aby ur
     bin/console server:start
 
 Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:8000/`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
+
+### Te funkcje mogą nie działać
+
+* Wyszukiwarka wykazów (ta funkcja wymaga bazy MySQL zamiast domyślnej SQLite).
+* Eksport wykazu do pliku PDF (funkcja ta wymaga instalacji i konfiguracji programu `wkhtmltopdf`).
 
 Testy
 ---
