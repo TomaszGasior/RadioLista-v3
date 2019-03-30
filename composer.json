@@ -9,6 +9,7 @@
         "beberlei/doctrineextensions": "^1.1",
         "doctrine/doctrine-bundle": "^1.10",
         "doctrine/orm": "^2.6",
+        "friendsofsymfony/ckeditor-bundle": "^2.0",
         "isometriks/spam-bundle": "^1.0",
         "knplabs/knp-snappy-bundle": "^1.5",
         "matthiasmullie/minify": "^1.3",
