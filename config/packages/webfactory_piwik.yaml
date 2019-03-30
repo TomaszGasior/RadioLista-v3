@@ -1,0 +1,9 @@
+webfactory_piwik:
+    # Required, no default. Must be set to the site id found in the Matomo control panel
+    site_id: '%env(PIWIK_SITE_ID)%'
+    # Required, has default. Usually, you only want to include the tracking code in a production environment
+    disabled: '%kernel.debug%'
+    # Required. no default. Hostname and path to the Matomo host.
+    piwik_host: '%env(PIWIK_HOST)%'
+    # Required, has default. Path to the tracking script on the host.
+    tracker_path: "/js/"
