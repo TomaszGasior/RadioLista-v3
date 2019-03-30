@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\RadioTable;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +24,7 @@ class RadioTableCreateType extends AbstractType
                     'MHz' => 0,
                 ]
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'label' => 'Opis wykazu',
                 'required' => false,
                 'sanitize_html' => true,
