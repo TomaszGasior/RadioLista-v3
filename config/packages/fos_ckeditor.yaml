@@ -1,4 +1,16 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+fos_ck_editor:
+    base_path: '../bundles/fosckeditor'
+    js_path:   '../bundles/fosckeditor/ckeditor.js'
+    configs:
+        rlv2:
+            height: 150
+            removeButtons: 'Anchor,Copy,Cut,Paste,Subscript,Superscript,Undo,Redo,Indent,Outdent,About'
+            removeDialogTabs: 'link:advanced;link:target'
+            forceEnterMode: true
+            entities_latin: true
+            disableNativeSpellChecker: false
+            dialog_backgroundCoverColor: 'rgb(20,20,20)'
 
 twig:
     form_themes:
