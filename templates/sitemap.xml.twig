@@ -5,7 +5,7 @@
         <url>
             <loc>{{ url(page) }}</loc>
             <changefreq>monthly</changefreq>
-            <priority>0.6</priority>
+            <priority>0.5</priority>
         </url>
     {% endfor %}
 
@@ -15,6 +15,14 @@
             <lastmod>{{ radiotable.lastUpdateTime|date('c') }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+    {% for user in users %}
+        <url>
+            <loc>{{ url('user.public_profile', {name: user.name}) }}</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
         </url>
     {% endfor %}
 </urlset>
