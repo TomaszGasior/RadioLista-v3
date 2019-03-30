@@ -18,4 +18,9 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function findAllWithPublicProfile(): array
+    {
+        return $this->findBy(['publicProfile' => true]);
+    }
 }
