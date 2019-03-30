@@ -36,6 +36,8 @@
             <h1>{{ error_title }}</h1>
             <p>{{ error_text|replace({'|': '<br>'})|raw }}</p>
         </div>
+
+        {{ piwik_code() }}
     </body>
 </html>
 
