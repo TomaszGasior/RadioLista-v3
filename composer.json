@@ -27,7 +27,8 @@
         "symfony/twig-bundle": "^4.1",
         "symfony/validator": "^4.1",
         "symfony/yaml": "^4.1",
-        "tgalopin/html-sanitizer-bundle": "^1.1"
+        "tgalopin/html-sanitizer-bundle": "^1.1",
+        "webfactory/piwik-bundle": "^2.5"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",

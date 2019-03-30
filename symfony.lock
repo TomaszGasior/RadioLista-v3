@@ -424,5 +424,8 @@
     },
     "twig/twig": {
         "version": "v2.5.0"
+    },
+    "webfactory/piwik-bundle": {
+        "version": "2.5.0"
     }
 }
