@@ -2,6 +2,9 @@
     "beberlei/doctrineextensions": {
         "version": "v1.1.5"
     },
+    "composer/ca-bundle": {
+        "version": "1.1.4"
+    },
     "dama/doctrine-test-bundle": {
         "version": "4.0",
         "recipe": {
@@ -136,6 +139,18 @@
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
+    },
+    "sensiolabs/security-checker": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "05daf6b214e54aed4089f3480f944a67ac3a7889"
+        },
+        "files": [
+            "config/packages/security_checker.yaml"
+        ]
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
