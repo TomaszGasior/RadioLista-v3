@@ -1,4 +1,5 @@
 *.sublime-workspace
+/public/errors
 
 ###> symfony/framework-bundle ###
 /.env.local
