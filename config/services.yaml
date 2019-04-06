@@ -4,8 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    version: 2.99
-    contact_address: '%env(RL_CONTACT_ADDRESS)%'
+    app.version: 2.99
+    app.contact_address: '%env(RL_CONTACT_ADDRESS)%'
 
 services:
     # default configuration for services in *this* file
@@ -14,7 +14,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $debug: '%kernel.debug%'
-            $contactAddress: '%contact_address%'
+            $contactAddress: '%app.contact_address%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
