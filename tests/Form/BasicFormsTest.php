@@ -13,24 +13,30 @@ use App\Form\SecurityLoginType;
 use App\Form\Type\RadioTableColumnsType;
 use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
-use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
-use Symfony\Component\Form\PreloadedExtension;
+use HtmlSanitizer\Bundle\Form\TextTypeExtension as HtmlSanitizerExtension;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\Validator\Validation;
 
 class BasicFormsTest extends TypeTestCase
 {
-    protected function getExtensions()
+    use ValidatorExtensionTrait;
+
+    protected function getTypes(): array
     {
-        $validator = Validation::createValidator();
-
-        $radioTableColumnsType = new RadioTableColumnsType(
-            $this->createMock(RadioTableColumnsTransformer::class)
-        );
-
         return [
-            new ValidatorExtension($validator),
-            new PreloadedExtension([$radioTableColumnsType], []),
+            new RadioTableColumnsType(
+                $this->createMock(RadioTableColumnsTransformer::class)
+            ),
+        ];
+    }
+
+    protected function getTypeExtensions(): array
+    {
+        return [
+            new HtmlSanitizerExtension(
+                $this->createMock(ContainerInterface::class), ''
+            ),
         ];
     }
 
@@ -56,9 +62,9 @@ class BasicFormsTest extends TypeTestCase
             [UserSettingsType::class],
             [SecurityLoginType::class],
             [ContactFormType::class],
-
-            // Don't test RadioStationRemoveType — dependencies
-            // on Doctrine form types makes it hard to test.
         ];
+
+        // Don't test RadioStationRemoveType — dependencies on EntityType
+        // and Doctrine repository makes it impossible to test.
     }
 }
