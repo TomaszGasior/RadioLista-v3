@@ -34,3 +34,7 @@ services:
         resource: '../src/Doctrine/EntityListener/*'
         tags:
             - { name: 'doctrine.orm.entity_listener', lazy: true }
+
+    App\Form\Extension\ValidationFlashErrorExtension:
+        tags:
+            - { name: form.type_extension, priority: -100 }
