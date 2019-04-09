@@ -1,0 +1,44 @@
+{% extends 'admin/_admin_layout.html.twig' %}
+
+{% block page_content %}
+    <header>
+        <h1>Panel administracyjny — lista wykazów</h1>
+    </header>
+
+    {% set status_labels = {
+        (constant('App\\Entity\\RadioTable::STATUS_PUBLIC')):   'publiczny',
+        (constant('App\\Entity\\RadioTable::STATUS_PRIVATE')):  'prywatny',
+        (constant('App\\Entity\\RadioTable::STATUS_UNLISTED')): 'niepubliczny',
+    } %}
+
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th data-sort="N">ID</th>
+                <th data-sort="T">Autor</th>
+                <th data-sort="T">Widoczność</th>
+                <th data-sort="T">Nazwa</th>
+                <th data-sort="N">Liczba stacji</th>
+                <th data-sort="T">Czas modyf.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for radiotable in radiotables %}
+                <tr>
+                    <td>{{ radiotable.id }}</td>
+                    <td>{{ radiotable.owner.name }}</td>
+                    <td>{{ status_labels[radiotable.status] }}</td>
+                    <td>
+                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+                            {{ radiotable.name }}
+                        </a>
+                    </td>
+                    <td>{{ radiotable.radioStationsCount }}</td>
+                    <td class="nowrap">{{ radiotable.lastUpdateTime|date('Y-m-d H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Liczba wszystkich wykazów: {{ radiotables|length }}</p>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'admin/_admin_layout.html.twig' %}
+
+{% block page_content %}
+    <header>
+        <h1>Panel administracyjny — lista użytkowników</h1>
+    </header>
+
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th data-sort="N">ID</th>
+                <th data-sort="T">Nazwa</th>
+                <th data-sort="N">Liczba wykazów</th>
+                <th data-sort="T">Profil pub.</th>
+                <th data-sort="T">Data aktywności</th>
+                <th data-sort="T">Data rejestracji</th>
+                <th data-sort="T">Kompat. hasła</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        {% if user.publicProfile %}
+                            <a href="{{ path('user.public_profile', {name: user.name}) }}">
+                                {{ user.name }}
+                            </a>
+                        {% else %}
+                            {{ user.name }}
+                        {% endif %}
+                    </td>
+                    <td>{{ user.radioTablesCount }}</td>
+                    <td>{{ user.publicProfile ? 'włączony' : 'wyłączony' }}</td>
+                    <td>{{ user.lastActivityDate|date('Y-m-d') }}</td>
+                    <td>{{ user.registerDate|date('Y-m-d') }}</td>
+                    <td>{{ user.encoderName == 'rl_v1' ? 'tak' : '&mdash;' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Liczba wszystkich użytkowników: {{ users|length }}</p>
+{% endblock %}
