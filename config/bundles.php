@@ -18,4 +18,5 @@ return [
     DAMA\DoctrineTestBundle\DAMADoctrineTestBundle::class => ['test' => true],
     HtmlSanitizer\Bundle\HtmlSanitizerBundle::class => ['all' => true],
     Webfactory\Bundle\PiwikBundle\WebfactoryPiwikBundle::class => ['all' => true],
+    Isometriks\Bundle\SpamBundle\IsometriksSpamBundle::class => ['all' => true],
 ];
