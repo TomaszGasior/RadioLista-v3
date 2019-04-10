@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ChangeUserPassCommand extends Command
 {
@@ -17,14 +18,17 @@ class ChangeUserPassCommand extends Command
 
     private $entityManager;
     private $userRepository;
+    private $validator;
 
     public function __construct(EntityManagerInterface $entityManager,
-                                UserRepository $userRepository)
+                                UserRepository $userRepository,
+                                ValidatorInterface $validator)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->validator = $validator;
     }
 
     protected function configure(): void
@@ -54,6 +58,12 @@ class ChangeUserPassCommand extends Command
         $oldPasswordHash = $user->getPassword();
 
         $user->setPlainPassword($newPassword);
+        $errors = $this->validator->validate($user, null, 'RedefinePassword');
+        if ($errors->count() > 0) {
+            $io->error((string) $errors);
+            return;
+        }
+
         $this->entityManager->flush($user);
 
         $newPasswordHash = $user->getPassword();
