@@ -46,4 +46,14 @@ class ContactFormType extends AbstractType
             ])
         ;
     }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'timed_spam' => true,
+            'timed_spam_min' => 5,
+            'timed_spam_max' => 7200,
+            'timed_spam_message' => 'Ochrona przed spamem: zbyt szybko wysłana wiadomość.',
+        ]);
+    }
 }
