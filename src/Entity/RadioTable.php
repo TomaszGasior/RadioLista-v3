@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
  * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioTableListener"})
+ * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
 class RadioTable
 {

@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "name", groups={"Default", "RedefinePassword"},
  *     message="Wybrana nazwa użytkownika jest już zajęta."
  * )
+ * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
 class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
