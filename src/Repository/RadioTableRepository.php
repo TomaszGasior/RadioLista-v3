@@ -57,7 +57,7 @@ class RadioTableRepository extends ServiceEntityRepository
             $query->innerJoin('radioTable.owner', 'user')->addSelect('user');
         }
 
-        return $query->getQuery()->getResult();
+        return $query->getQuery()->setCacheable(true)->getResult();
     }
 
     public function findPublicBySearchTerm(string $searchTerm): array
