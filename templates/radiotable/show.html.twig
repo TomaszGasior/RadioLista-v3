@@ -87,17 +87,20 @@
                     <tr {% if radiostation.marker %}class="marker-{{ radiostation.marker }}"{% endif %}>
                 {%- endblock -%}
 
+                {# Check for permission outside of radiostation loop for better performance. #}
+                {% set is_granted = is_granted('RADIOTABLE_MODIFY', radiotable) %}
+
                 {%- block radiostation_name -%}
-                    {% if is_granted('RADIOTABLE_MODIFY', radiotable) %}
+                    {%- if is_granted -%}
                         <a href="{{ path('radiostation.edit', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
                             {{ radiostation.name }}
                         </a>
-                    {% else %}
+                    {%- else -%}
                         {{ radiostation.name }}
-                    {% endif %}
+                    {%- endif -%}
                 {%- endblock -%}
 
-                {%- block radiostation_rds %}
+                {%- block radiostation_rds -%}
                     {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
                     <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}"
                           class="rds rds-popup-enabled">{{ rds_ps_frames|first }}</span>
