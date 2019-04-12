@@ -1,5 +1,6 @@
 *.sublime-workspace
 /public/errors
+/public/assets/thirdparty/ckeditor
 
 ###> symfony/framework-bundle ###
 /.env.local
