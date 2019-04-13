@@ -24,18 +24,19 @@ class Compiler extends BaseCompiler
 
     private function compressTextNodes(Node $node): void
     {
-        if (false !== strpos($node->getTemplateName(), '.csv.twig')) {
+        // Don't try to minify CSV files and bundles templates.
+        if (false !== strpos($node->getTemplateName(), '.csv.twig') ||
+            false !== strpos($node->getTemplateName(), '@')) {
             return;
         }
 
         if ($node instanceof TextNode) {
             $data = $node->getAttribute('data');
 
-            // Yep, this "minification" sucks! It breaks <pre>/<code> contents
+            // Yep, this "minification" sucks. It breaks <pre>/<code> contents
             // and inline JavaScript without semicolons.
             // But it seems to be fine for this application purposes.
-            $data = str_replace("\n", '', $data);
-            $data = preg_replace('/ +/', ' ', $data);
+            $data = preg_replace('/\s+/', ' ', $data);
 
             $node->setAttribute('data', $data);
         }
