@@ -14,6 +14,8 @@ class AppExtension extends AbstractExtension
             ->getExtension('Twig_Extension_Core')
             ->setEscaper('csv', [$this, 'escapeCSV'])
         ;
+
+        $twig->setCompiler(new Compiler($twig));
     }
 
     public function getFilters(): array
