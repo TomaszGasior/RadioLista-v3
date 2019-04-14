@@ -1,0 +1,5 @@
+framework:
+    cache:
+        pools:
+            doctrine.second_level_cache_pool:
+                adapter: cache.adapter.array
