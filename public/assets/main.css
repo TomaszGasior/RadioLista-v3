@@ -1401,6 +1401,9 @@ form.contact-form p {
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a {
     font-family: inherit !important;
 }
+.cke_toolgroup {
+    background-image: linear-gradient(to bottom,#fff,#efefef) !important;
+}
 
 .cke_chrome .cke_inner {
     background: rgba(224,224,224, 0.3) !important;

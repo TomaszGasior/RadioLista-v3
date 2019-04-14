@@ -72,7 +72,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "ckeditor:install --clear=skip --release=basic %PUBLIC_DIR%/assets/thirdparty/ckeditor": "symfony-cmd",
+            "ckeditor:install --clear=skip --release=custom --custom-build-id=5af1ea2fd3c9442ab08af09ec2423ce6 %PUBLIC_DIR%/assets/thirdparty/ckeditor": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "security-checker security:check": "script"
         },

@@ -1,0 +1,12 @@
+{% use '@FOSCKEditor/Form/ckeditor_widget.html.twig' %}
+
+{% block ckeditor_widget %}
+    {{ parent() }}
+
+    <script>
+        CKEDITOR.instances.{{ id }}.on('langLoaded', function(){
+            var lang = CKEDITOR.lang[CKEDITOR.lang.detect()];
+            lang.wordcount.CharCountWithHTML = lang.wordcount.CharCount;
+        });
+    </script>
+{% endblock %}
