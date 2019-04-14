@@ -93,17 +93,18 @@
                 {%- block radiostation_name -%}
                     {%- if is_granted -%}
                         <a href="{{ path('radiostation.edit', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
-                            {{ radiostation.name }}
+                            {{- radiostation.name -}}
                         </a>
                     {%- else -%}
-                        {{ radiostation.name }}
+                        {{- radiostation.name -}}
                     {%- endif -%}
                 {%- endblock -%}
 
                 {%- block radiostation_rds -%}
                     {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
-                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}"
-                          class="rds rds-popup-enabled">{{ rds_ps_frames|first }}</span>
+                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}" class="rds rds-popup-enabled">
+                          {{- rds_ps_frames|first -}}
+                    </span>
                 {%- endblock -%}
             {% endembed %}
 

@@ -63,6 +63,7 @@
         (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')):  'bardzo zła',
     } -%}
     <span class="quality quality-{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
+        {#- Skip whitespace for proper styling. -#}
         {{- parent() -}}
     </span>
 {%- endblock -%}

@@ -78,10 +78,10 @@ template {
     padding-left: 2em;
     padding-right: 2em;
 }
-@media (min-width: 1600px)
+@media (min-width: 1400px)
 {
     .site-width {
-        max-width: 1300px;
+        max-width: 1100px;
     }
 }
 
@@ -130,7 +130,7 @@ template {
     list-style-type: none;
 }
 .site-navigation li {
-    display: inline;
+    display: inline-block;
 }
 .site-navigation li:before {
     margin: 0 0.4em;

@@ -13,6 +13,8 @@
 
 .site-header .site-logo {
     width: 72px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 
