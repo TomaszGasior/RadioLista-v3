@@ -8,16 +8,13 @@ use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\Security;
 
 class AdminVoter extends Voter
 {
-    private $security;
     private $eventDispatcher;
 
-    public function __construct(Security $security, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
-        $this->security = $security;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -35,10 +32,11 @@ class AdminVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
-        if (false === $this->security->isGranted('ROLE_ADMIN')) {
+        $currentUser = $token->getUser();
+
+        if (!($currentUser instanceof User) || !in_array('ROLE_ADMIN', $currentUser->getRoles())) {
             return false;
         }
-        $currentUser = $this->security->getUser();
 
         if ($subject instanceof User) {
             $user = $subject;
@@ -52,7 +50,7 @@ class AdminVoter extends Voter
                        && $radioTable->getOwner() !== $currentUser);
         }
 
-        // This method could be shorten to just `return isGranted('ROLE_ADMIN')`
+        // This method could be shorten to just `return Security::isGranted('ROLE_ADMIN')`
         // but this whole logic is needed to show flash message when site administrator
         // browses users private contents. Take a look at AdminFlashMessage class.
         if ($result) {
