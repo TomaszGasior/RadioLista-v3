@@ -88,6 +88,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     private $oldPassCompat = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $admin = false;
+
     public function __construct()
     {
         $this->lastActivityDate = new \DateTime;
@@ -219,7 +224,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     public function getRoles(): array
     {
-        if (1 === $this->id) {
+        if ($this->admin) {
             return ['ROLE_USER', 'ROLE_ADMIN'];
         }
 
