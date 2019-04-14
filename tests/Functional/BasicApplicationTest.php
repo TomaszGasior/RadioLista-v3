@@ -54,8 +54,8 @@ class BasicApplicationTest extends WebTestCase
     public function testAuthenticatedPagesSeemToWork(string $url): void
     {
         $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'radiolista',
-            'PHP_AUTH_PW' => 'radiolista',
+            'PHP_AUTH_USER' => 'test_user',
+            'PHP_AUTH_PW' => 'test_user',
         ]);
         $client->request('GET', $url);
 
@@ -67,6 +67,7 @@ class BasicApplicationTest extends WebTestCase
 
     public function authenticatedUrlsProvider(): array
     {
+        // Radiotable and radiostation specific pages are tested in SecurityPermissionTest.
         return [
             ['/utworz-wykaz'],
             ['/moje-wykazy'],
@@ -77,8 +78,8 @@ class BasicApplicationTest extends WebTestCase
     public function testSitemapSeemsToWork(): void
     {
         $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'radiolista',
-            'PHP_AUTH_PW' => 'radiolista',
+            'PHP_AUTH_USER' => 'test_user',
+            'PHP_AUTH_PW' => 'test_user',
         ]);
         $client->request('GET', '/sitemap.xml');
 

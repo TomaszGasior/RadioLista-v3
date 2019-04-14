@@ -43,8 +43,8 @@ class SecurityPermissionTest extends WebTestCase
     {
         $client = static::createClient([]);
         $crawler = $client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'radiolista',
-            'PHP_AUTH_PW' => 'radiolista',
+            'PHP_AUTH_USER' => 'test_user_2',
+            'PHP_AUTH_PW' => 'test_user_2',
         ]);
 
         $response = $client->getResponse();

@@ -30,8 +30,8 @@ class RadioTableStatusTest extends WebTestCase
         }
 
         $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'radiolista',
-            'PHP_AUTH_PW' => 'radiolista',
+            'PHP_AUTH_USER' => 'test_user_2',
+            'PHP_AUTH_PW' => 'test_user_2',
         ]);
         $client->request('GET', '/wykaz/' . $radioTable->getId());
 
@@ -113,8 +113,6 @@ class RadioTableStatusTest extends WebTestCase
 
     private function getRadioTable(): RadioTable
     {
-        static $radioTable;
-
         self::bootKernel();
         $userRepository = self::$container->get('App\Repository\UserRepository');
         $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
