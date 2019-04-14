@@ -10,7 +10,7 @@ use Faker\Provider\Base;
 
 abstract class AbstractFixture extends Fixture
 {
-    public const ENTITIES_NUMBER = 5;
+    protected const ENTITIES_NUMBER = 5;
 
     static private $faker;
 

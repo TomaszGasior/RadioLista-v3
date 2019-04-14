@@ -8,14 +8,15 @@ use Faker\Generator;
 
 class RadioStationFixtures extends AbstractFixture implements DependentFixtureInterface
 {
-    public const ENTITIES_NUMBER = 5000;
+    protected const ENTITIES_NUMBER = 5000;
 
     protected function createEntity(Generator $faker, int $i): object
     {
         $radioStation = new RadioStation;
 
+        // Radiotables for hardcoded users.
         $radioStation->setRadioTable(
-            $this->getReferenceFrom(RadioTableFixtures::class, $i < 40 ? 1 : null)
+            $this->getReferenceFrom(RadioTableFixtures::class, $i < 40 ? rand(1, 3) : null)
         );
 
         $radioStation->setFrequency(

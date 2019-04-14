@@ -8,23 +8,24 @@ use Faker\Generator;
 
 class RadioTableFixtures extends AbstractFixture implements DependentFixtureInterface
 {
-    public const ENTITIES_NUMBER = 120;
+    protected const ENTITIES_NUMBER = 120;
 
     protected function createEntity(Generator $faker, int $i): object
     {
         $radioTable = new RadioTable;
 
-        if ($i <= 3) {
+        // Radiotables for hardcoded users.
+        if ($i <= 6) {
             $radioTable->setName('Wykaz radiowy #' . $i);
-            $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, 1));
             $radioTable->setDescription($faker->HTMLDescription);
 
-            return $radioTable;
-        }
-        elseif (4 === $i) {
-            $radioTable->setName('Wykaz radiowy #' . $i);
-            $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, 2));
-            $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
+            if ($i <= 3) {
+                $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, 1));
+            }
+            else {
+                $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, $i < 6 ? 2 : 3));
+                $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
+            }
 
             return $radioTable;
         }

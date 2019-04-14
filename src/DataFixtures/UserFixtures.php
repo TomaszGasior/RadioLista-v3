@@ -7,12 +7,11 @@ use Faker\Generator;
 
 class UserFixtures extends AbstractFixture
 {
-    public const ENTITIES_NUMBER = 30;
+    protected const ENTITIES_NUMBER = 30;
 
-    private const DEFAULT_USER_NAME = 'radiolista';
-    private const DEFAULT_USER_PASS = 'radiolista';
-    private const TEST_USER_NAME = 'test_user';
-    private const TEST_USER_PASS = 'test_user';
+    public const DEFAULT_USERNAME = 'radiolista';
+    public const TEST_USERNAME = 'test_user';
+    public const TEST_USERNAME_SECOND = 'test_user_2';
 
     protected function createEntity(Generator $faker, int $i): object
     {
@@ -22,19 +21,19 @@ class UserFixtures extends AbstractFixture
         $user->setPublicProfile($faker->boolean(75));
 
         if (1 === $i) {
-            $user->setName(self::DEFAULT_USER_NAME);
+            $user->setName(self::DEFAULT_USERNAME);
             $user->setPublicProfile(true);
-            $user->setPlainPassword(self::DEFAULT_USER_PASS);
         }
         elseif (2 === $i) {
-            $user->setName(self::TEST_USER_NAME);
+            $user->setName(self::TEST_USERNAME);
             $user->setPublicProfile(false);
-            $user->setPlainPassword(self::TEST_USER_PASS);
         }
-        else {
-            $user->setPlainPassword($user->getName());
+        elseif (3 === $i) {
+            $user->setName(self::TEST_USERNAME_SECOND);
+            $user->setPublicProfile(false);
         }
 
+        $user->setPlainPassword($user->getName());
         $user->setAboutMe($faker->optional()->HTMLDescription);
 
         return $user;
