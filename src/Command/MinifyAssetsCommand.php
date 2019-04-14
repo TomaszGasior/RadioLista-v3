@@ -31,16 +31,18 @@ class MinifyAssetsCommand extends Command
             ->files()->in($assetsPath)->name('*.css');
 
         foreach ($finder as $file) {
-            $minifier = new Minify\CSS($file->getRealPath());
-            $minifier->minify();
+            $path = $file->getRealPath();
+            $minifier = new Minify\CSS($path);
+            $minifier->minify($path);
         }
 
         $finder = (new Finder())
             ->files()->in($assetsPath)->name('*.js');
 
         foreach ($finder as $file) {
-            $minifier = new Minify\JS($file->getRealPath());
-            $minifier->minify();
+            $path = $file->getRealPath();
+            $minifier = new Minify\JS($path);
+            $minifier->minify($path);
         }
     }
 
