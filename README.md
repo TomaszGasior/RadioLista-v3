@@ -3,9 +3,6 @@ RadioLista-v3
 
 RadioLista to serwis internetowy umożliwiający użytkownikom publikację własnych bandscanów oraz wykazów radiowych i telewizyjnych. Serwis funkcjonuje pod adresem https://radiolista.pl. Więcej informacji: https://tomaszgasior.pl/pomysly/radiolista, https://radiolista.pl/o-stronie.
 
-Zadaniem projektu RadioLista-v3 jest przeportowanie obecnej wersji serwisu do frameworka Symfony. Więcej informacji: https://github.com/TomaszGasior/RadioLista-v3/wiki.
-
-
 Instalacja lokalna
 ---
 
