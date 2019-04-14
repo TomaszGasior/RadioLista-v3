@@ -23,6 +23,8 @@ class UserFixtures extends AbstractFixture
         if (1 === $i) {
             $user->setName(self::DEFAULT_USERNAME);
             $user->setPublicProfile(true);
+
+            $this->setUserAdmin($user);
         }
         elseif (2 === $i) {
             $user->setName(self::TEST_USERNAME);
@@ -37,5 +39,12 @@ class UserFixtures extends AbstractFixture
         $user->setAboutMe($faker->optional()->HTMLDescription);
 
         return $user;
+    }
+
+    private function setUserAdmin(User $user): void
+    {
+        $reflection = new \ReflectionProperty(User::class, 'admin');
+        $reflection->setAccessible(true);
+        $reflection->setValue($user, true);
     }
 }
