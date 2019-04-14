@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b9cdf254d7f07762338b712823c253b",
+    "content-hash": "506082483730dd580775c39b83008d1a",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -6028,7 +6028,6 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1.3",
-        "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*"
