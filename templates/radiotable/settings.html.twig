@@ -77,17 +77,19 @@
         <div>
             <h2>Wygląd</h2>
 
+            {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
+
             {# style="" is used as dirty hack for box-shadow removing. #}
             {{ form_row(form.appearanceTheme) }}
             {{ form_row(form.appearanceBackgroundColor, {attr: {
                 'class': 'jscolor',
                 'style': '',
-                'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+                'data-jscolor': jscolor_settings,
             }}) }}
             {{ form_row(form.appearanceColor, {attr: {
                 'class': 'jscolor',
                 'style': '',
-                'data-jscolor': '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:4}',
+                'data-jscolor': jscolor_settings,
             }}) }}
             {{ form_row(form.appearanceBackgroundImage) }}
             {{ form_row(form.appearanceFullWidth) }}
@@ -132,4 +134,8 @@
     <button>Zapisz</button>
 
     {{ form_end(form) }}
+{% endblock %}
+
+{% block body_closing %}
+    <script src="{{ asset('thirdparty/jscolor.min.js') }}" async></script>
 {% endblock %}
