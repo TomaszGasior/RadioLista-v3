@@ -10,8 +10,9 @@
 
         this.compareRows = function(columnIndex, sortingType, row1, row2)
         {
-            var value1 = row1.children[columnIndex].textContent;
-            var value2 = row2.children[columnIndex].textContent;
+            // Use textContent to ignore HTML in row content. Trim HTML indentation.
+            var value1 = row1.children[columnIndex].textContent.trim();
+            var value2 = row2.children[columnIndex].textContent.trim();
 
             if ('N' === sortingType) {
                 if('' !== value1) {
