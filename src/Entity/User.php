@@ -225,6 +225,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getRoles(): array
     {
         if ($this->admin) {
+            // Additional privileges for user with ROLE_ADMIN:
+            // * use administration panel,
+            // * preview private radiotables and hidden user profiles,
+            // * browse application while maintenance mode is enabled.
             return ['ROLE_USER', 'ROLE_ADMIN'];
         }
 
