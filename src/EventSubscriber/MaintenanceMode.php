@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Security\Core\Exception\RuntimeException as SecurityException;
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
@@ -28,10 +29,11 @@ class MaintenanceMode implements EventSubscriberInterface
             return;
         }
 
-        // This line breaks Symfony profiler. Don't run maintenance mode on dev env. ;-)
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            return;
-        }
+        try {
+            if ($this->security->isGranted('ROLE_ADMIN')) {
+                return;
+            }
+        } catch (SecurityException $e) {}
 
         $response = new Response(
             $this->twig->render('dark-error.html.twig', ['message' => 'MaintenanceMode'])
