@@ -1217,16 +1217,16 @@
         },
         {
             "name": "friendsofsymfony/ckeditor-bundle",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
-                "reference": "ca2b528d9a9939ca068fa01f0cddbce6cebcff13"
+                "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/ca2b528d9a9939ca068fa01f0cddbce6cebcff13",
-                "reference": "ca2b528d9a9939ca068fa01f0cddbce6cebcff13",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/7ba78735ea75b9a6d4de403d7aced6c993a0557a",
+                "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a",
                 "shasum": ""
             },
             "require": {
@@ -1291,7 +1291,7 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2019-03-05T21:04:46+00:00"
+            "time": "2019-04-15T16:29:43+00:00"
         },
         {
             "name": "isometriks/spam-bundle",
@@ -4949,16 +4949,16 @@
         },
         {
             "name": "tgalopin/html-sanitizer-bundle",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tgalopin/html-sanitizer-bundle.git",
-                "reference": "fe9c3d1000717031980f9243fd514f70f9923f6f"
+                "reference": "aabcda7bdc2bc55322ffe4f36bb7d839a5c3e727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tgalopin/html-sanitizer-bundle/zipball/fe9c3d1000717031980f9243fd514f70f9923f6f",
-                "reference": "fe9c3d1000717031980f9243fd514f70f9923f6f",
+                "url": "https://api.github.com/repos/tgalopin/html-sanitizer-bundle/zipball/aabcda7bdc2bc55322ffe4f36bb7d839a5c3e727",
+                "reference": "aabcda7bdc2bc55322ffe4f36bb7d839a5c3e727",
                 "shasum": ""
             },
             "require": {
@@ -4989,7 +4989,7 @@
                 }
             ],
             "description": "Symfony Bundle for https://github.com/tgalopin/html-sanitizer",
-            "time": "2018-11-28T18:16:56+00:00"
+            "time": "2019-04-02T15:13:15+00:00"
         },
         {
             "name": "twig/twig",
