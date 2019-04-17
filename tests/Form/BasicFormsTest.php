@@ -13,6 +13,8 @@ use App\Form\SecurityLoginType;
 use App\Form\Type\RadioTableColumnsType;
 use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use HtmlSanitizer\Bundle\Form\TextTypeExtension as HtmlSanitizerExtension;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
@@ -27,6 +29,9 @@ class BasicFormsTest extends TypeTestCase
         return [
             new RadioTableColumnsType(
                 $this->createMock(RadioTableColumnsTransformer::class)
+            ),
+            new CKEditorType(
+                $this->createMock(CKEditorConfigurationInterface::class)
             ),
         ];
     }
