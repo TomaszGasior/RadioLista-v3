@@ -48,10 +48,11 @@
         };
         this.showPopupForItem = function(item)
         {
-            var PS = item.dataset.ps.trim();
-            var RT = item.dataset.rt.trim();
-            var PTY = item.dataset.pty.trim();
+            var PS = item.dataset.ps;
+            var RT = item.dataset.rt;
+            var PTY = item.dataset.pty;
 
+            // Don't show RDS popup if data is not specified or PS has only one frame.
             if (-1 === PS.indexOf('|') && !RT && !PTY) {
                 return;
             }
