@@ -1350,9 +1350,12 @@ form.contact-form p {
     max-height: 430px;
     overflow-y: auto;
     box-sizing: border-box;
-    padding: 0.8em 1em;
+    padding: 0.05em 1em;
     background: #F9FCF9;
     border: 1px solid #D6EAD0;
+}
+.radiostations-remove fieldset {
+    margin: 0;
 }
 
 
