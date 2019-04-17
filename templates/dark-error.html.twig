@@ -15,6 +15,10 @@
         {% set error_title = 'Wystąpił poważny błąd.' %}
         {% set error_text = 'Wystąpił nieprzewidziany błąd aplikacji.|Proszę skontaktować się z autorem RadioListy.' %}
 
+        {% if message == "MaintenanceMode" %}
+            {% set error_title = 'Trwa przerwa techniczna.' %}
+            {% set error_text = 'W tej chwili serwis jest wyłączony ze względu na prace konserwacyjne.|Odwiedź RadioListę za kilka minut.' %}
+        {% endif %}
         {% if message == "DatabaseConnection" %}
             {% set error_title = 'Drobne problemy techniczne.' %}
             {% set error_text = 'Nie udało się połączyć z bazą danych serwisu.|Proszę odczekać kilka minut i odświeżyć stronę.' %}

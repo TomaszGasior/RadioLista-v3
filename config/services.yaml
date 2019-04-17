@@ -16,6 +16,7 @@ services:
             $debug: '%kernel.debug%'
             $contactAddress: '%app.contact_address%'
             $logFilePath: '%kernel.logs_dir%/%kernel.environment%.log'
+            $maintenanceMode: '%env(bool:RL_MAINTENANCE)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
