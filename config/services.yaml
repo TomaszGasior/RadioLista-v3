@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.version: 2.99
-    app.contact_address: '%env(RL_CONTACT_ADDRESS)%'
 
 services:
     # default configuration for services in *this* file
@@ -14,7 +13,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $debug: '%kernel.debug%'
-            $contactAddress: '%app.contact_address%'
+            $contactAddress: '%env(RL_CONTACT_ADDRESS)%'
             $logFilePath: '%kernel.logs_dir%/%kernel.environment%.log'
             $maintenanceMode: '%env(bool:RL_MAINTENANCE)%'
 
