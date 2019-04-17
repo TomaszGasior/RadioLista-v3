@@ -8,14 +8,15 @@ use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, Compiler $compiler)
     {
         $twig
             ->getExtension('Twig_Extension_Core')
             ->setEscaper('csv', [$this, 'escapeCSV'])
         ;
 
-        $twig->setCompiler(new Compiler($twig));
+        // Set custom compiler to minify HTML output of cached Twig templates.
+        $twig->setCompiler($compiler);
     }
 
     public function getFilters(): array
