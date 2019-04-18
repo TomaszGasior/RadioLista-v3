@@ -68,8 +68,8 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $registerDate;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
-     * @Assert\Length(max=1000, groups={"Default", "RedefinePassword"})
+     * @ORM\Column(type="string", length=2000, nullable=true)
+     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"})
      */
     private $aboutMe;
 

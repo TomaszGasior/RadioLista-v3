@@ -114,8 +114,8 @@ class RadioTable
     private $sorting = self::SORTING_FREQUENCY;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
-     * @Assert\Length(max=1000)
+     * @ORM\Column(type="string", length=2000, nullable=true)
+     * @Assert\Length(max=2000)
      */
     private $description;
 
