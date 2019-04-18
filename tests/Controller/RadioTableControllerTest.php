@@ -3,6 +3,8 @@
 namespace App\Tests\Controller;
 
 use App\Entity\RadioTable;
+use App\Repository\RadioStationRepository;
+use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableControllerTest extends WebTestCase
@@ -36,8 +38,8 @@ class RadioTableControllerTest extends WebTestCase
     public function radioTableProvider(): array
     {
         self::bootKernel();
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
-        $radioStationRepository = self::$container->get('App\Repository\RadioStationRepository');
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
+        $radioStationRepository = self::$container->get(RadioStationRepository::class);
 
         $radioTable = $radioTableRepository->findOneBy([]);
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
@@ -105,7 +107,7 @@ class RadioTableControllerTest extends WebTestCase
     private function createRadioTable(): RadioTable
     {
         self::bootKernel();
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
 
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',

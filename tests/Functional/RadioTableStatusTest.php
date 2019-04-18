@@ -3,6 +3,8 @@
 namespace App\Tests\Functional;
 
 use App\Entity\RadioTable;
+use App\Repository\RadioTableRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableStatusTest extends WebTestCase
@@ -114,8 +116,8 @@ class RadioTableStatusTest extends WebTestCase
     private function getRadioTable(): RadioTable
     {
         self::bootKernel();
-        $userRepository = self::$container->get('App\Repository\UserRepository');
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
+        $userRepository = self::$container->get(UserRepository::class);
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
 
         $user = $userRepository->findOneByName('test_user');
         $radioTable = $radioTableRepository->findAllOwnedByUser($user)[0];

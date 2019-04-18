@@ -2,6 +2,8 @@
 
 namespace App\Tests\Functional;
 
+use App\Repository\RadioTableRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BasicApplicationTest extends WebTestCase
@@ -23,8 +25,8 @@ class BasicApplicationTest extends WebTestCase
     public function publicUrlsProvider(): iterable
     {
         self::bootKernel();
-        $userRepository = self::$container->get('App\Repository\UserRepository');
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
+        $userRepository = self::$container->get(UserRepository::class);
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
 
         $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime(10);
         $users = $userRepository->findByPublicProfile(true, null, 10);

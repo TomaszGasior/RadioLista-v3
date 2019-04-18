@@ -2,6 +2,9 @@
 
 namespace App\Tests\Functional;
 
+use App\Repository\RadioStationRepository;
+use App\Repository\RadioTableRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityPermissionTest extends WebTestCase
@@ -63,9 +66,9 @@ class SecurityPermissionTest extends WebTestCase
     public function ownedByTestUserUrlProvider(): array
     {
         self::bootKernel();
-        $userRepository = self::$container->get('App\Repository\UserRepository');
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
-        $radioStationRepository = self::$container->get('App\Repository\RadioStationRepository');
+        $userRepository = self::$container->get(UserRepository::class);
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
+        $radioStationRepository = self::$container->get(RadioStationRepository::class);
 
         $user = $userRepository->findOneByName('test_user');
         $radioTable = $radioTableRepository->findAllOwnedByUser($user)[0];

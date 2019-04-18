@@ -3,6 +3,8 @@
 namespace App\Tests\Controller;
 
 use App\Entity\RadioStation;
+use App\Repository\RadioStationRepository;
+use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioStationControllerTest extends WebTestCase
@@ -89,8 +91,8 @@ class RadioStationControllerTest extends WebTestCase
     private function createRadioStation(): RadioStation
     {
         self::bootKernel();
-        $radioTableRepository = self::$container->get('App\Repository\RadioTableRepository');
-        $radioStationRepository = self::$container->get('App\Repository\RadioStationRepository');
+        $radioTableRepository = self::$container->get(RadioTableRepository::class);
+        $radioStationRepository = self::$container->get(RadioStationRepository::class);
 
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',
