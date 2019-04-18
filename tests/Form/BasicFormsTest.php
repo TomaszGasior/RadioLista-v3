@@ -47,12 +47,11 @@ class BasicFormsTest extends TypeTestCase
 
     /**
      * @dataProvider formTypesProvider
+     * @doesNotPerformAssertions
      */
     public function testBuildForms(string $formClass): void
     {
         $this->factory->create($formClass);
-
-        $this->assertTrue(true);
     }
 
     public function formTypesProvider(): array
