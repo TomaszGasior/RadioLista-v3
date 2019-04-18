@@ -35,8 +35,11 @@ class MaintenanceMode implements EventSubscriberInterface
             }
         } catch (SecurityException $e) {}
 
+        // Don't enable maintenace mode on development environment.
+        // It breaks Symfony debug toolbar and profiler.
         $response = new Response(
-            $this->twig->render('dark-error.html.twig', ['message' => 'MaintenanceMode'])
+            $this->twig->render('dark-error.html.twig', ['message' => 'MaintenanceMode']),
+            503
         );
         $event->setResponse($response);
     }
