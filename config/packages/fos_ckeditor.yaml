@@ -1,25 +1,26 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 fos_ck_editor:
     configs:
-        rl_v2:
+        main:
             height: 200
             removeButtons: 'Anchor,Copy,Cut,Paste,Subscript,Superscript,Undo,Redo,Indent,Outdent,About'
             removeDialogTabs: 'link:advanced;link:target'
             forceEnterMode: true
-            entities_latin: true
+            entities_latin: false
             disableNativeSpellChecker: false
-            dialog_backgroundCoverColor: 'rgb(20,20,20)'
             wordcount:
-                showParagraphs: false
+                maxCharCount: 2000
                 showWordCount: true
                 showCharCount: true
-                countSpacesAsChars: true
                 countHTML: true
-                maxCharCount: 2000
+                countSpacesAsChars: false
+                countBytesAsChars: false
+                countLineBreaks: true
+                showParagraphs: false
+            title: false
+            dialog_backgroundCoverColor: 'rgb(20,20,20)'
 
-    # Workaround for https://github.com/FriendsOfSymfony/FOSCKEditorBundle/issues/181
-    # Changed also in composer.json scripts.
-    base_path: 'thirdparty/ckeditor'
+    base_path: 'thirdparty/ckeditor'  # Also changed in composer.json
     js_path:   'thirdparty/ckeditor/ckeditor.js'
 
 twig:
