@@ -11,6 +11,7 @@ use App\Repository\RadioStationRepository;
 use App\Repository\RadioTableRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use HtmlSanitizer\SanitizerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,12 +29,14 @@ class RLv2ToRLv3ConvCommand extends Command
     private $entityManager;
     private $userRepository;
     private $validator;
+    private $sanitizer;
 
     public function __construct(RadioTableRepository $radioTableRepository,
                                 RadioStationRepository $radioStationRepository,
                                 UserRepository $userRepository,
                                 EntityManagerInterface $entityManager,
-                                ValidatorInterface $validator)
+                                ValidatorInterface $validator,
+                                SanitizerInterface $sanitizer)
     {
         parent::__construct();
 
@@ -43,6 +46,7 @@ class RLv2ToRLv3ConvCommand extends Command
 
         $this->entityManager = $entityManager;
         $this->validator = $validator;
+        $this->sanitizer = $sanitizer;
     }
 
     protected function configure(): void
@@ -66,6 +70,19 @@ class RLv2ToRLv3ConvCommand extends Command
         $this->entityManager->getClassMetadata(RadioStation::class)->entityListeners = [];
 
         $io->title('Convert database contents from RLv2 to RLv3');
+
+        $users = $this->userRepository->findAll();
+
+        foreach ($users as $user) {
+            // About me.
+
+            $sanitizedAboutMe = $this->sanitizer->sanitize($user->getAboutMe());
+            if ($sanitizedAboutMe !== $user->getAboutMe()) {
+                $user->setAboutMe($sanitizedAboutMe);
+
+                $io->text('User id=' . $user->getId() . ', aboutMe, sanitize');
+            }
+        }
 
         $radioTables = $this->radioTableRepository->findAll();
 
@@ -125,6 +142,15 @@ class RLv2ToRLv3ConvCommand extends Command
 
                     $io->text('RadioTable id=' . $radioTable->getId() . ' ' . $columnName . ', unescape HTML chars');
                 }
+            }
+
+            // Description.
+
+            $sanitizedDescription = $this->sanitizer->sanitize($radioTable->getDescription());
+            if ($sanitizedDescription !== $radioTable->getDescription()) {
+                $radioTable->setDescription($sanitizedDescription);
+
+                $io->text('RadioTable id=' . $radioTable->getId() . ', description, sanitize');
             }
         }
 
