@@ -123,4 +123,34 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
     }
+
+    public function testRegisterNewUser(): void
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/rejestracja');
+
+        $form = $crawler->filter('form')->form();
+        $form['user_register[name]'] = 'EXAMPLE_LOGIN';
+        $form['user_register[plainPassword][first]'] = 'EXAMPLE_PASSW0RD!';
+        $form['user_register[plainPassword][second]'] = 'EXAMPLE_PASSW0RD!';
+        $form['user_register[acceptServiceTerms]'] = '1';
+        $client->submit($form);
+
+        $crawler = $client->request('GET', '/logowanie');
+
+        $form = $crawler->filter('form')->form();
+        $form['security_login[username]'] = 'EXAMPLE_LOGIN';
+        $form['security_login[password]'] = 'EXAMPLE_PASSW0RD!';
+        $client->submit($form);
+
+        $response = $client->getResponse();
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame('http://localhost/moje-wykazy', $response->getTargetUrl());
+
+        $crawler = $client->request('GET', '/moje-wykazy');
+
+        $response = $client->getResponse();
+        $this->assertSame(200, $response->getStatusCode());
+    }
 }
