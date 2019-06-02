@@ -1,7 +1,12 @@
 *.sublime-workspace
-/public/errors
 /public/assets/thirdparty/ckeditor
 /public/assets/minified-*
+
+/public/errors
+/public/google*.html
+/public/BingSiteAuth.xml
+/public/banner.gif
+/public/favicon.ico
 
 ###> symfony/framework-bundle ###
 /.env.local
