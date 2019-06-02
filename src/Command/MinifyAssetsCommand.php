@@ -14,35 +14,55 @@ use Symfony\Component\Finder\Finder;
 
 class MinifyAssetsCommand extends Command
 {
+    // Keep in sync with prod/framework.yaml.
+    private const MINIFIED_PREFIX = 'minified-';
+
     protected static $defaultName = 'app:minify-assets';
+
+    private $debug;
+
+    public function __construct(bool $debug)
+    {
+        $this->debug = $debug;
+
+        parent::__construct();
+    }
 
     protected function configure(): void
     {
         $this
             ->setDescription('Minify CSS and JS files in public/assets')
+            ->setHidden(true)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        // Minify assets only on production.
+        if ($this->debug) {
+            return;
+        }
+
         $assetsPath = $this->getAssetsDirectoryPath();
 
-        $finder = (new Finder())
-            ->files()->in($assetsPath)->name('*.css');
+        $finder = (new Finder)
+            ->files()->depth(0)->in($assetsPath)
+            ->name('*.css')->notName(self::MINIFIED_PREFIX . '*');
 
         foreach ($finder as $file) {
             $path = $file->getRealPath();
             $minifier = new Minify\CSS($path);
-            $minifier->minify($path);
+            $minifier->minify($this->addPrefixToPath($path));
         }
 
-        $finder = (new Finder())
-            ->files()->in($assetsPath)->name('*.js');
+        $finder = (new Finder)
+            ->files()->depth(0)->in($assetsPath)
+            ->name('*.js')->notName(self::MINIFIED_PREFIX . '*');
 
         foreach ($finder as $file) {
             $path = $file->getRealPath();
             $minifier = new Minify\JS($path);
-            $minifier->minify($path);
+            $minifier->minify($this->addPrefixToPath($path));
         }
     }
 
@@ -78,5 +98,10 @@ class MinifyAssetsCommand extends Command
         }
 
         return $defaultPublicDir;
+    }
+
+    private function addPrefixToPath($path): string
+    {
+        return dirname($path) . '/' . self::MINIFIED_PREFIX . basename($path);
     }
 }

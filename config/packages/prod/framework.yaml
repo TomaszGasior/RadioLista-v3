@@ -1,0 +1,5 @@
+framework:
+    assets:
+        base_path: 'assets'
+        version: '%app.version%'
+        version_format: 'minified-%%s?%%s'
