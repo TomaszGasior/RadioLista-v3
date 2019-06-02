@@ -74,6 +74,7 @@
             "cache:clear": "symfony-cmd",
             "ckeditor:install --clear=drop --release=custom --custom-build-id=5af1ea2fd3c9442ab08af09ec2423ce6 %PUBLIC_DIR%/assets/thirdparty/ckeditor": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "app:minify-assets": "symfony-cmd",
             "security-checker security:check": "script"
         },
         "post-install-cmd": [
