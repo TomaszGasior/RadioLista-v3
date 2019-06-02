@@ -21,7 +21,7 @@
         "symfony/expression-language": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/form": "^4.1",
-        "symfony/framework-bundle": "dev-trans-bugfix as 4.2.7",
+        "symfony/framework-bundle": "^4.1",
         "symfony/monolog-bundle": "^3.3",
         "symfony/security-bundle": "^4.1",
         "symfony/swiftmailer-bundle": "^3.2",
@@ -46,13 +46,6 @@
         "symfony/var-dumper": "^4.1",
         "symfony/web-server-bundle": "^4.1"
     },
-    "repositories": [
-        {
-            "type": "github",
-            "no-api": true,
-            "url": "https://github.com/TomaszGasior/framework-bundle.git"
-        }
-    ],
     "config": {
         "preferred-install": {
             "*": "dist"
