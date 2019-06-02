@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Extension\EscaperExtension;
 use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
@@ -11,7 +12,7 @@ class AppExtension extends AbstractExtension
     public function __construct(Environment $twig, Compiler $compiler)
     {
         $twig
-            ->getExtension('Twig_Extension_Core')
+            ->getExtension(EscaperExtension::class)
             ->setEscaper('csv', [$this, 'escapeCSV'])
         ;
 
