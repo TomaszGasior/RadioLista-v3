@@ -3,6 +3,6 @@ security:
         main:
             http_basic: ~
     encoders:
-        rl_v2:
-            algorithm: bcrypt
+        App\Entity\User:
+            algorithm: native
             cost: 4

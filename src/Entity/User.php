@@ -268,12 +268,12 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
 
     // EncoderAwareInterface
 
-    public function getEncoderName(): string
+    public function getEncoderName(): ?string
     {
         if ($this->oldPassCompat) {
             return 'rl_v1';
         }
 
-        return 'rl_v2';
+        return null;
     }
 }

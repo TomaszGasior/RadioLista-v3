@@ -6,9 +6,7 @@ security:
                 property: name
 
     encoders:
-        rl_v2:
-            algorithm: bcrypt
-            cost: 12
+        App\Entity\User: native
         rl_v1:
             id: App\Security\Encoder\RLv1Encoder
 
