@@ -329,7 +329,7 @@ input[type="number"] {
 input[type="number"].decimal {
     width: 100px;
 }
-@supports(-webkit-app-region: initial)
+@supports (-webkit-app-region: initial)
 {
     input[type="search"]::-webkit-search-cancel-button {
         /* remove "X" from search input in WebKit */
@@ -338,6 +338,13 @@ input[type="number"].decimal {
     input::-webkit-calendar-picker-indicator {
         /* remove ugly arrow in inputs with datalist attribute in WebKit */
         display: none;
+    }
+}
+@supports (-webkit-nbsp-mode: initial)
+{
+    input[type="search"] {
+        /* make search input consistent in WebKit, not Blink */
+        -webkit-appearance: none;
     }
 }
 
@@ -546,6 +553,13 @@ input.jscolor:not([style=""]) {
 
     vertical-align: bottom;
 }
+@supports (-webkit-nbsp-mode: initial)
+{
+    .tabbed-ui-navigator {
+        /* needed for WebKit, not Blink */
+        margin-bottom: 0;
+    }
+}
 .tabbed-ui-navigator li {
     display: inline;
 }
@@ -631,11 +645,11 @@ table.radiotable th {
 table.radiotable td {
     border-top: 1px solid rgba(0,0,0, 0.05);
 }
-@supports(-webkit-app-region: initial)
+@supports (-webkit-nbsp-mode: initial)
 {
-    /* color for WebKit */
+    /* color for WebKit, not Blink */
     table.radiotable td {
-        border-top: 1px solid rgba(0,0,0, 0.025);
+        border-top: 1px solid rgba(0,0,0, 0.03);
     }
 }
 
@@ -1050,6 +1064,9 @@ table.sortable th[data-sort].sorted-desc:after {
 .search-form {
     display: flex;
     margin: 1em 0 2em;
+
+    /* needed for WebKit, not Blink */
+    align-items: center;
 }
 .search-form button {
     margin: 0;
