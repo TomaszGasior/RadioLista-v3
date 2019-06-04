@@ -20,7 +20,7 @@
 {%- endblock -%}
 
 {%- block row_start -%}
-    <tr>
+    <tr {% if radiostation.marker %}class="marker-{{ radiostation.marker }}"{% endif %}>
 {%- endblock -%}
 {%- block cell_start -%}
     <td>

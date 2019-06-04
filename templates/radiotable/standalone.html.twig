@@ -64,11 +64,33 @@
             .quality.quality-1:before {
                 content: "●";
             }
+            .marker-1 {
+                font-weight: bold;
+            }
+            .marker-2 {
+                font-style: italic;
+            }
+            .marker-3 {
+                text-decoration: line-through;
+            }
+            .marker-4 {
+                background: rgba(255,209,209, 0.65);
+            }
+            .marker-5 {
+                background: rgba(175,255,150, 0.65);
+            }
+            .marker-6 {
+                background: rgba(156,230,255, 0.65);
+            }
             .rds {
                 white-space: pre;
                 font-family: 'Inconsolata', 'Consolas', 'Source Code Pro', 'Lucida Console', monospace;
                 background: #dedede;
                 padding: 0 3px;
+                {# Reset markers. -#}
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
             }
             .number-indent-apply-1:before {
                 content: '0';

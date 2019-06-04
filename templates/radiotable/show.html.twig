@@ -83,10 +83,6 @@
                     </th>
                 {%- endblock -%}
 
-                {%- block row_start -%}
-                    <tr {% if radiostation.marker %}class="marker-{{ radiostation.marker }}"{% endif %}>
-                {%- endblock -%}
-
                 {# Check for permission outside of radiostation loop for better performance. #}
                 {% set is_granted = is_granted('RADIOTABLE_MODIFY', radiotable) %}
 
