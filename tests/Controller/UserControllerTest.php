@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\RadioTable;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase

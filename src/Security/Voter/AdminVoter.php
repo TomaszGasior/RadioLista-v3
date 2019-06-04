@@ -2,7 +2,6 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
