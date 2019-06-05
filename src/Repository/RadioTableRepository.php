@@ -82,7 +82,7 @@ class RadioTableRepository extends ServiceEntityRepository
     {
         return $this->findBy(
             ['owner' => $user, 'status' => RadioTable::STATUS_PUBLIC],
-            ['radioStationsCount' => 'DESC']
+            ['lastUpdateTime' => 'DESC']
         );
     }
 
@@ -90,7 +90,7 @@ class RadioTableRepository extends ServiceEntityRepository
     {
         return $this->findBy(
             ['owner' => $user],
-            ['radioStationsCount' => 'DESC']
+            ['lastUpdateTime' => 'DESC']
         );
     }
 }
