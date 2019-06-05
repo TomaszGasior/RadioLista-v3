@@ -1180,8 +1180,18 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 .user-login-screen .form-item.form-regular {
-    /* keep these styles in sync with mobile form items list */
-    flex-direction: column;
+    /* for IE 11 only */
+    display: block;
+}
+@supports (color: initial)
+{
+    /* keep these styles in sync with mobile form item list */
+    .user-login-screen .form-item.form-regular {
+        flex-direction: column;
+
+        /* reset from IE 11 hack */
+        display: flex;
+    }
 }
 .user-login-screen .form-item.form-regular > *:first-child {
     width: auto;

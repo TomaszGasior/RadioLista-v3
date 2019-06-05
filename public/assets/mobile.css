@@ -125,7 +125,17 @@ button {
 /* form items list */
 
 .form-item.form-regular {
-    flex-direction: column;
+    /* for IE 11 only */
+    display: block;
+}
+@supports (color: initial)
+{
+    .form-item.form-regular {
+        flex-direction: column;
+
+        /* reset from IE 11 hack */
+        display: flex;
+    }
 }
 .form-item.form-regular > *:first-child {
     width: auto;
