@@ -46,7 +46,7 @@
             this.itemHasFocus = false;
             this.hidePopup();
         };
-        this.showPopupForItem = function(item)
+        this.hasItemExtraInfo = function(item)
         {
             var PS = item.dataset.ps;
             var RT = item.dataset.rt;
@@ -54,8 +54,16 @@
 
             // Don't show RDS popup if data is not specified or PS has only one frame.
             if (-1 === PS.indexOf('|') && !RT && !PTY) {
-                return;
+                return false;
             }
+
+            return true;
+        };
+        this.showPopupForItem = function(item)
+        {
+            var PS = item.dataset.ps;
+            var RT = item.dataset.rt;
+            var PTY = item.dataset.pty;
 
             if (PS) {
                 this.rowPS.hidden = false;
@@ -122,12 +130,14 @@
         this.setupItems = function()
         {
             this.items.forEach(function(item){
-                item.tabIndex = 0;
+                if (this.hasItemExtraInfo(item)) {
+                    item.tabIndex = 0;
 
-                item.addEventListener('mouseover', this.onItemMouseover.bind(this));
-                item.addEventListener('mouseleave', this.onItemMouseleave.bind(this));
-                item.addEventListener('focus', this.onItemFocus.bind(this));
-                item.addEventListener('blur', this.onItemBlur.bind(this));
+                    item.addEventListener('mouseover', this.onItemMouseover.bind(this));
+                    item.addEventListener('mouseleave', this.onItemMouseleave.bind(this));
+                    item.addEventListener('focus', this.onItemFocus.bind(this));
+                    item.addEventListener('blur', this.onItemBlur.bind(this));
+                }
             }.bind(this));
         };
 

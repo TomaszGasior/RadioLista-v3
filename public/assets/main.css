@@ -737,8 +737,8 @@ table.radiotable span.rds {
     font-style: normal;
     text-decoration: none;
 }
-table.radiotable span.rds:hover, table.radiotable span.rds:focus {
     background: rgba( 0,0,0, 0.7 );
+table.radiotable span.rds[tabindex]:hover, table.radiotable span.rds:focus {
     color: #fff;
     outline: none;
 }
