@@ -322,12 +322,9 @@ textarea {
     min-height: 130px;
 }
 input[type="number"] {
-    width: 80px;
+    width: 110px;
     text-align: center;
     margin-right: 0.2em;
-}
-input[type="number"].decimal {
-    width: 100px;
 }
 @supports (-webkit-app-region: initial)
 {
