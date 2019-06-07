@@ -21,8 +21,8 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
 
         $radioStation->setFrequency(
             $radioStation->getRadioTable()->getUseKhz()
-            ? $faker->randomFloat(2, 100, 9999)
-            : $faker->randomFloat(2, 87.5, 108)
+            ? $faker->randomFloat(1, 100, 9999)
+            : $faker->randomFloat(1, 87.5, 108)
         );
         $radioStation->setPower($faker->randomFloat(2, 0, 1000));
         $radioStation->setPrivateNumber($faker->numberBetween(1, 100));
@@ -41,6 +41,19 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
         $radioStation->setType(
             $faker->randomConstantFromClass(RadioStation::class, 'TYPE_')
         );
+        if ($faker->boolean(75)) {
+            $radioStation->setDistance($faker->numberBetween(1, 999));
+        }
+        if ($faker->boolean(75)) {
+            $firstLogDate = $faker->dateTimeBetween('-25 years', 'now')->format('Y-m-d');
+            if ($faker->boolean) {
+                $firstLogDate = substr($firstLogDate, 0, -3);
+                if ($faker->boolean) {
+                    $firstLogDate = substr($firstLogDate, 0, -3);
+                }
+            }
+            $radioStation->setFirstLogDate($firstLogDate);
+        }
         if ($faker->boolean) {
             $radioStation->setLocality([
                 'type' => $faker->randomConstantFromClass(RadioStation::class, 'LOCALITY_'),
@@ -59,6 +72,7 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
                 'pty' => $faker->optional()->randomElement(
                     ['NEWS', 'INFO', 'SPORT', 'CULTURE', 'POP M', 'ROCK M', 'LIGHT M', 'CLASSIC', 'OTHER M']
                 ),
+                'pi' => $faker->randomNumber(4),
             ]);
         }
 
