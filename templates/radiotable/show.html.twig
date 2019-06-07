@@ -98,7 +98,7 @@
 
                 {%- block radiostation_rds -%}
                     {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
-                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}" class="rds rds-popup-enabled">
+                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}" data-pi="{{ rds_pi|e|e }}" class="rds rds-popup-enabled">
                           {{- rds_ps_frames|first -}}
                     </span>
                 {%- endblock -%}
@@ -119,6 +119,10 @@
                         <div class="rds-popup-pty-row">
                             <dt>PTY</dt>
                             <dd class="rds-popup-pty-value"></dd>
+                        </div>
+                        <div class="rds-popup-pi-row">
+                            <dt>PI</dt>
+                            <dd class="rds-popup-pi-value"></dd>
                         </div>
                     </dl>
                 </section>

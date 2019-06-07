@@ -80,6 +80,7 @@
                     {%- set rds_rt = radiostation.rds.rt|strip_newlines -%}
                     {%- set rds_pty = radiostation.rds.pty|strip_newlines -%}
                     {%- set rds_ps_frames = radiostation.rds.ps|strip_newlines|split('|')|format_rds_frames -%}
+                    {%- set rds_pi = radiostation.rds.pi|strip_newlines -%}
 
                     {%- if rds_ps_frames|first|trim -%}
                         {%- block radiostation_rds rds_ps_frames|first|escape(escape_strategy) -%}
