@@ -1,8 +1,11 @@
-{% block decimal_unit_widget %}
-    {% set type = "number" %}
-    {% set attr = attr|merge({'class': 'decimal', 'step': step, 'min': step}) %}
-    {{ block('number_widget') }}
+{% block integer_unit_widget %}
+    {{ block('integer_widget') }}
     {{ unit_label }}
+{% endblock integer_unit_widget %}
+
+{% block decimal_unit_widget %}
+    {% set attr = attr|merge({'class': 'decimal', 'step': step, 'min': step}) %}
+    {{ block('integer_unit_widget') }}
 
     <script>
         {# Enforce leading zeros in typed values ("87.6" -> "87.60"). #}
