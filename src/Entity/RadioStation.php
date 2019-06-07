@@ -126,7 +126,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @YearMonthDate
+     * @YearMonthDate(message="Data pierwszego odbioru jest niepoprawna.")
      */
     private $firstLogDate;
 
