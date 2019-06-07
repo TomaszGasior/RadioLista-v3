@@ -158,6 +158,10 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('firstLogDate', null, [
                 'label' => 'Data pierwszego odbioru',
+                'attr' => [
+                    'placeholder' => 'na przykład: 2013, 2011-06, 2016-05-04',
+                    'pattern' => '[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?',
+                ],
             ])
             ->add('marker', ChoiceType::class, [
                 'label' => 'Wyróżnienie wizualne',
@@ -181,6 +185,7 @@ class RadioStationEditType extends AbstractType
                 'label' => 'Programme Service',
                 'required' => false,
                 'trim' => false,
+                'attr' => ['placeholder' => 'na przykład: POLSKIE|RADIO|JEDYNKA'],
             ])
             ->add('rdsRt', TextareaType::class, [
                 'property_path' => 'rds[rt]',
