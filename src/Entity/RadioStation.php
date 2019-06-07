@@ -177,12 +177,14 @@ class RadioStation
      *     "rt"  = @Assert\Type("string"),
      *     "ps"  = @Assert\Type("string"),
      *     "pty" = @Assert\Type("string"),
+     *     "pi"  = @Assert\Type("string"),
      * })
      */
     private $rds = [
         'rt' => '',
         'ps' => '',
         'pty' => '',
+        'pi' => '',
     ];
 
     /**
