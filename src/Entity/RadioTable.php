@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator\HexColor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -127,11 +128,11 @@ class RadioTable
      *     "th" = @Assert\Type("string"),
      *     "bg" = {
      *         @Assert\Type("string"),
-     *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tła jest niepoprawny."),
+     *         @HexColor(message="Kolor tła jest niepoprawny."),
      *     },
      *     "fg" = {
      *         @Assert\Type("string"),
-     *         @Assert\Regex("/^#([0-9a-f]{6}|[0-9a-f]{3})$/i", message="Kolor tekstu jest niepoprawny."),
+     *         @HexColor(message="Kolor tekstu jest niepoprawny."),
      *     },
      *     "img" = {
      *         @Assert\Type("string"),
