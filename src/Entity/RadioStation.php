@@ -112,6 +112,12 @@ class RadioStation
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThan(0, message="Odległość od nadajnika musi być większa niż zero.")
+     */
+    private $distance;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
      * @Assert\GreaterThan(0, message="Numer w odbiorniku musi być większy niż zero.")
      */
@@ -290,6 +296,18 @@ class RadioStation
     public function setPolarization(?string $polarization): self
     {
         $this->polarization = $polarization;
+
+        return $this;
+    }
+
+    public function getDistance(): ?int
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?int $distance): self
+    {
+        $this->distance = $distance;
 
         return $this;
     }
