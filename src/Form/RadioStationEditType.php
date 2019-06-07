@@ -156,6 +156,9 @@ class RadioStationEditType extends AbstractType
                 'unit_label' => 'km',
                 'attr' => ['min' => '1'],
             ])
+            ->add('firstLogDate', null, [
+                'label' => 'Data pierwszego odbioru',
+            ])
             ->add('marker', ChoiceType::class, [
                 'label' => 'Wyróżnienie wizualne',
                 'choices' => [
