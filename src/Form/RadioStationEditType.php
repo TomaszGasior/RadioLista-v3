@@ -154,6 +154,7 @@ class RadioStationEditType extends AbstractType
             ->add('distance', IntegerUnitType::class, [
                 'label' => 'Odległość od nadajnika',
                 'unit_label' => 'km',
+                'required' => false,
                 'attr' => ['min' => '1'],
             ])
             ->add('firstLogDate', null, [
