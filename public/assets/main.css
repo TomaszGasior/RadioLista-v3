@@ -641,6 +641,7 @@ table.radiotable th {
     padding-bottom: 0.5em;
     color: #477E2D;
     font-weight: normal;
+    white-space: nowrap;
 }
 table.radiotable td {
     border-top: 1px solid rgba(0,0,0, 0.05);
