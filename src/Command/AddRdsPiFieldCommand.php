@@ -2,6 +2,9 @@
 
 namespace App\Command;
 
+use App\Entity\RadioStation;
+use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -36,6 +39,10 @@ class AddRdsPiFieldCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->entityManager->getClassMetadata(User::class)->entityListeners = [];
+        $this->entityManager->getClassMetadata(RadioTable::class)->entityListeners = [];
+        $this->entityManager->getClassMetadata(RadioStation::class)->entityListeners = [];
+
         $radioStations = $this->radioStationRepository->findAll();
 
         foreach ($radioStations as $radioStation) {
