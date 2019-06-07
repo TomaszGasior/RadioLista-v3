@@ -59,7 +59,7 @@ class RehashRLv1UserPasswordTest extends TestCase
         $user = $this->createMock(User::class);
         $user
             ->method('getEncoderName')
-            ->willReturn('rl_v2')
+            ->willReturn(null)
         ;
         $user
             ->expects($this->never())
