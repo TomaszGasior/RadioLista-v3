@@ -27,6 +27,7 @@ class RadioTable
     public const COLUMN_POLARIZATION = 'polarization';
     public const COLUMN_TYPE = 'type';
     public const COLUMN_LOCALITY = 'locality';
+    public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
     public const COLUMN_DISTANCE = 'distance';
     public const COLUMN_QUALITY = 'quality';
     public const COLUMN_RDS = 'rds';
@@ -84,6 +85,7 @@ class RadioTable
      *     RadioTable::COLUMN_POLARIZATION,
      *     RadioTable::COLUMN_TYPE,
      *     RadioTable::COLUMN_LOCALITY,
+     *     RadioTable::COLUMN_FIRST_LOG_DATE,
      *     RadioTable::COLUMN_DISTANCE,
      *     RadioTable::COLUMN_QUALITY,
      *     RadioTable::COLUMN_RDS,

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -122,6 +123,12 @@ class RadioStation
      * @Assert\GreaterThan(0, message="Numer w odbiorniku musi być większy niż zero.")
      */
     private $privateNumber;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @YearMonthDate
+     */
+    private $firstLogDate;
 
     /**
      * @ORM\Column(type="smallint")
@@ -308,6 +315,18 @@ class RadioStation
     public function setDistance(?int $distance): self
     {
         $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getFirstLogDate(): ?string
+    {
+        return $this->firstLogDate;
+    }
+
+    public function setFirstLogDate(?string $firstLogDate): self
+    {
+        $this->firstLogDate = $firstLogDate;
 
         return $this;
     }
