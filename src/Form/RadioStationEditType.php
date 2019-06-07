@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\RadioStation;
 use App\Form\Type\DecimalUnitType;
+use App\Form\Type\IntegerUnitType;
 use App\Form\Type\TextHintsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -148,6 +149,11 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('privateNumber', null, [
                 'label' => 'Numer w odbiorniku',
+                'attr' => ['min' => '1'],
+            ])
+            ->add('distance', IntegerUnitType::class, [
+                'label' => 'Odległość od nadajnika',
+                'unit_label' => 'km',
                 'attr' => ['min' => '1'],
             ])
             ->add('marker', ChoiceType::class, [
