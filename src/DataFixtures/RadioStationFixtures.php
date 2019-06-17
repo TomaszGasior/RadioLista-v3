@@ -72,8 +72,8 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
                 'pty' => $faker->optional()->randomElement(
                     ['NEWS', 'INFO', 'SPORT', 'CULTURE', 'POP M', 'ROCK M', 'LIGHT M', 'CLASSIC', 'OTHER M']
                 ),
-                'pi' => $faker->randomNumber(4),
             ]);
+            $radioStation->setRdsPi(rand(1000, 9999));
         }
 
         return $radioStation;
