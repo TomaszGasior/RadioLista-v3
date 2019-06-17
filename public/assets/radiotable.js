@@ -8,11 +8,9 @@
         this.rowPS = null;
         this.rowRT = null;
         this.rowPTY = null;
-        this.rowPI = null;
         this.valuePS = null;
         this.valueRT = null;
         this.valuePTY = null;
-        this.valuePI = null;
 
         this.itemHasFocus = false;
 
@@ -53,10 +51,9 @@
             var PS = item.dataset.ps;
             var RT = item.dataset.rt;
             var PTY = item.dataset.pty;
-            var PI = item.dataset.pi;
 
             // Don't show RDS popup if data is not specified or PS has only one frame.
-            if (-1 === PS.indexOf('|') && !RT && !PTY && !PI) {
+            if (-1 === PS.indexOf('|') && !RT && !PTY) {
                 return false;
             }
 
@@ -67,7 +64,6 @@
             var PS = item.dataset.ps;
             var RT = item.dataset.rt;
             var PTY = item.dataset.pty;
-            var PI = item.dataset.pi;
 
             if (PS) {
                 this.rowPS.hidden = false;
@@ -84,13 +80,8 @@
                 this.valuePTY.innerHTML =
                     '<span>' + PTY + '</span>';
             }
-            if (PI) {
-                this.rowPI.hidden = false;
-                this.valuePI.innerHTML =
-                    '<span>' + PI + '</span>';
-            }
 
-            if (PS || RT || PTY || PI) {
+            if (PS || RT || PTY) {
                 this.popup.hidden = false;
             }
 
@@ -113,7 +104,6 @@
             this.rowPS.hidden = true;
             this.rowRT.hidden = true;
             this.rowPTY.hidden = true;
-            this.rowPI.hidden = true;
 
             this.popup.hidden = true;
         };
@@ -126,12 +116,10 @@
             this.rowPS = this.popup.querySelector('.rds-popup-ps-row');
             this.rowRT = this.popup.querySelector('.rds-popup-rt-row');
             this.rowPTY = this.popup.querySelector('.rds-popup-pty-row');
-            this.rowPI = this.popup.querySelector('.rds-popup-pi-row');
 
             this.valuePS = this.popup.querySelector('.rds-popup-ps-value');
             this.valueRT = this.popup.querySelector('.rds-popup-rt-value');
             this.valuePTY = this.popup.querySelector('.rds-popup-pty-value');
-            this.valuePI = this.popup.querySelector('.rds-popup-pi-value');
 
             this.popup.style.position = 'fixed';
             this.hidePopup();
