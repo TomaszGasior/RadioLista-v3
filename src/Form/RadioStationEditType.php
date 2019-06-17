@@ -201,8 +201,6 @@ class RadioStationEditType extends AbstractType
                 'label' => 'Program Type',
             ])
             ->add('rdsPi', null, [
-                'property_path' => 'rds[pi]',
-
                 'label' => 'Programme Identification',
                 'attr' => ['maxlength' => '4'],
             ])

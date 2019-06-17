@@ -41,6 +41,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                     RadioTable::COLUMN_FIRST_LOG_DATE  => 'Data pierwszego odbioru',
                     RadioTable::COLUMN_QUALITY  => 'Jakość odbioru',
                     RadioTable::COLUMN_RDS  => 'RDS',
+                    RadioTable::COLUMN_RDS_PI  => 'Kod RDS PI',
                     RadioTable::COLUMN_COMMENT  => 'Komentarz',
                 ],
             ])
