@@ -41,6 +41,9 @@
 {%- block radiostation_power -%}
     <span class="number-indent-2">{{ parent() }}</span>
 {%- endblock -%}
+{%- block radiostation_distance -%}
+    <span class="number-indent-2">{{ parent() }}</span>
+{%- endblock -%}
 {%- block radiostation_polarization -%}
     <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ parent() }}</abbr>
 {%- endblock -%}

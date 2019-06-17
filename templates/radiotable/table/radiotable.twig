@@ -63,6 +63,8 @@
                     {%- block radiostation_polarization radiostation.polarization|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}
                     {%- block radiostation_quality radiostation.quality|escape(escape_strategy) -%}
+                {%- elseif column == 'distance' and radiostation.distance is not null -%}
+                    {%- block radiostation_distance radiostation.distance|escape(escape_strategy) -%}
 
                 {%- elseif column == 'locality' -%}
                     {%- set locality_is_network = radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) -%}
