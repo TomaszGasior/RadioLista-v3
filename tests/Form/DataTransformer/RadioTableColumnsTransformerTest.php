@@ -59,7 +59,8 @@ class RadioTableColumnsTransformerTest extends TestCase
                     RadioTable::COLUMN_POLARIZATION => -12,
                     RadioTable::COLUMN_FIRST_LOG_DATE => -13,
                     RadioTable::COLUMN_DISTANCE => -14,
-                    RadioTable::COLUMN_COMMENT => -15,
+                    RadioTable::COLUMN_RDS_PI => -15,
+                    RadioTable::COLUMN_COMMENT => -16,
                 ],
             ],
 
@@ -94,6 +95,7 @@ class RadioTableColumnsTransformerTest extends TestCase
                     RadioTable::COLUMN_LOCALITY => -13,
                     RadioTable::COLUMN_FIRST_LOG_DATE => -14,
                     RadioTable::COLUMN_DISTANCE => -15,
+                    RadioTable::COLUMN_RDS_PI => -16,
                 ],
             ],
         ];
