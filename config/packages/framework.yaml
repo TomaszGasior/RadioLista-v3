@@ -24,3 +24,8 @@ framework:
     assets:
         base_path: 'assets'
         version: '%app.version%'
+
+        packages:
+            minified:
+                base_path: 'assets'
+                version: '%app.version%'
