@@ -190,15 +190,19 @@ class RadioStation
      *     "rt"  = @Assert\Type("string"),
      *     "ps"  = @Assert\Type("string"),
      *     "pty" = @Assert\Type("string"),
-     *     "pi"  = @Assert\Type("string"),
      * })
      */
     private $rds = [
         'rt' => '',
         'ps' => '',
         'pty' => '',
-        'pi' => '',
     ];
+
+    /**
+     * @ORM\Column(type="string", length=4, nullable=true)
+     * @Assert\Length(max=4, maxMessage="Kod RDS PI może mieć maksymalnie {{ limit }} znaki.")
+     */
+    private $rdsPi;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
@@ -399,6 +403,18 @@ class RadioStation
     public function setRds(array $rds): self
     {
         $this->rds = $rds;
+
+        return $this;
+    }
+
+    public function getRdsPi(): ?string
+    {
+        return $this->rdsPi;
+    }
+
+    public function setRdsPi(?string $rdsPi): self
+    {
+        $this->rdsPi = $rdsPi;
 
         return $this;
     }
