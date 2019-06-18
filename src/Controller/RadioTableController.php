@@ -117,7 +117,8 @@ class RadioTableController extends AbstractController
 
         $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $radioTable->getName() . '.' . $_format, date('Y-m-d_H-i-s') . '.' . $_format
+            str_replace(['/', '\\'], '', $radioTable->getName()) . '.' . $_format,
+            date('Y-m-d_H-i-s') . '.' . $_format
         ));
 
         return $response;
