@@ -147,26 +147,59 @@
 
     function NumberIndent(container)
     {
-        this.elementsIndent1 = container.querySelectorAll('.number-indent-1');
-        this.elementsIndent2 = container.querySelectorAll('.number-indent-2');
+        this.container = container;
+        this.itemsGroups = new Map;
 
-        this.elementsIndent1.forEach(function(element){
-            var value = parseInt(element.textContent);
+        this.getIntegerFromItem = function(item)
+        {
+            return parseInt(item.textContent);
+        };
+        this.getDigitsCountInInteger = function(number)
+        {
+            return number.toString().length;
+        };
+        this.findMaxNumberInItems = function(items)
+        {
+            var numbers = items.map(function(item){
+                return this.getIntegerFromItem(item);
+            }.bind(this));
 
-            if (value < 10) {
-                element.classList.add('number-indent-apply-1');
-            }
-        });
-        this.elementsIndent2.forEach(function(element){
-            var value = parseInt(element.textContent);
+            return numbers.reduce(function(prev, value){
+                return (prev > value ? prev : value);
+            });
+        };
+        this.setupItemsGroups = function()
+        {
+            this.container.querySelectorAll('[data-number-indent]').forEach(function(item){
+                var groupName = item.dataset.numberIndent;
 
-            if (value < 10) {
-                element.classList.add('number-indent-apply-2');
-            }
-            else if (value < 100) {
-                element.classList.add('number-indent-apply-1');
-            }
-        });
+                if (!this.itemsGroups.has(groupName)) {
+                    this.itemsGroups.set(groupName, []);
+                }
+
+                this.itemsGroups.get(groupName).push(item);
+            }.bind(this));
+        };
+        this.applyNumberIndent = function()
+        {
+            this.itemsGroups.forEach(function(items){
+                var maxNumber = this.findMaxNumberInItems(items);
+                var maxDigits = this.getDigitsCountInInteger(maxNumber);
+
+                items.forEach(function(item){
+                    var number = this.getIntegerFromItem(item);
+                    var digits = this.getDigitsCountInInteger(number);
+                    var digitsDifference = maxDigits - digits;
+
+                    if (digitsDifference) {
+                        item.classList.add('number-indent-' + digitsDifference);
+                    }
+                }.bind(this));
+            }.bind(this));
+        };
+
+        this.setupItemsGroups();
+        this.applyNumberIndent();
     }
 
     function OverflowStyles(container)

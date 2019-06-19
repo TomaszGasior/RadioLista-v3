@@ -33,16 +33,16 @@
 {%- endblock -%}
 
 {%- block radiostation_private_number -%}
-    <span class="number-indent-1">{{ parent() }}</span>
+    <span data-number-indent="private-number">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radiostation_frequency -%}
-    <span class="number-indent-2">{{ parent() }}</span>
+    <span data-number-indent="frequency">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radiostation_power -%}
-    <span class="number-indent-2">{{ parent() }}</span>
+    <span data-number-indent="power">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radiostation_distance -%}
-    <span class="number-indent-2">{{ parent() }}</span>
+    <span data-number-indent="distance">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radiostation_polarization -%}
     <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ parent() }}</abbr>

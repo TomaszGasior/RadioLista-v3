@@ -921,12 +921,24 @@ table.sortable th[data-sort].sorted-desc:after {
 
 /* number indentation in tables */
 
-.number-indent-apply-1:before {
+.number-indent-1:before {
     content: "0";
     opacity: 0;
 }
-.number-indent-apply-2:before {
+.number-indent-2:before {
     content: "00";
+    opacity: 0;
+}
+.number-indent-3:before {
+    content: "000";
+    opacity: 0;
+}
+.number-indent-4:before {
+    content: "0000";
+    opacity: 0;
+}
+.number-indent-5:before {
+    content: "00000";
     opacity: 0;
 }
 
