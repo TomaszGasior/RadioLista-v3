@@ -102,10 +102,10 @@ class RadioTable
     private $columns = [
         self::COLUMN_FREQUENCY,
         self::COLUMN_NAME,
-        self::COLUMN_RADIO_GROUP,
         self::COLUMN_LOCATION,
-        self::COLUMN_TYPE,
-        self::COLUMN_LOCALITY,
+        self::COLUMN_POWER,
+        self::COLUMN_POLARIZATION,
+        self::COLUMN_COUNTRY,
         self::COLUMN_QUALITY,
         self::COLUMN_RDS,
     ];
