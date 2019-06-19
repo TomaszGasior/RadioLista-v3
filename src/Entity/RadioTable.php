@@ -17,23 +17,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RadioTable
 {
+    // Keep these constants and its values in sync with RadioStation's field names.
+    // Order of them affects order in disabled columns in radiotable settings page. :)
     public const COLUMN_FREQUENCY = 'frequency';
-    public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
     public const COLUMN_NAME = 'name';
-    public const COLUMN_RADIO_GROUP = 'radioGroup';
-    public const COLUMN_COUNTRY = 'country';
     public const COLUMN_LOCATION = 'location';
     public const COLUMN_POWER = 'power';
     public const COLUMN_POLARIZATION = 'polarization';
-    public const COLUMN_TYPE = 'type';
-    public const COLUMN_LOCALITY = 'locality';
-    public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
-    public const COLUMN_DISTANCE = 'distance';
+    public const COLUMN_COUNTRY = 'country';
     public const COLUMN_QUALITY = 'quality';
     public const COLUMN_RDS = 'rds';
+    public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
+    public const COLUMN_DISTANCE = 'distance';
     public const COLUMN_RDS_PI = 'rdsPi';
+    public const COLUMN_RADIO_GROUP = 'radioGroup';
+    public const COLUMN_TYPE = 'type';
+    public const COLUMN_LOCALITY = 'locality';
+    public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
     public const COLUMN_COMMENT = 'comment';
-    // Keep in sync with RadioStation's fields names.
 
     public const SORTING_FREQUENCY = self::COLUMN_FREQUENCY;
     public const SORTING_NAME = self::COLUMN_NAME;
@@ -77,20 +78,20 @@ class RadioTable
      * @ORM\Column(type="array")
      * @Assert\Choice({
      *     RadioTable::COLUMN_FREQUENCY,
-     *     RadioTable::COLUMN_PRIVATE_NUMBER,
      *     RadioTable::COLUMN_NAME,
-     *     RadioTable::COLUMN_RADIO_GROUP,
-     *     RadioTable::COLUMN_COUNTRY,
      *     RadioTable::COLUMN_LOCATION,
      *     RadioTable::COLUMN_POWER,
      *     RadioTable::COLUMN_POLARIZATION,
-     *     RadioTable::COLUMN_TYPE,
-     *     RadioTable::COLUMN_LOCALITY,
-     *     RadioTable::COLUMN_FIRST_LOG_DATE,
-     *     RadioTable::COLUMN_DISTANCE,
+     *     RadioTable::COLUMN_COUNTRY,
      *     RadioTable::COLUMN_QUALITY,
      *     RadioTable::COLUMN_RDS,
+     *     RadioTable::COLUMN_FIRST_LOG_DATE,
+     *     RadioTable::COLUMN_DISTANCE,
      *     RadioTable::COLUMN_RDS_PI,
+     *     RadioTable::COLUMN_RADIO_GROUP,
+     *     RadioTable::COLUMN_TYPE,
+     *     RadioTable::COLUMN_LOCALITY,
+     *     RadioTable::COLUMN_PRIVATE_NUMBER,
      *     RadioTable::COLUMN_COMMENT,
      * }, multiple=true)
      * @Assert\Expression(
