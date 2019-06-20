@@ -1360,7 +1360,7 @@ form.contact-form p {
 .radiostation-disabled-column textarea:not(:focus) {
     opacity: 0.5;
 }
-.radiostation-disabled-column label {
+.radiostation-disabled-column label, .radiostation-disabled-column .unit-label {
     opacity: 0.6;
     text-decoration: line-through;
     text-decoration-color: rgba(0,0,0, 0.5);
