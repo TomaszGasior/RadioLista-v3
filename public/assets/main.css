@@ -1338,7 +1338,18 @@ form.contact-form p {
 }
 
 
-/* radiostation edit/add, rds */
+/* radiostation edit/add */
+
+.radiostation-disabled-column input:not(:focus),
+.radiostation-disabled-column select:not(:focus),
+.radiostation-disabled-column textarea:not(:focus) {
+    opacity: 0.5;
+}
+.radiostation-disabled-column label {
+    opacity: 0.6;
+    text-decoration: line-through;
+    text-decoration-color: rgba(0,0,0, 0.5);
+}
 
 .radiostation-rds input, .radiostation-rds textarea {
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
