@@ -3,6 +3,7 @@
 namespace App\Form\Extension;
 
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
@@ -21,6 +22,7 @@ class RadioStationEditExtension extends AbstractTypeExtension
 
         $visibleColumns = $radioStation->getRadioTable()->getColumns();
         $formChildrenToHide = [];
+        $excludedChildren = ['marker'];
 
         foreach ($form as $childrenName => $children) {
             // Get only first element of property path. Some RadioStation properties
@@ -34,7 +36,9 @@ class RadioStationEditExtension extends AbstractTypeExtension
         }
 
         foreach ($view as $childrenName => $children) {
-            $children->vars['disabled_radiotable_column'] = in_array($childrenName, $formChildrenToHide);
+            $children->vars['disabled_radiotable_column'] =
+                in_array($childrenName, $formChildrenToHide) &&
+                false === in_array($childrenName, $excludedChildren);
         }
     }
 
