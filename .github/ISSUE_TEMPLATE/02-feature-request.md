@@ -1,0 +1,24 @@
+---
+name: Propozycja nowej funkcji
+about: Zaproponuj nową funkcję lub zmianę w serwisie (jeśli bieżące zachowanie NIE JEST BŁĘDEM).
+title: '[Propozycja nowej funkcji] tytuł wpisz tytuł'
+labels: ''
+assignees: ''
+
+---
+
+<!-- Przed zgłoszeniem propozycji SPRAWDŹ, czy ktoś inny już jej nie zgłosił wcześniej! -->
+<!-- Jeśli tak, swoje ewentualne uwagi dopisz w już istniejącym zgłoszeniu. -->
+
+**Opis nowej funkcji lub proponowanej zmiany:**
+<!-- Tutaj opisz DOKŁADNIE swój pomysł. WYMAGANE -->
+
+
+
+**Czego ma dotyczyć twoja propozycja?**
+<!-- Wpisz „X” za właściwym opisem. WYMAGANE -->
+
+- Konta użytkowników:
+- Wykazy radiowe (same w sobie):
+- Stacje radiowe w wykazach:
+- Wykazy i stacje radiowe (powiązane ze sobą):
