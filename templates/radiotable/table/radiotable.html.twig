@@ -50,6 +50,9 @@
 {%- block radiostation_locality_network %}
     <small title="sieć">{{ parent()|trim }}</small>
 {%- endblock -%}
+{%- block radiostation_first_log_date %}
+    <time>{{ parent() }}</time>
+{%- endblock -%}
 {%- block radiostation_rds -%}
     <span class="rds">{{ parent() }}</span>
 {%- endblock -%}

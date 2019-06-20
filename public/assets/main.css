@@ -749,6 +749,9 @@ table.radiotable abbr {
     text-decoration: none;
     border-bottom: 1px dotted #ccc;
 }
+table.radiotable time {
+    white-space: nowrap;
+}
 
 
 /* radiotable — details section */
