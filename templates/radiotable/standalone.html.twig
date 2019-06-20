@@ -101,12 +101,24 @@
                 font-style: normal;
                 text-decoration: none;
             }
-            .number-indent-apply-1:before {
-                content: '0';
+            .number-indent-1:before {
+                content: "0";
                 opacity: 0;
             }
-            .number-indent-apply-2:before {
-                content: '00';
+            .number-indent-2:before {
+                content: "00";
+                opacity: 0;
+            }
+            .number-indent-3:before {
+                content: "000";
+                opacity: 0;
+            }
+            .number-indent-4:before {
+                content: "0000";
+                opacity: 0;
+            }
+            .number-indent-5:before {
+                content: "00000";
                 opacity: 0;
             }
             footer {
@@ -135,30 +147,43 @@
         </footer>
 
         <script>
-        {# Keep this script in sync with main.js. -#}
+        {#  Keep this script in sync with original code in common.js. -#}
+        {#- This script is reorganized because wkhtmltopdf uses WebKit from 2011. :( -#}
         (function(table){
-            {# Needed for old browsers and wkhtmltopdf. -#}
             NodeList.prototype.forEach = Array.prototype.forEach;
 
-            this.elementsIndent1 = table.querySelectorAll('.number-indent-1');
-            this.elementsIndent2 = table.querySelectorAll('.number-indent-2');
+            var itemsGroups = [];
 
-            this.elementsIndent1.forEach(function(element){
-                var value = parseInt(element.textContent);
+            table.querySelectorAll('[data-number-indent]').forEach(function(item){
+                var groupName = item.dataset.numberIndent;
 
-                if (value < 10) {
-                   element.classList.add('number-indent-apply-1');
+                if (undefined === itemsGroups[groupName]) {
+                    itemsGroups[groupName] = [];
                 }
+                itemsGroups[groupName].push(item);
             });
-            this.elementsIndent2.forEach(function(element){
-                var value = parseInt(element.textContent);
+            itemsGroups = Object.keys(itemsGroups).map(function(key){
+                return itemsGroups[key];
+            });
 
-                if (value < 10) {
-                    element.classList.add('number-indent-apply-2');
-                }
-                else if (value < 100) {
-                    element.classList.add('number-indent-apply-1');
-                }
+            itemsGroups.forEach(function(items){
+                var numbers = items.map(function(item){
+                    return parseInt(item.textContent);
+                });
+                var maxNumber = numbers.reduce(function(prev, value){
+                    return (prev > value ? prev : value);
+                });
+                var maxDigits = maxNumber.toString().length;
+
+                items.forEach(function(item){
+                    var number = parseInt(item.textContent);
+                    var digits = number.toString().length;
+                    var digitsDifference = maxDigits - digits;
+
+                    if (digitsDifference) {
+                        item.classList.add('number-indent-' + digitsDifference);
+                    }
+                });
             });
         })(document.querySelector('table'));
         </script>
