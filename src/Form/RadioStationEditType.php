@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\RadioStation;
+use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
+use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\TextHintsType;
@@ -14,6 +16,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioStationEditType extends AbstractType
 {
+    private $rdsPsTransformer;
+    private $rdsRtTransformer;
+
+    public function __construct(RadioStationRdsPsFrameTransformer $rdsPsTransformer,
+                                RadioStationRdsRtFrameTransformer $rdsRtTransformer)
+    {
+        $this->rdsPsTransformer = $rdsPsTransformer;
+        $this->rdsRtTransformer = $rdsRtTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -205,6 +217,15 @@ class RadioStationEditType extends AbstractType
                 'label' => 'Programme Identification',
                 'attr' => ['maxlength' => '4'],
             ])
+        ;
+
+        $builder
+            ->get('rdsPs')
+            ->addViewTransformer($this->rdsPsTransformer)
+        ;
+        $builder
+            ->get('rdsRt')
+            ->addViewTransformer($this->rdsRtTransformer)
         ;
     }
 
