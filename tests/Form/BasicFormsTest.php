@@ -2,7 +2,6 @@
 
 namespace App\Tests\Form;
 
-use App\Form\ContactFormType;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use App\Form\RadioStationEditType;
 use App\Form\RadioTableCreateType;
@@ -65,7 +64,6 @@ class BasicFormsTest extends TypeTestCase
             [UserRegisterType::class],
             [UserSettingsType::class],
             [SecurityLoginType::class],
-            [ContactFormType::class],
         ];
 
         // Don't test RadioStationRemoveType — dependencies on EntityType
