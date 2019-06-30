@@ -11,39 +11,30 @@ class AppExtensionTest extends TestCase
     /**
      * @dataProvider rdsProvider
      */
-    public function testFormatRdsFrames(array $frames, array $formattedFrames): void
+    public function testAlignRdsFrame(string $frame, string $expectedFrame): void
     {
         $appExtension = $this->getInstance();
 
-        $result = $appExtension->formatRDSFrames($frames);
-
-        $this->assertEquals($formattedFrames, $result);
-
-        $this->assertTrue((function($result){
-            foreach ($result as $item) {
-                if (8 !== mb_strlen($item)) {
-                    return false;
-                }
-            }
-            return true;
-        })($result));
+        $this->assertEquals($expectedFrame, $appExtension->alignRDSFrame($frame));
     }
 
     public function rdsProvider(): array
     {
         return [
-            [
-                ['POLSKIE',   '_RADIO',  'JEDYNKA',   '_20:00' ],
-                ['POLSKIE ', '  RADIO ', 'JEDYNKA ', '  20:00 '],
-            ],
-            [
-                [ 'RMF_FM',  'KATOWICE',   'NAJ-',    'LEPSZA',   'MUZYKA' ],
-                [' RMF FM ', 'KATOWICE', '  NAJ-  ', ' LEPSZA ', ' MUZYKA '],
-            ],
-            [
-                [   'x',        'xx',      'xxx',      'xxxx',    'xxxxx',    'xxxxxx',  'xxxxxxx',  'xxxxxxxx', 'xxxxxxxxx'],
-                ['   x    ', '   xx   ', '  xxx   ', '  xxxx  ', ' xxxxx  ', ' xxxxxx ', 'xxxxxxx ', 'xxxxxxxx', 'xxxxxxxx' ],
-            ],
+            ['POLSKIE', 'POLSKIE '],
+            ['_RADIO',  '  RADIO '],
+            ['JEDYNKA', 'JEDYNKA '],
+            ['_20:00',  '  20:00 '],
+
+            ['x',         '   x    '],
+            ['xx',        '   xx   '],
+            ['xxx',       '  xxx   '],
+            ['xxxx',      '  xxxx  '],
+            ['xxxxx',     ' xxxxx  '],
+            ['xxxxxx',    ' xxxxxx '],
+            ['xxxxxxx',   'xxxxxxx '],
+            ['xxxxxxxx',  'xxxxxxxx'],
+            ['xxxxxxxxx', 'xxxxxxxx'],
         ];
     }
 

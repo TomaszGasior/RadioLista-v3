@@ -36,7 +36,7 @@ class RadioStationRdsRtFrameTransformerTest extends TestCase
                     ' 00-977 WARSZAWA    TE.022 645 9115    FAX.022 645 9515',
                     '*  POLSKIE RADIO SA  * PROGRAM 1  AL. NIEPODLEGLOSCI  77/85',
                 ],
-                ' 00-977 WARSZAWA    TE.022 645 9115    FAX.022 645 9515|*  POLSKIE RADIO SA  * PROGRAM 1  AL. NIEPODLEGLOSCI  77/85',
+                " 00-977 WARSZAWA    TE.022 645 9115    FAX.022 645 9515\n*  POLSKIE RADIO SA  * PROGRAM 1  AL. NIEPODLEGLOSCI  77/85",
             ],
         ];
     }

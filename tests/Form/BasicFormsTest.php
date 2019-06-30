@@ -2,6 +2,8 @@
 
 namespace App\Tests\Form;
 
+use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
+use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use App\Form\RadioStationEditType;
 use App\Form\RadioTableCreateType;
@@ -26,6 +28,10 @@ class BasicFormsTest extends TypeTestCase
     protected function getTypes(): array
     {
         return [
+            new RadioStationEditType(
+                $this->createMock(RadioStationRdsPsFrameTransformer::class),
+                $this->createMock(RadioStationRdsRtFrameTransformer::class)
+            ),
             new RadioTableColumnsType(
                 $this->createMock(RadioTableColumnsTransformer::class)
             ),
