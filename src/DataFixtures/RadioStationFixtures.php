@@ -67,8 +67,9 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
         }
         if ($faker->boolean) {
             $radioStation->setRds([
-                'ps' => implode('|', $faker->words(rand(1, 7))),
-                'rt' => $faker->boolean(40) ? implode('|', $faker->sentences()) : null,
+                'ps' => $faker->boolean(40) ? [$faker->words(rand(1, 7))] :
+                        [$faker->words(rand(1, 7)), $faker->words(rand(1, 7))],
+                'rt' => $faker->boolean(40) ? $faker->sentences() : null,
                 'pty' => $faker->optional()->randomElement(
                     ['NEWS', 'INFO', 'SPORT', 'CULTURE', 'POP M', 'ROCK M', 'LIGHT M', 'CLASSIC', 'OTHER M']
                 ),
