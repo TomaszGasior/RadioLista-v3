@@ -81,7 +81,7 @@
             if (PTY) {
                 this.rowPTY.hidden = false;
                 this.valuePTY.innerHTML =
-                    '<span>' + PTY + '</span>';
+                    '<div><span>' + PTY + '</span></div>';
             }
 
             if (PS || RT || PTY) {
