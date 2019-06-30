@@ -1236,22 +1236,6 @@ table.sortable th[data-sort].sorted-desc:after {
 }
 
 
-/* page — contact form */
-
-form.contact-form {
-    max-width: 700px;
-    margin: auto;
-}
-form.contact-form textarea {
-    min-height: 170px;
-}
-
-form.contact-form p {
-    line-height: 1.5em;
-    margin-bottom: 1.7em;
-}
-
-
 /* page — terms of service */
 
 .terms-of-service-page {
@@ -1283,15 +1267,32 @@ form.contact-form p {
 }
 
 
-/* page — about service */
+/* page — about service, contact */
 
-.about-service-page {
-    line-height: 1.6em;
+.plain-text-page {
     max-width: 700px;
     margin: auto;
 }
-.about-service-page p {
-    margin: 0.5em 0;
+.plain-text-page p, .plain-text-page ol {
+    line-height: 1.6em;
+    margin: 0.6em 0;
+}
+.plain-text-page ol {
+    padding-left: 1.5em;
+}
+.plain-text-page li {
+    margin: 0.2em 0;
+}
+.plain-text-page p.p-for-button {
+    line-height: inherit;
+    margin: 1.3em 0;
+    text-align: center;
+}
+.plain-text-page a.button {
+    max-width: none;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    margin-bottom: -1px;
 }
 
 

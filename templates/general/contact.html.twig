@@ -7,17 +7,26 @@
         <h1>Kontakt z autorem</h1>
     </header>
 
-    {{ form_start(form, {attr: {class: 'contact-form'}}) }}
-
-    <p>
-        Jeśli masz jakiekolwiek pytania lub sugestie nt. RadioListy bądź chcesz zgłosić błąd, skorzystaj z&nbsp;poniższego formularza w&nbsp;celu kontaktu z&nbsp;autorem serwisu.
-    </p>
-
-    {{ form_row(form.subject) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.content) }}
-
-    <button>Wyślij wiadomość</button>
-
-    {{ form_end(form) }}
+    <div class="plain-text-page">
+        <p>
+            RadioLista jest projektem open source rozwijanym z pomocą popularnego serwisu GitHub.<br>
+            Aby zgłosić błąd napotkany w serwisie RadioLista lub zaproponować nową funkcję, przejdź do&nbsp;repozytorium projektu w&nbsp;serwisie GitHub i&nbsp;umieść swoje uwagi w&nbsp;sekcji zgłoszeń.
+        </p>
+        <p class="p-for-button">
+            <a class="button" href="https://github.com/TomaszGasior/RadioLista-v3/issues" target="_blank" rel="noopener">
+                Przejdź do zgłoszeń RadioListy
+            </a>
+        </p>
+        <ol>
+            <li>Przejdź do sekcji zgłoszeń projektu RadioLista, korzystając z&nbsp;przycisku powyżej.</li>
+            <li>Przejrzyj listę istniejących zgłoszeń. Jeśli poszukiwana kwestia została już zgłoszona, możesz dodać swoje uwagi w komentarzach lub zasubskrybować wątek, korzystając z&nbsp;przycisku „Subscribe”, aby otrzymywać powiadomienia.</li>
+            <li>Jeżeli nie udało ci się odnaleźć poszukiwanej kwestii, dodaj nowe zgłoszenie za pomocą zielonego przycisku „New issue”.</li>
+            <li>Aby wysłać zgłoszenie, należy być zalogowanym w&nbsp;serwisie GitHub. Jeśli nie posiadasz tam konta, serwis GitHub wyświetli formularz rejestracyjny.</li>
+            <li>Wybierz szablon zgłoszenia — „Zgłoszenie błędu” lub „Propozycja nowej funkcji”, a&nbsp;następnie dokładnie opisz swoje uwagi. Możesz pisać po&nbsp;polsku lub po&nbsp;angielsku.</li>
+            <li>Automatycznie otrzymasz powiadomienie mailem w razie odpowiedzi autora.</li>
+        </ol>
+        <p>
+            Alternatywnie, w&nbsp;sprawach niedotyczących błędów i&nbsp;nowych funkcji, możesz też wysłać mail do&nbsp;autora RadioListy na adres <em>kontakt&nbsp;[małpa]&nbsp;radiolista&nbsp;[kropka]&nbsp;pl</em>. Do&nbsp;zgłaszania błędów i&nbsp;propozycji nowych funkcji sekcja zgłoszeń na&nbsp;GitHubie jest jednakże preferowana.
+        </p>
+    </div>
 {% endblock %}
