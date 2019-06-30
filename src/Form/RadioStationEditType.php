@@ -207,6 +207,7 @@ class RadioStationEditType extends AbstractType
                 'label' => 'Radio Text',
                 'required' => false,
                 'trim' => false,
+                'attr' => ['placeholder' => 'każdy komunikat w osobnej linii'],
             ])
             ->add('rdsPty', null, [
                 'property_path' => 'rds[pty]',

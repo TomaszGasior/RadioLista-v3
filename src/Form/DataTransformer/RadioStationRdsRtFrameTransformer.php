@@ -18,7 +18,7 @@ class RadioStationRdsRtFrameTransformer implements DataTransformerInterface
             return null;
         }
 
-        return implode('|', $value);
+        return implode("\n", $value);
     }
 
     public function reverseTransform($value): array
