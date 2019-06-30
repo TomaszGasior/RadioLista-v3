@@ -866,28 +866,18 @@ table.radiotable time {
 }
 
 .rds-popup dd span {
-    display: inline-block;
-    margin: 0 9px 4px 0;
-
-    /* unvisible border for proper padding sizing */
-    border-bottom: 1px solid rgba(0,0,0, 0);
+    display: inline;
+    margin-right: 8px;
 
     white-space: pre;
     background: rgba(160,160,160, 0.2);
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
 }
-
-.rds-popup dd div {
-    margin-bottom: 3px;
+.rds-popup dd.rds-wrap span {
+    white-space: pre-wrap;
 }
-.rds-popup dd div span {
-    /* unvisible border for proper padding sizing */
-    border-top: 1px solid rgba(0,0,0, 0);
-    border-bottom: 1px solid rgba(0,0,0, 0);
-
-    display: inline;
-    white-space: pre-wrap !important;
-    margin: 0;
+.rds-popup dd div {
+    margin-bottom: 5px;
 }
 
 

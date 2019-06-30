@@ -100,9 +100,27 @@
                 {%- endblock -%}
 
                 {%- block radiostation_rds -%}
-                    {#- Value of data-* attributes need to be double-escaped. JS will automatically unescape them once. -#}
-                    <span data-pty="{{ rds_pty|e|e }}" data-rt="{{ rds_rt|e|e }}" data-ps="{{ rds_ps_frames|join('|')|e|e }}" class="rds rds-popup-enabled">
-                          {{- rds_ps_frames|first -}}
+                    {%- set rds_rt = [] -%}
+                    {%- for frame in radiostation.rds.rt -%}
+                        {%- set rds_rt = rds_rt|merge([frame|escape]) -%}
+                    {%- endfor -%}
+
+                    {%- set rds_ps_groups = [] -%}
+                    {%- for group_key in radiostation.rds.ps|keys -%}
+                        {%- set group = [] -%}
+                        {%- for frame in radiostation.rds.ps[group_key] -%}
+                            {%- set group = group|merge([frame|align_rds_frame|escape]) -%}
+                        {%- endfor -%}
+                        {%- set rds_ps_groups = rds_ps_groups|merge([group]) -%}
+                    {%- endfor -%}
+
+                    {%- set rds_pty = radiostation.rds.pty|escape -%}
+
+                    <span data-pty="{{ rds_pty|json_encode|escape('html_attr') }}"
+                          data-rt="{{ rds_rt|json_encode|escape('html_attr') }}"
+                          data-ps="{{ rds_ps_groups|json_encode|escape('html_attr') }}"
+                          class="rds rds-popup-enabled">
+                        {{- radiostation.rds.ps|first|first|align_rds_frame -}}
                     </span>
                 {%- endblock -%}
             {% endembed %}
@@ -117,7 +135,7 @@
                         </div>
                         <div class="rds-popup-rt-row">
                             <dt>RT</dt>
-                            <dd class="rds-popup-rt-value"></dd>
+                            <dd class="rds-popup-rt-value rds-wrap"></dd>
                         </div>
                         <div class="rds-popup-pty-row">
                             <dt>PTY</dt>

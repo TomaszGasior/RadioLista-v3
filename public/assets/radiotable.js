@@ -48,12 +48,12 @@
         };
         this.hasItemExtraInfo = function(item)
         {
-            var PS = item.dataset.ps;
-            var RT = item.dataset.rt;
-            var PTY = item.dataset.pty;
+            var PS = JSON.parse(item.dataset.ps);
+            var RT = JSON.parse(item.dataset.rt);
+            var PTY = JSON.parse(item.dataset.pty);
 
             // Don't show RDS popup if data is not specified or PS has only one frame.
-            if (-1 === PS.indexOf('|') && !RT && !PTY) {
+            if ((PS[0] && PS[0].length < 2) && PS.length < 2 && 0 === RT.length && !PTY) {
                 return false;
             }
 
@@ -61,19 +61,22 @@
         };
         this.showPopupForItem = function(item)
         {
-            var PS = item.dataset.ps;
-            var RT = item.dataset.rt;
-            var PTY = item.dataset.pty;
+            var PS = JSON.parse(item.dataset.ps);
+            var RT = JSON.parse(item.dataset.rt);
+            var PTY = JSON.parse(item.dataset.pty);
 
-            if (PS) {
+            if (PS.length > 0) {
                 this.rowPS.hidden = false;
+                PS.forEach(function(group, key){
+                   PS[key] = '<span>' + group.join('</span> <span>') + '</span>';
+                });
                 this.valuePS.innerHTML =
-                    '<span>' + PS.replace(/\|/g, '</span> <span>') + '</span>';
+                   '<div>' + PS.join('</div> <div>') + '</div>';
             }
-            if (RT) {
+            if (RT.length > 0) {
                 this.rowRT.hidden = false;
                 this.valueRT.innerHTML =
-                    '<div><span>' + RT.replace(/\|/g, '</span></div> <div><span>') + '</span></div>';
+                    '<div><span>' + RT.join('</span></div> <div><span>') + '</span></div>';
             }
             if (PTY) {
                 this.rowPTY.hidden = false;

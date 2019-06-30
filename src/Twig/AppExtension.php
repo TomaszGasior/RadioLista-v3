@@ -26,8 +26,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('date_format', [$this, 'formatDateAsTimeHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
-            new TwigFilter('format_rds_frames', [$this, 'formatRDSFrames']),
-            new TwigFilter('strip_newlines', [$this, 'stripNewLineChars']),
+            new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
         ];
     }
 
@@ -43,31 +42,19 @@ class AppExtension extends AbstractExtension
                '</time>';
     }
 
-    public function formatRDSFrames(array $frames): array
+    public function alignRDSFrame(string $frame): string
     {
-        foreach($frames as $key => &$frame) {
-            $frame = str_replace('_', ' ', $frame);
-            $emptyChars = 8 - mb_strlen($frame);
+        $frame = str_replace('_', ' ', $frame);
+        $emptyChars = 8 - mb_strlen($frame);
 
-            if ('' == trim($frame)) {
-                unset($frames[$key]);
-                continue;
-            }
-
-            if ($emptyChars > 0) {
-                $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
-            }
-            elseif ($emptyChars < 0) {
-                $frame = htmlspecialchars(substr($frame, 0, 8));
-            }
+        if ($emptyChars > 0) {
+            $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
+        }
+        elseif ($emptyChars < 0) {
+            $frame = substr($frame, 0, 8);
         }
 
-        return $frames;
-    }
-
-    public function stripNewLineChars(?string $string): string
-    {
-        return preg_replace('/\R/u', '', $string);
+        return $frame;
     }
 
     public function escapeCSV(Environment $twig, $data): string
