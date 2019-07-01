@@ -1,5 +1,6 @@
 {% use 'form_div_layout.html.twig' %}
 {% use 'common/form/overwritten_types.html.twig' %}
+{% use 'common/form/custom_types.html.twig' %}
 
 {% block form_row %}
     {% if disabled_radiotable_column %}
@@ -16,4 +17,37 @@
         {% set label_attr = label_attr|merge({'title': 'Ta kolumna jest niewidoczna w wykazie.'}) %}
     {% endif %}
     {{ parent() }}
+{% endblock %}
+
+{% block _radio_station_edit_frequency_widget %}
+    {{ block('decimal_unit_widget') }}
+
+    {# Keep original "0.01" step for values smaller than 74. Use "0.05" otherwise. #}
+    {# This way entering standard frequencies is simpler while OIRT frequencies are #}
+    {# available for advanced usage. #}
+    <script>
+    (function(){
+        var frequencyInput = document.getElementById('{{ id }}');
+        const REPLACED_STEP = '0.05';
+        const ORIGINAL_STEP = frequencyInput.step;
+
+        var updateStep = function()
+        {
+            if (frequencyInput.value >= 74) {
+                if (frequencyInput.step != REPLACED_STEP) {
+                    frequencyInput.step = REPLACED_STEP;
+                    frequencyInput.min = REPLACED_STEP;
+                }
+            }
+            else if (frequencyInput.step != ORIGINAL_STEP) {
+                frequencyInput.step = ORIGINAL_STEP;
+                frequencyInput.min = ORIGINAL_STEP;
+            }
+        };
+
+        updateStep();
+        frequencyInput.addEventListener('input', updateStep);
+        frequencyInput.addEventListener('blur', updateStep);
+    })();
+    </script>
 {% endblock %}
