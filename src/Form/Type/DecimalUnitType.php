@@ -26,9 +26,10 @@ class DecimalUnitType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'step' => 0.05,
-            'unit_label' => '',
-        ]);
+        $resolver
+            ->setDefaults(['unit_label' => ''])
+            ->setRequired(['step'])
+            ->setAllowedTypes('step', 'float')
+        ;
     }
 }
