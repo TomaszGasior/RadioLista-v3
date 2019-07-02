@@ -63,10 +63,10 @@
 {%- block radiostation_quality -%}
     {%- set quality_labels = {
         (constant('App\\Entity\\RadioStation::QUALITY_VERY_GOOD')): 'bardzo dobra',
-        (constant('App\\Entity\\RadioStation::QUALITY_GOOD')):      'dobra',
-        (constant('App\\Entity\\RadioStation::QUALITY_MIDDLE')):    'dostateczna',
-        (constant('App\\Entity\\RadioStation::QUALITY_BAD')):       'zła',
-        (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')):  'bardzo zła',
+        (constant('App\\Entity\\RadioStation::QUALITY_GOOD')): 'dobra',
+        (constant('App\\Entity\\RadioStation::QUALITY_MIDDLE')): 'dostateczna',
+        (constant('App\\Entity\\RadioStation::QUALITY_BAD')): 'zła',
+        (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')): 'bardzo zła',
     } -%}
     <span class="quality quality-{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
         {#- Skip whitespace for proper styling. -#}

@@ -187,11 +187,11 @@ class RadioStation
     /**
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
-     *     "rt"  = {
+     *     "rt" = {
      *         @Assert\Type("array"),
      *         @Assert\All({@Assert\Type("string")}),
      *     },
-     *     "ps"  = {
+     *     "ps" = {
      *         @Assert\Type("array"),
      *         @Assert\All({
      *             @Assert\Type("array"),

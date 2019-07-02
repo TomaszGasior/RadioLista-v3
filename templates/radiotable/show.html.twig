@@ -66,20 +66,20 @@
 
                 {%- block heading_cell -%}
                     {%- set columns_sorting = {
-                        (constant('App\\Entity\\RadioTable::COLUMN_DISTANCE')):       'N',
-                        (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')):      'N',
-                        (constant('App\\Entity\\RadioTable::COLUMN_POWER')):          'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_DISTANCE')): 'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')): 'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_POWER')): 'N',
                         (constant('App\\Entity\\RadioTable::COLUMN_PRIVATE_NUMBER')): 'N',
-                        (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')):        'N',
-                        (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')):        'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')): 'N',
+                        (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')): 'T',
                         (constant('App\\Entity\\RadioTable::COLUMN_FIRST_LOG_DATE')): 'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')):       'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')):       'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_NAME')):           'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')):   'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')):    'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_RDS_PI')):         'T',
-                        (constant('App\\Entity\\RadioTable::COLUMN_TYPE')):           'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_NAME')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_RDS_PI')): 'T',
+                        (constant('App\\Entity\\RadioTable::COLUMN_TYPE')): 'T',
                     } -%}
                     <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
                         {{- columns_labels[column] -}}
