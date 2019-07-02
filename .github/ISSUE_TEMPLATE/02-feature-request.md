@@ -18,7 +18,6 @@ assignees: ''
 **Czego ma dotyczyć twoja propozycja?**
 <!-- Wpisz „X” za właściwym opisem. WYMAGANE -->
 
+- Wykazy i stacje:
 - Konta użytkowników:
-- Wykazy radiowe (same w sobie):
-- Stacje radiowe w wykazach:
-- Wykazy i stacje radiowe (powiązane ze sobą):
+- Ogólne działanie i wygląd serwisu:
