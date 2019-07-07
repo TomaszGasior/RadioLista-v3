@@ -44,7 +44,6 @@ class AppExtension extends AbstractExtension
 
     public function alignRDSFrame(string $frame): string
     {
-        $frame = str_replace('_', ' ', $frame);
         $emptyChars = 8 - mb_strlen($frame);
 
         if ($emptyChars > 0) {

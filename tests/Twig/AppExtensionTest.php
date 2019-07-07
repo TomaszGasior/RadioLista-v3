@@ -22,9 +22,9 @@ class AppExtensionTest extends TestCase
     {
         return [
             ['POLSKIE', 'POLSKIE '],
-            ['_RADIO',  '  RADIO '],
+            [' RADIO',  '  RADIO '],
             ['JEDYNKA', 'JEDYNKA '],
-            ['_20:00',  '  20:00 '],
+            [' 20:00',  '  20:00 '],
 
             ['x',         '   x    '],
             ['xx',        '   xx   '],

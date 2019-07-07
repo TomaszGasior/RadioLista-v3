@@ -102,14 +102,14 @@
                 {%- block radiostation_rds -%}
                     {%- set rds_rt = [] -%}
                     {%- for frame in radiostation.rds.rt -%}
-                        {%- set rds_rt = rds_rt|merge([frame|escape]) -%}
+                        {%- set rds_rt = rds_rt|merge([frame|replace({'_':' '})|escape]) -%}
                     {%- endfor -%}
 
                     {%- set rds_ps_groups = [] -%}
                     {%- for group_key in radiostation.rds.ps|keys -%}
                         {%- set group = [] -%}
                         {%- for frame in radiostation.rds.ps[group_key] -%}
-                            {%- set group = group|merge([frame|align_rds_frame|escape]) -%}
+                            {%- set group = group|merge([frame|replace({'_':' '})|align_rds_frame|escape]) -%}
                         {%- endfor -%}
                         {%- set rds_ps_groups = rds_ps_groups|merge([group]) -%}
                     {%- endfor -%}
@@ -120,7 +120,7 @@
                           data-rt="{{ rds_rt|json_encode|escape('html_attr') }}"
                           data-ps="{{ rds_ps_groups|json_encode|escape('html_attr') }}"
                           class="rds rds-popup-enabled">
-                        {{- radiostation.rds.ps|first|first|align_rds_frame -}}
+                        {{- radiostation.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
                     </span>
                 {%- endblock -%}
             {% endembed %}
