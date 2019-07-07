@@ -93,7 +93,7 @@ class RadioStation
     private $location;
 
     /**
-     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
+     * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
      * @Assert\Type("numeric")
      * @Assert\GreaterThan(0, message="Moc musi być większa niż zero.")
      */

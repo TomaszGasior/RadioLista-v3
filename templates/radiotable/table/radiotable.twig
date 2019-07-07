@@ -56,7 +56,7 @@
                 {%- elseif column == 'frequency' -%}
                     {%- block radiostation_frequency radiostation.frequency|number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'power' and radiostation.power is not null -%}
-                    {%- block radiostation_power radiostation.power|number_format|escape(escape_strategy) -%}
+                    {%- block radiostation_power radiostation.power|soft_number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
                     {%- block radiostation_type types_labels[radiostation.type]|escape(escape_strategy) -%}
                 {%- elseif column == 'polarization' and radiostation.polarization -%}

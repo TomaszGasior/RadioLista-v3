@@ -103,7 +103,7 @@ class RadioStationEditType extends AbstractType
             ->add('power', DecimalUnitType::class, [
                 'label' => 'Moc nadajnika',
                 'unit_label' => 'kW',
-                'step' => 0.01,
+                'step' => 0.001,
                 'required' => false,
             ])
             ->add('polarization', ChoiceType::class, [
