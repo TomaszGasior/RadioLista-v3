@@ -658,6 +658,10 @@ table.radiotable tbody tr:hover, table.radiotable tbody tr:focus-within {
     background: rgba(250,230,205, 0.8);
 }
 
+table.radiotable a {
+    display: block;
+}
+
 
 /* radiotable — special cells */
 
