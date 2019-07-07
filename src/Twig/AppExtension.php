@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Extension\CoreExtension;
 use Twig\Extension\EscaperExtension;
 use Twig\TwigFilter;
 
@@ -26,6 +27,9 @@ class AppExtension extends AbstractExtension
             new TwigFilter('date_format', [$this, 'formatDateAsTimeHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
+            new TwigFilter('soft_number_format', [$this, 'softNumberFormat'], [
+                'needs_environment' => true
+            ]),
             new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
         ];
     }
@@ -40,6 +44,22 @@ class AppExtension extends AbstractExtension
         return '<time datetime="' . $date->format('Y-m-d') . '">' .
                $formatter->format($date->getTimestamp()) .
                '</time>';
+    }
+
+    public function softNumberFormat(Environment $twig, $number, int $decimal = null,
+                                     string $decimalPoint = null, string $thousandSep = null): string
+    {
+        if (null === $decimal) {
+            $decimal = $twig->getExtension(CoreExtension::class)->getNumberFormat()[0];
+        }
+
+        // Don't round values with precision bigger than preferred.
+        $sourceDecimal = strlen(strstr((float)(string)$number, '.')) - 1;
+        if ($sourceDecimal > $decimal) {
+            $decimal = $sourceDecimal;
+        }
+
+        return twig_number_format_filter($twig, $number, $decimal, $decimalPoint, $thousandSep);
     }
 
     public function alignRDSFrame(string $frame): string
