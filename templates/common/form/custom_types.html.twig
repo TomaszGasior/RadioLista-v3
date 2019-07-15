@@ -15,10 +15,15 @@
     (function(){
         var input = document.getElementById('{{ id }}');
         var decimals = (input.step.match(/\..*/) || [''])[0].length - 1;
-        if (decimals && input.valueAsNumber) {
-            input.addEventListener('change', function(){
+
+        if (decimals && input.valueAsNumber != undefined) {
+            var updateFixed = function()
+            {
                 input.value = input.valueAsNumber.toFixed(decimals);
-            });
+            };
+
+            input.addEventListener('change', updateFixed);
+            updateFixed();
         }
     })();
     </script>
