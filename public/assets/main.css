@@ -317,6 +317,10 @@ input:focus, textarea:focus, select:focus, button:focus, a.button:focus {
     /* needed for WebKit/Blink */
     outline-offset: 0px;
 }
+input:disabled, textarea:disabled, select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
 textarea {
     resize: vertical;
     min-height: 130px;

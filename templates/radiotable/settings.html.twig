@@ -79,20 +79,40 @@
 
             {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
 
+            {{ form_row(form.appearanceTheme, {attr: {'class': 'radiotable-theme'}}) }}
+
             {# style="" is used as dirty hack for box-shadow removing. #}
-            {{ form_row(form.appearanceTheme) }}
-            {{ form_row(form.appearanceBackgroundColor, {attr: {
-                'class': 'jscolor',
-                'style': '',
-                'data-jscolor': jscolor_settings,
-            }}) }}
-            {{ form_row(form.appearanceColor, {attr: {
-                'class': 'jscolor',
-                'style': '',
-                'data-jscolor': jscolor_settings,
-            }}) }}
-            {{ form_row(form.appearanceBackgroundImage) }}
+            <div class="radiotable-custom-theme-wrapper">
+                {{ form_row(form.appearanceBackgroundColor, {attr: {
+                    'class': 'jscolor',
+                    'style': '',
+                    'data-jscolor': jscolor_settings,
+                }}) }}
+                {{ form_row(form.appearanceColor, {attr: {
+                    'class': 'jscolor',
+                    'style': '',
+                    'data-jscolor': jscolor_settings,
+                }}) }}
+                {{ form_row(form.appearanceBackgroundImage) }}
+            </div>
+
             {{ form_row(form.appearanceFullWidth) }}
+
+            <script>
+            (function(){
+                const CUSTOM_THEME_NAME = '';
+                var themeSelectorField = document.querySelector('.radiotable-theme');
+                var customThemeFieldsWrapper = document.querySelector('.radiotable-custom-theme-wrapper');
+
+                var updateFieldVisibility = function()
+                {
+                    customThemeFieldsWrapper.hidden = (themeSelectorField.value != CUSTOM_THEME_NAME);
+                };
+                updateFieldVisibility();
+                themeSelectorField.addEventListener('change', updateFieldVisibility);
+                themeSelectorField.addEventListener('blur', updateFieldVisibility);
+            })();
+            </script>
         </div>
 
         <div id="export">
