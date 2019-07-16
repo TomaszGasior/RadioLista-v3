@@ -87,16 +87,6 @@ class RadioStationEditType extends AbstractType
                     'Słowacja',
                 ],
             ])
-            ->add('quality', ChoiceType::class, [
-                'label' => 'Jakość odbioru',
-                'choices' => [
-                    'bardzo dobra' => RadioStation::QUALITY_VERY_GOOD,
-                    'dobra' => RadioStation::QUALITY_GOOD,
-                    'dostateczna' => RadioStation::QUALITY_MIDDLE,
-                    'zła' => RadioStation::QUALITY_BAD,
-                    'bardzo zła' => RadioStation::QUALITY_VERY_BAD,
-                ],
-            ])
             ->add('location', null, [
                 'label' => 'Lokalizacja nadajnika',
             ])
@@ -160,15 +150,21 @@ class RadioStationEditType extends AbstractType
                     'zachodniopomorskie',
                 ],
             ])
-            ->add('privateNumber', null, [
-                'label' => 'Numer w odbiorniku',
-                'attr' => ['min' => '1'],
-            ])
             ->add('distance', IntegerUnitType::class, [
                 'label' => 'Odległość od nadajnika',
                 'unit_label' => 'km',
                 'required' => false,
                 'attr' => ['min' => '1'],
+            ])
+            ->add('quality', ChoiceType::class, [
+                'label' => 'Jakość odbioru',
+                'choices' => [
+                    'bardzo dobra' => RadioStation::QUALITY_VERY_GOOD,
+                    'dobra' => RadioStation::QUALITY_GOOD,
+                    'dostateczna' => RadioStation::QUALITY_MIDDLE,
+                    'zła' => RadioStation::QUALITY_BAD,
+                    'bardzo zła' => RadioStation::QUALITY_VERY_BAD,
+                ],
             ])
             ->add('firstLogDate', null, [
                 'label' => 'Data pierwszego odbioru',
@@ -176,6 +172,10 @@ class RadioStationEditType extends AbstractType
                     'placeholder' => 'na przykład: 2013, 2011-06, 2016-05-04',
                     'pattern' => '[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?',
                 ],
+            ])
+            ->add('privateNumber', null, [
+                'label' => 'Numer w odbiorniku',
+                'attr' => ['min' => '1'],
             ])
             ->add('marker', ChoiceType::class, [
                 'label' => 'Wyróżnienie wizualne',

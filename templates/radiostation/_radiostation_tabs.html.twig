@@ -8,7 +8,6 @@
         {{ form_row(form.name) }}
         {{ form_row(form.radioGroup) }}
         {{ form_row(form.country) }}
-        {{ form_row(form.quality) }}
     </div>
     <div>
         <h2>Nadawanie i audycje</h2>
@@ -39,11 +38,16 @@
         </script>
     </div>
     <div>
+        <h2>Odbiór</h2>
+
+        {{ form_row(form.distance) }}
+        {{ form_row(form.quality) }}
+        {{ form_row(form.firstLogDate) }}
+    </div>
+    <div>
         <h2>Osobiste</h2>
 
         {{ form_row(form.privateNumber) }}
-        {{ form_row(form.distance) }}
-        {{ form_row(form.firstLogDate) }}
         {{ form_row(form.marker) }}
         {{ form_row(form.comment) }}
     </div>
