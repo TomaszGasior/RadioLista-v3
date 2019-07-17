@@ -1,8 +1,8 @@
 ---
 name: Zgłoszenie błędu
 about: Zgłoś błąd w działaniu już istniejącej funkcji serwisu RadioLista.
-title: Tutaj wpisz tytuł zgłoszenia
-labels: ''
+title: Tutaj wpisz krótki opis błędu
+labels: bug
 assignees: ''
 
 ---

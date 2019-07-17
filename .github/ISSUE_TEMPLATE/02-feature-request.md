@@ -1,8 +1,8 @@
 ---
 name: Propozycja nowej funkcji
 about: Zaproponuj nową funkcję lub zmianę w serwisie (jeśli bieżące zachowanie NIE JEST BŁĘDEM).
-title: '[Propozycja nowej funkcji] tytuł wpisz tytuł'
-labels: ''
+title: Tutaj wpisz krótki opis nowej funkcji
+labels: enhancement
 assignees: ''
 
 ---
