@@ -235,6 +235,13 @@ class RadioStation
      */
     private $comment;
 
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     * @Assert\Length(max=500, maxMessage="Odnośnik zewnętrzny może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\Url(message="Odnośnik zewnętrzny jest niepoprawny.")
+     */
+    private $externalAnchor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -464,6 +471,18 @@ class RadioStation
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getExternalAnchor(): ?string
+    {
+        return $this->externalAnchor;
+    }
+
+    public function setExternalAnchor(?string $externalAnchor): self
+    {
+        $this->externalAnchor = $externalAnchor;
 
         return $this;
     }

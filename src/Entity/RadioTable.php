@@ -36,6 +36,7 @@ class RadioTable
     public const COLUMN_LOCALITY = 'locality';
     public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
     public const COLUMN_COMMENT = 'comment';
+    public const COLUMN_EXTERNAL_ANCHOR = 'externalAnchor';
 
     public const SORTING_FREQUENCY = self::COLUMN_FREQUENCY;
     public const SORTING_NAME = self::COLUMN_NAME;
@@ -95,6 +96,7 @@ class RadioTable
      *     RadioTable::COLUMN_LOCALITY,
      *     RadioTable::COLUMN_PRIVATE_NUMBER,
      *     RadioTable::COLUMN_COMMENT,
+     *     RadioTable::COLUMN_EXTERNAL_ANCHOR,
      * }, multiple=true)
      * @Assert\Expression(
      *     "frequency in value && name in value",
