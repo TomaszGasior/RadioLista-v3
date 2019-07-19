@@ -14,6 +14,7 @@
     (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')): 'Grupa',
     (constant('App\\Entity\\RadioTable::COLUMN_RDS')): 'RDS',
     (constant('App\\Entity\\RadioTable::COLUMN_RDS_PI')): 'PI',
+    (constant('App\\Entity\\RadioTable::COLUMN_RECEPTION')): 'Odbiór',
     (constant('App\\Entity\\RadioTable::COLUMN_TYPE')): 'Rodzaj',
 } -%}
 {%- set polarization_labels = {
@@ -21,6 +22,12 @@
     (constant('App\\Entity\\RadioStation::POLARIZATION_VERTICAL')): 'pionowa',
     (constant('App\\Entity\\RadioStation::POLARIZATION_CIRCULAR')): 'kołowa',
     (constant('App\\Entity\\RadioStation::POLARIZATION_VARIOUS')): 'różne',
+} -%}
+{%- set reception_labels = {
+    (constant('App\\Entity\\RadioStation::RECEPTION_REGULAR')): 'regularny',
+    (constant('App\\Entity\\RadioStation::RECEPTION_TROPO')): 'tropo',
+    (constant('App\\Entity\\RadioStation::RECEPTION_SCATTER')): 'scatter',
+    (constant('App\\Entity\\RadioStation::RECEPTION_SPORADIC_E')): 'sporadic-E',
 } -%}
 {%- set types_labels = {
     (constant('App\\Entity\\RadioStation::TYPE_MUSIC')): 'muzyczny',
@@ -59,6 +66,8 @@
                     {%- block radiostation_power radiostation.power|soft_number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
                     {%- block radiostation_type types_labels[radiostation.type]|escape(escape_strategy) -%}
+                {%- elseif column == 'reception' -%}
+                    {%- block radiostation_reception reception_labels[radiostation.reception]|escape(escape_strategy) -%}
                 {%- elseif column == 'polarization' and radiostation.polarization -%}
                     {%- block radiostation_polarization radiostation.polarization|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}

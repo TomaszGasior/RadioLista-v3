@@ -42,6 +42,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                     RadioTable::COLUMN_RADIO_GROUP => 'Grupa medialna',
                     RadioTable::COLUMN_RDS => 'Informacje RDS',
                     RadioTable::COLUMN_RDS_PI => 'Kod RDS PI',
+                    RadioTable::COLUMN_RECEPTION => 'Specyfika odbioru',
                     RadioTable::COLUMN_TYPE => 'Rodzaj programu',
                 ],
             ])

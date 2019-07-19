@@ -156,6 +156,15 @@ class RadioStationEditType extends AbstractType
                 'required' => false,
                 'attr' => ['min' => '1'],
             ])
+            ->add('reception', ChoiceType::class, [
+                'label' => 'Specyfika odbioru',
+                'choices' => [
+                    'regularny' => RadioStation::RECEPTION_REGULAR,
+                    'troposferyczny' => RadioStation::RECEPTION_TROPO,
+                    'odbity (scatter)' => RadioStation::RECEPTION_SCATTER,
+                    'jonosferyczny (sporadic-E)' => RadioStation::RECEPTION_SPORADIC_E,
+                ],
+            ])
             ->add('quality', ChoiceType::class, [
                 'label' => 'Jakość odbioru',
                 'choices' => [

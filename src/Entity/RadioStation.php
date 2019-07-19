@@ -131,7 +131,7 @@ class RadioStation
      *     RadioStation::RECEPTION_SPORADIC_E,
      * })
      */
-    private $reception;
+    private $reception = self::RECEPTION_REGULAR;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
