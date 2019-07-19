@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Tests\Validator;
+
+use App\Entity\RadioStation;
+use App\Validator\ClassConstantsChoice;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\ChoiceValidator;
+use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
+
+class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
+{
+    protected function createValidator(): ConstraintValidatorInterface
+    {
+        return new ChoiceValidator;
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testClassConstantsChoiceConstraint($class, $constantsPrefix,
+                                                       $validConstants, $value): void
+    {
+        $classConstantsChoiceConstraint = new ClassConstantsChoice(
+            ['class' => $class, 'prefix' => $constantsPrefix]
+        );
+        $choiceConstraint = new Choice(['choices' => $validConstants]);
+
+        $this->validator->validate($value, $classConstantsChoiceConstraint);
+        $classConstantsChoiceViolation = $this->context->getViolations()[0] ?? null;
+
+        $this->validator->validate($value, $choiceConstraint);
+        $choiceViolation = $this->context->getViolations()[1] ?? null;
+
+        $this->assertEquals($choiceViolation, $classConstantsChoiceViolation);
+    }
+
+    public function dataProvider(): iterable
+    {
+        $class = RadioStation::class;
+        $validConstants = [
+            RadioStation::POLARIZATION_HORIZONTAL,
+            RadioStation::POLARIZATION_VERTICAL,
+            RadioStation::POLARIZATION_CIRCULAR,
+            RadioStation::POLARIZATION_VARIOUS,
+            RadioStation::POLARIZATION_NONE,
+        ];
+        $constantsPrefix = 'POLARIZATION_';
+
+        $testedValues = [
+            RadioStation::POLARIZATION_HORIZONTAL,
+            RadioStation::POLARIZATION_VERTICAL,
+            RadioStation::POLARIZATION_CIRCULAR,
+            RadioStation::POLARIZATION_VARIOUS,
+            RadioStation::POLARIZATION_NONE,
+            RadioStation::MARKER_1,
+            RadioStation::MARKER_2,
+            RadioStation::MARKER_3,
+            RadioStation::MARKER_4,
+        ];
+
+        foreach ($testedValues as $testedValue) {
+            yield [$class, $constantsPrefix, $validConstants, $testedValue];
+        }
+    }
+}
