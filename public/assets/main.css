@@ -765,6 +765,16 @@ table.radiotable time {
     white-space: nowrap;
 }
 
+table.radiotable a.external {
+    display: inline-block;
+    text-decoration: none;
+}
+table.radiotable a.external svg {
+    vertical-align: -2px;
+    padding: 0 2px;
+    fill: currentColor;
+}
+
 
 /* radiotable — details section */
 

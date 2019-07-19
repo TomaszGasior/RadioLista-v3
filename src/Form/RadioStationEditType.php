@@ -11,6 +11,7 @@ use App\Form\Type\TextHintsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -197,6 +198,11 @@ class RadioStationEditType extends AbstractType
                     'zielony kolor tła' => RadioStation::MARKER_5,
                     'niebieski kolor tła' => RadioStation::MARKER_6,
                 ],
+            ])
+            ->add('externalAnchor', UrlType::class, [
+                'label' => 'Odnośnik zewnętrzny',
+                'required' => false,
+                'default_protocol' => null,
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'Komentarz',

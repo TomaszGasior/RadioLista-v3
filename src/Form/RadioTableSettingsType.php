@@ -30,6 +30,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                     RadioTable::COLUMN_COMMENT => 'Komentarz',
                     RadioTable::COLUMN_COUNTRY => 'Kraj',
                     RadioTable::COLUMN_DISTANCE => 'Odległość od nadajnika',
+                    RadioTable::COLUMN_EXTERNAL_ANCHOR => 'Odnośnik zewnętrzny',
                     RadioTable::COLUMN_FIRST_LOG_DATE => 'Data pierwszego odbioru',
                     RadioTable::COLUMN_FREQUENCY => 'Częstotliwość',
                     RadioTable::COLUMN_LOCALITY => 'Lokalność programu',
