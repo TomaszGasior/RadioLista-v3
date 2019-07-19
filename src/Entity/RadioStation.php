@@ -22,6 +22,11 @@ class RadioStation
     public const POLARIZATION_VARIOUS = 'M';
     public const POLARIZATION_NONE = null;
 
+    public const RECEPTION_REGULAR = 0;
+    public const RECEPTION_TROPO = 1;
+    public const RECEPTION_SCATTER = 2;
+    public const RECEPTION_SPORADIC_E = 3;
+
     public const QUALITY_VERY_GOOD = 5;
     public const QUALITY_GOOD = 4;
     public const QUALITY_MIDDLE = 3;
@@ -116,6 +121,17 @@ class RadioStation
      * @Assert\GreaterThan(0, message="Odległość od nadajnika musi być większa niż zero.")
      */
     private $distance;
+
+    /**
+     * @ORM\Column(type="smallint")
+     * @Assert\Choice({
+     *     RadioStation::RECEPTION_REGULAR,
+     *     RadioStation::RECEPTION_TROPO,
+     *     RadioStation::RECEPTION_SCATTER,
+     *     RadioStation::RECEPTION_SPORADIC_E,
+     * })
+     */
+    private $reception;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -328,6 +344,18 @@ class RadioStation
     public function setDistance(?int $distance): self
     {
         $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getReception(): ?int
+    {
+        return $this->reception;
+    }
+
+    public function setReception(?int $reception): self
+    {
+        $this->reception = $reception;
 
         return $this;
     }

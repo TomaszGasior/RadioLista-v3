@@ -28,6 +28,7 @@ class RadioTable
     public const COLUMN_QUALITY = 'quality';
     public const COLUMN_RDS = 'rds';
     public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
+    public const COLUMN_RECEPTION = 'reception';
     public const COLUMN_DISTANCE = 'distance';
     public const COLUMN_RDS_PI = 'rdsPi';
     public const COLUMN_RADIO_GROUP = 'radioGroup';
@@ -86,6 +87,7 @@ class RadioTable
      *     RadioTable::COLUMN_QUALITY,
      *     RadioTable::COLUMN_RDS,
      *     RadioTable::COLUMN_FIRST_LOG_DATE,
+     *     RadioTable::COLUMN_RECEPTION,
      *     RadioTable::COLUMN_DISTANCE,
      *     RadioTable::COLUMN_RDS_PI,
      *     RadioTable::COLUMN_RADIO_GROUP,
