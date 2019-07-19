@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator\ClassConstantsChoice;
 use App\Validator\HexColor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,36 +69,13 @@ class RadioTable
 
     /**
      * @ORM\Column(type="smallint")
-     * @Assert\Choice({
-     *     RadioTable::STATUS_PUBLIC,
-     *     RadioTable::STATUS_UNLISTED,
-     *     RadioTable::STATUS_PRIVATE,
-     * })
+     * @ClassConstantsChoice(class=RadioTable::class, prefix="STATUS_")
      */
     private $status = self::STATUS_PUBLIC;
 
     /**
      * @ORM\Column(type="array")
-     * @Assert\Choice({
-     *     RadioTable::COLUMN_FREQUENCY,
-     *     RadioTable::COLUMN_NAME,
-     *     RadioTable::COLUMN_LOCATION,
-     *     RadioTable::COLUMN_POWER,
-     *     RadioTable::COLUMN_POLARIZATION,
-     *     RadioTable::COLUMN_COUNTRY,
-     *     RadioTable::COLUMN_QUALITY,
-     *     RadioTable::COLUMN_RDS,
-     *     RadioTable::COLUMN_FIRST_LOG_DATE,
-     *     RadioTable::COLUMN_RECEPTION,
-     *     RadioTable::COLUMN_DISTANCE,
-     *     RadioTable::COLUMN_RDS_PI,
-     *     RadioTable::COLUMN_RADIO_GROUP,
-     *     RadioTable::COLUMN_TYPE,
-     *     RadioTable::COLUMN_LOCALITY,
-     *     RadioTable::COLUMN_PRIVATE_NUMBER,
-     *     RadioTable::COLUMN_COMMENT,
-     *     RadioTable::COLUMN_EXTERNAL_ANCHOR,
-     * }, multiple=true)
+     * @ClassConstantsChoice(class=RadioTable::class, prefix="COLUMN_", multiple=true)
      * @Assert\Expression(
      *     "frequency in value && name in value",
      *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME},
@@ -117,11 +95,7 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=15)
-     * @Assert\Choice({
-     *     RadioTable::SORTING_FREQUENCY,
-     *     RadioTable::SORTING_NAME,
-     *     RadioTable::SORTING_PRIVATE_NUMBER,
-     * })
+     * @ClassConstantsChoice(class=RadioTable::class, prefix="SORTING_")
      */
     private $sorting = self::SORTING_FREQUENCY;
 

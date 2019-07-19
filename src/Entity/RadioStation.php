@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator\ClassConstantsChoice;
 use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -106,13 +107,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
-     * @Assert\Choice({
-     *     RadioStation::POLARIZATION_HORIZONTAL,
-     *     RadioStation::POLARIZATION_VERTICAL,
-     *     RadioStation::POLARIZATION_CIRCULAR,
-     *     RadioStation::POLARIZATION_VARIOUS,
-     *     RadioStation::POLARIZATION_NONE,
-     * })
+     * @ClassConstantsChoice(class=RadioStation::class, prefix="POLARIZATION_")
      */
     private $polarization = self::POLARIZATION_NONE;
 
@@ -124,12 +119,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="smallint")
-     * @Assert\Choice({
-     *     RadioStation::RECEPTION_REGULAR,
-     *     RadioStation::RECEPTION_TROPO,
-     *     RadioStation::RECEPTION_SCATTER,
-     *     RadioStation::RECEPTION_SPORADIC_E,
-     * })
+     * @ClassConstantsChoice(class=RadioStation::class, prefix="RECEPTION_")
      */
     private $reception = self::RECEPTION_REGULAR;
 
@@ -148,50 +138,26 @@ class RadioStation
 
     /**
      * @ORM\Column(type="smallint")
-     * @Assert\Choice({
-     *     RadioStation::QUALITY_VERY_GOOD,
-     *     RadioStation::QUALITY_GOOD,
-     *     RadioStation::QUALITY_MIDDLE,
-     *     RadioStation::QUALITY_BAD,
-     *     RadioStation::QUALITY_VERY_BAD,
-     * })
+     * @ClassConstantsChoice(class=RadioStation::class, prefix="QUALITY_")
      */
     private $quality = self::QUALITY_VERY_GOOD;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
-     * @Assert\Choice({
-     *     RadioStation::MARKER_1,
-     *     RadioStation::MARKER_2,
-     *     RadioStation::MARKER_3,
-     *     RadioStation::MARKER_4,
-     *     RadioStation::MARKER_5,
-     *     RadioStation::MARKER_6,
-     *     RadioStation::MARKER_NONE,
-     * })
+     * @ClassConstantsChoice(class=RadioStation::class, prefix="MARKER_")
      */
     private $marker = self::MARKER_NONE;
 
     /**
      * @ORM\Column(type="smallint")
-     * @Assert\Choice({
-     *     RadioStation::TYPE_MUSIC,
-     *     RadioStation::TYPE_INFORMATION,
-     *     RadioStation::TYPE_UNIVERSAL,
-     *     RadioStation::TYPE_RELIGIOUS,
-     *     RadioStation::TYPE_OTHER,
-     * })
+     * @ClassConstantsChoice(class=RadioStation::class, prefix="TYPE_")
      */
     private $type = self::TYPE_MUSIC;
 
     /**
      * @ORM\Column(type="array")
      * @Assert\Collection(fields = {
-     *     "type" = @Assert\Choice({
-     *         RadioStation::LOCALITY_COUNTRY,
-     *         RadioStation::LOCALITY_LOCAL,
-     *         RadioStation::LOCALITY_NETWORK,
-     *     }),
+     *     "type" = @ClassConstantsChoice(class=RadioStation::class, prefix="LOCALITY_"),
      *     "city" = @Assert\Type("string"),
      * })
      */
