@@ -15,6 +15,12 @@
                 {# Needed for Cantarell and number indentation. -#}
                 font-variant-numeric: tabular-nums;
             }
+            .sr-only {
+                position: absolute !important;
+                height: 1px; width: 1px;
+                overflow: hidden;
+                clip: rect(1px, 1px, 1px, 1px);
+            }
             a {
                 color: #0850AA;
                 text-decoration: none;
@@ -120,6 +126,17 @@
             .number-indent-5:before {
                 content: "00000";
                 opacity: 0;
+            }
+            a.external {
+                border-bottom: none;
+                color: inherit;
+            }
+            a.external svg {
+                vertical-align: -2px;
+                padding: 0 1px;
+                fill: currentColor;
+                {# Needed for wkhtmltopdf. -#}
+                width: 1.1em;
             }
             footer {
                 font-size: 0.85em;
