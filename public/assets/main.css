@@ -769,7 +769,8 @@ table.radiotable a.external {
     text-decoration: none;
 }
 table.radiotable a.external svg {
-    vertical-align: -2px;
+    height: 0.9em;
+    vertical-align: -1px;
     padding: 0 2px;
     fill: currentColor;
 }
