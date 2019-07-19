@@ -41,6 +41,9 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
         $radioStation->setType(
             $faker->randomConstantFromClass(RadioStation::class, 'TYPE_')
         );
+        $radioStation->setReception(
+            $faker->randomConstantFromClass(RadioStation::class, 'RECEPTION_')
+        );
         if ($faker->boolean(75)) {
             $radioStation->setDistance($faker->numberBetween(1, 999));
         }
@@ -75,6 +78,9 @@ class RadioStationFixtures extends AbstractFixture implements DependentFixtureIn
                 ),
             ]);
             $radioStation->setRdsPi(rand(1000, 9999));
+        }
+        if ($faker->boolean(40)) {
+            $radioStation->setExternalAnchor($faker->url);
         }
 
         return $radioStation;
