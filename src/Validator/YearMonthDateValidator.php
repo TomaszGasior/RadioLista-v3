@@ -4,6 +4,7 @@ namespace App\Validator;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\DateValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class YearMonthDateValidator extends DateValidator
@@ -12,6 +13,10 @@ class YearMonthDateValidator extends DateValidator
 
     public function validate($value, Constraint $constraint)
     {
+        if (!$constraint instanceof YearMonthDate) {
+            throw new UnexpectedTypeException($constraint, YearMonthDate::class);
+        }
+
         if (null === $value || '' === $value) {
             return;
         }
