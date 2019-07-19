@@ -136,14 +136,14 @@ template {
 .site-navigation li {
     display: inline-block;
 }
-.site-navigation li:before {
+.site-navigation li::before {
     margin: 0 0.4em;
     content: " | ";
     color: rgba(0,0,0, 0.1);
     font-size: 0.9em;
     vertical-align: 1px;
 }
-.site-navigation li:first-child:before {
+.site-navigation li:first-child::before {
     display: none;
 }
 .site-navigation a {
@@ -447,7 +447,7 @@ input[type="checkbox"], input[type="radio"] {
     opacity: 0;
 }
 
-input[type="checkbox"] + label:before, input[type="radio"] + label:before {
+input[type="checkbox"] + label::before, input[type="radio"] + label::before {
     content: " ";
 
     display: inline-block;
@@ -467,28 +467,28 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before {
     box-shadow: inset 2px 2px 2px #DEDEDE;
     border: 1px solid #C2C2C2;
 }
-input[type="radio"] + label:before {
+input[type="radio"] + label::before {
     border-radius: 10px;
     -moz-outline-radius: 10px;
 }
-input[type="checkbox"]:focus + label:before, input[type="radio"]:focus + label:before {
+input[type="checkbox"]:focus + label::before, input[type="radio"]:focus + label::before {
     /* copied from form widgets styles */
     outline: 1px solid #F07F1F;
 }
-input[type="checkbox"]:checked + label:before, input[type="radio"]:checked + label:before {
+input[type="checkbox"]:checked + label::before, input[type="radio"]:checked + label::before {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 9px 9px;
 }
-input[type="checkbox"]:checked + label:before {
+input[type="checkbox"]:checked + label::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1.852 1.852'%3E%3Cpath fill='%23FF7500' d='M0 0h1.852v1.852H0z'/%3E%3C/svg%3E");
 }
-input[type="radio"]:checked + label:before {
+input[type="radio"]:checked + label::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1.852 1.852'%3E%3Ccircle fill='%23FF7500' cx='19.798' cy='24.486' r='.926' transform='translate%28-18.872 -23.56%29'/%3E%3C/svg%3E");
 }
 
 input[type="checkbox"] + label, input[type="radio"] + label {
-    /* keep in sync with :before's margin-left */
+    /* keep in sync with ::before's margin-left */
     padding-left: calc(17px + 0.7em);
 }
 input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(:hover) + label {
@@ -708,28 +708,28 @@ table.radiotable .quality {
 table.radiotable .quality::selection {
     opacity: 0;
 }
-table.radiotable .quality:before {
+table.radiotable .quality::before {
     text-shadow: 0 0 2px #CCC;
     margin-right: -10px;
     letter-spacing: 2px;
 }
-table.radiotable .quality.quality-5:before {
+table.radiotable .quality.quality-5::before {
     color: #0BB300;
     content: "●●●●●";
 }
-table.radiotable .quality.quality-4:before {
+table.radiotable .quality.quality-4::before {
     color: #A8D300;
     content: "●●●●";
 }
-table.radiotable .quality.quality-3:before {
+table.radiotable .quality.quality-3::before {
     color: #BDAC00;
     content: "●●●";
 }
-table.radiotable .quality.quality-2:before {
+table.radiotable .quality.quality-2::before {
     color: #FF5E00;
     content: "●●";
 }
-table.radiotable .quality.quality-1:before {
+table.radiotable .quality.quality-1::before {
     color: #FF0017;
     content: "●";
 }
@@ -814,7 +814,7 @@ table.radiotable a.external svg {
 .radiotable-details dt {
     text-align: right;
 }
-.radiotable-details dt:after {
+.radiotable-details dt::after {
     content: ":";
 }
 .radiotable-details dd {
@@ -882,7 +882,7 @@ table.radiotable a.external svg {
     /* keep in sync with div's margin */
     padding: 0.3em 0;
 }
-.rds-popup dt:after {
+.rds-popup dt::after {
     content: ":";
 }
 .rds-popup dd {
@@ -919,39 +919,39 @@ table.sortable th[data-sort]:focus:hover {
     outline: none;
 }
 
-table.sortable th[data-sort]:after {
+table.sortable th[data-sort]::after {
     position: absolute;
     padding-left: 2px;
     opacity: 0.8;
     text-decoration: none !important;
 }
-table.sortable th[data-sort].sorted-asc:after {
+table.sortable th[data-sort].sorted-asc::after {
     content: "↓";
 }
-table.sortable th[data-sort].sorted-desc:after {
+table.sortable th[data-sort].sorted-desc::after {
     content: "↑";
 }
 
 
 /* number indentation in tables */
 
-.number-indent-1:before {
+.number-indent-1::before {
     content: "0";
     opacity: 0;
 }
-.number-indent-2:before {
+.number-indent-2::before {
     content: "00";
     opacity: 0;
 }
-.number-indent-3:before {
+.number-indent-3::before {
     content: "000";
     opacity: 0;
 }
-.number-indent-4:before {
+.number-indent-4::before {
     content: "0000";
     opacity: 0;
 }
-.number-indent-5:before {
+.number-indent-5::before {
     content: "00000";
     opacity: 0;
 }
@@ -996,7 +996,7 @@ table.sortable th[data-sort].sorted-desc:after {
 .radiotables-list-details dt, .radiotables-list-details dd {
     display: inline;
 }
-.radiotables-list-details dt:after {
+.radiotables-list-details dt::after {
     content: ':';
 }
 .radiotables-list-details dt:not(:first-child) {
@@ -1024,7 +1024,7 @@ table.sortable th[data-sort].sorted-desc:after {
 .customized-radiotable table.radiotable tbody tr:hover, .customized-radiotable table.radiotable tbody tr:focus-within {
     background: rgba(200,200,200, 0.4);
 }
-.customized-radiotable table.radiotable .quality:before {
+.customized-radiotable table.radiotable .quality::before {
     text-shadow: 0 0 1px #000;
 }
 .customized-radiotable table.radiotable span.rds {
@@ -1194,7 +1194,7 @@ table.sortable th[data-sort].sorted-desc:after {
     padding: 0 0.3em;
     margin: 0;
 }
-.user-profile-details dt:after {
+.user-profile-details dt::after {
     content: ":";
 }
 
@@ -1442,7 +1442,7 @@ table.sortable th[data-sort].sorted-desc:after {
     flex: 1;
     margin: 0.3em 0;
 }
-.my-account-details dt:after {
+.my-account-details dt::after {
     content: ":";
 }
 

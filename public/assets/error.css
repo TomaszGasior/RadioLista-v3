@@ -68,7 +68,7 @@ div.content p {
     line-height: 1.45em;
 }
 
-div.content:before {
+div.content::before {
     content: attr(data-banner-text);
     opacity: 0.2;
     font-size: 2.2em;

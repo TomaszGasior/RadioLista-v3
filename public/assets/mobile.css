@@ -23,7 +23,7 @@
 .site-navigation {
     line-height: 1.75em;
 }
-.site-navigation li:before {
+.site-navigation li::before {
     display: none;
 }
 .site-navigation li {
@@ -273,7 +273,7 @@ button {
 
 /* radiotable settings, status */
 
-.radiotable-status input[type="radio"] + label::before {
+.radiotable-status input[type="radio"] + label:::before {
     top: 40%;
 }
 
