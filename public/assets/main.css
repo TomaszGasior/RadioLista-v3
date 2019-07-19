@@ -176,7 +176,6 @@ template {
 
     border-top: 1px solid rgba(0,0,0, 0.11);
     padding: 1em 0 2.6em 0;
-    margin-top: 2em;
 }
 .site-footer ul {
     display: inline;
@@ -268,7 +267,7 @@ template {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin: auto;
-    min-height: 70vh;
+    min-height: 74vh;
 }
 
 .main-content > header h1 {
