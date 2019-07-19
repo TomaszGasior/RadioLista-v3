@@ -56,27 +56,32 @@
     {%- block row_start -%}{%- endblock -%}
         {%- for column in radiotable.columns -%}
             {%- block cell_start -%}{%- endblock -%}
+                {%- if attribute(radiostation, column) is not null -%}
 
                 {%- if column == 'name' -%}
                     {%- block radiostation_name radiostation.name|escape(escape_strategy) -%}
-                {%- elseif column == 'privateNumber' and radiostation.privateNumber is not null -%}
+                {%- elseif column == 'privateNumber' -%}
                     {%- block radiostation_private_number radiostation.privateNumber|escape(escape_strategy) -%}
                 {%- elseif column == 'frequency' -%}
                     {%- block radiostation_frequency radiostation.frequency|number_format|escape(escape_strategy) -%}
-                {%- elseif column == 'power' and radiostation.power is not null -%}
+                {%- elseif column == 'power' -%}
                     {%- block radiostation_power radiostation.power|soft_number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
                     {%- block radiostation_type types_labels[radiostation.type]|escape(escape_strategy) -%}
                 {%- elseif column == 'reception' -%}
                     {%- block radiostation_reception reception_labels[radiostation.reception]|escape(escape_strategy) -%}
-                {%- elseif column == 'polarization' and radiostation.polarization -%}
+                {%- elseif column == 'polarization' -%}
                     {%- block radiostation_polarization radiostation.polarization|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}
                     {%- block radiostation_quality radiostation.quality|escape(escape_strategy) -%}
-                {%- elseif column == 'distance' and radiostation.distance is not null -%}
+                {%- elseif column == 'distance' -%}
                     {%- block radiostation_distance radiostation.distance|escape(escape_strategy) -%}
-                {%- elseif column == 'firstLogDate' and radiostation.firstLogDate is not null -%}
+                {%- elseif column == 'firstLogDate' -%}
                     {%- block radiostation_first_log_date radiostation.firstLogDate|escape(escape_strategy) -%}
+                {%- elseif column == 'comment' -%}
+                    {%- block radiostation_comment radiostation.comment|escape(escape_strategy) -%}
+                {%- elseif column == 'externalAnchor' -%}
+                    {%- block radiostation_external_anchor radiostation.externalAnchor|escape(escape_strategy) -%}
 
                 {%- elseif column == 'locality' -%}
                     {%- set locality_is_network = radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) -%}
@@ -95,19 +100,14 @@
 
                 {%- elseif column == 'rds' -%}
                     {%- if radiostation.rds.ps|first and radiostation.rds.ps|first|first|trim -%}
-                        {%- block radiostation_rds radiostation.rds.ps|first|first|replace({'_':' '})|align_rds_frame -%}
+                        {%- block radiostation_rds radiostation.rds.ps|first|first|replace({'_':' '})|align_rds_frame|escape(escape_strategy) -%}
                     {%- endif -%}
-
-                {%- elseif column == 'comment' -%}
-                    {%- block radiostation_comment radiostation.comment|escape(escape_strategy) -%}
-
-                {%- elseif column == 'externalAnchor' and radiostation.externalAnchor is not null -%}
-                    {%- block radiostation_external_anchor radiostation.externalAnchor|escape(escape_strategy) -%}
 
                 {%- else -%}
                     {{- attribute(radiostation, column)|escape(escape_strategy) -}}
                 {%- endif -%}
 
+                {%- endif -%}
             {%- block cell_end -%}{%- endblock -%}
         {%- endfor -%}
     {%- block row_end -%}{%- endblock -%}
