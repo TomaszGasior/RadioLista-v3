@@ -1,17 +1,17 @@
-FROM php:7.3-fpm-buster
+FROM php:7.3-fpm-alpine
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get update -qq
+RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev unzip \
+    && docker-php-ext-install pdo_mysql intl zip \
+    && yes '' | pecl install apcu && docker-php-ext-enable apcu \
+    && apk del $PHPIZE_DEPS icu-dev libzip-dev
 
-# https://github.com/docker-library/php/issues/57#issuecomment-418976885
-# https://github.com/docker-library/php/issues/61
-RUN apt-get install -yqq --no-install-recommends libicu-dev libzip-dev unzip \
-    && docker-php-ext-install intl zip pdo_mysql \
-    && yes '' | pecl install apcu && docker-php-ext-enable apcu
-
-RUN apt-get install -yqq --no-install-recommends wkhtmltopdf
-RUN apt-get install -yqq --no-install-recommends fonts-lato fonts-inconsolata
+RUN apk --no-cache add wkhtmltopdf
+RUN apk --no-cache add ttf-inconsolata \
+    && wget http://latofonts.com/download/Lato2OFL.zip -O - > /tmp/lato.zip \
+    && unzip /tmp/lato.zip -x "__MACOSX/*" -d /usr/share/fonts \
+    && fc-cache /usr/share/fonts && rm /tmp/lato.zip
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     WKHTMLTOPDF_PATH=/usr/bin/wkhtmltopdf \
