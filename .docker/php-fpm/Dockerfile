@@ -19,4 +19,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 \
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
+COPY entrypoint.sh /usr/local/bin/radiolista-entrypoint
+ENTRYPOINT ["radiolista-entrypoint"]
+CMD ["php-fpm"]
+
 WORKDIR /srv/app
