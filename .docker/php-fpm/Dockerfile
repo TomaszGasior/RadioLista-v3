@@ -1,7 +1,5 @@
 FROM php:7.3-fpm-alpine
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev unzip \
     && docker-php-ext-install pdo_mysql intl zip \
     && yes '' | pecl install apcu && docker-php-ext-enable apcu \
@@ -13,11 +11,14 @@ RUN apk --no-cache add ttf-inconsolata \
     && unzip /tmp/lato.zip -x "__MACOSX/*" -d /usr/share/fonts \
     && fc-cache /usr/share/fonts && rm /tmp/lato.zip
 
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-    WKHTMLTOPDF_PATH=/usr/bin/wkhtmltopdf \
+ENV WKHTMLTOPDF_PATH=/usr/bin/wkhtmltopdf \
     WKHTMLTOIMAGE_PATH=/usr/bin/wkhtmltoimage
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+RUN apk --no-cache add su-exec \
+    && curl -sS https://getcomposer.org/installer \
+    | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY entrypoint.sh /usr/local/bin/radiolista-entrypoint
 ENTRYPOINT ["radiolista-entrypoint"]
