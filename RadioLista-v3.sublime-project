@@ -5,6 +5,8 @@
             "path": ".",
 
             "folder_exclude_patterns": [
+                ".docker",
+                ".docker/data",
                 ".github",
                 "bin",
                 "vendor",
@@ -21,6 +23,7 @@
                 ".hidden",
                 ".htaccess",
                 "composer.lock",
+                "docker-compose.yaml",
                 "symfony.lock",
                 "logo.svg",
             ],
