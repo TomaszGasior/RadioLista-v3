@@ -10,13 +10,13 @@
             </a>
         </li>
         <li>
-            <a href="{{ path('radiostation.copy', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
-                Kopiuj tę stację
+            <a href="{{ path('radiostation.add', {radioTableId: radiostation.radioTable.id}) }}">
+                Dodaj stację
             </a>
         </li>
         <li>
-            <a href="{{ path('radiostation.remove', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
-                Usuń tę stację
+            <a href="{{ path('radiostation.copy', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
+                Kopiuj bieżącą stację
             </a>
         </li>
     </ul>
