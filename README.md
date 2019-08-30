@@ -3,10 +3,23 @@ RadioLista-v3
 
 RadioLista to serwis internetowy umożliwiający użytkownikom publikację własnych bandscanów oraz wykazów radiowych i telewizyjnych. Serwis funkcjonuje pod adresem https://radiolista.pl. Więcej informacji: https://tomaszgasior.pl/pomysly/radiolista, https://radiolista.pl/o-stronie.
 
-Instalacja lokalna
+Instalacja lokalna — kontenery Dockera
 ---
 
-Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `intl` i `pdo_sqlite`), composer oraz git. Aby uruchomić aplikację RadioLista-v3, należy sklonować repozytorium, przygotować bazę danych SQLite oraz uruchomić serwer WWW, wykonując w CLI następujące polecenia:
+Do instalacji lokalnej w formie kontenerów Dockera wymagane są programy `git` i `docker-compose` oraz usługa `docker`. Aby uruchomić aplikację, należy sklonować repozytorium i uruchomić kontenery, wykonując w CLI następujące polecenia:
+
+    git clone https://github.com/TomaszGasior/RadioLista-v3.git
+    cd RadioLista-v3
+    sudo docker-compose up
+
+Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może potrwać do ok. 60 sekund — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MariaDB zostanie wypełniona danymi przykładowymi.
+
+Aplikacja uruchomi się pod adresem `http://localhost`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Konfiguracja kontenerów będzie przechowywana w folderze `.docker/data`.
+
+Instalacja lokalna — wbudowany serwer PHP
+---
+
+Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `intl` i `pdo_sqlite`), `composer` oraz `git`. Aby uruchomić aplikację, należy sklonować repozytorium, przygotować bazę danych SQLite oraz uruchomić serwer WWW, wykonując w CLI następujące polecenia:
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
@@ -16,18 +29,12 @@ Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `in
     bin/console doctrine:fixtures:load -n
     bin/console server:start
 
-Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:8000/`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
+Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:8000`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
 
 ### Te funkcje mogą nie działać
 
-* Wyszukiwarka wykazów (ta funkcja wymaga bazy MySQL zamiast domyślnej SQLite).
-* Eksport wykazu do pliku PDF (funkcja ta wymaga instalacji i konfiguracji programu `wkhtmltopdf`).
-
-### Uwagi dla użytkowników Windows
-
-* Należy globalnie zainstalować interpreter PHP 7.3: https://windows.php.net/download#php-7.3. W pliku konfiguracyjnym `php.ini` należy włączyć rozszerzenia `intl` i `pdo_sqlite`. Poradnik: http://kizu514.com/blog/install-php7-and-composer-on-windows-10/.
-* Należy zainstalować programy git i composer: https://git-scm.com/download/win, https://getcomposer.org/download/.
-* Polecenia należy uruchomić w programie „Wiersz polecenia” systemu Windows. Zamiast `bin/console` należy używać składni `php bin/console`.
+* Wyszukiwarka wykazów — ta funkcja wymaga bazy MySQL/MariaDB zamiast domyślnej SQLite.
+* Eksport wykazu do pliku PDF — funkcja ta wymaga instalacji i konfiguracji programu `wkhtmltopdf`.
 
 Testy
 ---
