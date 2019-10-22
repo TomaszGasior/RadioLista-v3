@@ -16,30 +16,15 @@ class MinifyAssetsCommand extends Command
 
     protected static $defaultName = 'app:minify-assets';
 
-    private $debug;
-
-    public function __construct(bool $debug)
-    {
-        $this->debug = $debug;
-
-        parent::__construct();
-    }
-
     protected function configure(): void
     {
         $this
             ->setDescription('Minify CSS and JS files in public/assets')
-            ->setHidden(true)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        // Minify assets only on production.
-        if ($this->debug) {
-            return;
-        }
-
         $assetsPath = $this->getAssetsDirectoryPath();
 
         $finder = (new Finder)
@@ -48,8 +33,7 @@ class MinifyAssetsCommand extends Command
 
         foreach ($finder as $file) {
             $path = $file->getRealPath();
-            $minifier = new Minify\CSS($path);
-            $minifier->minify($this->addPrefixToPath($path));
+            (new Minify\CSS($path))->minify($this->addPrefixToPath($path));
         }
 
         $finder = (new Finder)
@@ -58,8 +42,7 @@ class MinifyAssetsCommand extends Command
 
         foreach ($finder as $file) {
             $path = $file->getRealPath();
-            $minifier = new Minify\JS($path);
-            $minifier->minify($this->addPrefixToPath($path));
+            (new Minify\JS($path))->minify($this->addPrefixToPath($path));
         }
     }
 
