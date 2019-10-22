@@ -41,9 +41,11 @@ class AppExtension extends AbstractExtension
         $formatter = new \IntlDateFormatter(null, null, null);
         $formatter->setPattern('d MMMM Y');
 
-        return '<time datetime="' . $date->format('Y-m-d') . '">' .
-               $formatter->format($date->getTimestamp()) .
-               '</time>';
+        return sprintf(
+            '<time datetime="%s">%s</time>',
+            $date->format('Y-m-d'),
+            $formatter->format($date->getTimestamp())
+        );
     }
 
     public function softNumberFormat(Environment $twig, $number, int $decimal = null,
