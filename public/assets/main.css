@@ -61,13 +61,6 @@ a:active {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
-main {
-    display: block; /* IE11 */
-}
-template {
-    display: none; /* IE11 */
-}
-
 
 /* site width */
 
@@ -365,10 +358,6 @@ select {
 
     /* needed for WebKit */
     border-radius: 0;
-}
-select::-ms-expand {
-    /* "appearance: none" for Internet Explorer */
-    display: none;
 }
 @supports (-moz-user-select: none)
 {
@@ -1207,18 +1196,11 @@ table.sortable th[data-sort].sorted-desc::after {
     margin: 2.5em auto;
 }
 
-.user-login-screen .form-item.form-regular {
-    /* for IE 11 only */
-    display: block;
-}
 @supports (color: initial)
 {
     /* keep these styles in sync with mobile form item list */
     .user-login-screen .form-item.form-regular {
         flex-direction: column;
-
-        /* reset from IE 11 hack */
-        display: flex;
     }
 }
 .user-login-screen .form-item.form-regular > *:first-child {

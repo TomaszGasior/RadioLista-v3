@@ -8,7 +8,6 @@
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="stylesheet" href="{{ asset('main.css', 'minified') }}">
         <link rel="stylesheet" media="(max-width: 800px)" href="{{ asset('mobile.css', 'minified') }}">
-        <script>if (!document.currentScript) { document.write('<script src="{{ asset('ie11.js', 'minified') }}"></scr' + 'ipt>') }</script>
         <script src="{{ asset('common.js', 'minified') }}"></script>
 
         {% if block('page_title') %}
