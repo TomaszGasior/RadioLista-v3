@@ -82,5 +82,7 @@
 
         {% block body_closing %}{% endblock %}
         {{ piwik_code() }}
+
+        <script>if (document.documentMode) document.body.innerHTML = '<div style="font-size:20px;padding:20px;text-align:center;background:#663399;color:#fff"><b>Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge.<br>Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.</b></div>' + document.body.innerHTML;</script>
     </body>
 </html>
