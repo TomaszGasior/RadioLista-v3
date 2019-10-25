@@ -7,7 +7,6 @@
 /public/google*.html
 /public/BingSiteAuth.xml
 /public/banner.gif
-/public/favicon.ico
 
 ###> symfony/framework-bundle ###
 /.env.local
