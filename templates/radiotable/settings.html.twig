@@ -101,11 +101,10 @@
             <script>
             (function(){
                 const CUSTOM_THEME_NAME = '';
-                var themeSelectorField = document.querySelector('.radiotable-theme');
-                var customThemeFieldsWrapper = document.querySelector('.radiotable-custom-theme-wrapper');
+                let themeSelectorField = document.querySelector('.radiotable-theme');
+                let customThemeFieldsWrapper = document.querySelector('.radiotable-custom-theme-wrapper');
 
-                var updateFieldVisibility = function()
-                {
+                let updateFieldVisibility = () => {
                     customThemeFieldsWrapper.hidden = (themeSelectorField.value != CUSTOM_THEME_NAME);
                 };
                 updateFieldVisibility();

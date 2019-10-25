@@ -4,8 +4,9 @@
     {{ parent() }}
 
     <script>
+        {# Dirty fix for wordcount CKEditor plugin. Remove "HTML" word from UI message. #}
         CKEDITOR.instances.{{ id }}.on('langLoaded', function(){
-            var lang = CKEDITOR.lang[CKEDITOR.lang.detect()];
+            let lang = CKEDITOR.lang[CKEDITOR.lang.detect()];
             lang.wordcount.CharCountWithHTML = lang.wordcount.CharCount;
         });
     </script>

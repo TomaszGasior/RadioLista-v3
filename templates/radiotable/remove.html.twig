@@ -78,16 +78,16 @@
 
             <script>
             (function(){
-                var input = document.querySelector('.radiotable-remove-confirm input');
-                var confirm = function() {
+                let input = document.querySelector('.radiotable-remove-confirm input');
+                let confirmDialog = () => {
                     if (input.checked && false === window.confirm('Czy na pewno? Tej czynności nie można cofnąć!')) {
                         input.checked = false;
                         input.blur();
                     }
 
-                    input.removeEventListener('change', confirm);
+                    input.removeEventListener('change', confirmDialog);
                 };
-                input.addEventListener('change', confirm);
+                input.addEventListener('change', confirmDialog);
             })();
             </script>
         </div>

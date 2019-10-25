@@ -24,11 +24,10 @@
         <script>
         (function(){
             const LOCALITY_COUNTRY = '{{ constant('App\\Entity\\RadioStation::LOCALITY_COUNTRY') }}';
-            var localityTypeInput = document.querySelector('.locality-type-input');
-            var localityCityWrapper = document.querySelector('.locality-city-wrapper');
+            let localityTypeInput = document.querySelector('.locality-type-input');
+            let localityCityWrapper = document.querySelector('.locality-city-wrapper');
 
-            var updateFieldVisibility = function()
-            {
+            let updateFieldVisibility = () => {
                 localityCityWrapper.hidden = (localityTypeInput.value == LOCALITY_COUNTRY);
             };
             updateFieldVisibility();

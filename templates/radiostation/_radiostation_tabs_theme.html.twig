@@ -27,12 +27,11 @@
     {# available for advanced usage. #}
     <script>
     (function(){
-        var frequencyInput = document.getElementById('{{ id }}');
+        let frequencyInput = document.getElementById('{{ id }}');
         const REPLACED_STEP = '0.05';
         const ORIGINAL_STEP = frequencyInput.step;
 
-        var updateStep = function()
-        {
+        let updateStep = () => {
             if (frequencyInput.value >= 74) {
                 if (frequencyInput.step != REPLACED_STEP) {
                     frequencyInput.step = REPLACED_STEP;

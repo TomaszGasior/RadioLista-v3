@@ -13,12 +13,11 @@
     {# See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6367416/ #}
     <script>
     (function(){
-        var input = document.getElementById('{{ id }}');
-        var decimals = (input.step.match(/\..*/) || [''])[0].length - 1;
+        let input = document.getElementById('{{ id }}');
+        let decimals = (input.step.match(/\..*/) || [''])[0].length - 1;
 
         if (decimals && input.valueAsNumber != undefined) {
-            var updateFixed = function()
-            {
+            let updateFixed = () => {
                 input.value = input.valueAsNumber.toFixed(decimals);
             };
 
