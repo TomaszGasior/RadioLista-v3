@@ -1,0 +1,6 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+            memory_cost: 10
+            cost: 4
