@@ -8,7 +8,6 @@ use App\Form\UserSettingsType;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,10 +69,13 @@ class UserController extends AbstractController
 
     /**
      * @Route("/rejestracja", name="user.register")
-     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')", statusCode=400)
      */
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (null !== $this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $user = new User;
 
         $form = $this->createForm(UserRegisterType::class, $user);

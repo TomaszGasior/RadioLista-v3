@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\SecurityLoginType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +13,13 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/logowanie", name="security.login")
-     * @Security("not is_granted('IS_AUTHENTICATED_REMEMBERED')", statusCode=400)
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        if (null !== $this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $form = $this->createForm(SecurityLoginType::class, [
             'username' => $authenticationUtils->getLastUsername(),
         ]);
