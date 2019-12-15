@@ -9,3 +9,7 @@ RUN echo "Include conf/extra/php-fpm.conf" >> conf/httpd.conf \
     -e 's/^#\(LoadModule .*mod_proxy_fcgi.so\)/\1/' \
     -e 's/^#\(LoadModule .*mod_rewrite.so\)/\1/' \
     -e 's/AllowOverride None/AllowOverride All/'
+
+COPY entrypoint.sh /usr/local/bin/radiolista-entrypoint
+ENTRYPOINT ["/usr/local/bin/radiolista-entrypoint"]
+CMD ["httpd-foreground"]
