@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
         if ($error) {
             $token = $error->getToken();
 
-            if (!$token->getUsername() || !$token->getCredentials()) {
+            if (!$token || !$token->getUsername() || !$token->getCredentials()) {
                 $this->addFlash('error', 'Nie podano nazwy użytkownika lub hasła.');
             }
             elseif ($error instanceof BadCredentialsException) {
