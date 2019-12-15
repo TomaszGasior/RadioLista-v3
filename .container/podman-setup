@@ -1,0 +1,37 @@
+#!/bin/bash -e
+
+prefix=radiolista-v3
+port=2012
+
+if podman pod exists $prefix; then
+    echo 'Pod '$prefix' already exists. Use `podman pod start '$prefix'` to start.'
+    echo 'Then, go to http://127.0.0.1:'$port' in the browser.'
+    exit 1
+fi
+
+cd $(dirname "$0")
+
+podman pod create --name $prefix --publish $port':80'
+
+podman build --tag $prefix'_http' 'apache'
+podman build --tag $prefix'_app' 'php-fpm'
+
+podman create --pod $prefix --name $prefix'_http' --add-host 'http:127.0.0.1' \
+    --volume '../public:/srv/app/public:z' \
+    $prefix'_http'
+
+podman create --pod $prefix --name $prefix'_app' --add-host 'app:127.0.0.1' \
+    --env 'DATABASE_URL=mysql://root:toor@db:3306/radiolista' \
+    --volume '..:/srv/app:z' \
+    --volume './data/var:/srv/app/var:z' \
+    $prefix'_app'
+
+podman create --pod $prefix --name $prefix'_db' --add-host 'db:127.0.0.1' \
+    --env 'MYSQL_ROOT_PASSWORD=toor' \
+    --volume './data/db:/var/lib/mysql:z' \
+    'mariadb:10.4'
+
+echo
+echo 'Done! Use `podman pod start '$prefix'` to start the application.'
+echo 'Then, go to http://127.0.0.1:'$port' in the browser.'
+echo
