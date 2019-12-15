@@ -1,20 +1,27 @@
 RadioLista-v3
 ===
 
-RadioLista to serwis internetowy umożliwiający użytkownikom publikację własnych bandscanów oraz wykazów radiowych i telewizyjnych. Serwis funkcjonuje pod adresem https://radiolista.pl. Więcej informacji: https://tomaszgasior.pl/pomysly/radiolista, https://radiolista.pl/o-stronie.
+RadioLista to serwis internetowy umożliwiający użytkownikom publikację własnych bandscanów oraz wykazów radiowych i telewizyjnych. Serwis funkcjonuje pod adresem https://radiolista.pl. Więcej informacji: https://radiolista.pl/o-stronie, https://tomaszgasior.pl/pomysly/radiolista.
 
-Instalacja lokalna — kontenery Dockera
+Instalacja lokalna — kontenery Docker/Podman
 ---
 
-Do instalacji lokalnej w formie kontenerów Dockera wymagane są programy `git` i `docker-compose` oraz usługa `docker`. Aby uruchomić aplikację, należy sklonować repozytorium i uruchomić kontenery, wykonując w CLI następujące polecenia:
+Do instalacji lokalnej w formie kontenerów wymagany jest program `git` oraz usługa kontenerów Docker lub Podman. Aby uruchomić aplikację, należy sklonować repozytorium i uruchomić kontenery Dockera, wykonując w CLI następujące polecenia:
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
     sudo docker-compose up
 
-Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może potrwać do ok. 60 sekund — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MariaDB zostanie wypełniona danymi przykładowymi.
+W przypadku programu Podman można użyć polecenia `podman-compose up`. Alternatywnie można też uruchomić w CLI:
 
-Aplikacja uruchomi się pod adresem `http://localhost`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Konfiguracja kontenerów będzie przechowywana w folderze `.docker/data`.
+    git clone https://github.com/TomaszGasior/RadioLista-v3.git
+    cd RadioLista-v3
+    .container/podman-setup
+    podman pod start radiolista-v3
+
+Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może potrwać ponad minutę — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MariaDB zostanie wypełniona danymi przykładowymi.
+
+Aplikacja uruchomi się pod adresem `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Konfiguracja kontenerów będzie przechowywana w folderze `.container/data`.
 
 Instalacja lokalna — wbudowany serwer PHP
 ---
