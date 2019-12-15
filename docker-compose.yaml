@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     http:
-        build: '.docker/apache'
+        build: '.container/apache'
         ports:
             - '2012:80'
         volumes:
@@ -11,12 +11,12 @@ services:
             - app
 
     app:
-        build: '.docker/php-fpm'
+        build: '.container/php-fpm'
         environment:
             DATABASE_URL: mysql://root:toor@db:3306/radiolista
         volumes:
             - '.:/srv/app:z'
-            - './.docker/data/var:/srv/app/var:z'
+            - './.container/data/var:/srv/app/var:z'
         depends_on:
             - db
 
@@ -25,4 +25,4 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: 'toor'
         volumes:
-            - './.docker/data/db:/var/lib/mysql:z'
+            - './.container/data/db:/var/lib/mysql:z'
