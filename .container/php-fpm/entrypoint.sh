@@ -1,5 +1,4 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
 # Fix improper `var` permission caused by docker volume.
 chmod 777 var
