@@ -7,8 +7,6 @@ services:
             - '2012:80'
         volumes:
             - './public:/srv/app/public:z'
-        depends_on:
-            - app
 
     app:
         build: '.container/php-fpm'
@@ -17,8 +15,6 @@ services:
         volumes:
             - '.:/srv/app:z'
             - './.container/data/var:/srv/app/var:z'
-        depends_on:
-            - db
 
     db:
         image: 'mariadb:10.4'
