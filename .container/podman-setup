@@ -1,37 +1,39 @@
 #!/bin/bash -e
 
-prefix=radiolista-v3
+name=radiolista-v3
 port=2012
 
-if podman pod exists $prefix; then
-    echo 'Pod '$prefix' already exists. Use `podman pod start '$prefix'` to start.'
-    echo 'Then, go to http://127.0.0.1:'$port' in the browser.'
+if podman pod exists $name; then
+    echo 'Pod '$name' already exists. Use `podman pod start '$name'` to start'
+    echo 'or use `podman pod rm '$name' --force` to remove all containers.'
     exit 1
 fi
 
 cd $(dirname "$0")
 
-podman pod create --name $prefix --publish $port':80'
+podman pod create --name $name --publish $port':80'
 
-podman build --tag $prefix'_http' 'apache'
-podman build --tag $prefix'_app' 'php-fpm'
+podman build --tag $name'_http' 'apache'
+podman build --tag $name'_app' 'php-fpm'
 
-podman create --pod $prefix --name $prefix'_http' --add-host 'http:127.0.0.1' \
+# --add-host switch is used only for compatibility with docker-compose.
+
+podman create --pod $name --name $name'_http' --add-host 'http:127.0.0.1' \
     --volume '../public:/srv/app/public:z' \
-    $prefix'_http'
+    $name'_http'
 
-podman create --pod $prefix --name $prefix'_app' --add-host 'app:127.0.0.1' \
+podman create --pod $name --name $name'_app' --add-host 'app:127.0.0.1' \
     --env 'DATABASE_URL=mysql://root:toor@db:3306/radiolista' \
     --volume '..:/srv/app:z' \
     --volume './data/var:/srv/app/var:z' \
-    $prefix'_app'
+    $name'_app'
 
-podman create --pod $prefix --name $prefix'_db' --add-host 'db:127.0.0.1' \
+podman create --pod $name --name $name'_db' --add-host 'db:127.0.0.1' \
     --env 'MYSQL_ROOT_PASSWORD=toor' \
     --volume './data/db:/var/lib/mysql:z' \
     'mariadb:10.4'
 
 echo
-echo 'Done! Use `podman pod start '$prefix'` to start the application.'
+echo 'Done! Use `podman pod start '$name'` to start the application.'
 echo 'Then, go to http://127.0.0.1:'$port' in the browser.'
 echo
