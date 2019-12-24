@@ -11,7 +11,8 @@ fi
 
 cd $(dirname "$0")
 
-podman pod create --name $name --publish $port':80'
+podman pod create --name $name \
+    --publish $port':80' --publish $(( port + 1 ))':3306'
 
 podman build --tag $name'_http' 'apache'
 podman build --tag $name'_app' 'php-fpm'
@@ -23,7 +24,7 @@ podman create --pod $name --name $name'_http' --add-host 'http:127.0.0.1' \
     $name'_http'
 
 podman create --pod $name --name $name'_app' --add-host 'app:127.0.0.1' \
-    --env 'DATABASE_URL=mysql://root:toor@db:3306/radiolista' \
+    --env 'DATABASE_URL=mysql://root:toor@db:3306/'$name \
     --volume '..:/srv/app:z' \
     --volume './data/var:/srv/app/var:z' \
     $name'_app'
@@ -36,4 +37,5 @@ podman create --pod $name --name $name'_db' --add-host 'db:127.0.0.1' \
 echo
 echo 'Done! Use `podman pod start '$name'` to start the application.'
 echo 'Then, go to http://127.0.0.1:'$port' in the browser.'
+echo 'Application database is available on 127.0.0.1:'$(( port + 1 ))'.'
 echo

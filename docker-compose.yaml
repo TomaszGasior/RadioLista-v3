@@ -11,13 +11,15 @@ services:
     app:
         build: '.container/php-fpm'
         environment:
-            DATABASE_URL: mysql://root:toor@db:3306/radiolista
+            DATABASE_URL: mysql://root:toor@db:3306/radiolista-v3
         volumes:
             - '.:/srv/app:z'
             - './.container/data/var:/srv/app/var:z'
 
     db:
         image: 'mariadb:10.4'
+        ports:
+            - '2013:3306'
         environment:
             MYSQL_ROOT_PASSWORD: 'toor'
         volumes:
