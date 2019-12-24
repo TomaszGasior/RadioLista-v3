@@ -24,7 +24,7 @@ podman create --pod $name --name $name'_http' --add-host 'http:127.0.0.1' \
     $name'_http'
 
 podman create --pod $name --name $name'_app' --add-host 'app:127.0.0.1' \
-    --env 'DATABASE_URL=mysql://root:toor@db:3306/'$name \
+    --env 'DATABASE_URL=mysql://root:toor@db:3306/'$name'?server_version=5.7' \
     --volume '..:/srv/app:z' \
     --volume './data/var:/srv/app/var:z' \
     $name'_app'
@@ -32,7 +32,7 @@ podman create --pod $name --name $name'_app' --add-host 'app:127.0.0.1' \
 podman create --pod $name --name $name'_db' --add-host 'db:127.0.0.1' \
     --env 'MYSQL_ROOT_PASSWORD=toor' \
     --volume './data/db:/var/lib/mysql:z' \
-    'mariadb:10.4'
+    'mysql:5.7'
 
 echo
 echo 'Done! Use `podman pod start '$name'` to start the application.'
