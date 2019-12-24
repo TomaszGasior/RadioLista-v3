@@ -20,18 +20,17 @@ podman build --tag $name'_app' 'php-fpm'
 # --add-host switch is used only for compatibility with docker-compose.
 
 podman create --pod $name --name $name'_http' --add-host 'http:127.0.0.1' \
-    --volume '../public:/srv/app/public:z' \
+    --volume '../public:/srv/public:z' \
     $name'_http'
 
 podman create --pod $name --name $name'_app' --add-host 'app:127.0.0.1' \
     --env 'DATABASE_URL=mysql://root:toor@db:3306/'$name'?server_version=5.7' \
-    --volume '..:/srv/app:z' \
-    --volume './data/var:/srv/app/var:z' \
+    --volume '..:/srv:z' \
     $name'_app'
 
 podman create --pod $name --name $name'_db' --add-host 'db:127.0.0.1' \
     --env 'MYSQL_ROOT_PASSWORD=toor' \
-    --volume './data/db:/var/lib/mysql:z' \
+    --volume '../var/mysql:/var/lib/mysql:z' \
     'mysql:5.7'
 
 echo

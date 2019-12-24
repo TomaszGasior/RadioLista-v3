@@ -6,15 +6,14 @@ services:
         ports:
             - '2012:80'
         volumes:
-            - './public:/srv/app/public:z'
+            - './public:/srv/public:z'
 
     app:
         build: '.container/php-fpm'
         environment:
             DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
         volumes:
-            - '.:/srv/app:z'
-            - './.container/data/var:/srv/app/var:z'
+            - '.:/srv:z'
 
     db:
         image: 'mysql:5.7'
@@ -23,4 +22,4 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: 'toor'
         volumes:
-            - './.container/data/db:/var/lib/mysql:z'
+            - './var/mysql:/var/lib/mysql:z'

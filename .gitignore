@@ -1,5 +1,4 @@
 *.sublime-workspace
-/.container/data
 /public/assets/thirdparty/ckeditor
 /public/assets/minified-*
 

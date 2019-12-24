@@ -29,4 +29,4 @@ COPY entrypoint.sh /usr/local/bin/custom-entrypoint
 ENTRYPOINT ["custom-entrypoint"]
 CMD ["php-fpm"]
 
-WORKDIR /srv/app
+WORKDIR /srv
