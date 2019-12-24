@@ -10,6 +10,6 @@ RUN echo "Include conf/extra/php-fpm.conf" >> conf/httpd.conf \
     -e 's/^#\(LoadModule .*mod_rewrite.so\)/\1/' \
     -e 's/AllowOverride None/AllowOverride All/'
 
-COPY entrypoint.sh /usr/local/bin/radiolista-entrypoint
-ENTRYPOINT ["/usr/local/bin/radiolista-entrypoint"]
+COPY entrypoint.sh /usr/local/bin/custom-entrypoint
+ENTRYPOINT ["/usr/local/bin/custom-entrypoint"]
 CMD ["httpd-foreground"]

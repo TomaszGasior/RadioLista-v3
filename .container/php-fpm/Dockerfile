@@ -25,8 +25,8 @@ RUN apk --no-cache add su-exec \
     && curl -sS https://getcomposer.org/installer \
     | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY entrypoint.sh /usr/local/bin/radiolista-entrypoint
-ENTRYPOINT ["radiolista-entrypoint"]
+COPY entrypoint.sh /usr/local/bin/custom-entrypoint
+ENTRYPOINT ["custom-entrypoint"]
 CMD ["php-fpm"]
 
 WORKDIR /srv/app
