@@ -16,12 +16,12 @@ W przypadku programu Podman można użyć polecenia `podman-compose up`. Alterna
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
-    .container/podman-setup
+    ./podman-setup
     podman pod start radiolista-v3
 
-Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może potrwać ponad minutę — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MariaDB zostanie wypełniona danymi przykładowymi.
+Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może **potrwać ponad minutę** — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MySQL zostanie wypełniona danymi przykładowymi.
 
-Aplikacja uruchomi się pod adresem `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Konfiguracja kontenerów będzie przechowywana w folderze `.container/data`.
+Aplikacja uruchomi się pod adresem `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Baza danych MySQL będzie dostępna pod adresem `127.0.0.1:2013`, a jej konfiguracja będzie przechowywana w folderze `var/mysql`.
 
 Instalacja lokalna — wbudowany serwer PHP
 ---
