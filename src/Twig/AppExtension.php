@@ -39,7 +39,7 @@ class AppExtension extends AbstractExtension
         $date = twig_date_converter($twig, $date);
 
         $formatter = new \IntlDateFormatter(null, null, null);
-        $formatter->setPattern('d MMMM Y');
+        $formatter->setPattern('d MMMM y');
 
         return sprintf(
             '<time datetime="%s">%s</time>',
