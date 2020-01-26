@@ -51,7 +51,7 @@ class ChangeUserPassCommand extends Command
             return;
         }
 
-        $newPassword = $io->ask('New password');
+        $newPassword = $io->ask('New password', $this->getRandomPassword());
         if (! $newPassword) {
             $io->error('Password cannot be empty.');
             return;
@@ -80,5 +80,23 @@ class ChangeUserPassCommand extends Command
 
         // Clear APCu cache after changing the password.
         $this->getApplication()->run(new ArrayInput(['command' => 'cache:clear']), $output);
+    }
+
+    /**
+     * https://paragonie.com/blog/2015/07/how-safely-generate-random-strings-and-integers-in-php
+     */
+    private function getRandomPassword(): string
+    {
+        $alphabet = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+        $alphabetLength = strlen($alphabet) - 1;
+
+        $password = '';
+        $passwordLength = 20;
+
+        for ($i = 0; $i < $passwordLength; $i++) {
+            $password .= $alphabet[random_int(0, $alphabetLength)];
+        }
+
+        return $password;
     }
 }
