@@ -2,9 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -40,8 +42,10 @@ class ChangeUserPassCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $name = $io->ask('Username');
+        // There is no way to access APCu cache here. Don't warn about it.
+        $this->entityManager->getClassMetadata(User::class)->cache = null;
 
+        $name = $io->ask('Username');
         if (! $user = $this->userRepository->findOneByName($name)) {
             $io->error('There is no such user.');
             return;
@@ -73,5 +77,8 @@ class ChangeUserPassCommand extends Command
                 $oldPasswordHash, $newPasswordHash
             )
         ]);
+
+        // Clear APCu cache after changing the password.
+        $this->getApplication()->run(new ArrayInput(['command' => 'cache:clear']), $output);
     }
 }
