@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
-class User implements UserInterface, \Serializable, EncoderAwareInterface
+class User implements UserInterface, EncoderAwareInterface
 {
     /**
      * @ORM\Id()
@@ -238,32 +238,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
-    }
-
-    // Serializable
-
-    public function serialize(): string
-    {
-        return serialize([
-            $this->id,
-            $this->name,
-            $this->password,
-
-            $this->registerDate,
-            $this->oldPassCompat
-        ]);
-    }
-
-    public function unserialize($serialized): void
-    {
-        list(
-            $this->id,
-            $this->name,
-            $this->password,
-
-            $this->registerDate,
-            $this->oldPassCompat
-        ) = unserialize($serialized, ['allowed_classes' => ['DateTime']]);
     }
 
     // EncoderAwareInterface
