@@ -23,7 +23,7 @@ class MinifyAssetsCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $assetsPath = $this->getAssetsDirectoryPath();
 
@@ -44,6 +44,8 @@ class MinifyAssetsCommand extends Command
             $path = $file->getRealPath();
             (new Minify\JS($path))->minify($this->addPrefixToPath($path));
         }
+
+        return 0;
     }
 
     private function getAssetsDirectoryPath(): string

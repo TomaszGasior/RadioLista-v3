@@ -38,7 +38,7 @@ class ChangeUserPassCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -48,13 +48,13 @@ class ChangeUserPassCommand extends Command
         $name = $io->ask('Username');
         if (! $user = $this->userRepository->findOneByName($name)) {
             $io->error('There is no such user.');
-            return;
+            return 1;
         }
 
         $newPassword = $io->ask('New password', $this->getRandomPassword());
         if (! $newPassword) {
             $io->error('Password cannot be empty.');
-            return;
+            return 1;
         }
 
         $oldPasswordHash = $user->getPassword();
@@ -63,7 +63,7 @@ class ChangeUserPassCommand extends Command
         $errors = $this->validator->validate($user, null, 'RedefinePassword');
         if ($errors->count() > 0) {
             $io->error((string) $errors);
-            return;
+            return 1;
         }
 
         $this->entityManager->flush($user);
@@ -80,6 +80,8 @@ class ChangeUserPassCommand extends Command
 
         // Clear APCu cache after changing the password.
         $this->getApplication()->run(new ArrayInput(['command' => 'cache:clear']), $output);
+
+        return 0;
     }
 
     /**
