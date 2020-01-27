@@ -138,6 +138,8 @@ class RadioTableController extends AbstractController
     }
 
     /**
+     * This action handles both radiotable removing and radiostation removing.
+     *
      * @Route("/wykaz/{id}/usun", name="radiotable.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
@@ -146,8 +148,6 @@ class RadioTableController extends AbstractController
     public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                            RadioStation $radioStationToRemove = null): Response
     {
-        // This action handles both radiotable removing and radiostation removing.
-
         $form_RadioTable = $this->createForm(RadioTableRemoveType::class);
         $form_RadioTable->handleRequest($request);
 

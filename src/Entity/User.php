@@ -183,13 +183,17 @@ class User implements UserInterface, EncoderAwareInterface
         return $this;
     }
 
-    // Not persisted
-
+    /**
+     * Not persisted.
+     */
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
+    /**
+     * Not persisted. Used by entity listener for password encoding.
+     */
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
@@ -201,18 +205,25 @@ class User implements UserInterface, EncoderAwareInterface
         return $this;
     }
 
-    // UserInterface
-
+    /**
+     * @see UserInterface
+     */
     public function getUsername(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getSalt(): ?string
     {
         if ($this->oldPassCompat) {
@@ -222,26 +233,34 @@ class User implements UserInterface, EncoderAwareInterface
         return null;
     }
 
+    /**
+     * Additional privileges for user with ROLE_ADMIN:
+     * — use administration panel,
+     * — preview private radiotables and hidden user profiles,
+     * — browse application while maintenance mode is enabled.
+     *
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         if ($this->admin) {
-            // Additional privileges for user with ROLE_ADMIN:
-            // * use administration panel,
-            // * preview private radiotables and hidden user profiles,
-            // * browse application while maintenance mode is enabled.
             return ['ROLE_USER', 'ROLE_ADMIN'];
         }
 
         return ['ROLE_USER'];
     }
 
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
     }
 
-    // EncoderAwareInterface
-
+    /**
+     * @see EncoderAwareInterface
+     */
     public function getEncoderName(): ?string
     {
         if ($this->oldPassCompat) {
