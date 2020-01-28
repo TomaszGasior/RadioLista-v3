@@ -15,17 +15,17 @@
         "sensio/framework-extra-bundle": "^5.2",
         "sensiolabs/security-checker": "^5.0",
         "symfony/apache-pack": "^1.0",
-        "symfony/asset": "^4.1",
-        "symfony/console": "^4.1",
-        "symfony/expression-language": "^4.1",
+        "symfony/asset": "^4.4",
+        "symfony/console": "^4.4",
+        "symfony/expression-language": "^4.4",
         "symfony/flex": "^1.0",
-        "symfony/form": "^4.1",
+        "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.3",
         "symfony/monolog-bundle": "^3.3",
-        "symfony/security-bundle": "^4.1",
-        "symfony/twig-bundle": "^4.1",
-        "symfony/validator": "^4.1",
-        "symfony/yaml": "^4.1",
+        "symfony/security-bundle": "^4.4",
+        "symfony/twig-bundle": "^4.4",
+        "symfony/validator": "^4.4",
+        "symfony/yaml": "^4.4",
         "tgalopin/html-sanitizer-bundle": "^1.1",
         "webfactory/piwik-bundle": "^2.5"
     },
@@ -34,15 +34,15 @@
         "dama/doctrine-test-bundle": "^5.0",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "fzaninotto/faker": "^1.8",
-        "symfony/browser-kit": "^4.1",
-        "symfony/css-selector": "^4.1",
-        "symfony/debug-bundle": "^4.1",
-        "symfony/dotenv": "^4.1",
+        "symfony/browser-kit": "^4.4",
+        "symfony/css-selector": "^4.4",
+        "symfony/debug-bundle": "^4.4",
+        "symfony/dotenv": "^4.4",
         "symfony/maker-bundle": "^1.6",
-        "symfony/phpunit-bridge": "^4.1",
+        "symfony/phpunit-bridge": "^4.4",
         "symfony/profiler-pack": "^1.0",
-        "symfony/var-dumper": "^4.1",
-        "symfony/web-server-bundle": "^4.1"
+        "symfony/var-dumper": "^4.4",
+        "symfony/web-server-bundle": "^4.4"
     },
     "config": {
         "preferred-install": {
@@ -87,7 +87,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "require": "4.4.*"
         }
     }
 }
