@@ -34,9 +34,9 @@ Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `in
     bin/console doctrine:database:create
     bin/console doctrine:schema:create
     bin/console doctrine:fixtures:load -n
-    bin/console server:start
+    php -S 127.0.0.1:2012 -t ./public
 
-Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:8000`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
+Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
 
 ### Te funkcje mogą nie działać
 
