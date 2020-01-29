@@ -42,3 +42,7 @@ services:
     App\Form\Extension\ValidationFlashErrorExtension:
         tags:
             - { name: form.type_extension, priority: -100 }
+
+    App\Controller\DarkErrorController:
+        arguments:
+            $errorController: '@error_controller'
