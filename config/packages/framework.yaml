@@ -1,6 +1,7 @@
 framework:
     secret: '%env(APP_SECRET)%'
     default_locale: pl
+    error_controller: App\Controller\DarkErrorController::showError
     #csrf_protection: true
     #http_method_override: true
 

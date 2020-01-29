@@ -4,29 +4,35 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use Doctrine\DBAL\Exception\ConnectionException;
-use Symfony\Bundle\TwigBundle\Controller\ExceptionController;
-use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
-class DarkErrorController extends ExceptionController
+class DarkErrorController extends AbstractController
 {
-    public function show(Request $request, FlattenException $exception,
-                         DebugLoggerInterface $logger = null): Response
+    private $errorController;
+    private $debug;
+
+    public function __construct(ErrorController $errorController, bool $debug)
     {
-        if ($this->debug) {
-            return parent::showAction($request, $exception, $logger);
+        $this->errorController = $errorController;
+        $this->debug = $debug;
+    }
+
+    public function showError(\Throwable $exception, Request $request): Response
+    {
+        if ($request->attributes->get('showException', $this->debug)) {
+            return ($this->errorController)($exception);
         }
 
-        $class = $exception->getClass();
         $message = null;
 
-        if (is_a($class, ConnectionException::class, true)) {
+        if ($exception instanceof ConnectionException) {
             $message = 'DatabaseConnection';
         }
-        elseif (is_a($class, HttpException::class, true)) {
+        elseif ($exception instanceof HttpException) {
             $statusCode = $exception->getStatusCode();
 
             if (403 === $statusCode || 400 === $statusCode) {
@@ -43,8 +49,6 @@ class DarkErrorController extends ExceptionController
             }
         }
 
-        return new Response(
-            $this->twig->render('dark-error.html.twig', ['message' => $message])
-        );
+        return $this->render('dark-error.html.twig', ['message' => $message]);
     }
 }
