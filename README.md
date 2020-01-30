@@ -48,7 +48,6 @@ Testy
 
 Aby uruchomić testy automatyczne, należy wykonać w CLI:
 
-    bin/console doctrine:database:create --env test
-    bin/console doctrine:schema:create --env test
-    bin/console doctrine:fixtures:load -n --env test
     bin/phpunit
+
+Testowa baza danych SQLite generuje się automatycznie każdorazowo przed uruchomieniem testów.
