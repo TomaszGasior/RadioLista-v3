@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Util\PasswordGeneratorTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -14,6 +15,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ChangeUserPassCommand extends Command
 {
+    use PasswordGeneratorTrait;
+
     protected static $defaultName = 'app:change-user-pass';
 
     private $entityManager;
@@ -82,23 +85,5 @@ class ChangeUserPassCommand extends Command
         $this->getApplication()->run(new ArrayInput(['command' => 'cache:clear']), $output);
 
         return 0;
-    }
-
-    /**
-     * https://paragonie.com/blog/2015/07/how-safely-generate-random-strings-and-integers-in-php
-     */
-    private function getRandomPassword(): string
-    {
-        $alphabet = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-        $alphabetLength = strlen($alphabet) - 1;
-
-        $password = '';
-        $passwordLength = 20;
-
-        for ($i = 0; $i < $passwordLength; $i++) {
-            $password .= $alphabet[random_int(0, $alphabetLength)];
-        }
-
-        return $password;
     }
 }
