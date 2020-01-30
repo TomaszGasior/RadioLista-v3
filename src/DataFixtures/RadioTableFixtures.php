@@ -27,6 +27,8 @@ class RadioTableFixtures extends AbstractFixture implements DependentFixtureInte
                 $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
             }
 
+            $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+
             return $radioTable;
         }
 
@@ -34,6 +36,8 @@ class RadioTableFixtures extends AbstractFixture implements DependentFixtureInte
         $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class));
         $radioTable->setDescription($faker->optional()->HTMLDescription);
         $radioTable->setUseKhz($faker->boolean(25));
+
+        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
 
         if ($faker->boolean(40)) {
             $radioTable->setStatus(

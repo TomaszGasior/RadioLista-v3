@@ -38,6 +38,9 @@ class UserFixtures extends AbstractFixture
         $user->setPlainPassword($user->getName());
         $user->setAboutMe($faker->optional()->HTMLDescription);
 
+        $registerDate = $faker->dateTimeBetween('2012-07-01', '-1 year');
+        $this->setPrivateFieldOfObject($user, 'registerDate', $registerDate);
+        $this->setPrivateFieldOfObject($user, 'lastActivityDate', $faker->dateTimeBetween($registerDate, 'now'));
 
         return $user;
     }

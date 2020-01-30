@@ -30,6 +30,8 @@ abstract class AbstractFixture extends Fixture
             $this->addReference(static::class . $i, $entity);
         }
 
+        $this->disableRefreshDateEntityListeners($manager, get_class($entity));
+
         $manager->flush();
     }
 
@@ -40,6 +42,19 @@ abstract class AbstractFixture extends Fixture
         }
 
         return $this->getReference($fixtureClass . $i);
+    }
+
+    private function disableRefreshDateEntityListeners(ObjectManager $manager, string $entityClass): void
+    {
+        $entityListeners = $manager->getClassMetadata($entityClass)->entityListeners;
+
+        array_walk($entityListeners, function(&$listeners){
+            $listeners = array_filter($listeners, function($callback){
+                return !preg_match('/refresh.*(Date|Time).*/', $callback['method']);
+            });
+        });
+
+        $manager->getClassMetadata($entityClass)->entityListeners = $entityListeners;
     }
 
     private function setupFaker()
