@@ -2,6 +2,7 @@
 
 namespace App\Validator;
 
+use App\Util\ReflectionUtilsTrait;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 
@@ -10,6 +11,8 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
  */
 class ClassConstantsChoice extends Choice
 {
+    use ReflectionUtilsTrait;
+
     public $class;
     public $prefix;
 
@@ -33,16 +36,5 @@ class ClassConstantsChoice extends Choice
     public function validatedBy(): string
     {
         return ChoiceValidator::class;
-    }
-
-    private function getPrefixedConstantsOfClass($class, $constantsPrefix): array
-    {
-        return array_filter(
-            (new \ReflectionClass($class))->getConstants(),
-            function ($constantName) use ($constantsPrefix) {
-                return (0 === strpos($constantName, $constantsPrefix));
-            },
-            ARRAY_FILTER_USE_KEY
-        );
     }
 }

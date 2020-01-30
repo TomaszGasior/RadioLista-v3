@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Util\ReflectionUtilsTrait;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -10,6 +11,8 @@ use Faker\Provider\Base;
 
 abstract class AbstractFixture extends Fixture
 {
+    use ReflectionUtilsTrait;
+
     protected const ENTITIES_NUMBER = 5;
 
     static private $faker;
@@ -48,6 +51,8 @@ abstract class AbstractFixture extends Fixture
 
         $faker->addProvider(new class($faker) extends Base
         {
+            use ReflectionUtilsTrait;
+
             public function radioStation(): string
             {
                 return $this->randomElement([
@@ -101,13 +106,7 @@ abstract class AbstractFixture extends Fixture
 
             public function randomConstantsFromClass($class, $prefix)
             {
-                $values = array_filter(
-                    (new \ReflectionClass($class))->getConstants(),
-                    function($constantName) use ($prefix){
-                        return (strpos($constantName, $prefix) === 0);
-                    },
-                    ARRAY_FILTER_USE_KEY
-                );
+                $values = $this->getPrefixedConstantsOfClass($class, $prefix);
 
                 return $this->randomElements(
                     $values,

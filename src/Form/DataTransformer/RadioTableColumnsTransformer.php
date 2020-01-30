@@ -3,6 +3,7 @@
 namespace App\Form\DataTransformer;
 
 use App\Entity\RadioTable;
+use App\Util\ReflectionUtilsTrait;
 use Symfony\Component\Form\DataTransformerInterface;
 
 // The following transformer is designed for RadioTable::$columns field.
@@ -19,6 +20,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class RadioTableColumnsTransformer implements DataTransformerInterface
 {
+    use ReflectionUtilsTrait;
+
     public function transform($value): array
     {
         $enabledColumns  = is_array($value) ? $value : [];
@@ -52,11 +55,7 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
 
     private function getAllPossibleColumnsNames(): array
     {
-        $allColumnsConstants = array_filter(
-            (new \ReflectionClass(RadioTable::class))->getConstants(),
-            function($constantName){ return (0 === strpos($constantName, 'COLUMN_')); },
-            ARRAY_FILTER_USE_KEY
-        );
+        $allColumnsConstants = $this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_');
 
         return array_values($allColumnsConstants);
     }
