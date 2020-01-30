@@ -21,6 +21,10 @@ class ClassConstantsChoice extends Choice
         parent::__construct($options);
 
         $this->choices = $this->getPrefixedConstantsOfClass($options['class'], $options['prefix']);
+
+        if (!$this->choices) {
+            throw new \RuntimeException(sprintf('%s class does not have any constants prefixed with %s.', $options['class'], $options['prefix']));
+        }
     }
 
     public function getDefaultOption(): ?string
