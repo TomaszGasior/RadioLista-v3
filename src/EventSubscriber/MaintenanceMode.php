@@ -12,20 +12,20 @@ use Twig\Environment;
 
 class MaintenanceMode implements EventSubscriberInterface
 {
-    private $maintenanceMode;
+    private $lockFilePath;
     private $security;
     private $twig;
 
-    public function __construct(bool $maintenanceMode, Security $security, Environment $twig)
+    public function __construct(string $lockFilePath, Security $security, Environment $twig)
     {
-        $this->maintenanceMode = $maintenanceMode;
+        $this->lockFilePath = $lockFilePath;
         $this->security = $security;
         $this->twig = $twig;
     }
 
     public function onKernelRequest(GetResponseEvent $event): void
     {
-        if (!$this->maintenanceMode) {
+        if (false === file_exists($this->lockFilePath)) {
             return;
         }
 

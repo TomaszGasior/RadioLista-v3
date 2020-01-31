@@ -14,7 +14,6 @@ services:
         bind:
             $debug: '%kernel.debug%'
             $logFilePath: '%kernel.logs_dir%/%kernel.environment%.log'
-            $maintenanceMode: '%env(bool:RL_MAINTENANCE)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -46,3 +45,7 @@ services:
     App\Controller\DarkErrorController:
         arguments:
             $errorController: '@error_controller'
+
+    App\EventSubscriber\MaintenanceMode:
+        arguments:
+            $lockFilePath: '%kernel.project_dir%/maintenance.lock'
