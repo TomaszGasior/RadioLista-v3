@@ -15,23 +15,23 @@
         {% set error_title = 'Wystąpił poważny błąd.' %}
         {% set error_text = 'Wystąpił nieprzewidziany błąd aplikacji.|Proszę skontaktować się z&nbsp;autorem RadioListy.' %}
 
-        {% if message == "MaintenanceMode" %}
+        {% if message == 'MaintenanceMode' %}
             {% set error_title = 'Trwa przerwa techniczna.' %}
             {% set error_text = 'W tej chwili serwis jest wyłączony ze względu na prace konserwacyjne.|Odwiedź RadioListę za kilka minut.' %}
         {% endif %}
-        {% if message == "DatabaseConnection" %}
+        {% if message == 'DatabaseConnection' %}
             {% set error_title = 'Drobne problemy techniczne.' %}
             {% set error_text = 'Nie udało się połączyć z bazą danych serwisu.|Proszę odczekać kilka minut i&nbsp;odświeżyć stronę.' %}
         {% endif %}
-        {% if message == "UnexpectedRequest" %}
+        {% if message == 'UnexpectedRequest' %}
             {% set error_title = 'Nie można wykonać działania.' %}
             {% set error_text = 'Brak uprawnień do wykonania działania|lub działanie pozbawione sensu.' %}
         {% endif %}
-        {% if message == "RadioTableNotFound" %}
+        {% if message == 'RadioTableNotFound' %}
             {% set error_title = 'Wykaz nie istnieje.' %}
             {% set error_text = 'Poszukiwany wykaz nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
         {% endif %}
-        {% if message == "NotFound" %}
+        {% if message == 'NotFound' %}
             {% set error_title = 'Strona nie istnieje.' %}
             {% set error_text = 'Poszukiwana strona serwisu nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
         {% endif %}
