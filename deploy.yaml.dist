@@ -1,0 +1,7 @@
+server.hostname:
+    domain: 'radiolista.pl'
+    user: 'username'
+    bin/php: 'php'
+    deploy_path: '/home/{{user}}/domains/{{domain}}'
+    public_dir: '{{deploy_path}}/public_html'
+    http_user: '{{user}}'
