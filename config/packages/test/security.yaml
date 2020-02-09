@@ -4,5 +4,4 @@ security:
             http_basic: ~
     encoders:
         App\Entity\User:
-            algorithm: md5
-            cost: 4
+            algorithm: plaintext
