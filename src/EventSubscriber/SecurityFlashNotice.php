@@ -3,8 +3,8 @@
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\RememberMeToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -31,9 +31,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
         $session->getFlashBag()->add('notice', 'Zalogowano się pomyślnie.');
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
 
         if (!($exception instanceof AccessDeniedException) || 404 === $exception->getCode()
             || null !== $this->security->getUser()) {
