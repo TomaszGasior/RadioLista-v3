@@ -44,7 +44,7 @@ services:
 
     App\EventSubscriber\MaintenanceMode:
         arguments:
-            $lockFilePath: '%kernel.project_dir%/maintenance.lock'
+            $lockFilePath: '%kernel.project_dir%/var/lock/maintenance.lock'
 
     App\Form\Extension\ValidationFlashErrorExtension:
         tags: [{ name: form.type_extension, priority: -100 }]

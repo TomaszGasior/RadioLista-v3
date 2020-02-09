@@ -8,6 +8,7 @@ set('repository', 'git@github.com:TomaszGasior/RadioLista-v3.git');
 set('branch', function(){ return runLocally('git describe master --abbrev=0'); });
 
 set('env', ['APP_ENV' => 'prod']);
+set('shared_dirs', ['var/log', 'var/sessions', 'var/lock']);
 set('shared_files', ['.env.local.php']);
 
 inventory('deploy.yaml');
@@ -17,10 +18,10 @@ task('deploy:clear_opcache', 'cachetool opcache:reset --web --web-path {{public_
 after('deploy:symlink', 'deploy:clear_opcache');
 
 desc('Enable maintenance mode');
-task('maintenance:enable', 'touch maintenance.lock');
+task('maintenance:enable', 'touch var/lock/maintenance.lock');
 
 desc('Disable maintenance mode');
-task('maintenance:disable', 'rm -f maintenance.lock');
+task('maintenance:disable', 'rm -f var/lock/maintenance.lock');
 
 desc('Upload generated .env.local.php file');
 task('deploy:env_local_php', function(){
