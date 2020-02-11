@@ -9,9 +9,7 @@ class UserFixtures extends AbstractEntityFixture
 {
     protected const ENTITIES_NUMBER = 30;
 
-    public const DEFAULT_USERNAME = 'radiolista';
-    public const TEST_USERNAME = 'test_user';
-    public const TEST_USERNAME_SECOND = 'test_user_2';
+    private const DEFAULT_USERNAME = 'radiolista';
 
     protected function createEntity(Generator $faker, int $i): object
     {
@@ -25,14 +23,6 @@ class UserFixtures extends AbstractEntityFixture
             $user->setPublicProfile(true);
 
             $this->setPrivateFieldOfObject($user, 'admin', true);
-        }
-        elseif (2 === $i) {
-            $user->setName(self::TEST_USERNAME);
-            $user->setPublicProfile(false);
-        }
-        elseif (3 === $i) {
-            $user->setName(self::TEST_USERNAME_SECOND);
-            $user->setPublicProfile(false);
         }
 
         $user->setPlainPassword($user->getName());
