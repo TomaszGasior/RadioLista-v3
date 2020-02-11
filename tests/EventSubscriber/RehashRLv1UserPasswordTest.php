@@ -5,6 +5,7 @@ namespace App\Tests\EventSubscriber;
 use App\Entity\User;
 use App\EventSubscriber\RehashRLv1UserPassword;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -27,6 +28,7 @@ class RehashRLv1UserPasswordTest extends TestCase
             ->with($this->equalTo(self::PLAIN_PASSWORD))
         ;
 
+        /** @var EntityManagerInterface|MockObject */
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager
             ->expects($this->once())
@@ -34,6 +36,7 @@ class RehashRLv1UserPasswordTest extends TestCase
             ->with($this->equalTo($user))
         ;
 
+        /** @var TokenInterface|MockObject */
         $token = $this->createMock(TokenInterface::class);
         $token
             ->method('getUser')
@@ -66,12 +69,14 @@ class RehashRLv1UserPasswordTest extends TestCase
             ->method('setPlainPassword')
         ;
 
+        /** @var EntityManagerInterface|MockObject */
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager
             ->expects($this->never())
             ->method('flush')
         ;
 
+        /** @var TokenInterface|MockObject */
         $token = $this->createMock(TokenInterface::class);
         $token
             ->method('getUser')

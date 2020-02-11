@@ -3,6 +3,7 @@
 namespace App\Tests\Twig;
 
 use App\Twig\AppExtension;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 
@@ -44,6 +45,8 @@ class AppExtensionTest extends TestCase
     public function testCsvEscaper(string $sourceString, string $escapedString): void
     {
         $appExtension = $this->getInstance();
+
+        /** @var Environment|MockObject */
         $twigEnvironment = $this->createMock(Environment::class);
 
         $this->assertEquals(

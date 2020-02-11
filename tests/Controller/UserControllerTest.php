@@ -84,6 +84,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'test_user',
         ]);
         $client->request('GET', '/ustawienia-konta');
+        /** @var RedirectResponse */
         $response = $client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
@@ -110,6 +111,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => $newPassword,
         ]);
         $client->request('GET', '/ustawienia-konta');
+        /** @var RedirectResponse */
         $response = $client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
@@ -143,6 +145,7 @@ class UserControllerTest extends WebTestCase
         $form['security_login[password]'] = 'EXAMPLE_PASSW0RD!';
         $client->submit($form);
 
+        /** @var RedirectResponse */
         $response = $client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/moje-wykazy', $response->getTargetUrl());

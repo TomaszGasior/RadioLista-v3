@@ -12,10 +12,9 @@ class AppExtension extends AbstractExtension
 {
     public function __construct(Environment $twig, Compiler $compiler)
     {
-        $twig
-            ->getExtension(EscaperExtension::class)
-            ->setEscaper('csv', [$this, 'escapeCSV'])
-        ;
+        /** @var EscaperExtension */
+        $escaperExtension = $twig->getExtension(EscaperExtension::class);
+        $escaperExtension->setEscaper('csv', [$this, 'escapeCSV']);
 
         // Set custom compiler to minify HTML output of cached Twig templates.
         $twig->setCompiler($compiler);
@@ -52,7 +51,9 @@ class AppExtension extends AbstractExtension
                                      string $decimalPoint = null, string $thousandSep = null): string
     {
         if (null === $decimal) {
-            $decimal = $twig->getExtension(CoreExtension::class)->getNumberFormat()[0];
+            /** @var CoreExtension */
+            $coreExtension = $twig->getExtension(CoreExtension::class);
+            $decimal = $coreExtension->getNumberFormat()[0];
         }
 
         // Don't round values with precision bigger than preferred.

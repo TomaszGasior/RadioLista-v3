@@ -111,7 +111,7 @@ abstract class AbstractFixture extends Fixture
             public function HTMLDescription(): string
             {
                 $paragraphs = $this->generator->paragraphs(3);
-                return '<p>' . implode($paragraphs, '</p><p>') . '</p>';
+                return '<p>' . implode('</p><p>', $paragraphs) . '</p>';
             }
 
             public function randomConstantFromClass($class, $prefix)

@@ -27,7 +27,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
             return;
         }
 
+        /** @var Session */
         $session = $event->getRequest()->getSession();
+
         $session->getFlashBag()->add('notice', 'Zalogowano się pomyślnie.');
     }
 
@@ -40,7 +42,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
             return;
         }
 
+        /** @var Session */
         $session = $event->getRequest()->getSession();
+
         $session->getFlashBag()->add('error', 'Zaloguj się, aby mieć dostęp do tej strony.');
     }
 
@@ -52,7 +56,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
             return;
         }
 
+        /** @var Session */
         $session = $request->getSession();
+
         $session->getFlashBag()->add('notice', 'Wylogowano się pomyślnie.');
     }
 

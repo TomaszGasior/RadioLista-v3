@@ -24,7 +24,9 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
             $form = $event->getForm();
 
             if ($form->isRoot() && false === $form->isValid()) {
+                /** @var Session */
                 $session = $this->requestStack->getCurrentRequest()->getSession();
+
                 $message = $form->getErrors(true)[0]->getMessage();
 
                 // Set generic error message if current text isn't specified by this application.

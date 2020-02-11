@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminFlashMessage implements EventSubscriberInterface
 {
@@ -18,7 +19,9 @@ class AdminFlashMessage implements EventSubscriberInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
+        /** @var Session */
         $session = $request->getSession();
+
         $session->getFlashBag()->add('error', 'Przeglądasz prywatny zasób jako administrator.');
     }
 

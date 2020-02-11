@@ -18,6 +18,7 @@ class SecurityPermissionTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', $url);
 
+        /** @var RedirectResponse */
         $response = $client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
