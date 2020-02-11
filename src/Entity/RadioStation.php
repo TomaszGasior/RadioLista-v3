@@ -184,8 +184,8 @@ class RadioStation
      * })
      */
     private $rds = [
-        'rt' => '',
-        'ps' => '',
+        'rt' => [],
+        'ps' => [],
         'pty' => '',
     ];
 
