@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Faker\Generator;
 
-class UserFixtures extends AbstractFixture
+class UserFixtures extends AbstractEntityFixture
 {
     protected const ENTITIES_NUMBER = 30;
 

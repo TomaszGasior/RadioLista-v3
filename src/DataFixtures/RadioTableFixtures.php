@@ -6,7 +6,7 @@ use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Generator;
 
-class RadioTableFixtures extends AbstractFixture implements DependentFixtureInterface
+class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtureInterface
 {
     protected const ENTITIES_NUMBER = 120;
 

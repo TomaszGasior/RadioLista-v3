@@ -9,40 +9,11 @@ use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\Base;
 
-abstract class AbstractFixture extends Fixture
+trait FixtureTrait
 {
     use ReflectionUtilsTrait;
 
-    protected const ENTITIES_NUMBER = 5;
-
     static private $faker;
-
-    abstract protected function createEntity(Generator $faker, int $i): object;
-
-    public function load(ObjectManager $manager): void
-    {
-        $this->setupFaker();
-
-        foreach (range(1, static::ENTITIES_NUMBER) as $i) {
-            $entity = $this->createEntity(self::$faker, $i);
-
-            $manager->persist($entity);
-            $this->addReference(static::class . $i, $entity);
-        }
-
-        $this->disableRefreshDateEntityListeners($manager, get_class($entity));
-
-        $manager->flush();
-    }
-
-    protected function getReferenceFrom(string $fixtureClass, int $i = null): object
-    {
-        if (null === $i) {
-            $i = random_int(1, $fixtureClass::ENTITIES_NUMBER);
-        }
-
-        return $this->getReference($fixtureClass . $i);
-    }
 
     private function disableRefreshDateEntityListeners(ObjectManager $manager, string $entityClass): void
     {
@@ -119,7 +90,7 @@ abstract class AbstractFixture extends Fixture
                 return $this->randomConstantsFromClass($class, $prefix)[0];
             }
 
-            public function randomConstantsFromClass($class, $prefix)
+            public function randomConstantsFromClass($class, $prefix): array
             {
                 $values = $this->getPrefixedConstantsOfClass($class, $prefix);
 
