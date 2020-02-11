@@ -24,13 +24,6 @@ class BasicApplicationTest extends WebTestCase
 
     public function publicUrlsProvider(): iterable
     {
-        self::bootKernel();
-        $userRepository = self::$container->get(UserRepository::class);
-        $radioTableRepository = self::$container->get(RadioTableRepository::class);
-
-        $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime(10);
-        $users = $userRepository->findByPublicProfile(true, null, 10);
-
         yield [''];
         yield ['/strona-glowna'];
         yield ['/o-stronie'];
@@ -41,13 +34,8 @@ class BasicApplicationTest extends WebTestCase
         yield ['/wszystkie-wykazy/3'];
         yield ['/logowanie'];
         yield ['/rejestracja'];
-
-        foreach ($radioTables as $radioTable) {
-            yield ['/wykaz/' . $radioTable->getId()];
-        }
-        foreach ($users as $user) {
-            yield ['/profil/' . $user->getName()];
-        }
+        yield ['/wykaz/1'];
+        yield ['/profil/test_user'];
     }
 
     /**

@@ -11,107 +11,76 @@ class RadioStationControllerTest extends WebTestCase
 {
     public function testAddRadioStation(): void
     {
-        $radioStation = $this->createRadioStation();
-        $radioTable = $radioStation->getRadioTable();
+        $client = static::createClient([], [
+            'PHP_AUTH_USER' => 'test_user',
+            'PHP_AUTH_PW' => 'test_user',
+        ]);
+
+        $crawler = $client->request('GET', '/wykaz/1/dodaj-stacje');
+        $form = $crawler->filter('form')->form();
+        $form['radio_station_edit[frequency]'] = '91.25';
+        $form['radio_station_edit[name]'] = 'EXAMPLE_RADIO_STATION_NAME_9125';
+        $client->submit($form);
 
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
-        $client->request('GET', '/wykaz/' . $radioTable->getId());
+        $client->request('GET', '/wykaz/1');
         $content = $client->getResponse()->getContent();
-        $this->assertContains($radioStation->getName(), $content);
+        $this->assertContains('EXAMPLE_RADIO_STATION_NAME_9125', $content);
     }
 
     public function testEditRadioStation(): void
     {
-        $radioStation = $this->createRadioStation();
-        $radioTable = $radioStation->getRadioTable();
-
-        $previousRadioStationName = $radioStation->getName();
-
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
-        $crawler = $client->request('GET', '/wykaz/' . $radioTable->getId() . '/edytuj-stacje/' . $radioStation->getId());
+        $crawler = $client->request('GET', '/wykaz/1/edytuj-stacje/1');
         $form = $crawler->filter('form')->form();
-        $form['radio_station_edit[name]'] = 'CHANGED_RADIOSTATION_NAME';
+        $form['radio_station_edit[name]'] = 'CHANGED_RADIO_STATION_NAME';
         $client->submit($form);
 
-        $client->request('GET', '/wykaz/' . $radioTable->getId());
+        $client->request('GET', '/wykaz/1');
         $content = $client->getResponse()->getContent();
-        $this->assertContains('CHANGED_RADIOSTATION_NAME', $content);
-        $this->assertNotContains($previousRadioStationName, $content);
+        $this->assertContains('CHANGED_RADIO_STATION_NAME', $content);
+        $this->assertNotContains('test_radio_station_name', $content);
     }
 
     public function testCopyRadioStation(): void
     {
-        $radioStation = $this->createRadioStation();
-        $radioTable = $radioStation->getRadioTable();
-
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
-        $crawler = $client->request('GET', '/wykaz/' . $radioTable->getId() . '/kopiuj-stacje/' . $radioStation->getId());
+        $crawler = $client->request('GET', '/wykaz/1/kopiuj-stacje/1');
         $form = $crawler->filter('form')->form();
         $currentValue = $form['radio_station_edit[name]']->getValue();
-        $form['radio_station_edit[name]'] = $currentValue . '___COPIED';
+        $form['radio_station_edit[name]'] = 'COPIED_RADIO_STATION_NAME';
         $client->submit($form);
 
-        $client->request('GET', '/wykaz/' . $radioTable->getId());
+        $client->request('GET', '/wykaz/1');
         $content = $client->getResponse()->getContent();
-        $this->assertContains($radioStation->getName() . '___COPIED', $content);
+        $this->assertContains('COPIED_RADIO_STATION_NAME', $content);
     }
 
     public function testRemoveRadioStation(): void
     {
-        $radioStation = $this->createRadioStation();
-        $radioTable = $radioStation->getRadioTable();
-
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
-        $crawler = $client->request('GET', '/wykaz/' . $radioTable->getId() . '/usun-stacje/' . $radioStation->getId());
+        $crawler = $client->request('GET', '/wykaz/1/usun-stacje/1');
         $form = $crawler->filter('form[name="radio_station_remove"]')->form();
-        // Radiostation is selected automatically.
-        $client->submit($form);
+        $client->submit($form); // Radiostation is selected automatically.
 
-        $client->request('GET', '/wykaz/' . $radioTable->getId());
+        $client->request('GET', '/wykaz/1');
         $content = $client->getResponse()->getContent();
-        $this->assertNotContains($radioStation->getName(), $content);
-    }
-
-    private function createRadioStation(): RadioStation
-    {
-        self::bootKernel();
-        $radioTableRepository = self::$container->get(RadioTableRepository::class);
-        $radioStationRepository = self::$container->get(RadioStationRepository::class);
-
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-
-        $crawler = $client->request('GET', '/utworz-wykaz');
-        $form = $crawler->filter('form')->form();
-        $form['radio_table_create[name]'] = 'EXAMPLE_RADIOTABLE_NAME';
-        $client->submit($form);
-
-        $radioTable = $radioTableRepository->findOneByName('EXAMPLE_RADIOTABLE_NAME');
-
-        $crawler = $client->request('GET', '/wykaz/' . $radioTable->getId() . '/dodaj-stacje');
-        $form = $crawler->filter('form')->form();
-        $form['radio_station_edit[frequency]'] = '100.00';
-        $form['radio_station_edit[name]'] = 'EXAMPLE_RADIOSTATION_NAME';
-        $client->submit($form);
-
-        return $radioStationRepository->findOneByName('EXAMPLE_RADIOSTATION_NAME');
+        $this->assertNotContains('test_radio_station_name', $content);
     }
 }

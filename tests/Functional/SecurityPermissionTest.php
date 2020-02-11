@@ -47,8 +47,8 @@ class SecurityPermissionTest extends WebTestCase
     {
         $client = static::createClient([]);
         $crawler = $client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user_2',
-            'PHP_AUTH_PW' => 'test_user_2',
+            'PHP_AUTH_USER' => 'test_user_second',
+            'PHP_AUTH_PW' => 'test_user_second',
         ]);
 
         $response = $client->getResponse();
@@ -66,24 +66,15 @@ class SecurityPermissionTest extends WebTestCase
 
     public function ownedByTestUserUrlProvider(): array
     {
-        self::bootKernel();
-        $userRepository = self::$container->get(UserRepository::class);
-        $radioTableRepository = self::$container->get(RadioTableRepository::class);
-        $radioStationRepository = self::$container->get(RadioStationRepository::class);
-
-        $user = $userRepository->findOneByName('test_user');
-        $radioTable = $radioTableRepository->findAllOwnedByUser($user)[0];
-        $radioStation = $radioStationRepository->findForRadioTable($radioTable)[0];
-
         return [
-            ['/wykaz/' . $radioTable->getId() . '/dodaj-stacje'],
-            ['/wykaz/' . $radioTable->getId() . '/edytuj-stacje/' . $radioStation->getId()],
-            ['/wykaz/' . $radioTable->getId() . '/kopiuj-stacje/' . $radioStation->getId()],
-            ['/wykaz/' . $radioTable->getId() . '/usun-stacje/' . $radioStation->getId()],
-            ['/wykaz/' . $radioTable->getId() . '/ustawienia'],
-            ['/wykaz/' . $radioTable->getId() . '/eksport/html'],
-            ['/wykaz/' . $radioTable->getId() . '/eksport/csv'],
-            ['/wykaz/' . $radioTable->getId() . '/usun'],
+            ['/wykaz/1/dodaj-stacje'],
+            ['/wykaz/1/edytuj-stacje/1'],
+            ['/wykaz/1/kopiuj-stacje/1'],
+            ['/wykaz/1/usun-stacje/1'],
+            ['/wykaz/1/ustawienia'],
+            ['/wykaz/1/eksport/html'],
+            ['/wykaz/1/eksport/csv'],
+            ['/wykaz/1/usun'],
         ];
     }
 }

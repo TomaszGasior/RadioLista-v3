@@ -1,0 +1,7 @@
+services:
+    App\DataFixtures\:
+        resource: '../src/DataFixtures'
+        autoconfigure: false
+
+    App\DataFixtures\TestsFixtures:
+        autoconfigure: true

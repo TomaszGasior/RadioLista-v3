@@ -12,8 +12,8 @@ class AdminControllerTest extends WebTestCase
     public function testAdminPanelSeemsToWork($url): void
     {
         $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'radiolista',
-            'PHP_AUTH_PW' => 'radiolista',
+            'PHP_AUTH_USER' => 'test_user_admin',
+            'PHP_AUTH_PW' => 'test_user_admin',
         ]);
 
         $client->request('GET', $url);
