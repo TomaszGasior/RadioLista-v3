@@ -5,16 +5,27 @@ namespace App\Tests\Controller;
 use App\Entity\RadioTable;
 use App\Repository\RadioStationRepository;
 use App\Repository\RadioTableRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableControllerTest extends WebTestCase
 {
-    public function testRadioTableWorks(): void
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/wykaz/1');
+    /** @var KernelBrowser */
+    private $client;
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    public function setUp(): void
+    {
+        $this->client = static::createClient([], [
+            'PHP_AUTH_USER' => 'test_user',
+            'PHP_AUTH_PW' => 'test_user',
+        ]);
+    }
+
+    public function testRadioTableRenderedProperly(): void
+    {
+        $crawler = $this->client->request('GET', '/wykaz/1');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertEquals('test_radio_table_name', $crawler->filter('h1')->text());
 
@@ -31,55 +42,41 @@ class RadioTableControllerTest extends WebTestCase
         }
     }
 
-    public function testAddRadioTable(): void
+    public function testCreateRadioTable(): void
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-        $crawler = $client->request('GET', '/utworz-wykaz');
+        $crawler = $this->client->request('GET', '/utworz-wykaz');
 
         $form = $crawler->filter('form')->form();
         $form['radio_table_create[name]'] = 'EXAMPLE_RADIO_TABLE_NAME';
-        $client->submit($form);
+        $this->client->submit($form);
 
-        $client->request('GET', '/moje-wykazy');
-        $content = $client->getResponse()->getContent();
+        $this->client->request('GET', '/moje-wykazy');
+        $content = $this->client->getResponse()->getContent();
         $this->assertContains('EXAMPLE_RADIO_TABLE_NAME', $content);
     }
 
     public function testEditRadioTable(): void
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-
-        $crawler = $client->request('GET', '/wykaz/1/ustawienia');
+        $crawler = $this->client->request('GET', '/wykaz/1/ustawienia');
         $form = $crawler->filter('form')->form();
         $form['radio_table_settings[name]'] = 'CHANGED_RADIO_TABLE_NAME';
-        $client->submit($form);
+        $this->client->submit($form);
 
-        $client->request('GET', '/moje-wykazy');
-        $content = $client->getResponse()->getContent();
+        $this->client->request('GET', '/moje-wykazy');
+        $content = $this->client->getResponse()->getContent();
         $this->assertContains('CHANGED_RADIO_TABLE_NAME', $content);
         $this->assertNotContains('test_radio_table_name', $content);
     }
 
     public function testRemoveRadioTable(): void
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-
-        $crawler = $client->request('GET', '/wykaz/1/usun');
+        $crawler = $this->client->request('GET', '/wykaz/1/usun');
         $form = $crawler->filter('form[name="radio_table_remove"]')->form();
         $form['radio_table_remove[confirm]'] = '1';
-        $client->submit($form);
+        $this->client->submit($form);
 
-        $client->request('GET', '/moje-wykazy');
-        $content = $client->getResponse()->getContent();
+        $this->client->request('GET', '/moje-wykazy');
+        $content = $this->client->getResponse()->getContent();
         $this->assertNotContains('test_radio_table_name', $content);
     }
 }

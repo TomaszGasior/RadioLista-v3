@@ -5,23 +5,30 @@ namespace App\Tests\Functional;
 use App\Entity\RadioTable;
 use App\Repository\RadioTableRepository;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableStatusTest extends WebTestCase
 {
+    /** @var KernelBrowser */
+    private $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * @dataProvider statusAndHttpCodeProvider
      */
-    public function testRadioTablePublicAccess($status,
-                                               int $expectedHttpCode,
+    public function testRadioTablePublicAccess($status, int $expectedHttpCode,
                                                bool $expectedNoIndexTag): void
     {
         $this->setRadioTableStatus($status);
 
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/wykaz/1');
+        $crawler = $this->client->request('GET', '/wykaz/1');
 
-        $this->assertSame($expectedHttpCode, $client->getResponse()->getStatusCode());
+        $this->assertSame($expectedHttpCode, $this->client->getResponse()->getStatusCode());
 
         $robotsTag = $crawler->filter('meta[name="robots"]');
         if ($expectedNoIndexTag) {
@@ -31,13 +38,12 @@ class RadioTableStatusTest extends WebTestCase
             $this->assertCount(0, $robotsTag);
         }
 
-        $client = static::createClient([], [
+        $this->client->request('GET', '/wykaz/1', [], [], [
             'PHP_AUTH_USER' => 'test_user_second',
             'PHP_AUTH_PW' => 'test_user_second',
         ]);
-        $client->request('GET', '/wykaz/1');
 
-        $this->assertSame($expectedHttpCode, $client->getResponse()->getStatusCode());
+        $this->assertSame($expectedHttpCode, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -47,13 +53,12 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $client = static::createClient([], [
+        $this->client->request('GET', '/wykaz/1', [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
-        $client->request('GET', '/wykaz/1');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function statusAndHttpCodeProvider(): array
@@ -68,13 +73,11 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider statusAndAnchorVisibilityProvider
      */
-    public function testVisibilityInAllRadioTablesList($status,
-                                                       bool $expectedVisibleAnchor): void
+    public function testVisibilityInAllRadioTablesList($status, bool $expectedVisibleAnchor): void
     {
         $this->setRadioTableStatus($status);
 
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/wszystkie-wykazy');
+        $crawler = $this->client->request('GET', '/wszystkie-wykazy');
 
         $anchors = $crawler->filter('a[href="/wykaz/1"]');
 
@@ -84,13 +87,11 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider statusAndAnchorVisibilityProvider
      */
-    public function testVisibilityInOwnerPublicProfile($status,
-                                                       bool $expectedVisibleAnchor): void
+    public function testVisibilityInOwnerPublicProfile($status, bool $expectedVisibleAnchor): void
     {
         $this->setRadioTableStatus($status);
 
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/profil/test_user');
+        $crawler = $this->client->request('GET', '/profil/test_user');
 
         $anchors = $crawler->filter('a[href="/wykaz/1"]');
 
@@ -108,14 +109,15 @@ class RadioTableStatusTest extends WebTestCase
 
     private function setRadioTableStatus($newStatus): void
     {
-        $client = static::createClient([], [
+        $crawler = $this->client->request('GET', '/wykaz/1/ustawienia', [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
-        $crawler = $client->request('GET', '/wykaz/1/ustawienia');
 
         $form = $crawler->filter('form')->form();
         $form['radio_table_settings[status]'] = $newStatus;
-        $client->submit($form);
+        $this->client->submit($form);
+
+        $this->client->restart();
     }
 }

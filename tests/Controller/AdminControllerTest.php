@@ -2,22 +2,29 @@
 
 namespace App\Tests\Controller;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminControllerTest extends WebTestCase
 {
+    /** @var KernelBrowser */
+    private $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * @dataProvider urlProvider
      */
     public function testAdminPanelSeemsToWork($url): void
     {
-        $client = static::createClient([], [
+        $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user_admin',
             'PHP_AUTH_PW' => 'test_user_admin',
         ]);
-
-        $client->request('GET', $url);
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -25,18 +32,14 @@ class AdminControllerTest extends WebTestCase
      */
     public function testAdminPanelInaccessibleForNonAdmin($url): void
     {
-        $client = static::createClient([], [
+        $this->client->request('GET', $url);
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+
+        $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
-
-        $client->request('GET', $url);
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
-
-        $client = static::createClient();
-
-        $client->request('GET', $url);
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function urlProvider(): array

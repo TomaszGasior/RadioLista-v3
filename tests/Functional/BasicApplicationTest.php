@@ -4,19 +4,27 @@ namespace App\Tests\Functional;
 
 use App\Repository\RadioTableRepository;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BasicApplicationTest extends WebTestCase
 {
+    /** @var KernelBrowser */
+    private $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * @dataProvider publicUrlsProvider
      */
     public function testPublicPagesSeemToWork(string $url): void
     {
-        $client = static::createClient();
-        $client->request('GET', $url);
+        $this->client->request('GET', $url);
 
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
         $this->assertContains('<!doctype html>', $response->getContent());
         $this->assertContains('</html>', $response->getContent());
@@ -43,13 +51,12 @@ class BasicApplicationTest extends WebTestCase
      */
     public function testAuthenticatedPagesSeemToWork(string $url): void
     {
-        $client = static::createClient([], [
+        $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
-        $client->request('GET', $url);
 
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
         $this->assertContains('<!doctype html>', $response->getContent());
         $this->assertContains('</html>', $response->getContent());
@@ -67,13 +74,9 @@ class BasicApplicationTest extends WebTestCase
 
     public function testSitemapSeemsToWork(): void
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-        $client->request('GET', '/sitemap.xml');
+        $this->client->request('GET', '/sitemap.xml');
 
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
     }
 }

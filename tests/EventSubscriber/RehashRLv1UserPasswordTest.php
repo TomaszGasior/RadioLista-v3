@@ -15,85 +15,79 @@ class RehashRLv1UserPasswordTest extends TestCase
 {
     private const PLAIN_PASSWORD = 'Passw0rd!';
 
+    /** @var User|MockObject */
+    private $user;
+
+    /** @var EntityManagerInterface|MockObject */
+    private $entityManager;
+
+    /** @var TokenInterface|MockObject */
+    private $token;
+
+    public function setUp(): void
+    {
+        $this->user = $this->createMock(User::class);
+
+        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+
+        $this->token = $this->createMock(TokenInterface::class);
+        $this->token
+            ->method('getUser')
+            ->willReturn($this->user)
+        ;
+        $this->token
+            ->method('getCredentials')
+            ->willReturn(self::PLAIN_PASSWORD)
+        ;
+        $this->token
+            ->expects($this->once())
+            ->method('eraseCredentials')
+        ;
+    }
+
     public function testRehashPasswordFromOldService(): void
     {
-        $user = $this->createMock(User::class);
-        $user
+        $this->user
             ->method('getEncoderName')
             ->willReturn('rl_v1')
         ;
-        $user
+        $this->user
             ->expects($this->once())
             ->method('setPlainPassword')
             ->with($this->equalTo(self::PLAIN_PASSWORD))
         ;
 
-        /** @var EntityManagerInterface|MockObject */
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager
+        $this->entityManager
             ->expects($this->once())
             ->method('flush')
-            ->with($this->equalTo($user))
+            ->with($this->equalTo($this->user))
         ;
 
-        /** @var TokenInterface|MockObject */
-        $token = $this->createMock(TokenInterface::class);
-        $token
-            ->method('getUser')
-            ->willReturn($user)
-        ;
-        $token
-            ->method('getCredentials')
-            ->willReturn(self::PLAIN_PASSWORD)
-        ;
-        $token
-            ->expects($this->once())
-            ->method('eraseCredentials')
-        ;
+        $securityEvent = new InteractiveLoginEvent(new Request, $this->token);
 
-        $securityEvent = new InteractiveLoginEvent(new Request, $token);
-
-        $subscriber = new RehashRLv1UserPassword($entityManager);
+        $subscriber = new RehashRLv1UserPassword($this->entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
     }
 
     public function testDoNotRehashPassword(): void
     {
-        $user = $this->createMock(User::class);
-        $user
+        $this->user
             ->method('getEncoderName')
             ->willReturn(null)
         ;
-        $user
+        $this->user
             ->expects($this->never())
             ->method('setPlainPassword')
         ;
 
-        /** @var EntityManagerInterface|MockObject */
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager
+        $this->entityManager
             ->expects($this->never())
             ->method('flush')
         ;
 
-        /** @var TokenInterface|MockObject */
-        $token = $this->createMock(TokenInterface::class);
-        $token
-            ->method('getUser')
-            ->willReturn($user)
-        ;
-        $token
-            ->method('getCredentials')
-            ->willReturn(self::PLAIN_PASSWORD)
-        ;
-        $token
-            ->expects($this->once())
-            ->method('eraseCredentials')
-        ;
+        $securityEvent = new InteractiveLoginEvent(new Request, $this->token);
 
-        $securityEvent = new InteractiveLoginEvent(new Request, $token);
-
-        $subscriber = new RehashRLv1UserPassword($entityManager);
+        $subscriber = new RehashRLv1UserPassword($this->entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
     }
 }

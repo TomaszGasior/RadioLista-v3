@@ -5,21 +5,29 @@ namespace App\Tests\Functional;
 use App\Repository\RadioStationRepository;
 use App\Repository\RadioTableRepository;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityPermissionTest extends WebTestCase
 {
+    /** @var KernelBrowser */
+    private $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * @dataProvider onlyForLoggedInUrlProvider
      * @dataProvider ownedByTestUserUrlProvider
      */
     public function testAnonymousCantAccessRestrictedPages(string $url): void
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', $url);
+        $crawler = $this->client->request('GET', $url);
 
         /** @var RedirectResponse */
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
     }
@@ -30,13 +38,12 @@ class SecurityPermissionTest extends WebTestCase
      */
     public function testUserCanAccessRestrictedPages(string $url): void
     {
-        $client = static::createClient([]);
-        $crawler = $client->request('GET', $url, [], [], [
+        $crawler = $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
     }
 
@@ -45,13 +52,12 @@ class SecurityPermissionTest extends WebTestCase
      */
     public function testUserCantAccessPagesOfOtherUser(string $url): void
     {
-        $client = static::createClient([]);
-        $crawler = $client->request('GET', $url, [], [], [
+        $crawler = $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user_second',
             'PHP_AUTH_PW' => 'test_user_second',
         ]);
 
-        $response = $client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertSame(404, $response->getStatusCode());
     }
 
