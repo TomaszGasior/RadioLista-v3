@@ -59,6 +59,21 @@ class RadioTableStatusTest extends WebTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
+    /**
+     * @dataProvider statusAndHttpCodeProvider
+     */
+    public function testAdminAlwaysHasAccess($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $this->client->request('GET', '/wykaz/1', [], [], [
+            'PHP_AUTH_USER' => 'test_user_admin',
+            'PHP_AUTH_PW' => 'test_user_admin',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
     public function statusAndHttpCodeProvider(): array
     {
         return [

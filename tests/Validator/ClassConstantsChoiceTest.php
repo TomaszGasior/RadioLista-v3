@@ -64,4 +64,14 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
             yield [$class, $constantsPrefix, $validConstants, $testedValue];
         }
     }
+
+    public function testThrowExceptionWithNoChoices(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessageRegExp('/stdClass.*NON_EXISTENT_CONSTANT_PREFIX_38907412/');
+
+        $classConstantsChoiceConstraint = new ClassConstantsChoice(
+            ['class' => \stdClass::class, 'prefix' => 'NON_EXISTENT_CONSTANT_PREFIX_38907412']
+        );
+    }
 }

@@ -45,6 +45,7 @@ class AdminControllerTest extends WebTestCase
     public function urlProvider(): array
     {
         return [
+            ['/admin'],
             ['/admin/dziennik'],
             ['/admin/wykazy'],
             ['/admin/uzytkownicy'],

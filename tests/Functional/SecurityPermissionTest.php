@@ -21,10 +21,13 @@ class SecurityPermissionTest extends WebTestCase
      */
     public function testAnonymousCantAccessRestrictedPages(string $url): void
     {
+        $this->skipPdfGenerator($url);
+
         $crawler = $this->client->request('GET', $url);
 
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
+
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
     }
@@ -35,12 +38,15 @@ class SecurityPermissionTest extends WebTestCase
      */
     public function testUserCanAccessRestrictedPages(string $url): void
     {
+        $this->skipPdfGenerator($url);
+
         $crawler = $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
 
         $response = $this->client->getResponse();
+
         $this->assertSame(200, $response->getStatusCode());
     }
 
@@ -49,12 +55,15 @@ class SecurityPermissionTest extends WebTestCase
      */
     public function testUserCantAccessPagesOfOtherUser(string $url): void
     {
+        $this->skipPdfGenerator($url);
+
         $crawler = $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user_second',
             'PHP_AUTH_PW' => 'test_user_second',
         ]);
 
         $response = $this->client->getResponse();
+
         $this->assertSame(404, $response->getStatusCode());
     }
 
@@ -77,7 +86,18 @@ class SecurityPermissionTest extends WebTestCase
             ['/wykaz/1/ustawienia'],
             ['/wykaz/1/eksport/html'],
             ['/wykaz/1/eksport/csv'],
+            ['/wykaz/1/eksport/pdf'],
             ['/wykaz/1/usun'],
         ];
+    }
+
+    /**
+     * Skip PDF related test if wkhtmltopdf is not installed.
+     */
+    private function skipPdfGenerator(string $url): void
+    {
+        if ('/wykaz/1/eksport/pdf' === $url && false === file_exists($_SERVER['WKHTMLTOPDF_PATH'])) {
+            $this->markTestSkipped('wkhtmltopdf is not installed');
+        }
     }
 }
