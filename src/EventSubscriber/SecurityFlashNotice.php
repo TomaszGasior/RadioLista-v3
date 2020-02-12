@@ -62,6 +62,9 @@ class SecurityFlashNotice implements EventSubscriberInterface
         $session->getFlashBag()->add('notice', 'Wylogowano się pomyślnie.');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     static public function getSubscribedEvents(): array
     {
         return [

@@ -34,6 +34,9 @@ class RehashRLv1UserPassword implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     static public function getSubscribedEvents(): array
     {
         return [SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin'];

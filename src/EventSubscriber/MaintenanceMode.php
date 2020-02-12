@@ -44,6 +44,9 @@ class MaintenanceMode implements EventSubscriberInterface
         $event->setResponse($response);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     static public function getSubscribedEvents(): array
     {
         return [

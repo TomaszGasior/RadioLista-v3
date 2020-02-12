@@ -25,6 +25,9 @@ class AdminFlashMessage implements EventSubscriberInterface
         $session->getFlashBag()->add('error', 'Przeglądasz prywatny zasób jako administrator.');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     static public function getSubscribedEvents(): array
     {
         return [
