@@ -82,7 +82,7 @@ a:active {
 /* site header */
 
 .site-header {
-    background: rgba(255,255,255, 0.6);
+    background-color: rgba(255,255,255, 0.6);
     box-shadow: 0 0 5px rgba(0,0,0, 0.2);
     padding-top: 0.6em;
     padding-bottom: 0.6em;
@@ -1008,7 +1008,7 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 .customized-radiotable .site-header {
-    background: rgba(255,255,255, 0.9);
+    background-color: rgba(255,255,255, 0.9);
 }
 
 .customized-radiotable table.radiotable tbody tr:hover, .customized-radiotable table.radiotable tbody tr:focus-within {
