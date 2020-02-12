@@ -3,8 +3,6 @@
 namespace App\Tests\Functional;
 
 use App\Entity\RadioTable;
-use App\Repository\RadioTableRepository;
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
