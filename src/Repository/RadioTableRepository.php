@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -64,6 +65,11 @@ class RadioTableRepository extends ServiceEntityRepository
     {
         // Search term equal to "*" causes MySQL error.
         if ('*' === $searchTerm) {
+            return [];
+        }
+
+        // MATCH AGAINST keyword works only with MySQL-like databases.
+        if (!($this->getEntityManager()->getConnection()->getDatabasePlatform() instanceof MySqlPlatform)) {
             return [];
         }
 
