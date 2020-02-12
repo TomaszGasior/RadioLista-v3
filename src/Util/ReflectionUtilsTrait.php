@@ -4,7 +4,7 @@ namespace App\Util;
 
 trait ReflectionUtilsTrait
 {
-    protected function getPrivateFieldOfObject(object $object, string $fieldName, $value)
+    protected function getPrivateFieldOfObject(object $object, string $fieldName)
     {
         $reflection = new \ReflectionProperty(get_class($object), $fieldName);
 
