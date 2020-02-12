@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class AdminVoter extends Voter
 {
@@ -53,7 +54,7 @@ class AdminVoter extends Voter
         // but this whole logic is needed to show flash message when site administrator
         // browses users private contents. Take a look at AdminFlashMessage class.
         if ($result) {
-            $this->eventDispatcher->dispatch('app.restricted_admin_access');
+            $this->eventDispatcher->dispatch(new Event, 'app.restricted_admin_access');
         }
 
         return $result;
