@@ -16,13 +16,6 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin")
-     */
-    public function admin(): Response
-    {
-        return $this->redirectToRoute('admin.logs');
-    }
-
-    /**
      * @Route("/admin/dziennik", name="admin.logs")
      */
     public function logs(string $logFilePath): Response
