@@ -30,7 +30,7 @@ class RehashRLv1UserPassword implements EventSubscriberInterface
 
         if ($plainPassword && 'rl_v1' === $user->getEncoderName()) {
             $user->setPlainPassword($plainPassword);
-            $this->entityManager->flush($user);
+            $this->entityManager->flush();
         }
     }
 

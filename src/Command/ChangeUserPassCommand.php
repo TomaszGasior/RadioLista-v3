@@ -69,7 +69,7 @@ class ChangeUserPassCommand extends Command
             return 1;
         }
 
-        $this->entityManager->flush($user);
+        $this->entityManager->flush();
 
         $newPasswordHash = $user->getPassword();
 

@@ -60,7 +60,6 @@ class RehashRLv1UserPasswordTest extends TestCase
         $this->entityManager
             ->expects($this->once())
             ->method('flush')
-            ->with($this->equalTo($this->user))
         ;
 
         $securityEvent = new InteractiveLoginEvent(new Request, $this->token);
