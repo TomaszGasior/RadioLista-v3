@@ -5,17 +5,17 @@
 {% block context_menu %}
     <ul>
         <li>
-            <a href="{{ path('radio_table.show', {id: radiostation.radioTable.id}) }}">
+            <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
                 Zobacz wykaz
             </a>
         </li>
         <li>
-            <a href="{{ path('radiostation.add', {radioTableId: radiostation.radioTable.id}) }}">
+            <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
                 Dodaj stację
             </a>
         </li>
         <li>
-            <a href="{{ path('radiostation.copy', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
+            <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
                 Kopiuj bieżącą stację
             </a>
         </li>
@@ -25,14 +25,14 @@
 {% block page_content %}
     <header>
         <h1 class="separated-title">
-            <span>Edytuj stację „{{ radiostation.name }}”</span>
-            <span class="additional"><span class="sr-only">wykaz</span> {{ radiostation.radioTable.name }}</span>
+            <span>Edytuj stację „{{ radio_station.name }}”</span>
+            <span class="additional"><span class="sr-only">wykaz</span> {{ radio_station.radioTable.name }}</span>
         </h1>
     </header>
 
     {{ form_start(form) }}
 
-    {% include 'radiostation/_radiostation_tabs.html.twig' %}
+    {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
     <button>Zapisz stację</button>
 

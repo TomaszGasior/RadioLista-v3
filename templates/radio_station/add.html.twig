@@ -5,12 +5,12 @@
 {% block context_menu %}
     <ul>
         <li>
-            <a href="{{ path('radio_table.show', {id: radiostation.radioTable.id}) }}">
+            <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
                 Zobacz wykaz
             </a>
         </li>
         <li>
-            <a href="{{ path('radio_table.settings', {id: radiostation.radioTable.id}) }}">
+            <a href="{{ path('radio_table.settings', {id: radio_station.radioTable.id}) }}">
                 Ustawienia wykazu
             </a>
         </li>
@@ -21,13 +21,13 @@
     <header>
         <h1 class="separated-title">
             <span>Dodaj nową stację</span>
-            <span class="additional"><span class="sr-only">wykaz</span> {{ radiostation.radioTable.name }}</span>
+            <span class="additional"><span class="sr-only">wykaz</span> {{ radio_station.radioTable.name }}</span>
         </h1>
     </header>
 
     {{ form_start(form) }}
 
-    {% include 'radiostation/_radiostation_tabs.html.twig' %}
+    {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
     <button>Dodaj stację</button>
 

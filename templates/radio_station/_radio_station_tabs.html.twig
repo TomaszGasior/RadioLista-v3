@@ -1,10 +1,10 @@
-{% form_theme form 'radiostation/_radiostation_tabs_theme.html.twig' %}
+{% form_theme form 'radio_station/_radio_station_tabs_theme.html.twig' %}
 
 <div class="tabbed-ui">
     <div>
         <h2>Główne</h2>
 
-        {{ form_row(form.frequency, {'unit_label': radiostation.radioTable.useKhz ? 'kHz' : 'MHz'}) }}
+        {{ form_row(form.frequency, {'unit_label': radio_station.radioTable.useKhz ? 'kHz' : 'MHz'}) }}
         {{ form_row(form.name) }}
         {{ form_row(form.radioGroup) }}
         {{ form_row(form.country) }}
@@ -61,7 +61,7 @@
             </p>
         </noscript>
 
-        <div class="radiostation-rds">
+        <div class="radio-station-rds">
             {{ form_row(form.rdsPi) }}
             {{ form_row(form.rdsPs, {attr: {wrap: 'off'}}) }}
             {{ form_row(form.rdsRt, {attr: {wrap: 'off'}}) }}

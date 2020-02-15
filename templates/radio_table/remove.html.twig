@@ -22,7 +22,7 @@
     </ul>
 {% endblock %}
 
-{% form_theme form_radiostation _self %}
+{% form_theme form_radio_station _self %}
 {% block _radio_station_remove_chosenToRemove_entry_label %}
     {% set unit_label = use_KHz ? 'kHz' : 'MHz' %}
     {% set label = label ~ ' (' ~ frequency|number_format ~ ' ' ~ unit_label ~ ')' %}
@@ -42,15 +42,15 @@
             <h2>Usuwanie stacji</h2>
 
             {% if radio_table.radioStationsCount > 0 %}
-                {{ form_start(form_radiostation) }}
+                {{ form_start(form_radio_station) }}
 
-                <div class="radiostations-remove">
-                    {{ form_row(form_radiostation.chosenToRemove) }}
+                <div class="radio-stations-remove">
+                    {{ form_row(form_radio_station.chosenToRemove) }}
                 </div>
 
                 <button>Usuń zaznaczone stacje</button>
 
-                {{ form_end(form_radiostation) }}
+                {{ form_end(form_radio_station) }}
             {% else %}
                 <p class="information">
                     Ten wykaz jest pusty. Nie ma czego usuwać&hellip;

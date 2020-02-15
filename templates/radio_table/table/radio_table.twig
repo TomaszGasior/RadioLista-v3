@@ -52,59 +52,59 @@
 
 {%- block table_between -%}{%- endblock -%}
 
-{%- for radiostation in radiostations -%}
+{%- for radio_station in radio_stations -%}
     {%- block row_start -%}{%- endblock -%}
         {%- for column in radio_table.columns -%}
             {%- block cell_start -%}{%- endblock -%}
-                {%- if attribute(radiostation, column) is not null -%}
+                {%- if attribute(radio_station, column) is not null -%}
 
                 {%- if column == 'name' -%}
-                    {%- block radiostation_name radiostation.name|escape(escape_strategy) -%}
+                    {%- block radio_station_name radio_station.name|escape(escape_strategy) -%}
                 {%- elseif column == 'privateNumber' -%}
-                    {%- block radiostation_private_number radiostation.privateNumber|escape(escape_strategy) -%}
+                    {%- block radio_station_private_number radio_station.privateNumber|escape(escape_strategy) -%}
                 {%- elseif column == 'frequency' -%}
-                    {%- block radiostation_frequency radiostation.frequency|number_format|escape(escape_strategy) -%}
+                    {%- block radio_station_frequency radio_station.frequency|number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'power' -%}
-                    {%- block radiostation_power radiostation.power|soft_number_format|escape(escape_strategy) -%}
+                    {%- block radio_station_power radio_station.power|soft_number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
-                    {%- block radiostation_type types_labels[radiostation.type]|escape(escape_strategy) -%}
+                    {%- block radio_station_type types_labels[radio_station.type]|escape(escape_strategy) -%}
                 {%- elseif column == 'reception' -%}
-                    {%- block radiostation_reception reception_labels[radiostation.reception]|escape(escape_strategy) -%}
+                    {%- block radio_station_reception reception_labels[radio_station.reception]|escape(escape_strategy) -%}
                 {%- elseif column == 'polarization' -%}
-                    {%- block radiostation_polarization radiostation.polarization|escape(escape_strategy) -%}
+                    {%- block radio_station_polarization radio_station.polarization|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}
-                    {%- block radiostation_quality radiostation.quality|escape(escape_strategy) -%}
+                    {%- block radio_station_quality radio_station.quality|escape(escape_strategy) -%}
                 {%- elseif column == 'distance' -%}
-                    {%- block radiostation_distance radiostation.distance|escape(escape_strategy) -%}
+                    {%- block radio_station_distance radio_station.distance|escape(escape_strategy) -%}
                 {%- elseif column == 'firstLogDate' -%}
-                    {%- block radiostation_first_log_date radiostation.firstLogDate|escape(escape_strategy) -%}
+                    {%- block radio_station_first_log_date radio_station.firstLogDate|escape(escape_strategy) -%}
                 {%- elseif column == 'comment' -%}
-                    {%- block radiostation_comment radiostation.comment|escape(escape_strategy) -%}
+                    {%- block radio_station_comment radio_station.comment|escape(escape_strategy) -%}
                 {%- elseif column == 'externalAnchor' -%}
-                    {%- block radiostation_external_anchor radiostation.externalAnchor|escape(escape_strategy) -%}
+                    {%- block radio_station_external_anchor radio_station.externalAnchor|escape(escape_strategy) -%}
 
                 {%- elseif column == 'locality' -%}
-                    {%- set locality_is_network = radiostation.locality.type == constant('LOCALITY_NETWORK', radiostation) -%}
+                    {%- set locality_is_network = radio_station.locality.type == constant('LOCALITY_NETWORK', radio_station) -%}
 
-                    {%- block radiostation_locality -%}
-                        {%- if radiostation.locality.type == constant('LOCALITY_COUNTRY', radiostation) -%}
+                    {%- block radio_station_locality -%}
+                        {%- if radio_station.locality.type == constant('LOCALITY_COUNTRY', radio_station) -%}
                             ogólnokrajowy
-                        {%- elseif radiostation.locality.city -%}
-                            {{- radiostation.locality.city|escape(escape_strategy) -}}
+                        {%- elseif radio_station.locality.city -%}
+                            {{- radio_station.locality.city|escape(escape_strategy) -}}
 
                             {%- if locality_is_network -%}
-                                {%- block radiostation_locality_network ' (s)' -%}
+                                {%- block radio_station_locality_network ' (s)' -%}
                             {%- endif -%}
                         {%- endif -%}
                     {%- endblock -%}
 
                 {%- elseif column == 'rds' -%}
-                    {%- if radiostation.rds.ps|first and radiostation.rds.ps|first|first|trim -%}
-                        {%- block radiostation_rds radiostation.rds.ps|first|first|replace({'_':' '})|align_rds_frame|escape(escape_strategy) -%}
+                    {%- if radio_station.rds.ps|first and radio_station.rds.ps|first|first|trim -%}
+                        {%- block radio_station_rds radio_station.rds.ps|first|first|replace({'_':' '})|align_rds_frame|escape(escape_strategy) -%}
                     {%- endif -%}
 
                 {%- else -%}
-                    {{- attribute(radiostation, column)|escape(escape_strategy) -}}
+                    {{- attribute(radio_station, column)|escape(escape_strategy) -}}
                 {%- endif -%}
 
                 {%- endif -%}

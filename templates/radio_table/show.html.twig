@@ -41,7 +41,7 @@
     {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}
         <ul>
             <li>
-                <a href="{{ path('radiostation.add', {radioTableId: radio_table.id}) }}">
+                <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
                     Dodaj stację
                 </a>
             </li>
@@ -87,41 +87,41 @@
                     </th>
                 {%- endblock -%}
 
-                {# Check for permission outside of radiostation loop for better performance. #}
+                {# Check for permission outside of radio_station loop for better performance. #}
                 {% set is_granted = is_granted('RADIO_TABLE_MODIFY', radio_table) %}
 
-                {%- block radiostation_name -%}
+                {%- block radio_station_name -%}
                     {%- if is_granted -%}
-                        <a href="{{ path('radiostation.edit', {id: radiostation.id, radioTableId: radiostation.radioTable.id}) }}">
-                            {{- radiostation.name -}}
+                        <a href="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
+                            {{- radio_station.name -}}
                         </a>
                     {%- else -%}
-                        {{- radiostation.name -}}
+                        {{- radio_station.name -}}
                     {%- endif -%}
                 {%- endblock -%}
 
-                {%- block radiostation_rds -%}
+                {%- block radio_station_rds -%}
                     {%- set rds_rt = [] -%}
-                    {%- for frame in radiostation.rds.rt -%}
+                    {%- for frame in radio_station.rds.rt -%}
                         {%- set rds_rt = rds_rt|merge([frame|replace({'_':' '})|escape]) -%}
                     {%- endfor -%}
 
                     {%- set rds_ps_groups = [] -%}
-                    {%- for group_key in radiostation.rds.ps|keys -%}
+                    {%- for group_key in radio_station.rds.ps|keys -%}
                         {%- set group = [] -%}
-                        {%- for frame in radiostation.rds.ps[group_key] -%}
+                        {%- for frame in radio_station.rds.ps[group_key] -%}
                             {%- set group = group|merge([frame|replace({'_':' '})|align_rds_frame|escape]) -%}
                         {%- endfor -%}
                         {%- set rds_ps_groups = rds_ps_groups|merge([group]) -%}
                     {%- endfor -%}
 
-                    {%- set rds_pty = radiostation.rds.pty|escape -%}
+                    {%- set rds_pty = radio_station.rds.pty|escape -%}
 
                     <span data-pty="{{ rds_pty|json_encode|escape('html_attr') }}"
                           data-rt="{{ rds_rt|json_encode|escape('html_attr') }}"
                           data-ps="{{ rds_ps_groups|json_encode|escape('html_attr') }}"
                           class="rds rds-popup-enabled">
-                        {{- radiostation.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
+                        {{- radio_station.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
                     </span>
                 {%- endblock -%}
             {% endembed %}
@@ -176,7 +176,7 @@
         <p class="information">
             Ten wykaz jest pusty.
             {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}
-                <a href="{{ path('radiostation.add', {radioTableId: radio_table.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.
+                <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.
             {% endif %}
         </p>
     {% endif %}

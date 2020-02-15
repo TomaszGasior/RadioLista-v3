@@ -31,7 +31,7 @@ class RadioTableController extends AbstractController
 
         return $this->render('radio_table/show.html.twig', [
             'radio_table' => $radioTable,
-            'radiostations' => $radioStations,
+            'radio_stations' => $radioStations,
         ]);
     }
 
@@ -96,7 +96,7 @@ class RadioTableController extends AbstractController
 
         $templateVars = [
             'radio_table' => $radioTable,
-            'radiostations' => $radioStations,
+            'radio_stations' => $radioStations,
         ];
 
         switch ($_format) {
@@ -138,7 +138,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * This action handles both radio table removing and radiostation removing.
+     * This action handles both radio table removing and radio station removing.
      *
      * @Route("/wykaz/{id}/usun", name="radio_table.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
@@ -182,8 +182,8 @@ class RadioTableController extends AbstractController
 
                 $this->addFlash('notice', 'Wybrane stacje zostały usunięte.');
 
-                // Redirect to after successful radiostations removing.
-                // * Form needs to be reloaded to not display removed radiostations.
+                // Redirect to after successful radio stations removing.
+                // * Form needs to be reloaded to not display removed radio stations.
                 // * URL needs to be changed to avoid 404 error if page was forwarded from RadioStationController.
                 return $this->redirectToRoute('radio_table.remove', [
                     'id' => $radioTable->getId(),
@@ -193,7 +193,7 @@ class RadioTableController extends AbstractController
 
         return $this->render('radio_table/remove.html.twig', [
             'form_radio_table' => $form_RadioTable->createView(),
-            'form_radiostation' => $form_RadioStation->createView(),
+            'form_radio_station' => $form_RadioStation->createView(),
             'radio_table' => $radioTable,
         ]);
     }

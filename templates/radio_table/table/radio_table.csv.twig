@@ -20,10 +20,10 @@
 
 {% endblock -%}
 
-{%- block radiostation_locality -%}
+{%- block radio_station_locality -%}
     {%- if locality_is_network -%}
         {#- This string needs to be concatenated with "network" mark before escaping. -#}
-        {%- set text = radiostation.locality.city ~ block('radiostation_locality_network') -%}
+        {%- set text = radio_station.locality.city ~ block('radio_station_locality_network') -%}
         {#- Without this syntax Twig escapes this text automatically using HTML filter. -#}
         {{- text|escape('csv')|raw -}}
     {%- else -%}
@@ -31,13 +31,13 @@
     {%- endif -%}
 {%- endblock -%}
 
-{%- block radiostation_rds -%}
+{%- block radio_station_rds -%}
     {{ parent()|raw|replace({' ': '_'})|raw }}
     {#- This value is escaped with "csv" escaper in parent template. -#}
     {#- "raw" filter is needed. Without it Twig escapes this value second time. -#}
 {%- endblock -%}
 
-{%- block radiostation_comment -%}
+{%- block radio_station_comment -%}
     {#- Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers. -#}
     {{ parent()|raw|replace({"\r": ''})|raw }}
 {%- endblock -%}

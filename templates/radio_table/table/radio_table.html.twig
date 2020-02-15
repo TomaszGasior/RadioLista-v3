@@ -20,7 +20,7 @@
 {%- endblock -%}
 
 {%- block row_start -%}
-    <tr {% if radiostation.marker %}class="marker-{{ radiostation.marker }}"{% endif %}>
+    <tr {% if radio_station.marker %}class="marker-{{ radio_station.marker }}"{% endif %}>
 {%- endblock -%}
 {%- block cell_start -%}
     <td>
@@ -32,35 +32,35 @@
     </tr>
 {%- endblock -%}
 
-{%- block radiostation_private_number -%}
+{%- block radio_station_private_number -%}
     <span data-number-indent="private-number">{{ parent() }}</span>
 {%- endblock -%}
-{%- block radiostation_frequency -%}
+{%- block radio_station_frequency -%}
     <span data-number-indent="frequency">{{ parent() }}</span>
 {%- endblock -%}
-{%- block radiostation_power -%}
+{%- block radio_station_power -%}
     <span data-number-indent="power">{{ parent() }}</span>
 {%- endblock -%}
-{%- block radiostation_distance -%}
+{%- block radio_station_distance -%}
     <span data-number-indent="distance">{{ parent() }}</span>
 {%- endblock -%}
-{%- block radiostation_polarization -%}
-    <abbr title="{{ polarization_labels[radiostation.polarization] }}">{{ parent() }}</abbr>
+{%- block radio_station_polarization -%}
+    <abbr title="{{ polarization_labels[radio_station.polarization] }}">{{ parent() }}</abbr>
 {%- endblock -%}
-{%- block radiostation_locality_network %}
+{%- block radio_station_locality_network %}
     <small title="sieć">{{ parent()|trim }}</small>
 {%- endblock -%}
-{%- block radiostation_first_log_date %}
+{%- block radio_station_first_log_date %}
     <time>{{ parent() }}</time>
 {%- endblock -%}
-{%- block radiostation_rds -%}
+{%- block radio_station_rds -%}
     <span class="rds">{{ parent() }}</span>
 {%- endblock -%}
-{%- block radiostation_comment -%}
+{%- block radio_station_comment -%}
     {{ parent()|nl2br(false) }}
 {%- endblock -%}
 
-{%- block radiostation_quality -%}
+{%- block radio_station_quality -%}
     {%- set quality_labels = {
         (constant('App\\Entity\\RadioStation::QUALITY_VERY_GOOD')): 'bardzo dobra',
         (constant('App\\Entity\\RadioStation::QUALITY_GOOD')): 'dobra',
@@ -68,15 +68,15 @@
         (constant('App\\Entity\\RadioStation::QUALITY_BAD')): 'zła',
         (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')): 'bardzo zła',
     } -%}
-    <span class="quality quality-{{ radiostation.quality }}" title="{{ quality_labels[radiostation.quality] }}">
+    <span class="quality quality-{{ radio_station.quality }}" title="{{ quality_labels[radio_station.quality] }}">
         {#- Skip whitespace for proper styling. -#}
         {{- parent() -}}
     </span>
 {%- endblock -%}
 
-{%- block radiostation_external_anchor -%}
+{%- block radio_station_external_anchor -%}
     <a class="external" href="{{- parent() -}}" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30"><path d="M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z"/></svg>
-        <span class="sr-only">Odnośnik dla „{{ radiostation.name }}”</span>
+        <span class="sr-only">Odnośnik dla „{{ radio_station.name }}”</span>
     </a>
 {%- endblock -%}

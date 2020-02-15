@@ -42,7 +42,7 @@ class RadioStationRepository extends ServiceEntityRepository
             case RadioTable::SORTING_PRIVATE_NUMBER:
                 $query
                     ->addSelect(
-                        // Move radiostations without private number to the end of the radio table.
+                        // Move radio stations without private number to the end of the radio table.
                         'CASE WHEN radioStation.privateNumber IS NULL THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
                     )
                     ->addOrderBy('privateNumberEmpty', 'ASC')

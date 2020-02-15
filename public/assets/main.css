@@ -1351,23 +1351,23 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radiostation edit/add */
+/* radio station edit/add */
 
-.radiostation-disabled-column input:not(:focus),
-.radiostation-disabled-column select:not(:focus),
-.radiostation-disabled-column textarea:not(:focus) {
+.radio-station-disabled-column input:not(:focus),
+.radio-station-disabled-column select:not(:focus),
+.radio-station-disabled-column textarea:not(:focus) {
     opacity: 0.5;
 }
-.radiostation-disabled-column label, .radiostation-disabled-column .unit-label {
+.radio-station-disabled-column label, .radio-station-disabled-column .unit-label {
     opacity: 0.6;
     text-decoration: line-through;
     text-decoration-color: rgba(0,0,0, 0.5);
 }
 
-.radiostation-rds input, .radiostation-rds textarea {
+.radio-station-rds input, .radio-station-rds textarea {
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
 }
-.radiostation-rds textarea {
+.radio-station-rds textarea {
     min-height: 80px;
 }
 
@@ -1393,9 +1393,9 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radio table/radiostation remove, list */
+/* radio table/radio station remove, list */
 
-.radiostations-remove {
+.radio-stations-remove {
     max-height: 430px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -1403,12 +1403,12 @@ table.sortable th[data-sort].sorted-desc::after {
     background: #F9FCF9;
     border: 1px solid #D6EAD0;
 }
-.radiostations-remove fieldset {
+.radio-stations-remove fieldset {
     margin: 0;
 }
 
 
-/* radio table/radiostation remove, warning */
+/* radio table/radio station remove, warning */
 
 .radio-table-remove-confirm {
     border: 3px dashed red;
