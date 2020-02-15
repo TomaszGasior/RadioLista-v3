@@ -86,9 +86,7 @@ class BasicApplicationTest extends WebTestCase
     private function assertResponse(Response $response, string $redirectUrl = null): void
     {
         if ($redirectUrl) {
-            /** @var RedirectResponse */
-            $response = $response;
-
+            /** @var RedirectResponse $response */
             $this->assertInstanceOf(RedirectResponse::class, $response);
             $this->assertSame($redirectUrl, $response->getTargetUrl());
 
