@@ -36,7 +36,7 @@ class RadioStationEditExtension extends AbstractTypeExtension
         }
 
         foreach ($view as $childrenName => $children) {
-            $children->vars['disabled_radiotable_column'] =
+            $children->vars['disabled_radio_table_column'] =
                 in_array($childrenName, $formChildrenToHide) &&
                 false === in_array($childrenName, $excludedChildren);
         }

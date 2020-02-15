@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="generator" content="RadioLista v{{ version }} – {{ app.request.schemeAndHttpHost }}">
-        <title>{{ radiotable.name }} — RadioLista</title>
+        <title>{{ radio_table.name }} — RadioLista</title>
         <style>
             body {
                 margin: 0.1em 3% 2em 3%;
@@ -152,10 +152,10 @@
 
     <body>
         <header>
-            <h1>{{ radiotable.name }}</h1>
+            <h1>{{ radio_table.name }}</h1>
         </header>
 
-        {% include 'radiotable/table/radiotable.html.twig' %}
+        {% include 'radio_table/table/radio_table.html.twig' %}
 
         <footer>
             <p>

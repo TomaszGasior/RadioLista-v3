@@ -21,7 +21,7 @@ security:
             form_login:
                 login_path: security.login
                 check_path: security.login
-                default_target_path: user.my_radiotables
+                default_target_path: user.my_radio_tables
                 username_parameter: security_login[username]
                 password_parameter: security_login[password]
                 csrf_token_generator: security.csrf.token_manager

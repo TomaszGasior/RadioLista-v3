@@ -142,35 +142,35 @@ button {
 }
 
 
-/* radiotable — wrapper */
+/* radio table — wrapper */
 
-.radiotable-container {
+.radio-table-container {
     margin-left: -5vw;
     margin-right: -5vw;
 }
 
 
-/* radiotable — details section */
+/* radio table — details section */
 
-.radiotable-details dl {
+.radio-table-details dl {
     flex-direction: column;
     align-items: stretch;
     padding-left: 0;
     padding-right: 0;
 }
 
-.radiotable-details dt, .radiotable-details dd {
+.radio-table-details dt, .radio-table-details dd {
     padding-top: 0.15em;
     padding-bottom: 0.15em;
 }
-.radiotable-details dd {
+.radio-table-details dd {
     border-right: none;
 }
 
 
-/* customized radiotable page */
+/* customized radio table page */
 
-.customized-radiotable .customizable-background {
+.customized-radio-table .customizable-background {
     background-image: none !important;
 }
 
@@ -209,13 +209,13 @@ button {
     flex-direction: column;
 }
 .homepage > * {
-    /* keep this to properly cut off radiotables names */
+    /* keep this to properly cut off radio tables names */
     width: 100%;
 }
 
 @media (max-width: 450px)
 {
-    .homepage-radiotables-list li {
+    .homepage-radio-tables-list li {
         flex-direction: column;
         align-items: start;
         margin: 0.5em 0;
@@ -223,38 +223,38 @@ button {
 }
 
 
-/* page — all radiotables */
+/* page — all radio tables */
 
-.all-radiotables-navigation li {
+.all-radio-tables-navigation li {
     display: block;
     margin: 0.4em 0;
 }
 
 
-/* radiotable settings, columns UI */
+/* radio table settings, columns UI */
 
-.JS .radiotable-columns {
+.JS .radio-table-columns {
     width: auto;
 }
-.JS .radiotable-columns .form-item.form-regular {
+.JS .radio-table-columns .form-item.form-regular {
     flex-direction: row;
 }
-.JS .radiotable-columns .form-item.form-regular label {
+.JS .radio-table-columns .form-item.form-regular label {
     margin-bottom: 0;
 }
 
 @media (max-width: 600px)
 {
-    .JS .radiotable-columns .form-item.form-regular {
+    .JS .radio-table-columns .form-item.form-regular {
         flex-direction: column;
     }
-    .JS .radiotable-columns .form-item.form-regular label {
+    .JS .radio-table-columns .form-item.form-regular label {
         margin-bottom: 0.7em;
     }
 }
 @media (max-width: 415px)
 {
-    .JS .radiotable-columns .form-item button {
+    .JS .radio-table-columns .form-item button {
         width: auto;
         height: auto;
         font-size: 0.8em;
@@ -264,16 +264,16 @@ button {
 }
 
 
-/* radiotable settings, status */
+/* radio table settings, status */
 
-.radiotable-status input[type="radio"] + label:::before {
+.radio-table-status input[type="radio"] + label:::before {
     top: 40%;
 }
 
 
-/* radiotable settings, export list */
+/* radio table settings, export list */
 
-.radiotable-export-list a.button {
+.radio-table-export-list a.button {
     margin: 0.23em 0 0.7em 0;
     width: 100%;
     max-width: 100%;

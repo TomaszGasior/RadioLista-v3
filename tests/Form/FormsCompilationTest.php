@@ -48,7 +48,7 @@ class FormsCompilationTest extends KernelTestCase
         self::bootKernel();
         $radioTable = self::$container->get(EntityManagerInterface::class)->find(RadioTable::class, 1);
         self::ensureKernelShutdown();
-        yield [RadioStationRemoveType::class, null, ['radiotable' => $radioTable]];
+        yield [RadioStationRemoveType::class, null, ['radio_table' => $radioTable]];
 
         yield [RadioTableCreateType::class, new RadioTable];
         yield [RadioTableRemoveType::class];

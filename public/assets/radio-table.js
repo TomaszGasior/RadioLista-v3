@@ -245,7 +245,7 @@ class OverflowStylesManager
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    let container = document.querySelector('.radiotable-container');
+    let container = document.querySelector('.radio-table-container');
 
     if (container) {
         new NumberIndentManager(container);

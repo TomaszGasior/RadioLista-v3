@@ -6,7 +6,7 @@
 .theme-bieszczady .customizable-color {
     color: #000;
 }
-.theme-bieszczady table.radiotable tbody tr:hover, .theme-bieszczady table.radiotable tbody tr:focus-within {
+.theme-bieszczady table.radio-table tbody tr:hover, .theme-bieszczady table.radio-table tbody tr:focus-within {
     background: #E5E5E5;
 }
 .theme-bieszczady .site-header {
@@ -22,10 +22,10 @@
 .theme-wood .customizable-color {
     color: #000;
 }
-.theme-wood table.radiotable tbody tr:hover, .theme-wood table.radiotable tbody tr:focus-within {
+.theme-wood table.radio-table tbody tr:hover, .theme-wood table.radio-table tbody tr:focus-within {
     background: #E6C1A8;
 }
-.theme-wood table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+.theme-wood table.radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(170,92,36, 0.2);
 }
 .theme-wood .site-header {
@@ -45,7 +45,7 @@
 .theme-rainbow .rds-popup {
     text-shadow: none;
 }
-.theme-rainbow table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+.theme-rainbow table.radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(0,0,0, 0.1);
 }
 .theme-rainbow .site-header {
@@ -65,16 +65,16 @@
 .theme-night .customizable-color a {
     border-color: rgba(255,255,255, 0.6);
 }
-.theme-night .rds-popup, .theme-night table.radiotable span.rds {
+.theme-night .rds-popup, .theme-night table.radio-table span.rds {
     text-shadow: none;
 }
-.theme-night table.radiotable tbody tr:hover, .theme-night table.radiotable tbody tr:focus-within {
+.theme-night table.radio-table tbody tr:hover, .theme-night table.radio-table tbody tr:focus-within {
     background: rgba(0,0,0, 0.35);
 }
-.theme-night table.radiotable td, .radiotable-details dl, .radiotable-details dd {
+.theme-night table.radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(255,255,255, 0.1);
 }
-.theme-night table.radiotable tr.marker-4, .theme-night table.radiotable tr.marker-5, .theme-night table.radiotable tr.marker-6 {
+.theme-night table.radio-table tr.marker-4, .theme-night table.radio-table tr.marker-5, .theme-night table.radio-table tr.marker-6 {
     color: #000;
     text-shadow: 0 0 2px #aaa;
 }

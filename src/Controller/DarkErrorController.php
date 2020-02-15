@@ -43,7 +43,7 @@ class DarkErrorController extends AbstractController
 
                 $text = $exception->getMessage();
                 if (false !== strpos($text, RadioTable::class) ||
-                    false !== strpos($text, 'RADIOTABLE_SHOW')) {
+                    false !== strpos($text, 'RADIO_TABLE_SHOW')) {
                     $message = 'RadioTableNotFound';
                 }
             }

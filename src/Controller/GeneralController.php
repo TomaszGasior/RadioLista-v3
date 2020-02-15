@@ -18,12 +18,12 @@ class GeneralController extends AbstractController
     public function homepage(RadioTableRepository $radioTableRepository): Response
     {
         $form = $this->createForm(RadioTableSearchType::class, null, [
-            'action' => $this->generateUrl('search_radiotables'),
+            'action' => $this->generateUrl('search_radio_tables'),
         ]);
 
         return $this->render('general/homepage.html.twig', [
-            'last_updated_radiotables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(10),
-            'last_created_radiotables' => $radioTableRepository->findPublicOrderedByIdDesc(10),
+            'last_updated_radio_tables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(10),
+            'last_created_radio_tables' => $radioTableRepository->findPublicOrderedByIdDesc(10),
             'search_form' => $form->createView(),
         ]);
     }
@@ -53,7 +53,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/wszystkie-wykazy/{sorting<1|2|3>?1}", name="all_radiotables",
+     * @Route("/wszystkie-wykazy/{sorting<1|2|3>?1}", name="all_radio_tables",
      *        condition="request.query.get('a') == ''")
      */
     public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting): Response
@@ -70,13 +70,13 @@ class GeneralController extends AbstractController
                 break;
         }
 
-        return $this->render('general/all_radiotables.html.twig', [
-            'radiotables' => $radioTables,
+        return $this->render('general/all_radio_tables.html.twig', [
+            'radio_tables' => $radioTables,
         ]);
     }
 
     /**
-     * @Route("/szukaj", name="search_radiotables")
+     * @Route("/szukaj", name="search_radio_tables")
      */
     public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request): Response
     {
@@ -91,8 +91,8 @@ class GeneralController extends AbstractController
 
         $radioTables = $radioTableRepository->findPublicBySearchTerm($searchTerm);
 
-        return $this->render('general/search_radiotables.html.twig', [
-            'radiotables' => $radioTables,
+        return $this->render('general/search_radio_tables.html.twig', [
+            'radio_tables' => $radioTables,
             'search_term' => $searchTerm,
             'search_form' => $form->createView(),
         ]);

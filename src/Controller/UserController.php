@@ -25,20 +25,20 @@ class UserController extends AbstractController
 
         return $this->render('user/public_profile.html.twig', [
             'user' => $user,
-            'radiotables' => $radioTables,
+            'radio_tables' => $radioTables,
         ]);
     }
 
     /**
-     * @Route("/moje-wykazy", name="user.my_radiotables")
+     * @Route("/moje-wykazy", name="user.my_radio_tables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function myRadioTables(RadioTableRepository $radioTableRepository): Response
     {
         $radioTables = $radioTableRepository->findAllOwnedByUser($this->getUser());
 
-        return $this->render('user/my_radiotables.html.twig', [
-            'radiotables' => $radioTables,
+        return $this->render('user/my_radio_tables.html.twig', [
+            'radio_tables' => $radioTables,
         ]);
     }
 

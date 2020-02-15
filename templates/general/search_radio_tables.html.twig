@@ -9,9 +9,9 @@
 
     {% include 'common/search_form.html.twig' %}
 
-    {% if radiotables %}
+    {% if radio_tables %}
         {% set show_owner = true %}
-        {% include 'common/radiotables_list.html.twig' %}
+        {% include 'common/radio_tables_list.html.twig' %}
     {% else %}
         <p class="information">
             Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki&nbsp;*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów.

@@ -20,7 +20,7 @@ class RLv2CompatController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->redirectToRoute('radiotable.show', ['id' => $radioTableId], 301);
+        return $this->redirectToRoute('radio_table.show', ['id' => $radioTableId], 301);
     }
 
     /**
@@ -48,6 +48,6 @@ class RLv2CompatController extends AbstractController
             $sorting = 1;
         }
 
-        return $this->redirectToRoute('all_radiotables', ['sorting' => $sorting], 301);
+        return $this->redirectToRoute('all_radio_tables', ['sorting' => $sorting], 301);
     }
 }

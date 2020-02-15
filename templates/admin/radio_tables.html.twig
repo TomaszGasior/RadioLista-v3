@@ -23,22 +23,22 @@
             </tr>
         </thead>
         <tbody>
-            {% for radiotable in radiotables %}
+            {% for radio_table in radio_tables %}
                 <tr>
-                    <td>{{ radiotable.id }}</td>
-                    <td>{{ radiotable.owner.name }}</td>
-                    <td>{{ status_labels[radiotable.status] }}</td>
+                    <td>{{ radio_table.id }}</td>
+                    <td>{{ radio_table.owner.name }}</td>
+                    <td>{{ status_labels[radio_table.status] }}</td>
                     <td>
-                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
-                            {{ radiotable.name }}
+                        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                            {{ radio_table.name }}
                         </a>
                     </td>
-                    <td>{{ radiotable.radioStationsCount }}</td>
-                    <td class="nowrap">{{ radiotable.lastUpdateTime|date('Y-m-d H:i') }}</td>
+                    <td>{{ radio_table.radioStationsCount }}</td>
+                    <td class="nowrap">{{ radio_table.lastUpdateTime|date('Y-m-d H:i') }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <p>Liczba wszystkich wykazów: {{ radiotables|length }}</p>
+    <p>Liczba wszystkich wykazów: {{ radio_tables|length }}</p>
 {% endblock %}

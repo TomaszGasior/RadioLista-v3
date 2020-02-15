@@ -4,7 +4,7 @@
     (constant('App\\Entity\\RadioTable::COLUMN_DISTANCE')): 'km',
     (constant('App\\Entity\\RadioTable::COLUMN_EXTERNAL_ANCHOR')): 'Odn.',
     (constant('App\\Entity\\RadioTable::COLUMN_FIRST_LOG_DATE')): '1. odbiór',
-    (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')): radiotable.useKhz ? 'kHz' : 'MHz',
+    (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')): radio_table.useKhz ? 'kHz' : 'MHz',
     (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')): 'Lokalność',
     (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')): 'Lokalizacja',
     (constant('App\\Entity\\RadioTable::COLUMN_NAME')): 'Nazwa',
@@ -46,7 +46,7 @@
 
 {%- block table_start -%}{%- endblock -%}
 
-{%- for column in radiotable.columns -%}
+{%- for column in radio_table.columns -%}
     {%- block heading_cell columns_labels[column] -%}
 {%- endfor -%}
 
@@ -54,7 +54,7 @@
 
 {%- for radiostation in radiostations -%}
     {%- block row_start -%}{%- endblock -%}
-        {%- for column in radiotable.columns -%}
+        {%- for column in radio_table.columns -%}
             {%- block cell_start -%}{%- endblock -%}
                 {%- if attribute(radiostation, column) is not null -%}
 

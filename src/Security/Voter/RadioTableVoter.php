@@ -11,7 +11,7 @@ class RadioTableVoter extends Voter
 {
     protected function supports($attribute, $subject): bool
     {
-        return in_array($attribute, ['RADIOTABLE_MODIFY', 'RADIOTABLE_SHOW'])
+        return in_array($attribute, ['RADIO_TABLE_MODIFY', 'RADIO_TABLE_SHOW'])
                && ($subject instanceof RadioTable || $subject instanceof RadioStation);
     }
 
@@ -21,13 +21,13 @@ class RadioTableVoter extends Voter
         $radioTable = ($subject instanceof RadioStation) ? $subject->getRadioTable() : $subject;
 
         switch ($attribute) {
-            case 'RADIOTABLE_SHOW':
+            case 'RADIO_TABLE_SHOW':
                 if (in_array($radioTable->getStatus(), [RadioTable::STATUS_PUBLIC, RadioTable::STATUS_UNLISTED])) {
                     return true;
                 }
                 // Don't break.
 
-            case 'RADIOTABLE_MODIFY':
+            case 'RADIO_TABLE_MODIFY':
                 if ($user and $user === $radioTable->getOwner()) {
                     return true;
                 }

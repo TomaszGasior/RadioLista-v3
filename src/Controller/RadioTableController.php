@@ -22,21 +22,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioTableController extends AbstractController
 {
     /**
-     * @Route("/wykaz/{id}", name="radiotable.show")
-     * @IsGranted("RADIOTABLE_SHOW", subject="radioTable", statusCode=404)
+     * @Route("/wykaz/{id}", name="radio_table.show")
+     * @IsGranted("RADIO_TABLE_SHOW", subject="radioTable", statusCode=404)
      */
     public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
-        return $this->render('radiotable/show.html.twig', [
-            'radiotable' => $radioTable,
+        return $this->render('radio_table/show.html.twig', [
+            'radio_table' => $radioTable,
             'radiostations' => $radioStations,
         ]);
     }
 
     /**
-     * @Route("/utworz-wykaz", name="radiotable.create")
+     * @Route("/utworz-wykaz", name="radio_table.create")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
@@ -53,18 +53,18 @@ class RadioTableController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('notice', 'Wykaz został utworzony.');
-            return $this->redirectToRoute('user.my_radiotables');
+            return $this->redirectToRoute('user.my_radio_tables');
         }
 
-        return $this->render('radiotable/create.html.twig', [
+        return $this->render('radio_table/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/wykaz/{id}/ustawienia", name="radiotable.settings")
+     * @Route("/wykaz/{id}/ustawienia", name="radio_table.settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function settings(RadioTable $radioTable, Request $request,
                              EntityManagerInterface $entityManager): Response
@@ -78,16 +78,16 @@ class RadioTableController extends AbstractController
             $this->addFlash('notice', 'Zmiany zostały zapisane.');
         }
 
-        return $this->render('radiotable/settings.html.twig', [
+        return $this->render('radio_table/settings.html.twig', [
             'form' => $form->createView(),
-            'radiotable' => $radioTable,
+            'radio_table' => $radioTable,
         ]);
     }
 
     /**
-     * @Route("/wykaz/{id}/eksport/{_format}", name="radiotable.download", requirements={"_format": "csv|html|pdf"})
+     * @Route("/wykaz/{id}/eksport/{_format}", name="radio_table.download", requirements={"_format": "csv|html|pdf"})
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function download(RadioTable $radioTable, string $_format, Pdf $pdfRenderer,
                              RadioStationRepository $radioStationRepository): Response
@@ -95,20 +95,20 @@ class RadioTableController extends AbstractController
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
 
         $templateVars = [
-            'radiotable' => $radioTable,
+            'radio_table' => $radioTable,
             'radiostations' => $radioStations,
         ];
 
         switch ($_format) {
             case 'html':
-                $content = $this->renderView('radiotable/standalone.html.twig', $templateVars);
+                $content = $this->renderView('radio_table/standalone.html.twig', $templateVars);
                 break;
             case 'csv':
-                $content = $this->renderView('radiotable/table/radiotable.csv.twig', $templateVars);
+                $content = $this->renderView('radio_table/table/radio_table.csv.twig', $templateVars);
                 break;
             case 'pdf':
                 $content = $pdfRenderer->getOutputFromHtml(
-                    $this->renderView('radiotable/standalone.html.twig', $templateVars)
+                    $this->renderView('radio_table/standalone.html.twig', $templateVars)
                 );
                 break;
         }
@@ -125,25 +125,25 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{id}/eksport", name="radiotable.export")
+     * @Route("/wykaz/{id}/eksport", name="radio_table.export")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function export(RadioTable $radioTable): Response
     {
-        return $this->redirectToRoute('radiotable.settings', [
+        return $this->redirectToRoute('radio_table.settings', [
             'id' => $radioTable->getId(),
             '_fragment' => 'export',
         ]);
     }
 
     /**
-     * This action handles both radiotable removing and radiostation removing.
+     * This action handles both radio table removing and radiostation removing.
      *
-     * @Route("/wykaz/{id}/usun", name="radiotable.remove")
+     * @Route("/wykaz/{id}/usun", name="radio_table.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                            RadioStation $radioStationToRemove = null): Response
@@ -153,7 +153,7 @@ class RadioTableController extends AbstractController
 
         $form_RadioStation = $this->createForm(RadioStationRemoveType::class,
             $radioStationToRemove ? ['chosenToRemove' => [$radioStationToRemove]] : null,
-            ['radiotable' => $radioTable]
+            ['radio_table' => $radioTable]
         );
         $form_RadioStation->handleRequest($request);
 
@@ -165,7 +165,7 @@ class RadioTableController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('notice', 'Wykaz został bezpowrotnie usunięty.');
-                return $this->redirectToRoute('user.my_radiotables');
+                return $this->redirectToRoute('user.my_radio_tables');
             }
             else {
                 $this->addFlash('error', 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!');
@@ -185,16 +185,16 @@ class RadioTableController extends AbstractController
                 // Redirect to after successful radiostations removing.
                 // * Form needs to be reloaded to not display removed radiostations.
                 // * URL needs to be changed to avoid 404 error if page was forwarded from RadioStationController.
-                return $this->redirectToRoute('radiotable.remove', [
+                return $this->redirectToRoute('radio_table.remove', [
                     'id' => $radioTable->getId(),
                 ]);
             }
         }
 
-        return $this->render('radiotable/remove.html.twig', [
-            'form_radiotable' => $form_RadioTable->createView(),
+        return $this->render('radio_table/remove.html.twig', [
+            'form_radio_table' => $form_RadioTable->createView(),
             'form_radiostation' => $form_RadioStation->createView(),
-            'radiotable' => $radioTable,
+            'radio_table' => $radioTable,
         ]);
     }
 }

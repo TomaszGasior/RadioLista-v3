@@ -20,7 +20,7 @@ class SitemapController extends AbstractController
         $users = $userRepository->findAllWithPublicProfile();
 
         return $this->render('sitemap.xml.twig', [
-            'radiotables' => $radioTables,
+            'radio_tables' => $radioTables,
             'users' => $users,
         ]);
     }

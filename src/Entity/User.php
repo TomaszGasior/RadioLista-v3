@@ -236,7 +236,7 @@ class User implements UserInterface, EncoderAwareInterface
     /**
      * Additional privileges for user with ROLE_ADMIN:
      * — use administration panel,
-     * — preview private radiotables and hidden user profiles,
+     * — preview private radio tables and hidden user profiles,
      * — browse application while maintenance mode is enabled.
      *
      * @see UserInterface

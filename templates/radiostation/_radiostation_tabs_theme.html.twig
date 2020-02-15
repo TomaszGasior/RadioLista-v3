@@ -3,17 +3,17 @@
 {% use 'common/form/custom_types.html.twig' %}
 
 {% block form_row %}
-    {% if disabled_radiotable_column %}
+    {% if disabled_radio_table_column %}
         <div class="radiostation-disabled-column">
     {% endif %}
     {{ parent() }}
-    {% if disabled_radiotable_column %}
+    {% if disabled_radio_table_column %}
         </div>
     {% endif %}
 {% endblock %}
 
 {% block form_label %}
-    {% if disabled_radiotable_column %}
+    {% if disabled_radio_table_column %}
         {% set label_attr = label_attr|merge({'title': 'Ta kolumna jest niewidoczna w wykazie.'}) %}
     {% endif %}
     {{ parent() }}

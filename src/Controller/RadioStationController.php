@@ -20,7 +20,7 @@ class RadioStationController extends AbstractController
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      * @ParamConverter("template", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioTable", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function add(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
                         RadioStation $template = null): Response
@@ -51,7 +51,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/wykaz/{radioTableId}/edytuj-stacje/{id}", name="radiostation.edit")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function edit(RadioStation $radioStation, Request $request,
                          EntityManagerInterface $entityManager): Response
@@ -74,7 +74,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/wykaz/{radioTableId}/kopiuj-stacje/{id}", name="radiostation.copy")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function copy(RadioStation $radioStation): Response
     {
@@ -91,7 +91,7 @@ class RadioStationController extends AbstractController
     /**
      * @Route("/wykaz/{radioTableId}/usun-stacje/{id}", name="radiostation.remove")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIOTABLE_MODIFY", subject="radioStation", statusCode=404)
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
     public function remove(RadioStation $radioStation): Response
     {

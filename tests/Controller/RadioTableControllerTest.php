@@ -27,7 +27,7 @@ class RadioTableControllerTest extends WebTestCase
 
         $this->assertEquals('test_radio_table_name', $crawler->filter('h1')->text());
 
-        $details = $crawler->filter('section.radiotable-details')->html();
+        $details = $crawler->filter('section.radio-table-details')->html();
         $this->assertContains('test_radio_table_description', $details);
         $this->assertContains('test_user', $details);
         $this->assertContains('2018-05-01', $details);

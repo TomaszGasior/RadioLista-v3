@@ -29,7 +29,7 @@ class RadioStationRemoveType extends AbstractType
 
                 'class' => RadioStation::class,
                 'choice_label' => 'name',
-                'query_builder' => $this->radioStationRepository->getQueryBuilderForRadioTable($options['radiotable']),
+                'query_builder' => $this->radioStationRepository->getQueryBuilderForRadioTable($options['radio_table']),
                 'expanded' => true,
                 'multiple' => true,
             ])
@@ -43,13 +43,13 @@ class RadioStationRemoveType extends AbstractType
         foreach ($view['chosenToRemove']->children as $name => $childrenView) {
             $radioStation = $choices[$name] ?? null;
             $childrenView->vars['frequency'] = $radioStation ? $radioStation->getFrequency() : null;
-            $childrenView->vars['use_KHz'] = $options['radiotable']->getUseKhz();
+            $childrenView->vars['use_KHz'] = $options['radio_table']->getUseKhz();
         }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired(['radiotable']);
-        $resolver->setAllowedTypes('radiotable', RadioTable::class);
+        $resolver->setRequired(['radio_table']);
+        $resolver->setAllowedTypes('radio_table', RadioTable::class);
     }
 }

@@ -26,12 +26,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/wykazy", name="admin.radiotables")
+     * @Route("/admin/wykazy", name="admin.radio_tables")
      */
     public function radioTables(RadioTableRepository $radioTableRepository): Response
     {
-        return $this->render('admin/radiotables.html.twig', [
-            'radiotables' => $radioTableRepository->findAll(),
+        return $this->render('admin/radio_tables.html.twig', [
+            'radio_tables' => $radioTableRepository->findAll(),
         ]);
     }
 

@@ -11,7 +11,7 @@ class RadioTableColumnsUI
     prepareUI()
     {
         let buttonsTemplate = document.importNode(
-            this.container.querySelector('.radiotable-columns-buttons-template').content, true
+            this.container.querySelector('.radio-table-columns-buttons-template').content, true
         );
         let buttons = [
             buttonsTemplate.querySelector('button.toggle'),
@@ -39,7 +39,7 @@ class RadioTableColumnsUI
             item.buttonMoveUp.addEventListener('click', this.onMoveUpButtonClick.bind(this));
             item.buttonMoveDown.addEventListener('click', this.onMoveDownButtonClick.bind(this));
 
-            // Items with "min" attribute represent radiotable columns which
+            // Items with "min" attribute represent radio-table columns which
             // always have to be shown and user isn't allowed to hide them.
             if (item.input.hasAttribute('min')) {
                 item.buttonToggle.disabled = true;
@@ -156,7 +156,7 @@ class RadioTableColumnsUI
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    let container = document.querySelector('.radiotable-columns');
+    let container = document.querySelector('.radio-table-columns');
 
     if (container) {
         new RadioTableColumnsUI(container);

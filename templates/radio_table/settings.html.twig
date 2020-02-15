@@ -3,23 +3,23 @@
 {% block page_title %}Ustawienia wykazu{% endblock %}
 
 {% block head_closing %}
-    <script src="{{ asset('radiotable-settings.js', 'minified') }}"></script>
+    <script src="{{ asset('radio-table-settings.js', 'minified') }}"></script>
 {% endblock %}
 
 {% block context_menu %}
     <ul>
         <li>
-            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                 Zobacz wykaz
             </a>
         </li>
         <li>
-            <a href="{{ path('radiostation.add', {radioTableId: radiotable.id}) }}">
+            <a href="{{ path('radiostation.add', {radioTableId: radio_table.id}) }}">
                 Dodaj stację
             </a>
         </li>
         <li>
-            <a href="{{ path('radiotable.remove', {id: radiotable.id}) }}">
+            <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
                 Usuń stacje lub wykaz
             </a>
         </li>
@@ -30,7 +30,7 @@
     <header>
         <h1 class="separated-title">
             <span>Ustawienia wykazu</span>
-            <span class="additional">{{ radiotable.name }}</span>
+            <span class="additional">{{ radio_table.name }}</span>
         </h1>
     </header>
 
@@ -49,7 +49,7 @@
         <div>
             <h2>Widoczność</h2>
 
-            <div class="radiotable-status">
+            <div class="radio-table-status">
                 {{ form_row(form.status) }}
             </div>
         </div>
@@ -63,10 +63,10 @@
                 </p>
             </noscript>
 
-            <div class="radiotable-columns">
+            <div class="radio-table-columns">
                 {{ form_row(form.columns) }}
 
-                <template class="radiotable-columns-buttons-template">
+                <template class="radio-table-columns-buttons-template">
                     <button type="button" class="toggle" data-show-label="Pokaż" data-hide-label="Ukryj"></button>
                     <button type="button" class="move-up">Do góry</button>
                     <button type="button" class="move-down">W dół</button>
@@ -79,10 +79,10 @@
 
             {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
 
-            {{ form_row(form.appearanceTheme, {attr: {'class': 'radiotable-theme'}}) }}
+            {{ form_row(form.appearanceTheme, {attr: {'class': 'radio-table-theme'}}) }}
 
             {# style="" is used as dirty hack for box-shadow removing. #}
-            <div class="radiotable-custom-theme-wrapper">
+            <div class="radio-table-custom-theme-wrapper">
                 {{ form_row(form.appearanceBackgroundColor, {attr: {
                     'class': 'jscolor',
                     'style': '',
@@ -101,8 +101,8 @@
             <script>
             (function(){
                 const CUSTOM_THEME_NAME = '';
-                let themeSelectorField = document.querySelector('.radiotable-theme');
-                let customThemeFieldsWrapper = document.querySelector('.radiotable-custom-theme-wrapper');
+                let themeSelectorField = document.querySelector('.radio-table-theme');
+                let customThemeFieldsWrapper = document.querySelector('.radio-table-custom-theme-wrapper');
 
                 let updateFieldVisibility = () => {
                     customThemeFieldsWrapper.hidden = (themeSelectorField.value != CUSTOM_THEME_NAME);
@@ -117,26 +117,26 @@
         <div id="export">
             <h2>Eksport</h2>
 
-            {% if radiotable.radioStationsCount > 0 %}
+            {% if radio_table.radioStationsCount > 0 %}
                 <p class="information">
                     Wybierz pożądany format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz&nbsp;eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane&nbsp;są&nbsp;szczegółowe informacje o&nbsp;RDS.
                 </p>
 
-                <ul class="radiotable-export-list">
+                <ul class="radio-table-export-list">
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'pdf'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
                             Pobierz dokument PDF
                         </a>
                         PDF — dokument elektroniczny do przeglądania i&nbsp;druku
                     </li>
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'csv'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
                             Pobierz arkusz CSV
                         </a>
                         CSV — zestaw danych do zaimportowania i&nbsp;edycji w&nbsp;arkuszu kalkulacyjnym
                     </li>
                     <li>
-                        <a href="{{ path('radiotable.download', {id: radiotable.id, _format: 'html'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
                             Pobierz stronę HTML
                         </a>
                         HTML — plik strony internetowej otwierany w&nbsp;przeglądarce

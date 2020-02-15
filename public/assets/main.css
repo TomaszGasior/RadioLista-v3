@@ -590,9 +590,9 @@ input.jscolor:not([style=""]) {
 }
 
 
-/* radiotable — wrapper */
+/* radio table — wrapper */
 
-.radiotable-container {
+.radio-table-container {
     /* reset visual vertical padding of table cells */
     margin: 0 -0.4em;
 
@@ -603,85 +603,85 @@ input.jscolor:not([style=""]) {
     background-repeat: no-repeat;
 }
 
-.radiotable-container.overflow-right {
+.radio-table-container.overflow-right {
     background-image: linear-gradient(90deg, rgba(0,0,0, 0), rgba(250,230,205, 0.4));
     background-position: right;
 }
-.radiotable-container.overflow-left {
+.radio-table-container.overflow-left {
     background-image: linear-gradient(90deg, rgba(250,230,205, 0.4), rgba(0,0,0, 0));
     background-position: left;
 }
-.radiotable-container.overflow-left.overflow-right {
+.radio-table-container.overflow-left.overflow-right {
     background-image: linear-gradient(90deg, rgba(0,0,0, 0), rgba(250,230,205, 0.4)),
                       linear-gradient(90deg, rgba(250,230,205, 0.4), rgba(0,0,0, 0));
     background-position: right, left;
 }
 
 
-/* radiotable */
+/* radio table */
 
-table.radiotable {
+table.radio-table {
     width: 100%;
     border-collapse: collapse;
 
     font-size: 0.96em;
 }
 
-table.radiotable td, table.radiotable th {
+table.radio-table td, table.radio-table th {
     padding: 0.31em 0.5em;
     text-align: left;
 }
-table.radiotable th {
+table.radio-table th {
     padding-bottom: 0.5em;
     color: #477E2D;
     font-weight: normal;
     white-space: nowrap;
 }
-table.radiotable td {
+table.radio-table td {
     border-top: 1px solid rgba(0,0,0, 0.05);
 }
 @supports (-webkit-nbsp-mode: initial)
 {
     /* color for WebKit, not Blink */
-    table.radiotable td {
+    table.radio-table td {
         border-top: 1px solid rgba(0,0,0, 0.03);
     }
 }
 
-table.radiotable tbody tr {
+table.radio-table tbody tr {
     transition: background 0.1s;
 }
-table.radiotable tbody tr:hover, table.radiotable tbody tr:focus-within {
+table.radio-table tbody tr:hover, table.radio-table tbody tr:focus-within {
     background: rgba(250,230,205, 0.8);
 }
 
-table.radiotable a {
+table.radio-table a {
     display: block;
 }
 
 
-/* radiotable — special cells */
+/* radio table — special cells */
 
-table.radiotable tr.marker-1 {
+table.radio-table tr.marker-1 {
     font-weight: bold;
 }
-table.radiotable tr.marker-2 {
+table.radio-table tr.marker-2 {
     font-style: italic;
 }
-table.radiotable tr.marker-3 {
+table.radio-table tr.marker-3 {
     text-decoration: line-through;
 }
-table.radiotable tr.marker-4 {
+table.radio-table tr.marker-4 {
     background: rgba(255,209,209, 0.65) !important;
 }
-table.radiotable tr.marker-5 {
+table.radio-table tr.marker-5 {
     background: rgba(175,255,150, 0.65) !important;
 }
-table.radiotable tr.marker-6 {
+table.radio-table tr.marker-6 {
     background: rgba(156,230,255, 0.65) !important;
 }
 
-table.radiotable .quality {
+table.radio-table .quality {
     color: rgba(0,0,0, 0);
     display: block;
 
@@ -690,40 +690,40 @@ table.radiotable .quality {
 }
 @supports (-moz-user-select: none)
 {
-    table.radiotable .quality::-moz-selection {
+    table.radio-table .quality::-moz-selection {
         opacity: 0;
     }
 }
-table.radiotable .quality::selection {
+table.radio-table .quality::selection {
     opacity: 0;
 }
-table.radiotable .quality::before {
+table.radio-table .quality::before {
     text-shadow: 0 0 2px #CCC;
     margin-right: -10px;
     letter-spacing: 2px;
 }
-table.radiotable .quality.quality-5::before {
+table.radio-table .quality.quality-5::before {
     color: #0BB300;
     content: "●●●●●";
 }
-table.radiotable .quality.quality-4::before {
+table.radio-table .quality.quality-4::before {
     color: #A8D300;
     content: "●●●●";
 }
-table.radiotable .quality.quality-3::before {
+table.radio-table .quality.quality-3::before {
     color: #BDAC00;
     content: "●●●";
 }
-table.radiotable .quality.quality-2::before {
+table.radio-table .quality.quality-2::before {
     color: #FF5E00;
     content: "●●";
 }
-table.radiotable .quality.quality-1::before {
+table.radio-table .quality.quality-1::before {
     color: #FF0017;
     content: "●";
 }
 
-table.radiotable span.rds {
+table.radio-table span.rds {
     white-space: pre;
     background: rgba(160,160,160, 0.2);
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
@@ -736,29 +736,29 @@ table.radiotable span.rds {
     font-style: normal;
     text-decoration: none;
 }
-table.radiotable span.rds[tabindex]:hover, table.radiotable span.rds:focus {
+table.radio-table span.rds[tabindex]:hover, table.radio-table span.rds:focus {
     background: rgba(0,0,0, 0.7);
     color: #fff;
     outline: none;
 }
 
-table.radiotable small {
+table.radio-table small {
     font-size: 0.7em;
     vertical-align: 2px;
 }
-table.radiotable abbr {
+table.radio-table abbr {
     text-decoration: none;
     border-bottom: 1px dotted #ccc;
 }
-table.radiotable time {
+table.radio-table time {
     white-space: nowrap;
 }
 
-table.radiotable a.external {
+table.radio-table a.external {
     display: inline-block;
     text-decoration: none;
 }
-table.radiotable a.external svg {
+table.radio-table a.external svg {
     height: 0.9em;
     vertical-align: -1px;
     padding: 0 2px;
@@ -766,19 +766,19 @@ table.radiotable a.external svg {
 }
 
 
-/* radiotable — details section */
+/* radio table — details section */
 
-.radiotable-details {
+.radio-table-details {
     margin-top: 1.8em;
     line-height: 1.5em;
 
     width: 100%;
 }
-.radiotable-details p {
+.radio-table-details p {
     margin: 0.4em 0;
 }
 
-.radiotable-details dl {
+.radio-table-details dl {
     display: flex;
     align-items: center;
     width: 100%;
@@ -789,34 +789,34 @@ table.radiotable a.external svg {
     padding: 0.8em 2em 0 2em;
     box-sizing: border-box;
 }
-.radiotable-details dl > * {
+.radio-table-details dl > * {
     display: flex;
     align-items: center;
     flex: 1;
 }
-.radiotable-details dl > * > * {
+.radio-table-details dl > * > * {
     flex: 1;
 }
-.radiotable-details dt, .radiotable-details dd {
+.radio-table-details dt, .radio-table-details dd {
     padding: 0 0.5em;
     margin: 0;
 }
-.radiotable-details dt {
+.radio-table-details dt {
     text-align: right;
 }
-.radiotable-details dt::after {
+.radio-table-details dt::after {
     content: ":";
 }
-.radiotable-details dd {
+.radio-table-details dd {
     text-align: left;
     border-right: 1px solid rgba(0,0,0, 0.05);
 }
-.radiotable-details dd:last-child {
+.radio-table-details dd:last-child {
     border-right: none;
 }
 
 
-/* radiotable — RDS popup */
+/* radio table — RDS popup */
 
 @keyframes rds_popup_show
 {
@@ -947,54 +947,54 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radiotables list */
+/* radio tables list */
 
-.radiotables-list-item {
+.radio-tables-list-item {
     background: #FAFFF8;
     border: 1px solid #D2D2D2;
     padding: 1em 1.4em;
     margin: 1.2em 0;
 }
-.radiotables-list-item dd {
+.radio-tables-list-item dd {
     margin-left: 0;
 }
 
-.radiotables-list-item:focus-within:not(:hover) {
+.radio-tables-list-item:focus-within:not(:hover) {
     background: rgba(255,255,255, 1);
     border-color: #BABABA;
 }
 
-.radiotables-list-title a, .radiotables-list-details dl {
+.radio-tables-list-title a, .radio-tables-list-details dl {
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.radiotables-list-title a {
+.radio-tables-list-title a {
     display: block;
     font-size: 1.6em;
 }
-.radiotables-list-title a:focus {
+.radio-tables-list-title a:focus {
     /* make outline visible with overflow */
     outline-offset: -1px;
 }
 
-.radiotables-list-details dl {
+.radio-tables-list-details dl {
     margin: 0.4em 0 0.1em;
     font-size: 0.8em;
 }
-.radiotables-list-details dt, .radiotables-list-details dd {
+.radio-tables-list-details dt, .radio-tables-list-details dd {
     display: inline;
 }
-.radiotables-list-details dt::after {
+.radio-tables-list-details dt::after {
     content: ':';
 }
-.radiotables-list-details dt:not(:first-child) {
+.radio-tables-list-details dt:not(:first-child) {
     margin-left: 1em;
 }
 
 
-/* customized radiotable page */
+/* customized radio table page */
 
 .full-width .site-width {
     max-width: 100%;
@@ -1007,48 +1007,48 @@ table.sortable th[data-sort].sorted-desc::after {
     }
 }
 
-.customized-radiotable .site-header {
+.customized-radio-table .site-header {
     background-color: rgba(255,255,255, 0.9);
 }
 
-.customized-radiotable table.radiotable tbody tr:hover, .customized-radiotable table.radiotable tbody tr:focus-within {
+.customized-radio-table table.radio-table tbody tr:hover, .customized-radio-table table.radio-table tbody tr:focus-within {
     background: rgba(200,200,200, 0.4);
 }
-.customized-radiotable table.radiotable .quality::before {
+.customized-radio-table table.radio-table .quality::before {
     text-shadow: 0 0 1px #000;
 }
-.customized-radiotable table.radiotable span.rds {
+.customized-radio-table table.radio-table span.rds {
     background: rgba(200,200,200, 0.8);
 }
-.customized-radiotable table.sortable th[data-sort]:focus {
+.customized-radio-table table.sortable th[data-sort]:focus {
     outline-color: currentColor;
 }
 
-.customized-radiotable .customizable-color h1 {
+.customized-radio-table .customizable-color h1 {
     color: inherit;
     text-shadow: none;
 }
-.customized-radiotable .customizable-color table.radiotable th {
+.customized-radio-table .customizable-color table.radio-table th {
     color: inherit;
     opacity: 0.8;
     text-shadow: 0 0 0 rgba(0,0,0, 0.7);
 }
-.customized-radiotable .customizable-color table.radiotable td {
+.customized-radio-table .customizable-color table.radio-table td {
     border-top: 0;
     box-shadow: inset 0 2px 2px -3px currentColor;
 }
 @supports (-moz-user-select: none)
 {
-    .customized-radiotable .customizable-color table.radiotable td {
+    .customized-radio-table .customizable-color table.radio-table td {
         box-shadow: inset 0 3px 3px -5px currentColor;
     }
 }
-.customized-radiotable .customizable-color a {
+.customized-radio-table .customizable-color a {
     color: inherit;
     text-decoration: underline;
     text-decoration-skip-ink: none;
 }
-.customized-radiotable .customizable-color a:focus {
+.customized-radio-table .customizable-color a:focus {
     outline-color: currentColor;
 }
 
@@ -1122,11 +1122,11 @@ table.sortable th[data-sort].sorted-desc::after {
     line-height: 1.35em;
 }
 
-.homepage-radiotables-list {
+.homepage-radio-tables-list {
     list-style: none;
     padding-left: 0;
 }
-.homepage-radiotables-list li {
+.homepage-radio-tables-list li {
     margin: 0.3em 0;
 
     width: 100%;
@@ -1134,7 +1134,7 @@ table.sortable th[data-sort].sorted-desc::after {
     justify-content: space-between;
     align-items: center;
 }
-.homepage-radiotables-list a {
+.homepage-radio-tables-list a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1144,13 +1144,13 @@ table.sortable th[data-sort].sorted-desc::after {
     display: block;
     width: 100%;
 }
-.homepage-radiotables-list span {
+.homepage-radio-tables-list span {
     white-space: nowrap;
     text-align: right;
     color: rgba(0,0,0, 0.4);
     font-size: 0.7em;
 }
-.homepage-radiotables-list a:hover + span, .homepage-radiotables-list a:focus + span {
+.homepage-radio-tables-list a:hover + span, .homepage-radio-tables-list a:focus + span {
     color: rgba(0,0,0, 0.8);
 }
 
@@ -1214,21 +1214,21 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* page — all radiotables */
+/* page — all radio tables */
 
-.all-radiotables-navigation {
+.all-radio-tables-navigation {
     padding-left: 0;
     margin: 1.5em 0;
     text-align: center;
 }
-.all-radiotables-navigation li {
+.all-radio-tables-navigation li {
     display: inline-block;
     margin: 0 1em;
 }
-.all-radiotables-navigation li a {
+.all-radio-tables-navigation li a {
     color: #5D9A3F;
 }
-.all-radiotables-navigation li a.selected {
+.all-radio-tables-navigation li a.selected {
     font-weight: bold;
 }
 
@@ -1293,13 +1293,13 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radiotable settings, columns UI */
+/* radio table settings, columns UI */
 
-.JS .radiotable-columns {
+.JS .radio-table-columns {
     width: 80%;
     margin: 1.2em auto;
 }
-.JS .radiotable-columns .form-item {
+.JS .radio-table-columns .form-item {
     background: #F3F3F3;
     box-shadow: inset 2px 2px 2px #DEDEDE;
     border: 1px solid #C2C2C2;
@@ -1307,22 +1307,22 @@ table.sortable th[data-sort].sorted-desc::after {
     box-sizing: border-box;
     align-items: center;
 }
-.JS .radiotable-columns .form-item label {
+.JS .radio-table-columns .form-item label {
     margin-top: 0;
 }
-.JS .radiotable-columns .form-item > :last-child {
+.JS .radio-table-columns .form-item > :last-child {
     text-align: right;
 }
-.JS .radiotable-columns .form-item.hidden-column {
+.JS .radio-table-columns .form-item.hidden-column {
     background: #FBFBFB;
     box-shadow: inset 2px 2px 2px #efefef;
     border-color: #dfdfdf;
 }
-.JS .radiotable-columns .form-item.hidden-column label {
+.JS .radio-table-columns .form-item.hidden-column label {
     text-decoration: line-through;
     opacity: 0.5;
 }
-.JS .radiotable-columns .form-item button {
+.JS .radio-table-columns .form-item button {
     display: inline;
     width: auto;
     height: 2em;
@@ -1330,21 +1330,21 @@ table.sortable th[data-sort].sorted-desc::after {
     margin: 0 0 0 0.6em;
     white-space: nowrap;
 }
-.JS .radiotable-columns .form-item button:first-of-type {
+.JS .radio-table-columns .form-item button:first-of-type {
     margin-left: 0;
 }
 
 
-/* radiotable settings, export list */
+/* radio table settings, export list */
 
-.radiotable-export-list {
+.radio-table-export-list {
     list-style: none;
     padding-left: 0;
 }
-.radiotable-export-list li {
+.radio-table-export-list li {
     margin-top: 0.8em;
 }
-.radiotable-export-list a {
+.radio-table-export-list a {
     margin-right: 0.7em;
     width: 250px;
     vertical-align: baseline;
@@ -1372,9 +1372,9 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radiotable settings, status */
+/* radio table settings, status */
 
-.radiotable-status .form-item {
+.radio-table-status .form-item {
     padding: 1.2em 0 1.1em 78px;
     box-sizing: border-box;
     background-repeat: no-repeat;
@@ -1382,18 +1382,18 @@ table.sortable th[data-sort].sorted-desc::after {
     background-size: 50px;
     /* https://icomoon.io/ */
 }
-.radiotable-status .form-item:nth-of-type(1) {
+.radio-table-status .form-item:nth-of-type(1) {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath d='M256.005.004C114.623.004.009 114.618.009 256c0 141.384 114.614 255.996 255.996 255.996 141.384 0 255.996-114.613 255.996-255.996C512.001 114.618 397.388.004 256.005.004zm144.846 341.328c4.576-21.575 7.464-44.475 8.404-68.265h67.97a219.61 219.61 0 0 1-16.363 68.265H400.85zM111.16 170.668c-4.576 21.575-7.465 44.475-8.404 68.266H34.787a219.656 219.656 0 0 1 16.361-68.266h60.012zm254.729 0c5.127 21.846 8.212 44.721 9.216 68.266H273.071v-68.266h92.817zm-92.817-34.133V36.623c7.781 2.264 15.49 6.064 23.055 11.397 14.177 9.995 27.74 25.39 39.221 44.525 7.937 13.227 14.801 27.954 20.531 43.99h-82.806zm-96.408-43.991c11.482-19.135 25.043-34.532 39.221-44.525 7.564-5.333 15.274-9.133 23.054-11.397v99.913h-82.806c5.731-16.035 12.595-30.762 20.531-43.99zm62.275 78.124v68.266H136.907c1.002-23.544 4.089-46.419 9.215-68.266h92.817zM51.149 341.332a219.643 219.643 0 0 1-16.361-68.265h67.969c.939 23.791 3.828 46.69 8.404 68.265H51.149zm85.758-68.265h102.032v68.265h-92.817c-5.126-21.845-8.212-44.721-9.215-68.265zm102.032 102.397v99.913c-7.78-2.264-15.49-6.065-23.054-11.397-14.178-9.995-27.74-25.392-39.221-44.525-7.937-13.228-14.8-27.956-20.532-43.99h82.807zm96.408 43.991c-11.481 19.134-25.044 34.531-39.221 44.525-7.565 5.332-15.274 9.132-23.055 11.397v-99.913h82.807c-5.731 16.035-12.595 30.762-20.532 43.99zm-62.275-78.123v-68.265h102.033c-1.002 23.544-4.089 46.421-9.216 68.265h-92.817zm136.183-102.398c-.94-23.791-3.828-46.691-8.404-68.266h60.012a219.68 219.68 0 0 1 16.363 68.266h-67.97zm33.765-102.399h-51.146c-9.94-31.339-23.667-58.822-40.168-80.76 22.685 10.848 43.23 25.395 61.18 43.344 11.456 11.454 21.526 23.966 30.134 37.416zM99.125 99.12c17.951-17.951 38.495-32.496 61.18-43.344-16.502 21.938-30.226 49.421-40.168 80.761H68.992c8.607-13.45 18.678-25.961 30.133-37.416zM68.992 375.464h51.145c9.941 31.339 23.667 58.822 40.169 80.762-22.685-10.848-43.23-25.395-61.18-43.346-11.456-11.454-21.527-23.966-30.134-37.416zm343.894 37.416c-17.95 17.95-38.495 32.498-61.18 43.346 16.502-21.938 30.228-49.422 40.168-80.762h51.146c-8.608 13.45-18.678 25.961-30.134 37.416z'/%3E%3C/svg%3E");
 }
-.radiotable-status .form-item:nth-of-type(2) {
+.radio-table-status .form-item:nth-of-type(2) {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath d='M341.334 370.935v-23.457c31.331-17.656 56.887-61.675 56.887-105.7 0-70.69 0-127.996-85.33-127.996s-85.33 57.305-85.33 127.996c0 44.026 25.555 88.044 56.887 105.7v23.457c-96.487 7.887-170.661 55.296-170.661 112.614h398.209c0-57.317-74.175-104.726-170.661-112.614z'/%3E%3Cpath d='M145.428 381.92c24.582-16.067 55.144-28.282 88.793-35.738-6.69-7.904-12.759-16.721-17.996-26.231-13.517-24.548-20.662-51.58-20.662-78.173 0-38.24 0-74.358 13.6-103.891 13.203-28.668 36.945-46.441 70.763-53.105-7.517-33.99-27.528-56.331-80.807-56.331-85.33 0-85.33 57.305-85.33 127.997 0 44.025 25.556 88.044 56.887 105.7v23.457C74.189 293.492.015 340.901.015 398.219h123.999c6.452-5.738 13.598-11.187 21.417-16.298z'/%3E%3C/svg%3E");
 }
-.radiotable-status .form-item:nth-of-type(3) {
+.radio-table-status .form-item:nth-of-type(3) {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath d='M472.971 23.025c-9.373-9.372-24.568-9.372-33.941 0L337.948 124.107c-25.969-7.877-53.474-12.111-81.948-12.111-111.659 0-208.441 65.021-256 160 20.561 41.062 50.324 76.52 86.511 103.548L7.03 455.025c-9.373 9.373-9.373 24.568 0 33.941 4.686 4.687 10.828 7.03 16.97 7.03s12.284-2.343 16.971-7.029l432-432c9.372-9.373 9.372-24.569 0-33.942zM208 175.996c21.12 0 39.041 13.647 45.46 32.598l-60.862 60.862c-18.951-6.419-32.598-24.34-32.598-45.46 0-26.51 21.49-48 48-48zm-152.942 96c19.146-30.262 44.637-55.962 74.717-75.148a231.722 231.722 0 0 1 5.931-3.65c-4.981 13.664-7.706 28.411-7.706 43.798 0 27.445 8.643 52.869 23.35 73.709l-30.462 30.462c-26.223-18.421-48.601-41.941-65.83-69.171zM384 236.996c0-13.583-2.128-26.667-6.051-38.949L217.045 358.951A127.894 127.894 0 0 0 256 364.996c70.691 0 128-57.309 128-128z'/%3E%3Cpath d='M415.013 160.983l-34.681 34.681c.632.393 1.265.784 1.893 1.184 30.081 19.187 55.571 44.887 74.717 75.148-19.146 30.261-44.637 55.961-74.718 75.148-37.797 24.109-81.445 36.852-126.224 36.852-19.332 0-38.451-2.38-56.981-7.02l-38.447 38.447c29.859 10.731 61.975 16.573 95.428 16.573 111.655 0 208.438-65.021 256-160-22.511-44.958-56.059-83.198-96.987-111.013z'/%3E%3C/svg%3E");
 }
 
 
-/* radiotable/radiostation remove, list */
+/* radio table/radiostation remove, list */
 
 .radiostations-remove {
     max-height: 430px;
@@ -1408,9 +1408,9 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 
 
-/* radiotable/radiostation remove, warning */
+/* radio table/radiostation remove, warning */
 
-.radiotable-remove-confirm {
+.radio-table-remove-confirm {
     border: 3px dashed red;
     padding: 0 1em;
 }

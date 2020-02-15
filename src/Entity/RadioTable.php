@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RadioTable
 {
     // Keep these constants and its values in sync with RadioStation's field names.
-    // Order of them affects order in disabled columns in radiotable settings page. :)
+    // Order of them affects order in disabled columns in radio table settings page. :)
     public const COLUMN_FREQUENCY = 'frequency';
     public const COLUMN_NAME = 'name';
     public const COLUMN_LOCATION = 'location';

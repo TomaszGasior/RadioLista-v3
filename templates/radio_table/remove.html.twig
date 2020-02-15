@@ -5,17 +5,17 @@
 {% block context_menu %}
     <ul>
         <li>
-            <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
+            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                 Zobacz wykaz
             </a>
         </li>
         <li>
-            <a href="{{ path('radiotable.export', {id: radiotable.id}) }}">
+            <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
                 Eksport wykazu
             </a>
         </li>
         <li>
-            <a href="{{ path('radiotable.settings', {id: radiotable.id}) }}">
+            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
                 Ustawienia wykazu
             </a>
         </li>
@@ -33,7 +33,7 @@
     <header>
         <h1 class="separated-title">
             <span>Usuń stacje lub wykaz</span>
-            <span class="additional">{{ radiotable.name }}</span>
+            <span class="additional">{{ radio_table.name }}</span>
         </h1>
     </header>
 
@@ -41,7 +41,7 @@
         <div>
             <h2>Usuwanie stacji</h2>
 
-            {% if radiotable.radioStationsCount > 0 %}
+            {% if radio_table.radioStationsCount > 0 %}
                 {{ form_start(form_radiostation) }}
 
                 <div class="radiostations-remove">
@@ -64,21 +64,21 @@
                 Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.
             </p>
 
-            {{ form_start(form_radiotable) }}
+            {{ form_start(form_radio_table) }}
 
-            <div class="radiotable-remove-confirm">
-                {{ form_row(form_radiotable.confirm, {
-                    label: 'Usuń cały wykaz „' ~ radiotable.name ~ '” na zawsze'
+            <div class="radio-table-remove-confirm">
+                {{ form_row(form_radio_table.confirm, {
+                    label: 'Usuń cały wykaz „' ~ radio_table.name ~ '” na zawsze'
                 }) }}
             </div>
 
             <button>Usuń wykaz</button>
 
-            {{ form_end(form_radiotable) }}
+            {{ form_end(form_radio_table) }}
 
             <script>
             (function(){
-                let input = document.querySelector('.radiotable-remove-confirm input');
+                let input = document.querySelector('.radio-table-remove-confirm input');
                 let confirmDialog = () => {
                     if (input.checked && false === window.confirm('Czy na pewno? Tej czynności nie można cofnąć!')) {
                         input.checked = false;

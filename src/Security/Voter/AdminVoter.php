@@ -23,7 +23,7 @@ class AdminVoter extends Voter
         if ('USER_PUBLIC_PROFILE' === $attribute && $subject instanceof User) {
             return true;
         }
-        if ('RADIOTABLE_SHOW' === $attribute && $subject instanceof RadioTable) {
+        if ('RADIO_TABLE_SHOW' === $attribute && $subject instanceof RadioTable) {
             return true;
         }
 

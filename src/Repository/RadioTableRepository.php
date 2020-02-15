@@ -53,8 +53,8 @@ class RadioTableRepository extends ServiceEntityRepository
             $query->setMaxResults($limit);
         }
         else {
-            // If there is no limit, result will be probably used on the radiotables list.
-            // Optimize query for fetching radiotable owners.
+            // If there is no limit, result will be probably used on the radio tables list.
+            // Optimize query for fetching radio table owners.
             $query->innerJoin('radioTable.owner', 'user')->addSelect('user');
         }
 

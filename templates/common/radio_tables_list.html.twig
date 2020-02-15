@@ -6,38 +6,38 @@
 {% set show_visibility = show_visibility|default(false) %}
 {% set show_owner = show_owner|default(false) %}
 
-<dl class="radiotables-list">
-    {% for radiotable in radiotables %}
-        <div class="radiotables-list-item">
-            <dt class="radiotables-list-title">
-                <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
-                    {{ radiotable.name }}
+<dl class="radio-tables-list">
+    {% for radio_table in radio_tables %}
+        <div class="radio-tables-list-item">
+            <dt class="radio-tables-list-title">
+                <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                    {{ radio_table.name }}
                 </a>
             </dt>
-            <dd class="radiotables-list-details">
+            <dd class="radio-tables-list-details">
                 <dl>
                     {% if show_visibility %}
                         <dt>Widoczność</dt>
-                        <dd>{{ status_labels[radiotable.status] }}</dd>
+                        <dd>{{ status_labels[radio_table.status] }}</dd>
                     {% endif %}
 
-                    {% if show_owner and radiotable.owner.publicProfile %}
+                    {% if show_owner and radio_table.owner.publicProfile %}
                         <dt>Autor</dt>
                         <dd>
-                            <a href="{{ path('user.public_profile', {name: radiotable.owner.name}) }}">
-                                {{ radiotable.owner.name }}
+                            <a href="{{ path('user.public_profile', {name: radio_table.owner.name}) }}">
+                                {{ radio_table.owner.name }}
                             </a>
                         </dd>
                     {% endif %}
 
                     <dt>Liczba stacji</dt>
-                    <dd>{{ radiotable.radioStationsCount }}</dd>
+                    <dd>{{ radio_table.radioStationsCount }}</dd>
 
                     <dt>Data aktualizacji</dt>
-                    <dd>{{ radiotable.lastUpdateTime|date_format }}</dd>
+                    <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
 
                     <dt>Jednostka</dt>
-                    <dd>{{ radiotable.useKhz ? 'kHz' : 'MHz' }}</dd>
+                    <dd>{{ radio_table.useKhz ? 'kHz' : 'MHz' }}</dd>
                 </dl>
             </dd>
         </div>

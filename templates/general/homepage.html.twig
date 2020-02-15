@@ -8,15 +8,15 @@
     <div class="homepage">
         <section>
             <h2>Ostatnio zmodyfikowane wykazy</h2>
-            <ol class="homepage-radiotables-list">
-                {% for radiotable in last_updated_radiotables %}
+            <ol class="homepage-radio-tables-list">
+                {% for radio_table in last_updated_radio_tables %}
                     <li>
-                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
-                            {{ radiotable.name }}
+                        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                            {{ radio_table.name }}
                         </a>
                         <span>
                             <span class="sr-only"> — ostatnia aktualizacja: </span>
-                            {{ radiotable.lastUpdateTime|date_format }}
+                            {{ radio_table.lastUpdateTime|date_format }}
                         </span>
                     </li>
                 {% endfor %}
@@ -25,15 +25,15 @@
 
         <section>
             <h2>Ostatnio utworzone wykazy</h2>
-            <ol class="homepage-radiotables-list">
-                {% for radiotable in last_created_radiotables %}
+            <ol class="homepage-radio-tables-list">
+                {% for radio_table in last_created_radio_tables %}
                     <li>
-                        <a href="{{ path('radiotable.show', {id: radiotable.id}) }}">
-                            {{ radiotable.name }}
+                        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                            {{ radio_table.name }}
                         </a>
                         <span>
                             <span class="sr-only"> — ostatnia aktualizacja: </span>
-                            {{ radiotable.lastUpdateTime|date_format }}
+                            {{ radio_table.lastUpdateTime|date_format }}
                         </span>
                     </li>
                 {% endfor %}
