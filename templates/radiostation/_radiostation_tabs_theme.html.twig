@@ -22,9 +22,9 @@
 {% block _radio_station_edit_frequency_widget %}
     {{ block('decimal_unit_widget') }}
 
-    {# Keep original "0.01" step for values smaller than 74. Use "0.05" otherwise. #}
-    {# This way entering standard frequencies is simpler while OIRT frequencies are #}
-    {# available for advanced usage. #}
+    {# Keep original "0.01" step for values smaller than 74, otherwise use "0.05". #}
+    {# This way entering usual frequencies is simpler while OIRT frequencies are #}
+    {# available too. See https://github.com/TomaszGasior/RadioLista-v3/issues/35 #}
     <script>
     (function(){
         let frequencyInput = document.getElementById('{{ id }}');
