@@ -23,14 +23,3 @@ task('maintenance:enable', 'touch var/lock/maintenance.lock');
 
 desc('Disable maintenance mode');
 task('maintenance:disable', 'rm -f var/lock/maintenance.lock');
-
-desc('Upload generated .env.local.php file');
-task('deploy:env_local_php', function(){
-    if (test('[ -f {{deploy_path}}/shared/.env.local.php ]')) {
-        throw new \Exception('File .env.local.php already exists.');
-    }
-    runLocally('composer symfony:dump-env prod');
-    upload('.env.local.php', '{{deploy_path}}/shared/.env.local.php');
-    runLocally('rm .env.local.php');
-});
-before('deploy:env_local_php', 'deploy:prepare');
