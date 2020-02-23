@@ -83,7 +83,7 @@
                         (constant('App\\Entity\\RadioTable::COLUMN_TYPE')): 'T',
                     } -%}
                     <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
-                        {{- columns_labels[column] -}}
+                        {{- parent()|striptags -}}
                     </th>
                 {%- endblock -%}
 

@@ -19,7 +19,7 @@
 {% block choice_row %}
     {% if expanded %}
         <fieldset>
-            <legend class="sr-only">{{ label }}</legend>
+            <legend class="sr-only">{{ form_label(form)|striptags }}</legend>
             {% for child in form %}
                 {{ form_row(child) }}
             {% endfor %}
