@@ -1,29 +1,23 @@
+{% form_theme form 'user/_register_theme.html.twig' %}
+
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Rejestracja{% endblock %}
-
-{% form_theme form _self %}
-{% block _user_register_acceptServiceTerms_label %}
-    {{ block('form_label')|replace(
-        {'regulamin': '<a href="' ~ path('terms_of_service') ~ '" target="_blank">regulamin</a>'}
-    )|raw }}
-{% endblock %}
+{% block page_title %}{{ 'user.register.title'|trans }}{% endblock %}
 
 {% block page_content %}
-    <header class="sr-only">
-        <h1>Konto użytkownika — rejestracja</h1>
-    </header>
-
     {{ form_start(form) }}
 
     <div class="user-login-screen">
-        <h2>Zarejestruj się</h2>
+        <h1 class="h2">{{ 'user.register.title'|trans }}</h1>
 
-        {{ form_row(form.name, {attr: {title: "Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka."}}) }}
+        {{ form_row(form.name) }}
         {{ form_row(form.plainPassword) }}
-        {{ form_row(form.acceptServiceTerms) }}
+        {{ form_row(form.acceptServiceTerms, {label_translation_parameters: {
+            '%anchor%': '<a href="' ~ path('terms_of_service') ~ '" target="_blank">',
+            '%anchor_end%': '</a>',
+        }}) }}
 
-        <button>Zarejestruj się</button>
+        <button>{{ 'user.register.title'|trans }}</button>
     </div>
 
     {{ form_end(form) }}

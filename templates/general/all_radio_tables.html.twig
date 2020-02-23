@@ -1,22 +1,17 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Wszystkie wykazy{% endblock %}
+{% block page_title %}{{ 'general.all_radio_tables.title'|trans }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h1>Wszystkie wykazy RadioListy</h1>
+        <h1>{{ 'general.all_radio_tables.title_long'|trans }}</h1>
 
-        {% set sorting_modes = {
-            1: 'Sortuj według liczby stacji',
-            2: 'Sortuj według daty aktualizacji',
-            3: 'Sortuj według jednostki',
-        } %}
         <ul class="all-radio-tables-navigation">
-            {% for id, label in sorting_modes %}
+            {% for id in [1, 2, 3] %}
                 <li>
                     <a {{ app.request.get('sorting') == id ? 'class="selected"' : '' }}
                         href="{{ path('all_radio_tables', {'sorting': id}) }}">
-                        {{ label }}
+                        {{ ('general.all_radio_tables.sorting.' ~ id)|trans }}
                     </a>
                 </li>
             {% endfor %}

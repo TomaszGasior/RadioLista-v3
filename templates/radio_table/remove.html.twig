@@ -1,22 +1,22 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Usuń stacje lub wykaz{% endblock %}
+{% block page_title %}{{ 'radio_table.remove.title'|trans }}{% endblock %}
 
 {% block context_menu %}
     <ul>
         <li>
             <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                Zobacz wykaz
+                {{ 'radio_table.show.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
-                Eksport wykazu
+                {{ 'radio_table.remove.action.export'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                Ustawienia wykazu
+                {{ 'radio_table.settings.title'|trans }}
             </a>
         </li>
     </ul>
@@ -32,14 +32,14 @@
 {% block page_content %}
     <header>
         <h1 class="separated-title">
-            <span>Usuń stacje lub wykaz</span>
+            <span>{{ 'radio_table.remove.title'|trans }}</span>
             <span class="additional">{{ radio_table.name }}</span>
         </h1>
     </header>
 
     <div class="tabbed-ui">
         <div>
-            <h2>Usuwanie stacji</h2>
+            <h2>{{ 'radio_table.remove.heading.remove_radio_station'|trans }}</h2>
 
             {% if radio_table.radioStationsCount > 0 %}
                 {{ form_start(form_radio_station) }}
@@ -48,31 +48,31 @@
                     {{ form_row(form_radio_station.chosenToRemove) }}
                 </div>
 
-                <button>Usuń zaznaczone stacje</button>
+                <button>{{ 'radio_table.remove.action.selected_radio_stations'|trans }}</button>
 
                 {{ form_end(form_radio_station) }}
             {% else %}
                 <p class="information">
-                    Ten wykaz jest pusty. Nie ma czego usuwać&hellip;
+                    {{ 'radio_table.remove.information.empty_cannot_remove_radio_station'|trans }}
                 </p>
             {% endif %}
         </div>
         <div>
-            <h2>Usuwanie wykazu</h2>
+            <h2>{{ 'radio_table.remove.heading.remove_radio_table'|trans }}</h2>
 
             <p class="information">
-                Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do&nbsp;pliku HTML, PDF lub CSV, aby pobrać go na komputer.
+                {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
             </p>
 
             {{ form_start(form_radio_table) }}
 
             <div class="radio-table-remove-confirm">
-                {{ form_row(form_radio_table.confirm, {
-                    label: 'Usuń cały wykaz „' ~ radio_table.name ~ '” na zawsze'
-                }) }}
+                {{ form_row(form_radio_table.confirm, {label_translation_parameters: {
+                    '%name%': radio_table.name,
+                }}) }}
             </div>
 
-            <button>Usuń wykaz</button>
+            <button>{{ 'radio_table.remove.action.radio_table'|trans }}</button>
 
             {{ form_end(form_radio_table) }}
 
@@ -80,7 +80,7 @@
             (function(){
                 let input = document.querySelector('.radio-table-remove-confirm input');
                 let confirmDialog = () => {
-                    if (input.checked && false === window.confirm('Czy na pewno? Tej czynności nie można cofnąć!')) {
+                    if (input.checked && false === window.confirm("{{ 'radio_table.remove.text.confirm_alert'|trans }}")) {
                         input.checked = false;
                         input.blur();
                     }

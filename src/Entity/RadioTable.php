@@ -62,8 +62,8 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Nazwa wykazu nie może być pusta.")
-     * @Assert\Length(max=100)
+     * @Assert\NotBlank(message="radio_table.name.not_blank")
+     * @Assert\Length(max=100, maxMessage="radio_table.name.max_length")
      */
     private $name;
 
@@ -79,7 +79,7 @@ class RadioTable
      * @Assert\Expression(
      *     "frequency in value && name in value",
      *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME},
-     *     message="Kolumny częstotliwości i nazwy muszą być widoczne."
+     *     message="radio_table.columns.frequency_and_name_required"
      * )
      */
     private $columns = [
@@ -101,7 +101,7 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000)
+     * @Assert\Length(max=2000, maxMessage="radio_table.description.max_length")
      */
     private $description;
 
@@ -111,15 +111,15 @@ class RadioTable
      *     "th" = @Assert\Type("string"),
      *     "bg" = {
      *         @Assert\Type("string"),
-     *         @HexColor(message="Kolor tła jest niepoprawny."),
+     *         @HexColor(message="radio_table.appearance.bg_invalid"),
      *     },
      *     "fg" = {
      *         @Assert\Type("string"),
-     *         @HexColor(message="Kolor tekstu jest niepoprawny."),
+     *         @HexColor(message="radio_table.appearance.fg_invalid"),
      *     },
      *     "img" = {
      *         @Assert\Type("string"),
-     *         @Assert\Url(message="Adres URL obrazu tła jest nieprawidłowy.")
+     *         @Assert\Url(message="radio_table.appearance.img_invalid")
      *     },
      *     "full" = @Assert\Type("bool"),
      * })

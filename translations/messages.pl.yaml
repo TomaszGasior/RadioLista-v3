@@ -1,0 +1,344 @@
+layout:
+    slogan: 'bandscany i wykazy radiowe'
+    description: 'twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji'
+    navigation_title: 'Menu główne'
+    app_version: 'Wersja aplikacji'
+    ie_alert: 'Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge. Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.'
+
+common:
+    action:
+        save: 'Zapisz'
+
+    search_form:
+        form:
+            s: 'Szukane wyrażenie'
+
+        action:
+            search: 'Szukaj'
+
+    notification:
+        saved_changes: 'Zmiany zostały zapisane.'
+        invalid_form: 'Formularz został wypełniony niepoprawnie.'
+
+radio_table:
+    detail:
+        status: 'Widoczność'
+        status.state:
+            '1': 'publiczny'
+            '0': 'niepubliczny'
+            '-1': 'prywatny'
+        author: 'Autor'
+        radio_stations_count: 'Liczba stacji'
+        last_update_time: 'Data aktualizacji'
+        unit: 'Jednostka'
+
+    show:
+        title: 'Zobacz wykaz'
+
+        heading:
+            details: 'Informacje o wykazie'
+
+        rds_popup:
+            title: 'Informacje o RDS'
+            ps: 'PS'
+            rt: 'RT'
+            pty: 'PTY'
+
+        information:
+            empty: 'Ten wykaz jest pusty.'
+            empty_editable: 'Ten wykaz jest pusty. %anchor%Dodaj do niego jakąś stację%anchor_end%, by usunąć ten komunikat.'
+
+    create:
+        title: 'Utwórz wykaz'
+        title_long: 'Utwórz nowy wykaz'
+
+        notification:
+            created: 'Wykaz został utworzony.'
+
+        information:
+            local_desc: "W nazwie i opisie wykazu warto umieścić lokalizację (np.\u00A0miejscowość lub województwo). Te\u00A0informacje są\u00A0używane przy\u00A0przeszukiwaniu wykazów. Można je później zmienić."
+
+    settings:
+        title: 'Ustawienia wykazu'
+
+        heading:
+            general: 'Główne'
+            visibility: 'Widoczność'
+            columns: 'Kolumny'
+            appearance: 'Wygląd'
+            export: 'Eksport'
+
+        form:
+            name: 'Nazwa wykazu'
+            useKhz: 'Jednostka częstotliwości'
+            description: 'Opis wykazu'
+            status: 'Widoczność wykazu'
+            status.choice:
+                '1': 'Publiczny — wykaz może zobaczyć każdy'
+                '0': 'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
+                '-1': 'Prywatny — wykaz możesz zobaczyć tylko ty'
+            sorting: 'Domyślne sortowanie'
+            appearanceTheme: 'Motyw'
+            appearanceTheme.choice:
+                '': '(brak motywu, własne kolory)'
+                bieszczady: 'Górski las'
+                wood: 'Drewno'
+                rainbow: 'Tęcza i niebo'
+                night: 'Widok nocą'
+            appearanceBackgroundColor: 'Kolor tła'
+            appearanceColor: 'Kolor tekstu'
+            appearanceBackgroundImage: 'Adres URL obrazu tła'
+            appearanceFullWidth: 'Rozciągnij wykaz na pełną szerokość ekranu'
+
+        information:
+            columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."
+            export: "Wybierz pożądany format eksportu, aby pobrać cały wykaz w\u00A0formie pliku na swój komputer. Wykaz\u00A0eksportowany jest z\u00A0aktualnie ustawionym sortowaniem i\u00A0aktualnie widocznymi kolumnami. Pomijane\u00A0są\u00A0szczegółowe informacje o\u00A0RDS."
+            export_cannot_empty: 'Ten wykaz jest pusty. Nie można go wyeksportować.'
+
+        columns_ui:
+            action:
+                toggle_show: 'Pokaż'
+                toggle_hide: 'Ukryj'
+                move_up: 'Do góry'
+                move_down: 'W dół'
+
+        export:
+            action:
+                download_pdf: 'Pobierz dokument PDF'
+                download_csv: 'Pobierz arkusz CSV'
+                download_html: 'Pobierz stronę HTML'
+            text:
+                about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
+                about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
+                about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
+
+    remove:
+        title: 'Usuń stacje lub wykaz'
+
+        action:
+            export: 'Eksport wykazu'
+            selected_radio_stations: 'Usuń zaznaczone stacje'
+            radio_table: 'Usuń wykaz'
+
+        heading:
+            remove_radio_station: 'Usuwanie stacji'
+            remove_radio_table: 'Usuwanie wykazu'
+
+        form:
+            confirm: 'Usuń cały wykaz „%name%” na zawsze'
+
+        notification:
+            removed: 'Wykaz został bezpowrotnie usunięty.'
+            not_yet: 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!'
+
+        information:
+            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty. Nie ma czego usuwać…'
+            cannot_be_undone: "Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do\u00A0pliku HTML, PDF lub CSV, aby pobrać go na komputer."
+
+        text:
+            confirm_alert: 'Czy na pewno? Tej czynności nie można cofnąć!'
+
+    standalone:
+        about: 'Wykaz wygenerowano w serwisie %anchor% dnia %date%.'
+
+radio_station:
+    add:
+        title: 'Dodaj stację'
+        title_long: 'Dodaj nową stację'
+
+        notification:
+            added: 'Stacja została dodana.'
+            copied: 'Dane stacji zostały wypełnione.'
+
+    edit:
+        title: 'Edytuj stację'
+        title_pattern: 'Edytuj stację „%name%”'
+
+        action:
+            copy_current: 'Kopiuj bieżącą stację'
+            save: 'Zapisz stację'
+
+        heading:
+            general: 'Główne'
+            broadcast: 'Nadawanie i audycje'
+            reception: 'Odbiór'
+            personal: 'Osobiste'
+            rds: 'RDS'
+
+        form:
+            localityType.choice:
+                '1': ogólnokrajowy
+                '2': lokalny
+                '3': sieciowy
+            localityCity: 'Lokalność — miasto/województwo'
+            polarization.choice:
+                '': '(brak informacji)'
+            firstLogDate.help: 'na przykład: 2013, 2011-06, 2016-05-04'
+            marker: 'Wyróżnienie wizualne'
+            marker.choice:
+                '': '(brak wyróżnienia)'
+                '1': 'pogrubienie'
+                '2': 'pochylenie'
+                '3': 'przekreślenie'
+                '4': 'czerwony kolor tła'
+                '5': 'zielony kolor tła'
+                '6': 'niebieski kolor tła'
+            rdsPs: 'Programme Service'
+            rdsPs.help: 'na przykład: POLSKIE|RADIO|JEDYNKA'
+            rdsRt: 'Radio Text'
+            rdsRt.help: 'każdy komunikat w osobnej linii'
+            rdsPty: 'Program Type'
+            rdsPi: 'Programme Identification'
+
+        information:
+            rds_popup: "Aby zobaczyć wyskakujące okno z\u00A0informacjami o\u00A0RDS, włącz JavaScript w\u00A0przeglądarce."
+
+        text:
+            for_radio_table_a11y_subheading: 'w wykazie'
+            disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
+
+    remove:
+        title: 'Usuń stację'
+
+        form:
+            chosenToRemove: 'Wskaż stacje do usunięcia'
+
+        notification:
+            chosen_to_be_removed: 'Stacja została zaznaczona do usunięcia.'
+            bulk_removed: 'Wybrane stacje zostały usunięte.'
+
+user:
+    detail:
+        name: 'Nazwa użytkownika'
+        last_activity_date: 'Data ostatniej aktywności'
+        register_date: 'Data założenia konta'
+        public_profile: 'Stan profilu publicznego'
+        public_profile.state:
+            '': 'wyłączony'
+            '1': 'włączony'
+        radio_tables_count: 'Liczba utworzonych wykazów'
+
+    settings:
+        title: 'Moje konto'
+        title_long: 'Ustawienia konta'
+
+        heading:
+            my_account: 'Moje konto'
+            public_profile: 'Profil publiczny'
+            change_password: 'Zmiana hasła'
+
+        form:
+            aboutMe: 'Kilka słów o mnie'
+            publicProfile: 'Włącz profil publiczny i stronę profilową'
+            currentPassword: 'Obecne hasło'
+            plainPassword.first: 'Nowe hasło'
+            plainPassword.second: 'Nowe hasło ponownie'
+
+        notification:
+            changed_password: 'Nowe hasło zostało zapisane.'
+
+        information:
+            public_profile: "Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i\u00A0spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem."
+            change_password: 'Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.'
+
+    register:
+        title: 'Zarejestruj się'
+
+        form:
+            name: 'Nazwa użytkownika'
+            name.help: 'Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka.'
+            plainPassword.first: 'Hasło'
+            plainPassword.second: 'Hasło ponownie'
+            acceptServiceTerms: 'Akceptuję %anchor%regulamin%anchor_end% serwisu RadioLista'
+
+        notification:
+            registered: 'Twoje konto zostało utworzone.'
+
+    my_radio_tables:
+        title: 'Moje wykazy'
+
+        information:
+            no_radio_tables: 'Nie posiadasz jeszcze żadnego wykazu. %anchor%To najlepszy moment, żeby to zmienić!%anchor_end%'
+
+    public_profile:
+        title_pattern: '%username% — profil użytkownika'
+
+        heading:
+            details: 'Informacje o użytkowniku'
+            radio_tables: 'Wykazy tego użytkownika'
+
+        information:
+            no_radio_tables: 'Ten użytkownik nie utworzył jeszcze żadnego wykazu.'
+
+general:
+    homepage:
+        heading:
+            last_updated_radio_tables: 'Ostatnio zmodyfikowane wykazy'
+            last_created_radio_tables: 'Ostatnio utworzone wykazy'
+            about_this_service: 'Czym jest RadioLista?'
+            search_radio_tables: 'Wyszukaj wykazy'
+
+        text:
+            about: "W serwisie RadioLista osoby interesujące się mediami mogą\u00A0publikować różnorodne wykazy radiowe i\u00A0telewi\u00ADzyjne — bandscany, regularne wykazy odbieranych stacji czy\u00A0też prywatne listy ulubionych programów."
+            last_update_time: 'ostatnia aktualizacja'
+
+    all_radio_tables:
+        title: 'Wszystkie wykazy'
+        title_long: 'Wszystkie wykazy RadioListy'
+
+        sorting:
+            '1': 'Sortuj według liczby stacji'
+            '2': 'Sortuj według daty aktualizacji'
+            '3': 'Sortuj według jednostki'
+
+    search_radio_tables:
+        title: 'Wyszukiwanie'
+        title_pattern: '„%search_term%” — wyszukiwanie'
+
+        information:
+            no_results: "Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki\u00A0*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów."
+
+session:
+    action:
+        logout: 'Wyloguj się'
+
+    login:
+        title: 'Zaloguj się'
+
+        form:
+            username: 'Nazwa użytkownika'
+            password: 'Hasło'
+            rememberMe: 'Zapamiętaj mnie'
+
+        notification:
+            no_credentials: 'Nie podano nazwy użytkownika lub hasła.'
+            bad_credentials: 'Dane logowania są niepoprawne.'
+            auth_error: 'Wystąpił błąd. Spróbuj ponownie później.'
+
+    notification:
+        logged_in: 'Zalogowano się pomyślnie.'
+        restricted_for_logged_in: 'Zaloguj się, aby mieć dostęp do tej strony.'
+        logged_out: 'Wylogowano się pomyślnie.'
+
+dark_error:
+    heading: 'Ciemność, widzę ciemność!'
+
+    unknown_title: 'Wystąpił poważny błąd.'
+    unknown_text: "Wystąpił nieprzewidziany błąd aplikacji.\nProszę skontaktować się z\u00A0autorem RadioListy."
+
+    message:
+        MaintenanceMode:
+            title: 'Trwa przerwa techniczna.'
+            text: "W tej chwili serwis jest wyłączony ze względu na prace konserwacyjne.\nOdwiedź RadioListę za kilka minut."
+        DatabaseConnection:
+            title: 'Drobne problemy techniczne.'
+            text: "Nie udało się połączyć z bazą danych serwisu.\nProszę odczekać kilka minut i\u00A0odświeżyć stronę."
+        UnexpectedRequest:
+            title: 'Nie można wykonać działania.'
+            text: "Brak uprawnień do wykonania działania\nlub działanie pozbawione sensu."
+        RadioTableNotFound:
+            title: 'Wykaz nie istnieje.'
+            text: "Poszukiwany wykaz nie istnieje.\nProszę sprawdzić poprawność wpisanego adresu."
+        NotFound:
+            title: 'Strona nie istnieje.'
+            text: "Poszukiwana strona serwisu nie istnieje.\nProszę sprawdzić poprawność wpisanego adresu."

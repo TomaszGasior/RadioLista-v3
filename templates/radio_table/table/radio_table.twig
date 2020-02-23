@@ -1,42 +1,4 @@
-{%- set columns_labels = {
-    (constant('App\\Entity\\RadioTable::COLUMN_COMMENT')): 'Komentarz',
-    (constant('App\\Entity\\RadioTable::COLUMN_COUNTRY')): 'Kraj',
-    (constant('App\\Entity\\RadioTable::COLUMN_DISTANCE')): 'km',
-    (constant('App\\Entity\\RadioTable::COLUMN_EXTERNAL_ANCHOR')): 'Odn.',
-    (constant('App\\Entity\\RadioTable::COLUMN_FIRST_LOG_DATE')): '1. odbiór',
-    (constant('App\\Entity\\RadioTable::COLUMN_FREQUENCY')): radio_table.useKhz ? 'kHz' : 'MHz',
-    (constant('App\\Entity\\RadioTable::COLUMN_LOCALITY')): 'Lokalność',
-    (constant('App\\Entity\\RadioTable::COLUMN_LOCATION')): 'Lokalizacja',
-    (constant('App\\Entity\\RadioTable::COLUMN_NAME')): 'Nazwa',
-    (constant('App\\Entity\\RadioTable::COLUMN_POLARIZATION')): 'Pol.',
-    (constant('App\\Entity\\RadioTable::COLUMN_POWER')): 'kW',
-    (constant('App\\Entity\\RadioTable::COLUMN_PRIVATE_NUMBER')): 'Nr',
-    (constant('App\\Entity\\RadioTable::COLUMN_QUALITY')): 'Jakość',
-    (constant('App\\Entity\\RadioTable::COLUMN_RADIO_GROUP')): 'Grupa',
-    (constant('App\\Entity\\RadioTable::COLUMN_RDS')): 'RDS',
-    (constant('App\\Entity\\RadioTable::COLUMN_RDS_PI')): 'PI',
-    (constant('App\\Entity\\RadioTable::COLUMN_RECEPTION')): 'Odbiór',
-    (constant('App\\Entity\\RadioTable::COLUMN_TYPE')): 'Rodzaj',
-} -%}
-{%- set polarization_labels = {
-    (constant('App\\Entity\\RadioStation::POLARIZATION_HORIZONTAL')): 'pozioma',
-    (constant('App\\Entity\\RadioStation::POLARIZATION_VERTICAL')): 'pionowa',
-    (constant('App\\Entity\\RadioStation::POLARIZATION_CIRCULAR')): 'kołowa',
-    (constant('App\\Entity\\RadioStation::POLARIZATION_VARIOUS')): 'różne',
-} -%}
-{%- set reception_labels = {
-    (constant('App\\Entity\\RadioStation::RECEPTION_REGULAR')): 'regularny',
-    (constant('App\\Entity\\RadioStation::RECEPTION_TROPO')): 'tropo',
-    (constant('App\\Entity\\RadioStation::RECEPTION_SCATTER')): 'scatter',
-    (constant('App\\Entity\\RadioStation::RECEPTION_SPORADIC_E')): 'sporadic-E',
-} -%}
-{%- set types_labels = {
-    (constant('App\\Entity\\RadioStation::TYPE_MUSIC')): 'muzyczny',
-    (constant('App\\Entity\\RadioStation::TYPE_UNIVERSAL')): 'uniwersalny',
-    (constant('App\\Entity\\RadioStation::TYPE_INFORMATION')): 'informacyjny',
-    (constant('App\\Entity\\RadioStation::TYPE_RELIGIOUS')): 'katolicki',
-    (constant('App\\Entity\\RadioStation::TYPE_OTHER')): 'inny',
-} -%}
+{%- trans_default_domain 'radio_table' -%}
 
 {# This template is abstract. Child templates can specify escaping strategy. #}
 {# Autoescaping needs to be disabled when "escape" filter is used with variable as argument. #}
@@ -47,7 +9,17 @@
 {%- block table_start -%}{%- endblock -%}
 
 {%- for column in radio_table.columns -%}
-    {%- block heading_cell columns_labels[column] -%}
+    {%- block heading_cell -%}
+        {%- if column == 'frequency' -%}
+            {{- radio_table.useKhz ? 'kHz' : 'MHz' -}}
+        {%- elseif column == 'power' -%}
+            kW
+        {%- elseif column == 'distance' -%}
+            km
+        {%- else -%}
+            {{- ('heading.' ~ column)|trans -}}
+        {%- endif -%}
+    {%- endblock -%}
 {%- endfor -%}
 
 {%- block table_between -%}{%- endblock -%}
@@ -67,9 +39,9 @@
                 {%- elseif column == 'power' -%}
                     {%- block radio_station_power radio_station.power|soft_number_format|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
-                    {%- block radio_station_type types_labels[radio_station.type]|escape(escape_strategy) -%}
+                    {%- block radio_station_type ('type.' ~ radio_station.type)|trans|escape(escape_strategy) -%}
                 {%- elseif column == 'reception' -%}
-                    {%- block radio_station_reception reception_labels[radio_station.reception]|escape(escape_strategy) -%}
+                    {%- block radio_station_reception ('reception.' ~ radio_station.reception)|trans|escape(escape_strategy) -%}
                 {%- elseif column == 'polarization' -%}
                     {%- block radio_station_polarization radio_station.polarization|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}
@@ -88,12 +60,12 @@
 
                     {%- block radio_station_locality -%}
                         {%- if radio_station.locality.type == constant('LOCALITY_COUNTRY', radio_station) -%}
-                            ogólnokrajowy
+                            {{- 'locality.country'|trans -}}
                         {%- elseif radio_station.locality.city -%}
                             {{- radio_station.locality.city|escape(escape_strategy) -}}
 
                             {%- if locality_is_network -%}
-                                {%- block radio_station_locality_network ' (s)' -%}
+                                {%- block radio_station_locality_network ' ' ~ 'locality.network.abbr'|trans -%}
                             {%- endif -%}
                         {%- endif -%}
                     {%- endblock -%}

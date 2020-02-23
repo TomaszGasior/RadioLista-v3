@@ -52,7 +52,7 @@ class RadioTableController extends AbstractController
             $entityManager->persist($radioTable);
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Wykaz został utworzony.');
+            $this->addFlash('notice', 'radio_table.create.notification.created');
             return $this->redirectToRoute('user.my_radio_tables');
         }
 
@@ -75,7 +75,7 @@ class RadioTableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Zmiany zostały zapisane.');
+            $this->addFlash('notice', 'common.notification.saved_changes');
         }
 
         return $this->render('radio_table/settings.html.twig', [
@@ -164,11 +164,11 @@ class RadioTableController extends AbstractController
                 $entityManager->remove($radioTable);
                 $entityManager->flush();
 
-                $this->addFlash('notice', 'Wykaz został bezpowrotnie usunięty.');
+                $this->addFlash('notice', 'radio_table.remove.notification.removed');
                 return $this->redirectToRoute('user.my_radio_tables');
             }
             else {
-                $this->addFlash('error', 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!');
+                $this->addFlash('error', 'radio_table.remove.notification.not_yet');
             }
         }
         elseif ($form_RadioStation->isSubmitted() && $form_RadioStation->isValid()) {
@@ -180,7 +180,7 @@ class RadioTableController extends AbstractController
                 }
                 $entityManager->flush();
 
-                $this->addFlash('notice', 'Wybrane stacje zostały usunięte.');
+                $this->addFlash('notice', 'radio_station.remove.notification.bulk_removed');
 
                 // Redirect to after successful radio stations removing.
                 // * Form needs to be reloaded to not display removed radio stations.

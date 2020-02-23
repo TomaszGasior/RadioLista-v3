@@ -1,60 +1,60 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Ustawienia konta{% endblock %}
+{% block page_title %}{{ 'user.settings.title_long'|trans }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h1>Ustawienia konta</h1>
+        <h1>{{ 'user.settings.title_long'|trans }}</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="tabbed-ui">
         <div>
-            <h2>Moje konto</h2>
+            <h2>{{ 'user.settings.heading.my_account'|trans }}</h2>
 
             <dl class="my-account-details">
                 <div>
-                    <dt>Nazwa użytkownika</dt>
+                    <dt>{{ 'user.detail.name'|trans }}</dt>
                     <dd>{{ app.user.name }}</dd>
                 </div>
 
                 <div>
-                    <dt>Data ostatniej aktywności</dt>
+                    <dt>{{ 'user.detail.last_activity_date'|trans }}</dt>
                     <dd>{{ app.user.lastActivityDate|date_format }}</dd>
                 </div>
 
                 <div>
-                    <dt>Data założenia konta</dt>
+                    <dt>{{ 'user.detail.register_date'|trans }}</dt>
                     <dd>{{ app.user.registerDate|date_format }}</dd>
                 </div>
 
                 <div>
-                    <dt>Stan profilu publicznego</dt>
-                    <dd>{{ app.user.publicProfile ? 'włączony' : 'wyłączony' }}</dd>
+                    <dt>{{ 'user.detail.public_profile'|trans }}</dt>
+                    <dd>{{ ('user.detail.public_profile.state.' ~ app.user.publicProfile)|trans }}</dd>
                 </div>
 
                 <div>
-                    <dt>Liczba utworzonych wykazów</dt>
+                    <dt>{{ 'user.detail.radio_tables_count'|trans }}</dt>
                     <dd>{{ app.user.radioTablesCount }}</dd>
                 </div>
             </dl>
         </div>
         <div>
-            <h2>Profil publiczny</h2>
+            <h2>{{ 'user.settings.heading.public_profile'|trans }}</h2>
 
             <p class="information">
-                Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i&nbsp;spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem.
+                {{ 'user.settings.information.public_profile'|trans }}
             </p>
 
             {{ form_row(form.aboutMe) }}
             {{ form_row(form.publicProfile) }}
         </div>
         <div>
-            <h2>Zmiana hasła</h2>
+            <h2>{{ 'user.settings.heading.change_password'|trans }}</h2>
 
             <p class="information">
-                Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.
+                {{ 'user.settings.information.change_password'|trans }}
             </p>
 
             {{ form_row(form.currentPassword) }}
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <button>Zapisz</button>
+    <button>{{ 'common.action.save'|trans }}</button>
 
     {{ form_end(form) }}
 {% endblock %}

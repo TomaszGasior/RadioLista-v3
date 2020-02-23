@@ -9,21 +9,25 @@
 
 {% block page_content %}
     <header>
-        <h1><strong>{{ user.name }}</strong> — profil użytkownika</h1>
+        <h1>
+            {{ 'user.public_profile.title_pattern'|trans({
+                '%username%': '<strong>' ~ user.name ~ '</strong>',
+            })|raw }}
+        </h1>
     </header>
 
     {% if user.aboutMe is not empty %}
         <section class="user-profile-page user-profile-description">
-            <h2>Informacje o użytkowniku</h2>
+            <h2>{{ 'user.public_profile.heading.details'|trans }}</h2>
 
             {{ user.aboutMe|raw }}
             <dl class="user-profile-details">
                 <div>
-                    <dt>Data ostatniej aktywności</dt>
+                    <dt>{{ 'user.detail.last_activity_date'|trans }}</dt>
                     <dd>{{ user.lastActivityDate|date_format }}</dd>
                 </div>
                 <div>
-                    <dt>Data założenia konta</dt>
+                    <dt>{{ 'user.detail.register_date'|trans }}</dt>
                     <dd>{{ user.registerDate|date_format }}</dd>
                 </div>
             </dl>
@@ -31,13 +35,13 @@
     {% endif %}
 
     <section class="user-profile-page">
-        <h2>Wykazy tego użytkownika</h2>
+        <h2>{{ 'user.public_profile.heading.radio_tables'|trans }}</h2>
 
         {% if radio_tables %}
             {% include 'common/radio_tables_list.html.twig' %}
         {% else %}
             <p class="information">
-                Ten użytkownik nie utworzył jeszcze żadnego wykazu.
+                {{ 'user.public_profile.information.no_radio_tables'|trans }}
             </p>
         {% endif %}
     </section>

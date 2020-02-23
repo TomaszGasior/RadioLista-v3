@@ -1,17 +1,17 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Dodaj nową stację{% endblock %}
+{% block page_title %}{{ 'radio_station.add.title'|trans }}{% endblock %}
 
 {% block context_menu %}
     <ul>
         <li>
             <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
-                Zobacz wykaz
+                {{ 'radio_table.show.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_table.settings', {id: radio_station.radioTable.id}) }}">
-                Ustawienia wykazu
+                {{ 'radio_table.settings.title'|trans }}
             </a>
         </li>
     </ul>
@@ -20,8 +20,11 @@
 {% block page_content %}
     <header>
         <h1 class="separated-title">
-            <span>Dodaj nową stację</span>
-            <span class="additional"><span class="sr-only">wykaz</span> {{ radio_station.radioTable.name }}</span>
+            <span>{{ 'radio_station.add.title_long'|trans }}</span>
+            <span class="additional">
+                <span class="sr-only">{{ 'radio_station.edit.text.for_radio_table_a11y_subheading'|trans }}</span>
+                {{ radio_station.radioTable.name }}
+            </span>
         </h1>
     </header>
 
@@ -29,7 +32,7 @@
 
     {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
-    <button>Dodaj stację</button>
+    <button>{{ 'radio_station.add.title'|trans }}</button>
 
     {{ form_end(form) }}
 {% endblock %}

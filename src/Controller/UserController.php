@@ -55,10 +55,10 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             if ($form->get('plainPassword')->getData()) {
-                $this->addFlash('notice', 'Nowe hasło zostało zapisane.');
+                $this->addFlash('notice', 'user.settings.notification.changed_password');
             }
             else {
-                $this->addFlash('notice', 'Zmiany zostały zapisane.');
+                $this->addFlash('notice', 'common.notification.saved_changes');
             }
         }
 
@@ -85,7 +85,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Twoje konto zostało utworzone.');
+            $this->addFlash('notice', 'user.register.notification.registered');
             return $this->redirectToRoute('security.login');
         }
 

@@ -11,10 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\Doctrine\EntityListener\UserListener"})
- * @UniqueEntity(
- *     "name", groups={"Default", "RedefinePassword"},
- *     message="Wybrana nazwa użytkownika jest już zajęta."
- * )
+ * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name.not_unique")
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
 class User implements UserInterface, EncoderAwareInterface
@@ -28,15 +25,11 @@ class User implements UserInterface, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(groups={"Default", "RedefinePassword"}, message="Nazwa użytkownika nie może być pusta.")
-     * @Assert\Length(
-     *     max=50, groups={"Default", "RedefinePassword"},
-     *     maxMessage="Nazwa użytkownika może mieć maksymalnie {{ limit }} znaków.",
-     * )
+     * @Assert\NotBlank(groups={"Default", "RedefinePassword"}, message="user.name.not_blank")
+     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"}, maxMessage="user.name.max_length")
      * @Assert\Regex(
-     *     "/^[a-zA-Z0-9_\.\-]*$/",
-     *     groups={"Default", "RedefinePassword"},
-     *     message="Nazwa użytkownika zawiera niedozwolone znaki.",
+     *     "/^[a-zA-Z0-9_\.\-]*$/", groups={"Default", "RedefinePassword"},
+     *     message="user.name.invalid_chars"
      * )
      */
     private $name;
@@ -48,11 +41,10 @@ class User implements UserInterface, EncoderAwareInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(groups={"RedefinePassword"}, message="Hasło nie może być puste.")
+     * @Assert\NotBlank(groups={"RedefinePassword"}, message="user.password.not_blank")
      * @Assert\Length(
      *     max=100, min=10, groups={"RedefinePassword"},
-     *     minMessage="Hasło musi mieć co najmniej {{ limit }} znaków.",
-     *     maxMessage="Hasło może mieć maksymalnie {{ limit }} znaków.",
+     *     minMessage="user.password.min_length", maxMessage="user.password.max_length"
      * )
      */
     private $plainPassword;
@@ -69,7 +61,7 @@ class User implements UserInterface, EncoderAwareInterface
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"})
+     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"}, maxMessage="user.about_me.max_length")
      */
     private $aboutMe;
 

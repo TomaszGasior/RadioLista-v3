@@ -14,29 +14,31 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RadioStationEditType extends AbstractType
 {
     private $rdsPsTransformer;
     private $rdsRtTransformer;
+    private $translator;
 
     public function __construct(RadioStationRdsPsFrameTransformer $rdsPsTransformer,
-                                RadioStationRdsRtFrameTransformer $rdsRtTransformer)
+                                RadioStationRdsRtFrameTransformer $rdsRtTransformer,
+                                TranslatorInterface $translator)
     {
         $this->rdsPsTransformer = $rdsPsTransformer;
         $this->rdsRtTransformer = $rdsRtTransformer;
+        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('frequency', DecimalUnitType::class, [
-                'label' => 'Częstotliwość',
                 'step' => 0.01,
                 // Unit label "MHz" or "kHz" needs to be set in template.
             ])
             ->add('name', TextHintsType::class, [
-                'label' => 'Nazwa',
                 'hints' => [
                     'Polskie Radio Jedynka',
                     'Polskie Radio Dwójka',
@@ -63,7 +65,6 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('radioGroup', TextHintsType::class, [
-                'label' => 'Grupa medialna',
                 'required' => false,
                 'hints' => [
                     'Polskie Radio',
@@ -75,7 +76,6 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('country', TextHintsType::class, [
-                'label' => 'Kraj',
                 'required' => false,
                 'hints' => [
                     'Polska',
@@ -88,49 +88,59 @@ class RadioStationEditType extends AbstractType
                     'Słowacja',
                 ],
             ])
-            ->add('location', null, [
-                'label' => 'Lokalizacja nadajnika',
-            ])
+            ->add('location')
             ->add('power', DecimalUnitType::class, [
-                'label' => 'Moc nadajnika',
                 'unit_label' => 'kW',
                 'step' => 0.001,
                 'required' => false,
             ])
             ->add('polarization', ChoiceType::class, [
-                'label' => 'Polaryzacja',
                 'choices' => [
-                    '(brak informacji)' => RadioStation::POLARIZATION_NONE,
-                    'pozioma' => RadioStation::POLARIZATION_HORIZONTAL,
-                    'pionowa' => RadioStation::POLARIZATION_VERTICAL,
-                    'kołowa' => RadioStation::POLARIZATION_CIRCULAR,
-                    'różne' => RadioStation::POLARIZATION_VARIOUS,
+                    RadioStation::POLARIZATION_NONE,
+                    RadioStation::POLARIZATION_HORIZONTAL,
+                    RadioStation::POLARIZATION_VERTICAL,
+                    RadioStation::POLARIZATION_CIRCULAR,
+                    RadioStation::POLARIZATION_VARIOUS,
                 ],
+                'choice_label' => function ($choice) {
+                    if ($choice) {
+                        return $this->translator->trans('polarization.'.$choice, [], 'radio_table');
+                    }
+                    return $this->translator->trans('radio_station.edit.form.polarization.choice.'.$choice);
+                },
+                'choice_translation_domain' => false,
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Rodzaj programu',
                 'choices' => [
-                    'muzyczny' => RadioStation::TYPE_MUSIC,
-                    'uniwersalny' => RadioStation::TYPE_UNIVERSAL,
-                    'informacyjny' => RadioStation::TYPE_INFORMATION,
-                    'katolicki' => RadioStation::TYPE_RELIGIOUS,
-                    'inny' => RadioStation::TYPE_OTHER,
+                    RadioStation::TYPE_MUSIC,
+                    RadioStation::TYPE_UNIVERSAL,
+                    RadioStation::TYPE_INFORMATION,
+                    RadioStation::TYPE_RELIGIOUS,
+                    RadioStation::TYPE_OTHER,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'type.'.$choice;
+                },
             ])
             ->add('localityType', ChoiceType::class, [
                 'property_path' => 'locality[type]',
 
-                'label' => 'Lokalność programu',
+                'label' => 'column.locality',
                 'choices' => [
-                    'ogólnokrajowy' => RadioStation::LOCALITY_COUNTRY,
-                    'lokalny' => RadioStation::LOCALITY_LOCAL,
-                    'sieciowy' => RadioStation::LOCALITY_NETWORK,
+                    RadioStation::LOCALITY_COUNTRY,
+                    RadioStation::LOCALITY_LOCAL,
+                    RadioStation::LOCALITY_NETWORK,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'radio_station.edit.form.localityType.choice.'.$choice;
+                },
+                'choice_translation_domain' => 'messages',
             ])
             ->add('localityCity', TextHintsType::class, [
                 'property_path' => 'locality[city]',
 
-                'label' => 'Lokalność — miasto/województwo',
+                'label' => 'radio_station.edit.form.localityCity',
+                'translation_domain' => 'messages',
                 'required' => false,
                 'hints' => [
                     'dolnośląskie',
@@ -152,85 +162,94 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('distance', IntegerUnitType::class, [
-                'label' => 'Odległość od nadajnika',
                 'unit_label' => 'km',
                 'required' => false,
                 'attr' => ['min' => '1'],
             ])
             ->add('reception', ChoiceType::class, [
-                'label' => 'Specyfika odbioru',
                 'choices' => [
-                    'regularny' => RadioStation::RECEPTION_REGULAR,
-                    'troposferyczny' => RadioStation::RECEPTION_TROPO,
-                    'odbity (scatter)' => RadioStation::RECEPTION_SCATTER,
-                    'jonosferyczny (sporadic-E)' => RadioStation::RECEPTION_SPORADIC_E,
+                    RadioStation::RECEPTION_REGULAR,
+                    RadioStation::RECEPTION_TROPO,
+                    RadioStation::RECEPTION_SCATTER,
+                    RadioStation::RECEPTION_SPORADIC_E,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'reception.'.$choice;
+                },
             ])
             ->add('quality', ChoiceType::class, [
-                'label' => 'Jakość odbioru',
                 'choices' => [
-                    'bardzo dobra' => RadioStation::QUALITY_VERY_GOOD,
-                    'dobra' => RadioStation::QUALITY_GOOD,
-                    'dostateczna' => RadioStation::QUALITY_MIDDLE,
-                    'zła' => RadioStation::QUALITY_BAD,
-                    'bardzo zła' => RadioStation::QUALITY_VERY_BAD,
+                    RadioStation::QUALITY_VERY_GOOD,
+                    RadioStation::QUALITY_GOOD,
+                    RadioStation::QUALITY_MIDDLE,
+                    RadioStation::QUALITY_BAD,
+                    RadioStation::QUALITY_VERY_BAD,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'quality.'.$choice;
+                },
             ])
             ->add('firstLogDate', null, [
-                'label' => 'Data pierwszego odbioru',
+                'label' => $this->translator->trans('column.firstLogDate', [], 'radio_table'),
                 'attr' => [
-                    'placeholder' => 'na przykład: 2013, 2011-06, 2016-05-04',
+                    'placeholder' => $this->translator->trans('radio_station.edit.form.firstLogDate.help'),
                     'pattern' => '[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?',
                 ],
+                'translation_domain' => false,
             ])
             ->add('privateNumber', null, [
-                'label' => 'Numer w odbiorniku',
                 'attr' => ['min' => '1'],
             ])
             ->add('marker', ChoiceType::class, [
-                'label' => 'Wyróżnienie wizualne',
+                'label' => 'radio_station.edit.form.marker',
                 'choices' => [
-                    '(brak wyróżnienia)' => RadioStation::MARKER_NONE,
-                    'pogrubienie' => RadioStation::MARKER_1,
-                    'pochylenie' => RadioStation::MARKER_2,
-                    'przekreślenie' => RadioStation::MARKER_3,
-                    'czerwony kolor tła' => RadioStation::MARKER_4,
-                    'zielony kolor tła' => RadioStation::MARKER_5,
-                    'niebieski kolor tła' => RadioStation::MARKER_6,
+                    RadioStation::MARKER_NONE,
+                    RadioStation::MARKER_1,
+                    RadioStation::MARKER_2,
+                    RadioStation::MARKER_3,
+                    RadioStation::MARKER_4,
+                    RadioStation::MARKER_5,
+                    RadioStation::MARKER_6,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'radio_station.edit.form.marker.choice.'.$choice;
+                },
+                'translation_domain' => 'messages',
             ])
             ->add('externalAnchor', UrlType::class, [
-                'label' => 'Odnośnik zewnętrzny',
                 'required' => false,
                 'default_protocol' => null,
             ])
             ->add('comment', TextareaType::class, [
-                'label' => 'Komentarz',
                 'required' => false,
             ])
             ->add('rdsPs', TextareaType::class, [
                 'property_path' => 'rds[ps]',
 
-                'label' => 'Programme Service',
+                'label' => 'radio_station.edit.form.rdsPs',
+                'translation_domain' => 'messages',
                 'required' => false,
                 'trim' => false,
-                'attr' => ['placeholder' => 'na przykład: POLSKIE|RADIO|JEDYNKA'],
+                'attr' => ['placeholder' => 'radio_station.edit.form.rdsPs.help'],
             ])
             ->add('rdsRt', TextareaType::class, [
                 'property_path' => 'rds[rt]',
 
-                'label' => 'Radio Text',
+                'label' => 'radio_station.edit.form.rdsRt',
+                'translation_domain' => 'messages',
                 'required' => false,
                 'trim' => false,
-                'attr' => ['placeholder' => 'każdy komunikat w osobnej linii'],
+                'attr' => ['placeholder' => 'radio_station.edit.form.rdsRt.help'],
             ])
             ->add('rdsPty', null, [
                 'property_path' => 'rds[pty]',
 
-                'label' => 'Program Type',
+                'label' => 'radio_station.edit.form.rdsPty',
+                'translation_domain' => 'messages',
             ])
             ->add('rdsPi', null, [
-                'label' => 'Programme Identification',
+                'label' => 'radio_station.edit.form.rdsPi',
+                'translation_domain' => 'messages',
                 'attr' => ['maxlength' => '4'],
             ])
         ;
@@ -249,6 +268,8 @@ class RadioStationEditType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => RadioStation::class,
+            'label_format' => 'column.%name%',
+            'translation_domain' => 'radio_table',
         ]);
     }
 }

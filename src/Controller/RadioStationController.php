@@ -35,7 +35,7 @@ class RadioStationController extends AbstractController
             $entityManager->persist($radioStation);
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Stacja została dodana.');
+            $this->addFlash('notice', 'radio_station.add.notification.added');
             return $this->redirectToRoute('radio_station.edit', [
                 'id' => $radioStation->getId(),
                 'radioTableId' => $radioTable->getId(),
@@ -62,7 +62,7 @@ class RadioStationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Stacja została zapisana.');
+            $this->addFlash('notice', 'common.notification.saved_changes');
         }
 
         return $this->render('radio_station/edit.html.twig', [
@@ -80,7 +80,7 @@ class RadioStationController extends AbstractController
     {
         $template = clone $radioStation;
 
-        $this->addFlash('notice', 'Dane stacji zostały wypełnione.');
+        $this->addFlash('notice', 'radio_station.add.notification.copied');
 
         return $this->forward(__CLASS__ . '::add', [
             'radioTableId' => $radioStation->getRadioTable()->getId(),
@@ -95,7 +95,7 @@ class RadioStationController extends AbstractController
      */
     public function remove(RadioStation $radioStation): Response
     {
-        $this->addFlash('notice', 'Stacja została zaznaczona do usunięcia.');
+        $this->addFlash('notice', 'radio_station.remove.notification.chosen_to_be_removed');
 
         return $this->forward(RadioTableController::class . '::remove', [
             'id' => $radioStation->getRadioTable()->getId(),

@@ -67,41 +67,41 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Nazwa stacji nie może być pusta.")
-     * @Assert\Length(max=100, maxMessage="Nazwa stacji może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\NotBlank(message="radio_station.name.not_blank")
+     * @Assert\Length(max=100, maxMessage="radio_station.name.max_length")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50, maxMessage="Grupa może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\Length(max=50, maxMessage="radio_station.radio_group.max_length")
      */
     private $radioGroup;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50, maxMessage="Kraj może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\Length(max=50, maxMessage="radio_station.country.max_length")
      */
     private $country;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2)
-     * @Assert\NotBlank(message="Częstotliwość stacji nie może być pusta.")
+     * @Assert\NotBlank(message="radio_station.frequency.not_blank")
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0, message="Częstotliwość musi być większa niż zero.")
+     * @Assert\GreaterThan(0, message="radio_station.frequency.greater_than_zero")
      */
     private $frequency;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=100, maxMessage="Lokalizacja może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\Length(max=100, maxMessage="radio_station.location.max_length")
      */
     private $location;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0, message="Moc musi być większa niż zero.")
+     * @Assert\GreaterThan(0, message="radio_station.power.greater_than_zero")
      */
     private $power;
 
@@ -113,7 +113,7 @@ class RadioStation
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0, message="Odległość od nadajnika musi być większa niż zero.")
+     * @Assert\GreaterThan(0, message="radio_station.distance.greater_than_zero")
      */
     private $distance;
 
@@ -126,13 +126,13 @@ class RadioStation
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
-     * @Assert\GreaterThan(0, message="Numer w odbiorniku musi być większy niż zero.")
+     * @Assert\GreaterThan(0, message="radio_station.private_number.greater_than_zero")
      */
     private $privateNumber;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @YearMonthDate(message="Data pierwszego odbioru jest niepoprawna.")
+     * @YearMonthDate(message="radio_station.first_log_date.invalid_format")
      */
     private $firstLogDate;
 
@@ -191,20 +191,20 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
-     * @Assert\Length(max=4, maxMessage="Kod RDS PI może mieć maksymalnie {{ limit }} znaki.")
+     * @Assert\Length(max=4, maxMessage="radio_station.rds_pi.max_length")
      */
     private $rdsPi;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Assert\Length(max=500, maxMessage="Komentarz może mieć maksymalnie {{ limit }} znaków.")
+     * @Assert\Length(max=500, maxMessage="radio_station.comment.max_length")
      */
     private $comment;
 
     /**
      * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\Length(max=500, maxMessage="Odnośnik zewnętrzny może mieć maksymalnie {{ limit }} znaków.")
-     * @Assert\Url(message="Odnośnik zewnętrzny jest niepoprawny.")
+     * @Assert\Length(max=500, maxMessage="radio_station.external_anchor.max_length")
+     * @Assert\Url(message="radio_station.external_anchor.invalid_format")
      */
     private $externalAnchor;
 

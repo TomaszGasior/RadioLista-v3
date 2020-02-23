@@ -22,7 +22,8 @@ class AdminFlashMessage implements EventSubscriberInterface
         /** @var Session */
         $session = $request->getSession();
 
-        $session->getFlashBag()->add('error', 'Przeglądasz prywatny zasób jako administrator.');
+        // TODO: get rid of this ugly workaround!
+        $session->getFlashBag()->add('validation_error', 'Przeglądasz prywatny zasób jako administrator.');
     }
 
     /**

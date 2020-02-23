@@ -1,22 +1,22 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Edytuj stację{% endblock %}
+{% block page_title %}{{ 'radio_station.edit.title'|trans }}{% endblock %}
 
 {% block context_menu %}
     <ul>
         <li>
             <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
-                Zobacz wykaz
+                {{ 'radio_table.show.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
-                Dodaj stację
+                {{ 'radio_station.add.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
-                Kopiuj bieżącą stację
+                {{ 'radio_station.edit.action.copy_current'|trans }}
             </a>
         </li>
     </ul>
@@ -25,8 +25,15 @@
 {% block page_content %}
     <header>
         <h1 class="separated-title">
-            <span>Edytuj stację „{{ radio_station.name }}”</span>
-            <span class="additional"><span class="sr-only">wykaz</span> {{ radio_station.radioTable.name }}</span>
+            <span>
+                {{ 'radio_station.edit.title_pattern'|trans({
+                    '%name%': radio_station.name,
+                }) }}
+            </span>
+            <span class="additional">
+                <span class="sr-only">{{ 'radio_station.edit.text.for_radio_table_a11y_subheading'|trans }}</span>
+                {{ radio_station.radioTable.name }}
+            </span>
         </h1>
     </header>
 
@@ -34,7 +41,7 @@
 
     {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
-    <button>Zapisz stację</button>
+    <button>{{ 'radio_station.edit.action.save'|trans }}</button>
 
     {{ form_end(form) }}
 {% endblock %}

@@ -42,12 +42,12 @@
         <ul>
             <li>
                 <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                    Dodaj stację
+                    {{ 'radio_station.add.title'|trans }}
                 </a>
             </li>
             <li>
                 <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                    Ustawienia wykazu
+                    {{ 'radio_table.settings.title'|trans }}
                 </a>
             </li>
         </ul>
@@ -128,18 +128,18 @@
 
             <template class="rds-popup-template">
                 <section class="rds-popup" role="alert">
-                    <h2>Informacje o RDS</h2>
+                    <h2>{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
                     <dl>
                         <div class="rds-popup-ps-row">
-                            <dt>PS</dt>
+                            <dt>{{ 'radio_table.show.rds_popup.ps'|trans }}</dt>
                             <dd class="rds-popup-ps-value"></dd>
                         </div>
                         <div class="rds-popup-rt-row">
-                            <dt>RT</dt>
+                            <dt>{{ 'radio_table.show.rds_popup.rt'|trans }}</dt>
                             <dd class="rds-popup-rt-value rds-wrap"></dd>
                         </div>
                         <div class="rds-popup-pty-row">
-                            <dt>PTY</dt>
+                            <dt>{{ 'radio_table.show.rds_popup.pty'|trans }}</dt>
                             <dd class="rds-popup-pty-value"></dd>
                         </div>
                     </dl>
@@ -148,21 +148,21 @@
         </div>
 
         <section class="radio-table-details customizable-color">
-            <h3 class="sr-only">Informacje o wykazie</h3>
+            <h3 class="sr-only">{{ 'radio_table.show.heading.details'|trans }}</h3>
 
             {{ radio_table.description|raw }}
             <dl>
                 <div>
-                    <dt>Liczba stacji</dt>
+                    <dt>{{ 'radio_table.detail.radio_stations_count'|trans }}</dt>
                     <dd>{{ radio_table.radioStationsCount }}</dd>
                 </div>
                 <div>
-                    <dt>Data aktualizacji</dt>
+                    <dt>{{ 'radio_table.detail.last_update_time'|trans }}</dt>
                     <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
                 </div>
                 {% if radio_table.owner.publicProfile %}
                     <div>
-                        <dt>Autor</dt>
+                        <dt>{{ 'radio_table.detail.author'|trans }}</dt>
                         <dd>
                             <a href="{{ path('user.public_profile', {name: radio_table.owner.name}) }}">
                                 {{ radio_table.owner.name }}
@@ -174,9 +174,13 @@
         </section>
     {% else %}
         <p class="information">
-            Ten wykaz jest pusty.
             {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}
-                <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">Dodaj do niego jakąś stację</a>, by usunąć ten komunikat.
+                {{ 'radio_table.show.information.empty_editable'|trans({
+                    '%anchor%': '<a href="' ~ path('radio_station.add', {radioTableId: radio_table.id}) ~ '">',
+                    '%anchor_end%': '</a>',
+                })|raw }}
+            {% else %}
+                {{ 'radio_table.show.information.empty'|trans }}
             {% endif %}
         </p>
     {% endif %}

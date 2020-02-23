@@ -25,10 +25,9 @@ class RadioStationRemoveType extends AbstractType
     {
         $builder
             ->add('chosenToRemove', EntityType::class, [
-                'label' => 'Wskaż stacje do usunięcia',
-
                 'class' => RadioStation::class,
                 'choice_label' => 'name',
+                'translation_domain' => false,
                 'query_builder' => $this->radioStationRepository->getQueryBuilderForRadioTable($options['radio_table']),
                 'expanded' => true,
                 'multiple' => true,
@@ -51,5 +50,8 @@ class RadioStationRemoveType extends AbstractType
     {
         $resolver->setRequired(['radio_table']);
         $resolver->setAllowedTypes('radio_table', RadioTable::class);
+        $resolver->setDefaults([
+            'label_format' => 'radio_station.remove.form.%name%',
+        ]);
     }
 }

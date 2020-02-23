@@ -30,7 +30,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         /** @var Session */
         $session = $event->getRequest()->getSession();
 
-        $session->getFlashBag()->add('notice', 'Zalogowano się pomyślnie.');
+        $session->getFlashBag()->add('notice', 'session.notification.logged_in');
     }
 
     public function onKernelException(ExceptionEvent $event): void
@@ -45,7 +45,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         /** @var Session */
         $session = $event->getRequest()->getSession();
 
-        $session->getFlashBag()->add('error', 'Zaloguj się, aby mieć dostęp do tej strony.');
+        $session->getFlashBag()->add('error', 'session.notification.restricted_for_logged_in');
     }
 
     public function onKernelFinishRequest(FinishRequestEvent $event): void
@@ -59,7 +59,7 @@ class SecurityFlashNotice implements EventSubscriberInterface
         /** @var Session */
         $session = $request->getSession();
 
-        $session->getFlashBag()->add('notice', 'Wylogowano się pomyślnie.');
+        $session->getFlashBag()->add('notice', 'session.notification.logged_out');
     }
 
     /**

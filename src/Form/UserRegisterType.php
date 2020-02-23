@@ -17,27 +17,23 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Nazwa użytkownika',
+                'attr' => [
+                    'title' => 'user.register.form.name.help',
+                ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'label_format' => 'user.register.form.plainPassword.%name%',
 
-                'first_options' => [
-                    'label' => 'Hasło',
-                ],
-                'second_options' => [
-                    'label' => 'Hasło ponownie',
-                ],
-                'invalid_message' => 'Podane hasła nie są identyczne.',
+                'invalid_message' => 'user.passwords_dont_match',
             ])
             ->add('acceptServiceTerms', CheckboxType::class, [
-                'label' => 'Akceptuję regulamin serwisu RadioLista',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new Assert\IsTrue([
                         'groups' => 'Registration',
-                        'message' => 'Akceptacja regulaminu serwisu jest wymagana.',
+                        'message' => 'user.service_terms_required',
                     ]),
                 ],
             ])
@@ -48,6 +44,7 @@ class UserRegisterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'label_format' => 'user.register.form.%name%',
             'validation_groups' => ['Registration', 'RedefinePassword'],
         ]);
     }

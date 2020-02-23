@@ -4,7 +4,7 @@
     <head>
         <meta name="viewport" content="initial-scale=1">
         <link rel="stylesheet" href="{{ asset('error.css', 'minified') }}">
-        <title>RadioLista — bandscany i wykazy radiowe</title>
+        <title>RadioLista — {{ 'layout.slogan'|trans }}</title>
     </head>
 
     <body>
@@ -12,33 +12,17 @@
             <a href="{{ url('homepage') }}">RadioLista</a>
         </div>
 
-        {% set error_title = 'Wystąpił poważny błąd.' %}
-        {% set error_text = 'Wystąpił nieprzewidziany błąd aplikacji.|Proszę skontaktować się z&nbsp;autorem RadioListy.' %}
+        {% set error_title = 'dark_error.unknown_title' %}
+        {% set error_text = 'dark_error.unknown_text' %}
 
-        {% if message == 'MaintenanceMode' %}
-            {% set error_title = 'Trwa przerwa techniczna.' %}
-            {% set error_text = 'W tej chwili serwis jest wyłączony ze względu na prace konserwacyjne.|Odwiedź RadioListę za kilka minut.' %}
-        {% endif %}
-        {% if message == 'DatabaseConnection' %}
-            {% set error_title = 'Drobne problemy techniczne.' %}
-            {% set error_text = 'Nie udało się połączyć z bazą danych serwisu.|Proszę odczekać kilka minut i&nbsp;odświeżyć stronę.' %}
-        {% endif %}
-        {% if message == 'UnexpectedRequest' %}
-            {% set error_title = 'Nie można wykonać działania.' %}
-            {% set error_text = 'Brak uprawnień do wykonania działania|lub działanie pozbawione sensu.' %}
-        {% endif %}
-        {% if message == 'RadioTableNotFound' %}
-            {% set error_title = 'Wykaz nie istnieje.' %}
-            {% set error_text = 'Poszukiwany wykaz nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
-        {% endif %}
-        {% if message == 'NotFound' %}
-            {% set error_title = 'Strona nie istnieje.' %}
-            {% set error_text = 'Poszukiwana strona serwisu nie istnieje.|Proszę sprawdzić poprawność wpisanego adresu.' %}
+        {% if message in ['MaintenanceMode', 'DatabaseConnection', 'UnexpectedRequest', 'RadioTableNotFound', 'NotFound'] %}
+            {% set error_title = 'dark_error.message.' ~ message ~ '.title' %}
+            {% set error_text = 'dark_error.message.' ~ message ~ '.text' %}
         {% endif %}
 
-        <div class="content" data-banner-text="Ciemność, widzę ciemność!">
-            <h1>{{ error_title }}</h1>
-            <p>{{ error_text|replace({'|': '<br>'})|raw }}</p>
+        <div class="content" data-banner-text="{{ 'dark_error.heading'|trans }}">
+            <h1>{{ error_title|trans }}</h1>
+            <p>{{ error_text|trans|nl2br(false) }}</p>
         </div>
 
         {{ piwik_code() }}

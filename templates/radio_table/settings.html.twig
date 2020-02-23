@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Ustawienia wykazu{% endblock %}
+{% block page_title %}{{ 'radio_table.settings.title'|trans }}{% endblock %}
 
 {% block head_closing %}
     <script src="{{ asset('radio-table-settings.js', 'minified') }}"></script>
@@ -10,17 +10,17 @@
     <ul>
         <li>
             <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                Zobacz wykaz
+                {{ 'radio_table.create.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                Dodaj stację
+                {{ 'radio_station.add.title'|trans }}
             </a>
         </li>
         <li>
             <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
-                Usuń stacje lub wykaz
+                {{ 'radio_table.remove.title'|trans }}
             </a>
         </li>
     </ul>
@@ -29,7 +29,7 @@
 {% block page_content %}
     <header>
         <h1 class="separated-title">
-            <span>Ustawienia wykazu</span>
+            <span>{{ 'radio_table.settings.title'|trans }}</span>
             <span class="additional">{{ radio_table.name }}</span>
         </h1>
     </header>
@@ -38,7 +38,7 @@
 
     <div class="tabbed-ui">
         <div>
-            <h2>Główne</h2>
+            <h2>{{ 'radio_table.settings.heading.general'|trans }}</h2>
 
             {{ form_row(form.name) }}
             {{ form_row(form.useKhz) }}
@@ -47,7 +47,7 @@
         </div>
 
         <div>
-            <h2>Widoczność</h2>
+            <h2>{{ 'radio_table.settings.heading.visibility'|trans }}</h2>
 
             <div class="radio-table-status">
                 {{ form_row(form.status) }}
@@ -55,11 +55,11 @@
         </div>
 
         <div>
-            <h2>Kolumny</h2>
+            <h2>{{ 'radio_table.settings.heading.columns'|trans }}</h2>
 
             <noscript>
                 <p class="information">
-                    Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z&nbsp;wygodnego graficznego edytora kolumn, włącz JavaScript w&nbsp;przeglądarce.
+                    {{ 'radio_table.settings.information.columns'|trans }}
                 </p>
             </noscript>
 
@@ -67,15 +67,18 @@
                 {{ form_row(form.columns) }}
 
                 <template class="radio-table-columns-buttons-template">
-                    <button type="button" class="toggle" data-show-label="Pokaż" data-hide-label="Ukryj"></button>
-                    <button type="button" class="move-up">Do góry</button>
-                    <button type="button" class="move-down">W dół</button>
+                    <button type="button" class="toggle"
+                            data-show-label="{{ 'radio_table.settings.columns_ui.action.toggle_show'|trans }}"
+                            data-hide-label="{{ 'radio_table.settings.columns_ui.action.toggle_hide'|trans }}">
+                    </button>
+                    <button type="button" class="move-up">{{ 'radio_table.settings.columns_ui.action.move_up'|trans }}</button>
+                    <button type="button" class="move-down">{{ 'radio_table.settings.columns_ui.action.move_down'|trans }}</button>
                 </template>
             </div>
         </div>
 
         <div>
-            <h2>Wygląd</h2>
+            <h2>{{ 'radio_table.settings.heading.appearance'|trans }}</h2>
 
             {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
 
@@ -115,42 +118,42 @@
         </div>
 
         <div id="export">
-            <h2>Eksport</h2>
+            <h2>{{ 'radio_table.settings.heading.export'|trans }}</h2>
 
             {% if radio_table.radioStationsCount > 0 %}
                 <p class="information">
-                    Wybierz pożądany format eksportu, aby pobrać cały wykaz w&nbsp;formie pliku na swój komputer. Wykaz&nbsp;eksportowany jest z&nbsp;aktualnie ustawionym sortowaniem i&nbsp;aktualnie widocznymi kolumnami. Pomijane&nbsp;są&nbsp;szczegółowe informacje o&nbsp;RDS.
+                    {{ 'radio_table.settings.information.export'|trans }}
                 </p>
 
                 <ul class="radio-table-export-list">
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
-                            Pobierz dokument PDF
+                            {{ 'radio_table.settings.export.action.download_pdf'|trans }}
                         </a>
-                        PDF — dokument elektroniczny do przeglądania i&nbsp;druku
+                        {{ 'radio_table.settings.export.text.about_pdf'|trans }}
                     </li>
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
-                            Pobierz arkusz CSV
+                            {{ 'radio_table.settings.export.action.download_csv'|trans }}
                         </a>
-                        CSV — zestaw danych do zaimportowania i&nbsp;edycji w&nbsp;arkuszu kalkulacyjnym
+                        {{ 'radio_table.settings.export.text.about_csv'|trans }}
                     </li>
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
-                            Pobierz stronę HTML
+                            {{ 'radio_table.settings.export.action.download_html'|trans }}
                         </a>
-                        HTML — plik strony internetowej otwierany w&nbsp;przeglądarce
+                        {{ 'radio_table.settings.export.text.about_html'|trans }}
                     </li>
                 </ul>
             {% else %}
                 <p class="information">
-                    Ten wykaz jest pusty. Nie można go wyeksportować.
+                    {{ 'radio_table.settings.information.export_cannot_empty'|trans }}
                 </p>
             {% endif %}
         </div>
     </div>
 
-    <button>Zapisz</button>
+    <button>{{ 'common.action.save'|trans }}</button>
 
     {{ form_end(form) }}
 {% endblock %}

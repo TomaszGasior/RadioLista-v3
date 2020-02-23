@@ -14,30 +14,28 @@ class RadioTableCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', null, [
-                'label' => 'Nazwa wykazu',
-            ])
+            ->add('name')
             ->add('useKhz', ChoiceType::class, [
-                'label' => 'Jednostka częstotliwości',
                 'choices' => [
                     'kHz' => 1,
                     'MHz' => 0,
-                ]
+                ],
+                'choice_translation_domain' => false,
             ])
             ->add('description', CKEditorType::class, [
-                'label' => 'Opis wykazu',
                 'required' => false,
                 'sanitize_html' => true,
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,
-                'label' => 'Widoczność wykazu',
                 'choices' => [
-                    'Publiczny — wykaz może zobaczyć każdy' => RadioTable::STATUS_PUBLIC,
-                    'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
-                        => RadioTable::STATUS_UNLISTED,
-                    'Prywatny — wykaz możesz zobaczyć tylko ty' => RadioTable::STATUS_PRIVATE,
+                    RadioTable::STATUS_PUBLIC,
+                    RadioTable::STATUS_UNLISTED,
+                    RadioTable::STATUS_PRIVATE,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'radio_table.settings.form.status.choice.'.$choice;
+                },
             ])
         ;
     }
@@ -46,6 +44,7 @@ class RadioTableCreateType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => RadioTable::class,
+            'label_format' => 'radio_table.settings.form.%name%',
         ]);
     }
 }

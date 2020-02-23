@@ -2,12 +2,12 @@
 
 {% block page_content %}
     <header class="sr-only">
-        <h1>RadioLista — bandscany i wykazy radiowe</h1>
+        <h1>RadioLista — {{ 'layout.slogan'|trans }}</h1>
     </header>
 
     <div class="homepage">
         <section>
-            <h2>Ostatnio zmodyfikowane wykazy</h2>
+            <h2>{{ 'general.homepage.heading.last_updated_radio_tables'|trans }}</h2>
             <ol class="homepage-radio-tables-list">
                 {% for radio_table in last_updated_radio_tables %}
                     <li>
@@ -15,7 +15,7 @@
                             {{ radio_table.name }}
                         </a>
                         <span>
-                            <span class="sr-only"> — ostatnia aktualizacja: </span>
+                            <span class="sr-only"> — {{ 'general.homepage.text.last_update_time'|trans }}: </span>
                             {{ radio_table.lastUpdateTime|date_format }}
                         </span>
                     </li>
@@ -24,7 +24,7 @@
         </section>
 
         <section>
-            <h2>Ostatnio utworzone wykazy</h2>
+            <h2>{{ 'general.homepage.heading.last_created_radio_tables'|trans }}</h2>
             <ol class="homepage-radio-tables-list">
                 {% for radio_table in last_created_radio_tables %}
                     <li>
@@ -32,7 +32,7 @@
                             {{ radio_table.name }}
                         </a>
                         <span>
-                            <span class="sr-only"> — ostatnia aktualizacja: </span>
+                            <span class="sr-only"> — {{ 'general.homepage.text.last_update_time'|trans }}: </span>
                             {{ radio_table.lastUpdateTime|date_format }}
                         </span>
                     </li>
@@ -41,15 +41,15 @@
         </section>
 
         <section>
-            <h2>Czym jest RadioLista?</h2>
+            <h2>{{ 'general.homepage.heading.about_this_service'|trans }}</h2>
 
             <p>
-                W serwisie RadioLista osoby interesujące się mediami mogą&nbsp;publikować różnorodne wykazy radiowe i&nbsp;telewi&shy;zyjne &mdash; bandscany, regularne wykazy odbieranych stacji czy&nbsp;też prywatne listy ulubionych programów.
+                {{ 'general.homepage.text.about'|trans }}
             </p>
         </section>
 
         <section>
-            <h2>Wyszukaj wykazy</h2>
+            <h2>{{ 'general.homepage.heading.search_radio_tables'|trans }}</h2>
 
             {% include 'common/search_form.html.twig' %}
         </section>

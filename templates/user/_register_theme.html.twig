@@ -1,0 +1,15 @@
+{# This ugly copy-paste from `form_label` in 'form_div_layout.html.twig' #}
+{# is needed to be able to use HTML code in `label_translation_parameters`. #}
+{% block _user_register_acceptServiceTerms_label %}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+    {% if required -%}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+    {%- endif -%}
+    {% set label = label_format|replace({
+        '%name%': name,
+        '%id%': id,
+    }) %}
+    <{{ element|default('label') }}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
+        {{- label|trans(label_translation_parameters, translation_domain)|raw -}}
+    </{{ element|default('label') }}>
+{% endblock %}

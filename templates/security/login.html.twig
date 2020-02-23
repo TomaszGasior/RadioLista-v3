@@ -1,22 +1,18 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Logowanie{% endblock %}
+{% block page_title %}{{ 'session.login.title'|trans }}{% endblock %}
 
 {% block page_content %}
-    <header class="sr-only">
-        <h1>Konto użytkownika — logowanie</h1>
-    </header>
-
     {{ form_start(form) }}
 
     <div class="user-login-screen">
-        <h2>Zaloguj się</h2>
+        <h1 class="h2">{{ 'session.login.title'|trans }}</h1>
 
         {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
         {{ form_row(form.password) }}
         {{ form_row(form.rememberMe) }}
 
-        <button>Zaloguj się</button>
+        <button>{{ 'session.login.title'|trans }}</button>
     </div>
 
     {{ form_end(form) }}

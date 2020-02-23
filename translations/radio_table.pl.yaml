@@ -1,0 +1,70 @@
+heading:
+    comment: 'Komentarz'
+    country: 'Kraj'
+    externalAnchor: 'Odn.'
+    firstLogDate: '1. odbiór'
+    locality: 'Lokalność'
+    location: 'Lokalizacja'
+    name: 'Nazwa'
+    polarization: 'Pol.'
+    privateNumber: 'Nr'
+    quality: 'Jakość'
+    radioGroup: 'Grupa'
+    rds: 'RDS'
+    rdsPi: 'PI'
+    reception: 'Odbiór'
+    type: 'Rodzaj'
+
+column:
+    comment: 'Komentarz'
+    country: 'Kraj'
+    distance: 'Odległość od nadajnika'
+    externalAnchor: 'Odnośnik zewnętrzny'
+    firstLogDate: 'Data pierwszego odbioru'
+    frequency: 'Częstotliwość'
+    locality: 'Lokalność programu'
+    location: 'Lokalizacja nadajnika'
+    name: 'Nazwa'
+    polarization: 'Polaryzacja'
+    power: 'Moc nadajnika'
+    privateNumber: 'Numer w odbiorniku'
+    quality: 'Jakość odbioru'
+    radioGroup: 'Grupa medialna'
+    rds: 'Informacje RDS'
+    rdsPi: 'Kod RDS PI'
+    reception: 'Specyfika odbioru'
+    type: 'Rodzaj programu'
+
+polarization:
+    H: 'pozioma'
+    V: 'pionowa'
+    C: 'kołowa'
+    M: 'różne'
+
+reception:
+    '0': 'regularny'
+    '1': 'tropo'
+    '2': 'scatter'
+    '3': 'sporadic-E'
+
+type:
+    '0': 'inny'
+    '1': 'muzyczny'
+    '2': 'informacyjny'
+    '3': 'uniwersalny'
+    '4': 'katolicki'
+
+quality:
+    '5': 'bardzo dobra'
+    '4': 'dobra'
+    '3': 'dostateczna'
+    '2': 'zła'
+    '1': 'bardzo zła'
+
+locality:
+    country: 'ogólnokrajowy'
+    network: 'sieć'
+    network.abbr: '(s)'
+
+external_anchor:
+    text: 'Odnośnik dla „%name%”'

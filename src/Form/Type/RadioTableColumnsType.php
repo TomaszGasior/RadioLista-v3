@@ -2,6 +2,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\RadioTable;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -46,21 +47,10 @@ class RadioTableColumnsType extends AbstractType
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         foreach ($view->children as $name => $childrenView) {
-            if (isset($options['column_labels'][$name])) {
-                $childrenView->vars['label'] = $options['column_labels'][$name];
-
-                // Frequency and name columns have to be always visible.
-                if (in_array($name, ['frequency', 'name'])) {
-                    $childrenView->vars['attr']['min'] = 1;
-                }
+            // Frequency and name columns have to be always visible.
+            if (in_array($name, [RadioTable::COLUMN_FREQUENCY, RadioTable::COLUMN_NAME])) {
+                $childrenView->vars['attr']['min'] = 1;
             }
         }
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'column_labels' => [],
-        ]);
     }
 }

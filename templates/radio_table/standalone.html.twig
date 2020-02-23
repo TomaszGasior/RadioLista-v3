@@ -3,7 +3,7 @@
 <html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
-        <meta name="generator" content="RadioLista v{{ version }} – {{ app.request.schemeAndHttpHost }}">
+        <meta name="generator" content="RadioLista v{{ version }} — {{ app.request.schemeAndHttpHost }}">
         <title>{{ radio_table.name }} — RadioLista</title>
         <style>
             body {
@@ -159,7 +159,10 @@
 
         <footer>
             <p>
-                Wykaz wygenerowano w serwisie <a href="{{ app.request.schemeAndHttpHost }}">RadioLista</a> dnia {{ 'now'|date_format }}.
+                {{ 'radio_table.standalone.about'|trans({
+                    '%anchor%': '<a href="' ~ app.request.schemeAndHttpHost ~ '">RadioLista</a>',
+                    '%date%': 'now'|date_format,
+                })|raw }}
             </p>
         </footer>
 

@@ -18,35 +18,26 @@ class UserSettingsType extends AbstractType
     {
         $builder
             ->add('aboutMe', CKEditorType::class, [
-                'label' => 'Kilka słów o mnie',
                 'required' => false,
                 'sanitize_html' => true,
             ])
-            ->add('publicProfile', null, [
-                'label' => 'Włącz profil publiczny i stronę profilową',
-            ])
+            ->add('publicProfile')
             ->add('currentPassword', PasswordType::class, [
-                'label' => 'Obecne hasło',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new SecurityAssert\UserPassword([
                         'groups' => 'ChangingPasswordTab',
-                        'message' => 'Podane aktualne hasło jest niepoprawne.',
+                        'message' => 'user.incorrect_password',
                     ]),
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,
+                'label_format' => 'user.settings.form.plainPassword.%name%',
 
-                'first_options' => [
-                    'label' => 'Nowe hasło',
-                ],
-                'second_options' => [
-                    'label' => 'Nowe hasło ponownie',
-                ],
-                'invalid_message' => 'Podane hasła nie są identyczne.',
+                'invalid_message' => 'user.passwords_dont_match',
             ])
         ;
     }
@@ -55,6 +46,7 @@ class UserSettingsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'label_format' => 'user.settings.form.%name%',
             'validation_groups' => function(FormInterface $form){
                 if ($form->get('currentPassword')->getData() || $form->get('plainPassword')->getData()) {
                     return ['ChangingPasswordTab', 'RedefinePassword'];

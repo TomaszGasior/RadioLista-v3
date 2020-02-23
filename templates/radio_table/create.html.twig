@@ -1,20 +1,20 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Utwórz nowy wykaz{% endblock %}
+{% block page_title %}{{ 'radio_table.create.title'|trans }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h1>Utwórz nowy wykaz</h1>
+        <h1>{{ 'radio_table.create.title_long'|trans }}</h1>
     </header>
 
     {{ form_start(form) }}
 
     <div class="tabbed-ui">
         <div>
-            <h2>Główne</h2>
+            <h2>{{ 'radio_table.settings.heading.general'|trans }}</h2>
 
             <p class="information">
-                W nazwie i opisie wykazu warto umieścić lokalizację (np.&nbsp;miejscowość lub województwo). Te&nbsp;informacje są&nbsp;używane przy&nbsp;przeszukiwaniu wykazów. Można je później zmienić.
+                {{ 'radio_table.create.information.local_desc'|trans }}
             </p>
 
             {{ form_row(form.name) }}
@@ -23,7 +23,7 @@
         </div>
 
         <div>
-            <h2>Widoczność</h2>
+            <h2>{{ 'radio_table.settings.heading.visibility'|trans }}</h2>
 
             <div class="radio-table-status">
                 {{ form_row(form.status) }}
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <button>Utwórz wykaz</button>
+    <button>{{ 'radio_table.create.title'|trans }}</button>
 
     {{ form_end(form) }}
 {% endblock %}

@@ -2,7 +2,7 @@
 
 <div class="tabbed-ui">
     <div>
-        <h2>Główne</h2>
+        <h2>{{ 'radio_station.edit.heading.general'|trans }}</h2>
 
         {{ form_row(form.frequency, {'unit_label': radio_station.radioTable.useKhz ? 'kHz' : 'MHz'}) }}
         {{ form_row(form.name) }}
@@ -10,7 +10,7 @@
         {{ form_row(form.country) }}
     </div>
     <div>
-        <h2>Nadawanie i audycje</h2>
+        <h2>{{ 'radio_station.edit.heading.broadcast'|trans }}</h2>
 
         {{ form_row(form.location) }}
         {{ form_row(form.power) }}
@@ -37,7 +37,7 @@
         </script>
     </div>
     <div>
-        <h2>Odbiór</h2>
+        <h2>{{ 'radio_station.edit.heading.reception'|trans }}</h2>
 
         {{ form_row(form.distance) }}
         {{ form_row(form.reception) }}
@@ -45,7 +45,7 @@
         {{ form_row(form.firstLogDate) }}
     </div>
     <div>
-        <h2>Osobiste</h2>
+        <h2>{{ 'radio_station.edit.heading.personal'|trans }}</h2>
 
         {{ form_row(form.privateNumber) }}
         {{ form_row(form.marker) }}
@@ -53,11 +53,11 @@
         {{ form_row(form.comment) }}
     </div>
     <div>
-        <h2>RDS</h2>
+        <h2>{{ 'radio_station.edit.heading.rds'|trans }}</h2>
 
         <noscript>
             <p class="information">
-                Aby zobaczyć wyskakujące okno z&nbsp;informacjami o&nbsp;RDS, włącz JavaScript w&nbsp;przeglądarce.
+                {{ 'radio_station.edit.information.rds_popup'|trans }}
             </p>
         </noscript>
 

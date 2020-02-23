@@ -5,6 +5,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioTableRemoveType extends AbstractType
 {
@@ -12,9 +13,15 @@ class RadioTableRemoveType extends AbstractType
     {
         $builder
             ->add('confirm', CheckboxType::class, [
-                'label' => 'Usuń cały wykaz na zawsze',
                 'required' => false,
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'label_format' => 'radio_table.remove.form.%name%',
+        ]);
     }
 }

@@ -1,4 +1,5 @@
-{% extends 'radio_table/table/radio_table.twig' %}
+{%- extends 'radio_table/table/radio_table.twig' -%}
+{%- trans_default_domain 'radio_table' -%}
 
 {%- block table_start -%}
     <table class="{%- block table_class 'radio-table' -%}">
@@ -45,10 +46,10 @@
     <span data-number-indent="distance">{{ parent() }}</span>
 {%- endblock -%}
 {%- block radio_station_polarization -%}
-    <abbr title="{{ polarization_labels[radio_station.polarization] }}">{{ parent() }}</abbr>
+    <abbr title="{{ ('polarization.' ~ radio_station.polarization)|trans }}">{{ parent() }}</abbr>
 {%- endblock -%}
 {%- block radio_station_locality_network %}
-    <small title="sieć">{{ parent()|trim }}</small>
+    <small title="{{ 'locality.network'|trans }}">{{ parent()|trim }}</small>
 {%- endblock -%}
 {%- block radio_station_first_log_date %}
     <time>{{ parent() }}</time>
@@ -61,14 +62,7 @@
 {%- endblock -%}
 
 {%- block radio_station_quality -%}
-    {%- set quality_labels = {
-        (constant('App\\Entity\\RadioStation::QUALITY_VERY_GOOD')): 'bardzo dobra',
-        (constant('App\\Entity\\RadioStation::QUALITY_GOOD')): 'dobra',
-        (constant('App\\Entity\\RadioStation::QUALITY_MIDDLE')): 'dostateczna',
-        (constant('App\\Entity\\RadioStation::QUALITY_BAD')): 'zła',
-        (constant('App\\Entity\\RadioStation::QUALITY_VERY_BAD')): 'bardzo zła',
-    } -%}
-    <span class="quality quality-{{ radio_station.quality }}" title="{{ quality_labels[radio_station.quality] }}">
+    <span class="quality quality-{{ radio_station.quality }}" title="{{ ('quality.' ~ radio_station.quality)|trans }}">
         {#- Skip whitespace for proper styling. -#}
         {{- parent() -}}
     </span>
@@ -77,6 +71,8 @@
 {%- block radio_station_external_anchor -%}
     <a class="external" href="{{- parent() -}}" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30"><path d="M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z"/></svg>
-        <span class="sr-only">Odnośnik dla „{{ radio_station.name }}”</span>
+        <span class="sr-only">
+            {{ 'external_anchor.text'|trans({'%name%': radio_station.name}) }}
+        </span>
     </a>
 {%- endblock -%}

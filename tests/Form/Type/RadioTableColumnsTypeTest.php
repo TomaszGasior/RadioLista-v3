@@ -27,8 +27,7 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     public function testRenderedFields(array $visibleColumns, array $columnLabels): void
     {
         $form = $this->factory->create(
-            RadioTableColumnsType::class, $visibleColumns,
-            ['column_labels' => $columnLabels],
+            RadioTableColumnsType::class, $visibleColumns
         );
 
         $view = $form->createView();

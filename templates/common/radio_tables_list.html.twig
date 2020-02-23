@@ -1,8 +1,3 @@
-{% set status_labels = {
-    (constant('App\\Entity\\RadioTable::STATUS_PUBLIC')): 'publiczny',
-    (constant('App\\Entity\\RadioTable::STATUS_PRIVATE')): 'prywatny',
-    (constant('App\\Entity\\RadioTable::STATUS_UNLISTED')): 'niepubliczny',
-} %}
 {% set show_visibility = show_visibility|default(false) %}
 {% set show_owner = show_owner|default(false) %}
 
@@ -17,12 +12,12 @@
             <dd class="radio-tables-list-details">
                 <dl>
                     {% if show_visibility %}
-                        <dt>Widoczność</dt>
-                        <dd>{{ status_labels[radio_table.status] }}</dd>
+                        <dt>{{ 'radio_table.detail.status'|trans }}</dt>
+                        <dd>{{ ('radio_table.detail.status.state.' ~ radio_table.status)|trans }}</dd>
                     {% endif %}
 
                     {% if show_owner and radio_table.owner.publicProfile %}
-                        <dt>Autor</dt>
+                        <dt>{{ 'radio_table.detail.author'|trans }}</dt>
                         <dd>
                             <a href="{{ path('user.public_profile', {name: radio_table.owner.name}) }}">
                                 {{ radio_table.owner.name }}
@@ -30,13 +25,13 @@
                         </dd>
                     {% endif %}
 
-                    <dt>Liczba stacji</dt>
+                    <dt>{{ 'radio_table.detail.radio_stations_count'|trans }}</dt>
                     <dd>{{ radio_table.radioStationsCount }}</dd>
 
-                    <dt>Data aktualizacji</dt>
+                    <dt>{{ 'radio_table.detail.last_update_time'|trans }}</dt>
                     <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
 
-                    <dt>Jednostka</dt>
+                    <dt>{{ 'radio_table.detail.unit'|trans }}</dt>
                     <dd>{{ radio_table.useKhz ? 'kHz' : 'MHz' }}</dd>
                 </dl>
             </dd>

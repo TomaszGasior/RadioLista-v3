@@ -29,13 +29,13 @@ class SecurityController extends AbstractController
             $token = $error->getToken();
 
             if (!$token || !$token->getUsername() || !$token->getCredentials()) {
-                $this->addFlash('error', 'Nie podano nazwy użytkownika lub hasła.');
+                $this->addFlash('error', 'session.login.notification.no_credentials');
             }
             elseif ($error instanceof BadCredentialsException) {
-                $this->addFlash('error', 'Dane logowania są niepoprawne.');
+                $this->addFlash('error', 'session.login.notification.bad_credentials');
             }
             else {
-                $this->addFlash('error', 'Wystąpił błąd. Spróbuj ponownie później.');
+                $this->addFlash('error', 'session.login.notification.auth_error');
             }
         }
 

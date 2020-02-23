@@ -18,70 +18,53 @@ class RadioTableSettingsType extends RadioTableCreateType
 
         $builder
             ->add('sorting', ChoiceType::class, [
-                'label' => 'Domyślne sortowanie',
                 'choices' => [
-                    'częstotliwość' => RadioTable::SORTING_FREQUENCY,
-                    'nazwa' => RadioTable::SORTING_NAME,
-                    'numer w odbiorniku' => RadioTable::SORTING_PRIVATE_NUMBER,
+                    RadioTable::SORTING_FREQUENCY,
+                    RadioTable::SORTING_NAME,
+                    RadioTable::SORTING_PRIVATE_NUMBER,
                 ],
+                'choice_label' => function ($choice) {
+                    return 'column.'.$choice;
+                },
+                'choice_translation_domain' => 'radio_table',
             ])
             ->add('columns', RadioTableColumnsType::class, [
-                'column_labels' => [
-                    RadioTable::COLUMN_COMMENT => 'Komentarz',
-                    RadioTable::COLUMN_COUNTRY => 'Kraj',
-                    RadioTable::COLUMN_DISTANCE => 'Odległość od nadajnika',
-                    RadioTable::COLUMN_EXTERNAL_ANCHOR => 'Odnośnik zewnętrzny',
-                    RadioTable::COLUMN_FIRST_LOG_DATE => 'Data pierwszego odbioru',
-                    RadioTable::COLUMN_FREQUENCY => 'Częstotliwość',
-                    RadioTable::COLUMN_LOCALITY => 'Lokalność programu',
-                    RadioTable::COLUMN_LOCATION => 'Lokalizacja nadajnika',
-                    RadioTable::COLUMN_NAME => 'Nazwa',
-                    RadioTable::COLUMN_POLARIZATION => 'Polaryzacja',
-                    RadioTable::COLUMN_POWER => 'Moc nadajnika',
-                    RadioTable::COLUMN_PRIVATE_NUMBER => 'Numer w odbiorniku',
-                    RadioTable::COLUMN_QUALITY => 'Jakość odbioru',
-                    RadioTable::COLUMN_RADIO_GROUP => 'Grupa medialna',
-                    RadioTable::COLUMN_RDS => 'Informacje RDS',
-                    RadioTable::COLUMN_RDS_PI => 'Kod RDS PI',
-                    RadioTable::COLUMN_RECEPTION => 'Specyfika odbioru',
-                    RadioTable::COLUMN_TYPE => 'Rodzaj programu',
-                ],
+                'label_format' => 'column.%name%',
+                'translation_domain' => 'radio_table',
             ])
             ->add('appearanceTheme', ChoiceType::class, [
                 'property_path' => 'appearance[th]',
 
-                'label' => 'Motyw',
                 'required' => false,
                 'choices' => [
-                    '(brak motywu, własne kolory)' => '',
-                    'Górski las' => 'bieszczady',
-                    'Drewno' => 'wood',
-                    'Tęcza i niebo' => 'rainbow',
-                    'Widok nocą' => 'night',
+                    '',
+                    'bieszczady',
+                    'wood',
+                    'rainbow',
+                    'night',
                 ],
+                'choice_label' => function ($choice) {
+                    return 'radio_table.settings.form.appearanceTheme.choice.'.$choice;
+                },
             ])
             ->add('appearanceBackgroundColor', TextType::class, [
                 'property_path' => 'appearance[bg]',
 
-                'label' => 'Kolor tła',
                 'required' => false,
             ])
             ->add('appearanceColor', TextType::class, [
                 'property_path' => 'appearance[fg]',
 
-                'label' => 'Kolor tekstu',
                 'required' => false,
             ])
             ->add('appearanceBackgroundImage', UrlType::class, [
                 'property_path' => 'appearance[img]',
 
-                'label' => 'Adres URL obrazu tła',
                 'required' => false,
             ])
             ->add('appearanceFullWidth', CheckboxType::class, [
                 'property_path' => 'appearance[full]',
 
-                'label' => 'Rozciągnij wykaz na pełną szerokość ekranu',
                 'required' => false,
             ])
         ;

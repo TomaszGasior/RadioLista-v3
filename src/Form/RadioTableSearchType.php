@@ -12,9 +12,7 @@ class RadioTableSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('s', SearchType::class, [
-                'label' => 'Szukane wyrażenie',
-            ])
+            ->add('s', SearchType::class)
             ->setMethod('GET')
         ;
     }
@@ -27,6 +25,7 @@ class RadioTableSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label_format' => 'common.search_form.form.%name%',
             'csrf_protection' => false,
         ]);
     }

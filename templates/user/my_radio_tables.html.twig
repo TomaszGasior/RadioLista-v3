@@ -1,16 +1,16 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Moje wykazy{% endblock %}
+{% block page_title %}{{ 'user.my_radio_tables.title'|trans }}{% endblock %}
 
 {% block context_menu %}
     <ul>
-        <li><a href="{{ path('radio_table.create') }}">Utwórz wykaz</a></li>
+        <li><a href="{{ path('radio_table.create') }}">{{ 'radio_table.create.title'|trans }}</a></li>
     </ul>
 {% endblock %}
 
 {% block page_content %}
     <header>
-        <h1>Moje wykazy</h1>
+        <h1>{{ 'user.my_radio_tables.title'|trans }}</h1>
     </header>
 
     {% if radio_tables %}
@@ -18,8 +18,10 @@
         {% include 'common/radio_tables_list.html.twig' %}
     {% else %}
         <p class="information">
-            Nie posiadasz jeszcze żadnego wykazu.
-            <a href="{{ path('radio_table.create') }}">To najlepszy moment, żeby to zmienić!</a>
+            {{ 'user.my_radio_tables.information.no_radio_tables'|trans({
+                '%anchor%': '<a href="' ~ path('radio_table.create') ~ '">',
+                '%anchor_end%': '</a>',
+            })|raw }}
         </p>
     {% endif %}
 {% endblock %}

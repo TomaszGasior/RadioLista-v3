@@ -1,10 +1,14 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Wyszukiwanie{% endblock %}
+{% block page_title %}{{ 'general.search_radio_tables.title'|trans }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h1><strong>„{{ search_term }}”</strong> — wyszukiwanie</h1>
+        <h1>
+            {{ 'general.search_radio_tables.title_pattern'|trans({
+                '%search_term%': '<strong>' ~ search_term ~ '</strong>',
+            })|raw }}
+        </h1>
     </header>
 
     {% include 'common/search_form.html.twig' %}
@@ -14,7 +18,7 @@
         {% include 'common/radio_tables_list.html.twig' %}
     {% else %}
         <p class="information">
-            Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki&nbsp;*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów.
+            {{ 'general.search_radio_tables.information.no_results'|trans }}
         </p>
     {% endif %}
 {% endblock %}
