@@ -276,7 +276,7 @@ a:active {
     padding-top: 0.3rem;
 }
 
-.main-content h2 {
+.main-content h2, .main-content .h2 {
     font-size: 1.6em;
     margin: 1rem 0;
     text-shadow: 0 0 2px #eee;
