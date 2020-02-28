@@ -109,7 +109,7 @@ class User implements UserInterface, EncoderAwareInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -157,7 +157,7 @@ class User implements UserInterface, EncoderAwareInterface
         return $this->publicProfile;
     }
 
-    public function setPublicProfile(?bool $publicProfile): self
+    public function setPublicProfile(bool $publicProfile): self
     {
         $this->publicProfile = $publicProfile;
 
@@ -194,7 +194,7 @@ class User implements UserInterface, EncoderAwareInterface
     /**
      * Not persisted. Used by entity listener for password encoding.
      */
-    public function setPlainPassword(string $plainPassword): self
+    public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
 
