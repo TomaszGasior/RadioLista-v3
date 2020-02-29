@@ -34,7 +34,7 @@ class UserControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'test_user',
         ]);
         $content = $crawler->html();
-        $this->assertContains($exampleContent, $content);
+        $this->assertStringContainsString($exampleContent, $content);
     }
 
     public function testUserPublicProfileVisibility(): void

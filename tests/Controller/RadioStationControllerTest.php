@@ -29,7 +29,7 @@ class RadioStationControllerTest extends WebTestCase
 
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();
-        $this->assertContains('EXAMPLE_RADIO_STATION_NAME_9125', $content);
+        $this->assertStringContainsString('EXAMPLE_RADIO_STATION_NAME_9125', $content);
     }
 
     public function testEditRadioStation(): void
@@ -41,8 +41,8 @@ class RadioStationControllerTest extends WebTestCase
 
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();
-        $this->assertContains('CHANGED_RADIO_STATION_NAME', $content);
-        $this->assertNotContains('test_radio_station_name', $content);
+        $this->assertStringContainsString('CHANGED_RADIO_STATION_NAME', $content);
+        $this->assertStringNotContainsString('test_radio_station_name', $content);
     }
 
     public function testCopyRadioStation(): void
@@ -55,7 +55,7 @@ class RadioStationControllerTest extends WebTestCase
 
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();
-        $this->assertContains('COPIED_RADIO_STATION_NAME', $content);
+        $this->assertStringContainsString('COPIED_RADIO_STATION_NAME', $content);
     }
 
     public function testRemoveRadioStation(): void
@@ -66,6 +66,6 @@ class RadioStationControllerTest extends WebTestCase
 
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();
-        $this->assertNotContains('test_radio_station_name', $content);
+        $this->assertStringNotContainsString('test_radio_station_name', $content);
     }
 }

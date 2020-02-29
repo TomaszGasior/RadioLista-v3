@@ -22,7 +22,7 @@ class SitemapControllerTest extends WebTestCase
         $response = $this->client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertContains('<loc>http://localhost/wykaz/1</loc>', $response->getContent());
-        $this->assertContains('<loc>http://localhost/profil/test_user</loc>', $response->getContent());
+        $this->assertStringContainsString('<loc>http://localhost/wykaz/1</loc>', $response->getContent());
+        $this->assertStringContainsString('<loc>http://localhost/profil/test_user</loc>', $response->getContent());
     }
 }

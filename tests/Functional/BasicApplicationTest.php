@@ -94,7 +94,7 @@ class BasicApplicationTest extends WebTestCase
         }
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertContains('<!doctype html>', $response->getContent());
-        $this->assertContains('</html>', $response->getContent());
+        $this->assertStringContainsString('<!doctype html>', $response->getContent());
+        $this->assertStringContainsString('</html>', $response->getContent());
     }
 }

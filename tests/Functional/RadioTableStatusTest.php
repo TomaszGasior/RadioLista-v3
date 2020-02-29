@@ -30,7 +30,7 @@ class RadioTableStatusTest extends WebTestCase
 
         $robotsTag = $crawler->filter('meta[name="robots"]');
         if ($expectedNoIndexTag) {
-            $this->assertContains('noindex', $robotsTag->attr('content'));
+            $this->assertStringContainsString('noindex', $robotsTag->attr('content'));
         }
         else {
             $this->assertCount(0, $robotsTag);
