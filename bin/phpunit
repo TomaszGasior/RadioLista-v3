@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-putenv('SYMFONY_PHPUNIT_VERSION=7');
 putenv('SYMFONY_PHPUNIT_DIR='.__DIR__.'/../vendor/.phpunit');
 
 if (!file_exists(dirname(__DIR__).'/vendor/symfony/phpunit-bridge/bin/simple-phpunit.php')) {
