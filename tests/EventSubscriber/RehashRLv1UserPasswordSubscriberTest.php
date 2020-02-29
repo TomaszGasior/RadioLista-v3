@@ -3,7 +3,7 @@
 namespace App\Tests\EventSubscriber;
 
 use App\Entity\User;
-use App\EventSubscriber\RehashRLv1UserPassword;
+use App\EventSubscriber\RehashRLv1UserPasswordSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class RehashRLv1UserPasswordTest extends TestCase
+class RehashRLv1UserPasswordSubscriberTest extends TestCase
 {
     private const PLAIN_PASSWORD = 'Passw0rd!';
 
@@ -64,7 +64,7 @@ class RehashRLv1UserPasswordTest extends TestCase
 
         $securityEvent = new InteractiveLoginEvent(new Request, $this->token);
 
-        $subscriber = new RehashRLv1UserPassword($this->entityManager);
+        $subscriber = new RehashRLv1UserPasswordSubscriber($this->entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
     }
 
@@ -86,7 +86,7 @@ class RehashRLv1UserPasswordTest extends TestCase
 
         $securityEvent = new InteractiveLoginEvent(new Request, $this->token);
 
-        $subscriber = new RehashRLv1UserPassword($this->entityManager);
+        $subscriber = new RehashRLv1UserPasswordSubscriber($this->entityManager);
         $subscriber->onSecurityInteractiveLogin($securityEvent);
     }
 }

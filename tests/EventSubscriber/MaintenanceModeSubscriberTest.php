@@ -2,7 +2,7 @@
 
 namespace App\Tests\EventSubscriber;
 
-use App\EventSubscriber\MaintenanceMode;
+use App\EventSubscriber\MaintenanceModeSubscriber;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
-class MaintenanceModeTest extends TestCase
+class MaintenanceModeSubscriberTest extends TestCase
 {
     private $lockFilePath;
 
@@ -48,7 +48,7 @@ class MaintenanceModeTest extends TestCase
             unlink($this->lockFilePath);
         }
 
-        $subscriber = new MaintenanceMode($this->lockFilePath, $this->security, $this->twig);
+        $subscriber = new MaintenanceModeSubscriber($this->lockFilePath, $this->security, $this->twig);
         $subscriber->onKernelRequest($this->event);
 
         $this->assertSame($response, $this->event->getResponse());
@@ -70,7 +70,7 @@ class MaintenanceModeTest extends TestCase
 
         file_put_contents($this->lockFilePath, '');
 
-        $subscriber = new MaintenanceMode($this->lockFilePath, $this->security, $this->twig);
+        $subscriber = new MaintenanceModeSubscriber($this->lockFilePath, $this->security, $this->twig);
         $subscriber->onKernelRequest($this->event);
 
         $this->assertNotSame($response, $this->event->getResponse());
@@ -92,7 +92,7 @@ class MaintenanceModeTest extends TestCase
 
         file_put_contents($this->lockFilePath, '');
 
-        $subscriber = new MaintenanceMode($this->lockFilePath, $this->security, $this->twig);
+        $subscriber = new MaintenanceModeSubscriber($this->lockFilePath, $this->security, $this->twig);
         $subscriber->onKernelRequest($this->event);
 
         $this->assertSame($response, $this->event->getResponse());

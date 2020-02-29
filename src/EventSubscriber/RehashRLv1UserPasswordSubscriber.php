@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class RehashRLv1UserPassword implements EventSubscriberInterface
+class RehashRLv1UserPasswordSubscriber implements EventSubscriberInterface
 {
     private $entityManager;
 

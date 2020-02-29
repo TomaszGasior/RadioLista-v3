@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class SecurityFlashNotice implements EventSubscriberInterface
+class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
 {
     private $security;
 

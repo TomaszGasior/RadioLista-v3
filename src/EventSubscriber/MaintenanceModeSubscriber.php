@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\RuntimeException as SecurityExcept
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
-class MaintenanceMode implements EventSubscriberInterface
+class MaintenanceModeSubscriber implements EventSubscriberInterface
 {
     private $lockFilePath;
     private $security;

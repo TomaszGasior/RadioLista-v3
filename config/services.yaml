@@ -45,7 +45,7 @@ services:
     App\Doctrine\EventSubscriber\SqliteForeignKeySubscriber:
         tags: ['doctrine.event_subscriber']
 
-    App\EventSubscriber\MaintenanceMode:
+    App\EventSubscriber\MaintenanceModeSubscriber:
         arguments:
             $lockFilePath: '%kernel.project_dir%/var/lock/maintenance.lock'
 
