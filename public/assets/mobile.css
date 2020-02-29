@@ -47,30 +47,26 @@
 @keyframes notification_show
 {
     from {
-        bottom: -800px;
+        transform: translateY(200%);
     }
     to {
-        bottom: 90px;
+        transform: translateY(0);
     }
 }
 @keyframes notification_hide
 {
     from {
-        bottom: 90px;
+        transform: translateY(0);
     }
     to {
-        bottom: -100px;
-        opacity: 0.1;
+        transform: translateY(200%);
+        opacity: 0;
     }
 }
 
 .JS .notification-wrapper {
     position: fixed;
-    bottom: 90px;
-    top: auto;
-}
-.JS .notification-wrapper.hidden {
-    bottom: -100px;
+    bottom: 30px;
     top: auto;
 }
 .JS .notification-wrapper .notification {

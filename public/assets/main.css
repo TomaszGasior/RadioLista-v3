@@ -205,20 +205,20 @@ a:active {
 @keyframes notification_show
 {
     from {
-        top: -800px;
+        transform: translateY(-450%);
     }
     to {
-        top: 76px;
+        transform: translateY(0);
     }
 }
 @keyframes notification_hide
 {
     from {
-        top: 76px;
+        transform: translateY(0);
     }
     to {
-        top: -100px;
-        opacity: 0.1;
+        transform: translateY(-450%);
+        opacity: 0;
     }
 }
 
@@ -228,30 +228,22 @@ a:active {
     top: 76px;
     left: 0;
     right: 0;
-    text-align: center;
-    height: 1px;
 
-    animation-name: notification_show;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
+    animation: notification_show 0.55s ease;
 }
 .JS .notification-wrapper .notification {
     display: inline-block;
     min-width: 400px;
     max-width: 800px;
 
-    text-align: center;
     font-weight: bold;
     padding: 0.8em 1.5em;
     box-shadow: 0 0 3px rgba(0,0,0, 0.2);
     border-radius: 2px;
 }
 .JS .notification-wrapper.hidden {
-    top: -100px;
-
-    animation-name: notification_hide;
-    animation-duration: 0.75s;
-    animation-timing-function: ease-in;
+    animation: notification_hide 1.25s ease;
+    animation-fill-mode: forwards;
 }
 
 
