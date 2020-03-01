@@ -47,6 +47,3 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-
-    # Required for App\EventListener\RehashRLv1UserPasswordSubscriber
-    erase_credentials: false
