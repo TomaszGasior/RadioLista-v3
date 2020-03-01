@@ -22,13 +22,9 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>
-                        {% if user.publicProfile %}
-                            <a href="{{ path('user.public_profile', {name: user.name}) }}">
-                                {{ user.name }}
-                            </a>
-                        {% else %}
+                        <a href="{{ path('user.public_profile', {name: user.name}) }}">
                             {{ user.name }}
-                        {% endif %}
+                        </a>
                     </td>
                     <td>{{ user.radioTablesCount }}</td>
                     <td>{{ user.publicProfile ? 'włączony' : 'wyłączony' }}</td>
