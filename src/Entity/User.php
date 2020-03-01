@@ -35,7 +35,7 @@ class User implements UserInterface, EncoderAwareInterface
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(groups={"Default"})
      */
     private $password;
