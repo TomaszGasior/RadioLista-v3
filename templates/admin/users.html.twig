@@ -34,7 +34,15 @@
                     <td>{{ user.publicProfile ? 'włączony' : 'wyłączony' }}</td>
                     <td>{{ user.lastActivityDate|date('Y-m-d') }}</td>
                     <td>{{ user.registerDate|date('Y-m-d') }}</td>
-                    <td>{{ user.encoderName == 'rl_v1' ? 'tak' : '&mdash;' }}</td>
+                    <td>
+                        {% if user.password[0:3] == '$2y' %}
+                            bcrypt
+                        {% elseif user.password[0:1] == '$' %}
+                            —
+                        {% else %}
+                            RL v1
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
