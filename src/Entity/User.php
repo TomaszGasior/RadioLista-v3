@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name.not_unique")
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
-class User implements UserInterface, EncoderAwareInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -214,6 +213,8 @@ class User implements UserInterface, EncoderAwareInterface
     }
 
     /**
+     * Used only by legacy RLv1Encoder for compatibility with RLv1.
+     *
      * @see UserInterface
      */
     public function getSalt(): ?string
@@ -248,17 +249,5 @@ class User implements UserInterface, EncoderAwareInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
-    }
-
-    /**
-     * @see EncoderAwareInterface
-     */
-    public function getEncoderName(): ?string
-    {
-        if ($this->oldPassCompat) {
-            return 'rl_v1';
-        }
-
-        return null;
     }
 }
