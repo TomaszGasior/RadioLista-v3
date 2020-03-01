@@ -27,7 +27,8 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
                 $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
             }
 
-            $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+            $this->setPrivateFieldOfObject($radioTable, 'creationTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+            $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
 
             return $radioTable;
         }
@@ -37,7 +38,12 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         $radioTable->setDescription($faker->optional()->HTMLDescription);
         $radioTable->setUseKhz($faker->boolean(25));
 
-        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+        $this->setPrivateFieldOfObject($radioTable, 'creationTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
+
+        if ($faker->boolean(20)) {
+            $this->setPrivateFieldOfObject($radioTable, 'creationTime', null);
+        }
 
         if ($faker->boolean(40)) {
             $radioTable->setStatus(

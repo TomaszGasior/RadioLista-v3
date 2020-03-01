@@ -133,6 +133,11 @@ class RadioTable
     ];
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $creationTime;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $lastUpdateTime;
@@ -149,6 +154,7 @@ class RadioTable
 
     public function __construct()
     {
+        $this->creationTime = new \DateTime;
         $this->lastUpdateTime = new \DateTime;
     }
 
@@ -239,6 +245,14 @@ class RadioTable
         $this->appearance = $appearance;
 
         return $this;
+    }
+
+    /**
+     * Nullable for backwards compatibility. Added in 3.14 version.
+     */
+    public function getCreationTime(): ?\DateTimeInterface
+    {
+        return $this->creationTime;
     }
 
     public function getLastUpdateTime(): \DateTimeInterface
