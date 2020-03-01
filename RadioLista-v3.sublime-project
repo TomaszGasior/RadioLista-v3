@@ -22,6 +22,7 @@
                 ".gitignore",
                 ".hidden",
                 ".htaccess",
+                ".phpunit.result.cache",
                 ".web-server-pid",
                 "composer.lock",
                 "logo.svg",
