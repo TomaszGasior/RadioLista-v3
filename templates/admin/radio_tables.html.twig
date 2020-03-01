@@ -18,8 +18,9 @@
                 <th data-sort="T">Autor</th>
                 <th data-sort="T">Widoczność</th>
                 <th data-sort="T">Nazwa</th>
-                <th data-sort="N">Liczba stacji</th>
-                <th data-sort="T">Czas modyf.</th>
+                <th data-sort="N">L. stacji</th>
+                <th data-sort="T">Data modyf.</th>
+                <th data-sort="T">Data utworz.</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +35,12 @@
                         </a>
                     </td>
                     <td>{{ radio_table.radioStationsCount }}</td>
-                    <td class="nowrap">{{ radio_table.lastUpdateTime|date('Y-m-d H:i') }}</td>
+                    <td class="nowrap" title="{{ radio_table.lastUpdateTime|date('Y-m-d H:i') }}">
+                        {{ radio_table.lastUpdateTime|date('Y-m-d') }}
+                    </td>
+                    <td class="nowrap" title="{{ radio_table.creationTime ? radio_table.creationTime|date('Y-m-d H:i') : '' }}">
+                        {{ radio_table.creationTime ? radio_table.creationTime|date('Y-m-d') : '?' }}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
