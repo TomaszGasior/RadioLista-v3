@@ -15,7 +15,7 @@
                             {{ radio_table.name }}
                         </a>
                         <span>
-                            <span class="sr-only"> — {{ 'general.homepage.text.last_update_time'|trans }}: </span>
+                            <span class="sr-only"> — {{ 'general.homepage.text.radio_table_updated_at'|trans }}: </span>
                             {{ radio_table.lastUpdateTime|date_format }}
                         </span>
                     </li>
@@ -31,10 +31,12 @@
                         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                             {{ radio_table.name }}
                         </a>
-                        <span>
-                            <span class="sr-only"> — {{ 'general.homepage.text.last_update_time'|trans }}: </span>
-                            {{ radio_table.lastUpdateTime|date_format }}
-                        </span>
+                        {% if radio_table.creationTime %}
+                            <span>
+                                <span class="sr-only"> — {{ 'general.homepage.text.radio_table_created_at'|trans }}: </span>
+                                {{ radio_table.creationTime|date_format }}
+                            </span>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ol>
