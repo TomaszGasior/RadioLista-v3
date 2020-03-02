@@ -27,17 +27,17 @@
             <h2>{{ 'general.homepage.heading.last_created_radio_tables'|trans }}</h2>
             <ol class="homepage-radio-tables-list">
                 {% for radio_table in last_created_radio_tables %}
-                    {% if radio_table.creationTime %}
-                        <li>
-                            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                                {{ radio_table.name }}
-                            </a>
+                    <li>
+                        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                            {{ radio_table.name }}
+                        </a>
+                        {% if radio_table.creationTime %}
                             <span>
                                 <span class="sr-only"> — {{ 'general.homepage.text.radio_table_created_at'|trans }}: </span>
                                 {{ radio_table.creationTime|date_format }}
                             </span>
-                        </li>
-                    {% endif %}
+                        {% endif %}
+                    </li>
                 {% endfor %}
             </ol>
         </section>
