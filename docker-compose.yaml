@@ -6,7 +6,7 @@ services:
         ports:
             - '2012:80'
         volumes:
-            - './public:/srv/public:z'
+            - '.:/srv:z'
 
     app:
         build: '.container/php-fpm'
