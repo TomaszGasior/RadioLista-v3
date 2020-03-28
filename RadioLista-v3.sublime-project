@@ -5,8 +5,6 @@
             "path": ".",
 
             "folder_exclude_patterns": [
-                ".container",
-                ".container/data",
                 ".github",
                 "bin",
                 "var",

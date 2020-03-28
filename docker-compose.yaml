@@ -2,14 +2,14 @@ version: '3.3'
 
 services:
     http:
-        build: '.container/apache'
+        build: 'container/apache'
         ports:
             - '2012:80'
         volumes:
             - '.:/srv:z'
 
     app:
-        build: '.container/php-fpm'
+        build: 'container/php-fpm'
         environment:
             DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
         volumes:
