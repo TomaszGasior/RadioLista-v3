@@ -1,5 +1,0 @@
-framework:
-    assets:
-        packages:
-            minified:
-                version_format: 'minified-%%s?%%s'

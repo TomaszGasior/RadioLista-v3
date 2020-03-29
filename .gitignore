@@ -2,7 +2,6 @@
 deploy.yaml
 
 /public/assets/thirdparty/ckeditor
-/public/assets/minified-*
 
 ###> symfony/framework-bundle ###
 /.env.local
