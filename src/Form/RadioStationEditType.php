@@ -224,7 +224,7 @@ class RadioStationEditType extends AbstractType
                 'required' => false,
             ])
             ->add('rdsPs', TextareaType::class, [
-                'property_path' => 'rds[ps]',
+                'property_path' => 'rds.ps',
 
                 'label' => 'radio_station.edit.form.rdsPs',
                 'translation_domain' => 'messages',
@@ -233,7 +233,7 @@ class RadioStationEditType extends AbstractType
                 'attr' => ['placeholder' => 'radio_station.edit.form.rdsPs.help'],
             ])
             ->add('rdsRt', TextareaType::class, [
-                'property_path' => 'rds[rt]',
+                'property_path' => 'rds.rt',
 
                 'label' => 'radio_station.edit.form.rdsRt',
                 'translation_domain' => 'messages',
@@ -242,12 +242,14 @@ class RadioStationEditType extends AbstractType
                 'attr' => ['placeholder' => 'radio_station.edit.form.rdsRt.help'],
             ])
             ->add('rdsPty', null, [
-                'property_path' => 'rds[pty]',
+                'property_path' => 'rds.pty',
 
                 'label' => 'radio_station.edit.form.rdsPty',
                 'translation_domain' => 'messages',
             ])
             ->add('rdsPi', null, [
+                'property_path' => 'rds.pi',
+
                 'label' => 'radio_station.edit.form.rdsPi',
                 'translation_domain' => 'messages',
                 'attr' => ['maxlength' => '4'],

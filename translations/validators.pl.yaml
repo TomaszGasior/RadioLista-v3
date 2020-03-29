@@ -33,6 +33,8 @@ radio_station:
         greater_than_zero: 'Numer w odbiorniku musi być większy niż zero.'
     first_log_date:
         invalid_format: 'Data pierwszego odbioru jest niepoprawna.'
+    rds_pty:
+        max_length: 'Kod RDS PTY może mieć maksymalnie {{ limit }} znaków.'
     rds_pi:
         max_length: 'Kod RDS PI może mieć maksymalnie {{ limit }} znaki.'
     comment:

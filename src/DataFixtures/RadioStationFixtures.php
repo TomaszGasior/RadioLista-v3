@@ -69,15 +69,17 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
             );
         }
         if ($faker->boolean) {
-            $radioStation->setRds([
-                'ps' => $faker->boolean(40) ? [$faker->words(rand(1, 7))] :
-                        [$faker->words(rand(1, 7)), $faker->words(rand(1, 7))],
-                'rt' => $faker->boolean(40) ? $faker->sentences() : null,
-                'pty' => $faker->optional()->randomElement(
+            ($radioStation->getRds())
+                ->setPs(
+                    $faker->boolean(40) ? [$faker->words(rand(1, 7))] :
+                                          [$faker->words(rand(1, 7)), $faker->words(rand(1, 7))]
+                )
+                ->setRt($faker->optional(40, [])->sentences())
+                ->setPty($faker->optional()->randomElement(
                     ['NEWS', 'INFO', 'SPORT', 'CULTURE', 'POP M', 'ROCK M', 'LIGHT M', 'CLASSIC', 'OTHER M']
-                ),
-            ]);
-            $radioStation->setRdsPi(rand(1000, 9999));
+                ))
+                ->setPi(rand(1000, 9999))
+            ;
         }
         if ($faker->boolean(40)) {
             $radioStation->setExternalAnchor($faker->url);

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Embeddable\RadioStation\Rds;
 use App\Validator\ClassConstantsChoice;
 use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
@@ -167,33 +168,28 @@ class RadioStation
     ];
 
     /**
-     * @ORM\Column(type="array")
-     * @Assert\Collection(fields = {
-     *     "rt" = {
-     *         @Assert\Type("array"),
-     *         @Assert\All({@Assert\Type("string")}),
-     *     },
-     *     "ps" = {
-     *         @Assert\Type("array"),
-     *         @Assert\All({
-     *             @Assert\Type("array"),
-     *             @Assert\All({@Assert\Type("string")}),
-     *         }),
-     *     },
-     *     "pty" = @Assert\Type("string"),
-     * })
+     * @ORM\Embedded(class=Rds::class)
+     * @Assert\Valid
      */
-    private $rds = [
+    private $rds;
+
+    /**
+     * @todo remove after 3.17 release
+     *
+     * @ORM\Column(name="rds", type="array")
+     */
+    private $legacyRds = [
         'rt' => [],
         'ps' => [],
         'pty' => '',
     ];
 
     /**
-     * @ORM\Column(type="string", length=4, nullable=true)
-     * @Assert\Length(max=4, maxMessage="radio_station.rds_pi.max_length")
+     * @todo remove after 3.17 release
+     *
+     * @ORM\Column(name="rdsPi", type="string", length=4, nullable=true)
      */
-    private $rdsPi;
+    private $legacyRdsPi;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
@@ -207,6 +203,11 @@ class RadioStation
      * @Assert\Url(message="radio_station.external_anchor.invalid_format")
      */
     private $externalAnchor;
+
+    public function __construct()
+    {
+        $this->rds = new Rds;
+    }
 
     public function getId(): ?int
     {
@@ -405,28 +406,17 @@ class RadioStation
         return $this;
     }
 
-    public function getRds(): ?array
+    public function getRds(): Rds
     {
         return $this->rds;
     }
 
-    public function setRds(array $rds): self
-    {
-        $this->rds = $rds;
-
-        return $this;
-    }
-
+    /**
+     * Each radio table column has its getter, by design.
+     */
     public function getRdsPi(): ?string
     {
-        return $this->rdsPi;
-    }
-
-    public function setRdsPi(?string $rdsPi): self
-    {
-        $this->rdsPi = $rdsPi;
-
-        return $this;
+        return $this->rds->getPi();
     }
 
     public function getComment(): ?string

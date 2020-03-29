@@ -4,10 +4,10 @@ namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-// The following transformer is designed for RadioStation::$rds[rt] array.
+// The following transformer is designed for RadioStation::$rds.rt array.
 // It's used by RadioStationEditType form field.
 //
-// RadioStation::$rds[rt] contains array with strings which need to be
+// RadioStation::$rds.rt contains array with strings which need to be
 // separated by "|" character in transformed string.
 
 class RadioStationRdsRtFrameTransformer implements DataTransformerInterface
