@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Validator\ClassConstantsChoice;
 use App\Validator\YearMonthDate;
@@ -40,10 +41,6 @@ class RadioStation
     public const TYPE_UNIVERSAL = 3;
     public const TYPE_RELIGIOUS = 4;
     public const TYPE_OTHER = 0;
-
-    public const LOCALITY_COUNTRY = 1;
-    public const LOCALITY_LOCAL = 2;
-    public const LOCALITY_NETWORK = 3;
 
     public const MARKER_1 = 1;
     public const MARKER_2 = 2;
@@ -156,14 +153,18 @@ class RadioStation
     private $type = self::TYPE_MUSIC;
 
     /**
-     * @ORM\Column(type="array")
-     * @Assert\Collection(fields = {
-     *     "type" = @ClassConstantsChoice(class=RadioStation::class, prefix="LOCALITY_"),
-     *     "city" = @Assert\Type("string"),
-     * })
+     * @ORM\Embedded(class=Locality::class)
+     * @Assert\Valid
      */
-    private $locality = [
-        'type' => self::LOCALITY_COUNTRY,
+    private $locality;
+
+    /**
+     * @todo remove after 3.17 release
+     *
+     * @ORM\Column(name="locality", type="array")
+     */
+    private $legacyLocality = [
+        'type' => Locality::TYPE_COUNTRY,
         'city' => '',
     ];
 
@@ -206,6 +207,7 @@ class RadioStation
 
     public function __construct()
     {
+        $this->locality = new Locality;
         $this->rds = new Rds;
     }
 
@@ -394,16 +396,9 @@ class RadioStation
         return $this;
     }
 
-    public function getLocality(): ?array
+    public function getLocality(): Locality
     {
         return $this->locality;
-    }
-
-    public function setLocality(array $locality): self
-    {
-        $this->locality = $locality;
-
-        return $this;
     }
 
     public function getRds(): Rds

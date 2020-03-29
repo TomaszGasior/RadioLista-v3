@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\RadioStation;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Generator;
@@ -58,10 +59,10 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
             $radioStation->setFirstLogDate($firstLogDate);
         }
         if ($faker->boolean) {
-            $radioStation->setLocality([
-                'type' => $faker->randomConstantFromClass(RadioStation::class, 'LOCALITY_'),
-                'city' => $faker->boolean(25) ? $faker->city : $faker->state,
-            ]);
+            ($radioStation->getLocality())
+                ->setType($faker->randomConstantFromClass(Locality::class, 'TYPE_'))
+                ->setCity($faker->boolean(25) ? $faker->city : $faker->state)
+            ;
         }
         if ($faker->boolean(25)) {
             $radioStation->setMarker(

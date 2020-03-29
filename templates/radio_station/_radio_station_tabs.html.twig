@@ -23,7 +23,7 @@
 
         <script>
         (function(){
-            const LOCALITY_COUNTRY = '{{ constant('App\\Entity\\RadioStation::LOCALITY_COUNTRY') }}';
+            const LOCALITY_COUNTRY = '{{ constant('TYPE_COUNTRY', radio_station.locality) }}';
             let localityTypeInput = document.querySelector('.locality-type-input');
             let localityCityWrapper = document.querySelector('.locality-city-wrapper');
 

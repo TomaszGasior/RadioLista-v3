@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\RadioStation;
 use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
@@ -123,13 +124,13 @@ class RadioStationEditType extends AbstractType
                 },
             ])
             ->add('localityType', ChoiceType::class, [
-                'property_path' => 'locality[type]',
+                'property_path' => 'locality.type',
 
                 'label' => 'column.locality',
                 'choices' => [
-                    RadioStation::LOCALITY_COUNTRY,
-                    RadioStation::LOCALITY_LOCAL,
-                    RadioStation::LOCALITY_NETWORK,
+                    Locality::TYPE_COUNTRY,
+                    Locality::TYPE_LOCAL,
+                    Locality::TYPE_NETWORK,
                 ],
                 'choice_label' => function ($choice) {
                     return 'radio_station.edit.form.localityType.choice.'.$choice;
@@ -137,7 +138,7 @@ class RadioStationEditType extends AbstractType
                 'choice_translation_domain' => 'messages',
             ])
             ->add('localityCity', TextHintsType::class, [
-                'property_path' => 'locality[city]',
+                'property_path' => 'locality.city',
 
                 'label' => 'radio_station.edit.form.localityCity',
                 'translation_domain' => 'messages',

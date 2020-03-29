@@ -56,10 +56,10 @@
                     {%- block radio_station_external_anchor radio_station.externalAnchor|escape(escape_strategy) -%}
 
                 {%- elseif column == 'locality' -%}
-                    {%- set locality_is_network = radio_station.locality.type == constant('LOCALITY_NETWORK', radio_station) -%}
+                    {%- set locality_is_network = radio_station.locality.type == constant('TYPE_NETWORK', radio_station.locality) -%}
 
                     {%- block radio_station_locality -%}
-                        {%- if radio_station.locality.type == constant('LOCALITY_COUNTRY', radio_station) -%}
+                        {%- if radio_station.locality.type == constant('TYPE_COUNTRY', radio_station.locality) -%}
                             {{- 'locality.country'|trans -}}
                         {%- elseif radio_station.locality.city -%}
                             {{- radio_station.locality.city|escape(escape_strategy) -}}
