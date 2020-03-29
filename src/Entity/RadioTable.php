@@ -248,7 +248,7 @@ class RadioTable
     }
 
     /**
-     * Nullable for backwards compatibility. Added in 3.14 version.
+     * Nullable for backward compatibility. Added in 3.14 version.
      */
     public function getCreationTime(): ?\DateTimeInterface
     {
