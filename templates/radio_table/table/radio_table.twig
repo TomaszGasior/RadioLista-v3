@@ -11,7 +11,7 @@
 {%- for column in radio_table.columns -%}
     {%- block heading_cell -%}
         {%- if column == 'frequency' -%}
-            {{- radio_table.useKhz ? 'kHz' : 'MHz' -}}
+            {{- radio_table.frequencyUnit == constant('FREQUENCY_KHZ', radio_table) ? 'kHz' : 'MHz' -}}
         {%- elseif column == 'power' -%}
             kW
         {%- elseif column == 'distance' -%}

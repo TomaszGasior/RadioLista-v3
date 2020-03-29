@@ -70,7 +70,7 @@ radio_table:
 
         form:
             name: 'Nazwa wykazu'
-            useKhz: 'Jednostka częstotliwości'
+            frequencyUnit: 'Jednostka częstotliwości'
             description: 'Opis wykazu'
             status: 'Widoczność wykazu'
             status.choice:

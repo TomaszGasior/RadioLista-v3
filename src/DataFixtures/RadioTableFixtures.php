@@ -36,7 +36,9 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         $radioTable->setName($faker->words(rand(3, 8), true));
         $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class));
         $radioTable->setDescription($faker->optional()->HTMLDescription);
-        $radioTable->setUseKhz($faker->boolean(25));
+        if ($faker->boolean(25)) {
+            $radioTable->setFrequencyUnit(RadioTable::FREQUENCY_KHZ);
+        }
 
         $this->setPrivateFieldOfObject($radioTable, 'creationTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
         $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $faker->dateTimeBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));

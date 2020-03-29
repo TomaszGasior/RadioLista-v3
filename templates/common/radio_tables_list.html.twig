@@ -32,7 +32,7 @@
                     <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
 
                     <dt>{{ 'radio_table.detail.unit'|trans }}</dt>
-                    <dd>{{ radio_table.useKhz ? 'kHz' : 'MHz' }}</dd>
+                    <dd>{{ radio_table.frequencyUnit == constant('FREQUENCY_KHZ', radio_table) ? 'kHz' : 'MHz' }}</dd>
                 </dl>
             </dd>
         </div>

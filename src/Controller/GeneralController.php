@@ -66,7 +66,7 @@ class GeneralController extends AbstractController
                 $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime();
                 break;
             case 3:
-                $radioTables = $radioTableRepository->findPublicOrderedByUseKhz();
+                $radioTables = $radioTableRepository->findPublicOrderedByFrequencyUnit();
                 break;
         }
 

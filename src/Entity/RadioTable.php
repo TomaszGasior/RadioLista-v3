@@ -47,6 +47,9 @@ class RadioTable
     public const STATUS_UNLISTED = 0;
     public const STATUS_PRIVATE = -1;
 
+    public const FREQUENCY_MHZ = 1;
+    public const FREQUENCY_KHZ = 2;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -135,6 +138,14 @@ class RadioTable
     private $lastUpdateTime;
 
     /**
+     * @ORM\Column(type="smallint", options={"default": RadioTable::FREQUENCY_MHZ})
+     * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
+     */
+    private $frequencyUnit = self::FREQUENCY_MHZ;
+
+    /**
+     * @todo remove after 3.17 release
+     *
      * @ORM\Column(type="boolean", options={"default": false})
      */
     private $useKhz = false;
@@ -253,14 +264,14 @@ class RadioTable
         return $this;
     }
 
-    public function getUseKhz(): ?bool
+    public function getFrequencyUnit(): ?int
     {
-        return $this->useKhz;
+        return $this->frequencyUnit;
     }
 
-    public function setUseKhz(bool $useKhz): self
+    public function setFrequencyUnit(int $frequencyUnit): self
     {
-        $this->useKhz = $useKhz;
+        $this->frequencyUnit = $frequencyUnit;
 
         return $this;
     }

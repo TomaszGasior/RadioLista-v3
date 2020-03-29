@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Generator;
 
@@ -21,7 +22,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         );
 
         $radioStation->setFrequency(
-            $radioStation->getRadioTable()->getUseKhz()
+            RadioTable::FREQUENCY_KHZ === $radioStation->getRadioTable()->getFrequencyUnit()
             ? $faker->randomFloat(1, 100, 9999)
             : $faker->randomFloat(1, 87.5, 108)
         );

@@ -15,10 +15,10 @@ class RadioTableCreateType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('useKhz', ChoiceType::class, [
+            ->add('frequencyUnit', ChoiceType::class, [
                 'choices' => [
-                    'kHz' => 1,
-                    'MHz' => 0,
+                    'MHz' => RadioTable::FREQUENCY_MHZ,
+                    'kHz' => RadioTable::FREQUENCY_KHZ,
                 ],
                 'choice_translation_domain' => false,
             ])
