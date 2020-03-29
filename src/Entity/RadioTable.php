@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Validator\ClassConstantsChoice;
-use App\Validator\HexColor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -106,25 +106,17 @@ class RadioTable
     private $description;
 
     /**
-     * @ORM\Column(type="array")
-     * @Assert\Collection(fields = {
-     *     "th" = @Assert\Type("string"),
-     *     "bg" = {
-     *         @Assert\Type("string"),
-     *         @HexColor(message="radio_table.appearance.bg_invalid"),
-     *     },
-     *     "fg" = {
-     *         @Assert\Type("string"),
-     *         @HexColor(message="radio_table.appearance.fg_invalid"),
-     *     },
-     *     "img" = {
-     *         @Assert\Type("string"),
-     *         @Assert\Url(message="radio_table.appearance.img_invalid")
-     *     },
-     *     "full" = @Assert\Type("bool"),
-     * })
+     * @ORM\Embedded(class=Appearance::class)
+     * @Assert\Valid
      */
-    private $appearance = [
+    private $appearance;
+
+    /**
+     * @todo remove after 3.17 release
+     *
+     * @ORM\Column(name="appearance", type="array")
+     */
+    private $legacyAppearance = [
         'th' => '',
         'bg' => '',
         'fg' => '',
@@ -154,6 +146,7 @@ class RadioTable
 
     public function __construct()
     {
+        $this->appearance = new Appearance;
         $this->creationTime = new \DateTime;
         $this->lastUpdateTime = new \DateTime;
     }
@@ -235,16 +228,9 @@ class RadioTable
         return $this;
     }
 
-    public function getAppearance(): ?array
+    public function getAppearance(): Appearance
     {
         return $this->appearance;
-    }
-
-    public function setAppearance(array $appearance): self
-    {
-        $this->appearance = $appearance;
-
-        return $this;
     }
 
     /**

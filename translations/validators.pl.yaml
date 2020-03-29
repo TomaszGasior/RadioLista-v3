@@ -10,6 +10,7 @@ radio_table:
         bg_invalid: 'Kolor tła jest niepoprawny.'
         fg_invalid: 'Kolor tekstu jest niepoprawny.'
         img_invalid: 'Adres URL obrazu tła jest nieprawidłowy.'
+        img_max_length: 'Adres URL obrazu może mieć maksymalnie {{ limit }} znaków.'
 
 radio_station:
     name:

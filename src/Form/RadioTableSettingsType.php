@@ -33,7 +33,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'translation_domain' => 'radio_table',
             ])
             ->add('appearanceTheme', ChoiceType::class, [
-                'property_path' => 'appearance[th]',
+                'property_path' => 'appearance.theme',
 
                 'required' => false,
                 'choices' => [
@@ -48,22 +48,22 @@ class RadioTableSettingsType extends RadioTableCreateType
                 },
             ])
             ->add('appearanceBackgroundColor', TextType::class, [
-                'property_path' => 'appearance[bg]',
+                'property_path' => 'appearance.backgroundColor',
 
                 'required' => false,
             ])
             ->add('appearanceColor', TextType::class, [
-                'property_path' => 'appearance[fg]',
+                'property_path' => 'appearance.textColor',
 
                 'required' => false,
             ])
             ->add('appearanceBackgroundImage', UrlType::class, [
-                'property_path' => 'appearance[img]',
+                'property_path' => 'appearance.backgroundImage',
 
                 'required' => false,
             ])
             ->add('appearanceFullWidth', CheckboxType::class, [
-                'property_path' => 'appearance[full]',
+                'property_path' => 'appearance.fullWidth',
 
                 'required' => false,
             ])

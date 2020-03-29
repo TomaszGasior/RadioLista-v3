@@ -61,16 +61,15 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         );
 
         $appearance = $radioTable->getAppearance();
-        $appearance['full'] = $faker->boolean;
+        $appearance->setFullWidth($faker->boolean);
         if ($faker->boolean) {
-            $appearance['bg'] = $faker->hexcolor;
-            $appearance['fg'] = $faker->hexcolor;
-            $appearance['img'] = $faker->optional(0.4)->imageUrl;
+            $appearance->setBackgroundColor($faker->hexcolor);
+            $appearance->setTextColor($faker->hexcolor);
+            $appearance->setBackgroundImage($faker->optional(0.4)->imageUrl);
         }
         elseif ($faker->boolean) {
-            $appearance['th'] = $faker->randomElement(['bieszczady', 'wood', 'rainbow', 'night']);
+            $appearance->setTheme($faker->randomElement(['bieszczady', 'wood', 'rainbow', 'night']));
         }
-        $radioTable->setAppearance($appearance);
 
         return $radioTable;
     }
