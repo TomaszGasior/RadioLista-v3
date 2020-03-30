@@ -115,19 +115,6 @@ class RadioTable
     private $appearance;
 
     /**
-     * @todo remove after 3.17 release
-     *
-     * @ORM\Column(name="appearance", type="array")
-     */
-    private $legacyAppearance = [
-        'th' => '',
-        'bg' => '',
-        'fg' => '',
-        'img' => '',
-        'full' => false,
-    ];
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $creationTime;
@@ -142,13 +129,6 @@ class RadioTable
      * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
      */
     private $frequencyUnit = self::FREQUENCY_MHZ;
-
-    /**
-     * @todo remove after 3.17 release
-     *
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    private $useKhz = false;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})

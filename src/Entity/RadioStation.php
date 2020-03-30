@@ -159,38 +159,10 @@ class RadioStation
     private $locality;
 
     /**
-     * @todo remove after 3.17 release
-     *
-     * @ORM\Column(name="locality", type="array")
-     */
-    private $legacyLocality = [
-        'type' => Locality::TYPE_COUNTRY,
-        'city' => '',
-    ];
-
-    /**
      * @ORM\Embedded(class=Rds::class)
      * @Assert\Valid
      */
     private $rds;
-
-    /**
-     * @todo remove after 3.17 release
-     *
-     * @ORM\Column(name="rds", type="array")
-     */
-    private $legacyRds = [
-        'rt' => [],
-        'ps' => [],
-        'pty' => '',
-    ];
-
-    /**
-     * @todo remove after 3.17 release
-     *
-     * @ORM\Column(name="rdsPi", type="string", length=4, nullable=true)
-     */
-    private $legacyRdsPi;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
