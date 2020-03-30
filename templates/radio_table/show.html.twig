@@ -31,10 +31,10 @@
 
     {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
     {% if radio_table.appearance.theme %}
-        <link rel="stylesheet" href="{{ asset('themes.css', 'minified') }}">
+        <link rel="stylesheet" href="{{ asset('themes.css') }}">
     {% endif %}
 
-    <script src="{{ asset('radio-table.js', 'minified') }}"></script>
+    <script src="{{ asset('radio-table.js') }}"></script>
 {% endblock %}
 
 {% block context_menu %}
