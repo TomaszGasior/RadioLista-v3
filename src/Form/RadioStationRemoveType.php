@@ -40,9 +40,11 @@ class RadioStationRemoveType extends AbstractType
         $choices = $form->get('chosenToRemove')->getConfig()->getAttribute('choice_list')->getChoices();
 
         foreach ($view['chosenToRemove']->children as $name => $childrenView) {
+            /** @var RadioStation */
             $radioStation = $choices[$name] ?? null;
+
             $childrenView->vars['frequency'] = $radioStation ? $radioStation->getFrequency() : null;
-            $childrenView->vars['use_KHz'] = (RadioTable::FREQUENCY_KHZ === $options['radio_table']->getFrequencyUnit());
+            $childrenView->vars['frequency_unit'] = $options['radio_table']->getFrequencyUnit();
         }
     }
 

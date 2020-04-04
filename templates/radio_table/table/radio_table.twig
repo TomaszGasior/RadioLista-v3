@@ -11,7 +11,7 @@
 {%- for column in radio_table.columns -%}
     {%- block heading_cell -%}
         {%- if column == 'frequency' -%}
-            {{- radio_table.frequencyUnit == constant('FREQUENCY_KHZ', radio_table) ? 'kHz' : 'MHz' -}}
+            {{- get_frequency_label(radio_table.frequencyUnit) -}}
         {%- elseif column == 'power' -%}
             kW
         {%- elseif column == 'distance' -%}
@@ -43,9 +43,9 @@
                 {%- elseif column == 'reception' -%}
                     {%- block radio_station_reception ('reception.' ~ radio_station.reception)|trans|escape(escape_strategy) -%}
                 {%- elseif column == 'polarization' -%}
-                    {%- block radio_station_polarization radio_station.polarization|escape(escape_strategy) -%}
+                    {%- block radio_station_polarization get_polarization_label(radio_station.polarization)|escape(escape_strategy) -%}
                 {%- elseif column == 'quality' -%}
-                    {%- block radio_station_quality radio_station.quality|escape(escape_strategy) -%}
+                    {%- block radio_station_quality get_quality_label(radio_station.quality)|escape(escape_strategy) -%}
                 {%- elseif column == 'distance' -%}
                     {%- block radio_station_distance radio_station.distance|escape(escape_strategy) -%}
                 {%- elseif column == 'firstLogDate' -%}

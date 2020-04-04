@@ -37,7 +37,6 @@ class RadioStationEditType extends AbstractType
         $builder
             ->add('frequency', DecimalUnitType::class, [
                 'step' => 0.01,
-                // Unit label "MHz" or "kHz" needs to be set in template.
             ])
             ->add('name', TextHintsType::class, [
                 'hints' => [
@@ -91,7 +90,6 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('location')
             ->add('power', DecimalUnitType::class, [
-                'unit_label' => 'kW',
                 'step' => 0.001,
                 'required' => false,
             ])
@@ -163,7 +161,6 @@ class RadioStationEditType extends AbstractType
                 ],
             ])
             ->add('distance', IntegerUnitType::class, [
-                'unit_label' => 'km',
                 'required' => false,
                 'attr' => ['min' => '1'],
             ])
