@@ -10,48 +10,18 @@ use Twig\Environment;
 class AppExtensionTest extends TestCase
 {
     /**
-     * @dataProvider rdsProvider
-     */
-    public function testAlignRdsFrame(string $frame, string $expectedFrame): void
-    {
-        $appExtension = $this->getInstance();
-
-        $this->assertEquals($expectedFrame, $appExtension->alignRDSFrame($frame));
-    }
-
-    public function rdsProvider(): array
-    {
-        return [
-            ['POLSKIE', 'POLSKIE '],
-            [' RADIO',  '  RADIO '],
-            ['JEDYNKA', 'JEDYNKA '],
-            [' 20:00',  '  20:00 '],
-
-            ['x',         '   x    '],
-            ['xx',        '   xx   '],
-            ['xxx',       '  xxx   '],
-            ['xxxx',      '  xxxx  '],
-            ['xxxxx',     ' xxxxx  '],
-            ['xxxxxx',    ' xxxxxx '],
-            ['xxxxxxx',   'xxxxxxx '],
-            ['xxxxxxxx',  'xxxxxxxx'],
-            ['xxxxxxxxx', 'xxxxxxxx'],
-        ];
-    }
-
-    /**
      * @dataProvider csvProvider
      */
     public function testCsvEscaper(string $sourceString, string $escapedString): void
     {
-        $appExtension = $this->getInstance();
+        $extension = $this->getInstance();
 
         /** @var Environment|MockObject */
         $twigEnvironment = $this->createMock(Environment::class);
 
         $this->assertEquals(
             $escapedString,
-            $appExtension->escapeCSV($twigEnvironment, $sourceString)
+            $extension->escapeCSV($twigEnvironment, $sourceString)
         );
     }
 

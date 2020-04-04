@@ -29,7 +29,6 @@ class AppExtension extends AbstractExtension
             new TwigFilter('soft_number_format', [$this, 'softNumberFormat'], [
                 'needs_environment' => true
             ]),
-            new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
         ];
     }
 
@@ -63,20 +62,6 @@ class AppExtension extends AbstractExtension
         }
 
         return twig_number_format_filter($twig, $number, $decimal, $decimalPoint, $thousandSep);
-    }
-
-    public function alignRDSFrame(string $frame): string
-    {
-        $emptyChars = 8 - mb_strlen($frame);
-
-        if ($emptyChars > 0) {
-            $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
-        }
-        elseif ($emptyChars < 0) {
-            $frame = substr($frame, 0, 8);
-        }
-
-        return $frame;
     }
 
     public function escapeCSV(Environment $twig, $data): string

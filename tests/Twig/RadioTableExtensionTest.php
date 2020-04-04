@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Tests\Twig;
+
+use App\Twig\RadioTableExtension;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+
+class RadioTableExtensionTest extends TestCase
+{
+    /**
+     * @dataProvider rdsProvider
+     */
+    public function testAlignRdsFrame(string $frame, string $expectedFrame): void
+    {
+        $extension = new RadioTableExtension;
+
+        $this->assertEquals($expectedFrame, $extension->alignRDSFrame($frame));
+    }
+
+    public function rdsProvider(): array
+    {
+        return [
+            ['POLSKIE', 'POLSKIE '],
+            [' RADIO',  '  RADIO '],
+            ['JEDYNKA', 'JEDYNKA '],
+            [' 20:00',  '  20:00 '],
+
+            ['x',         '   x    '],
+            ['xx',        '   xx   '],
+            ['xxx',       '  xxx   '],
+            ['xxxx',      '  xxxx  '],
+            ['xxxxx',     ' xxxxx  '],
+            ['xxxxxx',    ' xxxxxx '],
+            ['xxxxxxx',   'xxxxxxx '],
+            ['xxxxxxxx',  'xxxxxxxx'],
+            ['xxxxxxxxx', 'xxxxxxxx'],
+        ];
+    }
+}
