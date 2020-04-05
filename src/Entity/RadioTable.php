@@ -31,6 +31,7 @@ class RadioTable
     public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
     public const COLUMN_RECEPTION = 'reception';
     public const COLUMN_DISTANCE = 'distance';
+    public const COLUMN_MAX_SIGNAL_LEVEL = 'maxSignalLevel';
     public const COLUMN_RDS_PI = 'rdsPi';
     public const COLUMN_RADIO_GROUP = 'radioGroup';
     public const COLUMN_TYPE = 'type';
@@ -49,6 +50,11 @@ class RadioTable
 
     public const FREQUENCY_MHZ = 1;
     public const FREQUENCY_KHZ = 2;
+
+    public const MAX_SIGNAL_LEVEL_DB = 1;
+    public const MAX_SIGNAL_LEVEL_DBF = 2;
+    public const MAX_SIGNAL_LEVEL_DBUV = 3;
+    public const MAX_SIGNAL_LEVEL_DBM = 4;
 
     /**
      * @ORM\Id()
@@ -129,6 +135,12 @@ class RadioTable
      * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
      */
     private $frequencyUnit = self::FREQUENCY_MHZ;
+
+    /**
+     * @ORM\Column(type="smallint", options={"default": RadioTable::MAX_SIGNAL_LEVEL_DBF})
+     * @ClassConstantsChoice(class=RadioTable::class, prefix="MAX_SIGNAL_LEVEL_")
+     */
+    private $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
@@ -252,6 +264,18 @@ class RadioTable
     public function setFrequencyUnit(int $frequencyUnit): self
     {
         $this->frequencyUnit = $frequencyUnit;
+
+        return $this;
+    }
+
+    public function getMaxSignalLevelUnit(): ?int
+    {
+        return $this->maxSignalLevelUnit;
+    }
+
+    public function setMaxSignalLevelUnit(int $maxSignalLevelUnit): self
+    {
+        $this->maxSignalLevelUnit = $maxSignalLevelUnit;
 
         return $this;
     }

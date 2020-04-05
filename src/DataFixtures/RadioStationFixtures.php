@@ -50,6 +50,9 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
             $radioStation->setDistance($faker->numberBetween(1, 999));
         }
         if ($faker->boolean(75)) {
+            $radioStation->setMaxSignalLevel($faker->numberBetween(1, 999));
+        }
+        if ($faker->boolean(75)) {
             $firstLogDate = $faker->dateTimeBetween('-25 years', 'now')->format('Y-m-d');
             if ($faker->boolean) {
                 $firstLogDate = substr($firstLogDate, 0, -3);

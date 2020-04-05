@@ -116,6 +116,12 @@ class RadioStation
     private $distance;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThan(0, message="radio_station.max_signal_level.greater_than_zero")
+     */
+    private $maxSignalLevel;
+
+    /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioStation::class, prefix="RECEPTION_")
      */
@@ -292,6 +298,18 @@ class RadioStation
     public function setDistance(?int $distance): self
     {
         $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getMaxSignalLevel(): ?int
+    {
+        return $this->maxSignalLevel;
+    }
+
+    public function setMaxSignalLevel(?int $maxSignalLevel): self
+    {
+        $this->maxSignalLevel = $maxSignalLevel;
 
         return $this;
     }
