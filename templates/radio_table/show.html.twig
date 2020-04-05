@@ -1,33 +1,35 @@
 {% extends 'layout.html.twig' %}
 
+{% set appearance = radio_table.appearance %}
+
 {% set custom_css = '' %}
-{% set custom_theme_css = '' %}
+{% set has_custom_theme = false %}
 
-{% if radio_table.appearance.theme is empty %}
-    {% if radio_table.appearance.textColor %}
-        {% set custom_theme_css = custom_theme_css ~ '.customizable-color { color: ' ~ radio_table.appearance.textColor ~ ' }' %}
+{% if appearance.theme is empty %}
+    {% if appearance.textColor %}
+        {% set custom_css = custom_css ~ '.customizable-color { color: %s }'|format(appearance.textColor) %}
     {% endif %}
 
-    {% if radio_table.appearance.backgroundColor %}
-        {% set custom_theme_css = custom_theme_css ~ '.customizable-background { background: ' ~ radio_table.appearance.backgroundColor %}
-        {% if radio_table.appearance.backgroundImage %}
-            {% set custom_theme_css = custom_theme_css ~ ' url("' ~ radio_table.appearance.backgroundImage ~ '") center fixed' %}
+    {% if appearance.backgroundColor %}
+        {% set custom_css = custom_css ~ '.customizable-background { background: %s'|format(appearance.backgroundColor) %}
+        {% if appearance.backgroundImage %}
+            {% set custom_css = custom_css ~ ' url("%s") center fixed'|format(appearance.backgroundImage) %}
         {% endif %}
-        {% set custom_theme_css = custom_theme_css ~ ' }' %}
+        {% set custom_css = custom_css ~ ' }' %}
     {% endif %}
 
-    {% set custom_css = custom_theme_css %}
+    {% set has_custom_theme = custom_css ? true : false %}
 {% endif %}
 
-{% if radio_table.appearance.widthType == constant('WIDTH_CUSTOM', radio_table.appearance) %}
-    {% set custom_css = custom_css ~ '.custom-width .site-width { max-width: ' ~ radio_table.appearance.customWidth ~ 'px }' %}
+{% if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %}
+    {% set custom_css = custom_css ~ '.custom-width .site-width { max-width: %spx }'|format(appearance.customWidth) %}
 {% endif %}
 
 {% block html_classes %}
-    {%- if custom_theme_css or radio_table.appearance.theme %}customized-radio-table{% endif -%}
-    {%- if radio_table.appearance.theme %} theme-{{ radio_table.appearance.theme }}{% endif -%}
-    {%- if radio_table.appearance.widthType == constant('WIDTH_FULL', radio_table.appearance) %} full-width{% endif -%}
-    {%- if radio_table.appearance.widthType == constant('WIDTH_CUSTOM', radio_table.appearance) %} custom-width{% endif -%}
+    {%- if has_custom_theme or appearance.theme %}customized-radio-table{% endif -%}
+    {%- if appearance.theme %} theme-{{ appearance.theme }}{% endif -%}
+    {%- if appearance.widthType == constant('WIDTH_FULL', appearance) %} full-width{% endif -%}
+    {%- if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %} custom-width{% endif -%}
 {% endblock %}
 
 {% block page_title %}{{ radio_table.name }}{% endblock %}
@@ -38,7 +40,7 @@
     {% endif %}
 
     {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
-    {% if radio_table.appearance.theme %}
+    {% if appearance.theme %}
         <link rel="stylesheet" href="{{ asset('themes.css') }}">
     {% endif %}
 
