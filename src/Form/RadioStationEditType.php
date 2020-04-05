@@ -164,6 +164,10 @@ class RadioStationEditType extends AbstractType
                 'required' => false,
                 'attr' => ['min' => '1'],
             ])
+            ->add('maxSignalLevel', IntegerUnitType::class, [
+                'required' => false,
+                'attr' => ['min' => '1'],
+            ])
             ->add('reception', ChoiceType::class, [
                 'choices' => [
                     RadioStation::RECEPTION_REGULAR,

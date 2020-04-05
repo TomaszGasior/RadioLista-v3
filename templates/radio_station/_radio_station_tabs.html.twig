@@ -40,6 +40,7 @@
         <h2>{{ 'radio_station.edit.heading.reception'|trans }}</h2>
 
         {{ form_row(form.distance, {'unit_label': 'km'}) }}
+        {{ form_row(form.maxSignalLevel, {'unit_label': get_max_signal_level_label(radio_station.radioTable.maxSignalLevelUnit)}) }}
         {{ form_row(form.reception) }}
         {{ form_row(form.quality) }}
         {{ form_row(form.firstLogDate) }}

@@ -14,6 +14,7 @@ class RadioTableExtension extends AbstractExtension
     {
         return [
             new TwigFunction('get_frequency_label', [$this, 'getFrequencyLabel']),
+            new TwigFunction('get_max_signal_level_label', [$this, 'getMaxSignalLevelLabel']),
             new TwigFunction('get_polarization_label', [$this, 'getPolarizationLabel']),
             new TwigFunction('get_quality_label', [$this, 'getQualityLabel']),
         ];
@@ -31,6 +32,16 @@ class RadioTableExtension extends AbstractExtension
         return [
             RadioTable::FREQUENCY_MHZ => 'MHz',
             RadioTable::FREQUENCY_KHZ => 'kHz',
+        ][$unit];
+    }
+
+    public function getMaxSignalLevelLabel(string $unit): string
+    {
+        return [
+            RadioTable::MAX_SIGNAL_LEVEL_DB => 'dB',
+            RadioTable::MAX_SIGNAL_LEVEL_DBF => 'dBf',
+            RadioTable::MAX_SIGNAL_LEVEL_DBUV => 'dBµV',
+            RadioTable::MAX_SIGNAL_LEVEL_DBM => 'dBm',
         ][$unit];
     }
 

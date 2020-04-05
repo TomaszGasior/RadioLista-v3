@@ -16,6 +16,8 @@
             kW
         {%- elseif column == 'distance' -%}
             km
+        {%- elseif column == 'maxSignalLevel' -%}
+            {{- get_max_signal_level_label(radio_table.maxSignalLevelUnit) -}}
         {%- else -%}
             {{- ('heading.' ~ column)|trans -}}
         {%- endif -%}
@@ -48,6 +50,8 @@
                     {%- block radio_station_quality get_quality_label(radio_station.quality)|escape(escape_strategy) -%}
                 {%- elseif column == 'distance' -%}
                     {%- block radio_station_distance radio_station.distance|escape(escape_strategy) -%}
+                {%- elseif column == 'maxSignalLevel' -%}
+                    {%- block radio_station_max_signal_level radio_station.maxSignalLevel|escape(escape_strategy) -%}
                 {%- elseif column == 'firstLogDate' -%}
                     {%- block radio_station_first_log_date radio_station.firstLogDate|escape(escape_strategy) -%}
                 {%- elseif column == 'comment' -%}

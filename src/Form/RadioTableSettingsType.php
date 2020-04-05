@@ -17,6 +17,15 @@ class RadioTableSettingsType extends RadioTableCreateType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('maxSignalLevelUnit', ChoiceType::class, [
+                'choices' => [
+                    'dB' => RadioTable::MAX_SIGNAL_LEVEL_DB,
+                    'dBf' => RadioTable::MAX_SIGNAL_LEVEL_DBF,
+                    'dBµV' => RadioTable::MAX_SIGNAL_LEVEL_DBUV,
+                    'dBm' => RadioTable::MAX_SIGNAL_LEVEL_DBM,
+                ],
+                'choice_translation_domain' => false,
+            ])
             ->add('sorting', ChoiceType::class, [
                 'choices' => [
                     RadioTable::SORTING_FREQUENCY,

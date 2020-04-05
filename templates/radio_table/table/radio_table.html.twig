@@ -45,6 +45,9 @@
 {%- block radio_station_distance -%}
     <span data-number-indent="distance">{{ parent() }}</span>
 {%- endblock -%}
+{%- block radio_station_max_signal_level -%}
+    <span data-number-indent="max-signal-level">{{ parent() }}</span>
+{%- endblock -%}
 {%- block radio_station_polarization -%}
     <abbr title="{{ ('polarization.' ~ radio_station.polarization)|trans }}">{{ parent() }}</abbr>
 {%- endblock -%}

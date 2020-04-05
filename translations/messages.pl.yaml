@@ -71,6 +71,7 @@ radio_table:
         form:
             name: 'Nazwa wykazu'
             frequencyUnit: 'Jednostka częstotliwości'
+            maxSignalLevelUnit: 'Jednostka poziomu sygnału'
             description: 'Opis wykazu'
             status: 'Widoczność wykazu'
             status.choice:

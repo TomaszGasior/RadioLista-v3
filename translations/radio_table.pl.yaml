@@ -24,6 +24,7 @@ column:
     frequency: 'Częstotliwość'
     locality: 'Lokalność programu'
     location: 'Lokalizacja nadajnika'
+    maxSignalLevel: 'Maksymalny poziom sygnału'
     name: 'Nazwa'
     polarization: 'Polaryzacja'
     power: 'Moc nadajnika'
