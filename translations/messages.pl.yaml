@@ -89,7 +89,12 @@ radio_table:
             appearanceBackgroundColor: 'Kolor tła'
             appearanceColor: 'Kolor tekstu'
             appearanceBackgroundImage: 'Adres URL obrazu tła'
-            appearanceFullWidth: 'Rozciągnij wykaz na pełną szerokość ekranu'
+            appearanceWidthType: 'Rozmiar'
+            appearanceWidthType.choice:
+                '1': 'rozmiar domyślny'
+                '2': 'pełna szerokość ekranu'
+                '3': 'niestandardowa szerokość'
+            appearanceCustomWidth: 'Niestandardowa szerokość'
 
         information:
             columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."

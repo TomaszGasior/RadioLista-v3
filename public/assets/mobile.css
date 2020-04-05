@@ -4,7 +4,7 @@
     padding-left: 5vw;
     padding-right: 5vw;
 
-    /* override style from .full-width */
+    /* override style from .custom-width and .full-width */
     min-width: 320px !important;
     box-sizing: border-box;
 }

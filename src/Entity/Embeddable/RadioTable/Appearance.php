@@ -2,6 +2,7 @@
 
 namespace App\Entity\Embeddable\RadioTable;
 
+use App\Validator\ClassConstantsChoice;
 use App\Validator\HexColor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,6 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Appearance
 {
+    const WIDTH_STANDARD = 1;
+    const WIDTH_FULL = 2;
+    const WIDTH_CUSTOM = 3;
+
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
      */
@@ -36,9 +41,28 @@ class Appearance
     private $backgroundImage;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": false})
+     * @ORM\Column(type="smallint", options={"default": Appearance::WIDTH_STANDARD})
+     * @ClassConstantsChoice(class=Appearance::class, prefix="WIDTH_")
      */
-    private $fullWidth = false;
+    private $widthType = self::WIDTH_STANDARD;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThanOrEqual(900, message="radio_table.appearance.width_min_value")
+     * @Assert\Expression(
+     *     "value || this.getWidthType() !== width_custom",
+     *     values={"width_custom": Appearance::WIDTH_CUSTOM},
+     *     message="radio_table.appearance.width_required"
+     * )
+     */
+    private $customWidth;
+
+    /**
+     * @todo remove after 3.19 release
+     *
+     * @ORM\Column(name="fullWidth", type="boolean", options={"default": false})
+     */
+    private $legacyFullWidth = false;
 
     public function getTheme(): ?string
     {
@@ -88,14 +112,26 @@ class Appearance
         return $this;
     }
 
-    public function isFullWidth(): bool
+    public function getWidthType(): ?int
     {
-        return $this->fullWidth;
+        return $this->widthType;
     }
 
-    public function setFullWidth(bool $fullWidth): self
+    public function setWidthType(int $widthType): self
     {
-        $this->fullWidth = $fullWidth;
+        $this->widthType = $widthType;
+
+        return $this;
+    }
+
+    public function getCustomWidth(): ?int
+    {
+        return $this->customWidth;
+    }
+
+    public function setCustomWidth(?int $customWidth): self
+    {
+        $this->customWidth = $customWidth;
 
         return $this;
     }

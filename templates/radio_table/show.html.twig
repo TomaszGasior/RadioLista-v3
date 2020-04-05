@@ -1,25 +1,33 @@
 {% extends 'layout.html.twig' %}
 
 {% set custom_css = '' %}
+{% set custom_theme_css = '' %}
 
 {% if radio_table.appearance.theme is empty %}
     {% if radio_table.appearance.textColor %}
-        {% set custom_css = custom_css ~ '.customizable-color { color: ' ~ radio_table.appearance.textColor ~ ' }' %}
+        {% set custom_theme_css = custom_theme_css ~ '.customizable-color { color: ' ~ radio_table.appearance.textColor ~ ' }' %}
     {% endif %}
 
     {% if radio_table.appearance.backgroundColor %}
-        {% set custom_css = custom_css ~ '.customizable-background { background: ' ~ radio_table.appearance.backgroundColor %}
+        {% set custom_theme_css = custom_theme_css ~ '.customizable-background { background: ' ~ radio_table.appearance.backgroundColor %}
         {% if radio_table.appearance.backgroundImage %}
-            {% set custom_css = custom_css ~ ' url("' ~ radio_table.appearance.backgroundImage ~ '") center fixed' %}
+            {% set custom_theme_css = custom_theme_css ~ ' url("' ~ radio_table.appearance.backgroundImage ~ '") center fixed' %}
         {% endif %}
-        {% set custom_css = custom_css ~ ' }' %}
+        {% set custom_theme_css = custom_theme_css ~ ' }' %}
     {% endif %}
+
+    {% set custom_css = custom_theme_css %}
+{% endif %}
+
+{% if radio_table.appearance.widthType == constant('WIDTH_CUSTOM', radio_table.appearance) %}
+    {% set custom_css = custom_css ~ '.custom-width .site-width { max-width: ' ~ radio_table.appearance.customWidth ~ 'px }' %}
 {% endif %}
 
 {% block html_classes %}
-    {%- if custom_css or radio_table.appearance.theme %}customized-radio-table{% endif -%}
+    {%- if custom_theme_css or radio_table.appearance.theme %}customized-radio-table{% endif -%}
     {%- if radio_table.appearance.theme %} theme-{{ radio_table.appearance.theme }}{% endif -%}
-    {%- if radio_table.appearance.fullWidth %} full-width{% endif -%}
+    {%- if radio_table.appearance.widthType == constant('WIDTH_FULL', radio_table.appearance) %} full-width{% endif -%}
+    {%- if radio_table.appearance.widthType == constant('WIDTH_CUSTOM', radio_table.appearance) %} custom-width{% endif -%}
 {% endblock %}
 
 {% block page_title %}{{ radio_table.name }}{% endblock %}

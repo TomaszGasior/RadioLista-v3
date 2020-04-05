@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\RadioTable;
+use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioTableColumnsType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -71,10 +73,23 @@ class RadioTableSettingsType extends RadioTableCreateType
 
                 'required' => false,
             ])
-            ->add('appearanceFullWidth', CheckboxType::class, [
-                'property_path' => 'appearance.fullWidth',
+            ->add('appearanceWidthType', ChoiceType::class, [
+                'property_path' => 'appearance.widthType',
+
+                'choices' => [
+                    Appearance::WIDTH_STANDARD,
+                    Appearance::WIDTH_FULL,
+                    Appearance::WIDTH_CUSTOM,
+                ],
+                'choice_label' => function ($choice) {
+                    return 'radio_table.settings.form.appearanceWidthType.choice.'.$choice;
+                },
+            ])
+            ->add('appearanceCustomWidth', IntegerUnitType::class, [
+                'property_path' => 'appearance.customWidth',
 
                 'required' => false,
+                'attr' => ['min' => '900'],
             ])
         ;
     }

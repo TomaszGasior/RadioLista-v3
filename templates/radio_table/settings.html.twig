@@ -100,7 +100,11 @@
                 {{ form_row(form.appearanceBackgroundImage) }}
             </div>
 
-            {{ form_row(form.appearanceFullWidth) }}
+            {{ form_row(form.appearanceWidthType, {attr: {'class': 'radio-table-width-type'}}) }}
+
+            <div class="radio-table-custom-width-wrapper">
+                {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
+            </div>
 
             <script>
             (function(){
@@ -114,6 +118,18 @@
                 updateFieldVisibility();
                 themeSelectorField.addEventListener('change', updateFieldVisibility);
                 themeSelectorField.addEventListener('blur', updateFieldVisibility);
+            })();
+            (function(){
+                const WIDTH_CUSTOM = '{{ constant('WIDTH_CUSTOM', radio_table.appearance) }}';
+                let localityTypeInput = document.querySelector('.radio-table-width-type');
+                let localityCityWrapper = document.querySelector('.radio-table-custom-width-wrapper');
+
+                let updateFieldVisibility = () => {
+                    localityCityWrapper.hidden = (localityTypeInput.value != WIDTH_CUSTOM);
+                };
+                updateFieldVisibility();
+                localityTypeInput.addEventListener('change', updateFieldVisibility);
+                localityTypeInput.addEventListener('blur', updateFieldVisibility);
             })();
             </script>
         </div>

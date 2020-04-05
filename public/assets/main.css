@@ -993,7 +993,7 @@ table.sortable th[data-sort].sorted-desc::after {
 }
 @media (min-width: 900px)
 {
-    .full-width .site-width {
+    .full-width .site-width, .custom-width .site-width {
         padding-left: 4vw;
         padding-right: 4vw;
     }
