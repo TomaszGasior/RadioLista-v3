@@ -31,7 +31,10 @@ class ValidationFlashErrorExtension extends AbstractTypeExtension
                 $template = $error->getMessageTemplate();
 
                 // Set generic error message if current text isn't specified by this application.
-                if (false !== stripos($template, 'this') || false !== stripos($template, 'value')) {
+                if (
+                    false !== stripos($template, 'this') ||
+                    (false !== stripos($template, 'value') && false === stripos($template, 'value }}'))
+                ) {
                     $session->getFlashBag()->add('error', 'common.notification.invalid_form');
                 }
                 else {
