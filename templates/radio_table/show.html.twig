@@ -88,7 +88,7 @@
                     </th>
                 {%- endblock -%}
 
-                {# Check for permission outside of radio_station loop for better performance. #}
+                {# Check for permission outside of radio station loop for better performance. #}
                 {% set is_granted = is_granted('RADIO_TABLE_MODIFY', radio_table) %}
 
                 {%- block radio_station_name -%}
