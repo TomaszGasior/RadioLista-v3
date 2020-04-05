@@ -57,13 +57,6 @@ class Appearance
      */
     private $customWidth;
 
-    /**
-     * @todo remove after 3.19 release
-     *
-     * @ORM\Column(name="fullWidth", type="boolean", options={"default": false})
-     */
-    private $legacyFullWidth = false;
-
     public function getTheme(): ?string
     {
         return $this->theme;
