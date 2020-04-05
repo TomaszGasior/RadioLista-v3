@@ -24,7 +24,10 @@ class RadioTableSettingsType extends RadioTableCreateType
                     'dB' => RadioTable::MAX_SIGNAL_LEVEL_DB,
                     'dBf' => RadioTable::MAX_SIGNAL_LEVEL_DBF,
                     'dBµV' => RadioTable::MAX_SIGNAL_LEVEL_DBUV,
-                    'dBm' => RadioTable::MAX_SIGNAL_LEVEL_DBM,
+
+                    // This option is disabled temporarily. See details here:
+                    // https://github.com/TomaszGasior/RadioLista-v3/issues/25#issuecomment-609415102
+                    // 'dBm' => RadioTable::MAX_SIGNAL_LEVEL_DBM,
                 ],
                 'choice_translation_domain' => false,
             ])
