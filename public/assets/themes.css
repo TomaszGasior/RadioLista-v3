@@ -1,7 +1,7 @@
 /* theme — bieszczady */
 
 .theme-bieszczady .customizable-background {
-    background: #D1D1D1 url('themes/bieszczady.jpg') no-repeat center / cover fixed;
+    background: #E1E1E1 url('themes/bieszczady.jpg') no-repeat center / cover fixed;
 }
 .theme-bieszczady .customizable-color {
     color: #000;
@@ -14,10 +14,10 @@
 }
 
 /* theme — wood */
-/* http://blog.pogotowie3d.pl/index.php/darmowa-tekstura-drewna-olcha-sliwa-wallis/ */
+/* https://pixnio.com/textures-and-patterns/wood-texture/texture-old-retro-dirty-wood-knot */
 
 .theme-wood .customizable-background {
-    background: #C89776 url('themes/wood.jpg') repeat fixed;
+    background: #F2DAB6 url('themes/wood.jpg') no-repeat center / cover fixed;
 }
 .theme-wood .customizable-color {
     color: #000;
@@ -36,14 +36,17 @@
 /* http://www.publicdomainpictures.net/view-image.php?image=25019&picture=dark-clouds-and-rainbow/ */
 
 .theme-rainbow .customizable-background {
-    background: #919692 url('themes/rainbow.jpg') no-repeat center / cover fixed;
+    background: #D8DAD7 url('themes/rainbow.jpg') no-repeat center / cover fixed;
 }
 .theme-rainbow .customizable-color {
-    color: #0B0024;
-    text-shadow: 0 0 2px #999;
+    color: #060015;
+    text-shadow: 0 0 2px #AAA;
 }
 .theme-rainbow .rds-popup {
     text-shadow: none;
+}
+.theme-rainbow table.radio-table tbody tr:hover, .theme-rainbow table.radio-table tbody tr:focus-within {
+    background: rgba(255,255,255, 0.35);
 }
 .theme-rainbow table.radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(0,0,0, 0.1);
@@ -56,11 +59,11 @@
 /* http://magdeleine.co/photo-by-caleb-ralston-n-491/ */
 
 .theme-night .customizable-background {
-    background: #314b5e url('themes/night.jpg') no-repeat center / cover fixed;
+    background: #2A3944 url('themes/night.jpg') no-repeat center / cover fixed;
 }
 .theme-night .customizable-color {
     color: #eee;
-    text-shadow: 0 0 2px #111;
+    text-shadow: 0 0 3px #111;
 }
 .theme-night .customizable-color a {
     border-color: rgba(255,255,255, 0.6);
