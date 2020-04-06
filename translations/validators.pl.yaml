@@ -33,8 +33,6 @@ radio_station:
         greater_than_zero: 'Moc musi być większa niż zero.'
     distance:
         greater_than_zero: 'Odległość od nadajnika musi być większa niż zero.'
-    max_signal_level:
-        greater_than_zero: 'Maks. poziom sygnału musi być większy niż zero.'
     private_number:
         greater_than_zero: 'Numer w odbiorniku musi być większy niż zero.'
     first_log_date:
