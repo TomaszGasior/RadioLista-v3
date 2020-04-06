@@ -117,7 +117,6 @@ class RadioStation
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0, message="radio_station.max_signal_level.greater_than_zero")
      */
     private $maxSignalLevel;
 
