@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Generator;
@@ -63,7 +64,9 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         );
 
         $appearance = $radioTable->getAppearance();
-        $appearance->setFullWidth($faker->boolean);
+        $appearance->setWidthType(
+            $faker->randomConstantFromClass(Appearance::class, 'WIDTH_')
+        );
         if ($faker->boolean) {
             $appearance->setBackgroundColor($faker->hexcolor);
             $appearance->setTextColor($faker->hexcolor);
