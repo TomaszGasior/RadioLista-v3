@@ -1012,6 +1012,9 @@ table.sortable th[data-sort].sorted-desc::after {
 .customized-radio-table table.radio-table span.rds {
     background: rgba(200,200,200, 0.8);
 }
+.customized-radio-table table.radio-table span.rds[tabindex]:hover, .customized-radio-table table.radio-table span.rds:focus {
+    background: rgba(0,0,0, 0.55);
+}
 .customized-radio-table table.sortable th[data-sort]:focus {
     outline-color: currentColor;
 }
