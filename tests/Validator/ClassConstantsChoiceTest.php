@@ -68,9 +68,9 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
     public function testThrowExceptionWithNoChoices(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessageRegExp('/stdClass.*NON_EXISTENT_CONSTANT_PREFIX_38907412/');
+        $this->expectExceptionMessageMatches('/stdClass.*NON_EXISTENT_CONSTANT_PREFIX_38907412/');
 
-        $classConstantsChoiceConstraint = new ClassConstantsChoice(
+        new ClassConstantsChoice(
             ['class' => \stdClass::class, 'prefix' => 'NON_EXISTENT_CONSTANT_PREFIX_38907412']
         );
     }
