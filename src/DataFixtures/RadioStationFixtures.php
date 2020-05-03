@@ -89,6 +89,9 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         if ($faker->boolean(40)) {
             $radioStation->setExternalAnchor($faker->url);
         }
+        if ($faker->boolean) {
+            $radioStation->setComment($faker->sentences(2, true));
+        }
 
         return $radioStation;
     }
