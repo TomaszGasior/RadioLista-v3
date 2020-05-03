@@ -16,7 +16,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
     {
         $radioStation = new RadioStation;
 
-        // Radiotables for hardcoded users.
+        // Radio tables for hardcoded users.
         $radioStation->setRadioTable(
             $this->getReferenceFrom(RadioTableFixtures::class, $i < 40 ? rand(1, 3) : null)
         );

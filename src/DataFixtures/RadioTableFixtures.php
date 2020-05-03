@@ -15,7 +15,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
     {
         $radioTable = new RadioTable;
 
-        // Radiotables for hardcoded users.
+        // Radio tables for hardcoded users.
         if ($i <= 6) {
             $radioTable->setName('Wykaz radiowy #' . $i);
             $radioTable->setDescription($faker->HTMLDescription);
