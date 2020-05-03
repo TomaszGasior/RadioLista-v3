@@ -75,6 +75,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         elseif ($faker->boolean) {
             $appearance->setTheme($faker->randomElement(['bieszczady', 'wood', 'rainbow', 'night']));
         }
+        $appearance->setCollapsedComments($faker->boolean);
 
         return $radioTable;
     }

@@ -57,6 +57,11 @@ class Appearance
      */
     private $customWidth;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $collapsedComments = false;
+
     public function getTheme(): ?string
     {
         return $this->theme;
@@ -125,6 +130,18 @@ class Appearance
     public function setCustomWidth(?int $customWidth): self
     {
         $this->customWidth = $customWidth;
+
+        return $this;
+    }
+
+    public function getCollapsedComments(): ?bool
+    {
+        return $this->collapsedComments;
+    }
+
+    public function setCollapsedComments(bool $collapsedComments): self
+    {
+        $this->collapsedComments = $collapsedComments;
 
         return $this;
     }
