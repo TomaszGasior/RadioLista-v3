@@ -95,6 +95,7 @@ radio_table:
                 '2': 'pełna szerokość ekranu'
                 '3': 'niestandardowa szerokość'
             appearanceCustomWidth: 'Niestandardowa szerokość'
+            appearanceCollapsedComments: 'Użyj ikony zamiast pełnej treści w kolumnie komentarzy'
 
         information:
             columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."

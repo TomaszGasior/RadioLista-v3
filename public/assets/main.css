@@ -757,6 +757,13 @@ table.radio-table a.external svg {
     fill: currentColor;
 }
 
+table.radio-table .comment-collapsed svg {
+    height: 1em;
+    vertical-align: -2px;
+    padding: 0 2px;
+    fill: currentColor;
+}
+
 
 /* radio table — details section */
 

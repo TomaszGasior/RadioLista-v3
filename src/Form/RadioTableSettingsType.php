@@ -91,6 +91,11 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'required' => false,
                 'attr' => ['min' => '900'],
             ])
+            ->add('appearanceCollapsedComments', CheckboxType::class, [
+                'property_path' => 'appearance.collapsedComments',
+
+                'required' => false,
+            ])
         ;
     }
 }

@@ -1,5 +1,6 @@
 heading:
     comment: 'Komentarz'
+    comment.short: 'Kom.'
     country: 'Kraj'
     externalAnchor: 'Odn.'
     firstLogDate: '1. odbiór'
