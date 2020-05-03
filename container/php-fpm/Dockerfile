@@ -1,5 +1,5 @@
 FROM surnet/alpine-wkhtmltopdf:3.10-0.12.5-small as wkhtmltopdf
-FROM php:7.3-fpm-alpine3.10
+FROM php:7.4-fpm-alpine3.10
 
 RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev \
     && yes '' | pecl install apcu \
