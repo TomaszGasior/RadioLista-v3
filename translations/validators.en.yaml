@@ -1,0 +1,65 @@
+radio_table:
+    name:
+        not_blank: 'List name cannot be empty.'
+        max_length: 'List title can be up to {{ limit }} characters.'
+    columns:
+        frequency_and_name_required: 'Frequency and name columns must be visible.'
+    description:
+        max_length: 'List description can be up to {{ limit }} characters.'
+    appearance:
+        bg_invalid: 'Background color is incorrect.'
+        fg_invalid: 'Text color is incorrect.'
+        img_invalid: 'URL address of background image is incorrect.'
+        img_max_length: 'URL address of background can be up to {{ limit }} characters.'
+        width_min_value: 'Custom width must be at least {{ compared_value }} pixels.'
+        width_required: 'Custom width cannot be empty.'
+
+radio_station:
+    name:
+        not_blank: 'Station name cannot be empty.'
+        max_length: 'Station name can be up to {{ limit }} characters.'
+    radio_group:
+        max_length: 'Media group can be up to {{ limit }} characters.'
+    country:
+        max_length: 'Country can be up to {{ limit }} characters.'
+    frequency:
+        not_blank: 'Frequency cannot be empty.'
+        greater_than_zero: 'Frequency must be greater than zero.'
+    location:
+        max_length: 'Location can be up to {{ limit }} characters.'
+    locality_city:
+        max_length: 'Location region can be up to {{ limit }} characters.'
+    power:
+        greater_than_zero: 'Power must be greater than zero.'
+    distance:
+        greater_than_zero: 'Distance from the transmitter must be greater than zero'
+    private_number:
+        greater_than_zero: 'Number in the receiver must be greater than zero'
+    first_log_date:
+        invalid_format: 'First log date is incorrect.'
+    rds_pty:
+        max_length: 'RDS PTY can be up to {{ limit }} characters.'
+    rds_pi:
+        max_length: 'RDS PI can be up to {{ limit }} characters.'
+    comment:
+        max_length: 'Comment can be up to {{ limit }} characters.'
+    external_anchor:
+        max_length: 'External reference URL can be up to {{ limit }} characters.'
+        invalid_format: 'External reference URL is incorrect.'
+
+user:
+    name:
+        not_blank: 'Username cannot be empty.'
+        max_length: 'Username can be up to {{ limit }} characters.'
+        invalid_chars: 'Username contains disallowed characters.'
+        not_unique: 'This username is already used.'
+    password:
+        not_blank: 'Password cannot be empty.'
+        min_length: 'Password must be at least {{ limit }} characters.'
+        max_length: 'Password can be up to {{ limit }} characters.'
+    about_me:
+        max_length: 'Text about you can be up to {{ limit }} characters.'
+
+    service_terms_required: 'You must accept terms of service.'
+    incorrect_password: 'Your current password is incorrect.'
+    passwords_dont_match: 'Passwords do not match.'

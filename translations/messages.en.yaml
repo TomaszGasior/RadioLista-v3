@@ -1,0 +1,352 @@
+layout:
+    slogan: 'bandscans & radio lists'
+    description: 'your radio & television lists, bandscans, typical lists of received stations, private lists of favorite stations'
+    navigation_title: 'Main menu'
+    app_version: 'Application version'
+    ie_alert: 'This website does not work in Internet Explorer. Please switch to Microsoft Edge. Press Ctrl+Shift+E on the keyboard or search for Microsoft Edge in Start Menu.'
+
+common:
+    action:
+        save: 'Save'
+
+    search_form:
+        form:
+            s: 'Search term'
+
+        action:
+            search: 'Search'
+
+    notification:
+        saved_changes: 'Changes have been saved.'
+        invalid_form: 'The form has been filled out incorrectly.'
+
+radio_table:
+    detail:
+        status: 'Visibility'
+        status.state:
+            '1': 'public'
+            '0': 'unlisted'
+            '-1': 'private'
+        author: 'Author'
+        radio_stations_count: 'Number of stations'
+        last_update_time: 'Last update'
+        unit: 'Unit'
+
+    show:
+        title: 'Go to list'
+
+        heading:
+            details: 'List details'
+
+        rds_popup:
+            title: 'RDS details'
+            ps: 'PS'
+            rt: 'RT'
+            pty: 'PTY'
+
+        information:
+            empty: 'This list is empty.'
+            empty_editable: 'This list is empty. %anchor%Add here some station%anchor_end% to remove this message.'
+
+    create:
+        title: 'Create list'
+        title_long: 'Create new list'
+
+        notification:
+            created: 'List has been created.'
+
+        information:
+            local_desc: "It's usually good idea to include additional information about your location into list title and description. They\u00A0are used for searching. You can change them later."
+
+    settings:
+        title: 'List settings'
+
+        heading:
+            general: 'General'
+            visibility: 'Visibility'
+            columns: 'Columns'
+            appearance: 'Appearance'
+            export: 'Export'
+
+        form:
+            name: 'List name'
+            frequencyUnit: 'Frequency unit'
+            maxSignalLevelUnit: 'Signal level unit'
+            description: 'List description'
+            status: 'List visibility'
+            status.choice:
+                '1': 'Public — your list is available for everyone'
+                '0': 'Unlisted — your list is available only for visitors who receive the link'
+                '-1': 'Private — your list is available only for you'
+            sorting: 'Default sorting'
+            appearanceTheme: 'Theme'
+            appearanceTheme.choice:
+                '': '(no theme, custom colors)'
+                bieszczady: 'Mountain forest'
+                wood: 'Wood'
+                rainbow: 'Rainbow and sky'
+                night: 'Night view'
+            appearanceBackgroundColor: 'Background color'
+            appearanceColor: 'Text color'
+            appearanceBackgroundImage: 'URL address of background image'
+            appearanceWidthType: 'Size'
+            appearanceWidthType.choice:
+                '1': 'default size'
+                '2': 'full width of the screen'
+                '3': 'custom width'
+            appearanceCustomWidth: 'Custom width'
+            appearanceCollapsedComments: 'Use icon instead of full content in comments column'
+
+        information:
+            columns: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
+            export: 'Choose preferred export format to download the whole list to your computer. List will be exported with current sorting and with enabled columns only. Extra RDS information is not included.'
+            export_cannot_empty: 'You cannot export empty list.'
+
+        columns_ui:
+            action:
+                toggle_show: 'Show'
+                toggle_hide: 'Hide'
+                move_up: 'Move up'
+                move_down: 'Move down'
+
+        export:
+            action:
+                download_pdf: 'Download PDF document'
+                download_csv: 'Download CSV sheet'
+                download_html: 'Download HTML page'
+            text:
+                about_pdf: 'PDF — standard document for reading and printing'
+                about_csv: 'CSV — dataset for importing into spreadsheet'
+                about_html: 'HTML — web page file for internet browsers'
+
+    remove:
+        title: 'Delete station or list'
+
+        action:
+            export: 'Export list'
+            selected_radio_stations: 'Delete chosen stations'
+            radio_table: 'Delete list'
+
+        heading:
+            remove_radio_station: 'Delete stations'
+            remove_radio_table: 'Delete list'
+
+        form:
+            confirm: 'Delete the whole „%name%” list permanently'
+
+        notification:
+            removed: 'List has been permanently deleted.'
+            not_yet: "Let's try again. Nothing happened."
+
+        information:
+            empty_cannot_remove_radio_station: 'This is is empty. There is nothing to delete…'
+            cannot_be_undone: 'Deleted list cannot be restored. Please remember that you can still export your list into HTML, PDF or CSV file and download it to your computer.'
+
+        text:
+            confirm_alert: 'Are you sure? This action cannot be undone!'
+
+    standalone:
+        about: 'This list was created using %anchor% on %date%.'
+
+radio_station:
+    add:
+        title: 'Add station'
+        title_long: 'Add new station'
+
+        notification:
+            added: 'Station has been added.'
+            copied: 'Station data has been filled in.'
+
+    edit:
+        title: 'Edit station'
+        title_pattern: 'Edit station „%name%”'
+
+        action:
+            copy_current: 'Copy this station'
+            save: 'Save station'
+
+        heading:
+            general: 'General'
+            broadcast: 'Broadcast and content'
+            reception: 'Reception'
+            personal: 'Personal'
+            rds: 'RDS'
+
+        form:
+            localityType.choice:
+                '1': 'nationwide'
+                '2': 'local'
+                '3': 'network'
+            localityCity: 'Locality — region'
+            polarization.choice:
+                '': '(no information)'
+            firstLogDate.help: 'for example: 2013, 2011-06, 2016-05-04'
+            marker: 'Visual marker'
+            marker.choice:
+                '': '(no marker)'
+                '1': 'bold text'
+                '2': 'italic text'
+                '3': 'strike through text'
+                '4': 'red background'
+                '5': 'green background'
+                '6': 'blue background'
+            rdsPs: 'Programme Service'
+            rdsPs.help: 'for example: FRAME1|FRAME2|FRAME3'
+            rdsRt: 'Radio Text'
+            rdsRt.help: 'each message in separate line'
+            rdsPty: 'Programme Type'
+            rdsPi: 'Programme Identification'
+
+        information:
+            rds_popup: 'Please enable JavaScript in your browser to be able to use pop-up with extra RDS information.'
+
+        text:
+            for_radio_table_a11y_subheading: 'in list'
+            disabled_radio_table_column: 'This column is currently not visible in the list.'
+
+    remove:
+        title: 'Delete station'
+
+        form:
+            chosenToRemove: 'Choose stations to be deleted'
+
+        notification:
+            chosen_to_be_removed: 'Stations have been chosen to be deleted.'
+            bulk_removed: 'Chosen stations have been deleted.'
+
+user:
+    detail:
+        name: 'Username'
+        last_activity_date: 'Last activity date'
+        register_date: 'Registration date'
+        public_profile: 'Public profile state'
+        public_profile.state:
+            '': 'disabled'
+            '1': 'enabled'
+        radio_tables_count: 'Number of lists'
+
+    settings:
+        title: 'My account'
+        title_long: 'Account settings'
+
+        heading:
+            my_account: 'My account'
+            public_profile: 'Public profile'
+            change_password: 'Password change'
+
+        form:
+            aboutMe: 'About me'
+            publicProfile: 'Enable public profile'
+            currentPassword: 'Current password'
+            plainPassword.first: 'New password'
+            plainPassword.second: 'New password again'
+
+        notification:
+            changed_password: 'New password has been saved.'
+
+        information:
+            public_profile: 'Public profile page shows index with your lists and information about you. With public profile enabled your username will be shown publicly and linked under your lists.'
+            change_password: "Keep these fields empty if you don't want to change the password."
+
+    register:
+        title: 'Register'
+
+        form:
+            name: 'Username'
+            name.help: 'Allowed only: letters A-Z, numbers, underscore, dash, dot.'
+            plainPassword.first: 'Password'
+            plainPassword.second: 'Password again'
+            acceptServiceTerms: 'I accept %anchor%terms of service%anchor_end%'
+
+        notification:
+            registered: 'Your account has been created.'
+
+    my_radio_tables:
+        title: 'My lists'
+
+        information:
+            no_radio_tables: "You don't have any list yet. %anchor%This is the best time to change it!%anchor_end%"
+
+    public_profile:
+        title_pattern: '%username% — user profile'
+
+        heading:
+            details: 'User details'
+            radio_tables: 'User lists'
+
+        information:
+            no_radio_tables: "This user didn't create any list yet."
+
+general:
+    homepage:
+        heading:
+            last_updated_radio_tables: 'Last modified lists'
+            last_created_radio_tables: 'Last created lists'
+            about_this_service: "What's RadioLista?"
+            search_radio_tables: 'Search lists'
+
+        text:
+            about: "This is a place for people interested in the media to publish various radio lists and TV lists — bandscans, typical lists of received stations, private lists of favorite stations."
+            radio_table_updated_at: 'last updated at'
+            radio_table_created_at: 'created at'
+
+    all_radio_tables:
+        title: 'All lists'
+        title_long: 'All lists in RadioLista'
+
+        sorting:
+            '1': 'Sort by number of stations'
+            '2': 'Sort by last update date'
+            '3': 'Sort by unit'
+
+    search_radio_tables:
+        title: 'Search'
+        title_pattern: '„%search_term%” — search'
+
+        information:
+            no_results: "No search results found. Try to use a simpler expression, without unnecessary words like \"and\". You can use star\u00A0* character to search for partial terms. Please remember that only list titles and descriptions are searched."
+
+session:
+    action:
+        logout: 'Log out'
+
+    login:
+        title: 'Log in'
+
+        form:
+            username: 'Username'
+            password: 'Password'
+            rememberMe: 'Remember me'
+
+        notification:
+            no_credentials: 'No username or password provided.'
+            bad_credentials: 'Incorrect username or password.'
+            auth_error: 'An error occurred. Please try again later.'
+
+    notification:
+        logged_in: 'You have been logged in successfully.'
+        restricted_for_logged_in: 'You must log in to access this page.'
+        logged_out: 'You have been logged out.'
+
+dark_error:
+    heading: 'Darkness, darkness everywhere!'
+
+    unknown_title: 'We have serious problems.'
+    unknown_text: "An unknown application error occurred.\nPlease contact with RadioLista administrator."
+
+    message:
+        MaintenanceMode:
+            title: 'Maintenance break.'
+            text: "The service is currently down due to maintenance work.\nPlease try again in a few minutes."
+        DatabaseConnection:
+            title: 'Technical problem.'
+            text: "A database connection error occurred.\nPlease wait for a few minutes and refresh the page."
+        UnexpectedRequest:
+            title: 'Forbidden action.'
+            text: "You don't have permission for this action\nor the action does not make sense."
+        RadioTableNotFound:
+            title: 'This list does not exist.'
+            text: "The list you are looking for does not exist..\nPlease check whether address is correct."
+        NotFound:
+            title: 'This page does not exist.'
+            text: "The page you are looking for does not exist..\nPlease check whether address is correct."

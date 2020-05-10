@@ -1,0 +1,72 @@
+heading:
+    comment: 'Comment'
+    comment.short: 'Com.'
+    country: 'Country'
+    externalAnchor: 'Ref.'
+    firstLogDate: '1st log'
+    locality: 'Locality'
+    location: 'Location'
+    name: 'Name'
+    polarization: 'Pol.'
+    privateNumber: '#'
+    quality: 'Quality'
+    radioGroup: 'Group'
+    rds: 'RDS'
+    rdsPi: 'PI'
+    reception: 'Reception'
+    type: 'Type'
+
+column:
+    comment: 'Comment'
+    country: 'Country'
+    distance: 'Distance from the transmitter'
+    externalAnchor: 'External reference'
+    firstLogDate: 'First log date'
+    frequency: 'Frequency'
+    locality: 'Content locality'
+    location: 'Transmitter location'
+    maxSignalLevel: 'Max signal level'
+    name: 'Name'
+    polarization: 'Transmitter polarization'
+    power: 'Transmitter power'
+    privateNumber: 'Number in the receiver'
+    quality: 'Reception quality'
+    radioGroup: 'Media group'
+    rds: 'RDS information'
+    rdsPi: 'RDS PI code'
+    reception: 'Reception type'
+    type: 'Content type'
+
+polarization:
+    H: 'horizontal'
+    V: 'vertical'
+    C: 'circular'
+    M: 'various'
+
+reception:
+    '0': 'regular'
+    '1': 'tropo'
+    '2': 'scatter'
+    '3': 'sporadic-E'
+
+type:
+    '0': 'other'
+    '1': 'music'
+    '2': 'news'
+    '3': 'universal'
+    '4': 'religious'
+
+quality:
+    '5': 'very good'
+    '4': 'good'
+    '3': 'average'
+    '2': 'bad'
+    '1': 'very bad'
+
+locality:
+    country: 'nationwide'
+    network: 'network'
+    network.abbr: '(s)'
+
+external_anchor:
+    text: 'External reference for „%name%”'
