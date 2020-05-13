@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {% for page in ['homepage', 'all_radio_tables', 'about_service'] %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    {# TODO: restore 'about_service' when will be translated #}
+    {% for page in ['homepage', 'all_radio_tables'] %}
         <url>
-            <loc>{{ url(page) }}</loc>
+            <loc>{{ url(page, {_locale: 'pl'}) }}</loc>
+            {% for locale in locales %}
+                <xhtml:link rel="alternate" href="{{ url(page, {_locale: locale}) }}" hreflang="{{ locale }}" />
+            {% endfor %}
             <changefreq>monthly</changefreq>
             <priority>0.5</priority>
         </url>
@@ -11,7 +15,10 @@
 
     {% for radio_table in radio_tables %}
         <url>
-            <loc>{{ url('radio_table.show', {id: radio_table.id}) }}</loc>
+            <loc>{{ url('radio_table.show', {id: radio_table.id, _locale: 'pl'}) }}</loc>
+            {% for locale in locales %}
+                <xhtml:link rel="alternate" href="{{ url('radio_table.show', {id: radio_table.id, _locale: locale}) }}" hreflang="{{ locale }}" />
+            {% endfor %}
             <lastmod>{{ radio_table.lastUpdateTime|date('c') }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
@@ -20,7 +27,10 @@
 
     {% for user in users %}
         <url>
-            <loc>{{ url('user.public_profile', {name: user.name}) }}</loc>
+            <loc>{{ url('user.public_profile', {name: user.name, _locale: 'pl'}) }}</loc>
+            {% for locale in locales %}
+                <xhtml:link rel="alternate" href="{{ url('user.public_profile', {name: user.name, _locale: locale}) }}" hreflang="{{ locale }}" />
+            {% endfor %}
             <changefreq>monthly</changefreq>
             <priority>0.7</priority>
         </url>
