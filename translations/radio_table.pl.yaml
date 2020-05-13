@@ -54,7 +54,7 @@ type:
     '1': 'muzyczny'
     '2': 'informacyjny'
     '3': 'uniwersalny'
-    '4': 'katolicki'
+    '4': 'religijny'
 
 quality:
     '5': 'bardzo dobra'
