@@ -46,7 +46,7 @@ class GeneralController extends AbstractController
     /**
      * @Route("/kontakt", name="contact")
      */
-    public function contactForm(): Response
+    public function contact(): Response
     {
         return $this->render('general/contact.html.twig');
     }
