@@ -41,7 +41,9 @@ services:
     App\Controller\DarkErrorController:
         arguments:
             $errorController: '@error_controller'
+            $translator: '@translator.default'
             $debug: '%kernel.debug%'
+            $locales: '%app.locales%'
 
     App\Doctrine\EventSubscriber\SqliteForeignKeySubscriber:
         tags: ['doctrine.event_subscriber']
