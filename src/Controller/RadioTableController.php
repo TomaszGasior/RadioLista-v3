@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioTableController extends AbstractController
 {
     /**
-     * @Route("/wykaz/{id}", name="radio_table.show")
+     * @Route({"pl": "/wykaz/{id}", "en": "/list/{id}"}, name="radio_table.show")
      * @IsGranted("RADIO_TABLE_SHOW", subject="radioTable", statusCode=404)
      */
     public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
@@ -36,7 +36,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/utworz-wykaz", name="radio_table.create")
+     * @Route({"pl": "/utworz-wykaz", "en": "create-list"}, name="radio_table.create")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
@@ -62,7 +62,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{id}/ustawienia", name="radio_table.settings")
+     * @Route({"pl": "/wykaz/{id}/ustawienia", "en": "/list/{id}/settings"}, name="radio_table.settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -85,7 +85,10 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{id}/eksport/{_format}", name="radio_table.download", requirements={"_format": "csv|html|pdf"})
+     * @Route(
+     *     {"pl": "/wykaz/{id}/eksport/{_format}", "en": "/list/{id}/export/{_format}"},
+     *     name="radio_table.download", requirements={"_format": "csv|html|pdf"}
+     * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -125,7 +128,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{id}/eksport", name="radio_table.export")
+     * @Route({"pl": "/wykaz/{id}/eksport", "en": "/list/{id}/export"}, name="radio_table.export")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
@@ -140,7 +143,7 @@ class RadioTableController extends AbstractController
     /**
      * This action handles both radio table removing and radio station removing.
      *
-     * @Route("/wykaz/{id}/usun", name="radio_table.remove")
+     * @Route({"pl": "/wykaz/{id}/usun", "en": "/list/{id}/delete"}, name="radio_table.remove")
      * @ParamConverter("radioStationToRemove", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)

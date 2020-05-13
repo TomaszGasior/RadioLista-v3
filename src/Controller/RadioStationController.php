@@ -16,7 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class RadioStationController extends AbstractController
 {
     /**
-     * @Route("/wykaz/{radioTableId}/dodaj-stacje", name="radio_station.add")
+     * @Route(
+     *     {"pl": "/wykaz/{radioTableId}/dodaj-stacje", "en": "/list/{radioTableId}/add-station"},
+     *     name="radio_station.add"
+     * )
      * @ParamConverter("radioTable", options={"mapping": {"radioTableId": "id"}})
      * @ParamConverter("template", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
@@ -49,7 +52,10 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{radioTableId}/edytuj-stacje/{id}", name="radio_station.edit")
+     * @Route(
+     *     {"pl": "/wykaz/{radioTableId}/edytuj-stacje/{id}", "en": "/list/{radioTableId}/edit-station/{id}"},
+     *     name="radio_station.edit"
+     * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
@@ -72,7 +78,10 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{radioTableId}/kopiuj-stacje/{id}", name="radio_station.copy")
+     * @Route(
+     *     {"pl": "/wykaz/{radioTableId}/kopiuj-stacje/{id}", "en": "/list/{radioTableId}/copy-station/{id}"},
+     *     name="radio_station.copy"
+     * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
@@ -89,7 +98,10 @@ class RadioStationController extends AbstractController
     }
 
     /**
-     * @Route("/wykaz/{radioTableId}/usun-stacje/{id}", name="radio_station.remove")
+     * @Route(
+     *     {"pl": "/wykaz/{radioTableId}/usun-stacje/{id}", "en": "/list/{radioTableId}/delete-station/{id}"},
+     *     name="radio_station.remove"
+     * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */

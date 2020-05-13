@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil/{name}", name="user.public_profile")
+     * @Route({"pl": "/profil/{name}", "en": "/profile/{name}"}, name="user.public_profile")
      * @IsGranted("USER_PUBLIC_PROFILE", subject="user", statusCode=404)
      */
     public function publicProfile(User $user, RadioTableRepository $radioTableRepository): Response
@@ -30,7 +30,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moje-wykazy", name="user.my_radio_tables")
+     * @Route({"pl": "/moje-wykazy", "en": "/my-lists"}, name="user.my_radio_tables")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function myRadioTables(RadioTableRepository $radioTableRepository): Response
@@ -43,7 +43,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/ustawienia-konta", name="user.my_account_settings")
+     * @Route({"pl": "/ustawienia-konta", "en": "/account-settings"}, name="user.my_account_settings")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function myAccountSettings(EntityManagerInterface $entityManager, Request $request): Response
@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/rejestracja", name="user.register")
+     * @Route({"pl": "/rejestracja", "en": "register"}, name="user.register")
      */
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GeneralController extends AbstractController
 {
     /**
-     * @Route("", name="homepage")
+     * @Route({"pl": "", "en": "/en"}, name="homepage")
      */
     public function homepage(RadioTableRepository $radioTableRepository): Response
     {
@@ -52,10 +52,12 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/wszystkie-wykazy/{sorting<1|2|3>?1}", name="all_radio_tables",
-     *        condition="request.query.get('a') == ''")
+     * @Route(
+     *     {"pl": "/wszystkie-wykazy/{sorting}", "en": "/all-lists/{sorting}"},
+     *     name="all_radio_tables", requirements={"sorting": "1|2|3"}, condition="request.query.get('a') == ''"
+     * )
      */
-    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting): Response
+    public function allRadioTables(RadioTableRepository $radioTableRepository, $sorting = 1): Response
     {
         switch ($sorting) {
             case 1:
@@ -75,7 +77,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/szukaj", name="search_radio_tables")
+     * @Route({"pl": "/szukaj", "en": "/search"}, name="search_radio_tables")
      */
     public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request): Response
     {
