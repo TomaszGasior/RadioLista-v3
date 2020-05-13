@@ -9,6 +9,7 @@ twig:
         - 'common/form/overwritten_types.html.twig'
         - 'common/form/custom_types.html.twig'
     globals:
+        locales: '%app.locales%'
         version: '%app.version%'
 
     # number_format defaults for radiostation frequency and power.

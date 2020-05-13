@@ -1,9 +1,21 @@
 <!doctype html>
 
-<html class="{% block html_classes %}{% endblock %}" lang="{{ app.request.locale }}">
+{% set current_locale = app.request.locale %}
+{% set route_name = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set route_is_multilang = route_params._locale|default('') is not empty %}
+
+<html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
+        <meta name="language" content="{{ current_locale }}">
+
+        {% if route_is_multilang %}
+            {% for locale in locales %}
+                <link rel="alternate" href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
+            {% endfor %}
+        {% endif %}
 
         <base href="{{ app.request.schemeAndHttpHost }}">
         <link rel="icon" href="{{ asset('icon.png') }}">
@@ -118,6 +130,17 @@
                         {{ 'general.all_radio_tables.title'|trans }}
                     </a>
                 </li>
+                {% if route_is_multilang %}
+                    {% for locale in locales %}
+                        {% if locale != current_locale %}
+                            <li>
+                                <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
+                                    {{ 'layout.language_name'|trans(locale=locale) }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </ul>
         </footer>
 
