@@ -13,7 +13,6 @@ class GeneralController extends AbstractController
 {
     /**
      * @Route("", name="homepage")
-     * @Route("/strona-glowna")
      */
     public function homepage(RadioTableRepository $radioTableRepository): Response
     {

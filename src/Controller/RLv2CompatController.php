@@ -50,4 +50,12 @@ class RLv2CompatController extends AbstractController
 
         return $this->redirectToRoute('all_radio_tables', ['sorting' => $sorting], 301);
     }
+
+    /**
+     * @Route("/strona-glowna")
+     */
+    public function homepage()
+    {
+        return $this->redirectToRoute('homepage');
+    }
 }
