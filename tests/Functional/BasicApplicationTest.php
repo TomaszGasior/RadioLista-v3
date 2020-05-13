@@ -32,7 +32,7 @@ class BasicApplicationTest extends WebTestCase
     {
         return [
             [''],
-            ['/strona-glowna'],
+            ['/strona-glowna', '/'],
             ['/o-stronie'],
             ['/regulamin'],
             ['/kontakt'],
