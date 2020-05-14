@@ -18,7 +18,7 @@ assignees: ''
 **Informacje o użytkowniku:**
 <!-- Wklej określone informacje PO ich etykiecie. OPCJONALNIE -->
 
-- Link lub ID wykazu, którego dotyczy problem:
+- Link do wykazu, którego dotyczy problem:
 - Twoja nazwa użytkownika:
 
 **Informacje o oprogramowaniu:**
@@ -26,4 +26,4 @@ assignees: ''
 
 - System operacyjny (Windows/Mac/Linux + dokładna wersja):
 - Przeglądarka (np. Firefox/Chrome/Safari + dokładna wersja):
-- Używane urządzenie (laptop, komputer, smartfon + model smartfona):
+- Używane urządzenie (laptop/komputer/smartfon):
