@@ -1,32 +1,36 @@
 RadioLista-v3
 ===
 
-RadioLista to serwis internetowy umożliwiający użytkownikom publikację własnych bandscanów oraz wykazów radiowych i telewizyjnych. Serwis funkcjonuje pod adresem https://radiolista.pl. Więcej informacji: https://radiolista.pl/o-stronie, https://tomaszgasior.pl/pomysly/radiolista.
+RadioLista is a place for people interested in the media to publish various
+radio lists and TV lists — bandscans, typical lists of received stations,
+private lists with favorite stations. This application is available online
+at https://radiolista.pl. More information (Polish):
+https://radiolista.pl/o-stronie, https://tomaszgasior.pl/pomysly/radiolista.
 
-Instalacja lokalna — kontenery Docker/Podman
+Local development — Docker/Podman containers
 ---
-
-Do instalacji lokalnej w formie kontenerów wymagany jest program `git` oraz usługa kontenerów Docker lub Podman. Aby uruchomić aplikację, należy sklonować repozytorium i uruchomić kontenery Dockera, wykonując w CLI następujące polecenia:
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
     sudo docker-compose up
 
-W przypadku programu Podman można użyć polecenia `podman-compose up`. Alternatywnie można też uruchomić w CLI:
+If you prefer Podman, you may use `podman-compose` or the following script:
 
-    git clone https://github.com/TomaszGasior/RadioLista-v3.git
-    cd RadioLista-v3
     ./podman-setup
     podman pod start radiolista-v3
 
-Po wybudowaniu kontenerów pierwsze uruchomienie aplikacji może **potrwać ponad minutę** — automatycznie zostaną pobrane zależności poprzez program `composer`, a baza danych MySQL zostanie wypełniona danymi przykładowymi.
+After containers building process, the first start of the application can take
+**more than one minute**: dependencies installation and database with example
+data are handled automatically.
 
-Aplikacja uruchomi się pod adresem `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`. Baza danych MySQL będzie dostępna pod adresem `127.0.0.1:2013`, a jej konfiguracja będzie przechowywana w folderze `var/mysql`.
+The application will be started at `http://127.0.0.1:2012` with `radiolista`
+username and `radiolista` password. MySQL database will be available at
+`127.0.0.1:2013` and kept in `var/mysql`.
 
-Instalacja lokalna — wbudowany serwer PHP
+Local development — built-in PHP server
 ---
 
-Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `intl` i `pdo_sqlite`), `composer` oraz `git`. Aby uruchomić aplikację, należy sklonować repozytorium, przygotować bazę danych SQLite oraz uruchomić serwer WWW, wykonując w CLI następujące polecenia:
+Requirements: PHP 7.4 with `intl`, `pdo_sqlite` extensions and `composer`.
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
@@ -36,18 +40,18 @@ Do lokalnej instalacji wymagane są: PHP w wersji 7.3 (wraz z rozszerzeniami `in
     bin/console doctrine:fixtures:load -n
     php -S 127.0.0.1:2012 -t ./public
 
-Aplikacja uruchomi się pod adresem podanym na ekranie — domyślnie `http://127.0.0.1:2012`. Testowe dane logowania to login `radiolista` i hasło `radiolista`.
+The application will be started at `http://127.0.0.1:2012` with `radiolista`
+username and `radiolista` password.
 
-### Te funkcje mogą nie działać
+### These features are not supposed to work
 
-* Wyszukiwarka wykazów — ta funkcja wymaga bazy MySQL/MariaDB zamiast domyślnej SQLite.
-* Eksport wykazu do pliku PDF — funkcja ta wymaga instalacji i konfiguracji programu `wkhtmltopdf`.
+* List searching — this requires MySQL/MariaDB database instead of SQLite.
+* Exporting lists to PDF format — this requires `wkhtmltopdf` CLI utility.
 
-Testy
+Tests
 ---
-
-Aby uruchomić testy automatyczne, należy wykonać w CLI:
 
     bin/phpunit
 
-Testowa baza danych SQLite generuje się automatycznie każdorazowo przed uruchomieniem testów.
+Fresh SQLite database for test environment is generated automatically each time
+PHPUnit is started.
