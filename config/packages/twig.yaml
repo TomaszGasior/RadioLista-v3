@@ -3,17 +3,9 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
-    date:
-        format: 'j F Y'
     form_themes:
         - 'common/form/overwritten_types.html.twig'
         - 'common/form/custom_types.html.twig'
     globals:
         locales: '%app.locales%'
         version: '%app.version%'
-
-    # number_format defaults for radiostation frequency and power.
-    number_format:
-        decimals: 2
-        decimal_point: ','
-        thousands_separator: ''

@@ -4,7 +4,6 @@ namespace App\Twig;
 
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
-use Twig\Extension\CoreExtension;
 use Twig\Extension\EscaperExtension;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\TwigFilter;
@@ -27,9 +26,6 @@ class AppExtension extends AbstractExtension
             new TwigFilter('format_date_html', [$this, 'formatDateHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
-            new TwigFilter('soft_number_format', [$this, 'softNumberFormat'], [
-                'needs_environment' => true
-            ]),
         ];
     }
 
@@ -45,24 +41,6 @@ class AppExtension extends AbstractExtension
             $date->format('Y-m-d'),
             $intlExtension->formatDate($twig, $date, $dateFormat, ...$args)
         );
-    }
-
-    public function softNumberFormat(Environment $twig, $number, int $decimal = null,
-                                     string $decimalPoint = null, string $thousandSep = null): string
-    {
-        if (null === $decimal) {
-            /** @var CoreExtension */
-            $coreExtension = $twig->getExtension(CoreExtension::class);
-            $decimal = $coreExtension->getNumberFormat()[0];
-        }
-
-        // Don't round values with precision bigger than preferred.
-        $sourceDecimal = strlen(strstr((float)(string)$number, '.')) - 1;
-        if ($sourceDecimal > $decimal) {
-            $decimal = $sourceDecimal;
-        }
-
-        return twig_number_format_filter($twig, $number, $decimal, $decimalPoint, $thousandSep);
     }
 
     public function escapeCSV(Environment $twig, $data): string
