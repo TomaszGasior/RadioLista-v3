@@ -37,9 +37,9 @@
                 {%- elseif column == 'privateNumber' -%}
                     {%- block radio_station_private_number radio_station.privateNumber|escape(escape_strategy) -%}
                 {%- elseif column == 'frequency' -%}
-                    {%- block radio_station_frequency radio_station.frequency|number_format|escape(escape_strategy) -%}
+                    {%- block radio_station_frequency radio_station.frequency|format_number({min_fraction_digit: 2, grouping_used: false})|escape(escape_strategy) -%}
                 {%- elseif column == 'power' -%}
-                    {%- block radio_station_power radio_station.power|soft_number_format|escape(escape_strategy) -%}
+                    {%- block radio_station_power radio_station.power|format_number({min_fraction_digit: 2, grouping_used: false})|escape(escape_strategy) -%}
                 {%- elseif column == 'type' -%}
                     {%- block radio_station_type ('type.' ~ radio_station.type)|trans|escape(escape_strategy) -%}
                 {%- elseif column == 'reception' -%}

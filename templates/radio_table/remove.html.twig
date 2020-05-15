@@ -24,7 +24,7 @@
 
 {% form_theme form_radio_station _self %}
 {% block _radio_station_remove_chosenToRemove_entry_label %}
-    {% set label = '%s (%s %s)'|format(label, frequency|number_format, get_frequency_label(frequency_unit)) %}
+    {% set label = '%s (%s %s)'|format(label, frequency|format_number({min_fraction_digit: 2, grouping_used: false}), get_frequency_label(frequency_unit)) %}
     {{ block('form_label') }}
 {% endblock %}
 
