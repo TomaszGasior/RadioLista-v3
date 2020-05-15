@@ -111,10 +111,10 @@
                 {%- block radio_station_name -%}
                     {%- if is_granted -%}
                         <a href="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
-                            {{- radio_station.name -}}
+                            {{- parent() -}}
                         </a>
                     {%- else -%}
-                        {{- radio_station.name -}}
+                        {{- parent() -}}
                     {%- endif -%}
                 {%- endblock -%}
 
