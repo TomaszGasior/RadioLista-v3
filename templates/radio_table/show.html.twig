@@ -74,7 +74,7 @@
             {% embed 'radio_table/table/radio_table.html.twig' %}
                 {%- block table_class 'radio-table sortable' -%}
 
-                {%- block heading_cell -%}
+                {%- block heading_cell_html_attr -%}
                     {%- set columns_sorting = {
                         (constant('COLUMN_DISTANCE', radio_table)): 'N',
                         (constant('COLUMN_FREQUENCY', radio_table)): 'N',
@@ -93,13 +93,16 @@
                         (constant('COLUMN_RDS_PI', radio_table)): 'T',
                         (constant('COLUMN_TYPE', radio_table)): 'T',
                     } -%}
-                    <th {% if columns_sorting[column] is defined %}data-sort="{{ columns_sorting[column] }}"{% endif %}>
-                        {%- if column == 'comment' and radio_table.appearance.collapsedComments -%}
-                            {{- 'heading.comment.short'|trans({}, 'radio_table') -}}
-                        {%- else -%}
-                            {{- parent()|striptags -}}
-                        {%- endif -%}
-                    </th>
+                    {%- if columns_sorting[column] is defined %} data-sort="{{ columns_sorting[column] }}"{% endif -%}
+                    {{- parent() -}}
+                {%- endblock -%}
+
+                {%- block heading_cell_html_inner -%}
+                    {%- if column == 'comment' and radio_table.appearance.collapsedComments -%}
+                        {{- 'heading.comment.short'|trans({}, 'radio_table') -}}
+                    {%- else -%}
+                        {{- parent() -}}
+                    {%- endif -%}
                 {%- endblock -%}
 
                 {# Check for permission outside of radio station loop for better performance. #}

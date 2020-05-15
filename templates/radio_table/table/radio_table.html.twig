@@ -17,7 +17,16 @@
 {%- endblock -%}
 
 {%- block heading_cell -%}
-    <th>{{ parent() }}</th>
+    {%- set parent = parent() -%}
+    {%- set column_heading = block('heading_cell_html_inner') -%}
+    {%- set column_name = ('column.' ~ column)|trans -%}
+    <th
+        {%- block heading_cell_html_attr -%}
+            {%- if column_heading != column_name %} title="{{ column_name }}"{% endif -%}
+        {%- endblock -%}
+    >
+        {%- block heading_cell_html_inner parent -%}
+    </th>
 {%- endblock -%}
 
 {%- block row_start -%}
