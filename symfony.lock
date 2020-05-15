@@ -502,6 +502,12 @@
             "config/packages/html_sanitizer.yaml"
         ]
     },
+    "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/intl-extra": {
+        "version": "v3.0.3"
+    },
     "twig/twig": {
         "version": "v2.5.0"
     },
