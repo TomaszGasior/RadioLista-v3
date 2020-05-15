@@ -27,7 +27,7 @@ column:
     location: 'Lokalizacja nadajnika'
     maxSignalLevel: 'Maksymalny poziom sygnału'
     name: 'Nazwa'
-    polarization: 'Polaryzacja'
+    polarization: 'Polaryzacja nadajnika'
     power: 'Moc nadajnika'
     privateNumber: 'Numer w odbiorniku'
     quality: 'Jakość odbioru'
