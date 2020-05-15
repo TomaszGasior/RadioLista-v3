@@ -6,6 +6,7 @@ use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\CoreExtension;
 use Twig\Extension\EscaperExtension;
+use Twig\Extra\Intl\IntlExtension;
 use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
@@ -23,7 +24,7 @@ class AppExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('date_format', [$this, 'formatDateAsTimeHTML'], [
+            new TwigFilter('format_date_html', [$this, 'formatDateHTML'], [
                 'needs_environment' => true, 'is_safe' => ['html']
             ]),
             new TwigFilter('soft_number_format', [$this, 'softNumberFormat'], [
@@ -32,17 +33,17 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function formatDateAsTimeHTML(Environment $twig, $date): string
+    public function formatDateHTML(Environment $twig, $date, ?string $dateFormat = 'long', ...$args): string
     {
-        $date = twig_date_converter($twig, $date);
+        /** @var IntlExtension */
+        $intlExtension = $twig->getExtension(IntlExtension::class);
 
-        $formatter = new \IntlDateFormatter(null, null, null);
-        $formatter->setPattern('d MMMM y');
+        $date = twig_date_converter($twig, $date);
 
         return sprintf(
             '<time datetime="%s">%s</time>',
             $date->format('Y-m-d'),
-            $formatter->format($date->getTimestamp())
+            $intlExtension->formatDate($twig, $date, $dateFormat, ...$args)
         );
     }
 

@@ -24,11 +24,11 @@
             <dl class="user-profile-details">
                 <div>
                     <dt>{{ 'user.detail.last_activity_date'|trans }}</dt>
-                    <dd>{{ user.lastActivityDate|date_format }}</dd>
+                    <dd>{{ user.lastActivityDate|format_date_html }}</dd>
                 </div>
                 <div>
                     <dt>{{ 'user.detail.register_date'|trans }}</dt>
-                    <dd>{{ user.registerDate|date_format }}</dd>
+                    <dd>{{ user.registerDate|format_date_html }}</dd>
                 </div>
             </dl>
         </section>

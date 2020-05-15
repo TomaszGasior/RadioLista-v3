@@ -183,7 +183,7 @@
                 </div>
                 <div>
                     <dt>{{ 'radio_table.detail.last_update_time'|trans }}</dt>
-                    <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
+                    <dd>{{ radio_table.lastUpdateTime|format_date_html }}</dd>
                 </div>
                 {% if radio_table.owner.publicProfile %}
                     <div>

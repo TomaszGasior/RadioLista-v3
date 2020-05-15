@@ -161,7 +161,7 @@
             <p>
                 {{ 'radio_table.standalone.about'|trans({
                     '%anchor%': '<a href="' ~ app.request.schemeAndHttpHost ~ '">RadioLista</a>',
-                    '%date%': 'now'|date_format,
+                    '%date%': 'now'|format_date_html,
                 })|raw }}
             </p>
         </footer>

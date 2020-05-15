@@ -16,7 +16,7 @@
                         </a>
                         <span>
                             <span class="sr-only"> — {{ 'general.homepage.text.radio_table_updated_at'|trans }}: </span>
-                            {{ radio_table.lastUpdateTime|date_format }}
+                            {{ radio_table.lastUpdateTime|format_date_html }}
                         </span>
                     </li>
                 {% endfor %}
@@ -34,7 +34,7 @@
                         {% if radio_table.creationTime %}
                             <span>
                                 <span class="sr-only"> — {{ 'general.homepage.text.radio_table_created_at'|trans }}: </span>
-                                {{ radio_table.creationTime|date_format }}
+                                {{ radio_table.creationTime|format_date_html }}
                             </span>
                         {% endif %}
                     </li>

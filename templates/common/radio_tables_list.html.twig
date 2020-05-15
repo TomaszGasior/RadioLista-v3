@@ -29,7 +29,7 @@
                     <dd>{{ radio_table.radioStationsCount }}</dd>
 
                     <dt>{{ 'radio_table.detail.last_update_time'|trans }}</dt>
-                    <dd>{{ radio_table.lastUpdateTime|date_format }}</dd>
+                    <dd>{{ radio_table.lastUpdateTime|format_date_html }}</dd>
 
                     <dt>{{ 'radio_table.detail.unit'|trans }}</dt>
                     <dd>{{ get_frequency_label(radio_table.frequencyUnit) }}</dd>
