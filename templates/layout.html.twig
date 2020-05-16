@@ -135,7 +135,7 @@
                         {% if locale != current_locale %}
                             <li>
                                 <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
-                                    {{ 'layout.language_name'|trans(locale=locale) }}
+                                    {{ locale|language_name(locale=locale)|capitalize }}
                                 </a>
                             </li>
                         {% endif %}
