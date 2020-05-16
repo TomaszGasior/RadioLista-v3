@@ -247,7 +247,7 @@ button {
     margin-bottom: 0;
 }
 
-@media (max-width: 600px)
+@media (max-width: 700px)
 {
     .JS .radio-table-columns .form-item.form-regular {
         flex-direction: column;
@@ -255,11 +255,15 @@ button {
     .JS .radio-table-columns .form-item.form-regular label {
         margin-bottom: 0.7em;
     }
+    .JS .radio-table-columns .form-item > :last-child {
+        text-align: center;
+        white-space: nowrap;
+    }
 }
-@media (max-width: 415px)
+@media (max-width: 440px)
 {
     .JS .radio-table-columns .form-item button {
-        width: auto;
+        min-width: auto;
         height: auto;
         font-size: 0.8em;
         padding-top: 0.6em;

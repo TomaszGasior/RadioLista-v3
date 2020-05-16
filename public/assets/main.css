@@ -1328,7 +1328,7 @@ table.sortable th[data-sort].sorted-desc::after {
     display: inline;
     width: auto;
     height: 2em;
-    width: 85px;
+    min-width: 85px;
     margin: 0 0 0 0.6em;
     white-space: nowrap;
 }
