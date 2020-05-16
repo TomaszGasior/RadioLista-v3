@@ -7,6 +7,10 @@ private lists with favorite stations. This application is available online
 at https://radiolista.pl. More information (Polish):
 https://radiolista.pl/o-stronie, https://tomaszgasior.pl/pomysly/radiolista.
 
+If you would like to contribute, please take a look on unassigned issues
+labeled with [*help wanted*](https://github.com/TomaszGasior/RadioLista-v3/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+or [*good first issue*](https://github.com/TomaszGasior/RadioLista-v3/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+
 Local development — Docker/Podman containers
 ---
 
