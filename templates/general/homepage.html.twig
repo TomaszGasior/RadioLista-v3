@@ -1,5 +1,15 @@
 {% extends 'layout.html.twig' %}
 
+{% macro print_date(date) %}
+    <time datetime="{{ date.format('Y-m-d') }}">
+        {% if date > date('-8 days') %}
+            {{ date|ago }}
+        {% else %}
+            {{ date|format_date('long')|replace({(date().format('Y')) : ''})|trim(', ') }}
+        {% endif %}
+    </time>
+{% endmacro %}
+
 {% block page_content %}
     <header class="sr-only">
         <h1>RadioLista — {{ 'layout.slogan'|trans }}</h1>
@@ -15,8 +25,10 @@
                             {{ radio_table.name }}
                         </a>
                         <span>
-                            <span class="sr-only"> — {{ 'general.homepage.text.radio_table_updated_at'|trans }}: </span>
-                            {{ radio_table.lastUpdateTime|format_date_html }}
+                            <span class="sr-only">
+                                — {{ 'general.homepage.text.radio_table_updated_at'|trans }}:
+                            </span>
+                            {{ _self.print_date(radio_table.lastUpdateTime) }}
                         </span>
                     </li>
                 {% endfor %}
@@ -31,10 +43,13 @@
                         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                             {{ radio_table.name }}
                         </a>
+                        {# Legacy: creation time can be empty. #}
                         {% if radio_table.creationTime %}
                             <span>
-                                <span class="sr-only"> — {{ 'general.homepage.text.radio_table_created_at'|trans }}: </span>
-                                {{ radio_table.creationTime|format_date_html }}
+                                <span class="sr-only">
+                                    — {{ 'general.homepage.text.radio_table_created_at'|trans }}:
+                                </span>
+                                {{ _self.print_date(radio_table.creationTime) }}
                             </span>
                         {% endif %}
                     </li>
