@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.locales: ['pl', 'en']
-    app.version: '3.23'
+    app.version: '3.24'
 
 services:
     # default configuration for services in *this* file
