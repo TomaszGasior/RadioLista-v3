@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": ".",
+		}
+	],
+
+	"settings": {
+		"editor.insertSpaces": true,
+		"editor.rulers": [80, 120],
+		"editor.tabSize": 4,
+		"editor.wordWrap": "on",
+
+		"files.exclude": {
+			".github": true,
+			".hidden": true,
+			".phpunit.result.cache": true,
+			".vscode": true,
+			"*.code-workspace": true,
+			"*.lock": true,
+			"*.sublime-{project,workspace}": true,
+			"**/.gitignore": true,
+			"bin": true,
+			"public/assets/{fonts,themes,thirdparty}": true,
+			"public/bundles": true,
+			"var": true,
+		},
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimFinalNewlines": true,
+		"files.trimTrailingWhitespace": true,
+
+		"search.exclude": {
+			"vendor": true,
+		}
+	}
+}
