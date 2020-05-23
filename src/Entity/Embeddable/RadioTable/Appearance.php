@@ -41,7 +41,7 @@ class Appearance
     private $backgroundImage;
 
     /**
-     * @ORM\Column(type="smallint", options={"default": Appearance::WIDTH_STANDARD})
+     * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=Appearance::class, prefix="WIDTH_")
      */
     private $widthType = self::WIDTH_STANDARD;

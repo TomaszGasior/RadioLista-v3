@@ -131,19 +131,19 @@ class RadioTable
     private $lastUpdateTime;
 
     /**
-     * @ORM\Column(type="smallint", options={"default": RadioTable::FREQUENCY_MHZ})
+     * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
      */
     private $frequencyUnit = self::FREQUENCY_MHZ;
 
     /**
-     * @ORM\Column(type="smallint", options={"default": RadioTable::MAX_SIGNAL_LEVEL_DBF})
+     * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioTable::class, prefix="MAX_SIGNAL_LEVEL_")
      */
     private $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
 
     /**
-     * @ORM\Column(type="integer", options={"default": 0})
+     * @ORM\Column(type="integer")
      */
     private $radioStationsCount = 0;
 

@@ -70,7 +70,7 @@ class User implements UserInterface
     private $publicProfile = false;
 
     /**
-     * @ORM\Column(type="integer", options={"default": 0})
+     * @ORM\Column(type="integer")
      */
     private $radioTablesCount = 0;
 
