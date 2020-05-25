@@ -28,7 +28,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/o-stronie", name="about_service")
+     * @Route({"pl": "/o-stronie", "en": "/about"}, name="about_service")
      */
     public function aboutService(): Response
     {
@@ -36,7 +36,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/regulamin", name="terms_of_service")
+     * @Route({"pl": "/regulamin", "en": "/terms-of-service"}, name="terms_of_service")
      */
     public function termsOfService(): Response
     {
@@ -44,7 +44,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route("/kontakt", name="contact")
+     * @Route({"pl": "/kontakt", "en": "/contact"}, name="contact")
      */
     public function contact(): Response
     {

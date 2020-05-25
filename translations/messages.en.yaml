@@ -306,6 +306,11 @@ general:
         information:
             no_results: "No search results found. Try to use a simpler search term, without unnecessary words like \"and\". You can use star\u00A0* character to search for partial terms. Please remember that only list titles and descriptions are searched."
 
+    static_page:
+        about_service: 'About'
+        contact: 'Contact'
+        terms_of_service: 'Terms of service'
+
 session:
     action:
         logout: 'Log out'

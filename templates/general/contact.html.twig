@@ -1,32 +1,56 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}Kontakt{% endblock %}
+{% block page_title %}{{ 'general.static_page.contact'|trans }}{% endblock %}
 
 {% block page_content %}
     <header>
-        <h1>Kontakt z autorem</h1>
+        <h1>{{ 'general.static_page.contact'|trans }}</h1>
     </header>
 
     <div class="plain-text-page">
-        <p>
-            RadioLista jest projektem open source rozwijanym z pomocą popularnego serwisu GitHub.<br>
-            Aby zgłosić błąd napotkany w serwisie RadioLista lub zaproponować nową funkcję, przejdź do&nbsp;repozytorium projektu w&nbsp;serwisie GitHub i&nbsp;umieść swoje uwagi w&nbsp;sekcji zgłoszeń.
-        </p>
-        <p class="p-for-button">
-            <a class="button" href="https://github.com/TomaszGasior/RadioLista-v3/issues" target="_blank" rel="noopener">
-                Przejdź do zgłoszeń RadioListy
-            </a>
-        </p>
-        <ol>
-            <li>Przejdź do sekcji zgłoszeń projektu RadioLista, korzystając z&nbsp;przycisku powyżej.</li>
-            <li>Przejrzyj listę istniejących zgłoszeń. Jeśli poszukiwana kwestia została już zgłoszona, możesz dodać swoje uwagi w komentarzach lub zasubskrybować wątek, korzystając z&nbsp;przycisku „Subscribe”, aby otrzymywać powiadomienia.</li>
-            <li>Jeżeli nie udało ci się odnaleźć poszukiwanej kwestii, dodaj nowe zgłoszenie za pomocą zielonego przycisku „New issue”.</li>
-            <li>Aby wysłać zgłoszenie, należy być zalogowanym w&nbsp;serwisie GitHub. Jeśli nie posiadasz tam konta, serwis GitHub wyświetli formularz rejestracyjny.</li>
-            <li>Wybierz szablon zgłoszenia — „Zgłoszenie błędu” lub „Propozycja nowej funkcji”, a&nbsp;następnie dokładnie opisz swoje uwagi. Możesz pisać po&nbsp;polsku lub po&nbsp;angielsku.</li>
-            <li>Automatycznie otrzymasz powiadomienie mailem w razie odpowiedzi autora.</li>
-        </ol>
-        <p>
-            Alternatywnie, w&nbsp;sprawach niedotyczących błędów i&nbsp;nowych funkcji, możesz też wysłać mail do&nbsp;autora RadioListy na adres <em>kontakt&nbsp;[małpa]&nbsp;radiolista&nbsp;[kropka]&nbsp;pl</em>. Do&nbsp;zgłaszania błędów i&nbsp;propozycji nowych funkcji sekcja zgłoszeń na&nbsp;GitHubie jest jednakże preferowana.
-        </p>
+        {% if app.request.locale == 'pl' %}
+            <p>
+                RadioLista jest projektem open source rozwijanym z pomocą popularnego serwisu GitHub.<br>
+                Aby zgłosić błąd napotkany w serwisie RadioLista lub zaproponować nową funkcję, przejdź do&nbsp;repozytorium projektu w&nbsp;serwisie GitHub i&nbsp;umieść swoje uwagi w&nbsp;sekcji zgłoszeń.
+            </p>
+            <p class="p-for-button">
+                <a class="button" href="https://github.com/TomaszGasior/RadioLista-v3/issues" target="_blank" rel="noopener">
+                    Przejdź do zgłoszeń RadioListy
+                </a>
+            </p>
+            <ol>
+                <li>Przejdź do sekcji zgłoszeń projektu RadioLista, korzystając z&nbsp;przycisku powyżej.</li>
+                <li>Przejrzyj listę istniejących zgłoszeń. Jeśli poszukiwana kwestia została już zgłoszona, możesz dodać swoje uwagi w komentarzach lub zasubskrybować wątek, korzystając z&nbsp;przycisku „Subscribe”, aby otrzymywać powiadomienia.</li>
+                <li>Jeżeli nie udało ci się odnaleźć poszukiwanej kwestii, dodaj nowe zgłoszenie za pomocą zielonego przycisku „New issue”.</li>
+                <li>Aby wysłać zgłoszenie, należy być zalogowanym w&nbsp;serwisie GitHub. Jeśli nie posiadasz tam konta, serwis GitHub wyświetli formularz rejestracyjny.</li>
+                <li>Wybierz szablon zgłoszenia — „Zgłoszenie błędu” lub „Propozycja nowej funkcji”, a&nbsp;następnie dokładnie opisz swoje uwagi. Możesz pisać po&nbsp;polsku lub po&nbsp;angielsku.</li>
+                <li>Automatycznie otrzymasz powiadomienie mailem w razie odpowiedzi autora.</li>
+            </ol>
+            <p>
+                Alternatywnie, w&nbsp;sprawach niedotyczących błędów i&nbsp;nowych funkcji, możesz też wysłać mail do&nbsp;autora RadioListy na adres <em>kontakt&nbsp;[małpa]&nbsp;radiolista&nbsp;[kropka]&nbsp;pl</em>. Do&nbsp;zgłaszania błędów i&nbsp;propozycji nowych funkcji sekcja zgłoszeń na&nbsp;GitHubie jest jednakże preferowana.
+            </p>
+        {% else %}
+            <p>
+                RadioLista is an&nbsp;open source project developed on the&nbsp;popular GitHub website.<br>
+                To report a&nbsp;bug in the&nbsp;RadioLista website or to suggest a&nbsp;new feature, go to the&nbsp;project repository on&nbsp;the&nbsp;GitHub and send your comments in the&nbsp;issues section.
+            </p>
+            <p class="p-for-button">
+                <a class="button" href="https://github.com/TomaszGasior/RadioLista-v3/issues" target="_blank" rel="noopener">
+                    Go to RadioLista issues
+                </a>
+            </p>
+            <ol>
+                <li>Go to the&nbsp;issues section of the&nbsp;RadioLista project using the&nbsp;button above.</li>
+                <li>Review the&nbsp;list of existing issues. If the&nbsp;problem you are looking for has already been reported, please add your suggestions in the&nbsp;comments section or subscribe to the&nbsp;issue by&nbsp;the&nbsp;"Subscribe" button to receive notifications.</li>
+                <li>If you did not find your problem, please add a&nbsp;new issue using the&nbsp;green "New issue" button.</li>
+                <li>You must be logged in to GitHub. If you don't have an&nbsp;account there, registration form will&nbsp;be&nbsp;shown.</li>
+                <li>Select the&nbsp;issue template, "Reporting a&nbsp;bug" or "Suggestion for a&nbsp;new feature", and then describe your thoughts precisely.</li>
+                <li>You will automatically notified by an&nbsp;email when the&nbsp;author replies.</li>
+            </ol>
+            <p>
+                Alternatively, you can also send an&nbsp;email to the&nbsp;address <em>contact […] radiolista […] pl</em>.<br>
+                Please note that the&nbsp;GitHub issues section is preferred for bugs and feature requests.
+            </p>
+        {% endif %}
     </div>
 {% endblock %}
