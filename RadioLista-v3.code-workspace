@@ -24,11 +24,14 @@
 			"public/assets/{fonts,themes,thirdparty}": true,
 			"public/bundles": true,
 			"var": true,
-			"vendor": true,
 		},
 		"files.eol": "\n",
 		"files.insertFinalNewline": true,
 		"files.trimFinalNewlines": true,
 		"files.trimTrailingWhitespace": true,
+
+		"search.exclude": {
+			"vendor": true,
+		}
 	}
 }
