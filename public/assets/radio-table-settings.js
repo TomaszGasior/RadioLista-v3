@@ -53,10 +53,10 @@ class RadioTableColumnsUI
             let label = block.querySelector('label');
             label.removeAttribute('for');
             item.buttonMoveUp.setAttribute(
-                'aria-label', `$(label.textContent) $(item.buttonMoveUp.textContent)`
+                'aria-label', `${label.textContent} ${item.buttonMoveUp.textContent}`
             );
             item.buttonMoveDown.setAttribute(
-                'aria-label', `$(label.textContent) $(item.buttonMoveDown.textContent)`
+                'aria-label', `${label.textContent} ${item.buttonMoveDown.textContent}`
             );
             item.buttonToggle.dataset.label = label.textContent;
         });
