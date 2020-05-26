@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    {# TODO: restore 'about_service' when will be translated #}
-    {% for page in ['homepage', 'all_radio_tables'] %}
+    {% for page in ['homepage', 'all_radio_tables', 'about_service', 'contact'] %}
         <url>
             <loc>{{ url(page, {_locale: 'pl'}) }}</loc>
             {% for locale in locales %}
