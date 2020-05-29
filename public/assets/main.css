@@ -924,25 +924,20 @@ table.sortable th[data-sort].sorted-desc::after {
 
 /* number indentation in tables */
 
-.number-indent-1::before {
-    content: "0";
-    opacity: 0;
+.number-indent-1 {
+    padding-left: 1ch;
 }
-.number-indent-2::before {
-    content: "00";
-    opacity: 0;
+.number-indent-2 {
+    padding-left: 2ch;
 }
-.number-indent-3::before {
-    content: "000";
-    opacity: 0;
+.number-indent-3 {
+    padding-left: 3ch;
 }
-.number-indent-4::before {
-    content: "0000";
-    opacity: 0;
+.number-indent-4 {
+    padding-left: 4ch;
 }
-.number-indent-5::before {
-    content: "00000";
-    opacity: 0;
+.number-indent-5 {
+    padding-left: 5ch;
 }
 
 

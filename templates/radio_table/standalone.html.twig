@@ -127,6 +127,28 @@
                 content: "00000";
                 opacity: 0;
             }
+            @supports (padding-left: 1ch)
+            {
+                {#- Zeros-based implementation for wkhtmltopdf and WebKit from 2011. :( -#}
+                .number-indent-1::before, .number-indent-2::before, .number-indent-3::before, .number-indent-4::before, .number-indent-5::before {
+                    display: none;
+                }
+                .number-indent-1 {
+                    padding-left: 1ch;
+                }
+                .number-indent-2 {
+                    padding-left: 2ch;
+                }
+                .number-indent-3 {
+                    padding-left: 3ch;
+                }
+                .number-indent-4 {
+                    padding-left: 4ch;
+                }
+                .number-indent-5 {
+                    padding-left: 5ch;
+                }
+            }
             a.external {
                 border-bottom: none;
                 color: inherit;
