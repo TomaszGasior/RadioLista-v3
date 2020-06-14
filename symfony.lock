@@ -141,7 +141,7 @@
         "version": "1.5.1"
     },
     "php": {
-        "version": "7.4"
+        "version": "7.3"
     },
     "pimple/pimple": {
         "version": "v3.2.3"
