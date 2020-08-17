@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c22204b2916c95db29e87c2f2fc9997",
+    "content-hash": "6f9e66fed9f58b01e4244594409f476b",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6467,20 +6467,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.13.1",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "57e96259776ddcacf1814885fc3950460c8e18ef"
+                "reference": "9b76b1535483cdf4edf01bb787b0217b62bd68a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/57e96259776ddcacf1814885fc3950460c8e18ef",
-                "reference": "57e96259776ddcacf1814885fc3950460c8e18ef",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b76b1535483cdf4edf01bb787b0217b62bd68a5",
+                "reference": "9b76b1535483cdf4edf01bb787b0217b62bd68a5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1.3",
+                "php": ">=7.2.5",
                 "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "^1.3"
             },
@@ -6491,13 +6491,10 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.13-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Twig_": "lib/"
-                },
                 "psr-4": {
                     "Twig\\": "src/"
                 }
@@ -6538,58 +6535,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-05T15:09:04+00:00"
-        },
-        {
-            "name": "webfactory/piwik-bundle",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webfactory/piwik-bundle.git",
-                "reference": "be52d3d7334dee4fcf326c7238b26dd79ae43077"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webfactory/piwik-bundle/zipball/be52d3d7334dee4fcf326c7238b26dd79ae43077",
-                "reference": "be52d3d7334dee4fcf326c7238b26dd79ae43077",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.1",
-                "symfony/config": "~3.0|~4.0",
-                "symfony/dependency-injection": "~3.0|~4.0",
-                "symfony/http-kernel": "~3.0|~4.0",
-                "twig/twig": "^1.34|^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~7.0",
-                "symfony/phpunit-bridge": "@dev"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Webfactory\\Bundle\\PiwikBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "webfactory GmbH",
-                    "email": "info@webfactory.de",
-                    "homepage": "https://www.webfactory.de",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Tim Bernhard",
-                    "email": "tim@genieblog.ch"
-                }
-            ],
-            "description": "Symfony Bundle that adds a twig-function for the Matomo tracking code.",
-            "time": "2020-03-06T08:56:58+00:00"
+            "time": "2020-08-05T15:13:19+00:00"
         }
     ],
     "packages-dev": [
