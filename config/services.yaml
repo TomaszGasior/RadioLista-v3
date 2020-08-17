@@ -54,3 +54,8 @@ services:
 
     App\Form\Extension\ValidationFlashErrorExtension:
         tags: [{ name: form.type_extension, priority: -100 }]
+
+    App\Twig\TrackerExtension:
+        arguments:
+            $domain: '%env(TRACKER_DOMAIN)%'
+            $siteId: '%env(TRACKER_SITE_ID)%'
