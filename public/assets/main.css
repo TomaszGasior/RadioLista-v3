@@ -1155,35 +1155,6 @@ table.sortable th[data-sort].sorted-desc::after {
     margin: 1.3em 0;
 }
 
-.homepage-birthday body {
-    background-color: #fff4f4;
-}
-@media (min-width: 1230px)
-{
-    .homepage-birthday body {
-        background-image: url('balloons.svg'), url('balloons.svg');
-        background-size: 150px auto;
-        background-position: right 4% top 200px, left 4% top 200px;
-        background-repeat: no-repeat;
-    }
-}
-@media (min-width: 1600px)
-{
-    .homepage-birthday body {
-        background-position: right 7% top 200px, left 7% top 200px;
-    }
-}
-
-.homepage-birthday-message {
-    margin: 1.5em 0 1em;
-    padding: 0.6em 1em;
-    background: #EF7F20;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 0 0 2px rgba(0,0,0, 0.15);
-}
-
 
 /* page — user profile */
 

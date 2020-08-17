@@ -10,20 +10,10 @@
     </time>
 {% endmacro %}
 
-{% set is_birthday = app.request.locale == 'pl' and 'now'|date('m-d') == '07-01' %}
-
-{% block html_classes is_birthday ? 'homepage-birthday' : '' %}
-
 {% block page_content %}
     <header class="sr-only">
         <h1>RadioLista — {{ 'layout.slogan'|trans }}</h1>
     </header>
-
-    {% if is_birthday %}
-        <div class="homepage-birthday-message">
-            Sto lat, sto lat, niech żyje, żyje nam! RadioLista obchodzi dzisiaj ósme urodziny! Najlepszego odbioru!
-        </div>
-    {% endif %}
 
     <div class="homepage">
         <section>
