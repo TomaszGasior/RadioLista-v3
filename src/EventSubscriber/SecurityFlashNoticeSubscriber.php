@@ -4,13 +4,11 @@ namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\RememberMeToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
 {
@@ -37,8 +35,11 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
     {
         $exception = $event->getThrowable();
 
-        if (!($exception instanceof AccessDeniedException) || 404 === $exception->getCode()
-            || null !== $this->security->getUser()) {
+        if (
+            false === $exception instanceof AccessDeniedException
+            || 404 === $exception->getCode()
+            || null !== $this->security->getUser()
+        ) {
             return;
         }
 
@@ -48,13 +49,9 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
         $session->getFlashBag()->add('error', 'session.notification.restricted_for_logged_in');
     }
 
-    public function onKernelFinishRequest(FinishRequestEvent $event): void
+    public function onSecurityLogout(LogoutEvent $event): void
     {
         $request = $event->getRequest();
-
-        if ('security.logout' !== $request->attributes->get('_route')) {
-            return;
-        }
 
         /** @var Session */
         $session = $request->getSession();
@@ -68,9 +65,9 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
     static public function getSubscribedEvents(): array
     {
         return [
-            SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
-            KernelEvents::EXCEPTION => ['onKernelException', 10],
-            KernelEvents::FINISH_REQUEST => 'onKernelFinishRequest',
+            InteractiveLoginEvent::class => 'onSecurityInteractiveLogin',
+            ExceptionEvent::class => ['onKernelException', 10],
+            LogoutEvent::class => 'onSecurityLogout',
         ];
     }
 }

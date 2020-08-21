@@ -5,7 +5,6 @@ namespace App\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Exception\RuntimeException as SecurityException;
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
@@ -50,7 +49,7 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
     static public function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => 'onKernelRequest',
+            RequestEvent::class => 'onKernelRequest',
         ];
     }
 }
