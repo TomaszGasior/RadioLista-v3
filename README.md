@@ -11,17 +11,12 @@ If you would like to contribute, please take a look on unassigned issues
 labeled with [*help wanted*](https://github.com/TomaszGasior/RadioLista-v3/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 or [*good first issue*](https://github.com/TomaszGasior/RadioLista-v3/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
-Local development — Docker/Podman containers
+Local development — containers
 ---
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
     sudo docker-compose up
-
-If you prefer Podman, you may use `podman-compose` or the following script:
-
-    ./podman-setup
-    podman pod start radiolista-v3
 
 After containers building process, the first start of the application can take
 **more than one minute**: dependencies installation and database with example
