@@ -18,7 +18,6 @@
 			".vscode": true,
 			"*.code-workspace": true,
 			"*.lock": true,
-			"*.sublime-{project,workspace}": true,
 			"**/.gitignore": true,
 			"bin": true,
 			"public/assets/{fonts,themes,thirdparty}": true,

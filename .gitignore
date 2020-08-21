@@ -1,4 +1,3 @@
-*.sublime-workspace
 deploy.yaml
 
 /public/assets/thirdparty/ckeditor
