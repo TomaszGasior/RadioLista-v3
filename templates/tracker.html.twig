@@ -1,5 +1,8 @@
 <script>
     var _paq = window._paq = window._paq || [];
+    {% if user_id %}
+        _paq.push(['setUserId', '{{ user_id }}']);
+    {% endif %}
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
