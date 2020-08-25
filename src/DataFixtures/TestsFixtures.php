@@ -6,7 +6,7 @@ use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class TestsFixtures extends Fixture
 {
