@@ -11,10 +11,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserListener
 {
     private $passwordEncoder;
+    private $enableDateTimeRefresh;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder,
+                                bool $enableDateTimeRefresh)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->enableDateTimeRefresh = $enableDateTimeRefresh;
     }
 
     /**
@@ -22,6 +25,10 @@ class UserListener
      */
     public function refreshLastActivityDate(User $user, PreUpdateEventArgs $args): void
     {
+        if (false === $this->enableDateTimeRefresh) {
+            return;
+        }
+
         if ($args->hasChangedField('aboutMe') || $args->hasChangedField('publicProfile')) {
             $user->refreshLastActivityDate();
         }

@@ -12,12 +12,23 @@ class RadioTableListener
 {
     use EntityListenerTrait;
 
+    private $enableDateTimeRefresh;
+
+    public function __construct(bool $enableDateTimeRefresh)
+    {
+        $this->enableDateTimeRefresh = $enableDateTimeRefresh;
+    }
+
     /**
      * @PreFlush
      * @PreRemove
      */
     public function refreshLastActivityDateOfUser(RadioTable $radioTable, EventArgs $args): void
     {
+        if (false === $this->enableDateTimeRefresh) {
+            return;
+        }
+
         $user = $radioTable->getOwner();
 
         $user->refreshLastActivityDate();
