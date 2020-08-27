@@ -25,8 +25,6 @@ abstract class AbstractEntityFixture extends Fixture
             $this->addReference(static::class . $i, $entity);
         }
 
-        $this->disableRefreshDateEntityListeners($manager, get_class($entity));
-
         $manager->flush();
     }
 

@@ -39,7 +39,6 @@ class TestsFixtures extends Fixture
             ->setDescription('test_radio_table_description')
         ;
         $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new \DateTime('2018-05-01'));
-        $this->disableRefreshDateEntityListeners($manager, RadioStation::class);
 
         $radioStation = (new RadioStation)
             ->setRadioTable($radioTable)

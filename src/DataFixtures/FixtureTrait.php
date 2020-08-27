@@ -15,19 +15,6 @@ trait FixtureTrait
 
     static private $faker;
 
-    private function disableRefreshDateEntityListeners(ObjectManager $manager, string $entityClass): void
-    {
-        $entityListeners = $manager->getClassMetadata($entityClass)->entityListeners;
-
-        array_walk($entityListeners, function(&$listeners){
-            $listeners = array_filter($listeners, function($callback){
-                return !preg_match('/refresh.*(Date|Time).*/', $callback['method']);
-            });
-        });
-
-        $manager->getClassMetadata($entityClass)->entityListeners = $entityListeners;
-    }
-
     private function setupFaker()
     {
         if (self::$faker) {
