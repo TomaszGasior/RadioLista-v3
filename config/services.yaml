@@ -35,7 +35,7 @@ services:
         resource: '../src/Doctrine/EntityListener'
         tags: [{ name: 'doctrine.orm.entity_listener', lazy: true }]
         arguments:
-            $enableDateTimeRefresh: "@=constant('PHP_SAPI') !== 'cli'"
+            $enableDateTimeRefresh: "@=null !== service('request_stack').getCurrentRequest()"
 
     App\DataFixtures\TestsFixtures:
         autoconfigure: false
