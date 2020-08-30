@@ -5,3 +5,8 @@ services:
 
     App\DataFixtures\TestsFixtures:
         autoconfigure: true
+
+    test.client:
+        class: App\Tests\KernelBrowser
+        autowire: true
+        public: true
