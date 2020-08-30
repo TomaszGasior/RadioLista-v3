@@ -10,6 +10,9 @@ use Twig\TwigFunction;
 
 class RadioTableExtension extends AbstractExtension
 {
+    /**
+     * @codeCoverageIgnore
+     */
     public function getFunctions(): array
     {
         return [
@@ -20,6 +23,9 @@ class RadioTableExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getFilters(): array
     {
         return [

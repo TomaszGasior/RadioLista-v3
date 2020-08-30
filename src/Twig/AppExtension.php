@@ -20,6 +20,9 @@ class AppExtension extends AbstractExtension
         $twig->setCompiler($compiler);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getFilters(): array
     {
         return [

@@ -21,6 +21,9 @@ class TrackerExtension extends AbstractExtension
         $this->security = $security;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getFunctions(): array
     {
         return [

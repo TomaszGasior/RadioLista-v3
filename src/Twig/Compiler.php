@@ -6,6 +6,9 @@ use Twig\Compiler as BaseCompiler;
 use Twig\Node\Node;
 use Twig\Node\TextNode;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Compiler extends BaseCompiler
 {
     private $ignoredTemplates = [];
