@@ -73,6 +73,7 @@ class BasicApplicationTest extends WebTestCase
             ['/utworz-wykaz'],
             ['/moje-wykazy'],
             ['/ustawienia-konta'],
+            ['/wyloguj', 'http://localhost/'],
             ['/wykaz/1/dodaj-stacje'],
             ['/wykaz/1/edytuj-stacje/1'],
             ['/wykaz/1/kopiuj-stacje/1'],
