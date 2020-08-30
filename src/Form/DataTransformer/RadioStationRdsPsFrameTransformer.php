@@ -5,13 +5,14 @@ namespace App\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-// The following transformer is designed for RadioStation::$rds.ps array.
-// It's used by RadioStationEditType form field.
-//
-// RadioStation::$rds.ps contains array with nested arrays with strings.
-// In transformed string nested arrays need to be separated by newline
-// and string of each frame need to be separated by "|".
-
+/**
+ * The following transformer is designed for RadioStation::$rds.ps array.
+ * It's used by RadioStationEditType form field.
+ *
+ * RadioStation::$rds.ps contains array with nested arrays with strings.
+ * In transformed string nested arrays need to be separated by newline
+ * and string of each frame need to be separated by "|".
+ */
 class RadioStationRdsPsFrameTransformer implements DataTransformerInterface
 {
     public function transform($value): ?string
