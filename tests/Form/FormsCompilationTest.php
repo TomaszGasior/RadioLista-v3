@@ -28,6 +28,28 @@ class FormsCompilationTest extends KernelTestCase
         $this->factory = self::$container->get(FormFactoryInterface::class);
     }
 
+    public function formTypeAndEntityProvider(): iterable
+    {
+        self::bootKernel();
+        $entityManager = self::$container->get(EntityManagerInterface::class);
+
+        $radioTable = $entityManager->find(RadioTable::class, 1);
+        $radioStation = $entityManager->find(RadioStation::class, 1);
+        $user = $entityManager->find(User::class, 1);
+
+        self::ensureKernelShutdown();
+
+        yield 'RadioStationEditType' => [RadioStationEditType::class, $radioStation];
+        yield 'RadioStationRemoveType' => [RadioStationRemoveType::class, null, ['radio_table' => $radioTable]];
+        yield 'RadioTableCreateType' => [RadioTableCreateType::class, $radioTable];
+        yield 'RadioTableRemoveType' => [RadioTableRemoveType::class];
+        yield 'RadioTableSearchType' => [RadioTableSearchType::class];
+        yield 'RadioTableSettingsType' => [RadioTableSettingsType::class, $radioTable];
+        yield 'SecurityLoginType' => [SecurityLoginType::class];
+        yield 'UserRegisterType' => [UserRegisterType::class, new User];
+        yield 'UserSettingsType' => [UserSettingsType::class, $user];
+    }
+
     /**
      * @dataProvider formTypeAndEntityProvider
      * @doesNotPerformAssertions
@@ -38,24 +60,5 @@ class FormsCompilationTest extends KernelTestCase
 
         $form->handleRequest(new Request);
         $form->createView();
-    }
-
-    public function formTypeAndEntityProvider(): iterable
-    {
-        $radioStation = (new RadioStation)->setRadioTable(new RadioTable);
-        yield [RadioStationEditType::class, $radioStation];
-
-        self::bootKernel();
-        $radioTable = self::$container->get(EntityManagerInterface::class)->find(RadioTable::class, 1);
-        self::ensureKernelShutdown();
-        yield [RadioStationRemoveType::class, null, ['radio_table' => $radioTable]];
-
-        yield [RadioTableCreateType::class, new RadioTable];
-        yield [RadioTableRemoveType::class];
-        yield [RadioTableSearchType::class];
-        yield [RadioTableSettingsType::class, new RadioTable];
-        yield [SecurityLoginType::class];
-        yield [UserRegisterType::class, new User];
-        yield [UserSettingsType::class, new User];
     }
 }

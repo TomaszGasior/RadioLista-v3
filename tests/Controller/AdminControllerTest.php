@@ -15,10 +15,24 @@ class AdminControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
+    public function urlProvider(): iterable
+    {
+        $urls = [
+            '/admin',
+            '/admin/dziennik',
+            '/admin/wykazy',
+            '/admin/uzytkownicy',
+        ];
+
+        foreach ($urls as $url) {
+            yield $url => [$url];
+        }
+    }
+
     /**
      * @dataProvider urlProvider
      */
-    public function testAdminPanelSeemsToWork($url): void
+    public function testAdminPanelPage($url): void
     {
         $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user_admin',
@@ -40,15 +54,5 @@ class AdminControllerTest extends WebTestCase
             'PHP_AUTH_PW' => 'test_user',
         ]);
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    public function urlProvider(): array
-    {
-        return [
-            ['/admin'],
-            ['/admin/dziennik'],
-            ['/admin/wykazy'],
-            ['/admin/uzytkownicy'],
-        ];
     }
 }

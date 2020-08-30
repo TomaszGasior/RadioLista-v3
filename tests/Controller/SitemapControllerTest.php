@@ -15,7 +15,7 @@ class SitemapControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testSitemapRenderedProperly(): void
+    public function testRenderSitemap(): void
     {
         $crawler = $this->client->request('GET', '/sitemap.xml');
 

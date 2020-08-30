@@ -15,15 +15,47 @@ class SecurityPermissionTest extends WebTestCase
         $this->client = static::createClient();
     }
 
+    public function onlyForLoggedInUrlProvider(): iterable
+    {
+        $urls = [
+            '/utworz-wykaz',
+            '/moje-wykazy',
+            '/ustawienia-konta',
+        ];
+
+        foreach ($urls as $url) {
+            yield $url => [$url];
+        }
+    }
+
+    public function ownedByTestUserUrlProvider(): iterable
+    {
+        $urls = [
+            '/wykaz/1/dodaj-stacje',
+            '/wykaz/1/edytuj-stacje/1',
+            '/wykaz/1/kopiuj-stacje/1',
+            '/wykaz/1/usun-stacje/1',
+            '/wykaz/1/ustawienia',
+            '/wykaz/1/eksport/html',
+            '/wykaz/1/eksport/csv',
+            '/wykaz/1/eksport/pdf',
+            '/wykaz/1/usun',
+        ];
+
+        foreach ($urls as $url) {
+            yield $url => [$url];
+        }
+    }
+
     /**
      * @dataProvider onlyForLoggedInUrlProvider
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testAnonymousCantAccessRestrictedPages(string $url): void
+    public function testAnonymousCantAccessRestrictedPage(string $url): void
     {
         $this->skipPdfGenerator($url);
 
-        $crawler = $this->client->request('GET', $url);
+        $this->client->request('GET', $url);
 
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
@@ -36,11 +68,11 @@ class SecurityPermissionTest extends WebTestCase
      * @dataProvider onlyForLoggedInUrlProvider
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testUserCanAccessRestrictedPages(string $url): void
+    public function testUserCanAccessRestrictedPage(string $url): void
     {
         $this->skipPdfGenerator($url);
 
-        $crawler = $this->client->request('GET', $url, [], [], [
+        $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user',
             'PHP_AUTH_PW' => 'test_user',
         ]);
@@ -53,11 +85,11 @@ class SecurityPermissionTest extends WebTestCase
     /**
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testUserCantAccessPagesOfOtherUser(string $url): void
+    public function testUserCantAccessPageOfOtherUser(string $url): void
     {
         $this->skipPdfGenerator($url);
 
-        $crawler = $this->client->request('GET', $url, [], [], [
+        $this->client->request('GET', $url, [], [], [
             'PHP_AUTH_USER' => 'test_user_second',
             'PHP_AUTH_PW' => 'test_user_second',
         ]);
@@ -65,30 +97,6 @@ class SecurityPermissionTest extends WebTestCase
         $response = $this->client->getResponse();
 
         $this->assertSame(404, $response->getStatusCode());
-    }
-
-    public function onlyForLoggedInUrlProvider(): array
-    {
-        return [
-            ['/utworz-wykaz'],
-            ['/moje-wykazy'],
-            ['/ustawienia-konta'],
-        ];
-    }
-
-    public function ownedByTestUserUrlProvider(): array
-    {
-        return [
-            ['/wykaz/1/dodaj-stacje'],
-            ['/wykaz/1/edytuj-stacje/1'],
-            ['/wykaz/1/kopiuj-stacje/1'],
-            ['/wykaz/1/usun-stacje/1'],
-            ['/wykaz/1/ustawienia'],
-            ['/wykaz/1/eksport/html'],
-            ['/wykaz/1/eksport/csv'],
-            ['/wykaz/1/eksport/pdf'],
-            ['/wykaz/1/usun'],
-        ];
     }
 
     /**

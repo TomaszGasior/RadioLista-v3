@@ -9,33 +9,37 @@ use Twig\Environment;
 
 class RadioTableExtensionTest extends TestCase
 {
+    public function rdsFramesProvider(): iterable
+    {
+        $frames = [
+            'POLSKIE' => 'POLSKIE ',
+            ' RADIO'  => '  RADIO ',
+            'JEDYNKA' => 'JEDYNKA ',
+            ' 20:00'  => '  20:00 ',
+
+            'x'         => '   x    ',
+            'xx'        => '   xx   ',
+            'xxx'       => '  xxx   ',
+            'xxxx'      => '  xxxx  ',
+            'xxxxx'     => ' xxxxx  ',
+            'xxxxxx'    => ' xxxxxx ',
+            'xxxxxxx'   => 'xxxxxxx ',
+            'xxxxxxxx'  => 'xxxxxxxx',
+            'xxxxxxxxx' => 'xxxxxxxx',
+        ];
+
+        foreach ($frames as $frame => $expectedFrame) {
+            yield $frame => [$frame, $expectedFrame];
+        }
+    }
+
     /**
-     * @dataProvider rdsProvider
+     * @dataProvider rdsFramesProvider
      */
     public function testAlignRdsFrame(string $frame, string $expectedFrame): void
     {
         $extension = new RadioTableExtension;
 
         $this->assertEquals($expectedFrame, $extension->alignRDSFrame($frame));
-    }
-
-    public function rdsProvider(): array
-    {
-        return [
-            ['POLSKIE', 'POLSKIE '],
-            [' RADIO',  '  RADIO '],
-            ['JEDYNKA', 'JEDYNKA '],
-            [' 20:00',  '  20:00 '],
-
-            ['x',         '   x    '],
-            ['xx',        '   xx   '],
-            ['xxx',       '  xxx   '],
-            ['xxxx',      '  xxxx  '],
-            ['xxxxx',     ' xxxxx  '],
-            ['xxxxxx',    ' xxxxxx '],
-            ['xxxxxxx',   'xxxxxxx '],
-            ['xxxxxxxx',  'xxxxxxxx'],
-            ['xxxxxxxxx', 'xxxxxxxx'],
-        ];
     }
 }

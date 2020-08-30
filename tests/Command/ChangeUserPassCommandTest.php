@@ -19,7 +19,7 @@ class ChangeUserPassCommandTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testChangeUserPassword()
+    public function testCommandChangesUserPassword()
     {
         $application = new Application(static::$kernel);
 

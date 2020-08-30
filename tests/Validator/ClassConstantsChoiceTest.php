@@ -16,26 +16,6 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
         return new ChoiceValidator;
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testClassConstantsChoiceConstraint($class, $constantsPrefix,
-                                                       $validConstants, $value): void
-    {
-        $classConstantsChoiceConstraint = new ClassConstantsChoice(
-            ['class' => $class, 'prefix' => $constantsPrefix]
-        );
-        $choiceConstraint = new Choice(['choices' => $validConstants]);
-
-        $this->validator->validate($value, $classConstantsChoiceConstraint);
-        $classConstantsChoiceViolation = $this->context->getViolations()[0] ?? null;
-
-        $this->validator->validate($value, $choiceConstraint);
-        $choiceViolation = $this->context->getViolations()[1] ?? null;
-
-        $this->assertEquals($choiceViolation, $classConstantsChoiceViolation);
-    }
-
     public function dataProvider(): iterable
     {
         $class = RadioStation::class;
@@ -63,6 +43,26 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
         foreach ($testedValues as $testedValue) {
             yield [$class, $constantsPrefix, $validConstants, $testedValue];
         }
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testClassConstantsChoiceConstraint($class, $constantsPrefix,
+                                                       $validConstants, $value): void
+    {
+        $classConstantsChoiceConstraint = new ClassConstantsChoice(
+            ['class' => $class, 'prefix' => $constantsPrefix]
+        );
+        $choiceConstraint = new Choice(['choices' => $validConstants]);
+
+        $this->validator->validate($value, $classConstantsChoiceConstraint);
+        $classConstantsChoiceViolation = $this->context->getViolations()[0] ?? null;
+
+        $this->validator->validate($value, $choiceConstraint);
+        $choiceViolation = $this->context->getViolations()[1] ?? null;
+
+        $this->assertEquals($choiceViolation, $classConstantsChoiceViolation);
     }
 
     public function testThrowExceptionWithNoChoices(): void

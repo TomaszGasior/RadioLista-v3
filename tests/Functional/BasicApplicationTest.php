@@ -17,21 +17,10 @@ class BasicApplicationTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    /**
-     * @dataProvider publicUrlsProvider
-     */
-    public function testPublicPagesSeemToWork(string $url, string $redirectUrl = null): void
-    {
-        $this->client->request('GET', $url);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, $redirectUrl);
-    }
-
     public function publicUrlsProvider(): iterable
     {
-        return [
-            [''],
+        $urls = [
+            ['/'],
             ['/strona-glowna', '/'],
             ['/o-stronie'],
             ['/regulamin'],
@@ -51,25 +40,15 @@ class BasicApplicationTest extends WebTestCase
             ['/profil?u=test_user', '/profil/test_user'],
             ['/szukaj?s=test'],
         ];
+
+        foreach ($urls as $data) {
+            yield $data[0] => $data;
+        }
     }
 
-    /**
-     * @dataProvider authenticatedUrlsProvider
-     */
-    public function testAuthenticatedPagesSeemToWork(string $url, string $redirectUrl = null): void
+    public function authenticatedUrlsProvider(): iterable
     {
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, $redirectUrl);
-    }
-
-    public function authenticatedUrlsProvider(): array
-    {
-        return [
+        $urls = [
             ['/utworz-wykaz'],
             ['/moje-wykazy'],
             ['/ustawienia-konta'],
@@ -82,6 +61,35 @@ class BasicApplicationTest extends WebTestCase
             ['/wykaz/1/eksport', '/wykaz/1/ustawienia#export'],
             ['/wykaz/1/usun'],
         ];
+
+        foreach ($urls as $data) {
+            yield $data[0] => $data;
+        }
+    }
+
+    /**
+     * @dataProvider publicUrlsProvider
+     */
+    public function testPublicPage(string $url, string $redirectUrl = null): void
+    {
+        $this->client->request('GET', $url);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, $redirectUrl);
+    }
+
+    /**
+     * @dataProvider authenticatedUrlsProvider
+     */
+    public function testAuthenticatedPage(string $url, string $redirectUrl = null): void
+    {
+        $this->client->request('GET', $url, [], [], [
+            'PHP_AUTH_USER' => 'test_user',
+            'PHP_AUTH_PW' => 'test_user',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, $redirectUrl);
     }
 
     private function assertResponse(Response $response, string $redirectUrl = null): void

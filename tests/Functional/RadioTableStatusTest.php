@@ -16,6 +16,24 @@ class RadioTableStatusTest extends WebTestCase
         $this->client = static::createClient();
     }
 
+    public function statusAndHttpCodeProvider(): array
+    {
+        return [
+            'public' => [RadioTable::STATUS_PUBLIC, 200, false],
+            'unlisted' => [RadioTable::STATUS_UNLISTED, 200, true],
+            'private' => [RadioTable::STATUS_PRIVATE, 404, true],
+        ];
+    }
+
+    public function statusAndAnchorVisibilityProvider(): array
+    {
+        return [
+            'public' => [RadioTable::STATUS_PUBLIC, true],
+            'unlisted' => [RadioTable::STATUS_UNLISTED, false],
+            'private' => [RadioTable::STATUS_PRIVATE, false],
+        ];
+    }
+
     /**
      * @dataProvider statusAndHttpCodeProvider
      */
@@ -74,15 +92,6 @@ class RadioTableStatusTest extends WebTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function statusAndHttpCodeProvider(): array
-    {
-        return [
-            [RadioTable::STATUS_PUBLIC, 200, false],
-            [RadioTable::STATUS_UNLISTED, 200, true],
-            [RadioTable::STATUS_PRIVATE, 404, true],
-        ];
-    }
-
     /**
      * @dataProvider statusAndAnchorVisibilityProvider
      */
@@ -109,15 +118,6 @@ class RadioTableStatusTest extends WebTestCase
         $anchors = $crawler->filter('a[href="/wykaz/1"]');
 
         $this->assertCount($expectedVisibleAnchor ? 1 : 0, $anchors);
-    }
-
-    public function statusAndAnchorVisibilityProvider(): array
-    {
-        return [
-            [RadioTable::STATUS_PUBLIC, true],
-            [RadioTable::STATUS_UNLISTED, false],
-            [RadioTable::STATUS_PRIVATE, false],
-        ];
     }
 
     private function setRadioTableStatus($newStatus): void

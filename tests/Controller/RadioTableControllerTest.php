@@ -19,7 +19,7 @@ class RadioTableControllerTest extends WebTestCase
         ]);
     }
 
-    public function testRadioTableRenderedProperly(): void
+    public function testRenderRadioTable(): void
     {
         $crawler = $this->client->request('GET', '/wykaz/1');
 

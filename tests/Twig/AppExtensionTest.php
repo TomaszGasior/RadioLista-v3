@@ -9,6 +9,24 @@ use Twig\Environment;
 
 class AppExtensionTest extends TestCase
 {
+    public function csvProvider(): array
+    {
+        return [
+            'no spaces' => [
+                'something',
+                'something',
+            ],
+            'spaces' => [
+                'something with space',
+                '"something with space"',
+            ],
+            'newlines' => [
+                "something\nwith newline",
+                "\"something\nwith newline\"",
+            ],
+        ];
+    }
+
     /**
      * @dataProvider csvProvider
      */
@@ -23,24 +41,6 @@ class AppExtensionTest extends TestCase
             $escapedString,
             $extension->escapeCSV($twigEnvironment, $sourceString)
         );
-    }
-
-    public function csvProvider(): array
-    {
-        return [
-            [
-                'something',
-                'something',
-            ],
-            [
-                'something with space',
-                '"something with space"',
-            ],
-            [
-                "something\nwith newline",
-                "\"something\nwith newline\"",
-            ],
-        ];
     }
 
     private function getInstance(): AppExtension

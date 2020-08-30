@@ -8,31 +8,11 @@ use PHPUnit\Framework\TestCase;
 
 class RadioTableColumnsTransformerTest extends TestCase
 {
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testTransformFromDataToUi(array $visibleColumns, array $sortedColumns): void
-    {
-        $transformer = new RadioTableColumnsTransformer;
-
-        $this->assertEquals($sortedColumns, $transformer->transform($visibleColumns));
-    }
-
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testTransformFromUiToData(array $visibleColumns, array $sortedColumns): void
-    {
-        $transformer = new RadioTableColumnsTransformer;
-
-        $this->assertEquals($visibleColumns, $transformer->reverseTransform($sortedColumns));
-    }
 
     public function dataProvider(): array
     {
         return [
-            // case #1
-            [
+            'case #1' => [
                 [
                     RadioTable::COLUMN_FREQUENCY,
                     RadioTable::COLUMN_NAME,
@@ -67,8 +47,7 @@ class RadioTableColumnsTransformerTest extends TestCase
                 ],
             ],
 
-            // case #2
-            [
+            'case #2' => [
                 [
                     RadioTable::COLUMN_PRIVATE_NUMBER,
                     RadioTable::COLUMN_FREQUENCY,
@@ -105,5 +84,25 @@ class RadioTableColumnsTransformerTest extends TestCase
                 ],
             ],
         ];
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testTransformFromDataToUi(array $visibleColumns, array $sortedColumns): void
+    {
+        $transformer = new RadioTableColumnsTransformer;
+
+        $this->assertEquals($sortedColumns, $transformer->transform($visibleColumns));
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testTransformFromUiToData(array $visibleColumns, array $sortedColumns): void
+    {
+        $transformer = new RadioTableColumnsTransformer;
+
+        $this->assertEquals($visibleColumns, $transformer->reverseTransform($sortedColumns));
     }
 }

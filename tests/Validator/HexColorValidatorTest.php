@@ -14,25 +14,7 @@ class HexColorValidatorTest extends ConstraintValidatorTestCase
         return new HexColorValidator;
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testHexColorValidator(string $value, bool $isValid): void
-    {
-        $constraint = new HexColor;
-        $this->validator->validate($value, $constraint);
-
-        if ($isValid) {
-            $this->assertNoViolation();
-        }
-        else {
-            $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $value)
-                ->assertRaised();
-        }
-    }
-
-    public function dataProvider(): iterable
+    public function colorsProvider(): iterable
     {
         $validValues = [
             '#ff83A8',
@@ -57,10 +39,28 @@ class HexColorValidatorTest extends ConstraintValidatorTestCase
         ];
 
         foreach ($validValues as $value) {
-            yield [$value, true];
+            yield sprintf('valid "%s"', $value) => [$value, true];
         }
         foreach ($invalidValues as $value) {
-            yield [$value, false];
+            yield sprintf('invalid "%s"', $value) => [$value, false];
+        }
+    }
+
+    /**
+     * @dataProvider colorsProvider
+     */
+    public function testHexColorValidator(string $value, bool $isValid): void
+    {
+        $constraint = new HexColor;
+        $this->validator->validate($value, $constraint);
+
+        if ($isValid) {
+            $this->assertNoViolation();
+        }
+        else {
+            $this->buildViolation($constraint->message)
+                ->setParameter('{{ value }}', $value)
+                ->assertRaised();
         }
     }
 }

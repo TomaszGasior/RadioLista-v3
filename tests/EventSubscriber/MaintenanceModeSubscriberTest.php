@@ -77,7 +77,7 @@ class MaintenanceModeSubscriberTest extends TestCase
         $this->assertEquals(503, $this->event->getResponse()->getStatusCode());
     }
 
-    public function testEnabledMaintenanceModeAdminAccess(): void
+    public function testAdminAccessWhenEnabledMaintenanceMode(): void
     {
         $this->security
             ->expects($this->once())

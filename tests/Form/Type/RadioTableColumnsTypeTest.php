@@ -21,31 +21,6 @@ class RadioTableColumnsTypeTest extends TypeTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testRenderedFields(array $visibleColumns, array $columnLabels): void
-    {
-        $form = $this->factory->create(
-            RadioTableColumnsType::class, $visibleColumns
-        );
-
-        $view = $form->createView();
-        $children = $view->children;
-
-        foreach ($columnLabels as $columnName => $columnLabel) {
-            $this->assertArrayHasKey($columnName, $children);
-
-            $value = $view->children[$columnName]->vars['value'];
-            if (in_array($columnName, $visibleColumns)) {
-                $this->assertGreaterThan(0, $value);
-            }
-            else {
-                $this->assertLessThan(0, $value);
-            }
-        }
-    }
-
     public function dataProvider(): array
     {
         return [[
@@ -60,20 +35,44 @@ class RadioTableColumnsTypeTest extends TypeTestCase
                 RadioTable::COLUMN_RDS,
             ],
             [
-                RadioTable::COLUMN_PRIVATE_NUMBER  => 'Numer w odbiorniku',
-                RadioTable::COLUMN_FREQUENCY  => 'Częstotliwość',
-                RadioTable::COLUMN_NAME  => 'Nazwa',
-                RadioTable::COLUMN_RADIO_GROUP  => 'Grupa medialna',
-                RadioTable::COLUMN_COUNTRY  => 'Kraj',
-                RadioTable::COLUMN_LOCATION  => 'Lokalizacja nadajnika',
-                RadioTable::COLUMN_POWER  => 'Moc nadajnika',
-                RadioTable::COLUMN_POLARIZATION  => 'Polaryzacja',
-                RadioTable::COLUMN_TYPE  => 'Rodzaj programu',
-                RadioTable::COLUMN_LOCALITY  => 'Lokalność programu',
-                RadioTable::COLUMN_QUALITY  => 'Jakość odbioru',
-                RadioTable::COLUMN_RDS  => 'RDS',
-                RadioTable::COLUMN_COMMENT  => 'Komentarz',
+                RadioTable::COLUMN_PRIVATE_NUMBER,
+                RadioTable::COLUMN_FREQUENCY,
+                RadioTable::COLUMN_NAME,
+                RadioTable::COLUMN_RADIO_GROUP,
+                RadioTable::COLUMN_COUNTRY,
+                RadioTable::COLUMN_LOCATION,
+                RadioTable::COLUMN_POWER,
+                RadioTable::COLUMN_POLARIZATION,
+                RadioTable::COLUMN_TYPE,
+                RadioTable::COLUMN_LOCALITY,
+                RadioTable::COLUMN_QUALITY,
+                RadioTable::COLUMN_RDS,
+                RadioTable::COLUMN_COMMENT,
             ],
         ]];
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testRenderedFields(array $visibleColumns, array $allColumns): void
+    {
+        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
+
+        $view = $form->createView();
+        $children = $view->children;
+
+        foreach ($allColumns as $columnName) {
+            $this->assertArrayHasKey($columnName, $children);
+
+            $value = $view->children[$columnName]->vars['value'];
+
+            if (in_array($columnName, $visibleColumns)) {
+                $this->assertGreaterThan(0, $value);
+            }
+            else {
+                $this->assertLessThan(0, $value);
+            }
+        }
     }
 }
