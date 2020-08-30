@@ -16,19 +16,19 @@ class TestsFixtures extends Fixture
     {
         $user = (new User)
             ->setName('test_user')
-            ->setPasswordHash('test_user')
+            ->setPlainPassword('test_user')
             ->setPublicProfile(true)
             ->setAboutMe('test_user_about_me')
         ;
 
         $secondUser = (new User)
             ->setName('test_user_second')
-            ->setPasswordHash('test_user_second')
+            ->setPlainPassword('test_user_second')
         ;
 
         $adminUser = (new User)
             ->setName('test_user_admin')
-            ->setPasswordHash('test_user_admin')
+            ->setPlainPassword('test_user_admin')
         ;
         $this->setPrivateFieldOfObject($adminUser, 'admin', true);
 
