@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
@@ -17,10 +17,8 @@ class UserControllerTest extends WebTestCase
 
     public function testUserPublicProfileDescription(): void
     {
-        $crawler = $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $exampleContent = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>';
 
@@ -29,10 +27,7 @@ class UserControllerTest extends WebTestCase
         $form['user_settings[publicProfile]'] = '1';
         $this->client->submit($form);
 
-        $crawler = $this->client->request('GET', '/profil/test_user', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $crawler = $this->client->request('GET', '/profil/test_user');
         $content = $crawler->html();
         $this->assertStringContainsString($exampleContent, $content);
     }
@@ -40,10 +35,9 @@ class UserControllerTest extends WebTestCase
     public function testUserPublicProfileVisibility(): void
     {
         $setPublicProfile = function(bool $enabled) {
-            $crawler = $this->client->request('GET', '/ustawienia-konta', [], [], [
-                'PHP_AUTH_USER' => 'test_user',
-                'PHP_AUTH_PW' => 'test_user',
-            ]);
+            $this->client->loginUserByName('test_user');
+
+            $crawler = $this->client->request('GET', '/ustawienia-konta');
 
             $form = $crawler->filter('form')->form();
             $form['user_settings[publicProfile]'] = '1';
@@ -69,10 +63,8 @@ class UserControllerTest extends WebTestCase
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
-        $crawler = $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $form = $crawler->filter('form')->form();
         $form['user_settings[currentPassword]'] = 'test_user';
@@ -82,19 +74,15 @@ class UserControllerTest extends WebTestCase
 
         $this->client->restart();
 
-        $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => $newPassword,
-        ]);
+        $this->loginUserThroughForm('test_user', $newPassword);
+        $this->client->request('GET', '/ustawienia-konta');
         $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
 
         $this->client->restart();
 
-        $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->loginUserThroughForm('test_user', 'test_user!');
+        $this->client->request('GET', '/ustawienia-konta');
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
@@ -105,10 +93,8 @@ class UserControllerTest extends WebTestCase
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
-        $crawler = $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $form = $crawler->filter('form')->form();
         $form['user_settings[currentPassword]'] = 'invalid_current_pass';
@@ -118,10 +104,8 @@ class UserControllerTest extends WebTestCase
 
         $this->client->restart();
 
-        $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => $newPassword,
-        ]);
+        $this->loginUserThroughForm('test_user', $newPassword);
+        $this->client->request('GET', '/ustawienia-konta');
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
         $this->assertSame(302, $response->getStatusCode());
@@ -129,10 +113,8 @@ class UserControllerTest extends WebTestCase
 
         $this->client->restart();
 
-        $this->client->request('GET', '/ustawienia-konta', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->loginUserThroughForm('test_user', 'test_user');
+        $this->client->request('GET', '/ustawienia-konta');
         $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
     }
@@ -148,12 +130,7 @@ class UserControllerTest extends WebTestCase
         $form['user_register[acceptServiceTerms]'] = '1';
         $this->client->submit($form);
 
-        $crawler = $this->client->request('GET', '/logowanie');
-
-        $form = $crawler->filter('form')->form();
-        $form['security_login[username]'] = 'EXAMPLE_LOGIN';
-        $form['security_login[password]'] = 'EXAMPLE_PASSW0RD!';
-        $this->client->submit($form);
+        $this->loginUserThroughForm('EXAMPLE_LOGIN', 'EXAMPLE_PASSW0RD!');
 
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
@@ -164,5 +141,16 @@ class UserControllerTest extends WebTestCase
 
         $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
+    }
+
+    private function loginUserThroughForm(string $username, $password): void
+    {
+        $crawler = $this->client->request('GET', '/logowanie');
+
+        $form = $crawler->filter('form')->form();
+        $form['security_login[username]'] = $username;
+        $form['security_login[password]'] = $password;
+
+        $this->client->submit($form);
     }
 }

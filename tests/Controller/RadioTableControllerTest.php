@@ -3,7 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Entity\RadioTable;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableControllerTest extends WebTestCase
@@ -13,10 +13,10 @@ class RadioTableControllerTest extends WebTestCase
 
     public function setUp(): void
     {
-        $this->client = static::createClient([], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        /** @var KernelBrowser */
+        $this->client = static::createClient();
+
+        $this->client->loginUserByName('test_user');
     }
 
     public function testRenderRadioTable(): void

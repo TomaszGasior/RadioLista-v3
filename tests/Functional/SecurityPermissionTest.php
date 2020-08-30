@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityPermissionTest extends WebTestCase
@@ -72,10 +72,8 @@ class SecurityPermissionTest extends WebTestCase
     {
         $this->skipPdfGenerator($url);
 
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $this->client->request('GET', $url);
 
         $response = $this->client->getResponse();
 
@@ -89,10 +87,8 @@ class SecurityPermissionTest extends WebTestCase
     {
         $this->skipPdfGenerator($url);
 
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user_second',
-            'PHP_AUTH_PW' => 'test_user_second',
-        ]);
+        $this->client->loginUserByName('test_user_second');
+        $this->client->request('GET', $url);
 
         $response = $this->client->getResponse();
 

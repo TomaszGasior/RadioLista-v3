@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminControllerTest extends WebTestCase
@@ -34,10 +34,8 @@ class AdminControllerTest extends WebTestCase
      */
     public function testAdminPanelPage($url): void
     {
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user_admin',
-            'PHP_AUTH_PW' => 'test_user_admin',
-        ]);
+        $this->client->loginUserByName('test_user_admin');
+        $this->client->request('GET', $url);
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
@@ -49,10 +47,8 @@ class AdminControllerTest extends WebTestCase
         $this->client->request('GET', $url);
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
 
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $this->client->request('GET', $url);
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 }

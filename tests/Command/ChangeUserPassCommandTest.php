@@ -3,6 +3,7 @@
 namespace App\Tests\Command;
 
 use App\Entity\User;
+use App\Tests\KernelBrowser;
 use Deployer\Component\PharUpdate\Console\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -45,10 +46,20 @@ class ChangeUserPassCommandTest extends WebTestCase
         static::$container->get(EntityManagerInterface::class)
             ->getClassMetadata(User::class)->cache = $cache;
 
-        $crawler = $this->client->request('GET', '/moje-wykazy', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'NEW_PASSWORD_OF_TEST_USER',
-        ]);
+        $this->assertUserLogsIn('test_user', 'NEW_PASSWORD_OF_TEST_USER');
+    }
+
+    private function assertUserLogsIn(string $username, string $password): void
+    {
+        $crawler = $this->client->request('GET', '/logowanie');
+
+        $form = $crawler->filter('form')->form();
+        $form['security_login[username]'] = $username;
+        $form['security_login[password]'] = $password;
+
+        $this->client->submit($form);
+        $this->client->followRedirect();
+
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 }

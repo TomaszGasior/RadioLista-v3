@@ -3,7 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\RadioTable;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableStatusTest extends WebTestCase
@@ -54,10 +54,8 @@ class RadioTableStatusTest extends WebTestCase
             $this->assertCount(0, $robotsTag);
         }
 
-        $this->client->request('GET', '/wykaz/1', [], [], [
-            'PHP_AUTH_USER' => 'test_user_second',
-            'PHP_AUTH_PW' => 'test_user_second',
-        ]);
+        $this->client->loginUserByName('test_user_second');
+        $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame($expectedHttpCode, $this->client->getResponse()->getStatusCode());
     }
@@ -69,10 +67,8 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->request('GET', '/wykaz/1', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
@@ -84,10 +80,8 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->request('GET', '/wykaz/1', [], [], [
-            'PHP_AUTH_USER' => 'test_user_admin',
-            'PHP_AUTH_PW' => 'test_user_admin',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
@@ -122,10 +116,8 @@ class RadioTableStatusTest extends WebTestCase
 
     private function setRadioTableStatus($newStatus): void
     {
-        $crawler = $this->client->request('GET', '/wykaz/1/ustawienia', [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $crawler = $this->client->request('GET', '/wykaz/1/ustawienia');
 
         $form = $crawler->filter('form')->form();
         $form['radio_table_settings[status]'] = $newStatus;

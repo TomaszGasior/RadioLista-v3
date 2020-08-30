@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -83,10 +83,8 @@ class BasicApplicationTest extends WebTestCase
      */
     public function testAuthenticatedPage(string $url, string $redirectUrl = null): void
     {
-        $this->client->request('GET', $url, [], [], [
-            'PHP_AUTH_USER' => 'test_user',
-            'PHP_AUTH_PW' => 'test_user',
-        ]);
+        $this->client->loginUserByName('test_user');
+        $this->client->request('GET', $url);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, $redirectUrl);
