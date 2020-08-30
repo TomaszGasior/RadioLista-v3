@@ -37,6 +37,9 @@ class TestsFixtures extends Fixture
             ->setName('test_radio_table_name')
             ->setStatus(RadioTable::STATUS_PUBLIC)
             ->setDescription('test_radio_table_description')
+            ->setColumns(
+                $this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_')
+            )
         ;
         $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new \DateTime('2018-05-01'));
 
@@ -44,12 +47,14 @@ class TestsFixtures extends Fixture
             ->setRadioTable($radioTable)
             ->setName('test_radio_station_name')
             ->setFrequency(100.95)
+            ->setPolarization(RadioStation::POLARIZATION_HORIZONTAL)
         ;
 
         $secondRadioStation = (new RadioStation)
             ->setRadioTable($radioTable)
             ->setName('test_second_radio_station_name')
             ->setFrequency(91.20)
+            ->setPolarization(RadioStation::POLARIZATION_VERTICAL)
         ;
 
         foreach ([$user, $secondUser, $adminUser, $radioTable, $radioStation, $secondRadioStation] as $entity) {
