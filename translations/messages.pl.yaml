@@ -304,7 +304,7 @@ general:
         title_pattern: '„%search_term%” — wyszukiwanie'
 
         information:
-            no_results: "Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, pozbawionego zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Możesz też użyć znaku gwiazdki\u00A0*, aby wyszukiwać części wyrazów. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów."
+            no_results: "Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, bez zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów."
 
     static_page:
         about_service: 'O stronie'

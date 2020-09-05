@@ -81,7 +81,7 @@ class RadioTableRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('radioTable')
             ->andWhere('radioTable.status = :status')
             ->setParameter('status', RadioTable::STATUS_PUBLIC)
-            ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm BOOLEAN) > 0.0')
+            ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm) > 0.0')
             ->setParameter('searchTerm', $searchTerm)
             ->innerJoin('radioTable.owner', 'user')->addSelect('user')
             ->getQuery()

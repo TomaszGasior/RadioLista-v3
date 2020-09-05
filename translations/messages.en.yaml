@@ -304,7 +304,7 @@ general:
         title_pattern: '„%search_term%” — search'
 
         information:
-            no_results: "No search results found. Try to use a simpler search term, without unnecessary words like \"and\". You can use star\u00A0* character to search for partial terms. Please remember that only list titles and descriptions are searched."
+            no_results: "No search results found. Try to use a simpler search term, without unnecessary words like \"and\". Please remember that only list titles and descriptions are searched."
 
     static_page:
         about_service: 'About'
