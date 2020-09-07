@@ -21,8 +21,3 @@ framework:
         formats:
             pdf: application/pdf
             csv: text/csv
-
-    assets:
-        # this may break assets from bundles, installed by `assets:install` command
-        base_path: 'assets'
-        version: '%app.version%'
