@@ -1,5 +1,7 @@
 composer.lock
+package-lock.json
 symfony.lock
 bin
+node_modules
 vendor
 var

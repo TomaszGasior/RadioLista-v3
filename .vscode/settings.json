@@ -9,12 +9,11 @@
 		".hidden": true,
 		".phpunit.result.cache": true,
 		".vscode": true,
-		"*.code-workspace": true,
-		"*.lock": true,
+		"*{.lock,-lock.json}": true,
 		"**/.gitignore": true,
+		"assets/{images,public,fonts}": true,
 		"bin": true,
-		"public/assets/{fonts,themes,thirdparty}": true,
-		"public/bundles": true,
+		"public/{build,bundles}": true,
 		"var": true,
 	},
 	"files.eol": "\n",
@@ -23,6 +22,7 @@
 	"files.trimTrailingWhitespace": true,
 
 	"search.exclude": {
+		"node_modules": true,
 		"vendor": true,
 	},
 }
