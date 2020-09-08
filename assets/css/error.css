@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Regular.woff2'), url('fonts/LatoLatin-Regular.woff');
+    src: url('../fonts/LatoLatin-Regular.woff2'), url('../fonts/LatoLatin-Regular.woff');
 }
 
 body {
@@ -31,7 +31,7 @@ div.logo {
 }
 
 div.logo a {
-    background: url('logo.svg') no-repeat;
+    background: url('../images/logo.svg') no-repeat;
     background-size: contain;
     height: 50px;
     width: 200px;

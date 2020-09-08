@@ -1,7 +1,7 @@
 /* theme — bieszczady */
 
 .theme-bieszczady .customizable-background {
-    background: #E1E1E1 url('themes/bieszczady.jpg') no-repeat center / cover fixed;
+    background: #E1E1E1 url('../images/themes/bieszczady.jpg') no-repeat center / cover fixed;
 }
 .theme-bieszczady .customizable-color {
     color: #000;
@@ -17,7 +17,7 @@
 /* https://pixnio.com/textures-and-patterns/wood-texture/texture-old-retro-dirty-wood-knot */
 
 .theme-wood .customizable-background {
-    background: #F2DAB6 url('themes/wood.jpg') no-repeat center / cover fixed;
+    background: #F2DAB6 url('../images/themes/wood.jpg') no-repeat center / cover fixed;
 }
 .theme-wood .customizable-color {
     color: #000;
@@ -36,7 +36,7 @@
 /* http://www.publicdomainpictures.net/view-image.php?image=25019&picture=dark-clouds-and-rainbow/ */
 
 .theme-rainbow .customizable-background {
-    background: #D8DAD7 url('themes/rainbow.jpg') no-repeat center / cover fixed;
+    background: #D8DAD7 url('../images/themes/rainbow.jpg') no-repeat center / cover fixed;
 }
 .theme-rainbow .customizable-color {
     color: #060015;
@@ -59,7 +59,7 @@
 /* http://magdeleine.co/photo-by-caleb-ralston-n-491/ */
 
 .theme-night .customizable-background {
-    background: #2A3944 url('themes/night.jpg') no-repeat center / cover fixed;
+    background: #2A3944 url('../images/themes/night.jpg') no-repeat center / cover fixed;
 }
 .theme-night .customizable-color {
     color: #eee;

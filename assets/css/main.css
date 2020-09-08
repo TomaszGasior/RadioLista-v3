@@ -2,21 +2,21 @@
 
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Regular.woff2'), url('fonts/LatoLatin-Regular.woff');
+    src: url('../fonts/LatoLatin-Regular.woff2'), url('../fonts/LatoLatin-Regular.woff');
 }
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Heavy.woff2');
+    src: url('../fonts/LatoLatin-Heavy.woff2');
     font-weight: bold;
 }
 @font-face {
     font-family: "LatoLatinWeb";
-    src: url('fonts/LatoLatin-Italic.woff2');
+    src: url('../fonts/LatoLatin-Italic.woff2');
     font-style: italic;
 }
 @font-face {
     font-family: "Inconsolata";
-    src: url('fonts/Inconsolata.woff2');
+    src: url('../fonts/Inconsolata.woff2');
 }
 
 body {
@@ -104,7 +104,7 @@ a:active {
 }
 
 .site-header .site-logo {
-    background: url('logo.svg') no-repeat;
+    background: url('../images/logo.svg') no-repeat;
     background-size: 238px auto;
     background-position: 4px 4px;
     width: 245px;

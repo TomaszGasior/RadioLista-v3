@@ -3,7 +3,7 @@
 {% block page_title %}{{ 'radio_table.settings.title'|trans }}{% endblock %}
 
 {% block head_closing %}
-    <script src="{{ asset('radio-table-settings.js') }}"></script>
+    {{ encore_entry_script_tags('radio-table-settings') }}
 {% endblock %}
 
 {% block context_menu %}

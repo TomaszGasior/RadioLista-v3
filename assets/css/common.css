@@ -1,0 +1,2 @@
+@import './main.css';
+@import './mobile.css' (max-width: 800px);

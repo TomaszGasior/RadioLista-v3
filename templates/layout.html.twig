@@ -18,11 +18,10 @@
             {% endfor %}
         {% endif %}
 
-        <link rel="icon" href="{{ asset('icon.png') }}">
-        <link rel="apple-touch-icon" href="{{ asset('icon.png') }}">
-        <link rel="stylesheet" href="{{ asset('main.css') }}">
-        <link rel="stylesheet" media="(max-width: 800px)" href="{{ asset('mobile.css') }}">
-        <script src="{{ asset('common.js') }}"></script>
+        <link rel="icon" href="{{ asset('build/icon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('build/icon.png') }}">
+        {{ encore_entry_link_tags('common') }}
+        {{ encore_entry_script_tags('common') }}
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>

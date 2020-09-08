@@ -39,12 +39,10 @@
         <meta name="robots" content="noindex, noarchive">
     {% endif %}
 
-    {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
-    {% if appearance.theme %}
-        <link rel="stylesheet" href="{{ asset('themes.css') }}">
-    {% endif %}
+    {{ encore_entry_link_tags('radio-table-show') }}
+    {{ encore_entry_script_tags('radio-table-show') }}
 
-    <script src="{{ asset('radio-table.js') }}"></script>
+    {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
 {% endblock %}
 
 {% block context_menu %}

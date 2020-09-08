@@ -1,4 +1,4 @@
-class RadioTableColumnsUI
+export class RadioTableColumnsUI
 {
     constructor(container)
     {
@@ -154,11 +154,3 @@ class RadioTableColumnsUI
         button.focus();
     }
 }
-
-document.addEventListener('DOMContentLoaded', function(){
-    let container = document.querySelector('.radio-table-columns');
-
-    if (container) {
-        new RadioTableColumnsUI(container);
-    }
-});
