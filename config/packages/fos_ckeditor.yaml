@@ -20,9 +20,6 @@ fos_ck_editor:
             title: false
             dialog_backgroundCoverColor: 'rgb(20,20,20)'
 
-    base_path: 'thirdparty/ckeditor'  # Also changed in composer.json
-    js_path:   'thirdparty/ckeditor/ckeditor.js'
-
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'

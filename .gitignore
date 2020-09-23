@@ -1,7 +1,5 @@
 deploy.yaml
 
-/public/assets/thirdparty/ckeditor
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
