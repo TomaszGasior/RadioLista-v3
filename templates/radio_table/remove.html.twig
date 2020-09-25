@@ -2,6 +2,10 @@
 
 {% block page_title %}{{ 'radio_table.remove.title'|trans }}{% endblock %}
 
+{% block head_closing %}
+    {{ encore_entry_script_tags('radio-table-remove') }}
+{% endblock %}
+
 {% block context_menu %}
     <ul>
         <li>
@@ -65,30 +69,17 @@
 
             {{ form_start(form_radio_table) }}
 
-            <div class="radio-table-remove-confirm">
-                {{ form_row(form_radio_table.confirm, {label_translation_parameters: {
-                    '%name%': radio_table.name,
-                }}) }}
-            </div>
+            {{ form_row(form_radio_table.confirm, {
+                label_translation_parameters: { '%name%': radio_table.name },
+                attr: {
+                    'class': 'radio-table-remove-confirm',
+                    'data-confirm-message': 'radio_table.remove.text.confirm_alert'|trans,
+                },
+            }) }}
 
             <button>{{ 'radio_table.remove.action.radio_table'|trans }}</button>
 
             {{ form_end(form_radio_table) }}
-
-            <script>
-            (function(){
-                let input = document.querySelector('.radio-table-remove-confirm input');
-                let confirmDialog = () => {
-                    if (input.checked && false === window.confirm("{{ 'radio_table.remove.text.confirm_alert'|trans }}")) {
-                        input.checked = false;
-                        input.blur();
-                    }
-
-                    input.removeEventListener('change', confirmDialog);
-                };
-                input.addEventListener('change', confirmDialog);
-            })();
-            </script>
         </div>
     </div>
 {% endblock %}

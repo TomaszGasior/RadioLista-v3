@@ -2,6 +2,10 @@
 
 {% block page_title %}{{ 'radio_station.edit.title'|trans }}{% endblock %}
 
+{% block head_closing %}
+    {{ encore_entry_script_tags('radio-station-edit-add') }}
+{% endblock %}
+
 {% block context_menu %}
     <ul>
         <li>

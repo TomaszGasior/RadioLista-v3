@@ -13,35 +13,3 @@
         </div>
     {% endif %}
 {% endblock %}
-
-{% block _radio_station_edit_frequency_widget %}
-    {{ block('decimal_unit_widget') }}
-
-    {# Keep original "0.01" step for values smaller than 74, otherwise use "0.05". #}
-    {# This way entering usual frequencies is simpler while OIRT frequencies are #}
-    {# available too. See https://github.com/TomaszGasior/RadioLista-v3/issues/35 #}
-    <script>
-    (function(){
-        let frequencyInput = document.getElementById('{{ id }}');
-        const REPLACED_STEP = '0.05';
-        const ORIGINAL_STEP = frequencyInput.step;
-
-        let updateStep = () => {
-            if (frequencyInput.value >= 74) {
-                if (frequencyInput.step != REPLACED_STEP) {
-                    frequencyInput.step = REPLACED_STEP;
-                    frequencyInput.min = REPLACED_STEP;
-                }
-            }
-            else if (frequencyInput.step != ORIGINAL_STEP) {
-                frequencyInput.step = ORIGINAL_STEP;
-                frequencyInput.min = ORIGINAL_STEP;
-            }
-        };
-
-        updateStep();
-        frequencyInput.addEventListener('input', updateStep);
-        frequencyInput.addEventListener('blur', updateStep);
-    })();
-    </script>
-{% endblock %}

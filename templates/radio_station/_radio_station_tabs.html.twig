@@ -4,7 +4,10 @@
     <div>
         <h2>{{ 'radio_station.edit.heading.general'|trans }}</h2>
 
-        {{ form_row(form.frequency, {'unit_label': get_frequency_label(radio_station.radioTable.frequencyUnit)}) }}
+        {{ form_row(form.frequency, {
+            attr: { 'class': 'frequency-input' },
+            'unit_label': get_frequency_label(radio_station.radioTable.frequencyUnit),
+        }) }}
         {{ form_row(form.name) }}
         {{ form_row(form.radioGroup) }}
         {{ form_row(form.country) }}
@@ -16,25 +19,15 @@
         {{ form_row(form.power, {'unit_label': 'kW'}) }}
         {{ form_row(form.polarization) }}
         {{ form_row(form.type) }}
-        {{ form_row(form.localityType, {'attr': {'class': 'locality-type-input'}}) }}
+
+        {{ form_row(form.localityType, {'attr': {
+            'class': 'locality-type-input',
+            'data-locality-country-value': constant('TYPE_COUNTRY', radio_station.locality),
+        }}) }}
+
         <div class="locality-city-wrapper">
             {{ form_row(form.localityCity) }}
         </div>
-
-        <script>
-        (function(){
-            const LOCALITY_COUNTRY = '{{ constant('TYPE_COUNTRY', radio_station.locality) }}';
-            let localityTypeInput = document.querySelector('.locality-type-input');
-            let localityCityWrapper = document.querySelector('.locality-city-wrapper');
-
-            let updateFieldVisibility = () => {
-                localityCityWrapper.hidden = (localityTypeInput.value == LOCALITY_COUNTRY);
-            };
-            updateFieldVisibility();
-            localityTypeInput.addEventListener('change', updateFieldVisibility);
-            localityTypeInput.addEventListener('blur', updateFieldVisibility);
-        })();
-        </script>
     </div>
     <div>
         <h2>{{ 'radio_station.edit.heading.reception'|trans }}</h2>

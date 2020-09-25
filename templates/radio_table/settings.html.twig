@@ -83,7 +83,10 @@
 
             {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
 
-            {{ form_row(form.appearanceTheme, {attr: {'class': 'radio-table-theme'}}) }}
+            {{ form_row(form.appearanceTheme, {attr: {
+                'class': 'radio-table-theme',
+                'data-custom-theme-name': '',
+            }}) }}
 
             {# style="" is used as dirty hack for box-shadow removing. #}
             <div class="radio-table-custom-theme-wrapper">
@@ -100,38 +103,14 @@
                 {{ form_row(form.appearanceBackgroundImage) }}
             </div>
 
-            {{ form_row(form.appearanceWidthType, {attr: {'class': 'radio-table-width-type'}}) }}
+            {{ form_row(form.appearanceWidthType, {attr: {
+                'class': 'radio-table-width-type',
+                'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
+            }}) }}
 
             <div class="radio-table-custom-width-wrapper">
                 {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
             </div>
-
-            <script>
-            (function(){
-                const CUSTOM_THEME_NAME = '';
-                let themeSelectorField = document.querySelector('.radio-table-theme');
-                let customThemeFieldsWrapper = document.querySelector('.radio-table-custom-theme-wrapper');
-
-                let updateFieldVisibility = () => {
-                    customThemeFieldsWrapper.hidden = (themeSelectorField.value != CUSTOM_THEME_NAME);
-                };
-                updateFieldVisibility();
-                themeSelectorField.addEventListener('change', updateFieldVisibility);
-                themeSelectorField.addEventListener('blur', updateFieldVisibility);
-            })();
-            (function(){
-                const WIDTH_CUSTOM = '{{ constant('WIDTH_CUSTOM', radio_table.appearance) }}';
-                let localityTypeInput = document.querySelector('.radio-table-width-type');
-                let localityCityWrapper = document.querySelector('.radio-table-custom-width-wrapper');
-
-                let updateFieldVisibility = () => {
-                    localityCityWrapper.hidden = (localityTypeInput.value != WIDTH_CUSTOM);
-                };
-                updateFieldVisibility();
-                localityTypeInput.addEventListener('change', updateFieldVisibility);
-                localityTypeInput.addEventListener('blur', updateFieldVisibility);
-            })();
-            </script>
 
             {{ form_row(form.appearanceCollapsedComments) }}
         </div>

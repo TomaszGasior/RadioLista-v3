@@ -26,6 +26,8 @@ Encore
     .addEntry('common', './assets/js/common.js')
     .addEntry('radio-table-show', './assets/js/radio-table-show.js')
     .addEntry('radio-table-settings', './assets/js/radio-table-settings.js')
+    .addEntry('radio-table-remove', './assets/js/radio-table-remove.js')
+    .addEntry('radio-station-edit-add', './assets/js/radio-station-edit-add.js')
     .addStyleEntry('admin', './assets/css/admin.css')
     .addStyleEntry('error', './assets/css/error.css')
 
