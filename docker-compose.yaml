@@ -15,6 +15,11 @@ services:
         volumes:
             - '.:/srv:z'
 
+    js:
+        build: 'container/npm'
+        volumes:
+            - '.:/srv:z'
+
     db:
         image: 'mysql:5.7'
         ports:
