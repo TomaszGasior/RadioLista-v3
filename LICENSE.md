@@ -1,4 +1,4 @@
-RadioLista-v3 — license/licencja
+RadioLista-v3 — licencja
 ===
 
 Tomasz Gąsior 2018-2020
@@ -14,6 +14,11 @@ Tomasz Gąsior 2018-2020
   w nim zmiany, jednakże **wyłącznie** w celu odesłania tychże zmian do
   oryginalnego repozytorium w formie „pull request”, aby pomóc w rozwoju
   projektu `RadioLista-v3`.
+
+RadioLista-v3 — license
+===
+
+Tomasz Gąsior 2018-2020
 
 English version:
 
