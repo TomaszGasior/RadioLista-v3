@@ -23,7 +23,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN apk --no-cache add su-exec \
     && curl -sS https://getcomposer.org/installer \
-    | php -- --install-dir=/usr/local/bin --filename=composer
+    | php -- --install-dir=/usr/local/bin --filename=composer --version 2.0.8
 
 COPY entrypoint.sh /usr/local/bin/custom-entrypoint
 ENTRYPOINT ["custom-entrypoint"]
