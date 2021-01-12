@@ -29,7 +29,8 @@ username and `radiolista` password. MySQL database will be available at
 Local development — built-in PHP server
 ---
 
-Requirements: PHP 7.4 with `intl`, `pdo_sqlite` extensions and `composer`.
+Requirements: PHP 7.4 with `intl`, `pdo_sqlite` extensions, `composer`,
+also Node.js 14 and `npm`.
 
     git clone https://github.com/TomaszGasior/RadioLista-v3.git
     cd RadioLista-v3
@@ -37,6 +38,8 @@ Requirements: PHP 7.4 with `intl`, `pdo_sqlite` extensions and `composer`.
     bin/console doctrine:database:create
     bin/console doctrine:schema:create
     bin/console doctrine:fixtures:load -n
+    npm install
+    npm run watch &
     php -S 127.0.0.1:2012 -t ./public
 
 The application will be started at `http://127.0.0.1:2012` with `radiolista`
