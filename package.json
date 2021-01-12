@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.30.0"
+        "@symfony/webpack-encore": "^0.32.0"
     },
     "private": true,
     "scripts": {
