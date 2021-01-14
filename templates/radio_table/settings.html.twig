@@ -81,24 +81,17 @@
         <div>
             <h2>{{ 'radio_table.settings.heading.appearance'|trans }}</h2>
 
-            {% set jscolor_settings = '{mode:\'HSV\', required:false, hash:true, borderRadius:0, borderWidth:0, shadowBlur:2}' %}
-
             {{ form_row(form.appearanceTheme, {attr: {
                 'class': 'radio-table-theme',
                 'data-custom-theme-name': '',
             }}) }}
 
-            {# style="" is used as dirty hack for box-shadow removing. #}
             <div class="radio-table-custom-theme-wrapper">
                 {{ form_row(form.appearanceBackgroundColor, {attr: {
-                    'class': 'jscolor',
-                    'style': '',
-                    'data-jscolor': jscolor_settings,
+                    'class': 'color',
                 }}) }}
                 {{ form_row(form.appearanceColor, {attr: {
-                    'class': 'jscolor',
-                    'style': '',
-                    'data-jscolor': jscolor_settings,
+                    'class': 'color',
                 }}) }}
                 {{ form_row(form.appearanceBackgroundImage) }}
             </div>
@@ -154,8 +147,4 @@
     <button>{{ 'common.action.save'|trans }}</button>
 
     {{ form_end(form) }}
-{% endblock %}
-
-{% block body_closing %}
-    <script src="{{ asset('thirdparty/jscolor.min.js') }}" async></script>
 {% endblock %}

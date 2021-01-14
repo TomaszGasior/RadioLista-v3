@@ -480,12 +480,8 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 
 /* form widgets — special */
 
-input.jscolor {
+input.color {
     max-width: 200px;
-}
-input.jscolor:not([style=""]) {
-    /* dirty hack to remove box-shadow when color is filled */
-    box-shadow: none;
 }
 
 
