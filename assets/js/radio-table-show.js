@@ -1,4 +1,4 @@
-import '../css/themes.css';
+import '../css/radio-table-show.css';
 
 import { NumberIndentManager } from './src/NumberIndentManager.js';
 import { OverflowStylesManager } from './src/OverflowStylesManager.js';

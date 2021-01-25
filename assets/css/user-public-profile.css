@@ -1,0 +1,42 @@
+.user-profile-page h2 {
+    color: #5D9A3F;
+    line-height: 1.1em;
+}
+
+.user-profile-description {
+    line-height: 1.5em;
+}
+
+.user-profile-details {
+    display: flex;
+    justify-content: center;
+    margin: 1em auto 1.5em;
+    font-style: italic;
+}
+.user-profile-details > * {
+    display: flex;
+    margin: 0 1em;
+}
+.user-profile-details dt, .user-profile-details dd {
+    padding: 0 0.3em;
+    margin: 0;
+}
+.user-profile-details dt::after {
+    content: ":";
+}
+
+@media (max-width: 800px)
+{
+    .user-profile-details {
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 470px)
+{
+    .user-profile-details > * {
+        flex-direction: column;
+    }
+}

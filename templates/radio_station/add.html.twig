@@ -3,6 +3,7 @@
 {% block page_title %}{{ 'radio_station.add.title'|trans }}{% endblock %}
 
 {% block head_closing %}
+    {{ encore_entry_link_tags('radio-station-edit-add') }}
     {{ encore_entry_script_tags('radio-station-edit-add') }}
 {% endblock %}
 

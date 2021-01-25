@@ -1,3 +1,5 @@
+import '../css/radio-table-settings.css';
+
 import { RadioTableColumnsUI } from './src/RadioTableColumnsUI.js';
 
 function setupCustomThemeInput()

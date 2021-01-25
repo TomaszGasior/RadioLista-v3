@@ -1,3 +1,5 @@
+import '../css/radio-station-edit-add.css';
+
 // Enforce leading zeros in typed values ("87.6" -> "87.60").
 // Do not use "input" event. It looks better but makes manual typing hard.
 // This code works only in WebKit and Blink.

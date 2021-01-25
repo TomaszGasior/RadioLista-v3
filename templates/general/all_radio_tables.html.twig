@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block head_closing %}
+    {{ encore_entry_link_tags('all-radio-tables') }}
+{% endblock %}
+
 {% block page_title %}{{ 'general.all_radio_tables.title'|trans }}{% endblock %}
 
 {% block page_content %}

@@ -5,6 +5,8 @@
 {% block head_closing %}
     {# User name is case insensitive. #}
     <link rel="canonical" href="{{ path('user.public_profile', {name: user.name}) }}">
+
+    {{ encore_entry_link_tags('user-public-profile') }}
 {% endblock %}
 
 {% block page_content %}

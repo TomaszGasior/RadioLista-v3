@@ -29,7 +29,13 @@ Encore
     .addEntry('radio-table-remove', './assets/js/radio-table-remove.js')
     .addEntry('radio-station-edit-add', './assets/js/radio-station-edit-add.js')
     .addStyleEntry('admin', './assets/css/admin.css')
-    .addStyleEntry('error', './assets/css/error.css')
+    .addStyleEntry('all-radio-tables', './assets/css/all-radio-tables.css')
+    .addStyleEntry('dark-error', './assets/css/dark-error.css')
+    .addStyleEntry('homepage', './assets/css/homepage.css')
+    .addStyleEntry('my-account-settings', './assets/css/my-account-settings.css')
+    .addStyleEntry('static-page', './assets/css/static-page.css')
+    .addStyleEntry('user-login-register', './assets/css/user-login-register.css')
+    .addStyleEntry('user-public-profile', './assets/css/user-public-profile.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

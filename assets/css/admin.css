@@ -1,4 +1,4 @@
-/* admin colors */
+/* colors */
 
 body {
     background: #ededed;
@@ -13,7 +13,7 @@ button {
 }
 
 
-/* hide elements */
+/* hide global elements */
 
 .site-footer ul {
     display: none;

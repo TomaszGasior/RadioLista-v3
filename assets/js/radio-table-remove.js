@@ -1,3 +1,5 @@
+import '../css/radio-table-remove.css';
+
 function setupRemoveConfirmDialog()
 {
     let input = document.querySelector('.radio-table-remove-confirm');

@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block head_closing %}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
 {% macro print_date(date) %}
     <time datetime="{{ date.format('Y-m-d') }}">
         {% if date > date('-8 days') %}
