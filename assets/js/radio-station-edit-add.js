@@ -1,7 +1,6 @@
 // Enforce leading zeros in typed values ("87.6" -> "87.60").
 // Do not use "input" event. It looks better but makes manual typing hard.
-// Works only in Webkit/Blink. "input.valueAsNumber" condition needed for MSEdge.
-// See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6367416/
+// This code works only in WebKit and Blink.
 function setupDecimalInputs()
 {
     let decimalInputs = document.querySelectorAll('input.decimal');
@@ -9,7 +8,7 @@ function setupDecimalInputs()
     decimalInputs.forEach(input => {
         let decimals = (input.step.match(/\..*/) || [''])[0].length - 1;
 
-        if (decimals && input.valueAsNumber != undefined) {
+        if (decimals) {
             let updateFixed = () => {
                 input.value = input.valueAsNumber.toFixed(decimals);
             };
