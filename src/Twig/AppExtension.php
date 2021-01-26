@@ -10,14 +10,11 @@ use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
-    public function __construct(Environment $twig, Compiler $compiler)
+    public function __construct(Environment $twig)
     {
         /** @var EscaperExtension */
         $escaperExtension = $twig->getExtension(EscaperExtension::class);
         $escaperExtension->setEscaper('csv', [$this, 'escapeCSV']);
-
-        // Set custom compiler to minify HTML output of cached Twig templates.
-        $twig->setCompiler($compiler);
     }
 
     /**
