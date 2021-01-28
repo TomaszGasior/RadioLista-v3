@@ -104,12 +104,6 @@ table.radio-table .quality {
     /* override from themes */
     text-shadow: none !important;
 }
-@supports (-moz-user-select: none)
-{
-    table.radio-table .quality::-moz-selection {
-        opacity: 0;
-    }
-}
 table.radio-table .quality::selection {
     opacity: 0;
 }
