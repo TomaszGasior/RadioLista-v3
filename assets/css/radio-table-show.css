@@ -36,104 +36,104 @@
 
 /* the table */
 
-table.radio-table {
+.radio-table {
     width: 100%;
     border-collapse: collapse;
 
     font-size: 0.96em;
 }
 
-table.radio-table td, table.radio-table th {
+.radio-table td, .radio-table th {
     padding: 0.31em 0.5em;
     text-align: left;
 }
-table.radio-table th {
+.radio-table th {
     padding-bottom: 0.5em;
     color: #477E2D;
     font-weight: normal;
     white-space: nowrap;
 }
-table.radio-table td {
+.radio-table td {
     border-top: 1px solid rgba(0,0,0, 0.05);
 }
 @supports (-webkit-nbsp-mode: initial)
 {
     /* color for WebKit, not Blink */
-    table.radio-table td {
+    .radio-table td {
         border-top: 1px solid rgba(0,0,0, 0.03);
     }
 }
 
-table.radio-table tbody tr {
+.radio-table tbody tr {
     transition: background 0.1s;
 }
-table.radio-table tbody tr:hover, table.radio-table tbody tr:focus-within {
+.radio-table tbody tr:hover, .radio-table tbody tr:focus-within {
     background: rgba(250,230,205, 0.8);
 }
 
-table.radio-table a {
+.radio-table a {
     display: block;
 }
 
 
 /* special cells */
 
-table.radio-table tr.marker-1 {
+.radio-table tr.marker-1 {
     font-weight: bold;
 }
-table.radio-table tr.marker-2 {
+.radio-table tr.marker-2 {
     font-style: italic;
 }
-table.radio-table tr.marker-3 {
+.radio-table tr.marker-3 {
     text-decoration: line-through;
 }
-table.radio-table tr.marker-4 {
+.radio-table tr.marker-4 {
     background: rgba(255,209,209, 0.65) !important;
 }
-table.radio-table tr.marker-5 {
+.radio-table tr.marker-5 {
     background: rgba(175,255,150, 0.65) !important;
 }
-table.radio-table tr.marker-6 {
+.radio-table tr.marker-6 {
     background: rgba(156,230,255, 0.65) !important;
 }
 
-table.radio-table .quality {
+.radio-table .quality {
     color: rgba(0,0,0, 0);
     display: block;
 
     /* override from themes */
     text-shadow: none !important;
 }
-table.radio-table .quality::selection {
+.radio-table .quality::selection {
     opacity: 0;
 }
-table.radio-table .quality::before {
+.radio-table .quality::before {
     text-shadow: 0 0 2px #CCC;
     margin-right: -10px;
     letter-spacing: 2px;
 }
-table.radio-table .quality.quality-5::before {
+.radio-table .quality.quality-5::before {
     color: #0BB300;
     content: "●●●●●";
 }
-table.radio-table .quality.quality-4::before {
+.radio-table .quality.quality-4::before {
     color: #A8D300;
     content: "●●●●";
 }
-table.radio-table .quality.quality-3::before {
+.radio-table .quality.quality-3::before {
     color: #BDAC00;
     content: "●●●";
 }
-table.radio-table .quality.quality-2::before {
+.radio-table .quality.quality-2::before {
     color: #FF5E00;
     content: "●●";
 }
-table.radio-table .quality.quality-1::before {
+.radio-table .quality.quality-1::before {
     color: #FF0017;
     content: "●";
 }
 
-table.radio-table span.rds {
+.radio-table .rds {
     white-space: pre;
     background: rgba(160,160,160, 0.2);
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
@@ -146,36 +146,36 @@ table.radio-table span.rds {
     font-style: normal;
     text-decoration: none;
 }
-table.radio-table span.rds[tabindex]:hover, table.radio-table span.rds:focus {
+.radio-table .rds[tabindex]:hover, .radio-table .rds:focus {
     background: rgba(0,0,0, 0.7);
     color: #fff;
     outline: none;
 }
 
-table.radio-table small {
+.radio-table small {
     font-size: 0.7em;
     vertical-align: 2px;
 }
-table.radio-table abbr {
+.radio-table abbr {
     text-decoration: none;
     border-bottom: 1px dotted #ccc;
 }
-table.radio-table time {
+.radio-table time {
     white-space: nowrap;
 }
 
-table.radio-table a.external {
+.radio-table a.external {
     display: inline-block;
     text-decoration: none;
 }
-table.radio-table a.external svg {
+.radio-table a.external svg {
     height: 0.9em;
     vertical-align: -1px;
     padding: 0 2px;
     fill: currentColor;
 }
 
-table.radio-table .comment-collapsed svg {
+.radio-table .comment-collapsed svg {
     height: 1em;
     vertical-align: -2px;
     padding: 0 2px;
@@ -366,16 +366,16 @@ table.radio-table .comment-collapsed svg {
     background-color: rgba(255,255,255, 0.9);
 }
 
-.customized-radio-table table.radio-table tbody tr:hover, .customized-radio-table table.radio-table tbody tr:focus-within {
+.customized-radio-table .radio-table tbody tr:hover, .customized-radio-table .radio-table tbody tr:focus-within {
     background: rgba(200,200,200, 0.4);
 }
-.customized-radio-table table.radio-table .quality::before {
+.customized-radio-table .radio-table .quality::before {
     text-shadow: 0 0 1px #000;
 }
-.customized-radio-table table.radio-table span.rds {
+.customized-radio-table .radio-table .rds {
     background: rgba(200,200,200, 0.8);
 }
-.customized-radio-table table.radio-table span.rds[tabindex]:hover, .customized-radio-table table.radio-table span.rds:focus {
+.customized-radio-table .radio-table .rds[tabindex]:hover, .customized-radio-table .radio-table .rds:focus {
     background: rgba(0,0,0, 0.55);
 }
 .customized-radio-table table.sortable th[data-sort]:focus {
@@ -386,18 +386,18 @@ table.radio-table .comment-collapsed svg {
     color: inherit;
     text-shadow: none;
 }
-.customized-radio-table .customizable-color table.radio-table th {
+.customized-radio-table .customizable-color .radio-table th {
     color: inherit;
     opacity: 0.8;
     text-shadow: 0 0 0 rgba(0,0,0, 0.7);
 }
-.customized-radio-table .customizable-color table.radio-table td {
+.customized-radio-table .customizable-color .radio-table td {
     border-top: 0;
     box-shadow: inset 0 2px 2px -3px currentColor;
 }
 @supports (-moz-user-select: none)
 {
-    .customized-radio-table .customizable-color table.radio-table td {
+    .customized-radio-table .customizable-color .radio-table td {
         box-shadow: inset 0 3px 3px -5px currentColor;
     }
 }
@@ -426,7 +426,7 @@ table.radio-table .comment-collapsed svg {
 .theme-bieszczady .customizable-color {
     color: #000;
 }
-.theme-bieszczady table.radio-table tbody tr:hover, .theme-bieszczady table.radio-table tbody tr:focus-within {
+.theme-bieszczady .radio-table tbody tr:hover, .theme-bieszczady .radio-table tbody tr:focus-within {
     background: #E5E5E5;
 }
 .theme-bieszczady .site-header {
@@ -442,10 +442,10 @@ table.radio-table .comment-collapsed svg {
 .theme-wood .customizable-color {
     color: #000;
 }
-.theme-wood table.radio-table tbody tr:hover, .theme-wood table.radio-table tbody tr:focus-within {
+.theme-wood .radio-table tbody tr:hover, .theme-wood .radio-table tbody tr:focus-within {
     background: #E6C1A8;
 }
-.theme-wood table.radio-table td, .radio-table-details dl, .radio-table-details dd {
+.theme-wood .radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(170,92,36, 0.2);
 }
 .theme-wood .site-header {
@@ -465,10 +465,10 @@ table.radio-table .comment-collapsed svg {
 .theme-rainbow .rds-popup {
     text-shadow: none;
 }
-.theme-rainbow table.radio-table tbody tr:hover, .theme-rainbow table.radio-table tbody tr:focus-within {
+.theme-rainbow .radio-table tbody tr:hover, .theme-rainbow .radio-table tbody tr:focus-within {
     background: rgba(255,255,255, 0.35);
 }
-.theme-rainbow table.radio-table td, .radio-table-details dl, .radio-table-details dd {
+.theme-rainbow .radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(0,0,0, 0.1);
 }
 .theme-rainbow .site-header {
@@ -488,16 +488,16 @@ table.radio-table .comment-collapsed svg {
 .theme-night .customizable-color a {
     border-color: rgba(255,255,255, 0.6);
 }
-.theme-night .rds-popup, .theme-night table.radio-table span.rds {
+.theme-night .rds-popup, .theme-night .radio-table .rds {
     text-shadow: none;
 }
-.theme-night table.radio-table tbody tr:hover, .theme-night table.radio-table tbody tr:focus-within {
+.theme-night .radio-table tbody tr:hover, .theme-night .radio-table tbody tr:focus-within {
     background: rgba(0,0,0, 0.35);
 }
-.theme-night table.radio-table td, .radio-table-details dl, .radio-table-details dd {
+.theme-night .radio-table td, .radio-table-details dl, .radio-table-details dd {
     border-color: rgba(255,255,255, 0.1);
 }
-.theme-night table.radio-table tr.marker-4, .theme-night table.radio-table tr.marker-5, .theme-night table.radio-table tr.marker-6 {
+.theme-night .radio-table tr.marker-4, .theme-night .radio-table tr.marker-5, .theme-night .radio-table tr.marker-6 {
     color: #000;
     text-shadow: 0 0 2px #aaa;
 }
