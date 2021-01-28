@@ -2,6 +2,10 @@
 
 {% block page_title %}{{ 'radio_table.create.title'|trans }}{% endblock %}
 
+{% block head_closing %}
+    {{ encore_entry_link_tags('radio-table-create') }}
+{% endblock %}
+
 {% block page_content %}
     <header>
         <h1>{{ 'radio_table.create.title_long'|trans }}</h1>

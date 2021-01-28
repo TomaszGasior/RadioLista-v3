@@ -1,3 +1,7 @@
+@import './part/radio-table-status.css';
+@import './part/ckeditor.css';
+
+
 /* columns UI */
 
 .JS .radio-table-columns {

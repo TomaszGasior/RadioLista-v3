@@ -1,3 +1,5 @@
+import '../../css/part/tabbed-ui.css';
+
 export class TabbedUI
 {
     constructor(container)

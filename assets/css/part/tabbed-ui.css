@@ -1,0 +1,107 @@
+.JS .tabbed-ui > div {
+    background: #FAFFF8;
+    padding: 0.5em 1.2em 0.8em;
+    border: 1px solid #D2D2D2;
+}
+.JS .tabbed-ui > div:not(.tabbed-ui-current) {
+    display: none;
+}
+
+.tabbed-ui-navigator {
+    padding-left: 0;
+    list-style-type: none;
+    margin: 0 0 -1px;
+
+    vertical-align: bottom;
+}
+@supports (-webkit-nbsp-mode: initial)
+{
+    .tabbed-ui-navigator {
+        /* needed for WebKit, not Blink */
+        margin-bottom: 0;
+    }
+}
+.tabbed-ui-navigator li {
+    display: inline;
+}
+.tabbed-ui-navigator button {
+    margin-right: 0.4em;
+    padding: 0.2em 0.9em;
+    background: #FAFFF8;
+    border: 1px solid #D2D2D2;
+    opacity: 0.63;
+
+    white-space: nowrap;
+    display: inline-block;
+    outline-style: none;
+    box-shadow: none;
+    color: inherit;
+    transition-property: opacity;
+    width: auto;
+    font-weight: normal;
+    margin-top: 0;
+}
+.tabbed-ui-navigator button:hover {
+    background: #fff;
+    color: inherit;
+}
+.tabbed-ui-navigator button:focus:not(:hover):not(:active) {
+    opacity: 1;
+    outline-style: dashed;
+}
+.tabbed-ui-navigator button.tabbed-ui-current {
+    opacity: 1;
+    border-bottom-color: #FAFFF8;
+    padding-top: 0.6em;
+    background: #FAFFF8;
+}
+
+@media (max-width: 800px)
+{
+    .tabbed-ui-navigator {
+        margin-bottom: 0.4em;
+    }
+
+    .tabbed-ui-navigator button {
+        margin-bottom: 0.5em;
+    }
+    .tabbed-ui-navigator button, .tabbed-ui-navigator button.tabbed-ui-current {
+        padding: 0.2em 0.9em;
+        border: 1px solid #D2D2D2;
+    }
+    .tabbed-ui-navigator li:last-child button {
+        margin-right: 0;
+    }
+    .tabbed-ui-navigator button.tabbed-ui-current {
+        font-weight: bold;
+        border-color: #aaa;
+    }
+}
+
+
+/* information paragraph in tabbed UI */
+
+.JS .tabbed-ui .information {
+    box-shadow: none;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+@media (max-width: 800px)
+{
+    .JS .tabbed-ui .information {
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+    }
+}
+
+
+/* button in tabbed UI */
+
+.JS .tabbed-ui > div > form > button {
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+}
+.JS .tabbed-ui + button {
+    margin-top: 1.3em;
+}

@@ -1,0 +1,60 @@
+.cke_chrome {
+    box-shadow: none !important;
+    border: none !important;
+}
+.cke_chrome.cke_focus {
+    outline: 1px solid #F07F1F !important;
+}
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a {
+    font-family: inherit !important;
+}
+.cke_toolgroup {
+    background-image: linear-gradient(to bottom,#fff,#efefef) !important;
+}
+
+.cke_chrome .cke_inner {
+    background: rgba(224,224,224, 0.3) !important;
+}
+.cke_chrome .cke_wysiwyg_div {
+    padding: 2px 11px !important;
+    background: #F3F3F3 !important;
+    border: 1px solid #C2C2C2 !important;
+    box-shadow: inset 2px 2px 2px #DEDEDE !important;
+}
+.cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
+    box-shadow: none !important;
+    border: 1px solid #C2C2C2 !important;
+    background: none !important;
+}
+.cke_chrome span.cke_top {
+    border-bottom: none !important;
+}
+.cke_chrome span.cke_bottom {
+    border-top: none !important;
+}
+.cke_chrome .cke_wordcount {
+    text-transform: lowercase;
+    padding: 1px 0.7em 0 0;
+}
+.cke_chrome .cke_wordcount span {
+    cursor: default !important;
+}
+
+.cke_chrome .cke_wysiwyg_div p, .cke_chrome .cke_wysiwyg_div ul, .cke_chrome .cke_wysiwyg_div ol {
+    margin: 0.8em 0;
+}
+
+.cke_dialog_body {
+    box-shadow: 0 0 6px #222 !important;
+}
+.cke_dialog_body .cke_resizer {
+    display: none !important;
+}
+.cke_dialog_body option[value="anchor"] {
+    display: none !important;
+}
+select.cke_dialog_ui_input_select {
+    -moz-appearance: menulist;
+    -webkit-appearance: menulist;
+    background-image: none;
+}

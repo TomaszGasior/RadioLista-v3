@@ -1,3 +1,6 @@
+@import './part/ckeditor.css';
+
+
 .my-account-details > * {
     display: flex;
 }

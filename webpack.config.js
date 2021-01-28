@@ -33,6 +33,7 @@ Encore
     .addStyleEntry('dark-error', './assets/css/dark-error.css')
     .addStyleEntry('homepage', './assets/css/homepage.css')
     .addStyleEntry('my-account-settings', './assets/css/my-account-settings.css')
+    .addStyleEntry('radio-table-create', './assets/css/radio-table-create.css')
     .addStyleEntry('static-page', './assets/css/static-page.css')
     .addStyleEntry('user-login-register', './assets/css/user-login-register.css')
     .addStyleEntry('user-public-profile', './assets/css/user-public-profile.css')

@@ -1,3 +1,5 @@
+import '../../css/part/sortable-table.css';
+
 export class SortableTable
 {
     constructor(table)
