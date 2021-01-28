@@ -24,19 +24,19 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('common', './assets/js/common.js')
+    .addEntry('radio-table-create', './assets/js/radio-table-create.js')
     .addEntry('radio-table-show', './assets/js/radio-table-show.js')
     .addEntry('radio-table-settings', './assets/js/radio-table-settings.js')
     .addEntry('radio-table-remove', './assets/js/radio-table-remove.js')
     .addEntry('radio-station-edit-add', './assets/js/radio-station-edit-add.js')
-    .addStyleEntry('admin', './assets/css/admin.css')
-    .addStyleEntry('all-radio-tables', './assets/css/all-radio-tables.css')
-    .addStyleEntry('dark-error', './assets/css/dark-error.css')
+    .addEntry('my-account-settings', './assets/js/my-account-settings.js')
+    .addEntry('admin', './assets/js/admin.js')
     .addStyleEntry('homepage', './assets/css/homepage.css')
-    .addStyleEntry('my-account-settings', './assets/css/my-account-settings.css')
-    .addStyleEntry('radio-table-create', './assets/css/radio-table-create.css')
-    .addStyleEntry('static-page', './assets/css/static-page.css')
     .addStyleEntry('user-login-register', './assets/css/user-login-register.css')
     .addStyleEntry('user-public-profile', './assets/css/user-public-profile.css')
+    .addStyleEntry('all-radio-tables', './assets/css/all-radio-tables.css')
+    .addStyleEntry('static-page', './assets/css/static-page.css')
+    .addStyleEntry('dark-error', './assets/css/dark-error.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

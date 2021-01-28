@@ -1,5 +1,6 @@
 import '../css/radio-table-settings.css';
 
+import { TabbedUI } from './src/TabbedUI.js';
 import { RadioTableColumnsUI } from './src/RadioTableColumnsUI.js';
 
 function setupCustomThemeInput()
@@ -35,11 +36,8 @@ function setupCustomWidthInput()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    let radioTableColumnsContainer = document.querySelector('.radio-table-columns');
-
-    if (radioTableColumnsContainer) {
-        new RadioTableColumnsUI(radioTableColumnsContainer);
-    }
+    new TabbedUI(document.querySelector('.tabbed-ui'));
+    new RadioTableColumnsUI(document.querySelector('.radio-table-columns'));
 
     setupCustomThemeInput();
     setupCustomWidthInput();

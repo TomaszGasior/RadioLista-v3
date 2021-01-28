@@ -1,5 +1,7 @@
 import '../css/radio-station-edit-add.css';
 
+import { TabbedUI } from './src/TabbedUI.js';
+
 // Enforce leading zeros in typed values ("87.6" -> "87.60").
 // Do not use "input" event. It looks better but makes manual typing hard.
 // This code works only in WebKit and Blink.
@@ -66,6 +68,8 @@ function setupLocalityInput()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    new TabbedUI(document.querySelector('.tabbed-ui'));
+
     setupDecimalInputs();
     setupFrequencyInput();
     setupLocalityInput();
