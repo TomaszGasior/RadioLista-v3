@@ -14,7 +14,6 @@
         "knplabs/knp-snappy-bundle": "^1.5",
         "knplabs/knp-time-bundle": "^1.11",
         "sensio/framework-extra-bundle": "^5.2",
-        "sensiolabs/security-checker": "^6.0",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.2.*",
         "symfony/console": "5.2.*",
@@ -77,8 +76,7 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "ckeditor:install --clear=drop --release=custom --custom-build-id=5af1ea2fd3c9442ab08af09ec2423ce6": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security:check": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
