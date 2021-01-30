@@ -95,6 +95,9 @@
     "doctrine/sql-formatter": {
         "version": "1.0.1"
     },
+    "fakerphp/faker": {
+        "version": "v1.13.0"
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.0",
         "recipe": {
@@ -106,9 +109,6 @@
         "files": [
             "config/packages/fos_ckeditor.yaml"
         ]
-    },
-    "fzaninotto/faker": {
-        "version": "v1.8.0"
     },
     "knplabs/knp-snappy": {
         "version": "v1.0.4"
