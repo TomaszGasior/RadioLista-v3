@@ -37,6 +37,7 @@ class RadioStationEditType extends AbstractType
         $builder
             ->add('frequency', DecimalUnitType::class, [
                 'step' => 0.01,
+                'scale' => 2,
             ])
             ->add('name', TextHintsType::class, [
                 'hints' => [
@@ -91,6 +92,7 @@ class RadioStationEditType extends AbstractType
             ->add('location')
             ->add('power', DecimalUnitType::class, [
                 'step' => 0.001,
+                'scale' => 3,
                 'required' => false,
             ])
             ->add('polarization', ChoiceType::class, [

@@ -25,6 +25,7 @@ class DecimalUnitType extends AbstractType
     {
         $resolver
             ->setDefaults(['unit_label' => ''])
+            ->setDefaults(['input' => 'string'])
             ->setDefaults(['html5' => true])
             ->setRequired(['step'])
             ->setAllowedTypes('step', 'float')
