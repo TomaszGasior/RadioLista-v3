@@ -103,8 +103,8 @@ a:active {
 .site-header {
     background-color: rgba(255,255,255, 0.6);
     box-shadow: 0 0 5px rgba(0,0,0, 0.2);
-    padding-top: 0.6em;
-    padding-bottom: 0.6em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
 }
 .site-header.develop {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='a' viewBox='0 0 8 8' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Cpath fill='rgba%28255%2C0%2C0%2C0.06%29' d='M0 0h4L0 4zm0 8l8-8v4L4 8z'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url%28%23a%29' d='M0 0h24v24H0z'/%3E%3C/svg%3E");
@@ -117,10 +117,10 @@ a:active {
 
 .site-header .site-logo {
     background: url('../images/logo.svg') no-repeat;
-    background-size: 238px auto;
-    background-position: 4px 4px;
+    background-size: contain;
+    background-position: center;
     width: 245px;
-    height: 62px;
+    height: 56px;
 
     display: block;
     text-indent: -9999px;
@@ -131,6 +131,8 @@ a:active {
 {
     .site-header .site-logo {
         width: 72px;
+        background-size: auto 100%;
+        background-position: left;
         flex-grow: 0;
         flex-shrink: 0;
     }
@@ -170,7 +172,7 @@ a:active {
     color: #EE6D00;
 }
 .site-navigation .user-menu {
-    margin: 0.55em 0 0.6em;
+    margin: 0.35em 0 0.6em;
     font-size: 0.8em;
     color: #8E8E8E;
 }
