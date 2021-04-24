@@ -1,101 +1,61 @@
 import '../../css/part/tabbed-ui.css';
+import tocbot from 'tocbot';
 
 export class TabbedUI
 {
     constructor(container)
     {
+        /** @type {!Element} */
         this.container = container;
-        this.panels = [...container.children];
-        this.navigator = null;
-        this.buttons = [];
 
-        this.setupNavigator();
-        this.setupPanels();
+        this.wrapper = null;
+        this.navigation = null;
+
+        this.setupMarkup();
+        this.setupNavigation();
     }
 
-    get LAST_PANEL_SESSION_KEY()
+    setupMarkup()
     {
-        return 'tabbed-ui__' + location.pathname;
+        this.wrapper = document.createElement('div');
+        this.wrapper.classList.add('tabbed-ui-wrapper');
+
+        this.navigation = document.createElement('nav');
+        this.navigation.classList.add('tabbed-ui-navigation');
+
+        this.container.parentNode.replaceChild(this.wrapper, this.container);
+        this.wrapper.appendChild(this.navigation);
+        this.wrapper.appendChild(this.container);
     }
 
-    setupNavigator()
+    setupNavigation()
     {
-        this.navigator = document.createElement('ul');
-        this.navigator.classList.add('tabbed-ui-navigator');
-        this.navigator.setAttribute('role', 'tablist');
-
-        this.panels.forEach((panel, i) => {
-            let title = panel.querySelector('h2').innerHTML;
-            let item = document.createElement('li');
-            let button = document.createElement('button');
-
-            button.innerHTML = title;
-            button.dataset.panelNumber = i;
-            button.type = 'button';
-            button.addEventListener('click', this.onNavigatorButtonClick.bind(this));
-
-            this.buttons[i] = button;
-
-            item.appendChild(button);
-            this.navigator.appendChild(item);
+        this.container.querySelectorAll('h2').forEach(node => {
+            node.id = this.slugify(node.textContent);
         });
 
-        this.container.insertBefore(this.navigator, this.panels[0]);
-    }
+        tocbot.init({
+            tocSelector: '.tabbed-ui-navigation',
+            contentSelector: '.tabbed-ui',
+            headingSelector: 'h2',
 
-    setupPanels()
-    {
-        let defaultPanelNumber = 0;
+            activeLinkClass: 'active',
 
-        let currentHash = location.hash.replace('#', '');
-        let savedPanelNumber = sessionStorage.getItem(this.LAST_PANEL_SESSION_KEY);
-
-        if (null != savedPanelNumber) {
-            defaultPanelNumber = savedPanelNumber;
-        }
-
-        this.panels.forEach((panel, i) => {
-            panel.setAttribute('role', 'tab');
-
-            if (currentHash && panel.id == currentHash) {
-                defaultPanelNumber = i;
-
-                // If default panel was determined by URL hash, scroll to
-                // the top of the page to prevent default browser behavior.
-                let scrollToTop = () => {
-                    window.scroll(0, 0);
-                    window.removeEventListener('scroll', scrollToTop);
-                };
-                window.addEventListener('scroll', scrollToTop);
-            }
-        });
-
-        this.changePanel(defaultPanelNumber);
-    }
-
-    changePanel(panelNumber)
-    {
-        this.panels.forEach((panel, i) => {
-            panel.classList.remove('tabbed-ui-current');
-            this.buttons[i].classList.remove('tabbed-ui-current');
-
-            if (i == panelNumber) {
-                panel.classList.add('tabbed-ui-current');
-                this.buttons[i].classList.add('tabbed-ui-current');
-            }
+            basePath: window.location.pathname,
         });
     }
 
-    onNavigatorButtonClick(event)
+    slugify(string)
     {
-        event.preventDefault();
+        // https://gist.github.com/codeguy/6684588
 
-        let button = event.target;
-        let panelNumber = button.dataset.panelNumber;
-
-        button.blur();
-
-        this.changePanel(panelNumber);
-        sessionStorage.setItem(this.LAST_PANEL_SESSION_KEY, panelNumber);
+        return string
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9 ]/g, '')
+            .replace(/\s+/g, '-')
+        ;
     }
 }

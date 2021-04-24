@@ -1,107 +1,79 @@
-.JS .tabbed-ui > div {
-    background: #FAFFF8;
-    padding: 0.5em 1.2em 0.8em;
-    border: 1px solid #D2D2D2;
-}
-.JS .tabbed-ui > div:not(.tabbed-ui-current) {
-    display: none;
+/* wrapper */
+
+.tabbed-ui-wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-gap: 40px;
 }
 
-.tabbed-ui-navigator {
+@media (max-width: 800px)
+{
+    .tabbed-ui-wrapper {
+        display: block;
+    }
+}
+
+
+/* navigation */
+
+@media (max-width: 800px)
+{
+    .tabbed-ui-navigation {
+        display: none;
+    }
+}
+
+.tabbed-ui-navigation ol {
+    list-style: none;
     padding-left: 0;
-    list-style-type: none;
-    margin: 0 0 -1px;
+    margin: 0;
 
-    vertical-align: bottom;
+    position: sticky;
+    top: 20px;
 }
-@supports (-webkit-nbsp-mode: initial)
-{
-    .tabbed-ui-navigator {
-        /* needed for WebKit, not Blink */
-        margin-bottom: 0;
-    }
-}
-.tabbed-ui-navigator li {
-    display: inline;
-}
-.tabbed-ui-navigator button {
-    margin-right: 0.4em;
-    padding: 0.2em 0.9em;
-    background: #FAFFF8;
-    border: 1px solid #D2D2D2;
-    opacity: 0.63;
+.tabbed-ui-navigation a {
+    display: block;
 
-    white-space: nowrap;
-    display: inline-block;
-    outline-style: none;
-    box-shadow: none;
-    color: inherit;
-    transition-property: opacity;
-    width: auto;
-    font-weight: normal;
-    margin-top: 0;
-}
-.tabbed-ui-navigator button:hover {
+    border: 1px solid #eee;
     background: #fff;
-    color: inherit;
+    padding: 10px 20px;
+
+    position: relative;
+    overflow: hidden;
 }
-.tabbed-ui-navigator button:focus:not(:hover):not(:active) {
-    opacity: 1;
-    outline-style: dashed;
+.tabbed-ui-navigation a:hover, .tabbed-ui-navigation a:focus {
+    background: #f1f1f1;
 }
-.tabbed-ui-navigator button.tabbed-ui-current {
-    opacity: 1;
-    border-bottom-color: #FAFFF8;
-    padding-top: 0.6em;
-    background: #FAFFF8;
+.tabbed-ui-navigation a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    background: #ef7f20;
+    width: 7px;
+    transform: translateX(-100%);
+    transition: transform linear 0.1s;
 }
-
-@media (max-width: 800px)
-{
-    .tabbed-ui-navigator {
-        margin-bottom: 0.4em;
-    }
-
-    .tabbed-ui-navigator button {
-        margin-bottom: 0.5em;
-    }
-    .tabbed-ui-navigator button, .tabbed-ui-navigator button.tabbed-ui-current {
-        padding: 0.2em 0.9em;
-        border: 1px solid #D2D2D2;
-    }
-    .tabbed-ui-navigator li:last-child button {
-        margin-right: 0;
-    }
-    .tabbed-ui-navigator button.tabbed-ui-current {
-        font-weight: bold;
-        border-color: #aaa;
-    }
+.tabbed-ui-navigation a.active::before {
+    transform: translateX(0);
 }
-
-
-/* information paragraph in tabbed UI */
-
-.JS .tabbed-ui .information {
-    box-shadow: none;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
+.tabbed-ui-navigation li + li a {
+    border-top: none;
 }
-
-@media (max-width: 800px)
-{
-    .JS .tabbed-ui .information {
-        padding-top: 0.9em;
-        padding-bottom: 0.9em;
-    }
+.tabbed-ui-navigation li:first-child a {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.tabbed-ui-navigation li:last-child a {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 
-/* button in tabbed UI */
+/* content */
 
-.JS .tabbed-ui > div > form > button {
-    margin-top: 1.5em;
-    margin-bottom: 0.7em;
-}
-.JS .tabbed-ui + button {
-    margin-top: 1.3em;
+.tabbed-ui div:first-child h2 {
+    margin-top: 0;
 }
