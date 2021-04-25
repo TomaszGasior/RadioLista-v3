@@ -4,10 +4,9 @@ export class OverflowStylesManager
     {
         this.container = container;
 
-        this.refreshStatus();
-
         this.container.addEventListener('scroll', this.refreshStatus.bind(this));
         window.addEventListener('resize', this.refreshStatus.bind(this));
+        window.addEventListener('load', this.refreshStatus.bind(this));
     }
 
     refreshStatus()
