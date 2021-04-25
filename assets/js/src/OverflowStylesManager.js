@@ -20,10 +20,10 @@ export class OverflowStylesManager
         container.classList.remove('overflow-right');
 
         if (isScrollbarVisible) {
-            if(container.scrollLeft > MIN_SCROLL_MARGIN) {
+            if (container.scrollLeft > MIN_SCROLL_MARGIN) {
                 container.classList.add('overflow-left');
             }
-            if((container.scrollWidth - container.clientWidth - container.scrollLeft) > MIN_SCROLL_MARGIN) {
+            if ((container.scrollWidth - container.clientWidth - container.scrollLeft) > MIN_SCROLL_MARGIN) {
                 container.classList.add('overflow-right');
             }
         }
