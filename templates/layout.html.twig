@@ -33,7 +33,7 @@
     </head>
 
     <body class="customizable-background">
-        <header class="site-header {{ 'dev' == app.environment ? 'develop' : '' }}">
+        <header class="site-header {{ development ? 'develop' : '' }}">
             <div class="site-width">
                 <a href="{{ path('homepage') }}" class="site-logo">RadioLista</a>
 
