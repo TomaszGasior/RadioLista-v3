@@ -14,6 +14,13 @@ set('keep_releases', -1);
 
 inventory('deploy.yaml');
 
+foreach (Deployer::get()->hosts as $host) {
+    $host->set('hostname', $host->getHostname());
+    $host->set('domain', $host->getHostname());
+}
+
+after('deploy:failed', 'deploy:unlock');
+
 desc('Build assets');
 task('deploy:build_assets', '{{bin/npm}} install; {{bin/npm}} run build');
 after('deploy:vendors', 'deploy:build_assets');
@@ -21,6 +28,7 @@ after('deploy:vendors', 'deploy:build_assets');
 desc('Clear PHP opcache');
 task('deploy:clear_opcache', 'cachetool opcache:reset --web --web-path {{public_dir}} --web-url http://{{domain}}');
 after('deploy:symlink', 'deploy:clear_opcache');
+after('rollback', 'deploy:clear_opcache');
 
 desc('Enable maintenance mode');
 task('maintenance:enable', 'touch var/lock/maintenance.lock');

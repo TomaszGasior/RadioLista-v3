@@ -1,5 +1,5 @@
-server.hostname:
-    domain: 'radiolista.pl'
+.base: &base
+    hostname: 'hostname'
     user: 'username'
     bin/php: 'php'
     bin/npm: 'npm'
@@ -7,3 +7,7 @@ server.hostname:
     deploy_path: '/home/{{user}}/domains/{{domain}}'
     public_dir: '{{deploy_path}}/public_html'
     http_user: '{{user}}'
+
+radiolista.pl:
+    <<: *base
+    stage: prod
