@@ -7,6 +7,7 @@
 
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
+        <!-- {{ app_version() }} -->
         <base href="{{ app.request.schemeAndHttpHost }}">
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
@@ -107,7 +108,7 @@
 
         <footer class="site-footer customizable-color">
             <p>&copy; RadioLista 2012-2021</p>
-            <p><span class="sr-only">{{ 'layout.app_version'|trans }}:</span> v{{ version }}</p>
+            <p><span class="sr-only">{{ 'layout.app_version'|trans }}:</span> {{ app_version() }}</p>
             <ul>
                 <li>
                     <a href="{{ path('about_service') }}">

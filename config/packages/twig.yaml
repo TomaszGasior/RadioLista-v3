@@ -8,5 +8,4 @@ twig:
         - 'common/form/custom_types.html.twig'
     globals:
         locales: '%app.locales%'
-        version: '%app.version%'
         development: '%env(default::bool:DEVELOPMENT_WARNING)%'

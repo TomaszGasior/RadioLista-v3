@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.locales: ['pl', 'en']
-    app.version: '3.29'
 
 services:
     # default configuration for services in *this* file
@@ -65,3 +64,9 @@ services:
         arguments:
             $domain: '%env(TRACKER_DOMAIN)%'
             $siteId: '%env(TRACKER_SITE_ID)%'
+
+    App\Twig\VersionExtension:
+        arguments:
+            $environment: '%kernel.environment%'
+            $versionFilePath: '%kernel.project_dir%/version'
+            $gitDirPath: '%kernel.project_dir%/.git'

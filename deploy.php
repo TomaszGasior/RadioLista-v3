@@ -21,6 +21,10 @@ foreach (Deployer::get()->hosts as $host) {
 
 after('deploy:failed', 'deploy:unlock');
 
+desc('Save version name');
+task('deploy:version', '({{bin/git}} describe --exact-match HEAD 2> /dev/null || {{bin/git}} rev-parse --short HEAD) > version');
+after('deploy:update_code', 'deploy:version');
+
 desc('Build assets');
 task('deploy:build_assets', '{{bin/npm}} install; {{bin/npm}} run build');
 after('deploy:vendors', 'deploy:build_assets');

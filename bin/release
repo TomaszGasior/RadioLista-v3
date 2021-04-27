@@ -1,0 +1,13 @@
+#!/bin/bash -eu
+
+if [[ -n `git status --porcelain` ]]; then
+    echo 'There are uncommitted changes in the repository!'
+    exit 1
+fi
+
+tag=v3.$((`git describe master --abbrev=0 | cut -c 4-` + 1))
+echo $tag > /tmp/release-message
+
+set -x
+git commit --allow-empty -m $tag
+git tag -a -e -F /tmp/release-message $tag
