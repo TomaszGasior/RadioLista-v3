@@ -87,7 +87,6 @@ radio_table:
                 night: 'Night view'
             appearanceBackgroundColor: 'Background color'
             appearanceColor: 'Text color'
-            appearanceBackgroundImage: 'URL address of background image'
             appearanceWidthType: 'Size'
             appearanceWidthType.choice:
                 '1': 'default size'

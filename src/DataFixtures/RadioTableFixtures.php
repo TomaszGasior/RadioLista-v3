@@ -70,7 +70,6 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         if ($faker->boolean) {
             $appearance->setBackgroundColor($faker->hexcolor);
             $appearance->setTextColor($faker->hexcolor);
-            $appearance->setBackgroundImage($faker->optional(0.4)->imageUrl);
         }
         elseif ($faker->boolean) {
             $appearance->setTheme($faker->randomElement(['bieszczady', 'wood', 'rainbow', 'night']));

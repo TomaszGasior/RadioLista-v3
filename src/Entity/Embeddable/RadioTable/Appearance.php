@@ -34,13 +34,6 @@ class Appearance
     private $backgroundColor;
 
     /**
-     * @ORM\Column(type="string", length=400, nullable=true)
-     * @Assert\Length(max=400, maxMessage="radio_table.appearance.img_max_length")
-     * @Assert\Url(message="radio_table.appearance.img_invalid")
-     */
-    private $backgroundImage;
-
-    /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=Appearance::class, prefix="WIDTH_")
      */
@@ -94,18 +87,6 @@ class Appearance
     public function setBackgroundColor(?string $backgroundColor): self
     {
         $this->backgroundColor = $backgroundColor;
-
-        return $this;
-    }
-
-    public function getBackgroundImage(): ?string
-    {
-        return $this->backgroundImage;
-    }
-
-    public function setBackgroundImage(?string $backgroundImage): self
-    {
-        $this->backgroundImage = $backgroundImage;
 
         return $this;
     }

@@ -11,11 +11,7 @@
     {% endif %}
 
     {% if appearance.backgroundColor %}
-        {% set custom_css = custom_css ~ '.customizable-background { background: %s'|format(appearance.backgroundColor) %}
-        {% if appearance.backgroundImage %}
-            {% set custom_css = custom_css ~ ' url("%s") center fixed'|format(appearance.backgroundImage) %}
-        {% endif %}
-        {% set custom_css = custom_css ~ ' }' %}
+        {% set custom_css = custom_css ~ '.customizable-background { background: %s }'|format(appearance.backgroundColor) %}
     {% endif %}
 
     {% set has_custom_theme = custom_css ? true : false %}

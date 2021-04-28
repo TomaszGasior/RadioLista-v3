@@ -68,11 +68,6 @@ class RadioTableSettingsType extends RadioTableCreateType
 
                 'required' => false,
             ])
-            ->add('appearanceBackgroundImage', UrlType::class, [
-                'property_path' => 'appearance.backgroundImage',
-
-                'required' => false,
-            ])
             ->add('appearanceWidthType', ChoiceType::class, [
                 'property_path' => 'appearance.widthType',
 

@@ -9,8 +9,6 @@ radio_table:
     appearance:
         bg_invalid: 'Kolor tła jest niepoprawny.'
         fg_invalid: 'Kolor tekstu jest niepoprawny.'
-        img_invalid: 'Adres URL obrazu tła jest nieprawidłowy.'
-        img_max_length: 'Adres URL obrazu może mieć maksymalnie {{ limit }} znaków.'
         width_min_value: 'Niestandardowa szerokość musi mieć minimum {{ compared_value }} pikseli.'
         width_required: 'Niestandardowa szerokość nie może być pusta.'
 

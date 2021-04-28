@@ -9,8 +9,6 @@ radio_table:
     appearance:
         bg_invalid: 'Background color is incorrect.'
         fg_invalid: 'Text color is incorrect.'
-        img_invalid: 'URL address of background image is incorrect.'
-        img_max_length: 'URL address of background can be up to {{ limit }} characters.'
         width_min_value: 'Custom width must be at least {{ compared_value }} pixels.'
         width_required: 'Custom width cannot be empty.'
 

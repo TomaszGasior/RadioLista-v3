@@ -87,7 +87,6 @@ radio_table:
                 night: 'Widok nocą'
             appearanceBackgroundColor: 'Kolor tła'
             appearanceColor: 'Kolor tekstu'
-            appearanceBackgroundImage: 'Adres URL obrazu tła'
             appearanceWidthType: 'Rozmiar'
             appearanceWidthType.choice:
                 '1': 'rozmiar domyślny'
