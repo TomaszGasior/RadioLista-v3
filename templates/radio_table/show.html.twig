@@ -1,20 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% set appearance = radio_table.appearance %}
-
 {% set custom_css = '' %}
-{% set has_custom_theme = false %}
 
-{% if appearance.theme is empty %}
-    {% if appearance.textColor %}
-        {% set custom_css = custom_css ~ '.customizable-color { color: %s }'|format(appearance.textColor) %}
-    {% endif %}
+{% if appearance.textColor %}
+    {% set custom_css = custom_css ~ '.customizable-color { color: %s }'|format(appearance.textColor) %}
+{% endif %}
 
-    {% if appearance.backgroundColor %}
-        {% set custom_css = custom_css ~ '.customizable-background { background: %s }'|format(appearance.backgroundColor) %}
-    {% endif %}
-
-    {% set has_custom_theme = custom_css ? true : false %}
+{% if appearance.backgroundColor %}
+    {% set custom_css = custom_css ~ '.customizable-background { background: %s }'|format(appearance.backgroundColor) %}
 {% endif %}
 
 {% if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %}
@@ -22,8 +16,7 @@
 {% endif %}
 
 {% block html_classes %}
-    {%- if has_custom_theme or appearance.theme %}customized-radio-table{% endif -%}
-    {%- if appearance.theme %} theme-{{ appearance.theme }}{% endif -%}
+    {%- if custom_css %}customized-radio-table{% endif -%}
     {%- if appearance.widthType == constant('WIDTH_FULL', appearance) %} full-width{% endif -%}
     {%- if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %} custom-width{% endif -%}
 {% endblock %}

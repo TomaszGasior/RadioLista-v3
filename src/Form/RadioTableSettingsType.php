@@ -43,21 +43,6 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'label_format' => 'column.%name%',
                 'translation_domain' => 'radio_table',
             ])
-            ->add('appearanceTheme', ChoiceType::class, [
-                'property_path' => 'appearance.theme',
-
-                'required' => false,
-                'choices' => [
-                    '',
-                    'bieszczady',
-                    'wood',
-                    'rainbow',
-                    'night',
-                ],
-                'choice_label' => function ($choice) {
-                    return 'radio_table.settings.form.appearanceTheme.choice.'.$choice;
-                },
-            ])
             ->add('appearanceBackgroundColor', TextType::class, [
                 'property_path' => 'appearance.backgroundColor',
 

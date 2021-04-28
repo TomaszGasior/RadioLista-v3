@@ -78,13 +78,6 @@ radio_table:
                 '0': 'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
                 '-1': 'Prywatny — wykaz możesz zobaczyć tylko ty'
             sorting: 'Domyślne sortowanie'
-            appearanceTheme: 'Motyw'
-            appearanceTheme.choice:
-                '': '(brak motywu, własne kolory)'
-                bieszczady: 'Górski las'
-                wood: 'Drewno'
-                rainbow: 'Tęcza i niebo'
-                night: 'Widok nocą'
             appearanceBackgroundColor: 'Kolor tła'
             appearanceColor: 'Kolor tekstu'
             appearanceWidthType: 'Rozmiar'

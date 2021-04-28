@@ -17,11 +17,6 @@ class Appearance
     const WIDTH_CUSTOM = 3;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $theme;
-
-    /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @HexColor(message="radio_table.appearance.fg_invalid")
      */
@@ -54,18 +49,6 @@ class Appearance
      * @ORM\Column(type="boolean")
      */
     private $collapsedComments = false;
-
-    public function getTheme(): ?string
-    {
-        return $this->theme;
-    }
-
-    public function setTheme(?string $theme): self
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
 
     public function getTextColor(): ?string
     {

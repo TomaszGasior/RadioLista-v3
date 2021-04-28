@@ -78,13 +78,6 @@ radio_table:
                 '0': 'Unlisted — your list is available only for visitors who receive the link'
                 '-1': 'Private — your list is available only for you'
             sorting: 'Default sorting'
-            appearanceTheme: 'Theme'
-            appearanceTheme.choice:
-                '': '(no theme, custom colors)'
-                bieszczady: 'Mountain forest'
-                wood: 'Wood'
-                rainbow: 'Rainbow and sky'
-                night: 'Night view'
             appearanceBackgroundColor: 'Background color'
             appearanceColor: 'Text color'
             appearanceWidthType: 'Size'
