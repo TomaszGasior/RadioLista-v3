@@ -1,7 +1,13 @@
 {% block integer_unit_widget %}
+    {% set unit_label_id = id ~ '_unit' %}
+    {% set attr = attr|merge({'aria-describedby': (attr['aria-describedby'] ?? '') ~ ' ' ~ unit_label_id}) %}
+
     {{ block('integer_widget') }}
-    <span class="unit-label">{{ unit_label }}</span>
-{% endblock integer_unit_widget %}
+
+    <span class="unit-label" id="{{ unit_label_id }}">
+        {{ unit_label }}
+    </span>
+{% endblock %}
 
 {% block decimal_unit_widget %}
     {% set attr = attr|merge({
@@ -9,22 +15,24 @@
         'step': step,
         'min': step,
     }) %}
+
     {{ block('integer_unit_widget') }}
-{% endblock decimal_unit_widget %}
+{% endblock %}
 
 {% block radio_table_columns_row %}
     {# Do not render label for radio table columns widget. #}
     {{ block('form_rows') }}
-{% endblock radio_table_columns_row %}
+{% endblock %}
 
 {% block text_hints_widget %}
     {% set hints_list_id = id ~ '_hints' %}
+    {% set attr = attr|merge({'list': hints_list_id}) %}
+
     <datalist id="{{ hints_list_id }}">
         {% for hint in hints %}
             <option>{{ hint }}</option>
         {% endfor %}
     </datalist>
 
-    {% set attr = attr|merge({'list': hints_list_id}) %}
     {{ block('form_widget') }}
-{% endblock text_hints_widget %}
+{% endblock %}
