@@ -575,49 +575,31 @@ input.color[style] {
 /* form items lists */
 
 .form-item {
-    width: 100%;
+    margin: 20px 0;
+}
+.form-item label {
+    display: block;
+    margin-bottom: 7px;
 }
 
-.form-item.form-regular {
-    display: flex;
-    margin: 0.7em 0;
-}
-.form-item.form-regular > *:first-child {
-    width: 40%;
-}
-.form-item.form-regular > *:last-child {
-    flex: 1;
-}
-
-.form-item.form-checkbox {
-    margin: 0.9em 0;
-
+.form-item-checkbox {
     /* needed for inputs and fake checkboxes with position absolute */
     position: relative;
 }
-
-.form-item label {
-    display: block;
-}
-.form-item.form-regular label {
-    margin-top: 5px;
+.form-item-checkbox label {
+    margin-bottom: 0;
 }
 
-@media (max-width: 800px)
-{
-    .form-item.form-regular {
-        flex-direction: column;
-    }
-    .form-item.form-regular > *:first-child {
-        width: auto;
-    }
-    .form-item.form-regular label {
-        margin-bottom: 0.5em;
-    }
-
-    .form-item.form-checkbox {
-        margin: 1.3em 0;
-    }
+.form-error-message {
+    color: #ff0000;
+    margin: 7px 0 0;
+    font-weight: bold;
+}
+.form-help-message {
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 7px 0 0;
+    opacity: 0.8;
 }
 
 

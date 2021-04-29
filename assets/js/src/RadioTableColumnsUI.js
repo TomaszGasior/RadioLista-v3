@@ -45,7 +45,8 @@ export class RadioTableColumnsUI
                 item.buttonToggle.disabled = true;
             }
 
-            let buttonsContainer = item.block.lastElementChild;
+            let buttonsContainer = document.createElement('div');
+            item.block.appendChild(buttonsContainer)
             buttonsContainer.appendChild(item.buttonToggle);
             buttonsContainer.appendChild(item.buttonMoveUp);
             buttonsContainer.appendChild(item.buttonMoveDown);
