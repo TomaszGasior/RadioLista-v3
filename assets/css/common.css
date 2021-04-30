@@ -1,3 +1,22 @@
+:root {
+    --primary-color: #d66200;
+    --secondary-color: #457a2a;
+
+    --text-color: #000;
+    --text-invert-color: #fff;
+    --background-color: #fafafa;
+    --view-color: #fff;
+    --border-color: #ddd;
+
+    --success-color: #fff7bd;
+    --success-text-color: #111;
+    --error-color: #db0000;
+    --error-text-color: #fff;
+
+    --border-radius: 8px;
+}
+
+
 /* general */
 
 @font-face {
@@ -21,9 +40,9 @@
 
 body {
     font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
-    color: #000;
+    color: var(--text-color);
     text-rendering: optimizeLegibility;
-    background: #F7FFF3;
+    background: var(--background-color);
 
     cursor: default;
     overflow-y: scroll;
@@ -32,7 +51,7 @@ body {
 }
 
 a {
-    color: #D66200;
+    color: var(--primary-color);
     transition: linear 0.1s color;
 
     text-decoration: none;
@@ -41,16 +60,14 @@ a {
 }
 a:focus {
     text-decoration: underline;
-    outline: 1px dashed #F07F1F;
+    outline: 1px dashed currentColor;
     outline-offset: 2px;
 }
 a:hover {
     text-decoration: underline;
-    color: #0084FF;
     outline: none;
 }
 a:active {
-    color: #64BE00;
     outline: none;
 }
 
@@ -95,8 +112,8 @@ a:active {
 /* site header */
 
 .site-header {
-    background-color: rgba(255,255,255, 0.6);
-    box-shadow: 0 0 5px rgba(0,0,0, 0.2);
+    background-color: var(--view-color);
+    border-bottom: 1px solid var(--border-color);
     padding-top: 0.7em;
     padding-bottom: 0.7em;
 }
@@ -149,7 +166,6 @@ a:active {
 .site-navigation li::before {
     margin: 0 0.4em;
     content: " | ";
-    color: rgba(0,0,0, 0.1);
     font-size: 0.9em;
     vertical-align: 1px;
 }
@@ -157,18 +173,16 @@ a:active {
     display: none;
 }
 .site-navigation a {
-    text-shadow: 0 0 2px #eee;
-    color: #5D9A3F;
+    color: var(--secondary-color);
 
     display: inline-block;
 }
 .site-navigation a:hover {
-    color: #EE6D00;
+    color: var(--primary-color);
 }
 .site-navigation .user-menu {
     margin: 0.35em 0 0.6em;
     font-size: 0.8em;
-    color: #8E8E8E;
 }
 .site-navigation .user-menu a {
     color: inherit;
@@ -201,7 +215,7 @@ a:active {
     font-size: 0.8em;
     text-align: center;
 
-    border-top: 1px solid rgba(0,0,0, 0.11);
+    border-top: 1px solid var(--border-color);
     padding: 1em 0 2.6em 0;
     margin-top: 2em;
 }
@@ -235,12 +249,13 @@ a:active {
 .notification {
     padding: 0.2em 2em;
 
-    background: rgba(255,247,189, 0.6);
-    color: #000;
+    border-radius: var(--border-radius);
+    background: var(--success-color);
+    color: var(--success-text-color);
 }
 .notification.error {
-    background: rgba(255,0,0, 0.7);
-    color: #FFF;
+    background: var(--error-color);
+    color: var(--error-text-color);
 }
 
 @keyframes notification_show
@@ -279,8 +294,6 @@ a:active {
 
     font-weight: bold;
     padding: 0.8em 1.5em;
-    box-shadow: 0 0 3px rgba(0,0,0, 0.2);
-    border-radius: 2px;
 }
 .JS .notification-wrapper.hidden {
     animation: notification_hide 1.25s ease;
@@ -334,10 +347,9 @@ a:active {
 }
 
 .main-content > header h1 {
-    color: #EE6D00;
+    color: var(--primary-color);
     margin: 1.05rem 0 1.5rem;
     font-size: 2em;
-    text-shadow: 0 0 2px #eee;
 
     font-weight: normal;
 }
@@ -347,7 +359,7 @@ a:active {
 }
 .main-content > header h1 .additional {
     font-size: 0.4em;
-    color: #000;
+    color: var(--text-color);
     opacity: 0.4;
     padding-left: 2px;
     padding-top: 0.3rem;
@@ -356,7 +368,6 @@ a:active {
 .main-content h2, .main-content .h2 {
     font-size: 1.6em;
     margin: 1rem 0;
-    text-shadow: 0 0 2px #eee;
 
     font-weight: normal;
 }
@@ -379,9 +390,9 @@ input, textarea, select, button, a.button {
     font-size: 0.88em;
     width: 100%;
     padding: 5px 11px;
-    background: #F3F3F3;
-    box-shadow: inset 2px 2px 2px #DEDEDE;
-    border: 1px solid #C2C2C2;
+    background: var(--view-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 
     outline: none;
     font: inherit;
@@ -389,7 +400,7 @@ input, textarea, select, button, a.button {
     box-sizing: border-box;
 }
 input:focus, textarea:focus, select:focus, button:focus, a.button:focus {
-    outline: 1px solid #F07F1F;
+    outline: 1px solid var(--primary-color);
 
     /* needed for WebKit/Blink */
     outline-offset: 0px;
@@ -435,9 +446,6 @@ select {
     background-image: url("data:image/svg+xml,%3Csvg height='16px' width='35px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
     background-position: center right;
     background-repeat: no-repeat;
-
-    /* needed for WebKit */
-    border-radius: 0;
 }
 @supports (-moz-user-select: none)
 {
@@ -450,17 +458,16 @@ select {
 button, a.button {
     max-width: 40%;
     margin: 1em auto 0;
-    background: #F8FFDF;
-    color: #F07F1F;
-    font-weight: bold;
+    background: var(--view-color);
+    color: var(--primary-color);
     transition: linear 0.1s background-color;
-    border-color: #DDDDDD;
-    box-shadow: 0 0 2px rgba(0,0,0, 0.08);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
     display: block;
 }
 button:hover:not(:disabled), button:focus, a.button:hover, a.button:focus {
-    background: #F07F1F;
-    color: #F2FFC6;
+    background: var(--primary-color);
+    color: var(--text-invert-color);
 }
 button:disabled {
     opacity: 0.4;
@@ -522,9 +529,8 @@ input[type="checkbox"] + label::before, input[type="radio"] + label::before {
     margin-left: calc(-1 * (17px + 0.7em));
 
     /* copied from form widgets styles */
-    background: #F3F3F3;
-    box-shadow: inset 2px 2px 2px #DEDEDE;
-    border: 1px solid #C2C2C2;
+    background: var(--view-color);
+    border: 1px solid var(--border-color);
 }
 input[type="radio"] + label::before {
     border-radius: 10px;
@@ -532,7 +538,7 @@ input[type="radio"] + label::before {
 }
 input[type="checkbox"]:focus + label::before, input[type="radio"]:focus + label::before {
     /* copied from form widgets styles */
-    outline: 1px solid #F07F1F;
+    outline: 1px solid var(--primary-color);
 }
 input[type="checkbox"]:checked + label::before, input[type="radio"]:checked + label::before {
     background-position: center;
@@ -551,7 +557,7 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     padding-left: calc(17px + 0.7em);
 }
 input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(:hover) + label {
-    outline: 1px dotted #F6BD8D;
+    outline: 1px dotted var(--primary-color);
     outline-offset: 3px;
 }
 
@@ -575,8 +581,12 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 }
 
 .form-error-message {
-    color: #ff0000;
+    display: inline-block;
+    background: var(--error-color);
+    color: var(--error-text-color);
     margin: 7px 0 0;
+    padding: 3px 12px;
+    border-radius: var(--border-radius);
     font-weight: bold;
 }
 .form-help-message {
@@ -590,8 +600,9 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 /* radio tables list */
 
 .radio-tables-list-item {
-    background: #FAFFF8;
-    border: 1px solid #D2D2D2;
+    background: var(--view-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     padding: 1em 1.4em;
     margin: 1.2em 0;
 }
@@ -600,8 +611,7 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 }
 
 .radio-tables-list-item:focus-within:not(:hover) {
-    background: rgba(255,255,255, 1);
-    border-color: #BABABA;
+    outline: 1px solid var(--primary-color);
 }
 
 .radio-tables-list-title a, .radio-tables-list-details dl {
@@ -637,9 +647,10 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 /* information paragraph */
 
 .information {
-    box-shadow: 0 0 2px #eee;
     padding: 2em 100px 2em 2em;
-    background-color: rgba(180,240,255, 0.35);
+    background-color: var(--secondary-color);
+    color: var(--text-invert-color);
+    border-radius: var(--border-radius);
 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='51.264' height='116.008' viewBox='0 0 6.408 14.501'%3E%3Cpath fill='rgba(0,0,0, 0.12)' d='M4.603 0c-.496 0-.924.165-1.28.497-.353.331-.533.731-.533 1.196 0 .466.179.865.533 1.193.356.328.784.492 1.28.492.497 0 .922-.164 1.275-.492a1.57 1.57 0 0 0 .53-1.193c0-.465-.177-.865-.53-1.196A1.792 1.792 0 0 0 4.603 0zM2.92 4.906c-.404 0-.834.072-1.29.218-.454.144-.931.318-1.43.521l-.2.828c.146-.056.324-.113.53-.176.206-.06.408-.09.604-.09.401 0 .67.066.813.201.141.135.212.375.212.717 0 .192-.022.403-.068.633-.046.228-.104.473-.171.731l-.761 2.688a8.23 8.23 0 0 0-.147.759c-.03.224-.045.444-.045.659 0 .553.203 1.008.61 1.367.409.36.982.539 1.718.539.479 0 .9-.063 1.262-.189.363-.126.847-.308 1.455-.548l.203-.827a3.564 3.564 0 0 1-.506.17 2.4 2.4 0 0 1-.626.097c-.392 0-.67-.065-.827-.194-.16-.129-.239-.372-.239-.728 0-.141.024-.351.073-.626.05-.275.105-.521.167-.736l.757-2.68c.074-.247.125-.516.152-.811.027-.294.041-.5.041-.617 0-.564-.199-1.023-.594-1.376-.397-.352-.961-.53-1.692-.53z'/%3E%3C/svg%3E");
     background-position: right 2em center;
@@ -648,7 +659,9 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
     /* https://icons8.com/icon/76/info */
 }
 .information a {
-    color: #0088C6;
+    color: unset;
+    text-decoration: underline;
+    text-decoration-style: dotted;
 }
 
 @media (max-width: 800px)

@@ -34,8 +34,8 @@
 .tabbed-ui-navigation a {
     display: block;
 
-    border: 1px solid #eee;
-    background: #fff;
+    border: 1px solid var(--border-color);
+    background: var(--view-color);
     padding: 10px 20px;
 
     position: relative;
@@ -51,7 +51,7 @@
     top: 0;
     bottom: 0;
 
-    background: #ef7f20;
+    background: var(--primary-color);
     width: 7px;
     transform: translateX(-100%);
     transition: transform linear 0.1s;
@@ -63,12 +63,12 @@
     border-top: none;
 }
 .tabbed-ui-navigation li:first-child a {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }
 .tabbed-ui-navigation li:last-child a {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
 }
 
 

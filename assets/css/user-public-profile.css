@@ -1,5 +1,5 @@
 .user-profile-page h2 {
-    color: #5D9A3F;
+    color: var(--secondary-color);
     line-height: 1.1em;
 }
 

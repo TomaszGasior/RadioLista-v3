@@ -49,7 +49,7 @@
 }
 .radio-table th {
     padding-bottom: 0.5em;
-    color: #477E2D;
+    color: var(--secondary-color);
     font-weight: normal;
     white-space: nowrap;
 }
@@ -197,7 +197,7 @@
     align-items: center;
     width: 100%;
 
-    border-top: 1px solid rgba(0,0,0, 0.05);
+    border-top: 1px solid var(--border-color);
     font-size: 0.9em;
     margin-top: 1.5em;
     padding: 0.8em 2em 0 2em;
@@ -223,7 +223,7 @@
 }
 .radio-table-details dd {
     text-align: left;
-    border-right: 1px solid rgba(0,0,0, 0.05);
+    border-right: 1px solid var(--border-color);
 }
 .radio-table-details dd:last-child {
     border-right: none;

@@ -1,30 +1,38 @@
 .cke_chrome {
     box-shadow: none !important;
     border: none !important;
+    border-radius: var(--border-radius) !important;
 }
 .cke_chrome.cke_focus {
-    outline: 1px solid #F07F1F !important;
+    outline: 1px solid var(--primary-color) !important;
 }
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a {
     font-family: inherit !important;
 }
 .cke_toolgroup {
-    background-image: linear-gradient(to bottom,#fff,#efefef) !important;
+    background: var(--background-color) !important;
 }
 
 .cke_chrome .cke_inner {
-    background: rgba(224,224,224, 0.3) !important;
+    background: var(--view-color) !important;
 }
 .cke_chrome .cke_wysiwyg_div {
     padding: 2px 11px !important;
-    background: #F3F3F3 !important;
-    border: 1px solid #C2C2C2 !important;
-    box-shadow: inset 2px 2px 2px #DEDEDE !important;
+    background: var(--view-color) !important;
+    border: 1px solid var(--border-color) !important;
 }
 .cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
     box-shadow: none !important;
-    border: 1px solid #C2C2C2 !important;
+    border: 1px solid var(--border-color) !important;
     background: none !important;
+}
+.cke_chrome span.cke_top {
+    border-top-left-radius: var(--border-radius) !important;
+    border-top-right-radius: var(--border-radius) !important;
+}
+.cke_chrome span.cke_bottom {
+    border-bottom-left-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
 }
 .cke_chrome span.cke_top {
     border-bottom: none !important;
@@ -45,7 +53,7 @@
 }
 
 .cke_dialog_body {
-    box-shadow: 0 0 6px #222 !important;
+    box-shadow: 0 0 6px #222 !important; /* @todo */
 }
 .cke_dialog_body .cke_resizer {
     display: none !important;

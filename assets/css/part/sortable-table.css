@@ -3,7 +3,7 @@ table.sortable th[data-sort] {
 }
 table.sortable th[data-sort]:focus {
     text-decoration: underline;
-    outline: 1px dashed #F07F1F;
+    outline: 1px dashed var(--primary-color);
     outline-offset: -2px;
 }
 table.sortable th[data-sort]:focus:hover {

@@ -8,9 +8,9 @@
     margin: 1.2em auto;
 }
 .JS .radio-table-columns .form-item {
-    background: #F3F3F3;
-    box-shadow: inset 2px 2px 2px #DEDEDE;
-    border: 1px solid #C2C2C2;
+    background: var(--view-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     padding: 0.5em 1em;
     box-sizing: border-box;
     display: flex;
@@ -24,9 +24,7 @@
     flex: 1;
 }
 .JS .radio-table-columns .form-item.hidden-column {
-    background: #FBFBFB;
-    box-shadow: inset 2px 2px 2px #efefef;
-    border-color: #dfdfdf;
+    opacity: 0.7;
 }
 .JS .radio-table-columns .form-item.hidden-column label {
     text-decoration: line-through;
