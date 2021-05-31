@@ -1,10 +1,10 @@
 name: Check security
 
 on:
-  push:
-    branches: ['*']
-  schedule:
-    - cron: '0 15 * * 0'
+    push:
+        branches: ['*']
+    schedule:
+        - cron: '0 6 * * *'
 
 jobs:
     security:
