@@ -10,6 +10,7 @@ set('branch', function(){ return runLocally('git describe master --abbrev=0'); }
 set('env', ['APP_ENV' => 'prod']);
 set('shared_dirs', ['var/log', 'var/sessions', 'var/lock']);
 set('shared_files', ['.env.local.php']);
+set('clear_paths', ['node_modules']);
 set('keep_releases', -1);
 
 inventory('deploy.yaml');
@@ -20,6 +21,7 @@ foreach (Deployer::get()->hosts as $host) {
 }
 
 after('deploy:failed', 'deploy:unlock');
+after('deploy:symlink', 'deploy:clear_paths');
 
 desc('Save version name');
 task('deploy:version', '({{bin/git}} describe --exact-match HEAD 2> /dev/null || {{bin/git}} rev-parse --short HEAD) > version');
