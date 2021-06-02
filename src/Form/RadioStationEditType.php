@@ -54,7 +54,7 @@ class RadioStationEditType extends AbstractType
                     'Meloradio',
                     'AntyRadio',
                     'Eska',
-                    'Wawa',
+                    'Supernova',
                     'Vox FM',
                     'Plus',
                     'Tok FM',
