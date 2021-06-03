@@ -21,7 +21,7 @@ class SqliteForeignKeySubscriber implements EventSubscriber
         $connection = $args->getConnection();
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $connection->exec('PRAGMA foreign_keys = ON');
+            $connection->executeStatement('PRAGMA foreign_keys = ON');
         }
     }
 }
