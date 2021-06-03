@@ -39,10 +39,6 @@ services:
     App\DataFixtures\TestsFixtures:
         autoconfigure: false
 
-    App\Controller\AdminController:
-        bind:
-            $logFilePath: '%kernel.logs_dir%/%kernel.environment%.log'
-
     App\Controller\DarkErrorController:
         arguments:
             $errorController: '@error_controller'

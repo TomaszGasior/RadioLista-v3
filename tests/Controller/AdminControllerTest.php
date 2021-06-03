@@ -19,7 +19,6 @@ class AdminControllerTest extends WebTestCase
     {
         $urls = [
             '/admin',
-            '/admin/dziennik',
             '/admin/wykazy',
             '/admin/uzytkownicy',
         ];

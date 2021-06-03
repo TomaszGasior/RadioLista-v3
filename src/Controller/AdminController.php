@@ -16,16 +16,6 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin")
-     * @Route("/admin/dziennik", name="admin.logs")
-     */
-    public function logs(string $logFilePath): Response
-    {
-        return $this->render('admin/logs.html.twig', [
-            'logs' => is_file($logFilePath) ? file_get_contents($logFilePath) : '',
-        ]);
-    }
-
-    /**
      * @Route("/admin/wykazy", name="admin.radio_tables")
      */
     public function radioTables(RadioTableRepository $radioTableRepository): Response
