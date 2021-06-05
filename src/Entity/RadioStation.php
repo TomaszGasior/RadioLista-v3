@@ -83,7 +83,7 @@ class RadioStation
     private $country;
 
     /**
-     * @ORM\Column(type="decimal", precision=7, scale=2)
+     * @ORM\Column(type="decimal", precision=8, scale=3)
      * @Assert\NotBlank(message="radio_station.frequency.not_blank")
      * @Assert\Type("numeric")
      * @Assert\GreaterThan(0, message="radio_station.frequency.greater_than_zero")

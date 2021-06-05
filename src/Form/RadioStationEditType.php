@@ -36,8 +36,8 @@ class RadioStationEditType extends AbstractType
     {
         $builder
             ->add('frequency', DecimalUnitType::class, [
-                'step' => 0.01,
-                'scale' => 2,
+                'step' => 0.001,
+                'scale' => 3,
             ])
             ->add('name', TextHintsType::class, [
                 'hints' => [
