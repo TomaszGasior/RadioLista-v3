@@ -343,7 +343,7 @@ dark_error:
             text: "You don't have permission for this action\nor the action does not make sense."
         RadioTableNotFound:
             title: 'This list does not exist.'
-            text: "The list you are looking for does not exist..\nPlease check whether address is correct."
+            text: "The list you are looking for does not exist.\nPlease check whether address is correct."
         NotFound:
             title: 'This page does not exist.'
-            text: "The page you are looking for does not exist..\nPlease check whether address is correct."
+            text: "The page you are looking for does not exist.\nPlease check whether address is correct."
