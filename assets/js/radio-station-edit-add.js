@@ -2,55 +2,6 @@ import '../css/radio-station-edit-add.css';
 
 import { TabbedUI } from './src/TabbedUI.js';
 
-// Enforce leading zeros in typed values ("87.6" -> "87.60").
-// Do not use "input" event. It looks better but makes manual typing hard.
-// This code works only in WebKit and Blink.
-function setupDecimalInputs()
-{
-    let decimalInputs = document.querySelectorAll('input.decimal');
-
-    decimalInputs.forEach(input => {
-        let decimals = (input.step.match(/\..*/) || [''])[0].length - 1;
-
-        if (decimals) {
-            let updateFixed = () => {
-                input.value = input.valueAsNumber.toFixed(decimals);
-            };
-
-            input.addEventListener('change', updateFixed);
-            updateFixed();
-        }
-    });
-}
-
-// Keep original "0.01" step for values smaller than 74, otherwise use "0.05".
-// This way entering usual frequencies is simpler while OIRT frequencies are
-// available too. See https://github.com/TomaszGasior/RadioLista-v3/issues/35
-function setupFrequencyInput()
-{
-    let frequencyInput = document.querySelector('.frequency-input');
-
-    const REPLACED_STEP = '0.05';
-    const ORIGINAL_STEP = frequencyInput.step;
-
-    let updateStep = () => {
-        if (frequencyInput.value >= 74) {
-            if (frequencyInput.step != REPLACED_STEP) {
-                frequencyInput.step = REPLACED_STEP;
-                frequencyInput.min = REPLACED_STEP;
-            }
-        }
-        else if (frequencyInput.step != ORIGINAL_STEP) {
-            frequencyInput.step = ORIGINAL_STEP;
-            frequencyInput.min = ORIGINAL_STEP;
-        }
-    };
-
-    updateStep();
-    frequencyInput.addEventListener('input', updateStep);
-    frequencyInput.addEventListener('blur', updateStep);
-}
-
 function setupLocalityInput()
 {
     let localityTypeInput = document.querySelector('.locality-type-input');
@@ -70,7 +21,5 @@ function setupLocalityInput()
 document.addEventListener('DOMContentLoaded', () => {
     new TabbedUI(document.querySelector('.tabbed-ui'));
 
-    setupDecimalInputs();
-    setupFrequencyInput();
     setupLocalityInput();
 });
