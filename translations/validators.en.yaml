@@ -31,6 +31,8 @@ radio_station:
         greater_than_zero: 'Power must be greater than zero.'
     multiplex:
         max_length: 'Multiplex can be up to {{ limit }} characters.'
+    dab_channel:
+        invalid_for_frequency: 'DAB channel does not match the frequency.'
     distance:
         greater_than_zero: 'Distance from the transmitter must be greater than zero'
     private_number:

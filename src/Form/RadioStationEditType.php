@@ -9,6 +9,7 @@ use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\TextHintsType;
+use App\Util\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RadioStationEditType extends AbstractType
 {
+    use DabChannelsTrait;
+
     private $rdsPsTransformer;
     private $rdsRtTransformer;
     private $translator;
@@ -112,6 +115,16 @@ class RadioStationEditType extends AbstractType
                 'choice_translation_domain' => false,
             ])
             ->add('multiplex')
+            ->add('dabChannel', ChoiceType::class, [
+                'choices' => array_merge([null], $this->getDabChannels()),
+                'choice_label' => function ($choice) {
+                    if ($choice) {
+                        return $choice;
+                    }
+                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.'.$choice);
+                },
+                'choice_translation_domain' => false,
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     RadioStation::TYPE_MUSIC,

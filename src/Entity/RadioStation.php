@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Validator\ClassConstantsChoice;
+use App\Validator\DabChannel;
 use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -114,6 +115,12 @@ class RadioStation
      * @Assert\Length(max=100, maxMessage="radio_station.multiplex.max_length")
      */
     private $multiplex;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     * @DabChannel(message="radio_station.dab_channel.invalid_for_frequency")
+     */
+    private $dabChannel;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -303,6 +310,18 @@ class RadioStation
     public function setMultiplex(?string $multiplex): self
     {
         $this->multiplex = $multiplex;
+
+        return $this;
+    }
+
+    public function getDabChannel(): ?string
+    {
+        return $this->dabChannel;
+    }
+
+    public function setDabChannel(?string $dabChannel): self
+    {
+        $this->dabChannel = $dabChannel;
 
         return $this;
     }

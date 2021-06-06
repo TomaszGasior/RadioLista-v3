@@ -172,6 +172,8 @@ radio_station:
             localityCity: 'Lokalność — miasto/województwo'
             polarization.choice:
                 '': '(brak informacji)'
+            dabChannel.choice:
+                '': '(brak informacji)'
             firstLogDate.help: 'na przykład: 2013, 2011-06, 2016-05-04'
             marker: 'Wyróżnienie wizualne'
             marker.choice:

@@ -47,6 +47,14 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         $radioStation->setReception(
             $faker->randomConstantFromClass(RadioStation::class, 'RECEPTION_')
         );
+
+        if ($faker->boolean(75)) {
+            [$dabChannel, $frequency] = $faker->dabChannelWithFrequency;
+            $radioStation
+                ->setDabChannel($dabChannel)
+                ->setFrequency($frequency)
+            ;
+        }
         if ($faker->boolean(75)) {
             $radioStation->setDistance($faker->numberBetween(1, 999));
         }

@@ -172,6 +172,8 @@ radio_station:
             localityCity: 'Locality — region'
             polarization.choice:
                 '': '(no information)'
+            dabChannel.choice:
+                '': '(no information)'
             firstLogDate.help: 'for example: 2013, 2011-06, 2016-05-04'
             marker: 'Visual marker'
             marker.choice:

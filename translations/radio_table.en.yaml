@@ -2,6 +2,7 @@ heading:
     comment: 'Comment'
     comment.short: 'Com.'
     country: 'Country'
+    dabChannel: 'Ch.'
     externalAnchor: 'Ref.'
     firstLogDate: '1st log'
     locality: 'Locality'
@@ -20,6 +21,7 @@ heading:
 column:
     comment: 'Comment'
     country: 'Country'
+    dabChannel: 'DAB channel'
     distance: 'Distance from the transmitter'
     externalAnchor: 'External reference'
     firstLogDate: 'First log date'
