@@ -5,6 +5,7 @@
         <h2>{{ 'radio_station.edit.heading.general'|trans }}</h2>
 
         {{ form_row(form.frequency, {
+            attr: { 'class': 'frequency-input' },
             'unit_label': get_frequency_label(radio_station.radioTable.frequencyUnit),
         }) }}
         {{ form_row(form.name) }}
@@ -18,7 +19,7 @@
         {{ form_row(form.power, {'unit_label': 'kW'}) }}
         {{ form_row(form.polarization) }}
         {{ form_row(form.multiplex) }}
-        {{ form_row(form.dabChannel) }}
+        {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
         {{ form_row(form.type) }}
 
         {{ form_row(form.localityType, {'attr': {

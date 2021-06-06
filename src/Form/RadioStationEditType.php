@@ -124,6 +124,14 @@ class RadioStationEditType extends AbstractType
                     return $this->translator->trans('radio_station.edit.form.dabChannel.choice.'.$choice);
                 },
                 'choice_translation_domain' => false,
+
+                // These settings are needed for frontend JS script of radio station edit/add page.
+                'choice_value' => function ($choice) {
+                    return $choice;
+                },
+                'attr' => [
+                    'data-dab-channel-frequencies' => json_encode($this->getDabChannelsWithFrequencies()),
+                ],
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
