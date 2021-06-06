@@ -33,6 +33,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         $radioStation->setRadioGroup($faker->optional()->radioGroup);
         $radioStation->setCountry($faker->optional()->country);
         $radioStation->setLocation($faker->optional()->city);
+        $radioStation->setMultiplex($faker->optional()->multiplex);
 
         $radioStation->setPolarization(
             $faker->randomConstantFromClass(RadioStation::class, 'POLARIZATION_')

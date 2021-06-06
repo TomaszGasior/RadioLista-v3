@@ -29,6 +29,8 @@ radio_station:
         max_length: 'Miasto lokalności może mieć maksymalnie {{ limit }} znaków.'
     power:
         greater_than_zero: 'Moc musi być większa niż zero.'
+    multiplex:
+        max_length: 'Multipleks może mieć maksymalnie {{ limit }} znaków.'
     distance:
         greater_than_zero: 'Odległość od nadajnika musi być większa niż zero.'
     private_number:

@@ -25,6 +25,7 @@ class RadioTable
     public const COLUMN_LOCATION = 'location';
     public const COLUMN_POWER = 'power';
     public const COLUMN_POLARIZATION = 'polarization';
+    public const COLUMN_MULTIPLEX = 'multiplex';
     public const COLUMN_COUNTRY = 'country';
     public const COLUMN_QUALITY = 'quality';
     public const COLUMN_RDS = 'rds';

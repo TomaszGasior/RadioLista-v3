@@ -29,6 +29,8 @@ radio_station:
         max_length: 'Location region can be up to {{ limit }} characters.'
     power:
         greater_than_zero: 'Power must be greater than zero.'
+    multiplex:
+        max_length: 'Multiplex can be up to {{ limit }} characters.'
     distance:
         greater_than_zero: 'Distance from the transmitter must be greater than zero'
     private_number:

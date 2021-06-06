@@ -111,6 +111,7 @@ class RadioStationEditType extends AbstractType
                 },
                 'choice_translation_domain' => false,
             ])
+            ->add('multiplex')
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     RadioStation::TYPE_MUSIC,

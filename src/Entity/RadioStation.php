@@ -110,6 +110,12 @@ class RadioStation
     private $polarization = self::POLARIZATION_NONE;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=100, maxMessage="radio_station.multiplex.max_length")
+     */
+    private $multiplex;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\GreaterThan(0, message="radio_station.distance.greater_than_zero")
      */
@@ -285,6 +291,18 @@ class RadioStation
     public function setPolarization(?string $polarization): self
     {
         $this->polarization = $polarization;
+
+        return $this;
+    }
+
+    public function getMultiplex(): ?string
+    {
+        return $this->multiplex;
+    }
+
+    public function setMultiplex(?string $multiplex): self
+    {
+        $this->multiplex = $multiplex;
 
         return $this;
     }
