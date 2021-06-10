@@ -116,6 +116,7 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('multiplex')
             ->add('dabChannel', ChoiceType::class, [
+                'required' => false,
                 'choices' => array_merge([null], $this->getDabChannels()),
                 'choice_label' => function ($choice) {
                     if ($choice) {
