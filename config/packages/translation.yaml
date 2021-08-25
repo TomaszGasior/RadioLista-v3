@@ -5,3 +5,10 @@ framework:
         fallbacks:
             - en
             - pl
+#        providers:
+#            crowdin:
+#                dsn: '%env(CROWDIN_DSN)%'
+#            loco:
+#                dsn: '%env(LOCO_DSN)%'
+#            lokalise:
+#                dsn: '%env(LOKALISE_DSN)%'

@@ -9,3 +9,7 @@ twig:
     globals:
         locales: '%app.locales%'
         development: '%env(default::bool:DEVELOPMENT_WARNING)%'
+
+when@test:
+    twig:
+        strict_variables: true
