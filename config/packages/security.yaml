@@ -10,7 +10,9 @@ security:
         App\Entity\User:
             algorithm: auto
             cost: 12
-            migrate_from: [rl_v1, bcrypt]
+            # needs to be disabled until this bugfix will be released:
+            # https://github.com/symfony/symfony/issues/42746
+            # migrate_from: [rl_v1, bcrypt]
         rl_v1:
             id: App\Security\Encoder\RLv1Encoder
 
