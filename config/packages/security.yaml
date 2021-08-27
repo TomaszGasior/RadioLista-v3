@@ -1,13 +1,8 @@
 security:
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        database:
-            entity:
-                class: App\Entity\User
-                property: name
-
+    # https://symfony.com/doc/current/security.html#c-hashing-passwords
     password_hashers:
         App\Entity\User:
             algorithm: auto
@@ -15,6 +10,13 @@ security:
             migrate_from: [rl_v1, bcrypt]
         rl_v1:
             id: App\Security\Hasher\RLv1PasswordHasher
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        database:
+            entity:
+                class: App\Entity\User
+                property: name
 
     firewalls:
         dev:
