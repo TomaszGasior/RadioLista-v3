@@ -6,14 +6,14 @@ use App\Entity\User;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping\PreFlush;
 use Doctrine\ORM\Mapping\PreUpdate;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserListener
 {
     private $passwordEncoder;
     private $enableDateTimeRefresh;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder,
+    public function __construct(UserPasswordHasherInterface $passwordEncoder,
                                 bool $enableDateTimeRefresh)
     {
         $this->passwordEncoder = $passwordEncoder;
@@ -41,7 +41,7 @@ class UserListener
     {
         if ($user->getPlainPassword()) {
             $user->setPasswordHash(
-                $this->passwordEncoder->encodePassword($user, $user->getPlainPassword())
+                $this->passwordEncoder->hashPassword($user, $user->getPlainPassword())
             );
             $user->eraseCredentials();
         }

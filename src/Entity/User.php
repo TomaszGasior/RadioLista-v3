@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name.not_unique")
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
-class User implements UserInterface
+class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
@@ -199,13 +201,21 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getUsername(): ?string
+    public function getUserIdentifier(): ?string
     {
         return $this->name;
     }
 
     /**
      * @see UserInterface
+     */
+    public function getUsername(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
     {
@@ -215,7 +225,7 @@ class User implements UserInterface
     /**
      * Used only by legacy RLv1Encoder for compatibility with RLv1.
      *
-     * @see UserInterface
+     * @see LegacyPasswordAuthenticatedUserInterface
      */
     public function getSalt(): ?string
     {

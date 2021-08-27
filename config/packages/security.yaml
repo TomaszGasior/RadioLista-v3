@@ -1,4 +1,6 @@
 security:
+    enable_authenticator_manager: true
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         database:
@@ -6,22 +8,19 @@ security:
                 class: App\Entity\User
                 property: name
 
-    encoders:
+    password_hashers:
         App\Entity\User:
             algorithm: auto
             cost: 12
-            # needs to be disabled until this bugfix will be released:
-            # https://github.com/symfony/symfony/issues/42746
-            # migrate_from: [rl_v1, bcrypt]
+            migrate_from: [rl_v1, bcrypt]
         rl_v1:
-            id: App\Security\Encoder\RLv1Encoder
+            id: App\Security\Hasher\RLv1PasswordHasher
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
             form_login:
                 login_path: security.login
@@ -29,7 +28,7 @@ security:
                 default_target_path: user.my_radio_tables
                 username_parameter: security_login[username]
                 password_parameter: security_login[password]
-                csrf_token_generator: security.csrf.token_manager
+                enable_csrf: true
                 csrf_parameter: security_login[_token]
                 csrf_token_id: security_login
             logout:
