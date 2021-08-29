@@ -31,9 +31,7 @@
                     <td>{{ user.lastActivityDate|date('Y-m-d') }}</td>
                     <td>{{ user.registerDate|date('Y-m-d') }}</td>
                     <td>
-                        {% if user.password[0:3] == '$2y' %}
-                            bcrypt
-                        {% elseif user.password[0:1] == '$' %}
+                        {% if user.password[0:1] == '$' %}
                             —
                         {% else %}
                             RL v1
