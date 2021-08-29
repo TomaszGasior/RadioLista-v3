@@ -7,7 +7,7 @@ security:
         App\Entity\User:
             algorithm: auto
             cost: 12
-            migrate_from: [rl_v1, bcrypt]
+            migrate_from: [rl_v1]
         rl_v1:
             id: App\Security\Hasher\RLv1PasswordHasher
 
