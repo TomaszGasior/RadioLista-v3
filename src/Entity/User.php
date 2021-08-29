@@ -79,11 +79,6 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     /**
      * @ORM\Column(type="boolean")
      */
-    private $oldPassCompat = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $admin = false;
 
     public function __construct()
@@ -191,10 +186,6 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     {
         $this->plainPassword = $plainPassword;
 
-        if ($this->oldPassCompat) {
-            $this->oldPassCompat = false;
-        }
-
         return $this;
     }
 
@@ -223,17 +214,13 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     }
 
     /**
-     * Used only by legacy RLv1Encoder for compatibility with RLv1.
+     * Used only by legacy RLv1PasswordHasher for compatibility with RLv1.
      *
      * @see LegacyPasswordAuthenticatedUserInterface
      */
     public function getSalt(): ?string
     {
-        if ($this->oldPassCompat) {
-            return $this->registerDate->format('Y-m-d');
-        }
-
-        return null;
+        return $this->registerDate->format('Y-m-d');
     }
 
     /**
