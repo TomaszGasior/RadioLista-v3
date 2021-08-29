@@ -318,7 +318,6 @@ session:
             rememberMe: 'Remember me'
 
         notification:
-            no_credentials: 'No username or password provided.'
             bad_credentials: 'Incorrect username or password.'
             auth_error: 'An error occurred. Please try again later.'
 

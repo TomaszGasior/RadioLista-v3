@@ -26,12 +26,7 @@ class SecurityController extends AbstractController
 
         $error = $authenticationUtils->getLastAuthenticationError();
         if ($error) {
-            $token = $error->getToken();
-
-            if (!$token || !$token->getUsername() || !$token->getCredentials()) {
-                $this->addFlash('error', 'session.login.notification.no_credentials');
-            }
-            elseif ($error instanceof BadCredentialsException) {
+            if ($error instanceof BadCredentialsException) {
                 $this->addFlash('error', 'session.login.notification.bad_credentials');
             }
             else {

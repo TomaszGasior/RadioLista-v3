@@ -318,7 +318,6 @@ session:
             rememberMe: 'Zapamiętaj mnie'
 
         notification:
-            no_credentials: 'Nie podano nazwy użytkownika lub hasła.'
             bad_credentials: 'Dane logowania są niepoprawne.'
             auth_error: 'Wystąpił błąd. Spróbuj ponownie później.'
 
