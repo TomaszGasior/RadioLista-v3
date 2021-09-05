@@ -33,6 +33,7 @@ export class TabbedUI
             button.dataset.panelNumber = i;
             button.type = 'button';
             button.addEventListener('click', this.onNavigatorButtonClick.bind(this));
+            button.setAttribute('role', 'tab');
 
             this.buttons[i] = button;
 
@@ -55,7 +56,7 @@ export class TabbedUI
         }
 
         this.panels.forEach((panel, i) => {
-            panel.setAttribute('role', 'tab');
+            panel.setAttribute('role', 'tabpanel');
 
             if (currentHash && panel.id == currentHash) {
                 defaultPanelNumber = i;
