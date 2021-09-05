@@ -2,6 +2,7 @@ layout:
     slogan: 'bandscany i wykazy radiowe'
     description: 'twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji'
     navigation_title: 'Menu główne'
+    logged_in_as: 'Zalogowany jako'
     app_version: 'Wersja aplikacji'
     ie_alert: 'Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge. Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.'
 

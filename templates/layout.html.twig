@@ -46,6 +46,7 @@
                             <li class="username">
                                 {% if app.user.publicProfile %}
                                     <a href="{{ path('user.public_profile', {name: app.user.name}) }}">
+                                        <span class="sr-only">{{ 'layout.logged_in_as'|trans }}</span>
                                         {{ app.user.name }}
                                     </a>
                                 {% else %}
