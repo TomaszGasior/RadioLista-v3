@@ -22,6 +22,8 @@ framework:
         formats:
             pdf: application/pdf
             csv: text/csv
+            ods: application/vnd.oasis.opendocument.spreadsheet
+            xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
 when@test:
     framework:

@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
+use App\Export\RadioTableExporterProvder;
 use App\Form\RadioStationRemoveType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Snappy\Pdf;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,37 +87,21 @@ class RadioTableController extends AbstractController
     /**
      * @Route(
      *     {"pl": "/wykaz/{id}/eksport/{_format}", "en": "/list/{id}/export/{_format}"},
-     *     name="radio_table.download", requirements={"_format": "csv|html|pdf"}
+     *     name="radio_table.download", requirements={"_format": "csv|ods|xlsx|html|pdf"}
      * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
-    public function download(RadioTable $radioTable, string $_format, Pdf $pdfRenderer,
-                             RadioStationRepository $radioStationRepository): Response
+    public function download(RadioTable $radioTable, string $_format,
+                             RadioStationRepository $radioStationRepository,
+                             RadioTableExporterProvder $radioTableExporterProvider): Response
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
+        $exporter = $radioTableExporterProvider->getExporterForFileExtension($_format);
 
-        $templateVars = [
-            'radio_table' => $radioTable,
-            'radio_stations' => $radioStations,
-        ];
-
-        switch ($_format) {
-            case 'html':
-                $content = $this->renderView('radio_table/standalone.html.twig', $templateVars);
-                break;
-            case 'csv':
-                $content = $this->renderView('radio_table/table/radio_table.csv.twig', $templateVars);
-                break;
-            case 'pdf':
-                $content = $pdfRenderer->getOutputFromHtml(
-                    $this->renderView('radio_table/standalone.html.twig', $templateVars)
-                );
-                break;
-        }
-
-        $response = new Response($content);
-
+        $response = new Response(
+            $exporter->render($radioTable, $radioStations)
+        );
         $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             str_replace(['/', '\\'], '', $radioTable->getName()) . '.' . $_format,
