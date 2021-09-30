@@ -43,6 +43,11 @@ services:
     App\Doctrine\EventSubscriber\SqliteForeignKeySubscriber:
         tags: ['doctrine.event_subscriber']
 
+    App\EventSubscriber\HttpSecuritySubscriber:
+        arguments:
+            $cspExtraDomains:
+                - '%env(TRACKER_DOMAIN)%'
+
     App\EventSubscriber\MaintenanceModeSubscriber:
         arguments:
             $lockFilePath: '%kernel.project_dir%/var/lock/maintenance.lock'
