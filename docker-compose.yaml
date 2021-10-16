@@ -12,6 +12,7 @@ services:
         build: 'container/php-fpm'
         environment:
             DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
+            XDEBUG_CONFIG: 'client_port=2014'
         volumes:
             - '.:/srv:z'
 

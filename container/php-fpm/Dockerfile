@@ -20,6 +20,7 @@ RUN apk --no-cache add ttf-inconsolata unzip \
     && apk del unzip
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+COPY "php.ini" "$PHP_INI_DIR/conf.d/99-local.ini"
 
 RUN apk --no-cache add su-exec \
     && curl -sS https://getcomposer.org/installer \

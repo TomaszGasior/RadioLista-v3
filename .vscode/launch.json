@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+
+    "configurations": [
+        {
+            "name": "Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 2014,
+            "pathMappings": {
+                "/srv": "${workspaceFolder}",
+            },
+        }
+    ]
+}
