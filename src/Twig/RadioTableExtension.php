@@ -4,12 +4,22 @@ namespace App\Twig;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
+use App\Util\RadioTableLabelsTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class RadioTableExtension extends AbstractExtension
 {
+    use RadioTableLabelsTrait {
+        getFrequencyLabel as public;
+        getPowerLabel as public;
+        getDistanceLabel as public;
+        getMaxSignalLevelLabel as public;
+        getPolarizationLabel as public;
+        getQualityLabel as public;
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -17,6 +27,8 @@ class RadioTableExtension extends AbstractExtension
     {
         return [
             new TwigFunction('get_frequency_label', [$this, 'getFrequencyLabel']),
+            new TwigFunction('get_power_label', [$this, 'getPowerLabel']),
+            new TwigFunction('get_distance_label', [$this, 'getDistanceLabel']),
             new TwigFunction('get_max_signal_level_label', [$this, 'getMaxSignalLevelLabel']),
             new TwigFunction('get_polarization_label', [$this, 'getPolarizationLabel']),
             new TwigFunction('get_quality_label', [$this, 'getQualityLabel']),
@@ -31,46 +43,6 @@ class RadioTableExtension extends AbstractExtension
         return [
             new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
         ];
-    }
-
-    public function getFrequencyLabel(string $unit): string
-    {
-        return [
-            RadioTable::FREQUENCY_MHZ => 'MHz',
-            RadioTable::FREQUENCY_KHZ => 'kHz',
-        ][$unit];
-    }
-
-    public function getMaxSignalLevelLabel(string $unit): string
-    {
-        return [
-            RadioTable::MAX_SIGNAL_LEVEL_DB => 'dB',
-            RadioTable::MAX_SIGNAL_LEVEL_DBF => 'dBf',
-            RadioTable::MAX_SIGNAL_LEVEL_DBUV => 'dBµV',
-            RadioTable::MAX_SIGNAL_LEVEL_DBM => 'dBm',
-        ][$unit];
-    }
-
-    public function getPolarizationLabel(string $type): string
-    {
-        return [
-            RadioStation::POLARIZATION_HORIZONTAL => 'H',
-            RadioStation::POLARIZATION_VERTICAL => 'V',
-            RadioStation::POLARIZATION_CIRCULAR => 'C',
-            RadioStation::POLARIZATION_VARIOUS => 'M',
-            RadioStation::POLARIZATION_NONE => '',
-        ][$type];
-    }
-
-    public function getQualityLabel(string $type): string
-    {
-        return [
-            RadioStation::QUALITY_VERY_GOOD => '5',
-            RadioStation::QUALITY_GOOD => '4',
-            RadioStation::QUALITY_MIDDLE => '3',
-            RadioStation::QUALITY_BAD => '2',
-            RadioStation::QUALITY_VERY_BAD => '1',
-        ][$type];
     }
 
     public function alignRDSFrame(string $frame): string

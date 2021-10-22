@@ -13,9 +13,9 @@
         {%- if column == 'frequency' -%}
             {{- get_frequency_label(radio_table.frequencyUnit) -}}
         {%- elseif column == 'power' -%}
-            kW
+            {{- get_power_label() -}}
         {%- elseif column == 'distance' -%}
-            km
+            {{- get_distance_label() -}}
         {%- elseif column == 'maxSignalLevel' -%}
             {{- get_max_signal_level_label(radio_table.maxSignalLevelUnit) -}}
         {%- else -%}
