@@ -1,0 +1,128 @@
+{%- trans_default_domain 'radio_table' -%}
+
+<table class="{%- block table_class 'radio-table' -%}">
+    <thead>
+        <tr>
+            {%- for column in radio_table.columns -%}
+                {%- set column_heading = block('heading_cell') -%}
+                {%- set column_name = ('column.' ~ column)|trans -%}
+                <th
+                    {%- block heading_cell_attr -%}
+                        {%- if column_heading != column_name %} title="{{ column_name }}"{% endif -%}
+                    {%- endblock -%}
+                >
+                    {%- block heading_cell -%}
+                        {%- if column == 'frequency' -%}
+                            {{- get_frequency_label(radio_table.frequencyUnit) -}}
+                        {%- elseif column == 'power' -%}
+                            {{- get_power_label() -}}
+                        {%- elseif column == 'distance' -%}
+                            {{- get_distance_label() -}}
+                        {%- elseif column == 'maxSignalLevel' -%}
+                            {{- get_max_signal_level_label(radio_table.maxSignalLevelUnit) -}}
+                        {%- else -%}
+                            {{- ('heading.' ~ column)|trans -}}
+                        {%- endif -%}
+                    {%- endblock -%}
+                </th>
+            {%- endfor -%}
+        </tr>
+    </thead>
+
+    <tbody>
+        {%- for radio_station in radio_stations -%}
+            <tr {% if radio_station.marker %}class="marker-{{ radio_station.marker }}"{% endif %}>
+                {%- for column in radio_table.columns -%}
+                    <td>
+                        {%- if attribute(radio_station, column) is not null -%}
+                            {%- if column == 'name' -%}
+                                {%- block body_cell_name radio_station.name -%}
+
+                            {%- elseif column == 'privateNumber' -%}
+                                <span data-number-indent="private-number">
+                                    {{- radio_station.privateNumber -}}
+                                </span>
+
+                            {%- elseif column == 'frequency' -%}
+                                <span data-number-indent="frequency">
+                                    {{- radio_station.frequency|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
+                                </span>
+
+                            {%- elseif column == 'power' -%}
+                                <span data-number-indent="power">
+                                    {{- radio_station.power|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
+                                </span>
+
+                            {%- elseif column == 'type' -%}
+                                {{- ('type.' ~ radio_station.type)|trans -}}
+
+                            {%- elseif column == 'reception' -%}
+                                {{- ('reception.' ~ radio_station.reception)|trans -}}
+
+                            {%- elseif column == 'polarization' -%}
+                                <abbr title="{{ ('polarization.' ~ radio_station.polarization)|trans }}">
+                                    {{- get_polarization_label(radio_station.polarization) -}}
+                                </abbr>
+
+                            {%- elseif column == 'quality' -%}
+                                <span class="quality quality-{{ radio_station.quality }}"
+                                      title="{{ ('quality.' ~ radio_station.quality)|trans }}">
+                                    {#- Skip whitespace for proper styling. -#}
+                                    {{- get_quality_label(radio_station.quality) -}}
+                                </span>
+
+                            {%- elseif column == 'distance' -%}
+                                <span data-number-indent="distance">
+                                    {{- radio_station.distance -}}
+                                </span>
+
+                            {%- elseif column == 'maxSignalLevel' -%}
+                                <span data-number-indent="max-signal-level">
+                                    {{- radio_station.maxSignalLevel -}}
+                                </span>
+
+                            {%- elseif column == 'firstLogDate' -%}
+                                <time>{{ radio_station.firstLogDate }}</time>
+
+                            {%- elseif column == 'comment' -%}
+                                {%- block body_cell_comment radio_station.comment|nl2br(false) -%}
+
+                            {%- elseif column == 'externalAnchor' -%}
+                                <a class="external" href="{{ radio_station.externalAnchor }}" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30"><path d="M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z"/></svg>
+                                    <span class="sr-only">
+                                        {{- 'external_anchor.text'|trans({'%name%': radio_station.name}) -}}
+                                    </span>
+                                </a>
+
+                            {%- elseif column == 'locality' -%}
+                                {%- if radio_station.locality.type == constant('TYPE_COUNTRY', radio_station.locality) -%}
+                                    {{- 'locality.country'|trans -}}
+                                {%- elseif radio_station.locality.city -%}
+                                    {{- radio_station.locality.city -}}
+                                    {%- if radio_station.locality.type == constant('TYPE_NETWORK', radio_station.locality) %}
+                                        <small title="{{ 'locality.network'|trans }}">
+                                            {{- 'locality.network.abbr'|trans -}}
+                                        </small>
+                                    {%- endif -%}
+                                {%- endif -%}
+
+                            {%- elseif column == 'rds' -%}
+                                {%- if radio_station.rds.ps|first and radio_station.rds.ps|first|first|trim -%}
+                                    {%- block body_cell_rds -%}
+                                        <span class="rds">
+                                            {{- radio_station.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
+                                        </span>
+                                    {%- endblock -%}
+                                {%- endif -%}
+
+                            {%- else -%}
+                                {{- attribute(radio_station, column) -}}
+                            {%- endif -%}
+                        {%- endif -%}
+                    </td>
+                {%- endfor -%}
+            </tr>
+        {%- endfor -%}
+    </tbody>
+</table>
