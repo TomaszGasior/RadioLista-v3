@@ -110,16 +110,28 @@
 
                 <ul class="radio-table-export-list">
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_pdf'|trans }}
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
+                            {{ 'radio_table.settings.export.action.download_xlsx'|trans }}
                         </a>
-                        {{ 'radio_table.settings.export.text.about_pdf'|trans }}
+                        {{ 'radio_table.settings.export.text.about_xlsx'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
+                            {{ 'radio_table.settings.export.action.download_ods'|trans }}
+                        </a>
+                        {{ 'radio_table.settings.export.text.about_ods'|trans }}
                     </li>
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
                             {{ 'radio_table.settings.export.action.download_csv'|trans }}
                         </a>
                         {{ 'radio_table.settings.export.text.about_csv'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
+                            {{ 'radio_table.settings.export.action.download_pdf'|trans }}
+                        </a>
+                        {{ 'radio_table.settings.export.text.about_pdf'|trans }}
                     </li>
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">

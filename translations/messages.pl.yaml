@@ -107,10 +107,14 @@ radio_table:
                 download_pdf: 'Pobierz dokument PDF'
                 download_csv: 'Pobierz arkusz CSV'
                 download_html: 'Pobierz stronę HTML'
+                download_xlsx: 'Pobierz arkusz XLSX'
+                download_ods: 'Pobierz arkusz ODS'
             text:
                 about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
                 about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
                 about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
+                about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"
+                about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
 
     remove:
         title: 'Usuń stacje lub wykaz'

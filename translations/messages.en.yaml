@@ -107,10 +107,14 @@ radio_table:
                 download_pdf: 'Download PDF document'
                 download_csv: 'Download CSV sheet'
                 download_html: 'Download HTML page'
+                download_xlsx: 'Download XLSX sheet'
+                download_ods: 'Download ODS sheet'
             text:
                 about_pdf: 'PDF — standard document for reading and printing'
                 about_csv: 'CSV — dataset for importing into spreadsheet'
                 about_html: 'HTML — web page file for internet browsers'
+                about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
+                about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
 
     remove:
         title: 'Delete station or list'
