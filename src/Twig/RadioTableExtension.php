@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
+use App\Util\RadioStationRdsTrait;
 use App\Util\RadioTableLabelsTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -18,6 +19,10 @@ class RadioTableExtension extends AbstractExtension
         getMaxSignalLevelLabel as public;
         getPolarizationLabel as public;
         getQualityLabel as public;
+    }
+
+    use RadioStationRdsTrait {
+        alignRDSFrame as public;
     }
 
     /**
@@ -43,19 +48,5 @@ class RadioTableExtension extends AbstractExtension
         return [
             new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
         ];
-    }
-
-    public function alignRDSFrame(string $frame): string
-    {
-        $emptyChars = 8 - mb_strlen($frame);
-
-        if ($emptyChars > 0) {
-            $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
-        }
-        elseif ($emptyChars < 0) {
-            $frame = substr($frame, 0, 8);
-        }
-
-        return $frame;
     }
 }
