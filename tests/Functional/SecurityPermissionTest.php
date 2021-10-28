@@ -39,6 +39,8 @@ class SecurityPermissionTest extends WebTestCase
             '/wykaz/1/eksport/html',
             '/wykaz/1/eksport/csv',
             '/wykaz/1/eksport/pdf',
+            '/wykaz/1/eksport/xlsx',
+            '/wykaz/1/eksport/ods',
             '/wykaz/1/usun',
         ];
 
