@@ -38,7 +38,7 @@ class TestsFixtures extends Fixture
             ->setStatus(RadioTable::STATUS_PUBLIC)
             ->setDescription('test_radio_table_description')
             ->setColumns(
-                $this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_')
+                array_values($this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_'))
             )
         ;
         $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new \DateTime('2018-05-01'));
