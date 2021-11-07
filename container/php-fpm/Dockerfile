@@ -1,12 +1,12 @@
 FROM surnet/alpine-wkhtmltopdf:3.10-0.12.5-small as wkhtmltopdf
 FROM php:7.4-fpm-alpine3.10
 
-RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev \
+RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev libpng libpng-dev \
     && yes '' | pecl install apcu \
     && pecl install xdebug \
     && docker-php-ext-enable apcu xdebug \
-    && docker-php-ext-install pdo_mysql intl zip \
-    && apk del $PHPIZE_DEPS icu-dev libzip-dev
+    && docker-php-ext-install gd pdo_mysql intl zip \
+    && apk del $PHPIZE_DEPS icu-dev libzip-dev libpng-dev
 
 RUN apk --no-cache add libstdc++ libx11 libxrender libxext libssl1.1 \
     ca-certificates fontconfig freetype
