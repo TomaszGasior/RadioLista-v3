@@ -2,14 +2,14 @@ version: '3.3'
 
 services:
     http:
-        build: 'container/apache'
+        build: 'container/http'
         ports:
             - '2012:80'
         volumes:
             - '.:/srv:z'
 
     app:
-        build: 'container/php-fpm'
+        build: 'container/app'
         environment:
             DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
             XDEBUG_CONFIG: 'client_port=2014'
@@ -17,12 +17,12 @@ services:
             - '.:/srv:z'
 
     js:
-        build: 'container/npm'
+        build: 'container/js'
         volumes:
             - '.:/srv:z'
 
     db:
-        image: 'mysql:5.7'
+        image: 'mysql:5.7.35'
         ports:
             - '2013:3306'
         environment:
