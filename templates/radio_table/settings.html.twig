@@ -83,10 +83,12 @@
             <h2>{{ 'radio_table.settings.heading.appearance'|trans }}</h2>
 
             {{ form_row(form.appearanceBackgroundColor, {attr: {
-                'class': 'color',
+                'class': 'color radio-table-appearance-color',
+                'autocomplete': 'off',
             }}) }}
             {{ form_row(form.appearanceColor, {attr: {
-                'class': 'color',
+                'class': 'color radio-table-appearance-color',
+                'autocomplete': 'off',
             }}) }}
             {{ form_row(form.appearanceWidthType, {attr: {
                 'class': 'radio-table-width-type',

@@ -559,6 +559,9 @@ input[type="checkbox"]:focus:not(:hover) + label, input[type="radio"]:focus:not(
 input.color {
     max-width: 200px;
 }
+input.color[style] {
+    box-shadow: none;
+}
 
 
 /* form items lists */
