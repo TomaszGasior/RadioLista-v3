@@ -9,11 +9,11 @@ use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
-use App\Form\Type\TextHintsType;
 use App\Util\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -122,30 +122,12 @@ class RadioStationEditType extends AbstractType
                 },
                 'choice_translation_domain' => 'messages',
             ])
-            ->add('localityCity', TextHintsType::class, [
+            ->add('localityCity', TextType::class, [
                 'property_path' => 'locality.city',
 
                 'label' => 'radio_station.edit.form.localityCity',
                 'translation_domain' => 'messages',
                 'required' => false,
-                'hints' => [
-                    'dolnośląskie',
-                    'kujawsko-pomorskie',
-                    'lubelskie',
-                    'lubuskie',
-                    'łódzkie',
-                    'małopolskie',
-                    'mazowieckie',
-                    'opolskie',
-                    'podkarpackie',
-                    'podlaskie',
-                    'pomorskie',
-                    'śląskie',
-                    'świętokrzyskie',
-                    'warmińsko-mazurskie',
-                    'wielkopolskie',
-                    'zachodniopomorskie',
-                ],
             ])
             ->add('distance', IntegerUnitType::class, [
                 'required' => false,
