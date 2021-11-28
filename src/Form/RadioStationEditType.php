@@ -8,6 +8,7 @@ use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
+use App\Form\Type\RadioStationCompletionTextType;
 use App\Form\Type\TextHintsType;
 use App\Util\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
@@ -42,57 +43,16 @@ class RadioStationEditType extends AbstractType
                 'step' => 0.001,
                 'scale' => 3,
             ])
-            ->add('name', TextHintsType::class, [
-                'hints' => [
-                    'Polskie Radio Jedynka',
-                    'Polskie Radio Dwójka',
-                    'Polskie Radio Trójka',
-                    'Polskie Radio Czwórka',
-                    'Polskie Radio 24',
-                    'RMF FM',
-                    'RMF Classic',
-                    'RMF Maxxx',
-                    'Zet',
-                    'Chillizet',
-                    'Meloradio',
-                    'AntyRadio',
-                    'Eska',
-                    'Supernova',
-                    'Vox FM',
-                    'Plus',
-                    'Tok FM',
-                    'Złote Przeboje',
-                    'Pogoda',
-                    'Rock Radio',
-                    'Muzo.FM',
-                    'Maryja',
-                ],
-            ])
-            ->add('radioGroup', TextHintsType::class, [
+            ->add('name', RadioStationCompletionTextType::class)
+            ->add('radioGroup', RadioStationCompletionTextType::class, [
                 'required' => false,
-                'hints' => [
-                    'Polskie Radio',
-                    'Audytorium 17',
-                    'Grupa RMF',
-                    'Eurozet',
-                    'Grupa Radiowa Time',
-                    'Grupa Radiowa Agory',
-                ],
             ])
-            ->add('country', TextHintsType::class, [
+            ->add('country', RadioStationCompletionTextType::class, [
                 'required' => false,
-                'hints' => [
-                    'Polska',
-                    'Białoruś',
-                    'Czechy',
-                    'Litwa',
-                    'Niemcy',
-                    'Ukraina',
-                    'Rosja',
-                    'Słowacja',
-                ],
             ])
-            ->add('location')
+            ->add('location', RadioStationCompletionTextType::class, [
+                'required' => false,
+            ])
             ->add('power', DecimalUnitType::class, [
                 'step' => 0.001,
                 'scale' => 3,
@@ -114,7 +74,9 @@ class RadioStationEditType extends AbstractType
                 },
                 'choice_translation_domain' => false,
             ])
-            ->add('multiplex')
+            ->add('multiplex', RadioStationCompletionTextType::class, [
+                'required' => false,
+            ])
             ->add('dabChannel', ChoiceType::class, [
                 'required' => false,
                 'choices' => array_merge([null], $this->getDabChannels()),

@@ -55,4 +55,27 @@ class RadioStationRepository extends ServiceEntityRepository
 
         return $query;
     }
+
+    public function findColumnAllValuesForRadioTable(RadioTable $radioTable, string $column): array
+    {
+        switch ($column) {
+            case RadioTable::COLUMN_NAME:
+            case RadioTable::COLUMN_LOCATION:
+            case RadioTable::COLUMN_RADIO_GROUP:
+            case RadioTable::COLUMN_COUNTRY:
+            case RadioTable::COLUMN_MULTIPLEX:
+                return $this->createQueryBuilder('radioStation')
+                    ->select('DISTINCT radioStation.'.$column)
+                    ->andWhere('radioStation.radioTable = :radioTable')
+                    ->setParameter('radioTable', $radioTable)
+                    ->andWhere('radioStation.'.$column.' IS NOT NULL')
+                    ->addOrderBy('radioStation.'.$column, 'ASC')
+                    ->getQuery()
+                    ->getSingleColumnResult()
+                ;
+
+            default:
+                throw new \Exception(sprintf('Column "%s" is not supported.', $column));
+        }
+    }
 }
