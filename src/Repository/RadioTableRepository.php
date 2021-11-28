@@ -49,11 +49,6 @@ class RadioTableRepository extends ServiceEntityRepository
             ->orderBy('radioTable.'.$orderBy, 'DESC')
         ;
 
-        // TODO: remove this temporary hack when data about new radio tables will be collected.
-        if ('creationTime' === $orderBy) {
-            $query->addOrderBy('radioTable.id', 'DESC');
-        }
-
         if ($limit) {
             $query->setMaxResults($limit);
         }
