@@ -43,12 +43,19 @@ class RadioStation
     public const TYPE_RELIGIOUS = 4;
     public const TYPE_OTHER = 0;
 
+    /** @deprecated */
     public const MARKER_1 = 1;
+    /** @deprecated */
     public const MARKER_2 = 2;
+    /** @deprecated */
     public const MARKER_3 = 3;
+    /** @deprecated */
     public const MARKER_4 = 4;
+    /** @deprecated */
     public const MARKER_5 = 5;
+    /** @deprecated */
     public const MARKER_6 = 6;
+    /** @deprecated */
     public const MARKER_NONE = null;
 
     /**
@@ -415,13 +422,25 @@ class RadioStation
         return $this;
     }
 
+    /**
+     * @todo Remove it in next release, after migration.
+     * @deprecated
+     */
     public function getMarker(): ?int
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, use %1$s::%3$s() instead.', self::class, __FUNCTION__, 'getAppearance'), E_USER_DEPRECATED);
+
         return $this->marker;
     }
 
+    /**
+     * @todo Remove it in next release, after migration.
+     * @deprecated
+     */
     public function setMarker(?int $marker): self
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, use %1$s::%3$s() instead.', self::class, __FUNCTION__, 'setAppearance'), E_USER_DEPRECATED);
+
         $this->marker = $marker;
 
         return $this;
