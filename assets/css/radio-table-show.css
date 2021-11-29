@@ -78,22 +78,22 @@
 
 /* special cells */
 
-.radio-table tr.marker-1 {
+.radio-table tr.text-bold {
     font-weight: bold;
 }
-.radio-table tr.marker-2 {
+.radio-table tr.text-italic {
     font-style: italic;
 }
-.radio-table tr.marker-3 {
+.radio-table tr.text-strikethrough {
     text-decoration: line-through;
 }
-.radio-table tr.marker-4 {
+.radio-table tr.background-1 {
     background: rgba(255,209,209, 0.65) !important;
 }
-.radio-table tr.marker-5 {
+.radio-table tr.background-2 {
     background: rgba(175,255,150, 0.65) !important;
 }
-.radio-table tr.marker-6 {
+.radio-table tr.background-3 {
     background: rgba(156,230,255, 0.65) !important;
 }
 

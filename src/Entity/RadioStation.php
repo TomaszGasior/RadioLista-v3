@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Validator\ClassConstantsChoice;
@@ -207,10 +208,17 @@ class RadioStation
      */
     private $externalAnchor;
 
+    /**
+     * @ORM\Embedded(class=Appearance::class)
+     * @Assert\Valid
+     */
+    private $appearance;
+
     public function __construct()
     {
         $this->locality = new Locality;
         $this->rds = new Rds;
+        $this->appearance = new Appearance;
     }
 
     public function getId(): ?int
@@ -504,5 +512,10 @@ class RadioStation
         $this->externalAnchor = $externalAnchor;
 
         return $this;
+    }
+
+    public function getAppearance(): Appearance
+    {
+        return $this->appearance;
     }
 }

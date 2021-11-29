@@ -31,7 +31,26 @@
 
     <tbody>
         {%- for radio_station in radio_stations -%}
-            <tr {% if radio_station.marker %}class="marker-{{ radio_station.marker }}"{% endif %}>
+            {%- set appearance = radio_station.appearance -%}
+            {%- set row_class = '' -%}
+
+            {%- if appearance.background -%}
+                {%- set row_class = row_class ~ 'background-' ~ appearance.background -%}
+            {%- endif -%}
+
+            {%- if appearance.bold -%}
+                {%- set row_class = row_class ~ ' text-bold' -%}
+            {%- endif -%}
+
+            {%- if appearance.italic -%}
+                {%- set row_class = row_class ~ ' text-italic' -%}
+            {%- endif -%}
+
+            {%- if appearance.strikethrough -%}
+                {%- set row_class = row_class ~ ' text-strikethrough' -%}
+            {%- endif -%}
+
+            <tr {% if row_class %}class="{{ row_class }}"{% endif %}>
                 {%- for column in radio_table.columns -%}
                     <td>
                         {%- if attribute(radio_station, column) is not null -%}
