@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -76,9 +77,16 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
             );
         }
         if ($faker->boolean(25)) {
-            $radioStation->setMarker(
-                $faker->randomConstantFromClass(RadioStation::class, 'MARKER_')
-            );
+            ($radioStation->getAppearance())
+                ->setBackground($faker->randomConstantFromClass(Appearance::class, 'BACKGROUND_'))
+            ;
+        }
+        if ($faker->boolean(25)) {
+            ($radioStation->getAppearance())
+                ->setBold($faker->boolean)
+                ->setItalic($faker->boolean)
+                ->setStrikethrough($faker->boolean)
+            ;
         }
         if ($faker->boolean) {
             ($radioStation->getRds())
