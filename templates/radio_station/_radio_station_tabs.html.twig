@@ -11,6 +11,7 @@
         {{ form_row(form.name) }}
         {{ form_row(form.radioGroup) }}
         {{ form_row(form.country) }}
+        {{ form_row(form.type) }}
     </div>
     <div>
         <h2>{{ 'radio_station.edit.heading.broadcast'|trans }}</h2>
@@ -20,7 +21,6 @@
         {{ form_row(form.polarization) }}
         {{ form_row(form.multiplex) }}
         {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
-        {{ form_row(form.type) }}
     </div>
     <div>
         <h2>{{ 'radio_station.edit.heading.reception'|trans }}</h2>

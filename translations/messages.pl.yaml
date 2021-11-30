@@ -164,7 +164,7 @@ radio_station:
 
         heading:
             general: 'Główne'
-            broadcast: 'Nadawanie i audycje'
+            broadcast: 'Nadawanie'
             reception: 'Odbiór'
             personal: 'Osobiste'
             rds: 'RDS'
