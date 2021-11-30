@@ -16,8 +16,8 @@
     <div>
         <h2>{{ 'radio_station.edit.heading.broadcast'|trans }}</h2>
 
-        {{ form_row(form.location) }}
         {{ form_row(form.power, {'unit_label': 'kW'}) }}
+        {{ form_row(form.location) }}
         {{ form_row(form.polarization) }}
         {{ form_row(form.multiplex) }}
         {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
