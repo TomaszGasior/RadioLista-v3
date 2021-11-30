@@ -422,8 +422,14 @@ class RadioStation
         return $this;
     }
 
+    /**
+     * @todo Remove it in next release, after migration.
+     * @deprecated
+     */
     public function getLocality(): Locality
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
+
         return $this->locality;
     }
 

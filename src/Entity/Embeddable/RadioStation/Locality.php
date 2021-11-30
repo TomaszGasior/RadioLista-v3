@@ -8,6 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Embeddable
+ *
+ * @todo Remove it in next release, after migration.
+ * @deprecated
  */
 class Locality
 {
@@ -27,25 +30,45 @@ class Locality
      */
     private $city;
 
+    /**
+     * @deprecated
+     */
     public function getType(): ?int
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
+
         return $this->type;
     }
 
+    /**
+     * @deprecated
+     */
     public function setType(?int $type): self
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
+
         $this->type = $type;
 
         return $this;
     }
 
+    /**
+     * @deprecated
+     */
     public function getCity(): ?string
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
+
         return $this->city;
     }
 
+    /**
+     * @deprecated
+     */
     public function setCity(?string $city): self
     {
+        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
+
         $this->city = $city;
 
         return $this;
