@@ -5,7 +5,6 @@ heading:
     dabChannel: 'Kan.'
     externalAnchor: 'Odn.'
     firstLogDate: '1. odbiór'
-    locality: 'Lokalność'
     location: 'Lokalizacja'
     multiplex: 'MUX'
     name: 'Nazwa'
@@ -26,7 +25,6 @@ column:
     externalAnchor: 'Odnośnik zewnętrzny'
     firstLogDate: 'Data pierwszego odbioru'
     frequency: 'Częstotliwość'
-    locality: 'Lokalność programu'
     location: 'Lokalizacja nadajnika'
     maxSignalLevel: 'Maksymalny poziom sygnału'
     multiplex: 'Multipleks cyfrowy'
@@ -66,11 +64,6 @@ quality:
     '3': 'dostateczna'
     '2': 'zła'
     '1': 'bardzo zła'
-
-locality:
-    country: 'ogólnokrajowy'
-    network: 'sieć'
-    network.abbr: '(s)'
 
 external_anchor:
     text: 'Odnośnik dla „%name%”'

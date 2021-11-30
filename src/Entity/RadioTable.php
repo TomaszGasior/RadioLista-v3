@@ -37,7 +37,6 @@ class RadioTable
     public const COLUMN_RDS_PI = 'rdsPi';
     public const COLUMN_RADIO_GROUP = 'radioGroup';
     public const COLUMN_TYPE = 'type';
-    public const COLUMN_LOCALITY = 'locality';
     public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
     public const COLUMN_COMMENT = 'comment';
     public const COLUMN_EXTERNAL_ANCHOR = 'externalAnchor';

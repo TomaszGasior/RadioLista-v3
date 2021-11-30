@@ -95,18 +95,6 @@
                                     </span>
                                 </a>
 
-                            {%- elseif column == 'locality' -%}
-                                {%- if radio_station.locality.type == constant('TYPE_COUNTRY', radio_station.locality) -%}
-                                    {{- 'locality.country'|trans -}}
-                                {%- elseif radio_station.locality.city -%}
-                                    {{- radio_station.locality.city -}}
-                                    {%- if radio_station.locality.type == constant('TYPE_NETWORK', radio_station.locality) %}
-                                        <small title="{{ 'locality.network'|trans }}">
-                                            {{- 'locality.network.abbr'|trans -}}
-                                        </small>
-                                    {%- endif -%}
-                                {%- endif -%}
-
                             {%- elseif column == 'rds' -%}
                                 {%- if radio_station.rds.ps|first and radio_station.rds.ps|first|first|trim -%}
                                     {%- block body_cell_rds -%}

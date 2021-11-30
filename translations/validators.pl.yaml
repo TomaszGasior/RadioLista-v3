@@ -25,8 +25,6 @@ radio_station:
         greater_than_zero: 'Częstotliwość musi być większa niż zero.'
     location:
         max_length: 'Lokalizacja może mieć maksymalnie {{ limit }} znaków.'
-    locality_city:
-        max_length: 'Miasto lokalności może mieć maksymalnie {{ limit }} znaków.'
     power:
         greater_than_zero: 'Moc musi być większa niż zero.'
     multiplex:

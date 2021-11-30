@@ -21,15 +21,6 @@
         {{ form_row(form.multiplex) }}
         {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
         {{ form_row(form.type) }}
-
-        {{ form_row(form.localityType, {'attr': {
-            'class': 'locality-type-input',
-            'data-locality-country-value': constant('TYPE_COUNTRY', radio_station.locality),
-        }}) }}
-
-        <div class="locality-city-wrapper">
-            {{ form_row(form.localityCity) }}
-        </div>
     </div>
     <div>
         <h2>{{ 'radio_station.edit.heading.reception'|trans }}</h2>

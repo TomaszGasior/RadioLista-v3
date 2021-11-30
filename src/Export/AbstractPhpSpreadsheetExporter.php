@@ -2,7 +2,6 @@
 
 namespace App\Export;
 
-use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
 use App\Util\RadioStationRdsTrait;
@@ -159,21 +158,6 @@ abstract class AbstractPhpSpreadsheetExporter implements ExporterInterface
                         $value = $rds->getPs()[0][0] ?? '';
                         if ($value) {
                             $value = str_replace(' ', '_', $this->alignRDSFrame($value));
-                        }
-                        break;
-
-                    case RadioTable::COLUMN_LOCALITY:
-                        $locality = $value;
-
-                        if (Locality::TYPE_COUNTRY === $locality->getType()) {
-                            $value = $this->translate('locality.country');
-                        }
-                        else {
-                            $value = $locality->getCity();
-
-                            if (Locality::TYPE_NETWORK === $locality->getType()) {
-                                $value .= ' ' . $this->translate('locality.network.abbr');
-                            }
                         }
                         break;
                 }

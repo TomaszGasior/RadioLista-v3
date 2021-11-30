@@ -172,7 +172,6 @@ class RadioStation
 
     /**
      * @ORM\Embedded(class=Locality::class)
-     * @Assert\Valid
      */
     private $locality;
 

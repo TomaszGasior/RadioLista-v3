@@ -170,11 +170,6 @@ radio_station:
             rds: 'RDS'
 
         form:
-            localityType.choice:
-                '1': ogólnokrajowy
-                '2': lokalny
-                '3': sieciowy
-            localityCity: 'Lokalność — miasto/województwo'
             polarization.choice:
                 '': '(brak informacji)'
             dabChannel.choice:

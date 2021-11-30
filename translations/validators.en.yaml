@@ -25,8 +25,6 @@ radio_station:
         greater_than_zero: 'Frequency must be greater than zero.'
     location:
         max_length: 'Location can be up to {{ limit }} characters.'
-    locality_city:
-        max_length: 'Location region can be up to {{ limit }} characters.'
     power:
         greater_than_zero: 'Power must be greater than zero.'
     multiplex:

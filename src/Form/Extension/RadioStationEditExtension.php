@@ -31,8 +31,6 @@ class RadioStationEditExtension extends AbstractTypeExtension
      * and require special handling of property path.
      */
     private const PROPERTY_PATH_TO_COLUMN = [
-        'locality.city' => RadioTable::COLUMN_LOCALITY,
-        'locality.type' => RadioTable::COLUMN_LOCALITY,
         'rds.pi' => RadioTable::COLUMN_RDS_PI,
         'rds.ps' => RadioTable::COLUMN_RDS,
         'rds.pty' => RadioTable::COLUMN_RDS,
