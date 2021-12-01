@@ -73,4 +73,4 @@ locality:
     network.abbr: '(n)'
 
 external_anchor:
-    text: 'External reference for „%name%”'
+    text: 'External reference for "%name%"'
