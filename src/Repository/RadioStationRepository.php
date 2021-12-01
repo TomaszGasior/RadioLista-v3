@@ -69,6 +69,7 @@ class RadioStationRepository extends ServiceEntityRepository
                     ->andWhere('radioStation.radioTable = :radioTable')
                     ->setParameter('radioTable', $radioTable)
                     ->andWhere('radioStation.'.$column.' IS NOT NULL')
+                    ->andWhere('radioStation.'.$column.' != \'\'')
                     ->addOrderBy('radioStation.'.$column, 'ASC')
                     ->getQuery()
                     ->getSingleColumnResult()
