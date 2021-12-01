@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
-use App\Entity\Embeddable\RadioStation\Locality;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Validator\ClassConstantsChoice;
 use App\Validator\DabChannel;
@@ -185,11 +184,6 @@ class RadioStation
     private $type = self::TYPE_MUSIC;
 
     /**
-     * @ORM\Embedded(class=Locality::class)
-     */
-    private $locality;
-
-    /**
      * @ORM\Embedded(class=Rds::class)
      * @Assert\Valid
      */
@@ -216,7 +210,6 @@ class RadioStation
 
     public function __construct()
     {
-        $this->locality = new Locality;
         $this->rds = new Rds;
         $this->appearance = new Appearance;
     }
@@ -464,17 +457,6 @@ class RadioStation
         $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * @todo Remove it in next release, after migration.
-     * @deprecated
-     */
-    public function getLocality(): Locality
-    {
-        @trigger_error(sprintf('%1$s::%2$s() is deprecated, do not use it.', self::class, __FUNCTION__), E_USER_DEPRECATED);
-
-        return $this->locality;
     }
 
     public function getRds(): Rds
