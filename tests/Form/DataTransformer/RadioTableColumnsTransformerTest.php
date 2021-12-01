@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class RadioTableColumnsTransformerTest extends TestCase
 {
-
     public function dataProvider(): array
     {
         return [
@@ -19,7 +18,6 @@ class RadioTableColumnsTransformerTest extends TestCase
                     RadioTable::COLUMN_RADIO_GROUP,
                     RadioTable::COLUMN_LOCATION,
                     RadioTable::COLUMN_TYPE,
-                    RadioTable::COLUMN_LOCALITY,
                     RadioTable::COLUMN_QUALITY,
                     RadioTable::COLUMN_RDS,
                 ],
@@ -29,15 +27,15 @@ class RadioTableColumnsTransformerTest extends TestCase
                     RadioTable::COLUMN_RADIO_GROUP => 3,
                     RadioTable::COLUMN_LOCATION => 4,
                     RadioTable::COLUMN_TYPE => 5,
-                    RadioTable::COLUMN_LOCALITY => 6,
-                    RadioTable::COLUMN_QUALITY => 7,
-                    RadioTable::COLUMN_RDS => 8,
+                    RadioTable::COLUMN_QUALITY => 6,
+                    RadioTable::COLUMN_RDS => 7,
 
-                    RadioTable::COLUMN_POWER => -9,
-                    RadioTable::COLUMN_POLARIZATION => -10,
-                    RadioTable::COLUMN_MULTIPLEX => -11,
-                    RadioTable::COLUMN_DAB_CHANNEL => -12,
-                    RadioTable::COLUMN_COUNTRY => -13,
+                    RadioTable::COLUMN_POWER => -8,
+                    RadioTable::COLUMN_POLARIZATION => -9,
+                    RadioTable::COLUMN_MULTIPLEX => -10,
+                    RadioTable::COLUMN_DAB_CHANNEL => -11,
+                    RadioTable::COLUMN_COUNTRY => -12,
+                    RadioTable::COLUMN_REGION => -13,
                     RadioTable::COLUMN_FIRST_LOG_DATE => -14,
                     RadioTable::COLUMN_RECEPTION => -15,
                     RadioTable::COLUMN_DISTANCE => -16,
@@ -77,13 +75,13 @@ class RadioTableColumnsTransformerTest extends TestCase
                     RadioTable::COLUMN_MULTIPLEX => -11,
                     RadioTable::COLUMN_DAB_CHANNEL => -12,
                     RadioTable::COLUMN_COUNTRY => -13,
-                    RadioTable::COLUMN_FIRST_LOG_DATE => -14,
-                    RadioTable::COLUMN_RECEPTION => -15,
-                    RadioTable::COLUMN_DISTANCE => -16,
-                    RadioTable::COLUMN_MAX_SIGNAL_LEVEL => -17,
-                    RadioTable::COLUMN_RDS_PI => -18,
-                    RadioTable::COLUMN_TYPE => -19,
-                    RadioTable::COLUMN_LOCALITY => -20,
+                    RadioTable::COLUMN_REGION => -14,
+                    RadioTable::COLUMN_FIRST_LOG_DATE => -15,
+                    RadioTable::COLUMN_RECEPTION => -16,
+                    RadioTable::COLUMN_DISTANCE => -17,
+                    RadioTable::COLUMN_MAX_SIGNAL_LEVEL => -18,
+                    RadioTable::COLUMN_RDS_PI => -19,
+                    RadioTable::COLUMN_TYPE => -20,
                     RadioTable::COLUMN_EXTERNAL_ANCHOR => -21,
                 ],
             ],
