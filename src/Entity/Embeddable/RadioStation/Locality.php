@@ -73,4 +73,11 @@ class Locality
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        @trigger_error(sprintf('%1$s is deprecated, do not use it.', self::class), E_USER_DEPRECATED);
+
+        return '';
+    }
 }
