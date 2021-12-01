@@ -20,6 +20,8 @@ radio_station:
         max_length: 'Media group can be up to {{ limit }} characters.'
     country:
         max_length: 'Country can be up to {{ limit }} characters.'
+    region:
+        max_length: 'Region can be up to {{ limit }} characters.'
     frequency:
         not_blank: 'Frequency cannot be empty.'
         greater_than_zero: 'Frequency must be greater than zero.'

@@ -63,6 +63,7 @@ class RadioStationRepository extends ServiceEntityRepository
             case RadioTable::COLUMN_LOCATION:
             case RadioTable::COLUMN_RADIO_GROUP:
             case RadioTable::COLUMN_COUNTRY:
+            case RadioTable::COLUMN_REGION:
             case RadioTable::COLUMN_MULTIPLEX:
                 return $this->createQueryBuilder('radioStation')
                     ->select('DISTINCT radioStation.'.$column)

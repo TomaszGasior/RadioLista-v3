@@ -15,6 +15,7 @@ heading:
     rds: 'RDS'
     rdsPi: 'PI'
     reception: 'Reception'
+    region: 'Region'
     type: 'Type'
 
 column:
@@ -37,6 +38,7 @@ column:
     rds: 'RDS information'
     rdsPi: 'RDS PI code'
     reception: 'Reception type'
+    region: 'Region'
     type: 'Content type'
 
 polarization:

@@ -20,6 +20,8 @@ radio_station:
         max_length: 'Grupa może mieć maksymalnie {{ limit }} znaków.'
     country:
         max_length: 'Kraj może mieć maksymalnie {{ limit }} znaków.'
+    region:
+        max_length: 'Region może mieć maksymalnie {{ limit }} znaków.'
     frequency:
         not_blank: 'Częstotliwość stacji nie może być pusta.'
         greater_than_zero: 'Częstotliwość musi być większa niż zero.'

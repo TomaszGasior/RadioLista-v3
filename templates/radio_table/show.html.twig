@@ -80,6 +80,7 @@
                         (constant('COLUMN_RECEPTION', radio_table)): 'T',
                         (constant('COLUMN_RDS_PI', radio_table)): 'T',
                         (constant('COLUMN_TYPE', radio_table)): 'T',
+                        (constant('COLUMN_REGION', radio_table)): 'T',
                     } -%}
                     {%- if columns_sorting[column] is defined %} data-sort="{{ columns_sorting[column] }}"{% endif -%}
                     {{- parent() -}}

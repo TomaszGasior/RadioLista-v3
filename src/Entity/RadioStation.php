@@ -84,6 +84,12 @@ class RadioStation
     private $country;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=50, maxMessage="radio_station.region.max_length")
+     */
+    private $region;
+
+    /**
      * @ORM\Column(type="decimal", precision=8, scale=3)
      * @Assert\NotBlank(message="radio_station.frequency.not_blank")
      * @Assert\Type("numeric")
@@ -249,6 +255,18 @@ class RadioStation
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }

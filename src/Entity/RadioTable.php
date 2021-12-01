@@ -28,6 +28,7 @@ class RadioTable
     public const COLUMN_MULTIPLEX = 'multiplex';
     public const COLUMN_DAB_CHANNEL = 'dabChannel';
     public const COLUMN_COUNTRY = 'country';
+    public const COLUMN_REGION = 'region';
     public const COLUMN_QUALITY = 'quality';
     public const COLUMN_RDS = 'rds';
     public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';

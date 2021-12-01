@@ -49,6 +49,9 @@ class RadioStationEditType extends AbstractType
             ->add('country', RadioStationCompletionTextType::class, [
                 'required' => false,
             ])
+            ->add('region', RadioStationCompletionTextType::class, [
+                'required' => false,
+            ])
             ->add('location', RadioStationCompletionTextType::class, [
                 'required' => false,
             ])
