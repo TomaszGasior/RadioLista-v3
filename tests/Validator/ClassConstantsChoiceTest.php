@@ -34,10 +34,11 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
             RadioStation::POLARIZATION_CIRCULAR,
             RadioStation::POLARIZATION_VARIOUS,
             RadioStation::POLARIZATION_NONE,
-            RadioStation::MARKER_1,
-            RadioStation::MARKER_2,
-            RadioStation::MARKER_3,
-            RadioStation::MARKER_4,
+            RadioStation::QUALITY_VERY_GOOD,
+            RadioStation::QUALITY_GOOD,
+            RadioStation::QUALITY_MIDDLE,
+            RadioStation::QUALITY_BAD,
+            RadioStation::QUALITY_VERY_BAD,
         ];
 
         foreach ($testedValues as $testedValue) {
