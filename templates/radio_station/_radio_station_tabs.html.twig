@@ -36,7 +36,6 @@
         <h2>{{ 'radio_station.edit.heading.personal'|trans }}</h2>
 
         {{ form_row(form.privateNumber) }}
-        {{ form_row(form.marker) }}
         {{ form_row(form.externalAnchor) }}
         {{ form_row(form.comment) }}
     </div>
@@ -55,5 +54,13 @@
             {{ form_row(form.rdsRt, {attr: {wrap: 'off'}}) }}
             {{ form_row(form.rdsPty) }}
         </div>
+    </div>
+    <div>
+        <h2>{{ 'radio_station.edit.heading.appearance'|trans }}</h2>
+
+        {{ form_row(form.appearanceBackground) }}
+        {{ form_row(form.appearanceBold) }}
+        {{ form_row(form.appearanceItalic) }}
+        {{ form_row(form.appearanceStrikethrough) }}
     </div>
 </div>

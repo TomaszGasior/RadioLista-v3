@@ -22,7 +22,10 @@ class RadioStationEditExtension extends AbstractTypeExtension
      * and should never be rendered as disabled.
      */
     private const PROPERTY_PATH_NON_COLUMNS = [
-        'marker',
+        'appearance.background',
+        'appearance.bold',
+        'appearance.italic',
+        'appearance.strikethrough',
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\RadioStation;
 use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
@@ -10,6 +11,7 @@ use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
 use App\Util\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -151,22 +153,6 @@ class RadioStationEditType extends AbstractType
             ->add('privateNumber', null, [
                 'attr' => ['min' => '1'],
             ])
-            ->add('marker', ChoiceType::class, [
-                'label' => 'radio_station.edit.form.marker',
-                'choices' => [
-                    RadioStation::MARKER_NONE,
-                    RadioStation::MARKER_1,
-                    RadioStation::MARKER_2,
-                    RadioStation::MARKER_3,
-                    RadioStation::MARKER_4,
-                    RadioStation::MARKER_5,
-                    RadioStation::MARKER_6,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'radio_station.edit.form.marker.choice.'.$choice;
-                },
-                'translation_domain' => 'messages',
-            ])
             ->add('externalAnchor', UrlType::class, [
                 'required' => false,
                 'default_protocol' => null,
@@ -204,6 +190,39 @@ class RadioStationEditType extends AbstractType
                 'label' => 'radio_station.edit.form.rdsPi',
                 'translation_domain' => 'messages',
                 'attr' => ['maxlength' => '4'],
+            ])
+            ->add('appearanceBackground', ChoiceType::class, [
+                'property_path' => 'appearance.background',
+
+                'label' => 'radio_station.edit.form.appearanceBackground',
+                'choices' => [
+                    Appearance::BACKGROUND_NONE,
+                    Appearance::BACKGROUND_RED,
+                    Appearance::BACKGROUND_GREEN,
+                    Appearance::BACKGROUND_BLUE,
+                ],
+                'choice_label' => function ($choice) {
+                    return 'radio_station.edit.form.appearanceBackground.choice.'.$choice;
+                },
+                'translation_domain' => 'messages',
+            ])
+            ->add('appearanceBold', CheckboxType::class, [
+                'property_path' => 'appearance.bold',
+                'required' => false,
+                'label' => 'radio_station.edit.form.appearanceBold',
+                'translation_domain' => 'messages',
+            ])
+            ->add('appearanceItalic', CheckboxType::class, [
+                'property_path' => 'appearance.italic',
+                'required' => false,
+                'label' => 'radio_station.edit.form.appearanceItalic',
+                'translation_domain' => 'messages',
+            ])
+            ->add('appearanceStrikethrough', CheckboxType::class, [
+                'property_path' => 'appearance.strikethrough',
+                'required' => false,
+                'label' => 'radio_station.edit.form.appearanceStrikethrough',
+                'translation_domain' => 'messages',
             ])
         ;
 

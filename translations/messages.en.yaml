@@ -168,6 +168,7 @@ radio_station:
             reception: 'Reception'
             personal: 'Personal'
             rds: 'RDS'
+            appearance: 'Appearance'
 
         form:
             polarization.choice:
@@ -175,21 +176,21 @@ radio_station:
             dabChannel.choice:
                 '': '(no information)'
             firstLogDate.help: 'for example: 2013, 2011-06, 2016-05-04'
-            marker: 'Visual marker'
-            marker.choice:
-                '': '(no marker)'
-                '1': 'bold text'
-                '2': 'italic text'
-                '3': 'strike through text'
-                '4': 'red background'
-                '5': 'green background'
-                '6': 'blue background'
             rdsPs: 'Programme Service'
             rdsPs.help: 'for example: FRAME1|FRAME2|FRAME3'
             rdsRt: 'Radio Text'
             rdsRt.help: 'each message in separate line'
             rdsPty: 'Programme Type'
             rdsPi: 'Programme Identification'
+            appearanceBackground: 'Background color'
+            appearanceBackground.choice:
+                '': '(no background color)'
+                '1': 'red background'
+                '2': 'green background'
+                '3': 'blue background'
+            appearanceBold: 'Bold text'
+            appearanceItalic: 'Italic text'
+            appearanceStrikethrough: 'Strike through text'
 
         information:
             rds_popup: 'Please enable JavaScript in your browser to be able to use pop-up with extra RDS information.'

@@ -168,6 +168,7 @@ radio_station:
             reception: 'Odbiór'
             personal: 'Osobiste'
             rds: 'RDS'
+            appearance: 'Wygląd'
 
         form:
             polarization.choice:
@@ -175,21 +176,21 @@ radio_station:
             dabChannel.choice:
                 '': '(brak informacji)'
             firstLogDate.help: 'na przykład: 2013, 2011-06, 2016-05-04'
-            marker: 'Wyróżnienie wizualne'
-            marker.choice:
-                '': '(brak wyróżnienia)'
-                '1': 'pogrubienie'
-                '2': 'pochylenie'
-                '3': 'przekreślenie'
-                '4': 'czerwony kolor tła'
-                '5': 'zielony kolor tła'
-                '6': 'niebieski kolor tła'
             rdsPs: 'Programme Service'
             rdsPs.help: 'na przykład: POLSKIE|RADIO|JEDYNKA'
             rdsRt: 'Radio Text'
             rdsRt.help: 'każdy komunikat w osobnej linii'
             rdsPty: 'Programme Type'
             rdsPi: 'Programme Identification'
+            appearanceBackground: 'Kolor tła'
+            appearanceBackground.choice:
+                '': '(brak koloru tła)'
+                '1': 'czerwony kolor tła'
+                '2': 'zielony kolor tła'
+                '3': 'niebieski kolor tła'
+            appearanceBold: 'Pogrubiony tekst'
+            appearanceItalic: 'Pochylony tekst'
+            appearanceStrikethrough: 'Przekreślony tekst'
 
         information:
             rds_popup: "Aby zobaczyć wyskakujące okno z\u00A0informacjami o\u00A0RDS, włącz JavaScript w\u00A0przeglądarce."
