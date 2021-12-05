@@ -96,6 +96,12 @@
 .radio-table tr.background-3 {
     background: rgba(156,230,255, 0.65) !important;
 }
+.radio-table tr.background-4 {
+    background: rgba(255, 255, 120, 0.65) !important;
+}
+.radio-table tr.background-5 {
+    background: rgba(255, 177, 255, 0.65) !important;
+}
 
 .radio-table .quality {
     color: rgba(0,0,0, 0);

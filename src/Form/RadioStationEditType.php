@@ -200,6 +200,8 @@ class RadioStationEditType extends AbstractType
                     Appearance::BACKGROUND_RED,
                     Appearance::BACKGROUND_GREEN,
                     Appearance::BACKGROUND_BLUE,
+                    Appearance::BACKGROUND_YELLOW,
+                    Appearance::BACKGROUND_PINK,
                 ],
                 'choice_label' => function ($choice) {
                     return 'radio_station.edit.form.appearanceBackground.choice.'.$choice;

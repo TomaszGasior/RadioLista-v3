@@ -188,6 +188,8 @@ radio_station:
                 '1': 'red background'
                 '2': 'green background'
                 '3': 'blue background'
+                '4': 'yellow background'
+                '5': 'pink background'
             appearanceBold: 'Bold text'
             appearanceItalic: 'Italic text'
             appearanceStrikethrough: 'Strike through text'

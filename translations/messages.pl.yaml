@@ -188,6 +188,8 @@ radio_station:
                 '1': 'czerwony kolor tła'
                 '2': 'zielony kolor tła'
                 '3': 'niebieski kolor tła'
+                '4': 'żółty kolor tła'
+                '5': 'różowy kolor tła'
             appearanceBold: 'Pogrubiony tekst'
             appearanceItalic: 'Pochylony tekst'
             appearanceStrikethrough: 'Przekreślony tekst'

@@ -15,6 +15,8 @@ class Appearance
     public const BACKGROUND_RED = 1;
     public const BACKGROUND_GREEN = 2;
     public const BACKGROUND_BLUE = 3;
+    public const BACKGROUND_YELLOW = 4;
+    public const BACKGROUND_PINK = 5;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
