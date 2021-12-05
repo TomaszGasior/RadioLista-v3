@@ -9,14 +9,14 @@ use Doctrine\DBAL\Platforms\SqlitePlatform;
 
 class SqliteForeignKeySubscriber implements EventSubscriber
 {
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::postConnect,
         ];
     }
 
-    public function postConnect(ConnectionEventArgs $args)
+    public function postConnect(ConnectionEventArgs $args): void
     {
         $connection = $args->getConnection();
 
