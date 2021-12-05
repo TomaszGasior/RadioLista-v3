@@ -15,6 +15,12 @@
     font-style: italic;
 }
 @font-face {
+    font-family: "LatoLatinWeb";
+    src: url('../fonts/LatoLatin-HeavyItalic.woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
     font-family: "Inconsolata";
     src: url('../fonts/Inconsolata.woff2');
 }
