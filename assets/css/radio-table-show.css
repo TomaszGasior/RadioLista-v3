@@ -144,7 +144,7 @@
     padding: 1px 3px;
     transition: background 0.2s, color 0.2s;
 
-    /* reset markers styles */
+    /* reset styles from radio station appearance settings */
     font-weight: normal;
     font-style: normal;
     text-decoration: none;
