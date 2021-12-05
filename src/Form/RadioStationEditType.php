@@ -210,18 +210,21 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('appearanceBold', CheckboxType::class, [
                 'property_path' => 'appearance.bold',
+
                 'required' => false,
                 'label' => 'radio_station.edit.form.appearanceBold',
                 'translation_domain' => 'messages',
             ])
             ->add('appearanceItalic', CheckboxType::class, [
                 'property_path' => 'appearance.italic',
+
                 'required' => false,
                 'label' => 'radio_station.edit.form.appearanceItalic',
                 'translation_domain' => 'messages',
             ])
             ->add('appearanceStrikethrough', CheckboxType::class, [
                 'property_path' => 'appearance.strikethrough',
+
                 'required' => false,
                 'label' => 'radio_station.edit.form.appearanceStrikethrough',
                 'translation_domain' => 'messages',
