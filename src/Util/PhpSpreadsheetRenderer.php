@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Export;
+namespace App\Util;
 
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
-use App\Util\RadioStationRdsTrait;
-use App\Util\RadioTableLabelsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yectep\PhpSpreadsheetBundle\Factory;
 
-abstract class AbstractPhpSpreadsheetExporter implements ExporterInterface
+class PhpSpreadsheetRenderer
 {
     use RadioTableLabelsTrait;
     use RadioStationRdsTrait;
@@ -38,13 +36,13 @@ abstract class AbstractPhpSpreadsheetExporter implements ExporterInterface
     /**
      * @param RadioStation[] $radioStations
      */
-    public function render(RadioTable $radioTable, array $radioStations): string
+    public function render(string $phpSpreadsheetWriterType, RadioTable $radioTable, array $radioStations): string
     {
         $spreadsheet = $this->getSpreadsheet($radioTable, $radioStations);
 
         $writer = $this->phpSpreadsheetFactory->createWriter(
             $spreadsheet,
-            $this->getPhpSpreadsheetWriterType()
+            $phpSpreadsheetWriterType
         );
 
         ob_start();
@@ -52,8 +50,6 @@ abstract class AbstractPhpSpreadsheetExporter implements ExporterInterface
 
         return ob_get_clean();
     }
-
-    abstract protected function getPhpSpreadsheetWriterType(): string;
 
     /**
      * @param RadioStation[] $radioStations
@@ -148,7 +144,7 @@ abstract class AbstractPhpSpreadsheetExporter implements ExporterInterface
                         break;
 
                     case RadioTable::COLUMN_COMMENT:
-                        // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers.
+                        // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
                         $value = str_replace("\r", '', $value);
                         break;
 

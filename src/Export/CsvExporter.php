@@ -2,10 +2,23 @@
 
 namespace App\Export;
 
-class CsvExporter extends AbstractPhpSpreadsheetExporter
+use App\Entity\RadioTable;
+use App\Util\PhpSpreadsheetRenderer;
+
+class CsvExporter implements ExporterInterface
 {
-    protected function getPhpSpreadsheetWriterType(): string
+    private $phpSpreadsheetRenderer;
+
+    public function __construct(PhpSpreadsheetRenderer $phpSpreadsheetRenderer)
     {
-        return 'Csv';
+        $this->phpSpreadsheetRenderer = $phpSpreadsheetRenderer;
+    }
+
+    /**
+     * @param RadioStation[] $radioStations
+     */
+    public function render(RadioTable $radioTable, array $radioStations): string
+    {
+        return $this->phpSpreadsheetRenderer->render('Csv', $radioTable, $radioStations);
     }
 }

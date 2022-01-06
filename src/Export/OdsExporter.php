@@ -2,10 +2,23 @@
 
 namespace App\Export;
 
-class OdsExporter extends AbstractPhpSpreadsheetExporter
+use App\Entity\RadioTable;
+use App\Util\PhpSpreadsheetRenderer;
+
+class OdsExporter implements ExporterInterface
 {
-    protected function getPhpSpreadsheetWriterType(): string
+    private $phpSpreadsheetRenderer;
+
+    public function __construct(PhpSpreadsheetRenderer $phpSpreadsheetRenderer)
     {
-        return 'Ods';
+        $this->phpSpreadsheetRenderer = $phpSpreadsheetRenderer;
+    }
+
+    /**
+     * @param RadioStation[] $radioStations
+     */
+    public function render(RadioTable $radioTable, array $radioStations): string
+    {
+        return $this->phpSpreadsheetRenderer->render('Ods', $radioTable, $radioStations);
     }
 }
