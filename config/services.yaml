@@ -56,7 +56,7 @@ services:
         arguments:
             $lockFilePath: '%kernel.project_dir%/var/lock/maintenance.lock'
 
-    App\Export\RadioTableExporterProvder:
+    App\Export\RadioTableExporterProvider:
         arguments:
             $exporters: !tagged_iterator app.radio_table_exporter
 

@@ -2,7 +2,7 @@
 
 namespace App\Export;
 
-class RadioTableExporterProvder
+class RadioTableExporterProvider
 {
     /**
      * @var ExporterInterface[]

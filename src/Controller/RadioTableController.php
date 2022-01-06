@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
-use App\Export\RadioTableExporterProvder;
+use App\Export\RadioTableExporterProvider;
 use App\Form\RadioStationRemoveType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
@@ -94,7 +94,7 @@ class RadioTableController extends AbstractController
      */
     public function download(RadioTable $radioTable, string $_format,
                              RadioStationRepository $radioStationRepository,
-                             RadioTableExporterProvder $radioTableExporterProvider): Response
+                             RadioTableExporterProvider $radioTableExporterProvider): Response
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
         $exporter = $radioTableExporterProvider->getExporterForFileExtension($_format);
