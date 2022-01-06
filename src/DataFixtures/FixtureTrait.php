@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Util\DabChannelsTrait;
+use App\Util\Data\DabChannelsTrait;
 use App\Util\ReflectionUtilsTrait;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;

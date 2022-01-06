@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util;
+namespace App\Util\Data;
 
 trait DabChannelsTrait
 {

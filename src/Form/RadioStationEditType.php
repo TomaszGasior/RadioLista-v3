@@ -9,7 +9,7 @@ use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
-use App\Util\DabChannelsTrait;
+use App\Util\Data\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

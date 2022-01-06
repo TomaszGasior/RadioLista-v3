@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util;
+namespace App\Util\Data;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;

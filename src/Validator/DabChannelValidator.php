@@ -3,7 +3,7 @@
 namespace App\Validator;
 
 use App\Entity\RadioStation;
-use App\Util\DabChannelsTrait;
+use App\Util\Data\DabChannelsTrait;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;

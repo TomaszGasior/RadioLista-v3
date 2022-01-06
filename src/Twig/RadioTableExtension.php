@@ -4,8 +4,8 @@ namespace App\Twig;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
-use App\Util\RadioStationRdsTrait;
-use App\Util\RadioTableLabelsTrait;
+use App\Util\Data\RadioStationRdsTrait;
+use App\Util\Data\RadioTableLabelsTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
