@@ -4,7 +4,7 @@ namespace App\Command;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Util\PasswordGeneratorTrait;
+use App\Util\PasswordGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -15,23 +15,24 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ChangeUserPassCommand extends Command
 {
-    use PasswordGeneratorTrait;
-
     protected static $defaultName = 'app:change-user-pass';
 
     private $entityManager;
     private $userRepository;
     private $validator;
+    private $passwordGenerator;
 
     public function __construct(EntityManagerInterface $entityManager,
                                 UserRepository $userRepository,
-                                ValidatorInterface $validator)
+                                ValidatorInterface $validator,
+                                PasswordGenerator $passwordGenerator)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->validator = $validator;
+        $this->passwordGenerator = $passwordGenerator;
     }
 
     protected function configure(): void
@@ -54,7 +55,7 @@ class ChangeUserPassCommand extends Command
             return 1;
         }
 
-        $newPassword = $io->ask('New password', $this->getRandomPassword());
+        $newPassword = $io->ask('New password', $this->passwordGenerator->getRandomPassword());
         if (! $newPassword) {
             $io->error('Password cannot be empty.');
             return 1;
