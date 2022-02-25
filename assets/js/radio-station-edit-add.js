@@ -1,7 +1,5 @@
 import '../css/radio-station-edit-add.css';
 
-import { TabbedUI } from './src/TabbedUI.js';
-
 function setupFrequencyWithDabChannelSync()
 {
     let dabChannelInput = document.querySelector('.dab-channel-input');
@@ -19,7 +17,5 @@ function setupFrequencyWithDabChannelSync()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new TabbedUI(document.querySelector('.tabbed-ui'));
-
     setupFrequencyWithDabChannelSync();
 });

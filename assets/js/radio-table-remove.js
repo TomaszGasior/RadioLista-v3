@@ -1,7 +1,5 @@
 import '../css/radio-table-remove.css';
 
-import { TabbedUI } from './src/TabbedUI.js';
-
 function setupRemoveConfirmDialog()
 {
     let input = document.querySelector('.radio-table-remove-confirm');
@@ -19,7 +17,5 @@ function setupRemoveConfirmDialog()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new TabbedUI(document.querySelector('.tabbed-ui'));
-
     setupRemoveConfirmDialog();
 });

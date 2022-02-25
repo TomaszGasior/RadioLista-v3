@@ -1,6 +1,5 @@
 import '../css/radio-table-settings.css';
 
-import { TabbedUI } from './src/TabbedUI.js';
 import { RadioTableColumnsUI } from './src/RadioTableColumnsUI.js';
 import Huebee from 'huebee';
 
@@ -50,7 +49,6 @@ function setupCustomWidthInput()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new TabbedUI(document.querySelector('.tabbed-ui'));
     new RadioTableColumnsUI(document.querySelector('.radio-table-columns'));
 
     setupColorInputs();
