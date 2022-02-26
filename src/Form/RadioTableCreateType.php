@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\RadioTable;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,17 +17,6 @@ class RadioTableCreateType extends AbstractType
         $builder
             ->add('name', null, [
                 'help' => 'radio_table.settings.form.name.help',
-            ])
-            ->add('frequencyUnit', ChoiceType::class, [
-                'choices' => [
-                    'MHz' => RadioTable::FREQUENCY_MHZ,
-                    'kHz' => RadioTable::FREQUENCY_KHZ,
-                ],
-                'choice_translation_domain' => false,
-            ])
-            ->add('description', CKEditorType::class, [
-                'required' => false,
-                'sanitize_html' => true,
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,

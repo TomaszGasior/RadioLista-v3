@@ -53,7 +53,7 @@ class RadioTableController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('notice', 'radio_table.create.notification.created');
-            return $this->redirectToRoute('user.my_radio_tables');
+            return $this->redirectToRoute('radio_table.show', ['id' => $radioTable->getId()]);
         }
 
         return $this->render('radio_table/create.html.twig', [
