@@ -64,7 +64,6 @@ radio_table:
             visibility: 'Widoczność'
             columns: 'Kolumny'
             appearance: 'Wygląd'
-            export: 'Eksport'
 
         form:
             name: 'Nazwa wykazu'
@@ -93,8 +92,6 @@ radio_table:
 
         information:
             columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."
-            export: "Wybierz pożądany format eksportu, aby pobrać cały wykaz w\u00A0formie pliku na swój komputer. Wykaz\u00A0eksportowany jest z\u00A0aktualnie ustawionym sortowaniem i\u00A0aktualnie widocznymi kolumnami. Pomijane\u00A0są\u00A0szczegółowe informacje o\u00A0RDS."
-            export_cannot_empty: 'Ten wykaz jest pusty. Nie można go wyeksportować.'
 
         columns_ui:
             action:
@@ -103,25 +100,32 @@ radio_table:
                 move_up: 'Do góry'
                 move_down: 'W dół'
 
-        export:
-            action:
-                download_pdf: 'Pobierz dokument PDF'
-                download_csv: 'Pobierz arkusz CSV'
-                download_html: 'Pobierz stronę HTML'
-                download_xlsx: 'Pobierz arkusz XLSX'
-                download_ods: 'Pobierz arkusz ODS'
-            text:
-                about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
-                about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
-                about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
-                about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"
-                about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
+    export:
+        title: 'Eksportuj wykaz'
+
+        heading:
+            export: 'Eksport'
+
+        action:
+            download_pdf: 'Pobierz dokument PDF'
+            download_csv: 'Pobierz arkusz CSV'
+            download_html: 'Pobierz stronę HTML'
+            download_xlsx: 'Pobierz arkusz XLSX'
+            download_ods: 'Pobierz arkusz ODS'
+
+        text:
+            about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
+            about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
+            about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
+            about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"
+            about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
+
+        information:
+            export: "Wybierz pożądany format eksportu, aby pobrać cały wykaz w\u00A0formie pliku na swój komputer. Wykaz\u00A0eksportowany jest z\u00A0aktualnie ustawionym sortowaniem i\u00A0aktualnie widocznymi kolumnami. Pomijane\u00A0są\u00A0szczegółowe informacje o\u00A0RDS."
+            export_cannot_empty: 'Ten wykaz jest pusty. Nie można go wyeksportować.'
 
     remove:
         title: 'Usuń wykaz'
-
-        action:
-            export: 'Eksport wykazu'
 
         heading:
             remove_radio_table: 'Usuwanie wykazu'

@@ -115,9 +115,8 @@ class RadioTableController extends AbstractController
      */
     public function export(RadioTable $radioTable): Response
     {
-        return $this->redirectToRoute('radio_table.settings', [
-            'id' => $radioTable->getId(),
-            '_fragment' => 'export',
+        return $this->render('radio_table/export.html.twig', [
+            'radio_table' => $radioTable,
         ]);
     }
 

@@ -64,7 +64,6 @@ radio_table:
             visibility: 'Visibility'
             columns: 'Columns'
             appearance: 'Appearance'
-            export: 'Export'
 
         form:
             name: 'List name'
@@ -93,8 +92,6 @@ radio_table:
 
         information:
             columns: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
-            export: 'Choose preferred export format to download the whole list to your computer. List will be exported with current sorting and with enabled columns only. Extra RDS information is not included.'
-            export_cannot_empty: 'You cannot export empty list.'
 
         columns_ui:
             action:
@@ -103,25 +100,32 @@ radio_table:
                 move_up: 'Move up'
                 move_down: 'Move down'
 
-        export:
-            action:
-                download_pdf: 'Download PDF document'
-                download_csv: 'Download CSV sheet'
-                download_html: 'Download HTML page'
-                download_xlsx: 'Download XLSX sheet'
-                download_ods: 'Download ODS sheet'
-            text:
-                about_pdf: 'PDF — standard document for reading and printing'
-                about_csv: 'CSV — dataset for importing into spreadsheet'
-                about_html: 'HTML — web page file for internet browsers'
-                about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
-                about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
+    export:
+        title: 'Export list'
+
+        heading:
+            export: 'Export'
+
+        action:
+            download_pdf: 'Download PDF document'
+            download_csv: 'Download CSV sheet'
+            download_html: 'Download HTML page'
+            download_xlsx: 'Download XLSX sheet'
+            download_ods: 'Download ODS sheet'
+
+        text:
+            about_pdf: 'PDF — standard document for reading and printing'
+            about_csv: 'CSV — dataset for importing into spreadsheet'
+            about_html: 'HTML — web page file for internet browsers'
+            about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
+            about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
+
+        information:
+            export: 'Choose preferred export format to download the whole list to your computer. List will be exported with current sorting and with enabled columns only. Extra RDS information is not included.'
+            export_cannot_empty: 'You cannot export empty list.'
 
     remove:
         title: 'Delete list'
-
-        action:
-            export: 'Export list'
 
         heading:
             remove_radio_table: 'Delete list'

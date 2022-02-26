@@ -31,6 +31,7 @@ Encore
     .addStyleEntry('homepage', './assets/css/homepage.css')
     .addStyleEntry('user-login-register', './assets/css/user-login-register.css')
     .addStyleEntry('user-public-profile', './assets/css/user-public-profile.css')
+    .addStyleEntry('radio-table-export', './assets/css/radio-table-export.css')
     .addStyleEntry('radio-station-bulk-remove', './assets/css/radio-station-bulk-remove.css')
     .addStyleEntry('all-radio-tables', './assets/css/all-radio-tables.css')
     .addStyleEntry('static-page', './assets/css/static-page.css')
