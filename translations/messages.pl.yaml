@@ -56,9 +56,6 @@ radio_table:
         notification:
             created: 'Wykaz został utworzony.'
 
-        information:
-            local_desc: "W nazwie i opisie wykazu warto umieścić lokalizację (np.\u00A0miejscowość lub województwo). Te\u00A0informacje są\u00A0używane przy\u00A0przeszukiwaniu wykazów. Można je później zmienić."
-
     settings:
         title: 'Ustawienia wykazu'
 
@@ -71,14 +68,18 @@ radio_table:
 
         form:
             name: 'Nazwa wykazu'
+            name.help: 'Umieść tutaj lokalizację (np. miejscowość lub województwo), aby ułatwić odnalezienie twojego wykazu.'
             frequencyUnit: 'Jednostka częstotliwości'
             maxSignalLevelUnit: 'Jednostka poziomu sygnału'
             description: 'Opis wykazu'
             status: 'Widoczność wykazu'
             status.choice:
-                '1': 'Publiczny — wykaz może zobaczyć każdy'
-                '0': 'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
-                '-1': 'Prywatny — wykaz możesz zobaczyć tylko ty'
+                '1': 'Publiczny'
+                '1.help': 'Wykaz może zobaczyć każdy.'
+                '0': 'Niepubliczny'
+                '0.help': 'Wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik.'
+                '-1': 'Prywatny'
+                '-1.help': 'Wykaz możesz zobaczyć tylko ty.'
             sorting: 'Domyślne sortowanie'
             appearanceBackgroundColor: 'Kolor tła'
             appearanceColor: 'Kolor tekstu'
@@ -232,18 +233,16 @@ user:
             change_password: 'Zmiana hasła'
 
         form:
-            aboutMe: 'Kilka słów o mnie'
-            publicProfile: 'Włącz profil publiczny i stronę profilową'
+            aboutMe: 'Kilka słów o tobie'
+            publicProfile: 'Włącz profil publiczny'
+            publicProfile.help: 'Profil publiczny zawiera listę twoich wykazów i informacje o tobie. Jeśli jest wyłączony, twoje wykazy są anonimowe.'
             currentPassword: 'Obecne hasło'
+            currentPassword.help: 'Pozostaw puste, jeżeli nie chcesz zmieniać hasła.'
             plainPassword.first: 'Nowe hasło'
             plainPassword.second: 'Nowe hasło ponownie'
 
         notification:
             changed_password: 'Nowe hasło zostało zapisane.'
-
-        information:
-            public_profile: "Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i\u00A0spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem."
-            change_password: 'Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.'
 
     register:
         title: 'Zarejestruj się'

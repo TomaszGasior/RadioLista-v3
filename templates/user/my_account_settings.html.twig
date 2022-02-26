@@ -48,19 +48,11 @@
         <div>
             <h2>{{ 'user.settings.heading.public_profile'|trans }}</h2>
 
-            <p class="information">
-                {{ 'user.settings.information.public_profile'|trans }}
-            </p>
-
-            {{ form_row(form.aboutMe) }}
             {{ form_row(form.publicProfile) }}
+            {{ form_row(form.aboutMe) }}
         </div>
         <div>
             <h2>{{ 'user.settings.heading.change_password'|trans }}</h2>
-
-            <p class="information">
-                {{ 'user.settings.information.change_password'|trans }}
-            </p>
 
             {{ form_row(form.currentPassword) }}
             {{ form_row(form.plainPassword) }}

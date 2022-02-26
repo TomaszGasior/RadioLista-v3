@@ -1,8 +1,11 @@
 /* radio table status chooser */
 
 .radio-table-status .form-item {
-    padding: 1.2em 0 1.1em 78px;
+    padding-left: 78px;
+    padding-top: 3px;
+    min-height: 50px;
     box-sizing: border-box;
+
     background-repeat: no-repeat;
     background-position: left 2px center;
     background-size: 50px;

@@ -21,10 +21,14 @@ class UserSettingsType extends AbstractType
                 'required' => false,
                 'sanitize_html' => true,
             ])
-            ->add('publicProfile')
+            ->add('publicProfile', null, [
+                'required' => false,
+                'help' => 'user.settings.form.publicProfile.help',
+            ])
             ->add('currentPassword', PasswordType::class, [
                 'mapped' => false,
                 'required' => false,
+                'help' => 'user.settings.form.currentPassword.help',
                 'constraints' => [
                     new SecurityAssert\UserPassword([
                         'groups' => 'ChangingPasswordTab',
