@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
+use App\Form\RadioStationBulkRemoveType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -94,6 +95,40 @@ class RadioStationController extends AbstractController
         return $this->forward(__CLASS__ . '::add', [
             'radioTableId' => $radioStation->getRadioTable()->getId(),
             'template' => $template,
+        ]);
+    }
+
+    /**
+     * @Route({"pl": "/wykaz/{id}/usun-stacje", "en": "/list/{id}/delete-stations"}, name="radio_station.bulk_remove")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
+     */
+    public function bulkRemove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RadioStationBulkRemoveType::class, null, ['radio_table' => $radioTable]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chosenToRemove = $form->getData()['chosenToRemove'];
+
+            if (count($chosenToRemove) > 0) {
+                foreach ($chosenToRemove as $radioStation) {
+                    $entityManager->remove($radioStation);
+                }
+                $entityManager->flush();
+
+                $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
+
+                // Form needs to be reloaded to not display removed radio stations.
+                return $this->redirectToRoute('radio_station.bulk_remove', [
+                    'id' => $radioTable->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('radio_station/bulk_remove.html.twig', [
+            'form' => $form->createView(),
+            'radio_table' => $radioTable,
         ]);
     }
 }

@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RadioStationRemoveType extends AbstractType
+class RadioStationBulkRemoveType extends AbstractType
 {
     private $radioStationRepository;
 
@@ -53,7 +53,7 @@ class RadioStationRemoveType extends AbstractType
         $resolver->setRequired(['radio_table']);
         $resolver->setAllowedTypes('radio_table', RadioTable::class);
         $resolver->setDefaults([
-            'label_format' => 'radio_station.remove.form.%name%',
+            'label_format' => 'radio_station.bulk_remove.form.%name%',
         ]);
     }
 }

@@ -27,12 +27,6 @@
     </ul>
 {% endblock %}
 
-{% form_theme form_radio_station _self %}
-{% block _radio_station_remove_chosenToRemove_entry_label %}
-    {% set label = '%s (%s %s)'|format(label, frequency|format_number({min_fraction_digit: 2, grouping_used: false}), get_frequency_label(frequency_unit)) %}
-    {{ block('form_label') }}
-{% endblock %}
-
 {% block page_content %}
     <header>
         <h1 class="separated-title">
@@ -43,34 +37,15 @@
 
     <div class="tabbed-ui">
         <div>
-            <h2>{{ 'radio_table.remove.heading.remove_radio_station'|trans }}</h2>
-
-            {% if radio_table.radioStationsCount > 0 %}
-                {{ form_start(form_radio_station) }}
-
-                <div class="radio-stations-remove">
-                    {{ form_row(form_radio_station.chosenToRemove) }}
-                </div>
-
-                <button>{{ 'radio_table.remove.action.selected_radio_stations'|trans }}</button>
-
-                {{ form_end(form_radio_station) }}
-            {% else %}
-                <p class="information">
-                    {{ 'radio_table.remove.information.empty_cannot_remove_radio_station'|trans }}
-                </p>
-            {% endif %}
-        </div>
-        <div>
             <h2>{{ 'radio_table.remove.heading.remove_radio_table'|trans }}</h2>
 
             <p class="information">
                 {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
             </p>
 
-            {{ form_start(form_radio_table) }}
+            {{ form_start(form) }}
 
-            {{ form_row(form_radio_table.confirm, {
+            {{ form_row(form.confirm, {
                 label_translation_parameters: { '%name%': radio_table.name },
                 attr: {
                     'class': 'radio-table-remove-confirm',
@@ -78,9 +53,9 @@
                 },
             }) }}
 
-            <button>{{ 'radio_table.remove.action.radio_table'|trans }}</button>
+            <button>{{ 'radio_table.remove.title'|trans }}</button>
 
-            {{ form_end(form_radio_table) }}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

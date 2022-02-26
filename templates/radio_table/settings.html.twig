@@ -20,6 +20,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ path('radio_station.bulk_remove', {id: radio_table.id}) }}">
+                {{ 'radio_station.bulk_remove.title'|trans }}
+            </a>
+        </li>
+        <li>
             <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
                 {{ 'radio_table.remove.title'|trans }}
             </a>

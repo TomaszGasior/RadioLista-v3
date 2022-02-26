@@ -2,17 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Export\RadioTableExporterProvider;
-use App\Form\RadioStationRemoveType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -125,27 +122,17 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * This action handles both radio table removing and radio station removing.
-     *
      * @Route({"pl": "/wykaz/{id}/usun", "en": "/list/{id}/delete"}, name="radio_table.remove")
-     * @ParamConverter("radioStationToRemove", class="stdClass")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
-    public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager,
-                           RadioStation $radioStationToRemove = null): Response
+    public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form_RadioTable = $this->createForm(RadioTableRemoveType::class);
-        $form_RadioTable->handleRequest($request);
+        $form = $this->createForm(RadioTableRemoveType::class);
+        $form->handleRequest($request);
 
-        $form_RadioStation = $this->createForm(RadioStationRemoveType::class,
-            $radioStationToRemove ? ['chosenToRemove' => [$radioStationToRemove]] : null,
-            ['radio_table' => $radioTable]
-        );
-        $form_RadioStation->handleRequest($request);
-
-        if ($form_RadioTable->isSubmitted() && $form_RadioTable->isValid()) {
-            $confirmed = (true === $form_RadioTable->getData()['confirm']);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $confirmed = (true === $form->getData()['confirm']);
 
             if ($confirmed) {
                 $entityManager->remove($radioTable);
@@ -158,29 +145,9 @@ class RadioTableController extends AbstractController
                 $this->addFlash('error', 'radio_table.remove.notification.not_yet');
             }
         }
-        elseif ($form_RadioStation->isSubmitted() && $form_RadioStation->isValid()) {
-            $chosenToRemove = $form_RadioStation->getData()['chosenToRemove'];
-
-            if (count($chosenToRemove) > 0) {
-                foreach ($chosenToRemove as $radioStation) {
-                    $entityManager->remove($radioStation);
-                }
-                $entityManager->flush();
-
-                $this->addFlash('notice', 'radio_station.remove.notification.bulk_removed');
-
-                // Redirect to after successful radio stations removing.
-                // * Form needs to be reloaded to not display removed radio stations.
-                // * URL needs to be changed to avoid 404 error if page was forwarded from RadioStationController.
-                return $this->redirectToRoute('radio_table.remove', [
-                    'id' => $radioTable->getId(),
-                ]);
-            }
-        }
 
         return $this->render('radio_table/remove.html.twig', [
-            'form_radio_table' => $form_RadioTable->createView(),
-            'form_radio_station' => $form_RadioStation->createView(),
+            'form' => $form->createView(),
             'radio_table' => $radioTable,
         ]);
     }

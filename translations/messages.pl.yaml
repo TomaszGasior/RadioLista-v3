@@ -118,15 +118,12 @@ radio_table:
                 about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
 
     remove:
-        title: 'Usuń stacje lub wykaz'
+        title: 'Usuń wykaz'
 
         action:
             export: 'Eksport wykazu'
-            selected_radio_stations: 'Usuń zaznaczone stacje'
-            radio_table: 'Usuń wykaz'
 
         heading:
-            remove_radio_station: 'Usuwanie stacji'
             remove_radio_table: 'Usuwanie wykazu'
 
         form:
@@ -137,7 +134,6 @@ radio_table:
             not_yet: 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!'
 
         information:
-            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty. Nie ma czego usuwać…'
             cannot_be_undone: "Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do\u00A0pliku HTML, PDF lub CSV, aby pobrać go na komputer."
 
         text:
@@ -202,14 +198,23 @@ radio_station:
             for_radio_table_a11y_subheading: 'w wykazie'
             disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
 
-    remove:
-        title: 'Usuń stację'
+    bulk_remove:
+        title: 'Usuń wiele stacji'
+
+        action:
+            bulk_remove: 'Usuń zaznaczone stacje'
+
+        heading:
+            remove_radio_station: 'Usuwanie stacji'
 
         form:
             chosenToRemove: 'Wskaż stacje do usunięcia'
 
         notification:
             bulk_removed: 'Wybrane stacje zostały usunięte.'
+
+        information:
+            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty. Nie ma czego usuwać…'
 
 user:
     detail:

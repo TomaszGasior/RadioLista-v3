@@ -1,0 +1,13 @@
+/* radio station list */
+
+.radio-stations-remove {
+    max-height: 430px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0.05em 1em;
+    background: #F9FCF9;
+    border: 1px solid #D6EAD0;
+}
+.radio-stations-remove fieldset {
+    margin: 0;
+}

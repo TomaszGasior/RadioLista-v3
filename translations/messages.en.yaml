@@ -118,15 +118,12 @@ radio_table:
                 about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
 
     remove:
-        title: 'Delete station or list'
+        title: 'Delete list'
 
         action:
             export: 'Export list'
-            selected_radio_stations: 'Delete chosen stations'
-            radio_table: 'Delete list'
 
         heading:
-            remove_radio_station: 'Delete stations'
             remove_radio_table: 'Delete list'
 
         form:
@@ -137,7 +134,6 @@ radio_table:
             not_yet: "Let's try again. Nothing happened."
 
         information:
-            empty_cannot_remove_radio_station: 'This is is empty. There is nothing to delete…'
             cannot_be_undone: 'Deleted list cannot be restored. Please remember that you can still export your list into HTML, PDF or CSV file and download it to your computer.'
 
         text:
@@ -202,14 +198,23 @@ radio_station:
             for_radio_table_a11y_subheading: 'in list'
             disabled_radio_table_column: 'This column is currently not visible in the list.'
 
-    remove:
-        title: 'Delete station'
+    bulk_remove:
+        title: 'Delete more stations'
+
+        action:
+            bulk_remove: 'Delete chosen stations'
+
+        heading:
+            remove_radio_station: 'Delete stations'
 
         form:
             chosenToRemove: 'Choose stations to be deleted'
 
         notification:
             bulk_removed: 'Chosen stations have been deleted.'
+
+        information:
+            empty_cannot_remove_radio_station: 'This is is empty. There is nothing to delete…'
 
 user:
     detail:

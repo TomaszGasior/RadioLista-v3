@@ -58,11 +58,12 @@ class RadioStationControllerTest extends WebTestCase
         $this->assertStringContainsString('COPIED_RADIO_STATION_NAME', $content);
     }
 
-    public function testRemoveRadioStation(): void
+    public function testBulkRemoveRadioStation(): void
     {
-        $crawler = $this->client->request('GET', '/wykaz/1/usun-stacje/1');
-        $form = $crawler->filter('form[name="radio_station_remove"]')->form();
-        $this->client->submit($form); // Radiostation is selected automatically.
+        $crawler = $this->client->request('GET', '/wykaz/1/usun-stacje');
+        $form = $crawler->filter('form[name="radio_station_bulk_remove"]')->form();
+        $form['radio_station_bulk_remove[chosenToRemove][1]']->tick();  // Checkbox is chosen by order, not by input value.
+        $this->client->submit($form);
 
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();

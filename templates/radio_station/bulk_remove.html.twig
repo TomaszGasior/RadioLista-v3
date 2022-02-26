@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ 'radio_station.bulk_remove.title'|trans }}{% endblock %}
+
+{% block head_closing %}
+    {{ encore_entry_link_tags('radio-station-bulk-remove') }}
+{% endblock %}
+
+{% block context_menu %}
+    <ul>
+        <li>
+            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                {{ 'radio_table.show.title'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.title'|trans }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% form_theme form _self %}
+{% block _radio_station_bulk_remove_chosenToRemove_entry_label %}
+    {% set label = '%s (%s %s)'|format(label, frequency|format_number({min_fraction_digit: 2, grouping_used: false}), get_frequency_label(frequency_unit)) %}
+    {{ block('form_label') }}
+{% endblock %}
+
+{% block page_content %}
+    <header>
+        <h1 class="separated-title">
+            <span>{{ 'radio_station.bulk_remove.title'|trans }}</span>
+            <span class="additional">
+                <span class="sr-only">{{ 'radio_station.edit.text.for_radio_table_a11y_subheading'|trans }}</span>
+                {{ radio_table.name }}
+            </span>
+        </h1>
+    </header>
+
+    <div class="tabbed-ui">
+        <div>
+            <h2>{{ 'radio_station.bulk_remove.heading.remove_radio_station'|trans }}</h2>
+
+            {% if radio_table.radioStationsCount > 0 %}
+                {{ form_start(form) }}
+
+                <div class="radio-stations-remove">
+                    {{ form_row(form.chosenToRemove) }}
+                </div>
+
+                <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
+
+                {{ form_end(form) }}
+            {% else %}
+                <p class="information">
+                    {{ 'radio_station.bulk_remove.information.empty_cannot_remove_radio_station'|trans }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
