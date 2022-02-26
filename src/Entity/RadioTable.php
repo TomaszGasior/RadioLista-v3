@@ -73,8 +73,8 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="radio_table.name.not_blank")
-     * @Assert\Length(max=100, maxMessage="radio_table.name.max_length")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $name;
 
@@ -89,8 +89,7 @@ class RadioTable
      * @ClassConstantsChoice(class=RadioTable::class, prefix="COLUMN_", multiple=true)
      * @Assert\Expression(
      *     "frequency in value && name in value",
-     *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME},
-     *     message="radio_table.columns.frequency_and_name_required"
+     *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME}
      * )
      */
     private $columns = [
@@ -112,7 +111,7 @@ class RadioTable
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000, maxMessage="radio_table.description.max_length")
+     * @Assert\Length(max=2000)
      */
     private $description;
 

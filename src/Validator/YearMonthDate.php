@@ -9,4 +9,5 @@ use Symfony\Component\Validator\Constraints\Date;
  */
 class YearMonthDate extends Date
 {
+    public $message = 'radio_station.first_log_date_invalid_format';
 }

@@ -19,7 +19,7 @@ common:
 
     notification:
         saved_changes: 'Changes have been saved.'
-        invalid_form: 'The form has been filled out incorrectly.'
+        invalid_form: 'There is a problem in the form below.'
 
 radio_table:
     detail:

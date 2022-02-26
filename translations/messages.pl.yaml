@@ -19,7 +19,7 @@ common:
 
     notification:
         saved_changes: 'Zmiany zostały zapisane.'
-        invalid_form: 'Formularz został wypełniony niepoprawnie.'
+        invalid_form: 'Wystąpił błąd w formularzu poniżej.'
 
 radio_table:
     detail:

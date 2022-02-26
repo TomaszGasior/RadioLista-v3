@@ -33,7 +33,7 @@ class Rds
      * Programme Type
 
      * @ORM\Column(type="string", length=25, nullable=true)
-     * @Assert\Length(max=25, maxMessage="radio_station.rds_pty.max_length")
+     * @Assert\Length(max=25)
      */
     private $pty;
 
@@ -41,7 +41,7 @@ class Rds
      * Programme Identification
      *
      * @ORM\Column(type="string", length=4, nullable=true)
-     * @Assert\Length(max=4, maxMessage="radio_station.rds_pi.max_length")
+     * @Assert\Length(max=4)
      */
     private $pi;
 

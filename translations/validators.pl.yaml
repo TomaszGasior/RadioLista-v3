@@ -1,66 +1,17 @@
 radio_table:
-    name:
-        not_blank: 'Nazwa wykazu nie może być pusta.'
-        max_length: 'Nazwa wykazu może mieć maksymalnie {{ limit }} znaków.'
-    columns:
-        frequency_and_name_required: 'Kolumny częstotliwości i nazwy muszą być widoczne.'
-    description:
-        max_length: 'Opis wykazu może mieć maksymalnie {{ limit }} znaków.'
-    appearance:
-        bg_invalid: 'Kolor tła jest niepoprawny.'
-        fg_invalid: 'Kolor tekstu jest niepoprawny.'
-        width_min_value: 'Niestandardowa szerokość musi mieć minimum {{ compared_value }} pikseli.'
-        width_required: 'Niestandardowa szerokość nie może być pusta.'
+    appearance_width_min_value: 'Szerokość musi mieć minimum {{ compared_value }} pikseli.'
 
 radio_station:
-    name:
-        not_blank: 'Nazwa stacji nie może być pusta.'
-        max_length: 'Nazwa stacji może mieć maksymalnie {{ limit }} znaków.'
-    radio_group:
-        max_length: 'Grupa może mieć maksymalnie {{ limit }} znaków.'
-    country:
-        max_length: 'Kraj może mieć maksymalnie {{ limit }} znaków.'
-    region:
-        max_length: 'Region może mieć maksymalnie {{ limit }} znaków.'
-    frequency:
-        not_blank: 'Częstotliwość stacji nie może być pusta.'
-        greater_than_zero: 'Częstotliwość musi być większa niż zero.'
-    location:
-        max_length: 'Lokalizacja może mieć maksymalnie {{ limit }} znaków.'
-    power:
-        greater_than_zero: 'Moc musi być większa niż zero.'
-    multiplex:
-        max_length: 'Multipleks może mieć maksymalnie {{ limit }} znaków.'
-    dab_channel:
-        invalid_for_frequency: 'Kanał DAB nie zgadza się z częstotliwością.'
-    distance:
-        greater_than_zero: 'Odległość od nadajnika musi być większa niż zero.'
-    private_number:
-        greater_than_zero: 'Numer w odbiorniku musi być większy niż zero.'
-    first_log_date:
-        invalid_format: 'Data pierwszego odbioru jest niepoprawna.'
-    rds_pty:
-        max_length: 'Kod RDS PTY może mieć maksymalnie {{ limit }} znaków.'
-    rds_pi:
-        max_length: 'Kod RDS PI może mieć maksymalnie {{ limit }} znaki.'
-    comment:
-        max_length: 'Komentarz może mieć maksymalnie {{ limit }} znaków.'
-    external_anchor:
-        max_length: 'Odnośnik zewnętrzny może mieć maksymalnie {{ limit }} znaków.'
-        invalid_format: 'Odnośnik zewnętrzny jest niepoprawny.'
+    dab_channel_invalid_for_frequency: 'Kanał DAB nie zgadza się z częstotliwością.'
+    first_log_date_invalid_format: 'Format daty jest niepoprawny.'
+    color_invalid_format: 'Kolor w zapisie HEX jest niepoprawny.'
 
 user:
-    name:
-        not_blank: 'Nazwa użytkownika nie może być pusta.'
-        max_length: 'Nazwa użytkownika może mieć maksymalnie {{ limit }} znaków.'
-        invalid_chars: 'Nazwa użytkownika zawiera niedozwolone znaki.'
-        not_unique: 'Wybrana nazwa użytkownika jest już zajęta.'
-    password:
-        not_blank: 'Hasło nie może być puste.'
-        max_length: 'Hasło może mieć maksymalnie {{ limit }} znaków.'
-    about_me:
-        max_length: 'Twój opis może mieć maksymalnie {{ limit }} znaków.'
-
+    name_invalid_chars: 'Nazwa użytkownika zawiera niedozwolone znaki.'
+    name_not_unique: 'Wybrana nazwa użytkownika jest już zajęta.'
     service_terms_required: 'Akceptacja regulaminu serwisu jest wymagana.'
     incorrect_password: 'Podane aktualne hasło jest niepoprawne.'
     passwords_dont_match: 'Podane hasła nie są identyczne.'
+
+'This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.': 'Tutaj można wpisać maksymalnie {{ limit }} znaków.'
+'This value should not be blank.': 'To pole nie może być puste.'
