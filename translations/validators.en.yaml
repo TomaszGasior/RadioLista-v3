@@ -57,7 +57,6 @@ user:
         not_unique: 'This username is already used.'
     password:
         not_blank: 'Password cannot be empty.'
-        min_length: 'Password must be at least {{ limit }} characters.'
         max_length: 'Password can be up to {{ limit }} characters.'
     about_me:
         max_length: 'Text about you can be up to {{ limit }} characters.'

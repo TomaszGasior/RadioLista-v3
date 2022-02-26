@@ -44,8 +44,8 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     /**
      * @Assert\NotBlank(groups={"RedefinePassword"}, message="user.password.not_blank")
      * @Assert\Length(
-     *     max=100, min=10, groups={"RedefinePassword"},
-     *     minMessage="user.password.min_length", maxMessage="user.password.max_length"
+     *     max=100, groups={"RedefinePassword"},
+     *     maxMessage="user.password.max_length"
      * )
      */
     private $plainPassword;
