@@ -16,36 +16,6 @@
 
     <div class="tabbed-ui">
         <div>
-            <h2>{{ 'user.settings.heading.my_account'|trans }}</h2>
-
-            <dl class="my-account-details">
-                <div>
-                    <dt>{{ 'user.detail.name'|trans }}</dt>
-                    <dd>{{ app.user.name }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.last_activity_date'|trans }}</dt>
-                    <dd>{{ app.user.lastActivityDate|format_date_html }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.register_date'|trans }}</dt>
-                    <dd>{{ app.user.registerDate|format_date_html }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.public_profile'|trans }}</dt>
-                    <dd>{{ ('user.detail.public_profile.state.' ~ app.user.publicProfile)|trans }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.radio_tables_count'|trans }}</dt>
-                    <dd>{{ app.user.radioTablesCount }}</dd>
-                </div>
-            </dl>
-        </div>
-        <div>
             <h2>{{ 'user.settings.heading.public_profile'|trans }}</h2>
 
             {{ form_row(form.publicProfile) }}

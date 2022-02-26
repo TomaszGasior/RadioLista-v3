@@ -214,21 +214,14 @@ radio_station:
 
 user:
     detail:
-        name: 'Nazwa użytkownika'
         last_activity_date: 'Data ostatniej aktywności'
         register_date: 'Data założenia konta'
-        public_profile: 'Stan profilu publicznego'
-        public_profile.state:
-            '': 'wyłączony'
-            '1': 'włączony'
-        radio_tables_count: 'Liczba utworzonych wykazów'
 
     settings:
         title: 'Moje konto'
         title_long: 'Ustawienia konta'
 
         heading:
-            my_account: 'Moje konto'
             public_profile: 'Profil publiczny'
             change_password: 'Zmiana hasła'
 
