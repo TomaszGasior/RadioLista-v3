@@ -209,7 +209,6 @@ radio_station:
             chosenToRemove: 'Wskaż stacje do usunięcia'
 
         notification:
-            chosen_to_be_removed: 'Stacja została zaznaczona do usunięcia.'
             bulk_removed: 'Wybrane stacje zostały usunięte.'
 
 user:

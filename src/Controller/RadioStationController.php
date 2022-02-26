@@ -96,22 +96,4 @@ class RadioStationController extends AbstractController
             'template' => $template,
         ]);
     }
-
-    /**
-     * @Route(
-     *     {"pl": "/wykaz/{radioTableId}/usun-stacje/{id}", "en": "/list/{radioTableId}/delete-station/{id}"},
-     *     name="radio_station.remove"
-     * )
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
-     */
-    public function remove(RadioStation $radioStation): Response
-    {
-        $this->addFlash('notice', 'radio_station.remove.notification.chosen_to_be_removed');
-
-        return $this->forward(RadioTableController::class . '::remove', [
-            'id' => $radioStation->getRadioTable()->getId(),
-            'radioStationToRemove' => $radioStation,
-        ]);
-    }
 }

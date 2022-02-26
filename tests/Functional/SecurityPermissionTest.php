@@ -34,7 +34,6 @@ class SecurityPermissionTest extends WebTestCase
             '/wykaz/1/dodaj-stacje',
             '/wykaz/1/edytuj-stacje/1',
             '/wykaz/1/kopiuj-stacje/1',
-            '/wykaz/1/usun-stacje/1',
             '/wykaz/1/ustawienia',
             '/wykaz/1/eksport/html',
             '/wykaz/1/eksport/csv',
