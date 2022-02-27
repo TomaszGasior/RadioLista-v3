@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\RadioTable;
 use App\Form\Type\IntegerUnitType;
-use App\Form\Type\RadioTableColumnsType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -50,10 +49,6 @@ class RadioTableSettingsType extends RadioTableCreateType
                     return 'column.'.$choice;
                 },
                 'choice_translation_domain' => 'radio_table',
-            ])
-            ->add('columns', RadioTableColumnsType::class, [
-                'label_format' => 'column.%name%',
-                'translation_domain' => 'radio_table',
             ])
             ->add('appearanceBackgroundColor', TextType::class, [
                 'property_path' => 'appearance.backgroundColor',

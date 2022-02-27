@@ -65,6 +65,9 @@ radio_table:
             columns: 'Kolumny'
             appearance: 'Wygląd'
 
+        action:
+            set_custom_columns: 'Zmień układ kolumn'
+
         form:
             name: 'Nazwa wykazu'
             name.help: 'Umieść tutaj lokalizację (np. miejscowość lub województwo), aby ułatwić odnalezienie twojego wykazu.'
@@ -92,6 +95,12 @@ radio_table:
 
         information:
             columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."
+
+    columns:
+        title: 'Ustawienia kolumn'
+
+        heading:
+            columns: 'Kolumny'
 
         columns_ui:
             action:

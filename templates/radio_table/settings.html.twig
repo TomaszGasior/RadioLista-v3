@@ -69,24 +69,9 @@
         <div>
             <h2>{{ 'radio_table.settings.heading.columns'|trans }}</h2>
 
-            <noscript>
-                <p class="information">
-                    {{ 'radio_table.settings.information.columns'|trans }}
-                </p>
-            </noscript>
-
-            <div class="radio-table-columns">
-                {{ form_row(form.columns) }}
-
-                <template class="radio-table-columns-buttons-template">
-                    <button type="button" class="toggle"
-                            data-show-label="{{ 'radio_table.settings.columns_ui.action.toggle_show'|trans }}"
-                            data-hide-label="{{ 'radio_table.settings.columns_ui.action.toggle_hide'|trans }}">
-                    </button>
-                    <button type="button" class="move-up">{{ 'radio_table.settings.columns_ui.action.move_up'|trans }}</button>
-                    <button type="button" class="move-down">{{ 'radio_table.settings.columns_ui.action.move_down'|trans }}</button>
-                </template>
-            </div>
+            <a class="button" href="{{ path('radio_table.columns', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.action.set_custom_columns'|trans }}
+            </a>
         </div>
 
         <div>

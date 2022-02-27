@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use App\Export\RadioTableExporterProvider;
+use App\Form\RadioTableColumnsType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
@@ -76,6 +77,29 @@ class RadioTableController extends AbstractController
         }
 
         return $this->render('radio_table/settings.html.twig', [
+            'form' => $form->createView(),
+            'radio_table' => $radioTable,
+        ]);
+    }
+
+    /**
+     * @Route({"pl": "/wykaz/{id}/ustawienia/kolumny", "en": "/list/{id}/settings/columns"}, name="radio_table.columns")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
+     */
+    public function columns(RadioTable $radioTable, Request $request,
+                            EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RadioTableColumnsType::class, $radioTable);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'common.notification.saved_changes');
+        }
+
+        return $this->render('radio_table/columns.html.twig', [
             'form' => $form->createView(),
             'radio_table' => $radioTable,
         ]);
