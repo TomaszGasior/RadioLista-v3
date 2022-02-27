@@ -65,6 +65,9 @@ radio_table:
             columns: 'Columns'
             appearance: 'Appearance'
 
+        action:
+            set_custom_columns: 'Change columns layout'
+
         form:
             name: 'List name'
             name.help: 'Place information about location here to make finding your list easier.'
@@ -90,8 +93,11 @@ radio_table:
             appearanceCustomWidth: 'Custom width'
             appearanceCollapsedComments: 'Use icon instead of full content in comments column'
 
-        information:
-            columns: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
+    columns:
+        title: 'List columns'
+
+        heading:
+            columns: 'Columns'
 
         columns_ui:
             action:
@@ -99,6 +105,9 @@ radio_table:
                 toggle_hide: 'Hide'
                 move_up: 'Move up'
                 move_down: 'Move down'
+
+        information:
+            no_javascript: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
 
     export:
         title: 'Export list'

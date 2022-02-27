@@ -1,6 +1,5 @@
 import '../css/radio-table-settings.css';
 
-import { RadioTableColumnsUI } from './src/RadioTableColumnsUI.js';
 import Huebee from 'huebee';
 
 function setupColorInputs()
@@ -49,8 +48,6 @@ function setupCustomWidthInput()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new RadioTableColumnsUI(document.querySelector('.radio-table-columns'));
-
     setupColorInputs();
     setupCustomWidthInput();
 });

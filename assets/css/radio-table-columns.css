@@ -1,0 +1,75 @@
+/* columns UI */
+
+.JS .radio-table-columns {
+    margin: 1.2em auto;
+}
+.JS .radio-table-columns .form-item {
+    background: #F3F3F3;
+    box-shadow: inset 2px 2px 2px #DEDEDE;
+    border: 1px solid #C2C2C2;
+    padding: 0.5em 1em;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.JS .radio-table-columns .form-item label {
+    margin: 0;
+}
+.JS .radio-table-columns .form-item > :last-child {
+    text-align: right;
+    flex: 1;
+}
+.JS .radio-table-columns .form-item.hidden-column {
+    background: #FBFBFB;
+    box-shadow: inset 2px 2px 2px #efefef;
+    border-color: #dfdfdf;
+}
+.JS .radio-table-columns .form-item.hidden-column label {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.JS .radio-table-columns .form-item button {
+    display: inline;
+    width: auto;
+    height: 2em;
+    min-width: 85px;
+    margin: 0 0 0 0.6em;
+    white-space: nowrap;
+}
+.JS .radio-table-columns .form-item button:first-of-type {
+    margin-left: 0;
+}
+
+@media (max-width: 800px)
+{
+    .JS .radio-table-columns .form-item {
+        flex-direction: row;
+    }
+    .JS .radio-table-columns .form-item label {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 700px)
+{
+    .JS .radio-table-columns .form-item {
+        flex-direction: column;
+    }
+    .JS .radio-table-columns .form-item label {
+        margin-bottom: 0.7em;
+    }
+    .JS .radio-table-columns .form-item > :last-child {
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+@media (max-width: 440px)
+{
+    .JS .radio-table-columns .form-item button {
+        min-width: auto;
+        height: auto;
+        font-size: 0.8em;
+        padding-top: 0.6em;
+        padding-bottom: 0.6em;
+    }
+}

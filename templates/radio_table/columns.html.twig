@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ 'radio_table.columns.title'|trans }}{% endblock %}
+
+{% block head_closing %}
+    {{ encore_entry_link_tags('radio-table-columns') }}
+    {{ encore_entry_script_tags('radio-table-columns') }}
+{% endblock %}
+
+{% block context_menu %}
+    <ul>
+        <li>
+            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+                {{ 'radio_table.show.title'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.title'|trans }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block page_content %}
+    <header>
+        <h1 class="separated-title">
+            <span>{{ 'radio_table.columns.title'|trans }}</span>
+            <span class="additional">{{ radio_table.name }}</span>
+        </h1>
+    </header>
+
+    {{ form_start(form) }}
+
+    <div class="tabbed-ui">
+        <div>
+            <h2>{{ 'radio_table.columns.information.no_javascript'|trans }}</h2>
+
+            <noscript>
+                <p class="information">
+                    {{ 'radio_table.settings.information.columns'|trans }}
+                </p>
+            </noscript>
+
+            <div class="radio-table-columns">
+                {{ form_row(form.columns) }}
+
+                <template class="radio-table-columns-buttons-template">
+                    <button type="button" class="toggle"
+                            data-show-label="{{ 'radio_table.columns.columns_ui.action.toggle_show'|trans }}"
+                            data-hide-label="{{ 'radio_table.columns.columns_ui.action.toggle_hide'|trans }}">
+                    </button>
+                    <button type="button" class="move-up">{{ 'radio_table.columns.columns_ui.action.move_up'|trans }}</button>
+                    <button type="button" class="move-down">{{ 'radio_table.columns.columns_ui.action.move_down'|trans }}</button>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <button>{{ 'common.action.save'|trans }}</button>
+
+    {{ form_end(form) }}
+{% endblock %}
