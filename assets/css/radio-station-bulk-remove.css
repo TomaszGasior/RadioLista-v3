@@ -4,9 +4,11 @@
     max-height: 430px;
     overflow-y: auto;
     box-sizing: border-box;
-    padding: 0.05em 1em;
-    background: #F9FCF9;
-    border: 1px solid #D6EAD0;
+    padding: 0 1.4em;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 0 6px rgba(0,0,0, 0.09);
 }
 .radio-stations-remove fieldset {
     margin: 0;
