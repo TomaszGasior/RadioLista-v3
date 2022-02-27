@@ -1,36 +1,48 @@
-.cke_chrome {
-    box-shadow: none !important;
-    border: none !important;
+textarea.ckeditor {
+    height: 268px;
 }
-.cke_chrome.cke_focus {
-    outline: 1px solid #F07F1F !important;
+
+.cke_chrome {
+    border-radius: 7px !important;
+    border: 1px solid #cacaca !important;
+    background: #f7f7f7 !important;
+    outline: 0 solid transparent !important;
+    transition: linear 0.1s outline !important;
+
+    box-shadow: none !important;
+}
+.cke_chrome:focus-within {
+    outline: 2px solid rgb(240,127,31, 0.6) !important;
+    border-color: #F07F1F !important;
 }
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a {
     font-family: inherit !important;
 }
 .cke_toolgroup {
-    background-image: linear-gradient(to bottom,#fff,#efefef) !important;
+    background: #fff !important;
+}
+.cke_toolgroup .cke_button:hover, .cke_toolgroup .cke_button:focus {
+    background: #eaeaea !important;
+}
+.cke_toolgroup .cke_button_on {
+    background: #cdcdcd !important;
+
+    box-shadow: none !important;
 }
 
 .cke_chrome .cke_inner {
-    background: rgba(224,224,224, 0.3) !important;
+    background: transparent !important;
 }
 .cke_chrome .cke_wysiwyg_div {
     padding: 2px 11px !important;
-    background: #F3F3F3 !important;
-    border: 1px solid #C2C2C2 !important;
-    box-shadow: inset 2px 2px 2px #DEDEDE !important;
+    background: #fff !important;
+    border-top: 1px solid #cacaca !important;
+    border-bottom: 1px solid #cacaca !important;
 }
 .cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
     box-shadow: none !important;
-    border: 1px solid #C2C2C2 !important;
     background: none !important;
-}
-.cke_chrome span.cke_top {
-    border-bottom: none !important;
-}
-.cke_chrome span.cke_bottom {
-    border-top: none !important;
+    border: none !important;
 }
 .cke_chrome .cke_wordcount {
     text-transform: lowercase;

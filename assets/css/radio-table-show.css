@@ -269,8 +269,10 @@
 .rds-popup {
     background: #fff;
     color: #000;
-    border: 1px solid #eee;
-    box-shadow: 0 0 3px rgba(0,0,0, 0.4);
+    border: 1px solid #cacaca;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.14);
     width: 430px;
 
     animation-name: rds_popup_show;
@@ -286,7 +288,7 @@
     font-size: 0.9em;
     text-transform: uppercase;
     text-align: center;
-    padding: 0.1em 0;
+    padding: 0.3em 0;
     margin: 0;
 }
 

@@ -12,8 +12,10 @@
 }
 
 .homepage section {
-    background: rgba(255,255,255, 0.4);
-    box-shadow: 0 0 2px rgba(0,0,0, 0.15);
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
     padding: 0.2em 1.3em 0.4em;
 }
 .homepage section h2 {

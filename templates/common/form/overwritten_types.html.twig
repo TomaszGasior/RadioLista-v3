@@ -2,7 +2,9 @@
     {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
     <div class="form-item">
-        {{ form_label(form) }}
+        <div>
+            {{ form_label(form) }}
+        </div>
         {{ form_widget(form, {attr: {'aria-describedby': aria_describedby|trim}}) }}
         {{ form_errors(form) }}
         {{ form_help(form) }}
