@@ -2,11 +2,13 @@
     {% set unit_label_id = id ~ '_unit' %}
     {% set attr = attr|merge({'aria-describedby': (attr['aria-describedby'] ?? '') ~ ' ' ~ unit_label_id}) %}
 
-    {{ block('integer_widget') }}
+    <div class="form-widget-number-unit">
+        {{ block('integer_widget') }}
 
-    <span class="unit-label" id="{{ unit_label_id }}">
-        {{ unit_label }}
-    </span>
+        <span class="unit-label" id="{{ unit_label_id }}">
+            {{ unit_label }}
+        </span>
+    </div>
 {% endblock %}
 
 {% block decimal_unit_widget %}

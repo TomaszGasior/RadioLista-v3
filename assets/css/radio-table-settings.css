@@ -2,3 +2,10 @@
 
 @import './part/radio-table-status.css';
 @import './part/ckeditor.css';
+
+
+/* color picker input */
+
+input.color[style] {
+    box-shadow: none;
+}
