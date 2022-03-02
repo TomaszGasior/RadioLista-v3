@@ -409,9 +409,7 @@ textarea {
     min-height: 130px;
 }
 input[type="number"] {
-    width: 110px;
     text-align: center;
-    margin-right: 0.2em;
 }
 @supports (-webkit-app-region: initial)
 {
@@ -527,15 +525,38 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
 }
 
 
-/* form widgets — special */
+/* form widgets - number with unit */
 
-input.color {
-    max-width: 200px;
-}
-input.color[style] {
-    box-shadow: none;
-}
+.form-widget-number-unit {
+    position: relative;
 
+}
+.form-widget-number-unit input {
+    /* keep in sync with input's padding right */
+    padding-right: calc(11px + 70px);
+}
+.form-widget-number-unit .unit-label {
+    position: absolute;
+
+    /* keep in sync with input's border width */
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+
+    /* keep in sync with input's border radius */
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+
+    /* keep in sync with input's border color */
+    border-left: 1px solid #cacaca;
+
+    background: #f8f6f6;
+    width: 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* form items lists */
 
