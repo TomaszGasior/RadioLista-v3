@@ -22,7 +22,7 @@ services:
             - '.:/srv:z'
 
     db:
-        image: 'mysql:5.7.35'
+        image: 'mysql:8.0.28'
         ports:
             - '2013:3306'
         environment:
