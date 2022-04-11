@@ -57,6 +57,10 @@
         "sort-packages": true,
         "platform": {
             "php": "7.3"
+        },
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
         }
     },
     "autoload": {
