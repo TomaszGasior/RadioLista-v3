@@ -8,8 +8,14 @@
 {% block page_title %}Panel administracyjny{% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li><a href="{{ path('admin.radio_tables') }}">Lista wykazów</a></li>
-        <li><a href="{{ path('admin.users') }}">Lista użytkowników</a></li>
-    </ul>
+    <li>
+        <a href="{{ path('admin.radio_tables') }}">
+            Lista wykazów
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin.users') }}">
+            Lista użytkowników
+        </a>
+    </li>
 {% endblock %}

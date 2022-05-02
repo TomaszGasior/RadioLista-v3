@@ -3,9 +3,11 @@
 {% block page_title %}{{ 'user.my_radio_tables.title'|trans }}{% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li><a href="{{ path('radio_table.create') }}">{{ 'radio_table.create.title'|trans }}</a></li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.create') }}">
+            {{ 'radio_table.create.title'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}

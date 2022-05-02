@@ -274,6 +274,7 @@ user:
             no_radio_tables: 'Nie posiadasz jeszcze żadnego wykazu. %anchor%To najlepszy moment, żeby to zmienić!%anchor_end%'
 
     public_profile:
+        title: 'Mój profil'
         title_pattern: '%username% — profil użytkownika'
 
         heading:

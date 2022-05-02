@@ -274,6 +274,7 @@ user:
             no_radio_tables: "You don't have any list yet. %anchor%This is the best time to change it!%anchor_end%"
 
     public_profile:
+        title: 'My profile'
         title_pattern: '%username% — user profile'
 
         heading:

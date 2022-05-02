@@ -36,18 +36,16 @@
 
 {% block context_menu %}
     {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}
-        <ul>
-            <li>
-                <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                    {{ 'radio_station.add.title'|trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                    {{ 'radio_table.settings.title'|trans }}
-                </a>
-            </li>
-        </ul>
+        <li>
+            <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
+                {{ 'radio_station.add.title'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.title'|trans }}
+            </a>
+        </li>
     {% endif %}
 {% endblock %}
 

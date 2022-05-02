@@ -8,23 +8,21 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
-                {{ 'radio_station.add.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
-                {{ 'radio_station.edit.action.copy_current'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
+            {{ 'radio_station.add.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
+            {{ 'radio_station.edit.action.copy_current'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}

@@ -8,23 +8,21 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
-                {{ 'radio_table.export.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                {{ 'radio_table.settings.title'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
+            {{ 'radio_table.export.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+            {{ 'radio_table.settings.title'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}

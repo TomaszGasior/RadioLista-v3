@@ -8,33 +8,31 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                {{ 'radio_station.add.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
-                {{ 'radio_table.export.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.bulk_remove', {id: radio_table.id}) }}">
-                {{ 'radio_station.bulk_remove.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
-                {{ 'radio_table.remove.title'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
+            {{ 'radio_station.add.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
+            {{ 'radio_table.export.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.bulk_remove', {id: radio_table.id}) }}">
+            {{ 'radio_station.bulk_remove.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
+            {{ 'radio_table.remove.title'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}
