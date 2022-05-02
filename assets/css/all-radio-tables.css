@@ -14,7 +14,7 @@
     font-weight: bold;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .all-radio-tables-navigation li {
         display: block;

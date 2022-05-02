@@ -82,7 +82,7 @@ a:active {
     padding-right: 2em;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .site-width {
         padding-left: 5vw;
@@ -129,7 +129,7 @@ a:active {
     overflow: hidden;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .site-header {
         position: static;
@@ -194,7 +194,7 @@ a:active {
     color: inherit;
 }
 
-@media (min-width: 801px)
+@media (min-width: 768px)
 {
     .site-navigation li.user-submenu {
         position: relative;
@@ -251,7 +251,7 @@ a:active {
     }
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .site-navigation {
         line-height: 1.45em;
@@ -293,7 +293,7 @@ a:active {
     margin: 0 0.73em;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .site-footer {
         line-height: 2em;
@@ -366,7 +366,7 @@ a:active {
     animation-fill-mode: forwards;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     @keyframes notification_show
     {
@@ -440,7 +440,7 @@ a:active {
     font-weight: normal;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .main-content {
         min-height: auto;
@@ -742,7 +742,7 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
     color: #0088C6;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .information {
         padding: 1.5em 1.2em;
