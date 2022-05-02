@@ -64,7 +64,7 @@
     margin: 1.3em 0;
 }
 
-@media (max-width: 800px)
+@media (max-width: 767px)
 {
     .homepage {
         flex-direction: column;
