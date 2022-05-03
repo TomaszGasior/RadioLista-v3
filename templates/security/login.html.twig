@@ -12,9 +12,13 @@
     <div class="user-login-screen">
         <h1 class="h2">{{ 'session.login.title'|trans }}</h1>
 
-        {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
-        {{ form_row(form.password) }}
-        {{ form_row(form.rememberMe) }}
+        <div class="ui-block">
+            <div class="ui-block-content">
+                {{ form_row(form.username, {'attr': {'autofocus': ''}}) }}
+                {{ form_row(form.password) }}
+                {{ form_row(form.rememberMe) }}
+            </div>
+        </div>
 
         <button>{{ 'session.login.title'|trans }}</button>
     </div>

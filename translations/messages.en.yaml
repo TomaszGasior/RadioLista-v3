@@ -99,9 +99,6 @@ radio_table:
     columns:
         title: 'List columns'
 
-        heading:
-            columns: 'Columns'
-
         columns_ui:
             action:
                 toggle_show: 'Show'
@@ -111,9 +108,6 @@ radio_table:
 
     export:
         title: 'Export list'
-
-        heading:
-            export: 'Export'
 
         action:
             download_pdf: 'Download PDF document'
@@ -135,9 +129,6 @@ radio_table:
 
     remove:
         title: 'Delete list'
-
-        heading:
-            remove_radio_table: 'Delete list'
 
         form:
             confirm: 'Delete the whole „%name%” list permanently'
@@ -216,9 +207,6 @@ radio_station:
 
         action:
             bulk_remove: 'Delete chosen stations'
-
-        heading:
-            remove_radio_station: 'Delete stations'
 
         form:
             chosenToRemove: 'Choose stations to be deleted'

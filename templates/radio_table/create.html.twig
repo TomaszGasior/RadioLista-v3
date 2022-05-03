@@ -14,15 +14,9 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'radio_table.settings.heading.general'|trans }}</h2>
-
+    <div class="ui-block">
+        <div class="ui-block-content">
             {{ form_row(form.name) }}
-        </div>
-
-        <div>
-            <h2>{{ 'radio_table.settings.heading.visibility'|trans }}</h2>
 
             <div class="radio-table-status">
                 {{ form_row(form.status) }}

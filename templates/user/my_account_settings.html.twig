@@ -14,16 +14,23 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'user.settings.heading.public_profile'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             {{ form_row(form.publicProfile) }}
             {{ form_row(form.aboutMe) }}
         </div>
-        <div>
-            <h2>{{ 'user.settings.heading.change_password'|trans }}</h2>
+    </div>
 
+    <div class="ui-block">
+        <div class="ui-block-heading">
+            <h2>{{ 'user.settings.heading.change_password'|trans }}</h2>
+        </div>
+
+        <div class="ui-block-content">
             {{ form_row(form.currentPassword) }}
             {{ form_row(form.plainPassword) }}
         </div>
