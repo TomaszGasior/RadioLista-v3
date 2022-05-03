@@ -45,36 +45,50 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.general'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             {{ form_row(form.name) }}
             {{ form_row(form.frequencyUnit) }}
             {{ form_row(form.maxSignalLevelUnit) }}
             {{ form_row(form.sorting) }}
             {{ form_row(form.description) }}
         </div>
+    </div>
 
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.visibility'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             <div class="radio-table-status">
                 {{ form_row(form.status) }}
             </div>
         </div>
+    </div>
 
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.columns'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             <a class="button" href="{{ path('radio_table.columns', {id: radio_table.id}) }}">
                 {{ 'radio_table.settings.action.set_custom_columns'|trans }}
             </a>
         </div>
+    </div>
 
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.appearance'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             {{ form_row(form.appearanceBackgroundColor, {attr: {
                 'class': 'color radio-table-appearance-color',
                 'autocomplete': 'off',

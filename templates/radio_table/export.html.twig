@@ -28,52 +28,51 @@
         </h1>
     </header>
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'radio_table.export.heading.export'|trans }}</h2>
 
-            {% if radio_table.radioStationsCount > 0 %}
-                <p class="information">
-                    {{ 'radio_table.export.information.export'|trans }}
-                </p>
+    {% if radio_table.radioStationsCount > 0 %}
+        <p class="information">
+            {{ 'radio_table.export.information.export'|trans }}
+        </p>
 
-                <ul class="radio-table-export-list">
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
-                            {{ 'radio_table.export.action.download_xlsx'|trans }}
-                        </a>
-                        {{ 'radio_table.export.text.about_xlsx'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
-                            {{ 'radio_table.export.action.download_ods'|trans }}
-                        </a>
-                        {{ 'radio_table.export.text.about_ods'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
-                            {{ 'radio_table.export.action.download_csv'|trans }}
-                        </a>
-                        {{ 'radio_table.export.text.about_csv'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
-                            {{ 'radio_table.export.action.download_pdf'|trans }}
-                        </a>
-                        {{ 'radio_table.export.text.about_pdf'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
-                            {{ 'radio_table.export.action.download_html'|trans }}
-                        </a>
-                        {{ 'radio_table.export.text.about_html'|trans }}
-                    </li>
-                </ul>
-            {% else %}
-                <p class="information">
-                    {{ 'radio_table.export.information.export_cannot_empty'|trans }}
-                </p>
-            {% endif %}
+        <div class="ui-block">
+            <div class="ui-block-content">
+                    <ul class="radio-table-export-list">
+                        <li>
+                            <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
+                                {{ 'radio_table.export.action.download_xlsx'|trans }}
+                            </a>
+                            {{ 'radio_table.export.text.about_xlsx'|trans }}
+                        </li>
+                        <li>
+                            <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
+                                {{ 'radio_table.export.action.download_ods'|trans }}
+                            </a>
+                            {{ 'radio_table.export.text.about_ods'|trans }}
+                        </li>
+                        <li>
+                            <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
+                                {{ 'radio_table.export.action.download_csv'|trans }}
+                            </a>
+                            {{ 'radio_table.export.text.about_csv'|trans }}
+                        </li>
+                        <li>
+                            <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
+                                {{ 'radio_table.export.action.download_pdf'|trans }}
+                            </a>
+                            {{ 'radio_table.export.text.about_pdf'|trans }}
+                        </li>
+                        <li>
+                            <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
+                                {{ 'radio_table.export.action.download_html'|trans }}
+                            </a>
+                            {{ 'radio_table.export.text.about_html'|trans }}
+                        </li>
+                    </ul>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <p class="information">
+            {{ 'radio_table.export.information.export_cannot_empty'|trans }}
+        </p>
+    {% endif %}
 {% endblock %}

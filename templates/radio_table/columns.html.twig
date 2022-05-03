@@ -30,29 +30,23 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'radio_table.columns.information.no_javascript'|trans }}</h2>
+    <noscript>
+        <p class="information">
+            {{ 'radio_table.columns.information.no_javascript'|trans }}
+        </p>
+    </noscript>
 
-            <noscript>
-                <p class="information">
-                    {{ 'radio_table.settings.information.columns'|trans }}
-                </p>
-            </noscript>
+    <div class="radio-table-columns">
+        {{ form_row(form.columns) }}
 
-            <div class="radio-table-columns">
-                {{ form_row(form.columns) }}
-
-                <template class="radio-table-columns-buttons-template">
-                    <button type="button" class="toggle"
-                            data-show-label="{{ 'radio_table.columns.columns_ui.action.toggle_show'|trans }}"
-                            data-hide-label="{{ 'radio_table.columns.columns_ui.action.toggle_hide'|trans }}">
-                    </button>
-                    <button type="button" class="move-up">{{ 'radio_table.columns.columns_ui.action.move_up'|trans }}</button>
-                    <button type="button" class="move-down">{{ 'radio_table.columns.columns_ui.action.move_down'|trans }}</button>
-                </template>
-            </div>
-        </div>
+        <template class="radio-table-columns-buttons-template">
+            <button type="button" class="toggle"
+                    data-show-label="{{ 'radio_table.columns.columns_ui.action.toggle_show'|trans }}"
+                    data-hide-label="{{ 'radio_table.columns.columns_ui.action.toggle_hide'|trans }}">
+            </button>
+            <button type="button" class="move-up">{{ 'radio_table.columns.columns_ui.action.move_up'|trans }}</button>
+            <button type="button" class="move-down">{{ 'radio_table.columns.columns_ui.action.move_down'|trans }}</button>
+        </template>
     </div>
 
     <button>{{ 'common.action.save'|trans }}</button>

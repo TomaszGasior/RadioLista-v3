@@ -33,16 +33,14 @@
         </h1>
     </header>
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'radio_table.remove.heading.remove_radio_table'|trans }}</h2>
+    <p class="information">
+        {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
+    </p>
 
-            <p class="information">
-                {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
-            </p>
+    {{ form_start(form) }}
 
-            {{ form_start(form) }}
-
+    <div class="ui-block">
+        <div class="ui-block-content">
             {{ form_row(form.confirm, {
                 label_translation_parameters: { '%name%': radio_table.name },
                 attr: {
@@ -50,10 +48,10 @@
                     'data-confirm-message': 'radio_table.remove.text.confirm_alert'|trans,
                 },
             }) }}
-
-            <button>{{ 'radio_table.remove.title'|trans }}</button>
-
-            {{ form_end(form) }}
         </div>
     </div>
+
+    <button>{{ 'radio_table.remove.title'|trans }}</button>
+
+    {{ form_end(form) }}
 {% endblock %}

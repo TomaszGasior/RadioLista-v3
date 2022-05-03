@@ -97,9 +97,6 @@ radio_table:
     columns:
         title: 'Ustawienia kolumn'
 
-        heading:
-            columns: 'Kolumny'
-
         columns_ui:
             action:
                 toggle_show: 'Pokaż'
@@ -112,9 +109,6 @@ radio_table:
 
     export:
         title: 'Eksportuj wykaz'
-
-        heading:
-            export: 'Eksport'
 
         action:
             download_pdf: 'Pobierz dokument PDF'
@@ -136,9 +130,6 @@ radio_table:
 
     remove:
         title: 'Usuń wykaz'
-
-        heading:
-            remove_radio_table: 'Usuwanie wykazu'
 
         form:
             confirm: 'Usuń cały wykaz „%name%” na zawsze'
@@ -217,9 +208,6 @@ radio_station:
 
         action:
             bulk_remove: 'Usuń zaznaczone stacje'
-
-        heading:
-            remove_radio_station: 'Usuwanie stacji'
 
         form:
             chosenToRemove: 'Wskaż stacje do usunięcia'

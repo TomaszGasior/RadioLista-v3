@@ -765,3 +765,37 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
     margin: 0;
     margin-left: 0.6em;
 }
+
+
+/* ui block */
+
+.ui-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.ui-block + .ui-block {
+    margin-top: 40px;
+}
+.ui-block-content {
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
+    padding: 0.2em 1.3em 0.3em;
+
+    flex-grow: 1;
+}
+.ui-block-heading {
+    width: 200px;
+    margin-right: 25px;
+
+    flex-shrink: 0;
+}
+
+@media (max-width: 1000px)
+{
+    .ui-block {
+        flex-direction: column;
+    }
+}

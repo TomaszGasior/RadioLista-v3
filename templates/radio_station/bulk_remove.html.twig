@@ -36,25 +36,19 @@
         </h1>
     </header>
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'radio_station.bulk_remove.heading.remove_radio_station'|trans }}</h2>
+    {% if radio_table.radioStationsCount > 0 %}
+        {{ form_start(form) }}
 
-            {% if radio_table.radioStationsCount > 0 %}
-                {{ form_start(form) }}
-
-                <div class="radio-stations-remove">
-                    {{ form_row(form.chosenToRemove) }}
-                </div>
-
-                <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
-
-                {{ form_end(form) }}
-            {% else %}
-                <p class="information">
-                    {{ 'radio_station.bulk_remove.information.empty_cannot_remove_radio_station'|trans }}
-                </p>
-            {% endif %}
+        <div class="radio-stations-remove">
+            {{ form_row(form.chosenToRemove) }}
         </div>
-    </div>
+
+        <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
+
+        {{ form_end(form) }}
+    {% else %}
+        <p class="information">
+            {{ 'radio_station.bulk_remove.information.empty_cannot_remove_radio_station'|trans }}
+        </p>
+    {% endif %}
 {% endblock %}
