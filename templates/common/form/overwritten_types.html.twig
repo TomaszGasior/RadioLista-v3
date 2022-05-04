@@ -44,13 +44,26 @@
 {% block choice_row %}
     {% if expanded %}
         {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
+        {%- set linked = linked|default(false) -%}
 
         <fieldset class="form-group">
-            <legend class="sr-only">{{ form_label(form)|striptags }}</legend>
+            {% if linked %}
+                {{ form_label(form) }}
+            {% else %}
+                <legend class="sr-only">{{ form_label(form)|striptags }}</legend>
+            {% endif %}
+
+            {% if linked %}
+                <div class="form-linked-select">
+            {% endif %}
 
             {% for child in form %}
                 {{ form_row(child, {attr: {'aria-describedby': aria_describedby|trim}}) }}
             {% endfor %}
+
+            {% if linked %}
+                </div>
+            {% endif %}
 
             {{ form_errors(form) }}
             {{ form_help(form) }}

@@ -654,6 +654,61 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
 }
 
 
+/* form linked select */
+
+.form-linked-select {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.form-linked-select .form-item {
+    margin: 0;
+}
+.form-linked-select .form-item label {
+    padding: 6px 11px;
+    background: #f9f9f9;
+    border: 1px solid #cacaca;
+    border-radius: 0;
+
+    outline: 0 solid transparent;
+    transition: linear 0.1s background-color, linear 0.1s outline;
+
+
+
+
+    display: block;
+    margin: 1em auto 0;
+    width: auto;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+}
+.form-linked-select .form-item + .form-item label {
+    border-left: 0;
+}
+.form-linked-select .form-item:first-child label {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.form-linked-select .form-item:last-child label {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.form-linked-select .form-item input:focus + label {
+    outline: 2px solid rgb(240,127,31, 0.6);
+    border-color: #F07F1F;
+    background-color: #fff;
+    outline-offset: 0px;
+}
+.form-linked-select .form-item input:checked + label {
+    background: #eee;
+    color: #D66200;
+    text-shadow: 0 0 1px #D66200;
+}
+.form-linked-select .form-item input {
+    position: absolute;
+    opacity: 0;
+}
+
+
 /* radio tables list */
 
 .radio-tables-list-item {

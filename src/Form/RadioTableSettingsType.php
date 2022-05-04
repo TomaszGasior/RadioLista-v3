@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\RadioTable;
 use App\Form\Type\IntegerUnitType;
+use App\Form\Type\LinkedChoiceType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,14 +24,14 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'required' => false,
                 'sanitize_html' => true,
             ])
-            ->add('frequencyUnit', ChoiceType::class, [
+            ->add('frequencyUnit', LinkedChoiceType::class, [
                 'choices' => [
                     'MHz' => RadioTable::FREQUENCY_MHZ,
                     'kHz' => RadioTable::FREQUENCY_KHZ,
                 ],
                 'choice_translation_domain' => false,
             ])
-            ->add('maxSignalLevelUnit', ChoiceType::class, [
+            ->add('maxSignalLevelUnit', LinkedChoiceType::class, [
                 'choices' => [
                     'dB' => RadioTable::MAX_SIGNAL_LEVEL_DB,
                     'dBf' => RadioTable::MAX_SIGNAL_LEVEL_DBF,
