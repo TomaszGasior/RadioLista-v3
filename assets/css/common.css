@@ -653,6 +653,23 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
     margin-bottom: 7px;
 }
 
+@media (min-width: 768px)
+{
+    .form-columns {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
+        grid-gap: 20px;
+
+        /* keep in sync with .form-item */
+        margin: 20px 0;
+    }
+
+    .form-columns .form-item {
+        margin: 0;
+    }
+}
+
 .form-item-checkbox label {
     margin-bottom: 0;
 }

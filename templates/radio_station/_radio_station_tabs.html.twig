@@ -6,15 +6,23 @@
     </div>
 
     <div class="ui-block-content">
-        {{ form_row(form.frequency, {
-            attr: { 'class': 'frequency-input' },
-            'unit_label': get_frequency_label(radio_station.radioTable.frequencyUnit),
-        }) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.radioGroup) }}
-        {{ form_row(form.country) }}
-        {{ form_row(form.region) }}
-        {{ form_row(form.type) }}
+        <div class="form-columns form-columns-with-number-first">
+            {{ form_row(form.frequency, {
+                attr: { 'class': 'frequency-input' },
+                'unit_label': get_frequency_label(radio_station.radioTable.frequencyUnit),
+            }) }}
+            {{ form_row(form.name) }}
+        </div>
+
+        <div class="form-columns">
+            {{ form_row(form.country) }}
+            {{ form_row(form.region) }}
+        </div>
+
+        <div class="form-columns">
+            {{ form_row(form.type) }}
+            {{ form_row(form.radioGroup) }}
+        </div>
     </div>
 </div>
 
@@ -24,11 +32,16 @@
     </div>
 
     <div class="ui-block-content">
-        {{ form_row(form.power, {'unit_label': 'kW'}) }}
-        {{ form_row(form.location) }}
-        {{ form_row(form.polarization) }}
-        {{ form_row(form.multiplex) }}
-        {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
+        <div class="form-columns form-columns-with-number-first">
+            {{ form_row(form.power, {'unit_label': 'kW'}) }}
+            {{ form_row(form.location) }}
+        </div>
+
+        <div class="form-columns">
+            {{ form_row(form.polarization) }}
+            {{ form_row(form.multiplex) }}
+            {{ form_row(form.dabChannel, {attr: { 'class': 'dab-channel-input' }}) }}
+        </div>
     </div>
 </div>
 
@@ -38,11 +51,16 @@
     </div>
 
     <div class="ui-block-content">
-        {{ form_row(form.distance, {'unit_label': 'km'}) }}
-        {{ form_row(form.maxSignalLevel, {'unit_label': get_max_signal_level_label(radio_station.radioTable.maxSignalLevelUnit)}) }}
-        {{ form_row(form.reception) }}
-        {{ form_row(form.quality) }}
-        {{ form_row(form.firstLogDate) }}
+        <div class="form-columns">
+            {{ form_row(form.distance, {'unit_label': 'km'}) }}
+            {{ form_row(form.maxSignalLevel, {'unit_label': get_max_signal_level_label(radio_station.radioTable.maxSignalLevelUnit)}) }}
+            {{ form_row(form.quality) }}
+        </div>
+
+        <div class="form-columns">
+            {{ form_row(form.firstLogDate) }}
+            {{ form_row(form.reception) }}
+        </div>
     </div>
 </div>
 
@@ -52,8 +70,11 @@
     </div>
 
     <div class="ui-block-content">
-        {{ form_row(form.privateNumber) }}
-        {{ form_row(form.externalAnchor) }}
+        <div class="form-columns form-columns-with-number-first">
+            {{ form_row(form.privateNumber) }}
+            {{ form_row(form.externalAnchor) }}
+        </div>
+
         {{ form_row(form.comment) }}
     </div>
 </div>
@@ -71,10 +92,13 @@
         </noscript>
 
         <div class="radio-station-rds">
-            {{ form_row(form.rdsPi) }}
+            <div class="form-columns">
+                {{ form_row(form.rdsPi) }}
+                {{ form_row(form.rdsPty) }}
+            </div>
+
             {{ form_row(form.rdsPs, {attr: {wrap: 'off'}}) }}
             {{ form_row(form.rdsRt, {attr: {wrap: 'off'}}) }}
-            {{ form_row(form.rdsPty) }}
         </div>
     </div>
 </div>
@@ -86,8 +110,11 @@
 
     <div class="ui-block-content">
         {{ form_row(form.appearanceBackground) }}
-        {{ form_row(form.appearanceBold) }}
-        {{ form_row(form.appearanceItalic) }}
-        {{ form_row(form.appearanceStrikethrough) }}
+
+        <div class="form-columns">
+            {{ form_row(form.appearanceBold) }}
+            {{ form_row(form.appearanceItalic) }}
+            {{ form_row(form.appearanceStrikethrough) }}
+        </div>
     </div>
 </div>

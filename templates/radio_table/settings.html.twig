@@ -52,9 +52,13 @@
 
         <div class="ui-block-content">
             {{ form_row(form.name) }}
-            {{ form_row(form.frequencyUnit) }}
-            {{ form_row(form.maxSignalLevelUnit) }}
-            {{ form_row(form.sorting) }}
+
+            <div class="form-columns">
+                {{ form_row(form.frequencyUnit) }}
+                {{ form_row(form.maxSignalLevelUnit) }}
+                {{ form_row(form.sorting) }}
+            </div>
+
             {{ form_row(form.description) }}
         </div>
     </div>
@@ -89,21 +93,26 @@
         </div>
 
         <div class="ui-block-content">
-            {{ form_row(form.appearanceBackgroundColor, {attr: {
-                'class': 'color radio-table-appearance-color',
-                'autocomplete': 'off',
-            }}) }}
-            {{ form_row(form.appearanceColor, {attr: {
-                'class': 'color radio-table-appearance-color',
-                'autocomplete': 'off',
-            }}) }}
-            {{ form_row(form.appearanceWidthType, {attr: {
-                'class': 'radio-table-width-type',
-                'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
-            }}) }}
+            <div class="form-columns">
+                {{ form_row(form.appearanceBackgroundColor, {attr: {
+                    'class': 'color radio-table-appearance-color',
+                    'autocomplete': 'off',
+                }}) }}
+                {{ form_row(form.appearanceColor, {attr: {
+                    'class': 'color radio-table-appearance-color',
+                    'autocomplete': 'off',
+                }}) }}
+            </div>
 
-            <div class="radio-table-custom-width-wrapper">
-                {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
+            <div class="form-columns">
+                {{ form_row(form.appearanceWidthType, {attr: {
+                    'class': 'radio-table-width-type',
+                    'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
+                }}) }}
+
+                <div class="radio-table-custom-width-wrapper">
+                    {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
+                </div>
             </div>
 
             {{ form_row(form.appearanceCollapsedComments) }}

@@ -1,3 +1,10 @@
+.form-columns-with-number-first {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.form-columns-with-number-first *:last-child {
+    grid-column: 2 / -1;
+}
+
 .radio-station-disabled-column input:not(:focus),
 .radio-station-disabled-column select:not(:focus),
 .radio-station-disabled-column textarea:not(:focus) {
