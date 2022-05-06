@@ -44,7 +44,9 @@
 
     {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
-    <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+    <div class="form-action-button">
+        <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+    </div>
 
     {{ form_end(form) }}
 {% endblock %}

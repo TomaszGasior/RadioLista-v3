@@ -43,7 +43,9 @@
             {{ form_row(form.chosenToRemove) }}
         </div>
 
-        <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
+        <div class="form-action-button">
+            <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
+        </div>
 
         {{ form_end(form) }}
     {% else %}

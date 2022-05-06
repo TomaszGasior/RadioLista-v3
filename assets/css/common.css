@@ -687,6 +687,50 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
 }
 
 
+/* form action button */
+
+.form-action-button {
+    margin-top: 10px;
+    position: sticky;
+    bottom: 0;
+    padding: 30px 0;
+}
+.form-action-button::before, .form-action-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    /* cover shadow from .ui-block */
+    width: 20px;
+}
+.form-action-button::before {
+    left: 0;
+    transform: translateX(-100%);
+}
+.form-action-button::after {
+    right: 0;
+    transform: translateX(100%);
+}
+.form-action-button, .form-action-button::before, .form-action-button::after {
+    /* keep color in sync with body background */
+    background: linear-gradient(rgba(255,255,255, 0), #f7f6f5 40%);
+}
+.form-action-button button {
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+@media (max-width: 767px)
+{
+    /* keep in sync with .site-width padding */
+    .form-action-button::before, .form-action-button::after {
+        width: 5vw;
+    }
+}
+
+
 /* radio tables list */
 
 .radio-tables-list-item {
