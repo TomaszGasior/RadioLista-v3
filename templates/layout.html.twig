@@ -92,21 +92,16 @@
                     </ul>
                 </nav>
             </div>
-
-            {% set validation_error = app.flashes('validation_error')|last %}
-            {% set error = app.flashes('error')|last %}
-            {% set notice = app.flashes('notice')|last %}
-
-            <span class="notification-wrapper">
-                {% if validation_error %}
-                    <span role="alert" class="notification error">{{ validation_error }}</span>
-                {% elseif error %}
-                    <span role="alert" class="notification error">{{ error|trans }}</span>
-                {% elseif notice %}
-                    <span role="alert" class="notification">{{ notice|trans }}</span>
-                {% endif %}
-            </span>
         </header>
+
+        {% set error = app.flashes('error')|last %}
+        {% set notice = app.flashes('notice')|last %}
+
+        {% if error %}
+            <div role="alert" class="notification error">{{ error|trans }}</div>
+        {% elseif notice %}
+            <div role="alert" class="notification">{{ notice|trans }}</div>
+        {% endif %}
 
         <main class="main-content site-width">
             {% block page_content %}{% endblock %}
