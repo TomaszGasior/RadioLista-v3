@@ -178,6 +178,7 @@ radio_station:
             dabChannel.choice:
                 '': '(brak informacji)'
             firstLogDate.help: 'na przykład: 2013, 2011-06, 2016-05-04'
+            externalAnchor.help: 'na przykład: https://example.com/something'
             rdsPs: 'Programme Service'
             rdsPs.help: 'na przykład: POLSKIE|RADIO|JEDYNKA'
             rdsRt: 'Radio Text'

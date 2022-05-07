@@ -155,7 +155,12 @@ class RadioStationEditType extends AbstractType
             ])
             ->add('externalAnchor', UrlType::class, [
                 'required' => false,
+                'label' => $this->translator->trans('column.externalAnchor', [], 'radio_table'),
                 'default_protocol' => null,
+                'attr' => [
+                    'placeholder' => $this->translator->trans('radio_station.edit.form.externalAnchor.help'),
+                ],
+                'translation_domain' => false,
             ])
             ->add('comment', TextareaType::class, [
                 'required' => false,
