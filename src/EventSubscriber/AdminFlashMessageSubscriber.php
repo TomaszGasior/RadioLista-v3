@@ -22,8 +22,8 @@ class AdminFlashMessageSubscriber implements EventSubscriberInterface
         /** @var Session */
         $session = $request->getSession();
 
-        // TODO: get rid of this ugly workaround!
-        $session->getFlashBag()->add('validation_error', 'Przeglądasz prywatny zasób jako administrator.');
+        // This triggers warning about untranslated string.
+        $session->getFlashBag()->add('notice', 'Przeglądasz prywatny zasób jako administrator.');
     }
 
     /**
