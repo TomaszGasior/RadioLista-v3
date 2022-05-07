@@ -215,7 +215,7 @@ radio_station:
             bulk_removed: 'Chosen stations have been deleted.'
 
         information:
-            empty_cannot_remove_radio_station: 'This is is empty. There is nothing to delete…'
+            empty_cannot_remove_radio_station: 'This list is empty.'
 
 user:
     detail:

@@ -216,7 +216,7 @@ radio_station:
             bulk_removed: 'Wybrane stacje zostały usunięte.'
 
         information:
-            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty. Nie ma czego usuwać…'
+            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty.'
 
 user:
     detail:

@@ -33,14 +33,14 @@
         </h1>
     </header>
 
-    <p class="information">
-        {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
-    </p>
-
     {{ form_start(form) }}
 
     <div class="ui-block">
         <div class="ui-block-content">
+            <p class="information">
+                {{ 'radio_table.remove.information.cannot_be_undone'|trans }}
+            </p>
+
             {{ form_row(form.confirm, {
                 label_translation_parameters: { '%name%': radio_table.name },
                 attr: {
