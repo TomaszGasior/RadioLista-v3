@@ -130,18 +130,15 @@ radio_table:
     remove:
         title: 'Delete list'
 
-        form:
-            confirm: 'Delete the whole „%name%” list permanently'
+        action:
+            cancel: 'Cancel'
+            remove: 'Delete'
 
         notification:
             removed: 'List has been permanently deleted.'
-            not_yet: "Let's try again. Nothing happened."
-
-        information:
-            cannot_be_undone: 'Deleted list cannot be restored. Please remember that you can still export your list into HTML, PDF or CSV file and download it to your computer.'
 
         text:
-            confirm_alert: 'Are you sure? This action cannot be undone!'
+            confirmation: 'Are you sure you want to permanently delete „%name%” list? This cannot be undone.'
 
     standalone:
         about: 'This list was created using %anchor% on %date%.'

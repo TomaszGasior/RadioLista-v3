@@ -131,18 +131,15 @@ radio_table:
     remove:
         title: 'Usuń wykaz'
 
-        form:
-            confirm: 'Usuń cały wykaz „%name%” na zawsze'
+        action:
+            cancel: 'Anuluj'
+            remove: 'Usuń'
 
         notification:
             removed: 'Wykaz został bezpowrotnie usunięty.'
-            not_yet: 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!'
-
-        information:
-            cannot_be_undone: "Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do\u00A0pliku HTML, PDF lub CSV, aby pobrać go na komputer."
 
         text:
-            confirm_alert: 'Czy na pewno? Tej czynności nie można cofnąć!'
+            confirmation: 'Czy na pewno chcesz bezpowrotnie usunąć  wykaz „%name%”? Tej czynności nie można cofnąć.'
 
     standalone:
         about: 'Wykaz wygenerowano w serwisie %anchor% dnia %date%.'

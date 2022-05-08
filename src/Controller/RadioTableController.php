@@ -145,33 +145,17 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route({"pl": "/wykaz/{id}/usun", "en": "/list/{id}/delete"}, name="radio_table.remove")
+     * @Route({"pl": "/wykaz/{id}/usun", "en": "/list/{id}/delete"}, methods={"POST"}, name="radio_table.remove")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
     public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RadioTableRemoveType::class);
-        $form->handleRequest($request);
+        $entityManager->remove($radioTable);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $confirmed = (true === $form->getData()['confirm']);
+        $this->addFlash('notice', 'radio_table.remove.notification.removed');
 
-            if ($confirmed) {
-                $entityManager->remove($radioTable);
-                $entityManager->flush();
-
-                $this->addFlash('notice', 'radio_table.remove.notification.removed');
-                return $this->redirectToRoute('user.my_radio_tables');
-            }
-            else {
-                $this->addFlash('error', 'radio_table.remove.notification.not_yet');
-            }
-        }
-
-        return $this->render('radio_table/remove.html.twig', [
-            'form' => $form->createView(),
-            'radio_table' => $radioTable,
-        ]);
+        return $this->redirectToRoute('user.my_radio_tables');
     }
 }

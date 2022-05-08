@@ -47,7 +47,25 @@ function setupCustomWidthInput()
     widthTypeInput.addEventListener('blur', updateFieldVisibility);
 }
 
+function setupRemoveButtonAndDialog()
+{
+    let anchor = document.querySelector('.remove-radio-table-button');
+    let dialog = document.querySelector('.remove-radio-table-dialog');
+
+    let button = document.createElement('button');
+    button.innerHTML = anchor.innerHTML;
+    button.type = 'button';
+    button.classList.add('remove-radio-table-button');
+
+    anchor.parentNode.replaceChild(button, anchor);
+
+    button.addEventListener('click', () => {
+        dialog.showModal();
+    })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setupColorInputs();
     setupCustomWidthInput();
+    setupRemoveButtonAndDialog();
 });
