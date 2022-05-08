@@ -245,7 +245,7 @@ user:
         form:
             aboutMe: 'Kilka słów o tobie'
             publicProfile: 'Włącz profil publiczny'
-            publicProfile.help: 'Profil publiczny zawiera listę twoich wykazów i informacje o tobie. Jeśli jest wyłączony, twoje wykazy są anonimowe.'
+            publicProfile.help: 'Zaznacz, aby pod każdym wykazem znalazł się link do twojego profilu z listą twoich wykazów i poniższym opisem.'
             currentPassword: 'Obecne hasło'
             currentPassword.help: 'Pozostaw puste, jeżeli nie chcesz zmieniać hasła.'
             plainPassword.first: 'Nowe hasło'

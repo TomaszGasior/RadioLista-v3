@@ -244,7 +244,7 @@ user:
         form:
             aboutMe: 'Something about you'
             publicProfile: 'Enable public profile'
-            publicProfile.help: "Public profile shows your lists and information about you. If it's disabled, your lists are anonymous."
+            publicProfile.help: "If enabled each list includes link to your public profile showing all of your lists and description below."
             currentPassword: 'Current password'
             currentPassword.help: "Keep it empty if you don't want to change the password."
             plainPassword.first: 'New password'
