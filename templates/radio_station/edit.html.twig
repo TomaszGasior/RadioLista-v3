@@ -45,8 +45,38 @@
     {% include 'radio_station/_radio_station_tabs.html.twig' %}
 
     <div class="form-action-button">
-        <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+        <div class="remove-radio-station-button-wrapper">
+            <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+
+            <a class="button remove-radio-station-button" href="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id, remove: true}) }}">
+                {{ 'radio_station.remove.title'|trans }}
+            </a>
+        </div>
     </div>
 
     {{ form_end(form) }}
+
+    {% set no_js_fallback = app.request.query.has('remove') %}
+    <dialog {{ no_js_fallback ? 'open' }} class="remove-radio-station-dialog {{ no_js_fallback ? 'no-JS-fallback' }}">
+        {{ 'radio_station.remove.text.confirmation'|trans({
+            '%name%': radio_station.name,
+        }) }}
+
+        <form method="dialog">
+            {% if no_js_fallback %}
+                <button formmethod="get" formaction="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
+                    {{ 'radio_station.remove.action.cancel'|trans }}
+                </button>
+            {% else %}
+                <button>
+                    {{ 'radio_station.remove.action.cancel'|trans }}
+                </button>
+            {% endif %}
+
+
+            <button formmethod="post" formaction="{{ path('radio_station.remove', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}" class="remove">
+                {{ 'radio_station.remove.action.remove'|trans }}
+            </button>
+        </form>
+    </dialog>
 {% endblock %}

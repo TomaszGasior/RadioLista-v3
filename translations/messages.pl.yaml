@@ -204,6 +204,19 @@ radio_station:
             for_radio_table_a11y_subheading: 'w wykazie'
             disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
 
+    remove:
+        title: 'Usuń stację'
+
+        action:
+            cancel: 'Anuluj'
+            remove: 'Usuń'
+
+        notification:
+            removed: 'Stacja została usunięta.'
+
+        text:
+            confirmation: 'Czy na pewno chcesz usunąć stację „%name%”?'
+
     bulk_remove:
         title: 'Usuń wiele stacji'
 

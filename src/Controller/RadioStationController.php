@@ -99,6 +99,27 @@ class RadioStationController extends AbstractController
     }
 
     /**
+     * @Route(
+     *     {"pl": "/wykaz/{radioTableId}/usun-stacje/{id}", "en": "/list/{radioTableId}/delete-station/{id}"},
+     *     name="radio_station.remove",
+     *     methods={"POST"}
+     * )
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
+     */
+    public function remove(RadioStation $radioStation, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($radioStation);
+        $entityManager->flush();
+
+        $this->addFlash('notice', 'radio_station.remove.notification.removed');
+
+        return $this->redirectToRoute('radio_table.show', [
+            'id' => $radioStation->getRadioTable()->getId(),
+        ]);
+    }
+
+    /**
      * @Route({"pl": "/wykaz/{id}/usun-stacje", "en": "/list/{id}/delete-stations"}, name="radio_station.bulk_remove")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)

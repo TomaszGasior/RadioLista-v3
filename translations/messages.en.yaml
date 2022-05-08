@@ -203,6 +203,19 @@ radio_station:
             for_radio_table_a11y_subheading: 'in list'
             disabled_radio_table_column: 'This column is currently not visible in the list.'
 
+    remove:
+        title: 'Delete station'
+
+        action:
+            cancel: 'Cancel'
+            remove: 'Delete'
+
+        notification:
+            removed: 'Station has been deleted.'
+
+        text:
+            confirmation: 'Are you sure you want to delete „%name%” station?'
+
     bulk_remove:
         title: 'Delete more stations'
 
