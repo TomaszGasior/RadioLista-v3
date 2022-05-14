@@ -3,3 +3,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.form-group {
+    /* remove ugly margin between two fields */
+    margin-top: -15px;
+}
