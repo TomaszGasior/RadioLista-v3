@@ -34,12 +34,12 @@ function setupColorInputs()
 function setupCustomWidthInput()
 {
     let widthTypeInput = document.querySelector('.radio-table-width-type');
-    let customWidthFieldWrapper = document.querySelector('.radio-table-custom-width-wrapper');
+    let customWidthField = document.querySelector('.radio-table-custom-width');
 
     const WIDTH_CUSTOM = widthTypeInput.dataset.customWidthValue;
 
     let updateFieldVisibility = () => {
-        customWidthFieldWrapper.hidden = (widthTypeInput.value != WIDTH_CUSTOM);
+        customWidthField.disabled = (widthTypeInput.value != WIDTH_CUSTOM);
     };
 
     updateFieldVisibility();

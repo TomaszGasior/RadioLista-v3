@@ -100,9 +100,10 @@
                     'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
                 }}) }}
 
-                <div class="radio-table-custom-width-wrapper">
-                    {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
-                </div>
+                {{ form_row(form.appearanceCustomWidth, {
+                    unit_label: 'px',
+                    attr: { 'class': 'radio-table-custom-width' },
+                }) }}
             </div>
 
             {{ form_row(form.appearanceCollapsedComments) }}
