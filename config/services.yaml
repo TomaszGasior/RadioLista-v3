@@ -60,7 +60,7 @@ services:
         arguments:
             $exporters: !tagged_iterator app.radio_table_exporter
 
-    App\Form\Extension\ValidationFlashErrorExtension:
+    App\Form\Extension\ValidationErrorExtension:
         tags: [{ name: form.type_extension, priority: -100 }]
 
     App\Twig\TrackerExtension:
