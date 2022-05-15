@@ -98,3 +98,10 @@
 .remove-radio-station-dialog button.remove {
     color: #e10000;
 }
+
+@media (prefers-reduced-motion)
+{
+    .remove-radio-station-dialog {
+        animation: none;
+    }
+}

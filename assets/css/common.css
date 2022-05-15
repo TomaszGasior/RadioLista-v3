@@ -377,6 +377,13 @@ a:active {
     }
 }
 
+@media (prefers-reduced-motion)
+{
+    .notification {
+        animation-duration: 0s, 0s;
+    }
+}
+
 
 /* main content */
 

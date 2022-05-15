@@ -85,3 +85,10 @@ input.color[style] {
 .remove-radio-table-dialog button.remove {
     color: #e10000;
 }
+
+@media (prefers-reduced-motion)
+{
+    .remove-radio-table-dialog {
+        animation: none;
+    }
+}
