@@ -505,8 +505,7 @@ select {
 }
 
 button, a.button {
-    display: block;
-    margin: 1em auto 0;
+    display: inline-block;
     width: auto;
     padding-left: 1.2em;
     padding-right: 1.2em;
@@ -536,7 +535,6 @@ a.button {
     width: auto;
     text-decoration: none;
 
-    display: inline-block;
     margin: 0;
 }
 
@@ -682,6 +680,8 @@ input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible 
     position: sticky;
     bottom: 0;
     padding: 30px 0;
+
+    text-align: center;
 }
 .form-action-button::before, .form-action-button::after {
     content: '';
