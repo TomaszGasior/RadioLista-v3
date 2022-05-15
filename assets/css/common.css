@@ -45,11 +45,6 @@ a {
     border: none;
     outline: none;
 }
-a:focus {
-    text-decoration: underline;
-    outline: 1px dashed #F07F1F;
-    outline-offset: 2px;
-}
 a:hover {
     text-decoration: underline;
     color: #0084FF;
@@ -208,6 +203,10 @@ a:active {
         background-position: top 52.5% right;
         background-repeat: no-repeat;
         background-size: 15px;
+    }
+    .site-navigation li.user-submenu > span:focus-visible {
+        outline-offset: 3px;
+        outline: 2px solid rgb(240,127,31, 0.6);
     }
     .site-navigation li.user-submenu ul {
         display: none;
@@ -570,11 +569,6 @@ input[type="radio"]:checked {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1 1'%3E%3Crect fill='%23FF7500' rx='1' x='0' y='0' width='1' height='1'/%3E%3C/svg%3E");
 }
 
-input[type="checkbox"] + label, input[type="radio"] + label {
-    border-radius: 3px;
-    outline: 0 solid transparent;
-    transition: linear 0.1s outline;
-}
 input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible + label {
     outline-offset: 3px;
     outline: 2px solid rgb(240,127,31, 0.6);

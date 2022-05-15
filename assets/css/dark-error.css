@@ -41,9 +41,10 @@ body {
     text-indent: -9999px;
     overflow: hidden;
 }
-.logo a:focus {
-    outline: none;
-    background-color: rgba(255,255,255, 0.05);
+.logo a:focus-visible {
+    color: inherit;
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
 }
 
 @media (max-height: 600px)

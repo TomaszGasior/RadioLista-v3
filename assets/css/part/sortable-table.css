@@ -1,13 +1,9 @@
 table.sortable th[data-sort] {
     cursor: pointer;
 }
-table.sortable th[data-sort]:focus {
-    text-decoration: underline;
-    outline: 1px dashed #F07F1F;
-    outline-offset: -2px;
-}
-table.sortable th[data-sort]:focus:hover {
-    outline: none;
+table.sortable th[data-sort]:focus-visible {
+    outline: 2px solid rgb(240,127,31, 0.6);
+    outline-offset: -3px;
 }
 
 table.sortable th[data-sort]::after {
