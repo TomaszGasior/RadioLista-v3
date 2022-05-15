@@ -109,38 +109,18 @@
     </div>
 
     <div class="form-action-button">
-        <div class="remove-radio-table-button-wrapper">
-            <button>{{ 'common.action.save'|trans }}</button>
+        <button>{{ 'common.action.save'|trans }}</button>
 
-            <a class="button remove-radio-table-button" href="{{ path('radio_table.settings', {id: radio_table.id, remove: true}) }}">
-                {{ 'radio_table.remove.title'|trans }}
-            </a>
-        </div>
+        <a class="button remove-button" href="{{ path('radio_table.settings', {id: radio_table.id, remove: true}) }}">
+            {{ 'radio_table.remove.title'|trans }}
+        </a>
     </div>
 
     {{ form_end(form) }}
 
-    {% set no_js_fallback = app.request.query.has('remove') %}
-    <dialog {{ no_js_fallback ? 'open' }} class="remove-radio-table-dialog {{ no_js_fallback ? 'no-JS-fallback' }}">
-        {{ 'radio_table.remove.text.confirmation'|trans({
-            '%name%': radio_table.name,
-        }) }}
-
-        <form method="dialog">
-            {% if no_js_fallback %}
-                <button formmethod="get" formaction="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                    {{ 'radio_table.remove.action.cancel'|trans }}
-                </button>
-            {% else %}
-                <button>
-                    {{ 'radio_table.remove.action.cancel'|trans }}
-                </button>
-            {% endif %}
-
-
-            <button formmethod="post" formaction="{{ path('radio_table.remove', {id: radio_table.id}) }}" class="remove">
-                {{ 'radio_table.remove.action.remove'|trans }}
-            </button>
-        </form>
-    </dialog>
+    {% include 'common/remove_dialog.html.twig' with {
+        remove_question: 'radio_table.remove.text.confirmation'|trans({ '%name%': radio_table.name }),
+        remove_post_url: path('radio_table.remove', {id: radio_table.id}),
+        cancel_fallback_url: path('radio_table.settings', {id: radio_table.id})
+    } %}
 {% endblock %}

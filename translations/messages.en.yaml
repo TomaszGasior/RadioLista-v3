@@ -17,6 +17,11 @@ common:
         action:
             search: 'Search'
 
+    remove_dialog:
+        action:
+            cancel: 'Cancel'
+            remove: 'Delete'
+
     notification:
         saved_changes: 'Changes have been saved.'
         invalid_form: 'There is a problem in the form below.'
@@ -130,10 +135,6 @@ radio_table:
     remove:
         title: 'Delete list'
 
-        action:
-            cancel: 'Cancel'
-            remove: 'Delete'
-
         notification:
             removed: 'List has been permanently deleted.'
 
@@ -202,10 +203,6 @@ radio_station:
 
     remove:
         title: 'Delete station'
-
-        action:
-            cancel: 'Cancel'
-            remove: 'Delete'
 
         notification:
             removed: 'Station has been deleted.'

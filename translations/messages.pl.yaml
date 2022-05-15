@@ -17,6 +17,11 @@ common:
         action:
             search: 'Szukaj'
 
+    remove_dialog:
+        action:
+            cancel: 'Anuluj'
+            remove: 'Usuń'
+
     notification:
         saved_changes: 'Zmiany zostały zapisane.'
         invalid_form: 'Wystąpił błąd w formularzu poniżej.'
@@ -131,10 +136,6 @@ radio_table:
     remove:
         title: 'Usuń wykaz'
 
-        action:
-            cancel: 'Anuluj'
-            remove: 'Usuń'
-
         notification:
             removed: 'Wykaz został bezpowrotnie usunięty.'
 
@@ -203,10 +204,6 @@ radio_station:
 
     remove:
         title: 'Usuń stację'
-
-        action:
-            cancel: 'Anuluj'
-            remove: 'Usuń'
 
         notification:
             removed: 'Stacja została usunięta.'

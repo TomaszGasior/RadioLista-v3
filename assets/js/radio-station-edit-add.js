@@ -1,5 +1,7 @@
 import '../css/radio-station-edit-add.css';
 
+import { RemoveDialogManager } from './src/RemoveDialogManager.js';
+
 function setupFrequencyWithDabChannelSync()
 {
     let dabChannelInput = document.querySelector('.dab-channel-input');
@@ -16,24 +18,8 @@ function setupFrequencyWithDabChannelSync()
     });
 }
 
-function setupRemoveButtonAndDialog()
-{
-    let anchor = document.querySelector('.remove-radio-station-button');
-    let dialog = document.querySelector('.remove-radio-station-dialog');
-
-    let button = document.createElement('button');
-    button.innerHTML = anchor.innerHTML;
-    button.type = 'button';
-    button.classList.add('remove-radio-station-button');
-
-    anchor.parentNode.replaceChild(button, anchor);
-
-    button.addEventListener('click', () => {
-        dialog.showModal();
-    })
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     setupFrequencyWithDabChannelSync();
-    setupRemoveButtonAndDialog();
+
+    new RemoveDialogManager(document);
 });

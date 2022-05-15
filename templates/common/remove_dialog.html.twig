@@ -1,0 +1,21 @@
+{% set no_js_fallback = app.request.query.has('remove') %}
+
+<dialog {{ no_js_fallback ? 'open' }} class="remove-dialog {{ no_js_fallback ? 'no-JS-fallback' }}">
+    {{ remove_question }}
+
+    <form method="dialog">
+        {% if no_js_fallback %}
+            <button formmethod="get" formaction="{{ cancel_fallback_url }}">
+                {{ 'common.remove_dialog.action.cancel'|trans }}
+            </button>
+        {% else %}
+            <button>
+                {{ 'common.remove_dialog.action.cancel'|trans }}
+            </button>
+        {% endif %}
+
+        <button formmethod="post" formaction="{{ remove_post_url }}" class="remove">
+            {{ 'common.remove_dialog.action.remove'|trans }}
+        </button>
+    </form>
+</dialog>
