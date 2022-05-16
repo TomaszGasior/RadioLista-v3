@@ -37,6 +37,11 @@ body {
     padding: 0;
 }
 
+html {
+    /* make sure sticky site header don't cover invalid field in case of validation error */
+    scroll-padding-top: 100px;
+}
+
 a {
     color: #D66200;
     transition: linear 0.1s color;
