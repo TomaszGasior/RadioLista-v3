@@ -2,10 +2,6 @@
 
 {% block page_title %}{{ 'radio_station.bulk_remove.title'|trans }}{% endblock %}
 
-{% block head_closing %}
-    {{ encore_entry_link_tags('radio-station-bulk-remove') }}
-{% endblock %}
-
 {% block context_menu %}
     <li>
         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
@@ -39,8 +35,10 @@
     {% if radio_table.radioStationsCount > 0 %}
         {{ form_start(form) }}
 
-        <div class="radio-stations-remove">
-            {{ form_row(form.chosenToRemove) }}
+        <div class="ui-block">
+            <div class="ui-block-content">
+                {{ form_row(form.chosenToRemove) }}
+            </div>
         </div>
 
         <div class="form-action-button">
