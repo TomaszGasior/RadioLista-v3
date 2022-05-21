@@ -14,7 +14,7 @@
     vertical-align: baseline;
 }
 
-@media (max-width: 767px)
+@media (max-width: 1000px)
 {
     .radio-table-export-list a.button {
         margin: 15px 0 10px 0;
