@@ -4,10 +4,12 @@
     border-radius: 7px;
     box-shadow: 0 4px 22px rgba(0,0,0, 0.4);
     padding: 40px 35px 35px;
+
+    max-width: 500px;
+
     text-align: center;
     font-weight: 700;
     animation: dialog_show 0.5s ease;
-    max-width: 500px;
 }
 .remove-dialog.no-JS-fallback {
     position: fixed;
@@ -17,6 +19,15 @@
 .remove-dialog::backdrop {
     background: rgba(0,0,0, 0.4);
 }
+
+@media (max-width: 600px)
+{
+    .remove-dialog {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
 .remove-dialog button {
     display: inline-block;
     margin: 30px 7px 0 7px;
