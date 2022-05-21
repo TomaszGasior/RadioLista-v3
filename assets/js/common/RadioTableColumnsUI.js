@@ -10,8 +10,10 @@ export class RadioTableColumnsUI
 
     prepareUI()
     {
+        this.container.classList.add('radio-table-columns-ui');
+
         let buttonsTemplate = document.importNode(
-            this.container.querySelector('.radio-table-columns-buttons-template').content, true
+            this.container.querySelector('.radio-table-columns-ui-buttons-template').content, true
         );
         let buttons = [
             buttonsTemplate.querySelector('button.toggle'),

@@ -20,7 +20,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('layout', './assets/js/layout.js')
+    .addStyleEntry('layout', './assets/css/layout.css')
     .addEntry('admin', './assets/js/admin.js')
     .addStyleEntry('dark-error', './assets/css/dark-error.css')
 
