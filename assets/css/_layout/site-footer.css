@@ -1,0 +1,25 @@
+.site-footer {
+    font-size: 0.8em;
+    text-align: center;
+
+    border-top: 1px solid rgba(0,0,0, 0.11);
+    padding: 1em 0 2.6em 0;
+    margin-top: 2em;
+}
+.site-footer ul {
+    display: inline;
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+.site-footer p, .site-footer li {
+    display: inline-block;
+    margin: 0 0.73em;
+}
+
+@media (max-width: 767px)
+{
+    .site-footer {
+        line-height: 2em;
+    }
+}

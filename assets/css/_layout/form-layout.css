@@ -1,0 +1,52 @@
+.form-item {
+    margin: 20px 0;
+}
+.form-item label {
+    display: inline-block;
+    margin-bottom: 7px;
+}
+
+@media (min-width: 768px)
+{
+    .form-columns {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
+        grid-gap: 20px;
+
+        /* keep in sync with .form-item */
+        margin: 20px 0;
+    }
+
+    .form-columns .form-item {
+        margin: 0;
+    }
+}
+
+.form-item-checkbox {
+    position: relative;
+
+    /* keep in sync with input/checkbox width */
+    padding-left: calc(19px + 10px);
+}
+.form-item-checkbox label {
+    display: inline;
+    margin-bottom: 0;
+}
+.form-item-checkbox input {
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
+
+.form-error-message {
+    color: #ff0000;
+    margin: 7px 0 0;
+    font-weight: bold;
+}
+.form-help-message {
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 7px 0 0;
+    opacity: 0.8;
+}

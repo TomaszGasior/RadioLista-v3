@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('../../fonts/LatoLatin-Regular.woff2'), url('../../fonts/LatoLatin-Regular.woff');
+}
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('../../fonts/LatoLatin-Heavy.woff2');
+    font-weight: bold;
+}
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('../../fonts/LatoLatin-Italic.woff2');
+    font-style: italic;
+}
+@font-face {
+    font-family: "LatoLatinWeb";
+    src: url('../../fonts/LatoLatin-HeavyItalic.woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Inconsolata";
+    src: url('../../fonts/Inconsolata.woff2');
+}
+
+body {
+    font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
+    color: #000;
+    text-rendering: optimizeLegibility;
+    background: #f7f6f5;
+
+    cursor: default;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* make sure sticky site header don't cover invalid field in case of validation error */
+    scroll-padding-top: 100px;
+}
+
+a {
+    color: #D66200;
+    transition: linear 0.1s color;
+
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0084FF;
+    outline: none;
+}
+a:focus-visible {
+    outline-offset: 3px;
+    outline: 2px solid rgb(240,127,31, 0.6);
+}
+a:active {
+    color: #64BE00;
+    outline: none;
+}
+
+.sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.site-width {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+@media (max-width: 767px)
+{
+    .site-width {
+        padding-left: 5vw;
+        padding-right: 5vw;
+
+        /* override style from .custom-width and .full-width */
+        min-width: 320px !important;
+        box-sizing: border-box;
+    }
+}

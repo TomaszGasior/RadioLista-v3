@@ -1,5 +1,3 @@
-import '../../css/common/remove-dialog.css';
-
 export class RemoveDialogManager
 {
     constructor(container)
