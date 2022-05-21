@@ -46,14 +46,14 @@ textarea.ckeditor {
 }
 .cke_chrome .cke_wordcount {
     text-transform: lowercase;
-    padding: 1px 0.7em 0 0;
+    padding: 1px 12px 0 0;
 }
 .cke_chrome .cke_wordcount span {
     cursor: default !important;
 }
 
 .cke_chrome .cke_wysiwyg_div p, .cke_chrome .cke_wysiwyg_div ul, .cke_chrome .cke_wysiwyg_div ol {
-    margin: 0.8em 0;
+    margin: 15px 0;
 }
 
 .cke_dialog_body {

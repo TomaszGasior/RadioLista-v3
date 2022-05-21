@@ -5,10 +5,10 @@
     padding-left: 0;
 }
 .radio-table-export-list li {
-    margin-top: 0.8em;
+    margin-top: 15px;
 }
-.radio-table-export-list a {
-    margin-right: 0.7em;
+.radio-table-export-list a.button {
+    margin-right: 12px;
     width: 250px;
     vertical-align: baseline;
 }
@@ -16,7 +16,7 @@
 @media (max-width: 767px)
 {
     .radio-table-export-list a.button {
-        margin: 0.23em 0 0.7em 0;
+        margin: 15px 0 10px 0;
         width: 100%;
         max-width: 100%;
     }

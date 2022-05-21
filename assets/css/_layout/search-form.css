@@ -1,11 +1,11 @@
 .search-form {
     display: flex;
-    margin: 1em 0 2em;
+    margin: 18px 0 35px;
 
     /* needed for WebKit, not Blink */
     align-items: center;
 }
 .search-form button {
     margin: 0;
-    margin-left: 0.6em;
+    margin-left: 10px;
 }

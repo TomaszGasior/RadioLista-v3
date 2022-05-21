@@ -6,11 +6,11 @@
 }
 
 .radio-table td, .radio-table th {
-    padding: 0.31em 0.5em;
+    padding: 5px 8px;
     text-align: left;
 }
 .radio-table th {
-    padding-bottom: 0.5em;
+    padding-bottom: 10px;
     color: #477E2D;
     font-weight: normal;
     white-space: nowrap;

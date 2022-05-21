@@ -1,6 +1,7 @@
 .radio-table-container {
     /* reset visual vertical padding of table cells */
-    margin: 0 -0.4em;
+    margin-left: -6px;
+    margin-right: -6px;
 
     overflow-x: auto;
 

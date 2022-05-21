@@ -1,11 +1,11 @@
 .all-radio-tables-navigation {
     padding-left: 0;
-    margin: 1.5em 0;
+    margin: 25px 0;
     text-align: center;
 }
 .all-radio-tables-navigation li {
     display: inline-block;
-    margin: 0 1em;
+    margin: 0 10px;
 }
 .all-radio-tables-navigation li a {
     color: #5D9A3F;
@@ -18,6 +18,6 @@
 {
     .all-radio-tables-navigation li {
         display: block;
-        margin: 0.4em 0;
+        margin: 15px 0;
     }
 }

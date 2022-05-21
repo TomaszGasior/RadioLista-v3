@@ -69,8 +69,8 @@ select {
 button, a.button {
     display: inline-block;
     width: auto;
-    padding-left: 1.2em;
-    padding-right: 1.2em;
+    padding-left: 20px;
+    padding-right: 20px;
 
     background: #f8f8f8;
     color: #D66200;
@@ -104,7 +104,7 @@ fieldset {
     margin: 0;
     padding: 0;
     border: none;
-    padding: 0.3em 0;
+    padding: 5px 0;
 }
 
 input[type="checkbox"], input[type="radio"] {

@@ -3,8 +3,8 @@
     border: 1px solid #dfdfdf;
     border-radius: 7px;
     box-shadow: 0 0 6px rgba(0,0,0, 0.09);
-    padding: 1em 1.4em;
-    margin: 1.2em 0;
+    padding: 17px 24px;
+    margin: 20px 0;
 
     outline: 0 solid transparent;
     transition: linear 0.1s outline;
@@ -37,7 +37,7 @@
 }
 
 .radio-tables-list-details dl {
-    margin: 0.4em 0 0.1em;
+    margin: 7px 0 2px;
     font-size: 0.8em;
 }
 .radio-tables-list-details dt, .radio-tables-list-details dd {
@@ -47,5 +47,5 @@
     content: ':';
 }
 .radio-tables-list-details dt:not(:first-child) {
-    margin-left: 1em;
+    margin-left: 20px;
 }

@@ -15,7 +15,7 @@ body {
 @media (max-height: 600px) and (max-width: 400px)
 {
     body {
-        font-size: 0.9em;
+        font-size: 15em;
     }
 }
 
@@ -78,5 +78,5 @@ body {
 .content h1 {
     font-weight: normal;
     font-size: 1.5em;
-    margin: 0.8em 0;
+    margin: 14px 0;
 }

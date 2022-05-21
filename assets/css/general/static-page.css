@@ -10,15 +10,15 @@
 }
 .terms-of-service-page > *:last-child {
     flex-basis: 310px;
-    padding-left: 3em;
+    padding-left: 50px;
 }
 
 .terms-of-service-page ol {
-    padding-left: 1.5em;
+    padding-left: 27px;
 }
 .terms-of-service-page ol li {
-    padding-left: 0.3em;
-    margin: 0.3em 0;
+    padding-left: 5px;
+    margin: 5px 0;
 }
 .terms-of-service-page h2 {
     margin-top: 0;
@@ -37,17 +37,17 @@
 }
 .plain-text-page p, .plain-text-page ol {
     line-height: 1.6em;
-    margin: 0.6em 0;
+    margin: 10px 0;
 }
 .plain-text-page ol {
-    padding-left: 1.5em;
+    padding-left: 25px;
 }
 .plain-text-page li {
-    margin: 0.2em 0;
+    margin: 3px 0;
 }
 .plain-text-page p.p-for-button {
     line-height: inherit;
-    margin: 1.3em 0;
+    margin: 25px 0;
     text-align: center;
 }
 .plain-text-page a.button {

@@ -1,5 +1,5 @@
 .radio-table-columns-ui {
-    margin: 1.2em auto;
+    margin: 20px auto;
     max-width: 800px;
 }
 .radio-table-columns-ui .form-item {
@@ -8,7 +8,7 @@
     border: 1px solid #dfdfdf;
     box-shadow: 0 0 6px rgba(0,0,0, 0.09);
 
-    padding: 0.5em 1em;
+    padding: 10px 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -32,9 +32,8 @@
 .radio-table-columns-ui .form-item button {
     display: inline;
     width: auto;
-    height: 2em;
     min-width: 100px;
-    margin: 0 0 0 0.6em;
+    margin: 0 0 0 10px;
     white-space: nowrap;
 }
 .radio-table-columns-ui .form-item button:first-of-type {
@@ -57,7 +56,7 @@
         flex-direction: column;
     }
     .radio-table-columns-ui .form-item label {
-        margin-bottom: 0.7em;
+        margin-bottom: 15px;
     }
     .radio-table-columns-ui .form-item > :last-child {
         text-align: center;
@@ -70,7 +69,7 @@
         min-width: auto;
         height: auto;
         font-size: 0.8em;
-        padding-top: 0.6em;
-        padding-bottom: 0.6em;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 }

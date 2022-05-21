@@ -10,15 +10,15 @@
 .user-profile-details {
     display: flex;
     justify-content: center;
-    margin: 1em auto 1.5em;
+    margin: 18px auto 25px;
     font-style: italic;
 }
 .user-profile-details > * {
     display: flex;
-    margin: 0 1em;
+    margin: 0 20px;
 }
 .user-profile-details dt, .user-profile-details dd {
-    padding: 0 0.3em;
+    padding: 0 5px;
     margin: 0;
 }
 .user-profile-details dt::after {

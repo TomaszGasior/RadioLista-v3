@@ -1,8 +1,8 @@
 .site-header {
     background-color: #fff;
     border-bottom: 1px solid #dfdfdf;
-    padding-top: 0.51em;
-    padding-bottom: 0.51em;
+    padding-top: 9px;
+    padding-bottom: 9px;
 
     position: sticky;
     top: 0;
@@ -34,8 +34,8 @@
 {
     .site-header {
         position: static;
-        padding-top: 0.8em;
-        padding-bottom: 0.5em;
+        padding-top: 14px;
+        padding-bottom: 9px;
     }
     .site-header > div {
         flex-direction: column;
@@ -43,6 +43,6 @@
     }
 
     .site-header .site-logo {
-        margin-bottom: 0.6em;
+        margin-bottom: 10px;
     }
 }

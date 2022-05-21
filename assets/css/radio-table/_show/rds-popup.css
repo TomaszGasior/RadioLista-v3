@@ -30,13 +30,13 @@
     font-size: 0.9em;
     text-transform: uppercase;
     text-align: center;
-    padding: 0.3em 0;
+    padding: 5px 0;
     margin: 0;
 }
 
 .rds-popup dl {
     font-size: 0.8em;
-    margin: 0.9em 1.2em;
+    margin: 15px 20px;
 }
 .rds-popup dl > div {
     display: flex;
@@ -52,7 +52,7 @@
     font-weight: bold;
 
     /* keep in sync with div's margin */
-    padding: 0.3em 0;
+    padding: 5px 0;
 }
 .rds-popup dt::after {
     content: ":";
@@ -73,5 +73,5 @@
     white-space: pre-wrap;
 }
 .rds-popup dd div {
-    margin: 0.3em 0;
+    margin: 5px 0;
 }

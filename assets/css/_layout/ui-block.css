@@ -11,7 +11,7 @@
     border: 1px solid #dfdfdf;
     border-radius: 7px;
     box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
-    padding: 0.2em 1.3em 0.3em;
+    padding: 3px 22px 5px;
 
     flex-grow: 1;
 }
