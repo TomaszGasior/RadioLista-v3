@@ -40,6 +40,9 @@ function setupCustomWidthInput()
 
     const WIDTH_CUSTOM = widthTypeInput.dataset.customWidthValue;
 
+    // This is not added server-side for better UX of non-JS users.
+    customWidthField.required = true;
+
     let updateFieldVisibility = () => {
         customWidthField.disabled = (widthTypeInput.value != WIDTH_CUSTOM);
     };

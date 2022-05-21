@@ -76,6 +76,7 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'property_path' => 'appearance.customWidth',
 
                 'attr' => ['min' => '900'],
+                'required' => false,
             ])
             ->add('appearanceCollapsedComments', CheckboxType::class, [
                 'property_path' => 'appearance.collapsedComments',
