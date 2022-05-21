@@ -1,0 +1,64 @@
+.radio-table-details {
+    margin-top: 1.8em;
+    line-height: 1.5em;
+
+    width: 100%;
+}
+.radio-table-details p {
+    margin: 0.4em 0;
+}
+
+.radio-table-details dl {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    border-top: 1px solid rgba(0,0,0, 0.05);
+    font-size: 0.9em;
+    margin-top: 1.5em;
+    padding: 0.8em 2em 0 2em;
+    box-sizing: border-box;
+}
+.radio-table-details dl > * {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+.radio-table-details dl > * > * {
+    flex: 1;
+}
+.radio-table-details dt, .radio-table-details dd {
+    padding: 0 0.5em;
+    margin: 0;
+}
+.radio-table-details dt {
+    text-align: right;
+}
+.radio-table-details dt::after {
+    content: ":";
+}
+.radio-table-details dd {
+    text-align: left;
+    border-right: 1px solid rgba(0,0,0, 0.05);
+}
+.radio-table-details dd:last-child {
+    border-right: none;
+}
+
+@media (max-width: 767px)
+{
+    .radio-table-details dl {
+        flex-direction: column;
+        align-items: stretch;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .radio-table-details dt, .radio-table-details dd {
+        padding-top: 0.15em;
+        padding-bottom: 0.15em;
+    }
+    .radio-table-details dd {
+        border-right: none;
+    }
+}
