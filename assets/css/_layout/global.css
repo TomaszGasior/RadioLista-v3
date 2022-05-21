@@ -36,8 +36,10 @@ body {
 }
 
 html {
-    /* make sure sticky site header don't cover invalid field in case of validation error */
+    /* make sure sticky site header and sticky form action button don't cover site content */
+    /* in case of client-side validation error or keyboard based navigation */
     scroll-padding-top: 100px;
+    scroll-padding-bottom: 125px;
 }
 
 a {
