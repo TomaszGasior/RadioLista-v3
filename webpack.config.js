@@ -35,7 +35,6 @@ Encore
 
     .addStyleEntry('user-login-register', './assets/css/user/login-register.css')
     .addStyleEntry('user-public-profile', './assets/css/user/public-profile.css')
-    .addStyleEntry('my-account-settings', './assets/css/user/my-account-settings.css')
 
     .addStyleEntry('homepage', './assets/css/general/homepage.css')
     .addStyleEntry('all-radio-tables', './assets/css/general/all-radio-tables.css')
