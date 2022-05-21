@@ -33,10 +33,6 @@
     background: rgba(250,230,205, 0.8);
 }
 
-.radio-table a {
-    display: block;
-}
-
 .radio-table tr.text-bold {
     font-weight: bold;
 }
