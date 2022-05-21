@@ -53,13 +53,14 @@ a:hover {
     color: #0084FF;
     outline: none;
 }
-a:focus-visible {
-    outline-offset: 3px;
-    outline: 2px solid rgb(240,127,31, 0.6);
-}
 a:active {
     color: #64BE00;
     outline: none;
+}
+
+*:focus-visible {
+    outline-offset: 3px;
+    outline: 2px solid rgb(240,127,31, 0.6);
 }
 
 .sr-only {

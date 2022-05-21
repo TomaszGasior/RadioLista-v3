@@ -134,6 +134,7 @@ input[type="radio"]:checked {
 }
 
 input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible + label {
+    /* keep in sync with *:focus-visible */
     outline-offset: 3px;
     outline: 2px solid rgb(240,127,31, 0.6);
 }
