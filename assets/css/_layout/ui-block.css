@@ -7,7 +7,7 @@
     border: 1px solid #dfdfdf;
     border-radius: 7px;
     box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
-    padding: 3px 22px 5px;
+    padding: 26px 22px;
 }
 .ui-block-heading {
     width: 200px;
@@ -29,6 +29,13 @@
     }
 }
 
-.ui-block .information {
+.ui-block-content > .form-item:first-child, .ui-block-content > .form-columns:first-child {
+    margin-top: -2px;
+}
+
+.ui-block-content .information {
     box-shadow: none;
+}
+.ui-block-content > .information:first-child {
+    margin-top: 0;
 }

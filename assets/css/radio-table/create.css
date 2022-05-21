@@ -5,6 +5,5 @@
 }
 
 .form-group {
-    /* remove ugly margin between two fields */
-    margin-top: -15px;
+    padding-top: 5px;
 }
