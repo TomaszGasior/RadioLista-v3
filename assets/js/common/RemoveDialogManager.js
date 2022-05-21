@@ -1,4 +1,4 @@
-import '../../css/part/remove-dialog.css';
+import '../../css/common/remove-dialog.css';
 
 export class RemoveDialogManager
 {

@@ -1,6 +1,6 @@
 @import '~huebee/huebee.css';
 
-@import './part/ckeditor.css';
+@import '../common/ckeditor.css';
 
 
 /* color picker input */

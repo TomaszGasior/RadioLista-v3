@@ -1,4 +1,4 @@
-@import './part/ckeditor.css';
+@import '../common/ckeditor.css';
 
 
 .my-account-details > * {

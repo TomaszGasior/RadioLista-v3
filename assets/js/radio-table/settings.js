@@ -1,6 +1,6 @@
-import '../css/radio-table-settings.css';
+import '../../css/radio-table/settings.css';
 
-import { RemoveDialogManager } from './src/RemoveDialogManager.js';
+import { RemoveDialogManager } from '../common/RemoveDialogManager.js';
 
 import Huebee from 'huebee';
 

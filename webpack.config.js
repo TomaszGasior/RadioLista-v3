@@ -20,22 +20,26 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('common', './assets/js/common.js')
-    .addEntry('radio-table-create', './assets/js/radio-table-create.js')
-    .addEntry('radio-table-show', './assets/js/radio-table-show.js')
-    .addEntry('radio-table-settings', './assets/js/radio-table-settings.js')
-    .addEntry('radio-table-columns', './assets/js/radio-table-columns.js')
-    .addEntry('radio-station-edit-add', './assets/js/radio-station-edit-add.js')
-    .addEntry('my-account-settings', './assets/js/my-account-settings.js')
+    .addEntry('layout', './assets/js/layout.js')
     .addEntry('admin', './assets/js/admin.js')
-    .addStyleEntry('homepage', './assets/css/homepage.css')
-    .addStyleEntry('user-login-register', './assets/css/user-login-register.css')
-    .addStyleEntry('user-public-profile', './assets/css/user-public-profile.css')
-    .addStyleEntry('radio-table-export', './assets/css/radio-table-export.css')
-    .addStyleEntry('radio-station-bulk-remove', './assets/css/radio-station-bulk-remove.css')
-    .addStyleEntry('all-radio-tables', './assets/css/all-radio-tables.css')
-    .addStyleEntry('static-page', './assets/css/static-page.css')
     .addStyleEntry('dark-error', './assets/css/dark-error.css')
+
+    .addEntry('radio-table-show', './assets/js/radio-table/show.js')
+    .addEntry('radio-table-settings', './assets/js/radio-table/settings.js')
+    .addEntry('radio-table-columns', './assets/js/radio-table/columns.js')
+    .addStyleEntry('radio-table-create', './assets/css/radio-table/create.css')
+    .addStyleEntry('radio-table-export', './assets/css/radio-table/export.css')
+
+    .addEntry('radio-station-edit-add', './assets/js/radio-station/edit-add.js')
+    .addStyleEntry('radio-station-bulk-remove', './assets/css/radio-station/bulk-remove.css')
+
+    .addStyleEntry('user-login-register', './assets/css/user/login-register.css')
+    .addStyleEntry('user-public-profile', './assets/css/user/public-profile.css')
+    .addStyleEntry('my-account-settings', './assets/css/user/my-account-settings.css')
+
+    .addStyleEntry('homepage', './assets/css/general/homepage.css')
+    .addStyleEntry('all-radio-tables', './assets/css/general/all-radio-tables.css')
+    .addStyleEntry('static-page', './assets/css/general/static-page.css')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')

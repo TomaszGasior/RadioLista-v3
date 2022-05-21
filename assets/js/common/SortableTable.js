@@ -1,4 +1,4 @@
-import '../../css/part/sortable-table.css';
+import '../../css/common/sortable-table.css';
 
 export class SortableTable
 {

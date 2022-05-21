@@ -1,3 +1,3 @@
-import '../css/common.css';
+import '../css/layout.css';
 
 document.documentElement.classList.add('JS');

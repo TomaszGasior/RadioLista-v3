@@ -1,6 +1,6 @@
 import '../css/admin.css';
 
-import { SortableTable } from './src/SortableTable.js';
+import { SortableTable } from './common/SortableTable.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     let table = document.querySelector('table.sortable');

@@ -1,6 +1,6 @@
-import '../css/radio-station-edit-add.css';
+import '../../css/radio-station/edit-add.css';
 
-import { RemoveDialogManager } from './src/RemoveDialogManager.js';
+import { RemoveDialogManager } from '../common/RemoveDialogManager.js';
 
 function setupFrequencyWithDabChannelSync()
 {
