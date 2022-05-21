@@ -96,7 +96,7 @@ radio_table:
                 '2': 'pełna szerokość ekranu'
                 '3': 'niestandardowa szerokość'
             appearanceCustomWidth: 'Niestandardowa szerokość'
-            appearanceCollapsedComments: 'Użyj ikony zamiast pełnej treści w kolumnie komentarzy'
+            appearanceCollapsedComments: "Użyj ikony zamiast pełnej treści w\u00A0kolumnie komentarzy"
 
 
     columns:
