@@ -8,7 +8,6 @@
     max-width: 500px;
 
     text-align: center;
-    font-weight: 700;
     animation: dialog_show 0.5s ease;
 }
 .remove-dialog.no-JS-fallback {
@@ -26,6 +25,15 @@
         margin-left: 30px;
         margin-right: 30px;
     }
+}
+
+.remove-dialog-question {
+    font-weight: 700;
+}
+
+.remove-dialog .form-item-checkbox {
+    display: inline-block;
+    margin-top: 15px;
 }
 
 .remove-dialog button {

@@ -21,6 +21,8 @@ common:
         action:
             cancel: 'Anuluj'
             remove: 'Usuń'
+        text:
+            confirm_checkbox: 'Potwierdzam bezpowrotne usuwanie'
 
     notification:
         saved_changes: 'Zmiany zostały zapisane.'

@@ -21,6 +21,8 @@ common:
         action:
             cancel: 'Cancel'
             remove: 'Delete'
+        text:
+            confirm_checkbox: 'I confirm a permanent deletion'
 
     notification:
         saved_changes: 'Changes have been saved.'

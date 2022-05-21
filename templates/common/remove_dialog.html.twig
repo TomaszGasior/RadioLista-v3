@@ -1,15 +1,28 @@
 {% set no_js_fallback = app.request.query.has('remove') %}
 
 <dialog {{ no_js_fallback ? 'open' }} class="remove-dialog {{ no_js_fallback ? 'no-JS-fallback' }}">
-    {{ remove_question }}
+    <div class="remove-dialog-question">
+        {{ remove_question }}
+    </div>
 
     <form method="dialog">
+        {% if confirm_checkbox ?? true %}
+            <div>
+                <div class="form-item form-item-checkbox">
+                    <input required type="checkbox" id="remove-dialog-confirm-checkbox">
+                    <label for="remove-dialog-confirm-checkbox">
+                        {{ 'common.remove_dialog.text.confirm_checkbox'|trans }}
+                    </label>
+                </div>
+            </div>
+        {% endif %}
+
         {% if no_js_fallback %}
-            <button formmethod="get" formaction="{{ cancel_fallback_url }}">
+            <button formnovalidate formmethod="get" formaction="{{ cancel_fallback_url }}">
                 {{ 'common.remove_dialog.action.cancel'|trans }}
             </button>
         {% else %}
-            <button>
+            <button formnovalidate autofocus>
                 {{ 'common.remove_dialog.action.cancel'|trans }}
             </button>
         {% endif %}
