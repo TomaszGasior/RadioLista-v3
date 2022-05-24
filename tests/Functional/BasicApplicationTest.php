@@ -56,9 +56,11 @@ class BasicApplicationTest extends WebTestCase
             ['/wykaz/1/dodaj-stacje'],
             ['/wykaz/1/edytuj-stacje/1'],
             ['/wykaz/1/kopiuj-stacje/1'],
+            ['/wykaz/1/usun-stacje/1', '/wykaz/1', 'POST'],
             ['/wykaz/1/ustawienia'],
-            ['/wykaz/1/eksport', '/wykaz/1/ustawienia#export'],
-            ['/wykaz/1/usun'],
+            ['/wykaz/1/kolumny'],
+            ['/wykaz/1/eksport'],
+            ['/wykaz/1/usun', '/moje-wykazy', 'POST'],
         ];
 
         foreach ($urls as $data) {
@@ -69,9 +71,9 @@ class BasicApplicationTest extends WebTestCase
     /**
      * @dataProvider publicUrlsProvider
      */
-    public function testPublicPage(string $url, string $redirectUrl = null): void
+    public function testPublicPage(string $url, string $redirectUrl = null, string $method = 'GET'): void
     {
-        $this->client->request('GET', $url);
+        $this->client->request($method, $url);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, $redirectUrl);
@@ -80,10 +82,10 @@ class BasicApplicationTest extends WebTestCase
     /**
      * @dataProvider authenticatedUrlsProvider
      */
-    public function testAuthenticatedPage(string $url, string $redirectUrl = null): void
+    public function testAuthenticatedPage(string $url, string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->loginUserByName('test_user');
-        $this->client->request('GET', $url);
+        $this->client->request($method, $url);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, $redirectUrl);

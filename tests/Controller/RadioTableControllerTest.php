@@ -68,9 +68,8 @@ class RadioTableControllerTest extends WebTestCase
 
     public function testRemoveRadioTable(): void
     {
-        $crawler = $this->client->request('GET', '/wykaz/1/usun');
-        $form = $crawler->filter('form[name="radio_table_remove"]')->form();
-        $form['radio_table_remove[confirm]'] = '1';
+        $crawler = $this->client->request('GET', '/wykaz/1/ustawienia?remove=1');
+        $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();
         $this->client->submit($form);
 
         $this->client->request('GET', '/moje-wykazy');

@@ -58,6 +58,17 @@ class RadioStationControllerTest extends WebTestCase
         $this->assertStringContainsString('COPIED_RADIO_STATION_NAME', $content);
     }
 
+    public function testRemoveRadioStation(): void
+    {
+        $crawler = $this->client->request('GET', '/wykaz/1/edytuj-stacje/1?remove=1');
+        $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();
+        $this->client->submit($form);
+
+        $this->client->request('GET', '/wykaz/1');
+        $content = $this->client->getResponse()->getContent();
+        $this->assertStringNotContainsString('test_radio_station_name', $content);
+    }
+
     public function testBulkRemoveRadioStation(): void
     {
         $crawler = $this->client->request('GET', '/wykaz/1/usun-stacje');
