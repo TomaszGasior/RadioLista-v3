@@ -83,7 +83,7 @@ class RadioTableController extends AbstractController
     }
 
     /**
-     * @Route({"pl": "/wykaz/{id}/ustawienia/kolumny", "en": "/list/{id}/settings/columns"}, name="radio_table.columns")
+     * @Route({"pl": "/wykaz/{id}/kolumny", "en": "/list/{id}/columns"}, name="radio_table.columns")
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
