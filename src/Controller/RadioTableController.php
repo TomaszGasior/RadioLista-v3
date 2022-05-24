@@ -149,7 +149,7 @@ class RadioTableController extends AbstractController
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
      */
-    public function remove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
+    public function remove(RadioTable $radioTable, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($radioTable);
         $entityManager->flush();
