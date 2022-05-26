@@ -3,6 +3,7 @@ layout:
     description: 'your radio & television lists, bandscans, typical lists of received stations, private lists of favorite stations'
     navigation_title: 'Main menu'
     logged_in_as: 'Logged in as'
+    change_language_to: 'Change language to'
     app_version: 'Application version'
     ie_alert: 'This website does not work in Internet Explorer. Please switch to Microsoft Edge. Press Ctrl+Shift+E on the keyboard or search for Microsoft Edge in Start Menu.'
 

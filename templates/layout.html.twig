@@ -106,42 +106,62 @@
             {% block page_content %}{% endblock %}
         </main>
 
-        <footer class="site-footer customizable-color">
-            <p>&copy; RadioLista 2012-2022</p>
-            <p><span class="sr-only">{{ 'layout.app_version'|trans }}:</span> {{ app_version() }}</p>
-            <ul>
-                <li>
-                    <a href="{{ path('about_service') }}">
-                        {{ 'general.static_page.about_service'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('contact') }}">
-                        {{ 'general.static_page.contact'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('terms_of_service') }}">
-                        {{ 'general.static_page.terms_of_service'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('all_radio_tables') }}">
-                        {{ 'general.all_radio_tables.title'|trans }}
-                    </a>
-                </li>
-                {% if route_is_multilang %}
-                    {% for locale in locales %}
-                        {% if locale != current_locale %}
-                            <li>
-                                <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
-                                    {{ locale|language_name(locale=locale)|capitalize }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            </ul>
+        <footer class="site-footer">
+            <div class="site-width">
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ path('about_service') }}">
+                                {{ 'general.static_page.about_service'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('all_radio_tables') }}">
+                                {{ 'general.all_radio_tables.title'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contact') }}">
+                                {{ 'general.static_page.contact'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('terms_of_service') }}" hreflang="pl">
+                                {{ 'general.static_page.terms_of_service'|trans }}
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="secondary-line">
+                        &copy; RadioLista
+                        <span class="sr-only">{{ 'layout.app_version'|trans }}</span>
+                        <span title="{{ 'layout.app_version'|trans }}">{{ app_version() }}</span>
+                        2012-2022
+                    </div>
+                </div>
+
+                <div>
+                    {% if route_is_multilang %}
+                        <div aria-hidden="true" class="secondary-line">
+                            Languages
+                        </div>
+
+                        <ul>
+                            {% for locale in locales %}
+                                <li lang="{{ locale }}">
+                                    <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}"
+                                      {% if locale == current_locale %}aria-hidden="true" tabindex="-1"{% endif %}>
+                                        <span class="sr-only">
+                                        {{ 'layout.change_language_to'|trans(locale=locale) }}
+                                        </span>
+                                        {{ locale|language_name(locale=locale)|capitalize }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
         </footer>
 
         {% block body_closing %}{% endblock %}

@@ -12,6 +12,12 @@
 .customized-radio-table .site-header {
     background-color: rgba(255,255,255, 0.9);
 }
+.customized-radio-table .site-footer {
+    background: rgba(30,30,30, 0.7);
+}
+.customized-radio-table .site-footer > div::before {
+    opacity: 0.3;
+}
 
 .customized-radio-table .radio-table tbody tr:hover, .customized-radio-table .radio-table tbody tr:focus-within {
     background: rgba(200,200,200, 0.4);

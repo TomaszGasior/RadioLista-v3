@@ -1,8 +1,10 @@
 .main-content {
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 10px;
+    padding-bottom: 35px;
     margin: auto;
-    min-height: 70vh;
+
+    /* make sure footer is always at bottom */
+    min-height: calc(100vh - 225px - 57px - 10px - 35px);
 }
 
 .main-content > header h1 {
@@ -36,7 +38,8 @@
 @media (max-width: 767px)
 {
     .main-content {
-        min-height: auto;
+        /* make sure footer is always at bottom, outside of the initial viewport */
+        min-height: calc(100vh - 250px);
     }
 
     .main-content > header h1 {
