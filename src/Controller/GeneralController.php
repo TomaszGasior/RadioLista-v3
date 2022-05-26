@@ -36,7 +36,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route({"pl": "/regulamin", "en": "/terms-of-service"}, name="terms_of_service")
+     * @Route("/regulamin", name="terms_of_service")
      */
     public function termsOfService(): Response
     {
