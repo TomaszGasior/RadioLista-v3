@@ -18,13 +18,6 @@
 .radio-table td {
     border-top: 1px solid rgba(0,0,0, 0.05);
 }
-@supports (-webkit-nbsp-mode: initial)
-{
-    /* color for WebKit, not Blink */
-    .radio-table td {
-        border-top: 1px solid rgba(0,0,0, 0.03);
-    }
-}
 
 .radio-table tbody tr {
     transition: background 0.1s;
