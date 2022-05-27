@@ -258,7 +258,7 @@ user:
 
         form:
             name: 'Username'
-            name.help: 'Allowed only: letters A-Z, numbers, underscore, dash, dot.'
+            name.help: 'Allowed characters: letters, numbers, underscore, dash, dot. Username cannot be changed later.'
             plainPassword.first: 'Password'
             plainPassword.second: 'Password again'
             acceptServiceTerms: 'I accept %anchor%terms of service%anchor_end%'

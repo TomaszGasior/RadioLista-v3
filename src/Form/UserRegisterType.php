@@ -17,9 +17,7 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'attr' => [
-                    'title' => 'user.register.form.name.help',
-                ],
+                'help' => 'user.register.form.name.help',
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,

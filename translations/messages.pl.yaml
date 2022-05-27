@@ -259,7 +259,7 @@ user:
 
         form:
             name: 'Nazwa użytkownika'
-            name.help: 'Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka.'
+            name.help: 'Dozwolone znaki: litery A-Z, cyfry, podkreślnik, myślnik, kropka. Nazwy użytkownika nie można później zmienić.'
             plainPassword.first: 'Hasło'
             plainPassword.second: 'Hasło ponownie'
             acceptServiceTerms: 'Akceptuję %anchor%regulamin%anchor_end% serwisu RadioLista'
