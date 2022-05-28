@@ -4,10 +4,9 @@
 
 {% block page_content %}
     <header>
-        <h1>
-            {{ 'general.search_radio_tables.title_pattern'|trans({
-                '%search_term%': '<strong>' ~ search_term ~ '</strong>',
-            })|raw }}
+        <h1 class="sr-only">
+            {{ 'general.search_radio_tables.title'|trans }}
+            {{ search_term }}
         </h1>
     </header>
 

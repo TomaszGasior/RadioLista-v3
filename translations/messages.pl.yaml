@@ -14,6 +14,7 @@ common:
     search_form:
         form:
             s: 'Szukane wyrażenie'
+            s.help: 'Wpisz szukaną frazę'
 
         action:
             search: 'Szukaj'
@@ -308,7 +309,6 @@ general:
 
     search_radio_tables:
         title: 'Wyszukiwanie'
-        title_pattern: '„%search_term%” — wyszukiwanie'
 
         information:
             no_results: "Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, bez zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów."

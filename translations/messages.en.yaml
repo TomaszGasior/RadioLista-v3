@@ -14,6 +14,7 @@ common:
     search_form:
         form:
             s: 'Search term'
+            s.help: 'Enter the search term'
 
         action:
             search: 'Search'
@@ -307,7 +308,6 @@ general:
 
     search_radio_tables:
         title: 'Search'
-        title_pattern: '„%search_term%” — search'
 
         information:
             no_results: "No search results found. Try to use a simpler search term, without unnecessary words like \"and\". Please remember that only list titles and descriptions are searched."

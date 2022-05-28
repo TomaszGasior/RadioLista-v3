@@ -12,7 +12,11 @@ class RadioTableSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('s', SearchType::class)
+            ->add('s', SearchType::class, [
+                'attr' => [
+                    'placeholder' => 'common.search_form.form.s.help',
+                ],
+            ])
             ->setMethod('GET')
         ;
     }
