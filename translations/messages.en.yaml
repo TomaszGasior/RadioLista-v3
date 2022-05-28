@@ -288,14 +288,16 @@ general:
     homepage:
         heading:
             last_updated_radio_tables: 'Last modified lists'
-            last_created_radio_tables: 'Last created lists'
             about_this_service: "What's RadioLista?"
             search_radio_tables: 'Search lists'
 
+        action:
+            learn_more_about_service: 'Learn more about RadioLista'
+            show_all_radio_tables: 'View all lists'
+
         text:
-            about: "This is a place for people interested in the media to publish various radio lists and TV lists — bandscans, typical lists of received stations, private lists of favorite stations."
+            about: "RadioLista is a place in the Web where people interested in the media and the radio can publish various radio and TV lists — bandscans, regular lists of received stations, as well as private lists of favorite broadcasters."
             radio_table_updated_at: 'last updated at'
-            radio_table_created_at: 'created at'
 
     all_radio_tables:
         title: 'All lists'

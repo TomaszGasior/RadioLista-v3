@@ -289,14 +289,16 @@ general:
     homepage:
         heading:
             last_updated_radio_tables: 'Ostatnio zmodyfikowane wykazy'
-            last_created_radio_tables: 'Ostatnio utworzone wykazy'
             about_this_service: 'Czym jest RadioLista?'
             search_radio_tables: 'Wyszukaj wykazy'
+
+        action:
+            learn_more_about_service: 'Dowiedź się więcej o RadioLiście'
+            show_all_radio_tables: 'Zobacz wszystkie wykazy'
 
         text:
             about: "W serwisie RadioLista osoby interesujące się mediami mogą\u00A0publikować różnorodne wykazy radiowe i\u00A0telewi\u00ADzyjne — bandscany, regularne wykazy odbieranych stacji czy\u00A0też prywatne listy ulubionych programów."
             radio_table_updated_at: 'ostatnio zaktualizowano'
-            radio_table_created_at: 'utworzono'
 
     all_radio_tables:
         title: 'Wszystkie wykazy'
