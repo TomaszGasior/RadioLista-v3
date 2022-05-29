@@ -8,7 +8,7 @@
 }
 
 .main-content > header h1 {
-    color: #EE6D00;
+    color: #E76A00;
     margin: 18px 0 30px;
     font-size: 34px;
     text-shadow: 0 0 2px #eee;
@@ -22,7 +22,7 @@
 .main-content > header h1 .additional {
     font-size: 15px;
     color: #000;
-    opacity: 0.4;
+    opacity: 0.55;
     padding-left: 2px;
     padding-top: 5px;
 }

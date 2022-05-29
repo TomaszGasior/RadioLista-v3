@@ -27,7 +27,7 @@
 }
 .radio-table-columns-ui .form-item.hidden-column label {
     text-decoration: line-through;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 .radio-table-columns-ui .form-item button {
     display: inline;

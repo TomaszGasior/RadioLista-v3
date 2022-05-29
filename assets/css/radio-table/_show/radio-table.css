@@ -36,19 +36,19 @@
     text-decoration: line-through;
 }
 .radio-table tr.background-1 {
-    background: rgba(253,198,198, 0.65) !important;
+    background: rgba(253,198,198, 0.45) !important;
 }
 .radio-table tr.background-2 {
-    background: rgba(175,255,150, 0.65) !important;
+    background: rgba(175,255,150, 0.4) !important;
 }
 .radio-table tr.background-3 {
-    background: rgba(156,230,255, 0.65) !important;
+    background: rgba(156,230,255, 0.35) !important;
 }
 .radio-table tr.background-4 {
-    background: rgba(255,255,120, 0.65) !important;
+    background: rgba(255,255,120, 0.3) !important;
 }
 .radio-table tr.background-5 {
-    background: rgba(255,177,255, 0.65) !important;
+    background: rgba(255,177,255, 0.3) !important;
 }
 
 .radio-table .quality {
@@ -113,6 +113,13 @@
 }
 .radio-table time {
     white-space: nowrap;
+}
+
+.radio-table a:not(:hover) {
+    color: #a84c00;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: rgba(0,0,0, 0.2);
 }
 
 .radio-table a.external {
