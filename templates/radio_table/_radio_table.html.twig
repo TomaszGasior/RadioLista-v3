@@ -86,8 +86,8 @@
                             {%- elseif column == 'quality' -%}
                                 <span class="quality quality-{{ radio_station.quality }}"
                                       title="{{ ('quality.' ~ radio_station.quality)|trans }}">
-                                    {#- Skip whitespace for proper styling. -#}
-                                    {{- get_quality_label(radio_station.quality) -}}
+                                    <span class="raw">{{- get_quality_label(radio_station.quality) -}}</span>
+                                    <span class="dots" aria-hidden="true"></span>
                                 </span>
 
                             {%- elseif column == 'distance' -%}

@@ -52,34 +52,37 @@
 }
 
 .radio-table .quality {
-    color: rgba(0,0,0, 0);
     display: block;
 }
-.radio-table .quality::selection {
+.radio-table .quality .raw {
+    color: rgba(0,0,0, 0);
+    position: absolute;
+}
+.radio-table .quality .raw::selection {
     opacity: 0;
 }
-.radio-table .quality::before {
+.radio-table .quality .dots::before {
     text-shadow: 0 0 2px #CCC;
     margin-right: -10px;
     letter-spacing: 2px;
 }
-.radio-table .quality.quality-5::before {
+.radio-table .quality.quality-5 .dots::before {
     color: #0BB300;
     content: "●●●●●";
 }
-.radio-table .quality.quality-4::before {
+.radio-table .quality.quality-4 .dots::before {
     color: #A8D300;
     content: "●●●●";
 }
-.radio-table .quality.quality-3::before {
+.radio-table .quality.quality-3 .dots::before {
     color: #BDAC00;
     content: "●●●";
 }
-.radio-table .quality.quality-2::before {
+.radio-table .quality.quality-2 .dots::before {
     color: #FF5E00;
     content: "●●";
 }
-.radio-table .quality.quality-1::before {
+.radio-table .quality.quality-1 .dots::before {
     color: #FF0017;
     content: "●";
 }
