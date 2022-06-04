@@ -144,7 +144,7 @@ radio_table:
             removed: 'List has been permanently deleted.'
 
         text:
-            confirmation: 'Are you sure you want to permanently delete „%name%” list? This cannot be undone.'
+            confirmation: 'Are you sure you want to permanently delete "%name%" list? This cannot be undone.'
 
     standalone:
         about: 'This list was created using %anchor% on %date%.'
@@ -160,7 +160,7 @@ radio_station:
 
     edit:
         title: 'Edit station'
-        title_pattern: 'Edit station „%name%”'
+        title_pattern: 'Edit station "%name%"'
 
         action:
             copy_current: 'Copy this station'
@@ -213,7 +213,7 @@ radio_station:
             removed: 'Station has been deleted.'
 
         text:
-            confirmation: 'Are you sure you want to delete „%name%” station?'
+            confirmation: 'Are you sure you want to delete "%name%" station?'
 
     bulk_remove:
         title: 'Delete more stations'
