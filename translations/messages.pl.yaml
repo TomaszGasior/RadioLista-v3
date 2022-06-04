@@ -2,9 +2,10 @@ layout:
     slogan: 'bandscany i wykazy radiowe'
     description: 'twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji'
     navigation_title: 'Menu główne'
+    user_menu_title: 'Menu użytkownika'
     skip_to_content: 'Przeskocz do treści'
     logged_in_as: 'Zalogowany jako'
-    change_language_to: 'Zmień język na'
+    change_language_to: 'Zmień język na %lang%'
     app_version: 'Wersja aplikacji'
     ie_alert: 'Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge. Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.'
 
@@ -30,6 +31,9 @@ common:
     notification:
         saved_changes: 'Zmiany zostały zapisane.'
         invalid_form: 'Wystąpił błąd w formularzu poniżej.'
+
+    text:
+        in_radio_table_a11y_subheading_prefix: 'w wykazie'
 
 radio_table:
     detail:
@@ -204,7 +208,6 @@ radio_station:
             rds_popup: "Aby zobaczyć wyskakujące okno z\u00A0informacjami o\u00A0RDS, włącz JavaScript w\u00A0przeglądarce."
 
         text:
-            for_radio_table_a11y_subheading: 'w wykazie'
             disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
 
     remove:
@@ -288,6 +291,8 @@ user:
 
 general:
     homepage:
+        title: 'Strona główna'
+
         heading:
             last_updated_radio_tables: 'Ostatnio zmodyfikowane wykazy'
             about_this_service: 'Czym jest RadioLista?'

@@ -59,12 +59,11 @@
         background-size: 15px;
     }
     .site-navigation li.user-submenu ul {
-        display: none;
-
         position: absolute;
         right: 0;
-        bottom: -10px;
-        transform: translateY(100%);
+
+        /* hide visually by default, keep for screen readers */
+        top: -9999px;
 
         padding: 12px 20px;
         text-align: left;
@@ -73,6 +72,7 @@
         border-radius: 7px;
         box-shadow: 0 0 10px rgba(0,0,0, 0.14);
 
+        /* keep in sync with ::before height */
         margin-top: 10px;
     }
     .site-navigation li.user-submenu ul::before {
@@ -80,12 +80,11 @@
         position: absolute;
         left: 0;
         right: 0;
-        top: 0;
+        top: -10px;
         height: 10px;
-        transform: translateY(-100%);
     }
     .site-navigation li.user-submenu:hover ul, .site-navigation li.user-submenu:focus-within ul {
-        display: block;
+        top: auto;
     }
     .site-navigation li.user-submenu li {
         white-space: nowrap;

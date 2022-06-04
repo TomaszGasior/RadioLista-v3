@@ -38,7 +38,7 @@
 
         <header class="site-header {{ development ? 'develop' : '' }}">
             <div class="site-width">
-                <a href="{{ path('homepage') }}" class="site-logo">RadioLista</a>
+                <a href="{{ path('homepage') }}" class="site-logo" aria-label="{{ 'general.homepage.title'|trans }}">RadioLista</a>
 
                 <nav class="site-navigation">
                     <h2 class="sr-only">{{ 'layout.navigation_title'|trans }}</h2>
@@ -54,12 +54,12 @@
                             </li>
 
                             <li class="user-item user-submenu">
-                                <span tabindex="0" role="button">
+                                <span>
                                     <span class="sr-only">{{ 'layout.logged_in_as'|trans }}</span>
                                     {{ app.user.name }}
                                 </span>
 
-                                <ul>
+                                <ul aria-label="{{ 'layout.user_menu_title'|trans }}">
                                     {% if app.user.publicProfile %}
                                         <li>
                                             <a href="{{ path('user.public_profile', {name: app.user.name}) }}">
@@ -152,11 +152,10 @@
                         <ul>
                             {% for locale in locales %}
                                 <li lang="{{ locale }}">
-                                    <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}"
-                                      {% if locale == current_locale %}aria-hidden="true" tabindex="-1"{% endif %}>
-                                        <span class="sr-only">
-                                        {{ 'layout.change_language_to'|trans(locale=locale) }}
-                                        </span>
+                                    <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
+                                        aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"
+                                        {% if locale == current_locale %} aria-hidden="true" tabindex="-1" {% endif %}
+                                    >
                                         {{ locale|language_name(locale=locale)|capitalize }}
                                     </a>
                                 </li>

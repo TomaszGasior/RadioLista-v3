@@ -2,9 +2,10 @@ layout:
     slogan: 'bandscans & radio lists'
     description: 'your radio & television lists, bandscans, typical lists of received stations, private lists of favorite stations'
     navigation_title: 'Main menu'
+    user_menu_title: 'User menu'
     skip_to_content: 'Skip to content'
     logged_in_as: 'Logged in as'
-    change_language_to: 'Change language to'
+    change_language_to: 'Change language to %lang%'
     app_version: 'Application version'
     ie_alert: 'This website does not work in Internet Explorer. Please switch to Microsoft Edge. Press Ctrl+Shift+E on the keyboard or search for Microsoft Edge in Start Menu.'
 
@@ -30,6 +31,9 @@ common:
     notification:
         saved_changes: 'Changes have been saved.'
         invalid_form: 'There is a problem in the form below.'
+
+    text:
+        in_radio_table_a11y_subheading_prefix: 'in list'
 
 radio_table:
     detail:
@@ -203,7 +207,6 @@ radio_station:
             rds_popup: 'Please enable JavaScript in your browser to be able to use pop-up with extra RDS information.'
 
         text:
-            for_radio_table_a11y_subheading: 'in list'
             disabled_radio_table_column: 'This column is currently not visible in the list.'
 
     remove:
@@ -287,6 +290,8 @@ user:
 
 general:
     homepage:
+        title: 'Homepage'
+
         heading:
             last_updated_radio_tables: 'Last modified lists'
             about_this_service: "What's RadioLista?"
