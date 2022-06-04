@@ -2,6 +2,7 @@ layout:
     slogan: 'bandscans & radio lists'
     description: 'your radio & television lists, bandscans, typical lists of received stations, private lists of favorite stations'
     navigation_title: 'Main menu'
+    skip_to_content: 'Skip to content'
     logged_in_as: 'Logged in as'
     change_language_to: 'Change language to'
     app_version: 'Application version'

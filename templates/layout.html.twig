@@ -32,6 +32,10 @@
     </head>
 
     <body class="customizable-background">
+        <a href="#content" class="skip-link">
+            {{ 'layout.skip_to_content'|trans }}
+        </a>
+
         <header class="site-header {{ development ? 'develop' : '' }}">
             <div class="site-width">
                 <a href="{{ path('homepage') }}" class="site-logo">RadioLista</a>
@@ -101,7 +105,7 @@
             <div role="alert" class="notification">{{ notice|trans }}</div>
         {% endif %}
 
-        <main class="main-content site-width">
+        <main class="main-content site-width" id="content">
             {% block page_content %}{% endblock %}
         </main>
 

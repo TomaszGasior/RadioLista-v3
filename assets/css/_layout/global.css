@@ -72,6 +72,26 @@ a:active {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
+.skip-link {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    transform: translateX(-200%);
+
+    background: #fff;
+    padding: 15px;
+    line-height: 1;
+    border: 3px solid currentColor;
+    font-size: 1.3em;
+    font-weight: bold;
+
+    /* above sticky site header */
+    z-index: 1001;
+}
+.skip-link:focus {
+    transform: translateX(0);
+}
+
 .site-width {
     max-width: 1100px;
     margin-left: auto;

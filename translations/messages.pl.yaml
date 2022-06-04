@@ -2,6 +2,7 @@ layout:
     slogan: 'bandscany i wykazy radiowe'
     description: 'twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji'
     navigation_title: 'Menu główne'
+    skip_to_content: 'Przeskocz do treści'
     logged_in_as: 'Zalogowany jako'
     change_language_to: 'Zmień język na'
     app_version: 'Wersja aplikacji'
