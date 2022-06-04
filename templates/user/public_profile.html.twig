@@ -19,11 +19,11 @@
     </header>
 
     {% if user.aboutMe is not empty %}
-        <section class="user-profile-page user-profile-description">
+        <div class="user-profile-page user-profile-description">
             <h2>{{ 'user.public_profile.heading.details'|trans }}</h2>
 
             {{ user.aboutMe|raw }}
-        </section>
+        </div>
     {% endif %}
 
     <dl class="user-profile-details">
@@ -37,7 +37,7 @@
         </div>
     </dl>
 
-    <section class="user-profile-page">
+    <div class="user-profile-page">
         <h2>{{ 'user.public_profile.heading.radio_tables'|trans }}</h2>
 
         {% if radio_tables %}
@@ -47,5 +47,5 @@
                 {{ 'user.public_profile.information.no_radio_tables'|trans }}
             </p>
         {% endif %}
-    </section>
+    </div>
 {% endblock %}
