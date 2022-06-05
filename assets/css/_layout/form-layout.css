@@ -1,6 +1,10 @@
-.form-item + .form-item, .form-item + .form-group, .form-group + .form-item {
+.form-item + .form-item,
+.form-columns + .form-columns,
+.form-item + .form-columns, .form-columns + .form-item,
+.form-item + .form-group, .form-group + .form-item {
     margin-top: 20px;
 }
+
 .form-item label {
     display: inline-block;
     margin-bottom: 7px;
@@ -15,9 +19,6 @@
         grid-gap: 20px;
     }
 
-    .form-columns + .form-columns, .form-item + .form-columns, .form-columns + .form-item {
-        margin-top: 20px;
-    }
     .form-columns .form-item + .form-item {
         margin-top: 0;
     }

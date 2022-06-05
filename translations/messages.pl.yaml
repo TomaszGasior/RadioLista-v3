@@ -149,7 +149,7 @@ radio_table:
             removed: 'Wykaz został bezpowrotnie usunięty.'
 
         text:
-            confirmation: 'Czy na pewno chcesz bezpowrotnie usunąć  wykaz „%name%”? Tej czynności nie można cofnąć.'
+            confirmation: "Czy na pewno chcesz bezpowrotnie usunąć  wykaz „%name%”? Tej\u00A0czynności nie można cofnąć."
 
     standalone:
         about: 'Wykaz wygenerowano w serwisie %anchor% dnia %date%.'

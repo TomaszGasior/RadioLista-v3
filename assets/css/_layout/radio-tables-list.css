@@ -37,6 +37,18 @@
     color: #D66200;
 }
 
+@media (max-width: 767px)
+{
+    .radio-tables-list-item {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    .radio-tables-list-title a {
+        font-size: 1.3em;
+        line-height: 1.4;
+    }
+}
+
 .radio-tables-list-details dl {
     margin: 7px 0 2px;
     font-size: 0.8em;
