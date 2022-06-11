@@ -1,0 +1,78 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ 'radio_table.export.title'|trans }}{% endblock %}
+
+{% block head_closing %}
+    {{ encore_entry_link_tags('radio-table-export') }}
+    {{ encore_entry_script_tags('radio-table-export') }}
+{% endblock %}
+
+{% block context_menu %}
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+            {{ 'radio_table.settings.title'|trans }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block page_content %}
+    <header>
+        <h1 class="separated-title">
+            <span>{{ 'radio_table.export.title'|trans }}</span>
+            <span class="additional">{{ radio_table.name }}</span>
+        </h1>
+    </header>
+
+
+    {% if radio_table.radioStationsCount > 0 %}
+        <div class="ui-block">
+            <div class="ui-block-content">
+                <p class="information">
+                    {{ 'radio_table.export.information.export'|trans }}
+                </p>
+
+                <ul class="radio-table-export-list">
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
+                            {{ 'radio_table.export.action.download_xlsx'|trans }}
+                        </a>
+                        {{ 'radio_table.export.text.about_xlsx'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
+                            {{ 'radio_table.export.action.download_ods'|trans }}
+                        </a>
+                        {{ 'radio_table.export.text.about_ods'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
+                            {{ 'radio_table.export.action.download_csv'|trans }}
+                        </a>
+                        {{ 'radio_table.export.text.about_csv'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
+                            {{ 'radio_table.export.action.download_pdf'|trans }}
+                        </a>
+                        {{ 'radio_table.export.text.about_pdf'|trans }}
+                    </li>
+                    <li>
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
+                            {{ 'radio_table.export.action.download_html'|trans }}
+                        </a>
+                        {{ 'radio_table.export.text.about_html'|trans }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <p class="information">
+            {{ 'radio_table.export.information.export_cannot_empty'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

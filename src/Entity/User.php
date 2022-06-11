@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\Doctrine\EntityListener\UserListener"})
- * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name.not_unique")
+ * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name_not_unique")
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
 class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, PasswordAuthenticatedUserInterface
@@ -26,11 +26,11 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(groups={"Default", "RedefinePassword"}, message="user.name.not_blank")
-     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"}, maxMessage="user.name.max_length")
+     * @Assert\NotBlank(groups={"Default", "RedefinePassword"})
+     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"})
      * @Assert\Regex(
      *     "/^[a-zA-Z0-9_\.\-]*$/", groups={"Default", "RedefinePassword"},
-     *     message="user.name.invalid_chars"
+     *     message="user.name_invalid_chars"
      * )
      */
     private $name;
@@ -42,11 +42,8 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     private $password;
 
     /**
-     * @Assert\NotBlank(groups={"RedefinePassword"}, message="user.password.not_blank")
-     * @Assert\Length(
-     *     max=100, groups={"RedefinePassword"},
-     *     maxMessage="user.password.max_length"
-     * )
+     * @Assert\NotBlank(groups={"RedefinePassword"})
+     * @Assert\Length(max=100, groups={"RedefinePassword"})
      */
     private $plainPassword;
 
@@ -62,7 +59,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"}, maxMessage="user.about_me.max_length")
+     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"})
      */
     private $aboutMe;
 

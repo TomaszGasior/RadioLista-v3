@@ -1,0 +1,41 @@
+.ui-block + .ui-block {
+    margin-top: 40px;
+}
+
+.ui-block-content {
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
+    padding: 26px 22px;
+}
+.ui-block-heading {
+    width: 200px;
+    margin-right: 25px;
+}
+
+@media (min-width: 999px)
+{
+    .ui-block {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    .ui-block-content {
+        flex-grow: 1;
+    }
+    .ui-block-heading {
+        flex-shrink: 0;
+    }
+}
+
+.ui-block-content > .form-item:first-child, .ui-block-content > .form-columns:first-child {
+    margin-top: -2px;
+}
+
+.ui-block-content .information {
+    box-shadow: none;
+}
+.ui-block-content > .information:first-child {
+    margin-top: 0;
+}

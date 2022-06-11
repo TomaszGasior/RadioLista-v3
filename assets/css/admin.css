@@ -33,7 +33,7 @@ table tbody tr:hover {
     background: #ddd;
 }
 table td, table th {
-    padding: 0.26em 0.6em;
+    padding: 4px 10px;
 }
 table th {
     text-align: left;
@@ -49,27 +49,4 @@ table td.nowrap {
 table + p {
     font-style: italic;
     text-align: center;
-}
-
-
-/* log */
-
-.logs {
-    height: 500px;
-    font: 0.8em /1.5em "Source Code Pro", "Consolas", "Inconsolata", monospace;
-    overflow-y: scroll;
-    overflow-x: auto;
-    padding: 1em;
-
-    background: #fff;
-    box-shadow: 0 0 2px #cdcdcd;
-}
-.logs pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-.logs pre b {
-    display: inline-block;
-    padding-bottom: 4px;
 }

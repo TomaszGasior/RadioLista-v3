@@ -49,8 +49,8 @@ class RadioStationEditExtension extends AbstractTypeExtension
         $formChildrenToHide = [];
 
         /** @var FormInterface[] $form */
-        foreach ($form as $childrenName => $children) {
-            $propertyPath = (string) $children->getPropertyPath();
+        foreach ($form as $childName => $child) {
+            $propertyPath = (string) $child->getPropertyPath();
             $columnName = self::PROPERTY_PATH_TO_COLUMN[$propertyPath] ?? $propertyPath;
 
             if (in_array($columnName, self::PROPERTY_PATH_NON_COLUMNS)) {
@@ -58,13 +58,13 @@ class RadioStationEditExtension extends AbstractTypeExtension
             }
 
             if (false === in_array($columnName, $visibleColumns)) {
-                $formChildrenToHide[] = $childrenName;
+                $formChildrenToHide[] = $childName;
             }
         }
 
-        foreach ($view as $childrenName => $children) {
-            $children->vars['disabled_radio_table_column'] =
-                in_array($childrenName, $formChildrenToHide);
+        foreach ($view as $childName => $child) {
+            $child->vars['disabled_radio_table_column'] =
+                in_array($childName, $formChildrenToHide);
         }
     }
 

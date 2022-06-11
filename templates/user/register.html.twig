@@ -14,14 +14,20 @@
     <div class="user-login-screen">
         <h1 class="h2">{{ 'user.register.title'|trans }}</h1>
 
-        {{ form_row(form.name) }}
-        {{ form_row(form.plainPassword) }}
-        {{ form_row(form.acceptServiceTerms, {label_translation_parameters: {
-            '%anchor%': '<a href="' ~ path('terms_of_service') ~ '" target="_blank">',
-            '%anchor_end%': '</a>',
-        }}) }}
+        <div class="ui-block">
+            <div class="ui-block-content">
+                {{ form_row(form.name) }}
+                {{ form_row(form.plainPassword) }}
+                {{ form_row(form.acceptServiceTerms, {label_translation_parameters: {
+                    '%anchor%': '<a href="' ~ path('terms_of_service') ~ '" target="_blank" hreflang="pl">',
+                    '%anchor_end%': '</a>',
+                }}) }}
+            </div>
+        </div>
 
-        <button>{{ 'user.register.title'|trans }}</button>
+        <div class="form-action-button">
+            <button>{{ 'user.register.title'|trans }}</button>
+        </div>
     </div>
 
     {{ form_end(form) }}

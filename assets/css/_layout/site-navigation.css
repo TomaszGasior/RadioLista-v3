@@ -1,0 +1,117 @@
+.site-navigation {
+    text-align: right;
+}
+.site-navigation ul {
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+.site-navigation li {
+    display: inline-block;
+    margin-right: 20px;
+}
+.site-navigation li:last-child {
+    margin-right: 0;
+}
+.site-navigation a {
+    color: #477E2D;
+
+    display: inline-block;
+    padding: 6px 0;
+}
+.site-navigation a:hover {
+    color: #EE6D00;
+}
+.site-navigation li.user-item {
+    color: #111;
+}
+.site-navigation li.user-item::before {
+    content: '';
+    display: inline-block;
+    vertical-align: -3px;
+    width: 1px;
+    height: 18px;
+    margin-left: -3px;
+    margin-right: 17px;
+    background: rgba(0,0,0, 0.16);
+}
+.site-navigation li.user-item + li.user-item::before,
+.site-navigation li.user-item:first-child::before {
+    display: none;
+}
+.site-navigation li.user-item a {
+    color: inherit;
+}
+
+@media (min-width: 768px)
+{
+    .site-navigation li.user-submenu {
+        position: relative;
+    }
+    .site-navigation li.user-submenu > span {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-right: 23px;
+
+        background-image: url("data:image/svg+xml,%3Csvg height='16px' width='25px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23555' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+        background-position: top 52.5% right;
+        background-repeat: no-repeat;
+        background-size: 15px;
+    }
+    .site-navigation li.user-submenu ul {
+        position: absolute;
+        right: 0;
+
+        /* hide visually by default, keep for screen readers */
+        top: -9999px;
+
+        padding: 12px 20px;
+        text-align: left;
+        background: #fff;
+        border: 1px solid #cacaca;
+        border-radius: 7px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.14);
+
+        /* keep in sync with ::before height */
+        margin-top: 10px;
+    }
+    .site-navigation li.user-submenu ul::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -10px;
+        height: 10px;
+    }
+    .site-navigation li.user-submenu:hover ul, .site-navigation li.user-submenu:focus-within ul {
+        top: auto;
+    }
+    .site-navigation li.user-submenu li {
+        white-space: nowrap;
+        display: block;
+        margin: 0;
+    }
+    .site-navigation li.user-submenu a {
+        display: block;
+    }
+}
+
+@media (max-width: 767px)
+{
+    .site-navigation {
+        line-height: 1.45em;
+        text-align: left;
+    }
+    .site-navigation li.user-item::before {
+        display: none;
+    }
+    .site-navigation li.user-submenu > span {
+        display: none;
+    }
+    .site-navigation li.user-submenu {
+        display: block;
+    }
+    .site-navigation li.user-submenu ul {
+        font-size: 0.8em;
+    }
+}

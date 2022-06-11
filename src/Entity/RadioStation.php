@@ -58,47 +58,47 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="radio_station.name.not_blank")
-     * @Assert\Length(max=100, maxMessage="radio_station.name.max_length")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50, maxMessage="radio_station.radio_group.max_length")
+     * @Assert\Length(max=50)
      */
     private $radioGroup;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50, maxMessage="radio_station.country.max_length")
+     * @Assert\Length(max=50)
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=50, maxMessage="radio_station.region.max_length")
+     * @Assert\Length(max=50)
      */
     private $region;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=3)
-     * @Assert\NotBlank(message="radio_station.frequency.not_blank")
+     * @Assert\NotBlank()
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0, message="radio_station.frequency.greater_than_zero")
+     * @Assert\GreaterThan(0)
      */
     private $frequency;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=100, maxMessage="radio_station.location.max_length")
+     * @Assert\Length(max=100)
      */
     private $location;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
      * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0, message="radio_station.power.greater_than_zero")
+     * @Assert\GreaterThan(0)
      */
     private $power;
 
@@ -110,19 +110,19 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=100, maxMessage="radio_station.multiplex.max_length")
+     * @Assert\Length(max=100)
      */
     private $multiplex;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
-     * @DabChannel(message="radio_station.dab_channel.invalid_for_frequency")
+     * @DabChannel()
      */
     private $dabChannel;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0, message="radio_station.distance.greater_than_zero")
+     * @Assert\GreaterThan(0)
      */
     private $distance;
 
@@ -140,13 +140,13 @@ class RadioStation
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
-     * @Assert\GreaterThan(0, message="radio_station.private_number.greater_than_zero")
+     * @Assert\GreaterThan(0)
      */
     private $privateNumber;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @YearMonthDate(message="radio_station.first_log_date.invalid_format")
+     * @YearMonthDate()
      */
     private $firstLogDate;
 
@@ -170,14 +170,14 @@ class RadioStation
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Assert\Length(max=500, maxMessage="radio_station.comment.max_length")
+     * @Assert\Length(max=500)
      */
     private $comment;
 
     /**
      * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\Length(max=500, maxMessage="radio_station.external_anchor.max_length")
-     * @Assert\Url(message="radio_station.external_anchor.invalid_format")
+     * @Assert\Length(max=500)
+     * @Assert\Url()
      */
     private $externalAnchor;
 

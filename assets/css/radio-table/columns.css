@@ -1,0 +1,75 @@
+.radio-table-columns-ui {
+    margin: 20px auto;
+    max-width: 800px;
+}
+.radio-table-columns-ui .form-item {
+    border-radius: 7px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 6px rgba(0,0,0, 0.09);
+
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.radio-table-columns-ui .form-item label {
+    margin: 0;
+}
+.radio-table-columns-ui .form-item > :last-child {
+    text-align: right;
+    flex: 1;
+}
+.radio-table-columns-ui .form-item.hidden-column {
+    background: #fafafa;
+    box-shadow: inset 1px 1px 2px #efefef;
+    border-color: #e9e9e9;
+}
+.radio-table-columns-ui .form-item.hidden-column label {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.radio-table-columns-ui .form-item button {
+    display: inline;
+    width: auto;
+    min-width: 100px;
+    margin: 0 0 0 10px;
+    white-space: nowrap;
+}
+.radio-table-columns-ui .form-item button:first-of-type {
+    margin-left: 0;
+}
+
+@media (max-width: 767px)
+{
+    .radio-table-columns-ui .form-item {
+        flex-direction: row;
+    }
+    .radio-table-columns-ui .form-item label {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 700px)
+{
+    .radio-table-columns-ui .form-item {
+        flex-direction: column;
+    }
+    .radio-table-columns-ui .form-item label {
+        margin-bottom: 15px;
+    }
+    .radio-table-columns-ui .form-item > :last-child {
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+@media (max-width: 440px)
+{
+    .radio-table-columns-ui .form-item button {
+        min-width: auto;
+        height: auto;
+        font-size: 0.8em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

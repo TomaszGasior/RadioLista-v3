@@ -1,0 +1,64 @@
+.radio-table-details {
+    margin-top: 30px;
+    line-height: 1.5em;
+
+    width: 100%;
+}
+.radio-table-details p {
+    margin: 7px 0;
+}
+
+.radio-table-details dl {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    border-top: 1px solid rgba(0,0,0, 0.05);
+    font-size: 0.9em;
+    margin-top: 25px;
+    padding: 14px 34px 0 34px;
+    box-sizing: border-box;
+}
+.radio-table-details dl > * {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+.radio-table-details dl > * > * {
+    flex: 1;
+}
+.radio-table-details dt, .radio-table-details dd {
+    padding: 0 10px;
+    margin: 0;
+}
+.radio-table-details dt {
+    text-align: right;
+}
+.radio-table-details dt::after {
+    content: ":";
+}
+.radio-table-details dd {
+    text-align: left;
+    border-right: 1px solid rgba(0,0,0, 0.05);
+}
+.radio-table-details dd:last-child {
+    border-right: none;
+}
+
+@media (max-width: 767px)
+{
+    .radio-table-details dl {
+        flex-direction: column;
+        align-items: stretch;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .radio-table-details dt, .radio-table-details dd {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    .radio-table-details dd {
+        border-right: none;
+    }
+}

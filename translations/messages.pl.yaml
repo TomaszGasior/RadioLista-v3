@@ -2,24 +2,38 @@ layout:
     slogan: 'bandscany i wykazy radiowe'
     description: 'twoje wykazy radiowe i telewizyjne, bandscany, regularne wykazy odbieranych stacji, prywatne listy ulubionych stacji'
     navigation_title: 'Menu główne'
+    user_menu_title: 'Menu użytkownika'
+    skip_to_content: 'Przeskocz do treści'
     logged_in_as: 'Zalogowany jako'
+    change_language_to: 'Zmień język na %lang%'
     app_version: 'Wersja aplikacji'
     ie_alert: 'Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge. Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.'
 
 common:
     action:
-        save: 'Zapisz'
+        save: 'Zapisz zmiany'
 
     search_form:
         form:
             s: 'Szukane wyrażenie'
+            s.help: 'Wpisz szukaną frazę'
 
         action:
             search: 'Szukaj'
 
+    remove_dialog:
+        action:
+            cancel: 'Anuluj'
+            remove: 'Usuń'
+        text:
+            confirm_checkbox: 'Potwierdzam bezpowrotne usuwanie'
+
     notification:
         saved_changes: 'Zmiany zostały zapisane.'
-        invalid_form: 'Formularz został wypełniony niepoprawnie.'
+        invalid_form: 'Wystąpił błąd w formularzu poniżej.'
+
+    text:
+        in_radio_table_a11y_subheading_prefix: 'w wykazie'
 
 radio_table:
     detail:
@@ -56,9 +70,6 @@ radio_table:
         notification:
             created: 'Wykaz został utworzony.'
 
-        information:
-            local_desc: "W nazwie i opisie wykazu warto umieścić lokalizację (np.\u00A0miejscowość lub województwo). Te\u00A0informacje są\u00A0używane przy\u00A0przeszukiwaniu wykazów. Można je później zmienić."
-
     settings:
         title: 'Ustawienia wykazu'
 
@@ -67,18 +78,24 @@ radio_table:
             visibility: 'Widoczność'
             columns: 'Kolumny'
             appearance: 'Wygląd'
-            export: 'Eksport'
+
+        action:
+            set_custom_columns: 'Zmień układ kolumn'
 
         form:
             name: 'Nazwa wykazu'
+            name.help: 'Umieść tutaj lokalizację (np. miejscowość lub województwo), aby ułatwić odnalezienie twojego wykazu.'
             frequencyUnit: 'Jednostka częstotliwości'
             maxSignalLevelUnit: 'Jednostka poziomu sygnału'
             description: 'Opis wykazu'
             status: 'Widoczność wykazu'
             status.choice:
-                '1': 'Publiczny — wykaz może zobaczyć każdy'
-                '0': 'Niepubliczny — wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik'
-                '-1': 'Prywatny — wykaz możesz zobaczyć tylko ty'
+                '1': 'Publiczny'
+                '1.help': 'Wykaz może zobaczyć każdy.'
+                '0': 'Niepubliczny'
+                '0.help': 'Wykaz mogą zobaczyć jedynie osoby, które otrzymają odnośnik.'
+                '-1': 'Prywatny'
+                '-1.help': 'Wykaz możesz zobaczyć tylko ty.'
             sorting: 'Domyślne sortowanie'
             appearanceBackgroundColor: 'Kolor tła'
             appearanceColor: 'Kolor tekstu'
@@ -88,12 +105,11 @@ radio_table:
                 '2': 'pełna szerokość ekranu'
                 '3': 'niestandardowa szerokość'
             appearanceCustomWidth: 'Niestandardowa szerokość'
-            appearanceCollapsedComments: 'Użyj ikony zamiast pełnej treści w kolumnie komentarzy'
+            appearanceCollapsedComments: "Użyj ikony zamiast pełnej treści w\u00A0kolumnie komentarzy"
 
-        information:
-            columns: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."
-            export: "Wybierz pożądany format eksportu, aby pobrać cały wykaz w\u00A0formie pliku na swój komputer. Wykaz\u00A0eksportowany jest z\u00A0aktualnie ustawionym sortowaniem i\u00A0aktualnie widocznymi kolumnami. Pomijane\u00A0są\u00A0szczegółowe informacje o\u00A0RDS."
-            export_cannot_empty: 'Ten wykaz jest pusty. Nie można go wyeksportować.'
+
+    columns:
+        title: 'Ustawienia kolumn'
 
         columns_ui:
             action:
@@ -102,45 +118,38 @@ radio_table:
                 move_up: 'Do góry'
                 move_down: 'W dół'
 
-        export:
-            action:
-                download_pdf: 'Pobierz dokument PDF'
-                download_csv: 'Pobierz arkusz CSV'
-                download_html: 'Pobierz stronę HTML'
-                download_xlsx: 'Pobierz arkusz XLSX'
-                download_ods: 'Pobierz arkusz ODS'
-            text:
-                about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
-                about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
-                about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
-                about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"
-                about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
+        information:
+            no_javascript: "Kolejność kolumn wykazu jest uzależniona od przypisanych do nich liczb. Aby przenieść kolumnę, zmień jej liczbę. Aby ukryć kolumnę, wpisz liczbę ujemną. Aby skorzystać z\u00A0wygodnego graficznego edytora kolumn, włącz JavaScript w\u00A0przeglądarce."
 
-    remove:
-        title: 'Usuń stacje lub wykaz'
+    export:
+        title: 'Eksportuj wykaz'
 
         action:
-            export: 'Eksport wykazu'
-            selected_radio_stations: 'Usuń zaznaczone stacje'
-            radio_table: 'Usuń wykaz'
+            download_pdf: 'Pobierz dokument PDF'
+            download_csv: 'Pobierz arkusz CSV'
+            download_html: 'Pobierz stronę HTML'
+            download_xlsx: 'Pobierz arkusz XLSX'
+            download_ods: 'Pobierz arkusz ODS'
 
-        heading:
-            remove_radio_station: 'Usuwanie stacji'
-            remove_radio_table: 'Usuwanie wykazu'
+        text:
+            about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
+            about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
+            about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
+            about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"
+            about_ods: "ODS — arkusz kalkulacyjny pakietów LibreOffice oraz Apache\u00A0OpenOffice"
 
-        form:
-            confirm: 'Usuń cały wykaz „%name%” na zawsze'
+        information:
+            export: "Wybierz pożądany format eksportu, aby pobrać cały wykaz w\u00A0formie pliku na swój komputer. Wykaz\u00A0eksportowany jest z\u00A0aktualnie ustawionym sortowaniem i\u00A0aktualnie widocznymi kolumnami. Pomijane\u00A0są\u00A0szczegółowe informacje o\u00A0RDS."
+            export_cannot_empty: 'Ten wykaz jest pusty. Nie można go wyeksportować.'
+
+    remove:
+        title: 'Usuń wykaz'
 
         notification:
             removed: 'Wykaz został bezpowrotnie usunięty.'
-            not_yet: 'Pamiętaj: jeśli jesteś na samym dnie, głowa do góry, może być już tylko lepiej!'
-
-        information:
-            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty. Nie ma czego usuwać…'
-            cannot_be_undone: "Usunięcie wykazu jest nieodwracalne. Pamiętaj, że przed usunięciem możesz wyeksportować wykaz do\u00A0pliku HTML, PDF lub CSV, aby pobrać go na komputer."
 
         text:
-            confirm_alert: 'Czy na pewno? Tej czynności nie można cofnąć!'
+            confirmation: "Czy na pewno chcesz bezpowrotnie usunąć  wykaz „%name%”? Tej\u00A0czynności nie można cofnąć."
 
     standalone:
         about: 'Wykaz wygenerowano w serwisie %anchor% dnia %date%.'
@@ -176,6 +185,7 @@ radio_station:
             dabChannel.choice:
                 '': '(brak informacji)'
             firstLogDate.help: 'na przykład: 2013, 2011-06, 2016-05-04'
+            externalAnchor.help: 'na przykład: https://example.com/something'
             rdsPs: 'Programme Service'
             rdsPs.help: 'na przykład: POLSKIE|RADIO|JEDYNKA'
             rdsRt: 'Radio Text'
@@ -198,59 +208,63 @@ radio_station:
             rds_popup: "Aby zobaczyć wyskakujące okno z\u00A0informacjami o\u00A0RDS, włącz JavaScript w\u00A0przeglądarce."
 
         text:
-            for_radio_table_a11y_subheading: 'w wykazie'
             disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
 
     remove:
         title: 'Usuń stację'
 
+        notification:
+            removed: 'Stacja została usunięta.'
+
+        text:
+            confirmation: 'Czy na pewno chcesz usunąć stację „%name%”?'
+
+    bulk_remove:
+        title: 'Usuń wiele stacji'
+
+        action:
+            bulk_remove: 'Usuń zaznaczone stacje'
+
         form:
             chosenToRemove: 'Wskaż stacje do usunięcia'
 
         notification:
-            chosen_to_be_removed: 'Stacja została zaznaczona do usunięcia.'
             bulk_removed: 'Wybrane stacje zostały usunięte.'
+
+        information:
+            empty_cannot_remove_radio_station: 'Ten wykaz jest pusty.'
 
 user:
     detail:
-        name: 'Nazwa użytkownika'
         last_activity_date: 'Data ostatniej aktywności'
         register_date: 'Data założenia konta'
-        public_profile: 'Stan profilu publicznego'
-        public_profile.state:
-            '': 'wyłączony'
-            '1': 'włączony'
-        radio_tables_count: 'Liczba utworzonych wykazów'
 
     settings:
         title: 'Moje konto'
         title_long: 'Ustawienia konta'
 
         heading:
-            my_account: 'Moje konto'
             public_profile: 'Profil publiczny'
             change_password: 'Zmiana hasła'
 
         form:
-            aboutMe: 'Kilka słów o mnie'
-            publicProfile: 'Włącz profil publiczny i stronę profilową'
+            aboutMe: 'Kilka słów o tobie'
+            publicProfile: 'Włącz profil publiczny'
+            publicProfile.help: 'Zaznacz, aby pod każdym wykazem znalazł się link do twojego profilu z listą twoich wykazów i poniższym opisem.'
             currentPassword: 'Obecne hasło'
+            currentPassword.help: 'Pozostaw puste, jeżeli nie chcesz zmieniać hasła.'
             plainPassword.first: 'Nowe hasło'
             plainPassword.second: 'Nowe hasło ponownie'
 
         notification:
             changed_password: 'Nowe hasło zostało zapisane.'
 
-        information:
-            public_profile: "Publiczna strona profilowa zawiera spis twoich wykazów oraz poniższy opis. Włączenie publicznej strony profilowej ujawni twoją nazwę użytkownika i\u00A0spowoduje umieszczenie odnośnika do twojego profilu pod każdym twoim wykazem."
-            change_password: 'Jeżeli nie chcesz zmieniać hasła, pozostaw pola puste.'
-
     register:
         title: 'Zarejestruj się'
 
         form:
             name: 'Nazwa użytkownika'
-            name.help: 'Tylko litery A-Z, cyfry oraz podkreślnik, myślnik, kropka.'
+            name.help: 'Dozwolone znaki: litery A-Z, cyfry, podkreślnik, myślnik, kropka. Nazwy użytkownika nie można później zmienić.'
             plainPassword.first: 'Hasło'
             plainPassword.second: 'Hasło ponownie'
             acceptServiceTerms: 'Akceptuję %anchor%regulamin%anchor_end% serwisu RadioLista'
@@ -265,6 +279,7 @@ user:
             no_radio_tables: 'Nie posiadasz jeszcze żadnego wykazu. %anchor%To najlepszy moment, żeby to zmienić!%anchor_end%'
 
     public_profile:
+        title: 'Mój profil'
         title_pattern: '%username% — profil użytkownika'
 
         heading:
@@ -276,16 +291,20 @@ user:
 
 general:
     homepage:
+        title: 'Strona główna'
+
         heading:
             last_updated_radio_tables: 'Ostatnio zmodyfikowane wykazy'
-            last_created_radio_tables: 'Ostatnio utworzone wykazy'
             about_this_service: 'Czym jest RadioLista?'
             search_radio_tables: 'Wyszukaj wykazy'
+
+        action:
+            learn_more_about_service: 'Dowiedź się więcej o RadioLiście'
+            show_all_radio_tables: 'Zobacz wszystkie wykazy'
 
         text:
             about: "W serwisie RadioLista osoby interesujące się mediami mogą\u00A0publikować różnorodne wykazy radiowe i\u00A0telewi\u00ADzyjne — bandscany, regularne wykazy odbieranych stacji czy\u00A0też prywatne listy ulubionych programów."
             radio_table_updated_at: 'ostatnio zaktualizowano'
-            radio_table_created_at: 'utworzono'
 
     all_radio_tables:
         title: 'Wszystkie wykazy'
@@ -298,7 +317,6 @@ general:
 
     search_radio_tables:
         title: 'Wyszukiwanie'
-        title_pattern: '„%search_term%” — wyszukiwanie'
 
         information:
             no_results: "Brak wyników wyszukiwania dla szukanego wyrażenia. Spróbuj użyć prostszego wyrażenia, bez zbędnych spojników (takich jak „i”, „lub”) oraz odmiany przez przypadki. Pamietaj, że przeszukiwane są tylko tytuły oraz opisy wykazów."

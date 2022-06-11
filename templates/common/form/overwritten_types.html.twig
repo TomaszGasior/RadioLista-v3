@@ -1,30 +1,61 @@
 {% block form_row %}
-    <div class="form-item form-regular">
-        <div>{{ form_label(form) }}</div>
-        <div>{{ form_widget(form) }}</div>
+    {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
+
+    <div class="form-item">
+        <div>
+            {{ form_label(form) }}
+        </div>
+        {{ form_widget(form, {attr: {'aria-describedby': aria_describedby|trim}}) }}
+        {{ form_errors(form) }}
+        {{ form_help(form) }}
     </div>
-{% endblock form_row %}
+{% endblock %}
 
 {% block checkbox_row %}
-    <div class="form-item form-checkbox">
-        {{ form_widget(form) }}
-        {{ form_label(form) }}
-    </div>
-{% endblock checkbox_row %}
+    {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
-{% block radio_row %}
-    {{ block('checkbox_row') }}
-{% endblock radio_row %}
+    <div class="form-item form-item-checkbox">
+        <div>
+            {{ form_widget(form, {attr: {'aria-describedby': aria_describedby|trim}}) }}
+            {{ form_label(form) }}
+        </div>
+
+        {{ form_errors(form) }}
+        {{ form_help(form) }}
+    </div>
+{% endblock %}
+
+{% block form_errors %}
+    {%- if errors|length > 0 -%}
+        <p class="form-error-message" id="{{ id }}_error">
+            {{ (errors|first).message }}
+        </p>
+    {%- endif -%}
+{% endblock %}
+
+{% block form_help %}
+    {%- if help -%}
+        <p class="form-help-message" id="{{ id }}_help">
+            {{ help_html ? field_help(form)|raw : field_help(form) }}
+        </p>
+    {%- endif -%}
+{% endblock %}
 
 {% block choice_row %}
     {% if expanded %}
-        <fieldset>
+        {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
+
+        <fieldset class="form-group">
             <legend class="sr-only">{{ form_label(form)|striptags }}</legend>
+
             {% for child in form %}
-                {{ form_row(child) }}
+                {{ form_row(child, {attr: {'aria-describedby': aria_describedby|trim}}) }}
             {% endfor %}
+
+            {{ form_errors(form) }}
+            {{ form_help(form) }}
         </fieldset>
     {% else %}
         {{ form_row(form) }}
     {% endif %}
-{% endblock choice_row %}
+{% endblock %}

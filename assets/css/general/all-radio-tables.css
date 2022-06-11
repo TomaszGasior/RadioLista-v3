@@ -1,0 +1,23 @@
+.all-radio-tables-navigation {
+    padding-left: 0;
+    margin: 25px 0;
+    text-align: center;
+}
+.all-radio-tables-navigation li {
+    display: inline-block;
+    margin: 0 10px;
+}
+.all-radio-tables-navigation li a {
+    color: #5D9A3F;
+}
+.all-radio-tables-navigation li a.selected {
+    font-weight: bold;
+}
+
+@media (max-width: 767px)
+{
+    .all-radio-tables-navigation li {
+        display: block;
+        margin: 15px 0;
+    }
+}

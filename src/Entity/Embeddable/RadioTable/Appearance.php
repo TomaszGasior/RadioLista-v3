@@ -18,13 +18,13 @@ class Appearance
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @HexColor(message="radio_table.appearance.fg_invalid")
+     * @HexColor()
      */
     private $textColor;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @HexColor(message="radio_table.appearance.bg_invalid")
+     * @HexColor()
      */
     private $backgroundColor;
 
@@ -36,11 +36,11 @@ class Appearance
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThanOrEqual(900, message="radio_table.appearance.width_min_value")
+     * @Assert\GreaterThanOrEqual(900, message="radio_table.appearance_width_min_value")
      * @Assert\Expression(
      *     "value || this.getWidthType() !== width_custom",
      *     values={"width_custom": Appearance::WIDTH_CUSTOM},
-     *     message="radio_table.appearance.width_required"
+     *     message="This value should not be blank."
      * )
      */
     private $customWidth;

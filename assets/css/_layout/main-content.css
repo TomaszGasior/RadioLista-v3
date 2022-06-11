@@ -1,0 +1,48 @@
+.main-content {
+    padding-top: 10px;
+    padding-bottom: 35px;
+    margin: auto;
+
+    /* make sure footer is always at bottom */
+    min-height: calc(100vh - 225px - 57px - 10px - 35px);
+}
+
+.main-content > header h1 {
+    color: #E76A00;
+    margin: 18px 0 30px;
+    font-size: 34px;
+    text-shadow: 0 0 2px #eee;
+
+    font-weight: normal;
+}
+.main-content > header h1.separated-title {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.main-content > header h1 .additional {
+    font-size: 15px;
+    color: #000;
+    opacity: 0.55;
+    padding-left: 2px;
+    padding-top: 5px;
+}
+
+.main-content h2, .main-content .h2 {
+    font-size: 27px;
+    margin: 17px 0;
+    text-shadow: 0 0 2px #eee;
+
+    font-weight: normal;
+}
+
+@media (max-width: 767px)
+{
+    .main-content {
+        /* make sure footer is always at bottom, outside of the initial viewport */
+        min-height: calc(100vh - 250px);
+    }
+
+    .main-content > header h1 {
+        font-size: 29px;
+    }
+}

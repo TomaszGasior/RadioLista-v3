@@ -4,6 +4,7 @@ namespace App\Tests\Functional;
 
 use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityPermissionTest extends WebTestCase
 {
@@ -34,18 +35,27 @@ class SecurityPermissionTest extends WebTestCase
             '/wykaz/1/dodaj-stacje',
             '/wykaz/1/edytuj-stacje/1',
             '/wykaz/1/kopiuj-stacje/1',
-            '/wykaz/1/usun-stacje/1',
             '/wykaz/1/ustawienia',
+            '/wykaz/1/kolumny',
+            '/wykaz/1/eksport',
             '/wykaz/1/eksport/html',
             '/wykaz/1/eksport/csv',
             '/wykaz/1/eksport/pdf',
             '/wykaz/1/eksport/xlsx',
             '/wykaz/1/eksport/ods',
-            '/wykaz/1/usun',
         ];
 
         foreach ($urls as $url) {
             yield $url => [$url];
+        }
+
+        $postUrls = [
+            '/wykaz/1/usun-stacje/1',
+            '/wykaz/1/usun',
+        ];
+
+        foreach ($postUrls as $url) {
+            yield $url => [$url, 'POST'];
         }
     }
 
@@ -53,16 +63,17 @@ class SecurityPermissionTest extends WebTestCase
      * @dataProvider onlyForLoggedInUrlProvider
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testAnonymousCantAccessRestrictedPage(string $url): void
+    public function testAnonymousCantAccessRestrictedPage(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);
 
-        $this->client->request('GET', $url);
+        $this->client->request($method, $url);
 
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
 
         $this->assertSame(302, $response->getStatusCode());
+        $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
     }
 
@@ -70,12 +81,20 @@ class SecurityPermissionTest extends WebTestCase
      * @dataProvider onlyForLoggedInUrlProvider
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testUserCanAccessRestrictedPage(string $url): void
+    public function testUserCanAccessRestrictedPage(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);
 
         $this->client->loginUserByName('test_user');
-        $this->client->request('GET', $url);
+        $this->client->request($method, $url);
+
+        // POST-only endpoints always redirect to another page.
+        if ('POST' === $method) {
+            $response = $this->client->getResponse();
+            $this->assertSame(302, $response->getStatusCode());
+
+            $this->client->followRedirect();
+        }
 
         $response = $this->client->getResponse();
 
@@ -85,12 +104,12 @@ class SecurityPermissionTest extends WebTestCase
     /**
      * @dataProvider ownedByTestUserUrlProvider
      */
-    public function testUserCantAccessPageOfOtherUser(string $url): void
+    public function testUserCantAccessPageOfOtherUser(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);
 
         $this->client->loginUserByName('test_user_second');
-        $this->client->request('GET', $url);
+        $this->client->request($method, $url);
 
         $response = $this->client->getResponse();
 

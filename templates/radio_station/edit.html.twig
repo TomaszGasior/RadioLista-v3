@@ -8,23 +8,21 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
-                {{ 'radio_station.add.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
-                {{ 'radio_station.edit.action.copy_current'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.add', {radioTableId: radio_station.radioTable.id}) }}">
+            {{ 'radio_station.add.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.copy', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
+            {{ 'radio_station.edit.action.copy_current'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}
@@ -36,7 +34,7 @@
                 }) }}
             </span>
             <span class="additional">
-                <span class="sr-only">{{ 'radio_station.edit.text.for_radio_table_a11y_subheading'|trans }}</span>
+                <span class="sr-only"> {{ 'common.text.in_radio_table_a11y_subheading_prefix'|trans }} </span>
                 {{ radio_station.radioTable.name }}
             </span>
         </h1>
@@ -44,9 +42,22 @@
 
     {{ form_start(form) }}
 
-    {% include 'radio_station/_radio_station_tabs.html.twig' %}
+    {% include 'radio_station/_radio_station_form.html.twig' %}
 
-    <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+    <div class="form-action-button">
+        <button>{{ 'radio_station.edit.action.save'|trans }}</button>
+
+        <a class="button remove-button" href="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id, remove: true}) }}">
+            {{ 'radio_station.remove.title'|trans }}
+        </a>
+    </div>
 
     {{ form_end(form) }}
+
+    {% include 'common/remove_dialog.html.twig' with {
+        remove_question: 'radio_station.remove.text.confirmation'|trans({ '%name%': radio_station.name }),
+        remove_post_url: path('radio_station.remove', {id: radio_station.id, radioTableId: radio_station.radioTable.id}),
+        cancel_fallback_url: path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id}),
+        confirm_checkbox: false,
+    } %}
 {% endblock %}

@@ -36,18 +36,16 @@
 
 {% block context_menu %}
     {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}
-        <ul>
-            <li>
-                <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                    {{ 'radio_station.add.title'|trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
-                    {{ 'radio_table.settings.title'|trans }}
-                </a>
-            </li>
-        </ul>
+        <li>
+            <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
+                {{ 'radio_station.add.title'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.title'|trans }}
+            </a>
+        </li>
     {% endif %}
 {% endblock %}
 
@@ -144,7 +142,7 @@
             {% endembed %}
 
             <template class="rds-popup-template">
-                <section class="rds-popup" role="alert">
+                <div class="rds-popup" role="alert">
                     <h2>{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
                     <dl>
                         <div class="rds-popup-ps-row">
@@ -160,11 +158,11 @@
                             <dd class="rds-popup-pty-value"></dd>
                         </div>
                     </dl>
-                </section>
+                </div>
             </template>
         </div>
 
-        <section class="radio-table-details customizable-color">
+        <div class="radio-table-details customizable-color">
             <h3 class="sr-only">{{ 'radio_table.show.heading.details'|trans }}</h3>
 
             {{ radio_table.description|raw }}
@@ -188,7 +186,7 @@
                     </div>
                 {% endif %}
             </dl>
-        </section>
+        </div>
     {% else %}
         <p class="information">
             {% if is_granted('RADIO_TABLE_MODIFY', radio_table) %}

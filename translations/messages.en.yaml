@@ -2,24 +2,38 @@ layout:
     slogan: 'bandscans & radio lists'
     description: 'your radio & television lists, bandscans, typical lists of received stations, private lists of favorite stations'
     navigation_title: 'Main menu'
+    user_menu_title: 'User menu'
+    skip_to_content: 'Skip to content'
     logged_in_as: 'Logged in as'
+    change_language_to: 'Change language to %lang%'
     app_version: 'Application version'
     ie_alert: 'This website does not work in Internet Explorer. Please switch to Microsoft Edge. Press Ctrl+Shift+E on the keyboard or search for Microsoft Edge in Start Menu.'
 
 common:
     action:
-        save: 'Save'
+        save: 'Save changes'
 
     search_form:
         form:
             s: 'Search term'
+            s.help: 'Enter the search term'
 
         action:
             search: 'Search'
 
+    remove_dialog:
+        action:
+            cancel: 'Cancel'
+            remove: 'Delete'
+        text:
+            confirm_checkbox: 'I confirm a permanent deletion'
+
     notification:
         saved_changes: 'Changes have been saved.'
-        invalid_form: 'The form has been filled out incorrectly.'
+        invalid_form: 'There is a problem in the form below.'
+
+    text:
+        in_radio_table_a11y_subheading_prefix: 'in list'
 
 radio_table:
     detail:
@@ -56,9 +70,6 @@ radio_table:
         notification:
             created: 'List has been created.'
 
-        information:
-            local_desc: "It's usually good idea to include additional information about your location into list title and description. They\u00A0are used for searching. You can change them later."
-
     settings:
         title: 'List settings'
 
@@ -67,18 +78,24 @@ radio_table:
             visibility: 'Visibility'
             columns: 'Columns'
             appearance: 'Appearance'
-            export: 'Export'
+
+        action:
+            set_custom_columns: 'Change columns layout'
 
         form:
             name: 'List name'
+            name.help: 'Place information about location here to make finding your list easier.'
             frequencyUnit: 'Frequency unit'
             maxSignalLevelUnit: 'Signal level unit'
             description: 'List description'
             status: 'List visibility'
             status.choice:
-                '1': 'Public — your list is available for everyone'
-                '0': 'Unlisted — your list is available only for visitors who receive the link'
-                '-1': 'Private — your list is available only for you'
+                '1': 'Public'
+                '1.help': 'Your list is available for everyone.'
+                '0': 'Unlisted'
+                '0.help': 'Your list is available only for visitors who receive the link.'
+                '-1': 'Private'
+                '-1.help': 'Your list is available only for you.'
             sorting: 'Default sorting'
             appearanceBackgroundColor: 'Background color'
             appearanceColor: 'Text color'
@@ -90,10 +107,8 @@ radio_table:
             appearanceCustomWidth: 'Custom width'
             appearanceCollapsedComments: 'Use icon instead of full content in comments column'
 
-        information:
-            columns: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
-            export: 'Choose preferred export format to download the whole list to your computer. List will be exported with current sorting and with enabled columns only. Extra RDS information is not included.'
-            export_cannot_empty: 'You cannot export empty list.'
+    columns:
+        title: 'List columns'
 
         columns_ui:
             action:
@@ -102,45 +117,38 @@ radio_table:
                 move_up: 'Move up'
                 move_down: 'Move down'
 
-        export:
-            action:
-                download_pdf: 'Download PDF document'
-                download_csv: 'Download CSV sheet'
-                download_html: 'Download HTML page'
-                download_xlsx: 'Download XLSX sheet'
-                download_ods: 'Download ODS sheet'
-            text:
-                about_pdf: 'PDF — standard document for reading and printing'
-                about_csv: 'CSV — dataset for importing into spreadsheet'
-                about_html: 'HTML — web page file for internet browsers'
-                about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
-                about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
+        information:
+            no_javascript: 'Order of list columns can be changed through numbers. Change number to move column up or down. Use negative number to hide column. Please enable JavaScript in your browser for easy to use graphical interface.'
 
-    remove:
-        title: 'Delete station or list'
+    export:
+        title: 'Export list'
 
         action:
-            export: 'Export list'
-            selected_radio_stations: 'Delete chosen stations'
-            radio_table: 'Delete list'
+            download_pdf: 'Download PDF document'
+            download_csv: 'Download CSV sheet'
+            download_html: 'Download HTML page'
+            download_xlsx: 'Download XLSX sheet'
+            download_ods: 'Download ODS sheet'
 
-        heading:
-            remove_radio_station: 'Delete stations'
-            remove_radio_table: 'Delete list'
+        text:
+            about_pdf: 'PDF — standard document for reading and printing'
+            about_csv: 'CSV — dataset for importing into spreadsheet'
+            about_html: 'HTML — web page file for internet browsers'
+            about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
+            about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
 
-        form:
-            confirm: 'Delete the whole „%name%” list permanently'
+        information:
+            export: 'Choose preferred export format to download the whole list to your computer. List will be exported with current sorting and with enabled columns only. Extra RDS information is not included.'
+            export_cannot_empty: 'You cannot export empty list.'
+
+    remove:
+        title: 'Delete list'
 
         notification:
             removed: 'List has been permanently deleted.'
-            not_yet: "Let's try again. Nothing happened."
-
-        information:
-            empty_cannot_remove_radio_station: 'This is is empty. There is nothing to delete…'
-            cannot_be_undone: 'Deleted list cannot be restored. Please remember that you can still export your list into HTML, PDF or CSV file and download it to your computer.'
 
         text:
-            confirm_alert: 'Are you sure? This action cannot be undone!'
+            confirmation: 'Are you sure you want to permanently delete "%name%" list? This cannot be undone.'
 
     standalone:
         about: 'This list was created using %anchor% on %date%.'
@@ -156,7 +164,7 @@ radio_station:
 
     edit:
         title: 'Edit station'
-        title_pattern: 'Edit station „%name%”'
+        title_pattern: 'Edit station "%name%"'
 
         action:
             copy_current: 'Copy this station'
@@ -176,6 +184,7 @@ radio_station:
             dabChannel.choice:
                 '': '(no information)'
             firstLogDate.help: 'for example: 2013, 2011-06, 2016-05-04'
+            externalAnchor.help: 'for example: https://example.com/something'
             rdsPs: 'Programme Service'
             rdsPs.help: 'for example: FRAME1|FRAME2|FRAME3'
             rdsRt: 'Radio Text'
@@ -198,59 +207,63 @@ radio_station:
             rds_popup: 'Please enable JavaScript in your browser to be able to use pop-up with extra RDS information.'
 
         text:
-            for_radio_table_a11y_subheading: 'in list'
             disabled_radio_table_column: 'This column is currently not visible in the list.'
 
     remove:
         title: 'Delete station'
 
+        notification:
+            removed: 'Station has been deleted.'
+
+        text:
+            confirmation: 'Are you sure you want to delete "%name%" station?'
+
+    bulk_remove:
+        title: 'Delete more stations'
+
+        action:
+            bulk_remove: 'Delete chosen stations'
+
         form:
             chosenToRemove: 'Choose stations to be deleted'
 
         notification:
-            chosen_to_be_removed: 'Stations have been chosen to be deleted.'
             bulk_removed: 'Chosen stations have been deleted.'
+
+        information:
+            empty_cannot_remove_radio_station: 'This list is empty.'
 
 user:
     detail:
-        name: 'Username'
         last_activity_date: 'Last activity date'
         register_date: 'Registration date'
-        public_profile: 'Public profile state'
-        public_profile.state:
-            '': 'disabled'
-            '1': 'enabled'
-        radio_tables_count: 'Number of lists'
 
     settings:
         title: 'My account'
         title_long: 'Account settings'
 
         heading:
-            my_account: 'My account'
             public_profile: 'Public profile'
             change_password: 'Password change'
 
         form:
-            aboutMe: 'About me'
+            aboutMe: 'Something about you'
             publicProfile: 'Enable public profile'
+            publicProfile.help: "If enabled each list includes link to your public profile showing all of your lists and description below."
             currentPassword: 'Current password'
+            currentPassword.help: "Keep it empty if you don't want to change the password."
             plainPassword.first: 'New password'
             plainPassword.second: 'New password again'
 
         notification:
             changed_password: 'New password has been saved.'
 
-        information:
-            public_profile: 'Public profile page shows index with your lists and information about you. With public profile enabled your username will be shown publicly and linked under your lists.'
-            change_password: "Keep these fields empty if you don't want to change the password."
-
     register:
         title: 'Register'
 
         form:
             name: 'Username'
-            name.help: 'Allowed only: letters A-Z, numbers, underscore, dash, dot.'
+            name.help: 'Allowed characters: letters, numbers, underscore, dash, dot. Username cannot be changed later.'
             plainPassword.first: 'Password'
             plainPassword.second: 'Password again'
             acceptServiceTerms: 'I accept %anchor%terms of service%anchor_end%'
@@ -265,6 +278,7 @@ user:
             no_radio_tables: "You don't have any list yet. %anchor%This is the best time to change it!%anchor_end%"
 
     public_profile:
+        title: 'My profile'
         title_pattern: '%username% — user profile'
 
         heading:
@@ -276,16 +290,20 @@ user:
 
 general:
     homepage:
+        title: 'Homepage'
+
         heading:
             last_updated_radio_tables: 'Last modified lists'
-            last_created_radio_tables: 'Last created lists'
             about_this_service: "What's RadioLista?"
             search_radio_tables: 'Search lists'
 
+        action:
+            learn_more_about_service: 'Learn more about RadioLista'
+            show_all_radio_tables: 'View all lists'
+
         text:
-            about: "This is a place for people interested in the media to publish various radio lists and TV lists — bandscans, typical lists of received stations, private lists of favorite stations."
+            about: "RadioLista is a place in the Web where people interested in the media and the radio can publish various radio and TV lists — bandscans, regular lists of received stations, as well as private lists of favorite broadcasters."
             radio_table_updated_at: 'last updated at'
-            radio_table_created_at: 'created at'
 
     all_radio_tables:
         title: 'All lists'
@@ -298,7 +316,6 @@ general:
 
     search_radio_tables:
         title: 'Search'
-        title_pattern: '„%search_term%” — search'
 
         information:
             no_results: "No search results found. Try to use a simpler search term, without unnecessary words like \"and\". Please remember that only list titles and descriptions are searched."

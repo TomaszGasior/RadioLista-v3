@@ -56,27 +56,28 @@
             table time {
                 white-space: nowrap;
             }
-            .quality {
+            .quality .raw {
                 color: rgba(0,0,0, 0);
+                position: absolute;
             }
-            .quality::before {
+            .quality .dots::before {
                 margin-right: -10px;
                 letter-spacing: 2px;
                 color: #222;
             }
-            .quality.quality-5::before {
+            .quality.quality-5 .dots::before {
                 content: "●●●●●";
             }
-            .quality.quality-4::before {
+            .quality.quality-4 .dots::before {
                 content: "●●●●";
             }
-            .quality.quality-3::before {
+            .quality.quality-3 .dots::before {
                 content: "●●●";
             }
-            .quality.quality-2::before {
+            .quality.quality-2 .dots::before {
                 content: "●●";
             }
-            .quality.quality-1::before {
+            .quality.quality-1 .dots::before {
                 content: "●";
             }
             .text-bold {
@@ -89,19 +90,19 @@
                 text-decoration: line-through;
             }
             .background-1 {
-                background: rgba(253,198,198, 0.65);
+                background: rgba(253,198,198, 0.45);
             }
             .background-2 {
-                background: rgba(175,255,150, 0.65);
+                background: rgba(175,255,150, 0.4);
             }
             .background-3 {
-                background: rgba(156,230,255, 0.65);
+                background: rgba(156,230,255, 0.35);
             }
             .background-4 {
-                background: rgba(255,255,120, 0.65);
+                background: rgba(255,255,120, 0.3);
             }
             .background-5 {
-                background: rgba(255,177,255, 0.65);
+                background: rgba(255,177,255, 0.3);
             }
             .rds {
                 white-space: pre;
@@ -195,7 +196,7 @@
         </footer>
 
         <script>
-        {#  Keep this script in sync with original code in common.js. -#}
+        {#  Keep this script in sync with original code in NumberIndentManager. -#}
         {#- This script is reorganized because wkhtmltopdf uses WebKit from 2011. :( -#}
         (function(table){
             NodeList.prototype.forEach = Array.prototype.forEach;

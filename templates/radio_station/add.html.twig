@@ -8,18 +8,16 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.settings', {id: radio_station.radioTable.id}) }}">
-                {{ 'radio_table.settings.title'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.settings', {id: radio_station.radioTable.id}) }}">
+            {{ 'radio_table.settings.title'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}
@@ -27,7 +25,7 @@
         <h1 class="separated-title">
             <span>{{ 'radio_station.add.title_long'|trans }}</span>
             <span class="additional">
-                <span class="sr-only">{{ 'radio_station.edit.text.for_radio_table_a11y_subheading'|trans }}</span>
+                <span class="sr-only"> {{ 'common.text.in_radio_table_a11y_subheading_prefix'|trans }} </span>
                 {{ radio_station.radioTable.name }}
             </span>
         </h1>
@@ -35,9 +33,11 @@
 
     {{ form_start(form) }}
 
-    {% include 'radio_station/_radio_station_tabs.html.twig' %}
+    {% include 'radio_station/_radio_station_form.html.twig' %}
 
-    <button>{{ 'radio_station.add.title'|trans }}</button>
+    <div class="form-action-button">
+        <button>{{ 'radio_station.add.title'|trans }}</button>
+    </div>
 
     {{ form_end(form) }}
 {% endblock %}

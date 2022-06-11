@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ 'radio_station.bulk_remove.title'|trans }}{% endblock %}
+
+{% block context_menu %}
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
+            {{ 'radio_table.settings.title'|trans }}
+        </a>
+    </li>
+{% endblock %}
+
+{% form_theme form _self %}
+{% block _radio_station_bulk_remove_chosenToRemove_entry_label %}
+    {% set label = '%s (%s %s)'|format(label, frequency|format_number({min_fraction_digit: 2, grouping_used: false}), get_frequency_label(frequency_unit)) %}
+    {{ block('form_label') }}
+{% endblock %}
+
+{% block page_content %}
+    <header>
+        <h1 class="separated-title">
+            <span>{{ 'radio_station.bulk_remove.title'|trans }}</span>
+            <span class="additional">
+                <span class="sr-only"> {{ 'common.text.in_radio_table_a11y_subheading_prefix'|trans }} </span>
+                {{ radio_table.name }}
+            </span>
+        </h1>
+    </header>
+
+    {% if radio_table.radioStationsCount > 0 %}
+        {{ form_start(form) }}
+
+        <div class="ui-block">
+            <div class="ui-block-content">
+                {{ form_row(form.chosenToRemove) }}
+            </div>
+        </div>
+
+        <div class="form-action-button">
+            <button>{{ 'radio_station.bulk_remove.title'|trans }}</button>
+        </div>
+
+        {{ form_end(form) }}
+    {% else %}
+        <p class="information">
+            {{ 'radio_station.bulk_remove.information.empty_cannot_remove_radio_station'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

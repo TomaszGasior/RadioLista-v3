@@ -8,23 +8,21 @@
 {% endblock %}
 
 {% block context_menu %}
-    <ul>
-        <li>
-            <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
-                {{ 'radio_table.show.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_station.add', {radioTableId: radio_table.id}) }}">
-                {{ 'radio_station.add.title'|trans }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('radio_table.remove', {id: radio_table.id}) }}">
-                {{ 'radio_table.remove.title'|trans }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
+            {{ 'radio_table.show.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_table.export', {id: radio_table.id}) }}">
+            {{ 'radio_table.export.title'|trans }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('radio_station.bulk_remove', {id: radio_table.id}) }}">
+            {{ 'radio_station.bulk_remove.title'|trans }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block page_content %}
@@ -37,120 +35,92 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.general'|trans }}</h2>
+        </div>
 
+        <div class="ui-block-content">
             {{ form_row(form.name) }}
-            {{ form_row(form.frequencyUnit) }}
-            {{ form_row(form.maxSignalLevelUnit) }}
-            {{ form_row(form.sorting) }}
+
+            <div class="form-columns">
+                {{ form_row(form.frequencyUnit) }}
+                {{ form_row(form.maxSignalLevelUnit) }}
+                {{ form_row(form.sorting) }}
+            </div>
+
             {{ form_row(form.description) }}
         </div>
+    </div>
 
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.visibility'|trans }}</h2>
-
-            <div class="radio-table-status">
-                {{ form_row(form.status) }}
-            </div>
         </div>
 
-        <div>
+        <div class="ui-block-content">
+            {{ form_row(form.status) }}
+        </div>
+    </div>
+
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.columns'|trans }}</h2>
-
-            <noscript>
-                <p class="information">
-                    {{ 'radio_table.settings.information.columns'|trans }}
-                </p>
-            </noscript>
-
-            <div class="radio-table-columns">
-                {{ form_row(form.columns) }}
-
-                <template class="radio-table-columns-buttons-template">
-                    <button type="button" class="toggle"
-                            data-show-label="{{ 'radio_table.settings.columns_ui.action.toggle_show'|trans }}"
-                            data-hide-label="{{ 'radio_table.settings.columns_ui.action.toggle_hide'|trans }}">
-                    </button>
-                    <button type="button" class="move-up">{{ 'radio_table.settings.columns_ui.action.move_up'|trans }}</button>
-                    <button type="button" class="move-down">{{ 'radio_table.settings.columns_ui.action.move_down'|trans }}</button>
-                </template>
-            </div>
         </div>
 
-        <div>
+        <div class="ui-block-content">
+            <a class="button" href="{{ path('radio_table.columns', {id: radio_table.id}) }}">
+                {{ 'radio_table.settings.action.set_custom_columns'|trans }}
+            </a>
+        </div>
+    </div>
+
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'radio_table.settings.heading.appearance'|trans }}</h2>
+        </div>
 
-            {{ form_row(form.appearanceBackgroundColor, {attr: {
-                'class': 'color radio-table-appearance-color',
-                'autocomplete': 'off',
-            }}) }}
-            {{ form_row(form.appearanceColor, {attr: {
-                'class': 'color radio-table-appearance-color',
-                'autocomplete': 'off',
-            }}) }}
-            {{ form_row(form.appearanceWidthType, {attr: {
-                'class': 'radio-table-width-type',
-                'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
-            }}) }}
+        <div class="ui-block-content">
+            <div class="form-columns">
+                {{ form_row(form.appearanceBackgroundColor, {attr: {
+                    'class': 'color radio-table-appearance-color',
+                    'autocomplete': 'off',
+                }}) }}
+                {{ form_row(form.appearanceColor, {attr: {
+                    'class': 'color radio-table-appearance-color',
+                    'autocomplete': 'off',
+                }}) }}
+            </div>
 
-            <div class="radio-table-custom-width-wrapper">
-                {{ form_row(form.appearanceCustomWidth, {'unit_label': 'px'}) }}
+            <div class="form-columns">
+                {{ form_row(form.appearanceWidthType, {attr: {
+                    'class': 'radio-table-width-type',
+                    'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
+                }}) }}
+
+                {{ form_row(form.appearanceCustomWidth, {
+                    unit_label: 'px',
+                    attr: { 'class': 'radio-table-custom-width' },
+                }) }}
             </div>
 
             {{ form_row(form.appearanceCollapsedComments) }}
         </div>
-
-        <div id="export">
-            <h2>{{ 'radio_table.settings.heading.export'|trans }}</h2>
-
-            {% if radio_table.radioStationsCount > 0 %}
-                <p class="information">
-                    {{ 'radio_table.settings.information.export'|trans }}
-                </p>
-
-                <ul class="radio-table-export-list">
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_xlsx'|trans }}
-                        </a>
-                        {{ 'radio_table.settings.export.text.about_xlsx'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_ods'|trans }}
-                        </a>
-                        {{ 'radio_table.settings.export.text.about_ods'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_csv'|trans }}
-                        </a>
-                        {{ 'radio_table.settings.export.text.about_csv'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_pdf'|trans }}
-                        </a>
-                        {{ 'radio_table.settings.export.text.about_pdf'|trans }}
-                    </li>
-                    <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
-                            {{ 'radio_table.settings.export.action.download_html'|trans }}
-                        </a>
-                        {{ 'radio_table.settings.export.text.about_html'|trans }}
-                    </li>
-                </ul>
-            {% else %}
-                <p class="information">
-                    {{ 'radio_table.settings.information.export_cannot_empty'|trans }}
-                </p>
-            {% endif %}
-        </div>
     </div>
 
-    <button>{{ 'common.action.save'|trans }}</button>
+    <div class="form-action-button">
+        <button>{{ 'common.action.save'|trans }}</button>
+
+        <a class="button remove-button" href="{{ path('radio_table.settings', {id: radio_table.id, remove: true}) }}">
+            {{ 'radio_table.remove.title'|trans }}
+        </a>
+    </div>
 
     {{ form_end(form) }}
+
+    {% include 'common/remove_dialog.html.twig' with {
+        remove_question: 'radio_table.remove.text.confirmation'|trans({ '%name%': radio_table.name }),
+        remove_post_url: path('radio_table.remove', {id: radio_table.id}),
+        cancel_fallback_url: path('radio_table.settings', {id: radio_table.id})
+    } %}
 {% endblock %}

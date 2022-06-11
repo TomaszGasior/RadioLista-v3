@@ -1,10 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block head_closing %}
-    {{ encore_entry_link_tags('my-account-settings') }}
-    {{ encore_entry_script_tags('my-account-settings') }}
-{% endblock %}
-
 {% block page_title %}{{ 'user.settings.title_long'|trans }}{% endblock %}
 
 {% block page_content %}
@@ -14,60 +9,31 @@
 
     {{ form_start(form) }}
 
-    <div class="tabbed-ui">
-        <div>
-            <h2>{{ 'user.settings.heading.my_account'|trans }}</h2>
-
-            <dl class="my-account-details">
-                <div>
-                    <dt>{{ 'user.detail.name'|trans }}</dt>
-                    <dd>{{ app.user.name }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.last_activity_date'|trans }}</dt>
-                    <dd>{{ app.user.lastActivityDate|format_date_html }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.register_date'|trans }}</dt>
-                    <dd>{{ app.user.registerDate|format_date_html }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.public_profile'|trans }}</dt>
-                    <dd>{{ ('user.detail.public_profile.state.' ~ app.user.publicProfile)|trans }}</dd>
-                </div>
-
-                <div>
-                    <dt>{{ 'user.detail.radio_tables_count'|trans }}</dt>
-                    <dd>{{ app.user.radioTablesCount }}</dd>
-                </div>
-            </dl>
-        </div>
-        <div>
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'user.settings.heading.public_profile'|trans }}</h2>
-
-            <p class="information">
-                {{ 'user.settings.information.public_profile'|trans }}
-            </p>
-
-            {{ form_row(form.aboutMe) }}
-            {{ form_row(form.publicProfile) }}
         </div>
-        <div>
+
+        <div class="ui-block-content">
+            {{ form_row(form.publicProfile) }}
+            {{ form_row(form.aboutMe) }}
+        </div>
+    </div>
+
+    <div class="ui-block">
+        <div class="ui-block-heading">
             <h2>{{ 'user.settings.heading.change_password'|trans }}</h2>
+        </div>
 
-            <p class="information">
-                {{ 'user.settings.information.change_password'|trans }}
-            </p>
-
+        <div class="ui-block-content">
             {{ form_row(form.currentPassword) }}
             {{ form_row(form.plainPassword) }}
         </div>
     </div>
 
-    <button>{{ 'common.action.save'|trans }}</button>
+    <div class="form-action-button">
+        <button>{{ 'common.action.save'|trans }}</button>
+    </div>
 
     {{ form_end(form) }}
 {% endblock %}

@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\RadioTable;
 use App\Form\Type\IntegerUnitType;
-use App\Form\Type\RadioTableColumnsType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,6 +19,17 @@ class RadioTableSettingsType extends RadioTableCreateType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('description', CKEditorType::class, [
+                'required' => false,
+                'sanitize_html' => true,
+            ])
+            ->add('frequencyUnit', ChoiceType::class, [
+                'choices' => [
+                    'MHz' => RadioTable::FREQUENCY_MHZ,
+                    'kHz' => RadioTable::FREQUENCY_KHZ,
+                ],
+                'choice_translation_domain' => false,
+            ])
             ->add('maxSignalLevelUnit', ChoiceType::class, [
                 'choices' => [
                     'dB' => RadioTable::MAX_SIGNAL_LEVEL_DB,
@@ -38,10 +49,6 @@ class RadioTableSettingsType extends RadioTableCreateType
                     return 'column.'.$choice;
                 },
                 'choice_translation_domain' => 'radio_table',
-            ])
-            ->add('columns', RadioTableColumnsType::class, [
-                'label_format' => 'column.%name%',
-                'translation_domain' => 'radio_table',
             ])
             ->add('appearanceBackgroundColor', TextType::class, [
                 'property_path' => 'appearance.backgroundColor',
@@ -68,8 +75,8 @@ class RadioTableSettingsType extends RadioTableCreateType
             ->add('appearanceCustomWidth', IntegerUnitType::class, [
                 'property_path' => 'appearance.customWidth',
 
-                'required' => false,
                 'attr' => ['min' => '900'],
+                'required' => false,
             ])
             ->add('appearanceCollapsedComments', CheckboxType::class, [
                 'property_path' => 'appearance.collapsedComments',

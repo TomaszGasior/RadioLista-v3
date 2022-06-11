@@ -1,0 +1,21 @@
+@import './_layout/global.css';
+@import './_layout/site-header.css';
+@import './_layout/site-navigation.css';
+@import './_layout/site-footer.css';
+@import './_layout/main-content.css';
+
+@import './_layout/form-widgets.css';
+@import './_layout/form-widgets-extra.css';
+@import './_layout/form-layout.css';
+@import './_layout/form-action-button.css';
+
+@import './_layout/ui-block.css';
+@import './_layout/notification.css';
+@import './_layout/information.css';
+
+@import './_layout/radio-tables-list.css';
+@import './_layout/search-form.css';
+@import './_layout/remove-dialog.css';
+@import './_layout/sortable-table.css';
+
+@import './_layout/ckeditor-overrides.css';

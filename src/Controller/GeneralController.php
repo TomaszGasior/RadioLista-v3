@@ -21,8 +21,7 @@ class GeneralController extends AbstractController
         ]);
 
         return $this->render('general/homepage.html.twig', [
-            'last_updated_radio_tables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(10),
-            'last_created_radio_tables' => $radioTableRepository->findPublicOrderedByCreationTime(10),
+            'last_updated_radio_tables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(12),
             'search_form' => $form->createView(),
         ]);
     }
@@ -36,7 +35,7 @@ class GeneralController extends AbstractController
     }
 
     /**
-     * @Route({"pl": "/regulamin", "en": "/terms-of-service"}, name="terms_of_service")
+     * @Route("/regulamin", name="terms_of_service")
      */
     public function termsOfService(): Response
     {

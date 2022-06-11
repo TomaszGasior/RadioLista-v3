@@ -1,0 +1,24 @@
+/* export list */
+
+.radio-table-export-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.radio-table-export-list li {
+    margin-top: 15px;
+}
+.radio-table-export-list a.button {
+    margin-right: 12px;
+    width: 250px;
+    vertical-align: baseline;
+}
+
+@media (max-width: 1000px)
+{
+    .radio-table-export-list a.button {
+        margin: 15px 0 10px 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}

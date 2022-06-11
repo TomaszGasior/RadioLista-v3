@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
+use App\Form\RadioStationBulkRemoveType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -100,18 +101,55 @@ class RadioStationController extends AbstractController
     /**
      * @Route(
      *     {"pl": "/wykaz/{radioTableId}/usun-stacje/{id}", "en": "/list/{radioTableId}/delete-station/{id}"},
-     *     name="radio_station.remove"
+     *     name="radio_station.remove",
+     *     methods={"POST"}
      * )
      * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("RADIO_TABLE_MODIFY", subject="radioStation", statusCode=404)
      */
-    public function remove(RadioStation $radioStation): Response
+    public function remove(RadioStation $radioStation, EntityManagerInterface $entityManager): Response
     {
-        $this->addFlash('notice', 'radio_station.remove.notification.chosen_to_be_removed');
+        $entityManager->remove($radioStation);
+        $entityManager->flush();
 
-        return $this->forward(RadioTableController::class . '::remove', [
+        $this->addFlash('notice', 'radio_station.remove.notification.removed');
+
+        return $this->redirectToRoute('radio_table.show', [
             'id' => $radioStation->getRadioTable()->getId(),
-            'radioStationToRemove' => $radioStation,
+        ]);
+    }
+
+    /**
+     * @Route({"pl": "/wykaz/{id}/usun-stacje", "en": "/list/{id}/delete-stations"}, name="radio_station.bulk_remove")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
+     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
+     */
+    public function bulkRemove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RadioStationBulkRemoveType::class, null, ['radio_table' => $radioTable]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chosenToRemove = $form->getData()['chosenToRemove'];
+
+            if (count($chosenToRemove) > 0) {
+                foreach ($chosenToRemove as $radioStation) {
+                    $entityManager->remove($radioStation);
+                }
+                $entityManager->flush();
+
+                $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
+
+                // Form needs to be reloaded to not display removed radio stations.
+                return $this->redirectToRoute('radio_station.bulk_remove', [
+                    'id' => $radioTable->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('radio_station/bulk_remove.html.twig', [
+            'form' => $form->createView(),
+            'radio_table' => $radioTable,
         ]);
     }
 }

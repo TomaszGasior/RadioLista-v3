@@ -8,7 +8,6 @@
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
         <!-- {{ app_version() }} -->
-        <base href="{{ app.request.schemeAndHttpHost }}">
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
         <meta name="language" content="{{ current_locale }}">
@@ -21,8 +20,7 @@
 
         <link rel="icon" href="{{ asset('build/icon.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('build/icon.png') }}">
-        {{ encore_entry_link_tags('common') }}
-        {{ encore_entry_script_tags('common') }}
+        {{ encore_entry_link_tags('layout') }}
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
@@ -34,115 +32,138 @@
     </head>
 
     <body class="customizable-background">
+        <a href="#content" class="skip-link">
+            {{ 'layout.skip_to_content'|trans }}
+        </a>
+
         <header class="site-header {{ development ? 'develop' : '' }}">
             <div class="site-width">
-                <a href="{{ path('homepage') }}" class="site-logo">RadioLista</a>
+                <a href="{{ path('homepage') }}" class="site-logo" aria-label="{{ 'general.homepage.title'|trans }}">RadioLista</a>
 
                 <nav class="site-navigation">
                     <h2 class="sr-only">{{ 'layout.navigation_title'|trans }}</h2>
 
-                    <ul class="user-menu">
+                    <ul>
+                        {% block context_menu %}{% endblock %}
+
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="username">
-                                {% if app.user.publicProfile %}
-                                    <a href="{{ path('user.public_profile', {name: app.user.name}) }}">
-                                        <span class="sr-only">{{ 'layout.logged_in_as'|trans }}</span>
-                                        {{ app.user.name }}
-                                    </a>
-                                {% else %}
-                                    {{ app.user.name }}
-                                {% endif %}
-                            </li>
-                            <li>
+                            <li class="user-item">
                                 <a href="{{ path('user.my_radio_tables') }}">
                                     {{ 'user.my_radio_tables.title'|trans }}
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ path('user.my_account_settings') }}">
-                                    {{ 'user.settings.title'|trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('security.logout') }}">
-                                    {{ 'session.action.logout'|trans }}
-                                </a>
+
+                            <li class="user-item user-submenu">
+                                <span>
+                                    <span class="sr-only">{{ 'layout.logged_in_as'|trans }}</span>
+                                    {{ app.user.name }}
+                                </span>
+
+                                <ul aria-label="{{ 'layout.user_menu_title'|trans }}">
+                                    {% if app.user.publicProfile %}
+                                        <li>
+                                            <a href="{{ path('user.public_profile', {name: app.user.name}) }}">
+                                                {{ 'user.public_profile.title'|trans }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    <li>
+                                        <a href="{{ path('user.my_account_settings') }}">
+                                            {{ 'user.settings.title'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('security.logout') }}">
+                                            {{ 'session.action.logout'|trans }}
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         {% else %}
-                            <li>
+                            <li class="user-item">
                                 <a href="{{ path('security.login') }}">
                                     {{ 'session.login.title'|trans }}
                                 </a>
                             </li>
-                            <li>
+                            <li class="user-item">
                                 <a href="{{ path('user.register') }}">
                                     {{ 'user.register.title'|trans }}
                                 </a>
                             </li>
                         {% endif %}
                     </ul>
-
-                    <div class="context-menu">
-                        {% block context_menu %}{% endblock %}
-                    </div>
                 </nav>
             </div>
-
-            {% set validation_error = app.flashes('validation_error')|last %}
-            {% set error = app.flashes('error')|last %}
-            {% set notice = app.flashes('notice')|last %}
-
-            <span class="notification-wrapper">
-                {% if validation_error %}
-                    <span role="alert" class="notification error">{{ validation_error }}</span>
-                {% elseif error %}
-                    <span role="alert" class="notification error">{{ error|trans }}</span>
-                {% elseif notice %}
-                    <span role="alert" class="notification">{{ notice|trans }}</span>
-                {% endif %}
-            </span>
         </header>
 
-        <main class="main-content site-width">
+        {% set error = app.flashes('error')|last %}
+        {% set notice = app.flashes('notice')|last %}
+
+        {% if error %}
+            <div role="alert" class="notification error">{{ error|trans }}</div>
+        {% elseif notice %}
+            <div role="alert" class="notification">{{ notice|trans }}</div>
+        {% endif %}
+
+        <main class="main-content site-width" id="content">
             {% block page_content %}{% endblock %}
         </main>
 
-        <footer class="site-footer customizable-color">
-            <p>&copy; RadioLista 2012-2022</p>
-            <p><span class="sr-only">{{ 'layout.app_version'|trans }}:</span> {{ app_version() }}</p>
-            <ul>
-                <li>
-                    <a href="{{ path('about_service') }}">
-                        {{ 'general.static_page.about_service'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('contact') }}">
-                        {{ 'general.static_page.contact'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('terms_of_service') }}">
-                        {{ 'general.static_page.terms_of_service'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('all_radio_tables') }}">
-                        {{ 'general.all_radio_tables.title'|trans }}
-                    </a>
-                </li>
-                {% if route_is_multilang %}
-                    {% for locale in locales %}
-                        {% if locale != current_locale %}
-                            <li>
-                                <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
-                                    {{ locale|language_name(locale=locale)|capitalize }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            </ul>
+        <footer class="site-footer">
+            <div class="site-width">
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ path('about_service') }}">
+                                {{ 'general.static_page.about_service'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('all_radio_tables') }}">
+                                {{ 'general.all_radio_tables.title'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contact') }}">
+                                {{ 'general.static_page.contact'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('terms_of_service') }}" hreflang="pl">
+                                {{ 'general.static_page.terms_of_service'|trans }}
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="secondary-line">
+                        &copy; RadioLista
+                        <span class="sr-only">{{ 'layout.app_version'|trans }}</span>
+                        <span title="{{ 'layout.app_version'|trans }}">{{ app_version() }}</span>
+                        2012-2022
+                    </div>
+                </div>
+
+                <div>
+                    {% if route_is_multilang %}
+                        <div aria-hidden="true" class="secondary-line">
+                            Languages
+                        </div>
+
+                        <ul>
+                            {% for locale in locales %}
+                                <li lang="{{ locale }}">
+                                    <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
+                                        aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"
+                                        {% if locale == current_locale %} aria-hidden="true" tabindex="-1" {% endif %}
+                                    >
+                                        {{ locale|language_name(locale=locale)|capitalize }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
         </footer>
 
         {% block body_closing %}{% endblock %}

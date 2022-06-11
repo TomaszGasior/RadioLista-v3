@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class HexColor extends Constraint
 {
-    public $message = 'The value "{{ value }}" is not valid.';
+    public $message = 'radio_table.color_invalid_format';
 }

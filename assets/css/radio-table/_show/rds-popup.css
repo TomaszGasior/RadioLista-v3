@@ -1,0 +1,77 @@
+@keyframes rds_popup_show
+{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.rds-popup {
+    background: #fff;
+    color: #000;
+    border: 1px solid #cacaca;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.14);
+    width: 430px;
+
+    animation-name: rds_popup_show;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.15s;
+    animation-fill-mode: both;
+}
+
+.rds-popup h2 {
+    background: #eee;
+    color: #555;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.rds-popup dl {
+    font-size: 0.8em;
+    margin: 15px 20px;
+}
+.rds-popup dl > div {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+.rds-popup dl > div[hidden] {
+    /* weird fix of weird bug */
+    display: none;
+}
+.rds-popup dt {
+    min-width: 12%;
+    font-weight: bold;
+
+    /* keep in sync with div's margin */
+    padding: 5px 0;
+}
+.rds-popup dt::after {
+    content: ":";
+}
+.rds-popup dd {
+    margin-left: 0;
+}
+
+.rds-popup dd span {
+    display: inline;
+    margin-right: 8px;
+
+    white-space: pre;
+    background: rgba(160,160,160, 0.2);
+    font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
+}
+.rds-popup dd.rds-wrap span {
+    white-space: pre-wrap;
+}
+.rds-popup dd div {
+    margin: 5px 0;
+}

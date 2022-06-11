@@ -1,0 +1,157 @@
+.homepage-logo {
+    display: none;
+}
+
+.homepage-section {
+    text-align: center;
+}
+.homepage-section + .homepage-section {
+    margin-top: 50px;
+}
+.homepage-section h2 {
+    font-size: 1.6em;
+    color: #4A673C;
+    margin-bottom: 30px;
+}
+
+.homepage-section-about {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.homepage-section-about p {
+    line-height: 1.6em;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.homepage-radio-tables-list {
+    list-style: none;
+    padding-left: 0;
+
+    display: grid;
+    grid-gap: 20px;
+
+    text-align: left;
+
+    margin-top: 10px;
+    margin-bottom: 35px;
+}
+.homepage-radio-tables-list li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 0 6px rgba(0,0,0, 0.09);
+    padding: 15px 15px;
+
+    outline: 0 solid transparent;
+    transition: linear 0.1s outline;
+}
+.homepage-radio-tables-list li:hover {
+    background: #fcfcfc;
+    border-color: #e6d1be;
+}
+.homepage-radio-tables-list li:focus-within {
+    outline: 2px solid rgb(240,127,31, 0.6);
+    border-color: #F07F1F;
+}
+.homepage-radio-tables-list a {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+.homepage-radio-tables-list .date {
+    display: block;
+    color: #000;
+    opacity: 0.9;
+    margin-top: 8px;
+    font-size: 0.8em;
+}
+
+.search-form {
+    margin-top: 20px;
+}
+
+@media (min-width: 768px)
+{
+    .site-header .site-logo {
+        visibility: hidden;
+    }
+
+    .homepage-radio-tables-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .homepage-logo {
+        display: block;
+        height: 80px;
+        margin: 40px auto 0;
+    }
+    .homepage-logo .line-1, .homepage-logo .line-2, .homepage-logo .line-3 {
+        animation: logo-line-fade 6s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+    }
+    .homepage-logo .line-1 {
+        animation-delay: 1s;
+    }
+    .homepage-logo .line-2 {
+        animation-delay: 2s;
+    }
+    .homepage-logo .line-3 {
+        animation-delay: 3s;
+    }
+    .homepage-logo .dot {
+        animation: logo-dot-fade 2s;
+        animation-iteration-count: infinite;
+        animation-delay: 0.45s;
+        animation-fill-mode: both;
+    }
+
+    @keyframes logo-line-fade
+    {
+        0% {
+            filter: opacity(0.1);
+        }
+        5% {
+            filter: opacity(1);
+        }
+        60% {
+            filter: opacity(1);
+        }
+        100% {
+            filter: opacity(0.1);
+        }
+    }
+    @keyframes logo-dot-fade
+    {
+        0% {
+            filter: opacity(0.2);
+        }
+        10% {
+            filter: opacity(1);
+        }
+        90% {
+            filter: opacity(1);
+        }
+        100% {
+            filter: opacity(0.2);
+        }
+    }
+
+    @media (prefers-reduced-motion)
+    {
+        .homepage-logo .line-1, .homepage-logo .line-2, .homepage-logo .line-3, .homepage-logo .dot {
+            animation: none;
+        }
+    }
+}

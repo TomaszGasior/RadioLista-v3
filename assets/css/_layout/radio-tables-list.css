@@ -1,0 +1,64 @@
+.radio-tables-list-item {
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    box-shadow: 0 0 6px rgba(0,0,0, 0.09);
+    padding: 17px 24px;
+    margin: 20px 0;
+
+    outline: 0 solid transparent;
+    transition: linear 0.1s outline;
+}
+.radio-tables-list-item:hover {
+    background: #fcfcfc;
+    border-color: #e6d1be;
+}
+.radio-tables-list-item:focus-within {
+    outline: 2px solid rgb(240,127,31, 0.6);
+    border-color: #F07F1F;
+}
+.radio-tables-list-item dd {
+    margin-left: 0;
+}
+.radio-tables-list-item a {
+    /* make outline visible with overflow */
+    outline-offset: -1px;
+}
+
+.radio-tables-list-title a, .radio-tables-list-details dl {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.radio-tables-list-title a {
+    display: block;
+    font-size: 1.6em;
+    color: #D66200;
+}
+
+@media (max-width: 767px)
+{
+    .radio-tables-list-item {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    .radio-tables-list-title a {
+        font-size: 1.3em;
+        line-height: 1.4;
+    }
+}
+
+.radio-tables-list-details dl {
+    margin: 7px 0 2px;
+    font-size: 0.8em;
+}
+.radio-tables-list-details dt, .radio-tables-list-details dd {
+    display: inline;
+}
+.radio-tables-list-details dt::after {
+    content: ':';
+}
+.radio-tables-list-details dt:not(:first-child) {
+    margin-left: 20px;
+}

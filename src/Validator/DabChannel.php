@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class DabChannel extends Constraint
 {
-    public $message = 'The value "{{ value }}" is not valid.';
+    public $message = 'radio_station.dab_channel_invalid_for_frequency';
 }

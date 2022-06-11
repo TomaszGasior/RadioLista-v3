@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\RadioTable;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioTableCreateType extends AbstractType
@@ -14,17 +15,8 @@ class RadioTableCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('frequencyUnit', ChoiceType::class, [
-                'choices' => [
-                    'MHz' => RadioTable::FREQUENCY_MHZ,
-                    'kHz' => RadioTable::FREQUENCY_KHZ,
-                ],
-                'choice_translation_domain' => false,
-            ])
-            ->add('description', CKEditorType::class, [
-                'required' => false,
-                'sanitize_html' => true,
+            ->add('name', null, [
+                'help' => 'radio_table.settings.form.name.help',
             ])
             ->add('status', ChoiceType::class, [
                 'expanded' => true,
@@ -38,6 +30,13 @@ class RadioTableCreateType extends AbstractType
                 },
             ])
         ;
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options): void
+    {
+        foreach ($view['status'] as $children) {
+            $children->vars['help'] = 'radio_table.settings.form.status.choice.'.$children->vars['value'].'.help';
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

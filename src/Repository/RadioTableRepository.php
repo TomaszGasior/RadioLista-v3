@@ -36,11 +36,6 @@ class RadioTableRepository extends ServiceEntityRepository
         return $this->findAllPublic('frequencyUnit', null);
     }
 
-    public function findPublicOrderedByCreationTime(int $limit = null): array
-    {
-        return $this->findAllPublic('creationTime', $limit);
-    }
-
     private function findAllPublic(string $orderBy, ?int $limit): array
     {
         $query = $this->createQueryBuilder('radioTable')
