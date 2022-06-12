@@ -4,7 +4,7 @@ FROM php:7.4.25-fpm-alpine3.13
 RUN apk --no-cache add $PHPIZE_DEPS icu icu-dev libzip libzip-dev libpng libpng-dev \
     && yes '' | pecl install apcu \
     && pecl install xdebug \
-    && docker-php-ext-enable apcu xdebug \
+    && docker-php-ext-enable apcu xdebug opcache \
     && docker-php-ext-install gd pdo_mysql intl zip \
     && apk del $PHPIZE_DEPS icu-dev libzip-dev libpng-dev
 
