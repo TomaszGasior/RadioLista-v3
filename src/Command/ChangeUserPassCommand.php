@@ -46,9 +46,6 @@ class ChangeUserPassCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        // There is no way to access APCu cache here. Don't warn about it.
-        $this->entityManager->getClassMetadata(User::class)->cache = null;
-
         $name = $io->ask('Username');
         if (! $user = $this->userRepository->findOneByName($name)) {
             $io->error('There is no such user.');
@@ -82,7 +79,7 @@ class ChangeUserPassCommand extends Command
             )
         ]);
 
-        // Clear APCu cache after changing the password.
+        // Clear Doctrine's second level cache.
         $this->getApplication()->run(new ArrayInput(['command' => 'cache:clear']), $output);
 
         return 0;

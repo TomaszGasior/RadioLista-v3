@@ -36,15 +36,7 @@ class ChangeUserPassCommandTest extends WebTestCase
             'NEW_PASSWORD_OF_TEST_USER',
         ]);
 
-        // ChangeUserPassCommand changes User entity cache configuration
-        // to workaround APCu cache warnings. This breaks other tests.
-        $cache = static::$container->get(EntityManagerInterface::class)
-            ->getClassMetadata(User::class)->cache;
-
         $commandTester->execute([]);
-
-        static::$container->get(EntityManagerInterface::class)
-            ->getClassMetadata(User::class)->cache = $cache;
 
         $this->assertUserLogsIn('test_user', 'NEW_PASSWORD_OF_TEST_USER');
     }
