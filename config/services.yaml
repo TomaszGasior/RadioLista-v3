@@ -70,6 +70,4 @@ services:
 
     App\Twig\VersionExtension:
         arguments:
-            $environment: '%kernel.environment%'
             $versionFilePath: '%kernel.project_dir%/version'
-            $gitDirPath: '%kernel.project_dir%/.git'
