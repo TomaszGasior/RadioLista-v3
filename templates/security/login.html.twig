@@ -7,6 +7,8 @@
 {% block page_title %}{{ 'session.login.title'|trans }}{% endblock %}
 
 {% block page_content %}
+    {% include "common/birthday_message.html.twig" %}
+
     {{ form_start(form) }}
 
     <div class="user-login-screen">

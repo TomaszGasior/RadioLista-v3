@@ -7,6 +7,8 @@
 {% block page_title %}{{ 'general.static_page.contact'|trans }}{% endblock %}
 
 {% block page_content %}
+    {% include "common/birthday_message.html.twig" %}
+
     <header>
         <h1>{{ 'general.static_page.contact'|trans }}</h1>
     </header>
