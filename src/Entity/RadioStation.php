@@ -193,6 +193,12 @@ class RadioStation
         $this->appearance = new Appearance;
     }
 
+    public function __clone()
+    {
+        $this->rds = clone $this->rds;
+        $this->appearance = clone $this->appearance;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

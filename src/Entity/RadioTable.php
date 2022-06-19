@@ -155,6 +155,11 @@ class RadioTable
         $this->lastUpdateTime = new \DateTime;
     }
 
+    public function __clone()
+    {
+        $this->appearance = $this->appearance;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
