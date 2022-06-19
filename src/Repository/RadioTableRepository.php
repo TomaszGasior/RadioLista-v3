@@ -41,6 +41,7 @@ class RadioTableRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('radioTable')
             ->andWhere('radioTable.status = :status')
             ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->andWhere('radioTable.radioStationsCount > 0')
             ->orderBy('radioTable.'.$orderBy, 'DESC')
         ;
 
