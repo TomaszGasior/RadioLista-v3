@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util\Data;
+namespace App\Util;
 
 trait RadioStationRdsTrait
 {
