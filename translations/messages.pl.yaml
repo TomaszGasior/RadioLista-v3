@@ -299,7 +299,7 @@ general:
             search_radio_tables: 'Wyszukaj wykazy'
 
         action:
-            learn_more_about_service: 'Dowiedź się więcej o RadioLiście'
+            learn_more_about_service: 'Dowiedz się więcej o RadioLiście'
             show_all_radio_tables: 'Zobacz wszystkie wykazy'
 
         text:
