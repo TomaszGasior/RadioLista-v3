@@ -36,7 +36,7 @@ class RadioTableExtensionTest extends TestCase
     /**
      * @dataProvider rdsFramesProvider
      */
-    public function testAlignRdsFrame(string $frame, string $expectedFrame): void
+    public function test_frame_is_properly_aligned_to_center(string $frame, string $expectedFrame): void
     {
         $extension = new RadioTableExtension;
 

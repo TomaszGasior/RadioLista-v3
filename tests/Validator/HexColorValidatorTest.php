@@ -14,15 +14,23 @@ class HexColorValidatorTest extends ConstraintValidatorTestCase
         return new HexColorValidator;
     }
 
-    public function colorsProvider(): iterable
+    public function validColorProvider(): iterable
     {
-        $validValues = [
+        $values = [
             '#ff83A8',
             '#FF83A8',
             '#AEC',
             '#AAEECC',
         ];
-        $invalidValues = [
+
+        foreach ($values as $value) {
+            yield $value => [$value];
+        }
+    }
+
+    public function invalidColorProvider(): iterable
+    {
+        $values = [
             '#XYEECC',
             '#AEG',
             '#AECe',
@@ -38,29 +46,33 @@ class HexColorValidatorTest extends ConstraintValidatorTestCase
             'C',
         ];
 
-        foreach ($validValues as $value) {
-            yield sprintf('valid "%s"', $value) => [$value, true];
-        }
-        foreach ($invalidValues as $value) {
-            yield sprintf('invalid "%s"', $value) => [$value, false];
+        foreach ($values as $value) {
+            yield $value => [$value];
         }
     }
 
     /**
-     * @dataProvider colorsProvider
+     * @dataProvider validColorProvider
      */
-    public function testHexColorValidator(string $value, bool $isValid): void
+    public function test_validator_accepts_valid_color(string $value): void
     {
         $constraint = new HexColor;
         $this->validator->validate($value, $constraint);
 
-        if ($isValid) {
-            $this->assertNoViolation();
-        }
-        else {
-            $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $value)
-                ->assertRaised();
-        }
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @dataProvider invalidColorProvider
+     */
+    public function test_validator_rejects_invalid_color(string $value): void
+    {
+        $constraint = new HexColor;
+        $this->validator->validate($value, $constraint);
+
+        $this->buildViolation($constraint->message)
+            ->setParameter('{{ value }}', $value)
+            ->assertRaised()
+        ;
     }
 }

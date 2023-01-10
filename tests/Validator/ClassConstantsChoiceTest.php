@@ -49,7 +49,7 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testClassConstantsChoiceConstraint($class, $constantsPrefix,
+    public function test_works_the_same_as_plain_choice($class, $constantsPrefix,
                                                        $validConstants, $value): void
     {
         $classConstantsChoiceConstraint = new ClassConstantsChoice(
@@ -66,7 +66,7 @@ class ClassConstantsChoiceTest extends ConstraintValidatorTestCase
         $this->assertEquals($choiceViolation, $classConstantsChoiceViolation);
     }
 
-    public function testThrowExceptionWithNoChoices(): void
+    public function test_throws_exception_if_incorrect_prefix(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessageMatches('/stdClass.*NON_EXISTENT_CONSTANT_PREFIX_38907412/');

@@ -21,9 +21,44 @@ class RadioTableColumnsTypeTest extends TypeTestCase
         ];
     }
 
-    public function dataProvider(): array
+    public function test_form_contains_fields_for_all_columns(): void
     {
-        return [[
+        [$visibleColumns, $allColumns] = $this->getVisibleColumnsAndAllColumns();
+
+        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
+
+        $view = $form->createView();
+        $children = $view->children;
+
+        foreach ($allColumns as $columnName) {
+            $this->assertArrayHasKey($columnName, $children);
+        }
+    }
+
+    public function test_field_values_are_negative_for_hidden_and_positive_for_visible_columns(): void
+    {
+        [$visibleColumns, $allColumns] = $this->getVisibleColumnsAndAllColumns();
+
+        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
+
+        $view = $form->createView();
+        $children = $view->children;
+
+        foreach ($allColumns as $columnName) {
+            $value = $children[$columnName]->vars['value'];
+
+            if (in_array($columnName, $visibleColumns)) {
+                $this->assertGreaterThan(0, $value);
+            }
+            else {
+                $this->assertLessThan(0, $value);
+            }
+        }
+    }
+
+    private function getVisibleColumnsAndAllColumns(): array
+    {
+        return [
             [
                 RadioTable::COLUMN_FREQUENCY,
                 RadioTable::COLUMN_NAME,
@@ -47,30 +82,6 @@ class RadioTableColumnsTypeTest extends TypeTestCase
                 RadioTable::COLUMN_RDS,
                 RadioTable::COLUMN_COMMENT,
             ],
-        ]];
-    }
-
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testRenderedFields(array $visibleColumns, array $allColumns): void
-    {
-        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
-
-        $view = $form->createView();
-        $children = $view->children;
-
-        foreach ($allColumns as $columnName) {
-            $this->assertArrayHasKey($columnName, $children);
-
-            $value = $view->children[$columnName]->vars['value'];
-
-            if (in_array($columnName, $visibleColumns)) {
-                $this->assertGreaterThan(0, $value);
-            }
-            else {
-                $this->assertLessThan(0, $value);
-            }
-        }
+        ];
     }
 }

@@ -31,7 +31,7 @@ class AdminControllerTest extends WebTestCase
     /**
      * @dataProvider urlProvider
      */
-    public function testAdminPanelPage($url): void
+    public function test_admin_panel_seems_to_work($url): void
     {
         $this->client->loginUserByName('test_user_admin');
         $this->client->request('GET', $url);
@@ -41,7 +41,7 @@ class AdminControllerTest extends WebTestCase
     /**
      * @dataProvider urlProvider
      */
-    public function testAdminPanelInaccessibleForNonAdmin($url): void
+    public function test_admin_panel_is_not_available_for_non_administrator_user($url): void
     {
         $this->client->request('GET', $url);
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());

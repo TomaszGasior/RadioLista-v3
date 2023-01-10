@@ -57,7 +57,13 @@ class TestsFixtures extends Fixture
             ->setPolarization(RadioStation::POLARIZATION_VERTICAL)
         ;
 
-        foreach ([$user, $secondUser, $adminUser, $radioTable, $radioStation, $secondRadioStation] as $entity) {
+        $thirdRadioStation = (new RadioStation)
+            ->setRadioTable($radioTable)
+            ->setName('test_third_radio_station_name')
+            ->setFrequency(101.605)
+        ;
+
+        foreach ([$user, $secondUser, $adminUser, $radioTable, $radioStation, $secondRadioStation, $thirdRadioStation] as $entity) {
             $manager->persist($entity);
             $manager->flush();
         }

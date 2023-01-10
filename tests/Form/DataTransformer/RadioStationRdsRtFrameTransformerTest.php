@@ -56,7 +56,7 @@ class RadioStationRdsRtFrameTransformerTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testTransformFromDataToUi(array $data, string $transformedString): void
+    public function test_transforms_from_internal_structure_to_user_input(array $data, string $transformedString): void
     {
         $transformer = new RadioStationRdsRtFrameTransformer;
 
@@ -67,7 +67,7 @@ class RadioStationRdsRtFrameTransformerTest extends TestCase
      * @dataProvider dataProvider
      * @dataProvider dataWithExtraWhitespaceProvider
      */
-    public function testTransformFromUiToData(array $data, string $transformedString): void
+    public function test_transforms_from_user_input_to_internal_structure(array $data, string $transformedString): void
     {
         $transformer = new RadioStationRdsRtFrameTransformer;
 

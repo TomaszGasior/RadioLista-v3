@@ -71,7 +71,7 @@ class BasicApplicationTest extends WebTestCase
     /**
      * @dataProvider publicUrlsProvider
      */
-    public function testPublicPage(string $url, string $redirectUrl = null, string $method = 'GET'): void
+    public function test_public_page_seems_to_be_working(string $url, string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->request($method, $url);
 
@@ -82,7 +82,7 @@ class BasicApplicationTest extends WebTestCase
     /**
      * @dataProvider authenticatedUrlsProvider
      */
-    public function testAuthenticatedPage(string $url, string $redirectUrl = null, string $method = 'GET'): void
+    public function test_authenticated_page_seems_to_be_working(string $url, string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->loginUserByName('test_user');
         $this->client->request($method, $url);

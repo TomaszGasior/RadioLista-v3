@@ -28,17 +28,16 @@ class MaintenanceModeSubscriberTest extends TestCase
     public function setUp(): void
     {
         $this->lockFilePath = tempnam(sys_get_temp_dir(), 'rltest');
-
         $this->security = $this->createMock(Security::class);
-
         $this->twig = $this->createMock(Environment::class);
 
         /** @var HttpKernelInterface|MockObject */
         $kernel = $this->createMock(HttpKernelInterface::class);
+
         $this->event = new RequestEvent($kernel, new Request, null);
     }
 
-    public function testDisabledMaintenanceMode(): void
+    public function test_does_not_interrupt_response_when_maintenance_mode_is_disabled(): void
     {
         $response = new Response;
 
@@ -55,7 +54,7 @@ class MaintenanceModeSubscriberTest extends TestCase
         $this->assertEquals(200, $this->event->getResponse()->getStatusCode());
     }
 
-    public function testEnabledMaintenanceMode(): void
+    public function test_interrupts_response_when_maintenance_mode_is_enabled(): void
     {
         $this->security
             ->expects($this->once())
@@ -77,7 +76,7 @@ class MaintenanceModeSubscriberTest extends TestCase
         $this->assertEquals(503, $this->event->getResponse()->getStatusCode());
     }
 
-    public function testAdminAccessWhenEnabledMaintenanceMode(): void
+    public function test_does_not_interrupt_response_when_maintenance_mode_is_enabled_but_user_is_administrator(): void
     {
         $this->security
             ->expects($this->once())

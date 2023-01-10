@@ -15,7 +15,7 @@ class PasswordGeneratorTest extends TestCase
         $this->passwordGenerator = new PasswordGenerator;
     }
 
-    public function testGetRandomPassword(): void
+    public function test_password_is_long_enough_and_random_each_time(): void
     {
         $firstPassword = $this->passwordGenerator->getRandomPassword();
         $secondPassword = $this->passwordGenerator->getRandomPassword();

@@ -14,44 +14,55 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         return new YearMonthDateValidator;
     }
 
-    public function dateProvider(): iterable
+    public function validDateProvider(): iterable
     {
-        $validValues = [
+        $values = [
             '1991',
             '2003-01',
             '2016-02-29',
         ];
-        $invalidValues = [
-            '2015-13',
-            '201513',
-            // Other cases like incorrect day of month are covered
-            // in base DateValidator class.
+
+        foreach ($values as $value) {
+            yield '"'.$value.'"' => [$value];
+        }
+    }
+
+    public function invalidDateProvider(): iterable
+    {
+        $valuesWithErrorCode = [
+            ['2015-13', YearMonthDate::INVALID_FORMAT_ERROR],
+            ['201513', YearMonthDate::INVALID_FORMAT_ERROR],
+            ['2001-02-30', YearMonthDate::INVALID_DATE_ERROR],
         ];
 
-        foreach ($validValues as $value) {
-            yield sprintf('valid "%s"', $value) => [$value, true];
-        }
-        foreach ($invalidValues as $value) {
-            yield sprintf('invalid "%s"', $value) => [$value, false];
+        foreach ($valuesWithErrorCode as [$value, $errorCode]) {
+            yield '"'.$value.'"' => [$value, $errorCode];
         }
     }
 
     /**
-     * @dataProvider dateProvider
+     * @dataProvider validDateProvider
      */
-    public function testYearMonthDateValidator(string $value, bool $isValid): void
+    public function test_validator_accepts_correct_date(string $value): void
     {
         $constraint = new YearMonthDate;
         $this->validator->validate($value, $constraint);
 
-        if ($isValid) {
-            $this->assertNoViolation();
-        }
-        else {
-            $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', '"'.$value.'"')
-                ->setCode(YearMonthDate::INVALID_FORMAT_ERROR)
-                ->assertRaised();
-        }
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @dataProvider invalidDateProvider
+     */
+    public function test_validator_rejects_incorrect_date(string $value, string $errorCode): void
+    {
+        $constraint = new YearMonthDate;
+        $this->validator->validate($value, $constraint);
+
+        $this->buildViolation($constraint->message)
+            ->setParameter('{{ value }}', '"'.$value.'"')
+            ->setCode($errorCode)
+            ->assertRaised()
+        ;
     }
 }

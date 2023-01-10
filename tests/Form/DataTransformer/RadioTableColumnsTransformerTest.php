@@ -91,7 +91,7 @@ class RadioTableColumnsTransformerTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testTransformFromDataToUi(array $visibleColumns, array $sortedColumns): void
+    public function test_transforms_from_internal_structure_to_user_input(array $visibleColumns, array $sortedColumns): void
     {
         $transformer = new RadioTableColumnsTransformer;
 
@@ -101,7 +101,7 @@ class RadioTableColumnsTransformerTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testTransformFromUiToData(array $visibleColumns, array $sortedColumns): void
+    public function test_transforms_from_user_input_to_internal_structure(array $visibleColumns, array $sortedColumns): void
     {
         $transformer = new RadioTableColumnsTransformer;
 

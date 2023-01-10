@@ -15,7 +15,7 @@ class UserControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testUserPublicProfileDescription(): void
+    public function test_user_can_update_description_in_his_public_profile(): void
     {
         $this->client->loginUserByName('test_user');
         $crawler = $this->client->request('GET', '/ustawienia-konta');
@@ -32,9 +32,9 @@ class UserControllerTest extends WebTestCase
         $this->assertStringContainsString($exampleContent, $content);
     }
 
-    public function testUserPublicProfileVisibility(): void
+    public function test_user_can_enable_and_disable_his_public_profile(): void
     {
-        $setPublicProfile = function(bool $enabled) {
+        $setPublicProfile = function(bool $enabled): void {
             $this->client->loginUserByName('test_user');
 
             $crawler = $this->client->request('GET', '/ustawienia-konta');
@@ -59,7 +59,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testChangeUserPassword(): void
+    public function test_user_can_change_his_password(): void
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
@@ -89,7 +89,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
     }
 
-    public function testDontChangeUserPasswordWhenCurrentInvalid(): void
+    public function test_user_cannot_change_his_password_when_provides_invalid_current_password(): void
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
@@ -119,7 +119,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(200, $response->getStatusCode());
     }
 
-    public function testRegisterNewUser(): void
+    public function test_user_can_register_new_account(): void
     {
         $crawler = $this->client->request('GET', '/rejestracja');
 

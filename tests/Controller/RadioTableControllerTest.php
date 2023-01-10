@@ -19,7 +19,7 @@ class RadioTableControllerTest extends WebTestCase
         $this->client->loginUserByName('test_user');
     }
 
-    public function testRenderRadioTable(): void
+    public function test_radio_table_is_properly_rendered_and_contains_stations(): void
     {
         $crawler = $this->client->request('GET', '/wykaz/1');
 
@@ -40,7 +40,7 @@ class RadioTableControllerTest extends WebTestCase
         }
     }
 
-    public function testCreateRadioTable(): void
+    public function test_user_can_create_radio_table(): void
     {
         $crawler = $this->client->request('GET', '/utworz-wykaz');
 
@@ -53,7 +53,7 @@ class RadioTableControllerTest extends WebTestCase
         $this->assertStringContainsString('EXAMPLE_RADIO_TABLE_NAME', $content);
     }
 
-    public function testEditRadioTable(): void
+    public function test_user_can_modify_radio_table(): void
     {
         $crawler = $this->client->request('GET', '/wykaz/1/ustawienia');
         $form = $crawler->filter('form')->form();
@@ -66,7 +66,7 @@ class RadioTableControllerTest extends WebTestCase
         $this->assertStringNotContainsString('test_radio_table_name', $content);
     }
 
-    public function testRemoveRadioTable(): void
+    public function test_user_can_remove_radio_table(): void
     {
         $crawler = $this->client->request('GET', '/wykaz/1/ustawienia?remove=1');
         $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();

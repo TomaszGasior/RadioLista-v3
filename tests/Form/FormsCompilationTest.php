@@ -52,7 +52,7 @@ class FormsCompilationTest extends KernelTestCase
      * @dataProvider formTypeAndEntityProvider
      * @doesNotPerformAssertions
      */
-    public function testCompileForm(string $formClass, $data = null, array $options = []): void
+    public function test_form_compiles_without_errors(string $formClass, $data = null, array $options = []): void
     {
         $form = $this->factory->create($formClass, $data, $options);
 

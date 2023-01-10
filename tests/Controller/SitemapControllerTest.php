@@ -15,10 +15,9 @@ class SitemapControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testRenderSitemap(): void
+    public function test_sitemap_contains_urls(): void
     {
-        $crawler = $this->client->request('GET', '/sitemap.xml');
-
+        $this->client->request('GET', '/sitemap.xml');
         $response = $this->client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());

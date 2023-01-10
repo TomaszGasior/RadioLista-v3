@@ -16,54 +16,106 @@ class RadioTableStatusTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function statusAndHttpCodeProvider(): array
+    public function publicStatusProvider(): iterable
     {
-        return [
-            'public' => [RadioTable::STATUS_PUBLIC, 200, false],
-            'unlisted' => [RadioTable::STATUS_UNLISTED, 200, true],
-            'private' => [RadioTable::STATUS_PRIVATE, 404, true],
-        ];
+        yield 'status: public' => [RadioTable::STATUS_PUBLIC];
     }
 
-    public function statusAndAnchorVisibilityProvider(): array
+    public function unlistedStatusProvider(): iterable
     {
-        return [
-            'public' => [RadioTable::STATUS_PUBLIC, true],
-            'unlisted' => [RadioTable::STATUS_UNLISTED, false],
-            'private' => [RadioTable::STATUS_PRIVATE, false],
-        ];
+        yield 'status: unlisted' => [RadioTable::STATUS_UNLISTED];
+    }
+
+    public function privateStatusProvider(): iterable
+    {
+        yield 'status: private' => [RadioTable::STATUS_PRIVATE];
     }
 
     /**
-     * @dataProvider statusAndHttpCodeProvider
+     * @dataProvider publicStatusProvider
+     * @dataProvider unlistedStatusProvider
      */
-    public function testRadioTablePublicAccess($status, int $expectedHttpCode,
-                                               bool $expectedNoIndexTag): void
+    public function test_anonymous_user_can_access_public_radio_table($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $this->client->request('GET', '/wykaz/1');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @dataProvider privateStatusProvider
+     */
+    public function test_anonymous_user_cannot_access_private_radio_table($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $this->client->request('GET', '/wykaz/1');
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @dataProvider publicStatusProvider
+     * @dataProvider unlistedStatusProvider
+     */
+    public function test_user_can_access_public_radio_table_owned_by_another_user($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $this->client->loginUserByName('test_user_second');
+        $this->client->request('GET', '/wykaz/1');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @dataProvider privateStatusProvider
+     */
+    public function test_user_cannot_access_private_radio_table_owned_by_another_user($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $this->client->loginUserByName('test_user_second');
+        $this->client->request('GET', '/wykaz/1');
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @dataProvider publicStatusProvider
+     */
+    public function test_public_radio_table_does_not_have_noindex_meta_tag($status): void
     {
         $this->setRadioTableStatus($status);
 
         $crawler = $this->client->request('GET', '/wykaz/1');
 
-        $this->assertSame($expectedHttpCode, $this->client->getResponse()->getStatusCode());
+        $robotsTag = $crawler->filter('meta[name="robots"]');
+        $this->assertCount(0, $robotsTag);
+    }
+
+    /**
+     * @dataProvider unlistedStatusProvider
+     * @dataProvider privateStatusProvider
+     */
+    public function test_private_radio_table_has_noindex_meta_tag($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $crawler = $this->client->request('GET', '/wykaz/1');
 
         $robotsTag = $crawler->filter('meta[name="robots"]');
-        if ($expectedNoIndexTag) {
-            $this->assertStringContainsString('noindex', $robotsTag->attr('content'));
-        }
-        else {
-            $this->assertCount(0, $robotsTag);
-        }
-
-        $this->client->loginUserByName('test_user_second');
-        $this->client->request('GET', '/wykaz/1');
-
-        $this->assertSame($expectedHttpCode, $this->client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('noindex', $robotsTag->attr('content'));
     }
 
     /**
-     * @dataProvider statusAndHttpCodeProvider
+     * @dataProvider publicStatusProvider
+     * @dataProvider unlistedStatusProvider
+     * @dataProvider privateStatusProvider
      */
-    public function testOwnerAlwaysHasAccess($status): void
+    public function test_user_always_has_access_to_own_radio_table($status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -74,9 +126,11 @@ class RadioTableStatusTest extends WebTestCase
     }
 
     /**
-     * @dataProvider statusAndHttpCodeProvider
+     * @dataProvider publicStatusProvider
+     * @dataProvider unlistedStatusProvider
+     * @dataProvider privateStatusProvider
      */
-    public function testAdminAlwaysHasAccess($status): void
+    public function test_administrator_always_has_access_to_radio_table($status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -87,31 +141,57 @@ class RadioTableStatusTest extends WebTestCase
     }
 
     /**
-     * @dataProvider statusAndAnchorVisibilityProvider
+     * @dataProvider publicStatusProvider
      */
-    public function testVisibilityInAllRadioTablesList($status, bool $expectedVisibleAnchor): void
+    public function test_public_radio_table_is_visible_in_all_radio_tables_list($status): void
     {
         $this->setRadioTableStatus($status);
 
         $crawler = $this->client->request('GET', '/wszystkie-wykazy');
 
         $anchors = $crawler->filter('a[href="/wykaz/1"]');
-
-        $this->assertCount($expectedVisibleAnchor ? 1 : 0, $anchors);
+        $this->assertCount(1, $anchors);
     }
 
     /**
-     * @dataProvider statusAndAnchorVisibilityProvider
+     * @dataProvider unlistedStatusProvider
+     * @dataProvider privateStatusProvider
      */
-    public function testVisibilityInOwnerPublicProfile($status, bool $expectedVisibleAnchor): void
+    public function test_private_radio_table_is_not_visible_in_all_radio_tables_list($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $crawler = $this->client->request('GET', '/wszystkie-wykazy');
+
+        $anchors = $crawler->filter('a[href="/wykaz/1"]');
+        $this->assertCount(0, $anchors);
+    }
+
+    /**
+     * @dataProvider publicStatusProvider
+     */
+    public function test_public_radio_table_is_visible_in_owners_public_profile($status): void
     {
         $this->setRadioTableStatus($status);
 
         $crawler = $this->client->request('GET', '/profil/test_user');
 
         $anchors = $crawler->filter('a[href="/wykaz/1"]');
+        $this->assertCount(1, $anchors);
+    }
 
-        $this->assertCount($expectedVisibleAnchor ? 1 : 0, $anchors);
+    /**
+     * @dataProvider unlistedStatusProvider
+     * @dataProvider privateStatusProvider
+     */
+    public function test_private_radio_table_is_not_visible_in_owners_public_profile($status): void
+    {
+        $this->setRadioTableStatus($status);
+
+        $crawler = $this->client->request('GET', '/profil/test_user');
+
+        $anchors = $crawler->filter('a[href="/wykaz/1"]');
+        $this->assertCount(0, $anchors);
     }
 
     private function setRadioTableStatus($newStatus): void

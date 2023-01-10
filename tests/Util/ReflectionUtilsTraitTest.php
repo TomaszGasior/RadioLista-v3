@@ -39,19 +39,21 @@ class ReflectionUtilsTraitTest extends TestCase
         };
     }
 
-    public function testGetPrivateFieldOfObject(): void
+    public function test_util_reads_private_field_from_object(): void
     {
         $data = $this->reflectionUtils->getPrivateFieldOfObject($this->instance, 'privateField');
+
         $this->assertEquals('private_data', $data);
     }
 
-    public function testSetPrivateFieldOfObject(): void
+    public function test_util_changes_private_field_in_object(): void
     {
         $this->reflectionUtils->setPrivateFieldOfObject($this->instance, 'privateField', 'CHANGED');
+
         $this->assertEquals('CHANGED', $this->instance->getValueOfPrivateField());
     }
 
-    public function testGetPrefixedConstantsOfClass(): void
+    public function test_util_reads_constants_with_specified_prefix_from_class(): void
     {
         $constants = [
             'PREFIXED_CONST_FIRST' => 'value_1',
@@ -59,6 +61,7 @@ class ReflectionUtilsTraitTest extends TestCase
             'PREFIXED_CONST_THIRD' => 'value_3',
         ];
         $result = $this->reflectionUtils->getPrefixedConstantsOfClass(get_class($this->instance), 'PREFIXED_');
+
         $this->assertEquals($constants, $result);
     }
 }
