@@ -30,6 +30,9 @@ class HttpSecuritySubscriber implements EventSubscriberInterface
         $response->headers->set('X-Content-Type-Options', 'nosniff');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function getSubscribedEvents(): array
     {
         return [
