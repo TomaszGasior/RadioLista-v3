@@ -50,8 +50,11 @@ class ChangeUserPassCommandTest extends WebTestCase
         $form['security_login[password]'] = $password;
 
         $this->client->submit($form);
-        $this->client->followRedirect();
 
-        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        $crawler = $this->client->request('GET', '/moje-wykazy');
+        $response = $this->client->getResponse();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertStringContainsString('test_radio_table_name', $response->getContent());
     }
 }
