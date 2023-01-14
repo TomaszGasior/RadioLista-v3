@@ -189,15 +189,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     /**
      * @see UserInterface
      */
-    public function getUserIdentifier(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getUsername(): ?string
+    public function getUserIdentifier(): string
     {
         return $this->name;
     }
