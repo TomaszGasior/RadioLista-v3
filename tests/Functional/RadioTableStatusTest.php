@@ -134,7 +134,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->loginUserByName('test_user');
+        $this->client->loginUserByName('test_user_admin');
         $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
