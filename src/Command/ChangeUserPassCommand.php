@@ -15,8 +15,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ChangeUserPassCommand extends Command
 {
-    protected static $defaultName = 'app:change-user-pass';
-
     private $entityManager;
     private $userRepository;
     private $validator;
@@ -38,6 +36,7 @@ class ChangeUserPassCommand extends Command
     protected function configure(): void
     {
         $this
+            ->setName('app:change-user-pass')
             ->setDescription('Change user\'s password')
         ;
     }

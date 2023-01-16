@@ -43,9 +43,6 @@ services:
             $debug: '%kernel.debug%'
             $locales: '%app.locales%'
 
-    App\Doctrine\EventSubscriber\SqliteForeignKeySubscriber:
-        tags: ['doctrine.event_subscriber']
-
     App\EventSubscriber\HttpSecuritySubscriber:
         arguments:
             $cspExtraDomains:
