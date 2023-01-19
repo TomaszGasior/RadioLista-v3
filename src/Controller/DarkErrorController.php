@@ -38,7 +38,7 @@ class DarkErrorController extends AbstractController
 
         // Site language is defined by locale assigned to route. Set preferred
         // language for better user experience when route is unknown (real 404).
-        if (!$this->requestStack->getMasterRequest()->attributes->get('_route')) {
+        if (!$this->requestStack->getMainRequest()->attributes->get('_route')) {
             $this->translator->setLocale($request->getPreferredLanguage($this->locales));
         }
 
