@@ -30,7 +30,10 @@ framework:
         sanitizers:
             default:
                 allow_elements: { a: '*', b: '*', br: '*', div: '*', em: '*', i: '*', p: '*', span: '*', strong: '*', sub: '*', sup: '*', u: '*', ul: '*', ol: '*', li: '*' }
-                allowed_link_schemes: ~
+
+                # allowing all protocols would make more sense until CKEditor 4 is used but:
+                # https://github.com/symfony/symfony/issues/49030
+                allowed_link_schemes: ['http', 'https', 'mailto', 'tel', 'ftp', 'ftps', 'news']
 
 when@test:
     framework:
