@@ -76,7 +76,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         return $radioTable;
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [UserFixtures::class];
     }

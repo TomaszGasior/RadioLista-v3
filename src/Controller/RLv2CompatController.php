@@ -54,7 +54,7 @@ class RLv2CompatController extends AbstractController
     /**
      * @Route("/strona-glowna")
      */
-    public function homepage()
+    public function homepage(): Response
     {
         return $this->redirectToRoute('homepage');
     }

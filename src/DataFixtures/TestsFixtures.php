@@ -12,7 +12,7 @@ class TestsFixtures extends Fixture
 {
     use FixtureTrait;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user = (new User)
             ->setName('test_user')

@@ -15,7 +15,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
  */
 class RadioStationRdsPsFrameTransformer implements DataTransformerInterface
 {
-    public function transform($value): ?string
+    public function transform(mixed $value): ?string
     {
         if (false === is_array($value)) {
             return null;
@@ -34,7 +34,7 @@ class RadioStationRdsPsFrameTransformer implements DataTransformerInterface
         return implode("\n", $lines);
     }
 
-    public function reverseTransform($value): array
+    public function reverseTransform(mixed $value): array
     {
         // Normalize whitespace chars.
         $value = str_replace(["\r", "\t"], '', $value);

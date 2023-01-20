@@ -13,7 +13,7 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RadioStationRdsRtFrameTransformer implements DataTransformerInterface
 {
-    public function transform($value): ?string
+    public function transform(mixed $value): ?string
     {
         if (false === is_array($value)) {
             return null;
@@ -22,7 +22,7 @@ class RadioStationRdsRtFrameTransformer implements DataTransformerInterface
         return implode("\n", $value);
     }
 
-    public function reverseTransform($value): array
+    public function reverseTransform(mixed $value): array
     {
         // Normalize whitespace chars.
         $value = str_replace(["\r", "\t"], '', $value);

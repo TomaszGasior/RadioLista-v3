@@ -26,14 +26,7 @@ class PhpSpreadsheetRenderer
     ];
     private const DEFAULT_NUMBER_FORMATTING = '@';
 
-    private $phpSpreadsheetFactory;
-    private $translator;
-
-    public function __construct(Factory $phpSpreadsheetFactory, TranslatorInterface $translator)
-    {
-        $this->phpSpreadsheetFactory = $phpSpreadsheetFactory;
-        $this->translator = $translator;
-    }
+    public function __construct(private Factory $phpSpreadsheetFactory, private TranslatorInterface $translator) {}
 
     /**
      * @param RadioStation[] $radioStations

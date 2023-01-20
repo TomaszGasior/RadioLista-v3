@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Repository\RadioStationRepository;
+use RuntimeException;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,12 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioStationBulkRemoveType extends AbstractType
 {
-    private $radioStationRepository;
-
-    public function __construct(RadioStationRepository $radioStationRepository)
-    {
-        $this->radioStationRepository = $radioStationRepository;
-    }
+    public function __construct(private RadioStationRepository $radioStationRepository) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -40,8 +36,13 @@ class RadioStationBulkRemoveType extends AbstractType
         $choices = $form->get('chosenToRemove')->getConfig()->getAttribute('choice_list')->getChoices();
 
         foreach ($view['chosenToRemove']->children as $name => $childrenView) {
-            /** @var RadioStation */
             $radioStation = $choices[$name] ?? null;
+
+            if ($radioStation && false === $radioStation instanceof RadioStation) {
+                throw new RuntimeException;
+            }
+
+            /** @var RadioStation|null $radioStation */
 
             $childrenView->vars['frequency'] = $radioStation ? $radioStation->getFrequency() : null;
             $childrenView->vars['frequency_unit'] = $options['radio_table']->getFrequencyUnit();

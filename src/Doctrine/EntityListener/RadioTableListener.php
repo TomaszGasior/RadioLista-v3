@@ -12,12 +12,7 @@ class RadioTableListener
 {
     use EntityListenerTrait;
 
-    private $enableDateTimeRefresh;
-
-    public function __construct(bool $enableDateTimeRefresh)
-    {
-        $this->enableDateTimeRefresh = $enableDateTimeRefresh;
-    }
+    public function __construct(private bool $enableDateTimeRefresh) {}
 
     /**
      * @PreFlush

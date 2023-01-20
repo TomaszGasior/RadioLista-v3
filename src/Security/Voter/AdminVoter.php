@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\RadioTable;
 use App\Entity\User;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -11,14 +12,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class AdminVoter extends Voter
 {
-    private $eventDispatcher;
+    public function __construct(private EventDispatcherInterface $eventDispatcher) {}
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-    }
-
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         if ('USER_PUBLIC_PROFILE' === $attribute && $subject instanceof User) {
             return true;
@@ -30,11 +26,11 @@ class AdminVoter extends Voter
         return false;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $currentUser = $token->getUser();
 
-        if (!($currentUser instanceof User) || !in_array('ROLE_ADMIN', $currentUser->getRoles())) {
+        if (false === $currentUser instanceof User || false === in_array('ROLE_ADMIN', $currentUser->getRoles())) {
             return false;
         }
 
@@ -43,11 +39,14 @@ class AdminVoter extends Voter
 
             $result = (false === $user->getPublicProfile() && $user !== $currentUser);
         }
-        if ($subject instanceof RadioTable) {
+        elseif ($subject instanceof RadioTable) {
             $radioTable = $subject;
 
             $result = (RadioTable::STATUS_PRIVATE === $radioTable->getStatus()
                        && $radioTable->getOwner() !== $currentUser);
+        }
+        else {
+            throw new RuntimeException;
         }
 
         // This method could be shorten to just `return Security::isGranted('ROLE_ADMIN')`

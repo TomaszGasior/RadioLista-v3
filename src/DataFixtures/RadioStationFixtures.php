@@ -111,7 +111,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         return $radioStation;
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [RadioTableFixtures::class];
     }

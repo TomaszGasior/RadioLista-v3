@@ -7,12 +7,10 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class HttpSecuritySubscriber implements EventSubscriberInterface
 {
-    private $cspExtraDomains;
-
-    public function __construct(array $cspExtraDomains = [])
-    {
-        $this->cspExtraDomains = $cspExtraDomains;
-    }
+    /**
+     * @param string[] $cspExtraDomains
+     */
+    public function __construct(private array $cspExtraDomains = []) {}
 
     public function onKernelResponse(ResponseEvent $event): void
     {

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Validator\ClassConstantsChoice;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -63,26 +65,26 @@ class RadioTable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
-    private $owner;
+    private ?User $owner = null;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      * @Assert\Length(max=100)
      */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioTable::class, prefix="STATUS_")
      */
-    private $status = self::STATUS_PUBLIC;
+    private int $status = self::STATUS_PUBLIC;
 
     /**
      * @ORM\Column(type="array")
@@ -92,7 +94,7 @@ class RadioTable
      *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME}
      * )
      */
-    private $columns = [
+    private array $columns = [
         self::COLUMN_FREQUENCY,
         self::COLUMN_NAME,
         self::COLUMN_LOCATION,
@@ -107,52 +109,52 @@ class RadioTable
      * @ORM\Column(type="string", length=15)
      * @ClassConstantsChoice(class=RadioTable::class, prefix="SORTING_")
      */
-    private $sorting = self::SORTING_FREQUENCY;
+    private string $sorting = self::SORTING_FREQUENCY;
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
      * @Assert\Length(max=2000)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Embedded(class=Appearance::class)
      * @Assert\Valid
      */
-    private $appearance;
+    private Appearance $appearance;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $creationTime;
+    private ?DateTime $creationTime;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $lastUpdateTime;
+    private DateTime $lastUpdateTime;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
      */
-    private $frequencyUnit = self::FREQUENCY_MHZ;
+    private int $frequencyUnit = self::FREQUENCY_MHZ;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioTable::class, prefix="MAX_SIGNAL_LEVEL_")
      */
-    private $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
+    private int $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $radioStationsCount = 0;
+    private int $radioStationsCount = 0;
 
     public function __construct()
     {
         $this->appearance = new Appearance;
-        $this->creationTime = new \DateTime;
-        $this->lastUpdateTime = new \DateTime;
+        $this->creationTime = new DateTime;
+        $this->lastUpdateTime = new DateTime;
     }
 
     public function __clone()
@@ -189,7 +191,7 @@ class RadioTable
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): int
     {
         return $this->status;
     }
@@ -201,7 +203,7 @@ class RadioTable
         return $this;
     }
 
-    public function getColumns(): ?array
+    public function getColumns(): array
     {
         return $this->columns;
     }
@@ -213,7 +215,7 @@ class RadioTable
         return $this;
     }
 
-    public function getSorting(): ?string
+    public function getSorting(): string
     {
         return $this->sorting;
     }
@@ -245,24 +247,24 @@ class RadioTable
     /**
      * Nullable for backward compatibility. Added in 3.14 version.
      */
-    public function getCreationTime(): ?\DateTimeInterface
+    public function getCreationTime(): ?DateTimeInterface
     {
         return $this->creationTime;
     }
 
-    public function getLastUpdateTime(): \DateTimeInterface
+    public function getLastUpdateTime(): DateTimeInterface
     {
         return $this->lastUpdateTime;
     }
 
     public function refreshLastUpdateTime(): self
     {
-        $this->lastUpdateTime = new \DateTime;
+        $this->lastUpdateTime = new DateTime;
 
         return $this;
     }
 
-    public function getFrequencyUnit(): ?int
+    public function getFrequencyUnit(): int
     {
         return $this->frequencyUnit;
     }
@@ -274,7 +276,7 @@ class RadioTable
         return $this;
     }
 
-    public function getMaxSignalLevelUnit(): ?int
+    public function getMaxSignalLevelUnit(): int
     {
         return $this->maxSignalLevelUnit;
     }
@@ -286,7 +288,7 @@ class RadioTable
         return $this;
     }
 
-    public function getRadioStationsCount(): ?int
+    public function getRadioStationsCount(): int
     {
         return $this->radioStationsCount;
     }

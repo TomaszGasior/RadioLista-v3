@@ -5,6 +5,7 @@ namespace App\Form\Extension;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
+use RuntimeException;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -42,8 +43,11 @@ class RadioStationEditExtension extends AbstractTypeExtension
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        /** @var RadioStation */
         $radioStation = $form->getData();
+
+        if (false === $radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
 
         $visibleColumns = $radioStation->getRadioTable()->getColumns();
         $formChildrenToHide = [];

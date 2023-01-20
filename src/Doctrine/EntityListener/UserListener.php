@@ -10,15 +10,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserListener
 {
-    private $passwordEncoder;
-    private $enableDateTimeRefresh;
-
-    public function __construct(UserPasswordHasherInterface $passwordEncoder,
-                                bool $enableDateTimeRefresh)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-        $this->enableDateTimeRefresh = $enableDateTimeRefresh;
-    }
+    public function __construct(
+        private UserPasswordHasherInterface $passwordEncoder,
+        private bool $enableDateTimeRefresh
+    ) {}
 
     /**
      * @PreUpdate

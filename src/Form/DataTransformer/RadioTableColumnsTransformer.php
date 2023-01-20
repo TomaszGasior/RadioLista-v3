@@ -23,7 +23,7 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
 {
     use ReflectionUtilsTrait;
 
-    public function transform($value): array
+    public function transform(mixed $value): array
     {
         $enabledColumns  = is_array($value) ? $value : [];
         $disabledColumns = array_diff($this->getAllPossibleColumnsNames(), $enabledColumns);
@@ -41,7 +41,7 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
         return $mergedColumns;
     }
 
-    public function reverseTransform($value): array
+    public function reverseTransform(mixed $value): array
     {
         $mergedColumns = is_array($value) ? $value : [];
 

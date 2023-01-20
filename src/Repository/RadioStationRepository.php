@@ -7,6 +7,7 @@ use App\Entity\RadioTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use RuntimeException;
 
 /**
  * @method RadioStation|null find($id, $lockMode = null, $lockVersion = null)
@@ -77,7 +78,7 @@ class RadioStationRepository extends ServiceEntityRepository
                 ;
 
             default:
-                throw new \Exception(sprintf('Column "%s" is not supported.', $column));
+                throw new RuntimeException(sprintf('Column "%s" is not supported.', $column));
         }
     }
 }

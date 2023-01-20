@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
@@ -28,7 +29,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @see PasswordUpgraderInterface
      */
-    public function upgradePassword($user, string $encodedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $encodedPassword): void
     {
         if ($user instanceof User) {
             $user->setPasswordHash($encodedPassword);

@@ -27,17 +27,17 @@ class Appearance
     /**
      * @ORM\Column(type="boolean")
      */
-    private $bold = false;
+    private bool $bold = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $italic = false;
+    private bool $italic = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $strikethrough = false;
+    private bool $strikethrough = false;
 
     public function getBackground(): ?int
     {

@@ -20,13 +20,13 @@ class Appearance
      * @ORM\Column(type="string", length=10, nullable=true)
      * @HexColor()
      */
-    private $textColor;
+    private ?string $textColor;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @HexColor()
      */
-    private $backgroundColor;
+    private ?string $backgroundColor;
 
     /**
      * @ORM\Column(type="smallint")
@@ -43,12 +43,12 @@ class Appearance
      *     message="This value should not be blank."
      * )
      */
-    private $customWidth;
+    private ?int $customWidth;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $collapsedComments = false;
+    private bool $collapsedComments = false;
 
     public function getTextColor(): ?string
     {

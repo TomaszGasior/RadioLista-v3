@@ -51,7 +51,7 @@ class UserSettingsType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'label_format' => 'user.settings.form.%name%',
-            'validation_groups' => function(FormInterface $form){
+            'validation_groups' => function(FormInterface $form): string|array {
                 if ($form->get('currentPassword')->getData() || $form->get('plainPassword')->getData()) {
                     return ['ChangingPasswordTab', 'RedefinePassword'];
                 }

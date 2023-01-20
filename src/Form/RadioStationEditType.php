@@ -24,18 +24,11 @@ class RadioStationEditType extends AbstractType
 {
     use DabChannelsTrait;
 
-    private $rdsPsTransformer;
-    private $rdsRtTransformer;
-    private $translator;
-
-    public function __construct(RadioStationRdsPsFrameTransformer $rdsPsTransformer,
-                                RadioStationRdsRtFrameTransformer $rdsRtTransformer,
-                                TranslatorInterface $translator)
-    {
-        $this->rdsPsTransformer = $rdsPsTransformer;
-        $this->rdsRtTransformer = $rdsRtTransformer;
-        $this->translator = $translator;
-    }
+    public function __construct(
+        private RadioStationRdsPsFrameTransformer $rdsPsTransformer,
+        private RadioStationRdsRtFrameTransformer $rdsRtTransformer,
+        private TranslatorInterface $translator,
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -70,7 +63,7 @@ class RadioStationEditType extends AbstractType
                     RadioStation::POLARIZATION_CIRCULAR,
                     RadioStation::POLARIZATION_VARIOUS,
                 ],
-                'choice_label' => function ($choice) {
+                'choice_label' => function(?string $choice): string {
                     if ($choice) {
                         return $this->translator->trans('polarization.'.$choice, [], 'radio_table');
                     }
@@ -84,7 +77,7 @@ class RadioStationEditType extends AbstractType
             ->add('dabChannel', ChoiceType::class, [
                 'required' => false,
                 'choices' => array_merge([null], $this->getDabChannels()),
-                'choice_label' => function ($choice) {
+                'choice_label' => function(?string $choice): ?string {
                     if ($choice) {
                         return $choice;
                     }
@@ -108,7 +101,7 @@ class RadioStationEditType extends AbstractType
                     RadioStation::TYPE_RELIGIOUS,
                     RadioStation::TYPE_OTHER,
                 ],
-                'choice_label' => function ($choice) {
+                'choice_label' => function(string $choice): string {
                     return 'type.'.$choice;
                 },
             ])

@@ -48,38 +48,38 @@ class RadioStation
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
-    private $radioTable;
+    private RadioTable $radioTable;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      * @Assert\Length(max=100)
      */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Length(max=50)
      */
-    private $radioGroup;
+    private ?string $radioGroup = null;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Length(max=50)
      */
-    private $country;
+    private ?string $country = null;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(max=50)
      */
-    private $region;
+    private ?string $region = null;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=3)
@@ -87,105 +87,105 @@ class RadioStation
      * @Assert\Type("numeric")
      * @Assert\GreaterThan(0)
      */
-    private $frequency;
+    private ?string $frequency = null;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(max=100)
      */
-    private $location;
+    private ?string $location = null;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
      * @Assert\Type("numeric")
      * @Assert\GreaterThan(0)
      */
-    private $power;
+    private ?string $power = null;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
      * @ClassConstantsChoice(class=RadioStation::class, prefix="POLARIZATION_")
      */
-    private $polarization = self::POLARIZATION_NONE;
+    private ?string $polarization = self::POLARIZATION_NONE;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Length(max=100)
      */
-    private $multiplex;
+    private ?string $multiplex = null;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
      * @DabChannel()
      */
-    private $dabChannel;
+    private ?string $dabChannel = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\GreaterThan(0)
      */
-    private $distance;
+    private ?int $distance = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $maxSignalLevel;
+    private ?int $maxSignalLevel = null;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioStation::class, prefix="RECEPTION_")
      */
-    private $reception = self::RECEPTION_REGULAR;
+    private int $reception = self::RECEPTION_REGULAR;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("int")
      * @Assert\GreaterThan(0)
      */
-    private $privateNumber;
+    private ?int $privateNumber = null;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @YearMonthDate()
      */
-    private $firstLogDate;
+    private ?string $firstLogDate = null;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioStation::class, prefix="QUALITY_")
      */
-    private $quality = self::QUALITY_VERY_GOOD;
+    private int $quality = self::QUALITY_VERY_GOOD;
 
     /**
      * @ORM\Column(type="smallint")
      * @ClassConstantsChoice(class=RadioStation::class, prefix="TYPE_")
      */
-    private $type = self::TYPE_MUSIC;
+    private int $type = self::TYPE_MUSIC;
 
     /**
      * @ORM\Embedded(class=Rds::class)
      * @Assert\Valid
      */
-    private $rds;
+    private Rds $rds;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @Assert\Length(max=500)
      */
-    private $comment;
+    private ?string $comment = null;
 
     /**
      * @ORM\Column(type="string", length=300, nullable=true)
      * @Assert\Length(max=500)
      * @Assert\Url()
      */
-    private $externalAnchor;
+    private ?string $externalAnchor = null;
 
     /**
      * @ORM\Embedded(class=Appearance::class)
      * @Assert\Valid
      */
-    private $appearance;
+    private Appearance $appearance;
 
     public function __construct()
     {
@@ -264,12 +264,12 @@ class RadioStation
         return $this;
     }
 
-    public function getFrequency()
+    public function getFrequency(): ?string
     {
         return $this->frequency;
     }
 
-    public function setFrequency($frequency): self
+    public function setFrequency(?string $frequency): self
     {
         $this->frequency = $frequency;
 
@@ -288,12 +288,12 @@ class RadioStation
         return $this;
     }
 
-    public function getPower()
+    public function getPower(): ?string
     {
         return $this->power;
     }
 
-    public function setPower($power): self
+    public function setPower(?string $power): self
     {
         $this->power = $power;
 
@@ -360,12 +360,12 @@ class RadioStation
         return $this;
     }
 
-    public function getReception(): ?int
+    public function getReception(): int
     {
         return $this->reception;
     }
 
-    public function setReception(?int $reception): self
+    public function setReception(int $reception): self
     {
         $this->reception = $reception;
 
@@ -396,24 +396,24 @@ class RadioStation
         return $this;
     }
 
-    public function getQuality(): ?int
+    public function getQuality(): int
     {
         return $this->quality;
     }
 
-    public function setQuality(?int $quality): self
+    public function setQuality(int $quality): self
     {
         $this->quality = $quality;
 
         return $this;
     }
 
-    public function getType(): ?int
+    public function getType(): int
     {
         return $this->type;
     }
 
-    public function setType(?int $type): self
+    public function setType(int $type): self
     {
         $this->type = $type;
 

@@ -16,7 +16,7 @@ trait FixtureTrait
 
     static private $faker;
 
-    private function setupFaker()
+    private function setupFaker(): void
     {
         if (self::$faker) {
             return;
@@ -155,10 +155,11 @@ trait FixtureTrait
             public function HTMLDescription(): string
             {
                 $paragraphs = $this->generator->paragraphs(3);
+
                 return '<p>' . implode('</p><p>', $paragraphs) . '</p>';
             }
 
-            public function randomConstantFromClass($class, $prefix)
+            public function randomConstantFromClass($class, $prefix): mixed
             {
                 return $this->randomConstantsFromClass($class, $prefix)[0];
             }

@@ -16,12 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioTableColumnsType extends AbstractType
 {
-    private $transformer;
-
-    public function __construct(RadioTableColumnsTransformer $transformer)
-    {
-        $this->transformer = $transformer;
-    }
+    public function __construct(private RadioTableColumnsTransformer $transformer) {}
 
     public function getParent(): string
     {

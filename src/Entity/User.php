@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -22,7 +25,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
@@ -33,55 +36,55 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      *     message="user.name_invalid_chars"
      * )
      */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(groups={"Default"})
      */
-    private $password;
+    private ?string $password = null;
 
     /**
      * @Assert\NotBlank(groups={"RedefinePassword"})
      * @Assert\Length(max=100, groups={"RedefinePassword"})
      */
-    private $plainPassword;
+    private ?string $plainPassword = null;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $lastActivityDate;
+    private DateTime $lastActivityDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $registerDate;
+    private DateTime $registerDate;
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
      * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"})
      */
-    private $aboutMe;
+    private ?string $aboutMe = null;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $publicProfile = false;
+    private bool $publicProfile = false;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $radioTablesCount = 0;
+    private int $radioTablesCount = 0;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $admin = false;
+    private bool $admin = false;
 
     public function __construct()
     {
-        $this->lastActivityDate = new \DateTime;
-        $this->registerDate = new \DateTime;
+        $this->lastActivityDate = new DateTime;
+        $this->registerDate = new DateTime;
     }
 
     public function getId(): ?int
@@ -108,19 +111,19 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         return $this;
     }
 
-    public function getLastActivityDate(): ?\DateTimeInterface
+    public function getLastActivityDate(): DateTimeInterface
     {
         return $this->lastActivityDate;
     }
 
     public function refreshLastActivityDate(): self
     {
-        $this->lastActivityDate = new \DateTime;
+        $this->lastActivityDate = new DateTime;
 
         return $this;
     }
 
-    public function getRegisterDate(): ?\DateTimeInterface
+    public function getRegisterDate(): DateTimeInterface
     {
         return $this->registerDate;
     }
@@ -137,7 +140,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         return $this;
     }
 
-    public function getPublicProfile(): ?bool
+    public function getPublicProfile(): bool
     {
         return $this->publicProfile;
     }
@@ -149,7 +152,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         return $this;
     }
 
-    public function getRadioTablesCount(): ?int
+    public function getRadioTablesCount(): int
     {
         return $this->radioTablesCount;
     }
@@ -191,6 +194,10 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      */
     public function getUserIdentifier(): string
     {
+        if (!$this->name) {
+            throw new RuntimeException;
+        }
+
         return $this->name;
     }
 
@@ -207,7 +214,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      *
      * @see LegacyPasswordAuthenticatedUserInterface
      */
-    public function getSalt(): ?string
+    public function getSalt(): string
     {
         return $this->registerDate->format('Y-m-d');
     }
