@@ -157,7 +157,7 @@ class RadioTable
 
     public function __clone()
     {
-        $this->appearance = $this->appearance;
+        $this->appearance = clone $this->appearance;
     }
 
     public function getId(): ?int
