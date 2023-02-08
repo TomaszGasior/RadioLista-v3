@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional;
 
-use App\Entity\RadioTable;
+use App\Entity\Enum\RadioTable\Status;
 use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -18,24 +18,24 @@ class RadioTableStatusTest extends WebTestCase
 
     public function publicStatusProvider(): iterable
     {
-        yield 'status: public' => [RadioTable::STATUS_PUBLIC];
+        yield 'status: public' => [Status::PUBLIC];
     }
 
     public function unlistedStatusProvider(): iterable
     {
-        yield 'status: unlisted' => [RadioTable::STATUS_UNLISTED];
+        yield 'status: unlisted' => [Status::UNLISTED];
     }
 
     public function privateStatusProvider(): iterable
     {
-        yield 'status: private' => [RadioTable::STATUS_PRIVATE];
+        yield 'status: private' => [Status::PRIVATE];
     }
 
     /**
      * @dataProvider publicStatusProvider
      * @dataProvider unlistedStatusProvider
      */
-    public function test_anonymous_user_can_access_public_radio_table($status): void
+    public function test_anonymous_user_can_access_public_radio_table(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -47,7 +47,7 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider privateStatusProvider
      */
-    public function test_anonymous_user_cannot_access_private_radio_table($status): void
+    public function test_anonymous_user_cannot_access_private_radio_table(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -60,7 +60,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider publicStatusProvider
      * @dataProvider unlistedStatusProvider
      */
-    public function test_user_can_access_public_radio_table_owned_by_another_user($status): void
+    public function test_user_can_access_public_radio_table_owned_by_another_user(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -73,7 +73,7 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider privateStatusProvider
      */
-    public function test_user_cannot_access_private_radio_table_owned_by_another_user($status): void
+    public function test_user_cannot_access_private_radio_table_owned_by_another_user(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -86,7 +86,7 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider publicStatusProvider
      */
-    public function test_public_radio_table_does_not_have_noindex_meta_tag($status): void
+    public function test_public_radio_table_does_not_have_noindex_meta_tag(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -100,7 +100,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider unlistedStatusProvider
      * @dataProvider privateStatusProvider
      */
-    public function test_private_radio_table_has_noindex_meta_tag($status): void
+    public function test_private_radio_table_has_noindex_meta_tag(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -115,7 +115,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider unlistedStatusProvider
      * @dataProvider privateStatusProvider
      */
-    public function test_user_always_has_access_to_own_radio_table($status): void
+    public function test_user_always_has_access_to_own_radio_table(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -130,7 +130,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider unlistedStatusProvider
      * @dataProvider privateStatusProvider
      */
-    public function test_administrator_always_has_access_to_radio_table($status): void
+    public function test_administrator_always_has_access_to_radio_table(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -143,7 +143,7 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider publicStatusProvider
      */
-    public function test_public_radio_table_is_visible_in_all_radio_tables_list($status): void
+    public function test_public_radio_table_is_visible_in_all_radio_tables_list(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -157,7 +157,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider unlistedStatusProvider
      * @dataProvider privateStatusProvider
      */
-    public function test_private_radio_table_is_not_visible_in_all_radio_tables_list($status): void
+    public function test_private_radio_table_is_not_visible_in_all_radio_tables_list(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -170,7 +170,7 @@ class RadioTableStatusTest extends WebTestCase
     /**
      * @dataProvider publicStatusProvider
      */
-    public function test_public_radio_table_is_visible_in_owners_public_profile($status): void
+    public function test_public_radio_table_is_visible_in_owners_public_profile(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -184,7 +184,7 @@ class RadioTableStatusTest extends WebTestCase
      * @dataProvider unlistedStatusProvider
      * @dataProvider privateStatusProvider
      */
-    public function test_private_radio_table_is_not_visible_in_owners_public_profile($status): void
+    public function test_private_radio_table_is_not_visible_in_owners_public_profile(Status $status): void
     {
         $this->setRadioTableStatus($status);
 
@@ -194,13 +194,13 @@ class RadioTableStatusTest extends WebTestCase
         $this->assertCount(0, $anchors);
     }
 
-    private function setRadioTableStatus($newStatus): void
+    private function setRadioTableStatus(Status $newStatus): void
     {
         $this->client->loginUserByName('test_user');
         $crawler = $this->client->request('GET', '/wykaz/1/ustawienia');
 
         $form = $crawler->filter('form')->form();
-        $form['radio_table_settings[status]'] = $newStatus;
+        $form['radio_table_settings[status]'] = $newStatus->value;
         $this->client->submit($form);
 
         $this->client->restart();

@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use RuntimeException;
@@ -42,7 +43,7 @@ class AdminVoter extends Voter
         elseif ($subject instanceof RadioTable) {
             $radioTable = $subject;
 
-            $result = (RadioTable::STATUS_PRIVATE === $radioTable->getStatus()
+            $result = (Status::PRIVATE === $radioTable->getStatus()
                        && $radioTable->getOwner() !== $currentUser);
         }
         else {

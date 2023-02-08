@@ -2,6 +2,7 @@
 
 namespace App\Entity\Embeddable\RadioTable;
 
+use App\Entity\Enum\RadioTable\Width;
 use App\Validator\ClassConstantsChoice;
 use App\Validator\HexColor;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,10 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Appearance
 {
-    const WIDTH_STANDARD = 1;
-    const WIDTH_FULL = 2;
-    const WIDTH_CUSTOM = 3;
-
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @HexColor()
@@ -29,17 +26,16 @@ class Appearance
     private ?string $backgroundColor;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=Appearance::class, prefix="WIDTH_")
+     * @ORM\Column(type="smallint", enumType=Width::class)
      */
-    private $widthType = self::WIDTH_STANDARD;
+    private Width $widthType = Width::STANDARD;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\GreaterThanOrEqual(900, message="radio_table.appearance_width_min_value")
      * @Assert\Expression(
      *     "value || this.getWidthType() !== width_custom",
-     *     values={"width_custom": Appearance::WIDTH_CUSTOM},
+     *     values={"width_custom": Width::CUSTOM},
      *     message="This value should not be blank."
      * )
      */
@@ -74,12 +70,12 @@ class Appearance
         return $this;
     }
 
-    public function getWidthType(): ?int
+    public function getWidthType(): Width
     {
         return $this->widthType;
     }
 
-    public function setWidthType(int $widthType): self
+    public function setWidthType(Width $widthType): self
     {
         $this->widthType = $widthType;
 

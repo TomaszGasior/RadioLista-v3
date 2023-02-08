@@ -3,6 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
+use App\Entity\Enum\RadioStation\Background;
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioStation\Type;
+use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -22,7 +27,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         );
 
         $radioStation->setFrequency(
-            RadioTable::FREQUENCY_KHZ === $radioStation->getRadioTable()->getFrequencyUnit()
+            FrequencyUnit::KHZ === $radioStation->getRadioTable()->getFrequencyUnit()
             ? $faker->randomFloat(1, 100, 9999)
             : $faker->randomFloat(1, 87.5, 108)
         );
@@ -35,18 +40,10 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         $radioStation->setLocation($faker->optional()->city);
         $radioStation->setMultiplex($faker->optional()->multiplex);
 
-        $radioStation->setPolarization(
-            $faker->randomConstantFromClass(RadioStation::class, 'POLARIZATION_')
-        );
-        $radioStation->setQuality(
-            $faker->randomConstantFromClass(RadioStation::class, 'QUALITY_')
-        );
-        $radioStation->setType(
-            $faker->randomConstantFromClass(RadioStation::class, 'TYPE_')
-        );
-        $radioStation->setReception(
-            $faker->randomConstantFromClass(RadioStation::class, 'RECEPTION_')
-        );
+        $radioStation->setPolarization($faker->optional->randomEnum(Polarization::class));
+        $radioStation->setQuality($faker->randomEnum(Quality::class));
+        $radioStation->setType($faker->randomEnum(Type::class));
+        $radioStation->setReception($faker->randomEnum(Reception::class));
 
         if ($faker->boolean(75)) {
             [$dabChannel, $frequency] = $faker->dabChannelWithFrequency;
@@ -78,7 +75,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         }
         if ($faker->boolean(25)) {
             ($radioStation->getAppearance())
-                ->setBackground($faker->randomConstantFromClass(Appearance::class, 'BACKGROUND_'))
+                ->setBackground($faker->randomEnum(Background::class))
             ;
         }
         if ($faker->boolean(25)) {

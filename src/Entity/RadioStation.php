@@ -4,7 +4,10 @@ namespace App\Entity;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
-use App\Validator\ClassConstantsChoice;
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioStation\Reception;
+use App\Entity\Enum\RadioStation\Type;
 use App\Validator\DabChannel;
 use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,29 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RadioStation
 {
-    public const POLARIZATION_HORIZONTAL = 'H';
-    public const POLARIZATION_VERTICAL = 'V';
-    public const POLARIZATION_CIRCULAR = 'C';
-    public const POLARIZATION_VARIOUS = 'M';
-    public const POLARIZATION_NONE = null;
-
-    public const RECEPTION_REGULAR = 0;
-    public const RECEPTION_TROPO = 1;
-    public const RECEPTION_SCATTER = 2;
-    public const RECEPTION_SPORADIC_E = 3;
-
-    public const QUALITY_VERY_GOOD = 5;
-    public const QUALITY_GOOD = 4;
-    public const QUALITY_MIDDLE = 3;
-    public const QUALITY_BAD = 2;
-    public const QUALITY_VERY_BAD = 1;
-
-    public const TYPE_MUSIC = 1;
-    public const TYPE_INFORMATION = 2;
-    public const TYPE_UNIVERSAL = 3;
-    public const TYPE_RELIGIOUS = 4;
-    public const TYPE_OTHER = 0;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -103,10 +83,9 @@ class RadioStation
     private ?string $power = null;
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=true)
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="POLARIZATION_")
+     * @ORM\Column(type="string", length=1, enumType=Polarization::class, nullable=true)
      */
-    private ?string $polarization = self::POLARIZATION_NONE;
+    private ?Polarization $polarization = null;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -132,10 +111,9 @@ class RadioStation
     private ?int $maxSignalLevel = null;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="RECEPTION_")
+     * @ORM\Column(type="smallint", enumType=Reception::class)
      */
-    private int $reception = self::RECEPTION_REGULAR;
+    private Reception $reception = Reception::REGULAR;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -151,16 +129,14 @@ class RadioStation
     private ?string $firstLogDate = null;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="QUALITY_")
+     * @ORM\Column(type="smallint", enumType=Quality::class)
      */
-    private int $quality = self::QUALITY_VERY_GOOD;
+    private Quality $quality = Quality::VERY_GOOD;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="TYPE_")
+     * @ORM\Column(type="smallint", enumType=Type::class)
      */
-    private int $type = self::TYPE_MUSIC;
+    private Type $type = Type::MUSIC;
 
     /**
      * @ORM\Embedded(class=Rds::class)
@@ -300,12 +276,12 @@ class RadioStation
         return $this;
     }
 
-    public function getPolarization(): ?string
+    public function getPolarization(): ?Polarization
     {
         return $this->polarization;
     }
 
-    public function setPolarization(?string $polarization): self
+    public function setPolarization(?Polarization $polarization): self
     {
         $this->polarization = $polarization;
 
@@ -360,12 +336,12 @@ class RadioStation
         return $this;
     }
 
-    public function getReception(): int
+    public function getReception(): Reception
     {
         return $this->reception;
     }
 
-    public function setReception(int $reception): self
+    public function setReception(Reception $reception): self
     {
         $this->reception = $reception;
 
@@ -396,24 +372,24 @@ class RadioStation
         return $this;
     }
 
-    public function getQuality(): int
+    public function getQuality(): Quality
     {
         return $this->quality;
     }
 
-    public function setQuality(int $quality): self
+    public function setQuality(Quality $quality): self
     {
         $this->quality = $quality;
 
         return $this;
     }
 
-    public function getType(): int
+    public function getType(): Type
     {
         return $this->type;
     }
 
-    public function setType(int $type): self
+    public function setType(Type $type): self
     {
         $this->type = $type;
 

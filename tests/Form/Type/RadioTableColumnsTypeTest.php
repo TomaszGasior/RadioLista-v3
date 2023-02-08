@@ -2,6 +2,7 @@
 
 namespace App\Tests\Form\Type;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use App\Form\Type\RadioTableColumnsType;
@@ -23,35 +24,35 @@ class RadioTableColumnsTypeTest extends TypeTestCase
 
     public function test_form_contains_fields_for_all_columns(): void
     {
-        [$visibleColumns, $allColumns] = $this->getVisibleColumnsAndAllColumns();
+        [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
         $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
 
         $view = $form->createView();
         $children = $view->children;
 
-        foreach ($allColumns as $columnName) {
+        foreach ($allColumnNames as $columnName) {
             $this->assertArrayHasKey($columnName, $children);
         }
     }
 
     public function test_field_values_are_negative_for_hidden_and_positive_for_visible_columns(): void
     {
-        [$visibleColumns, $allColumns] = $this->getVisibleColumnsAndAllColumns();
+        [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
         $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
 
         $view = $form->createView();
         $children = $view->children;
 
-        foreach ($allColumns as $columnName) {
+        foreach ($allColumnNames as $columnName) {
             $value = $children[$columnName]->vars['value'];
 
-            if (in_array($columnName, $visibleColumns)) {
-                $this->assertGreaterThan(0, $value);
+            if (in_array(Column::from($columnName), $visibleColumns)) {
+                $this->assertGreaterThan(0, $value, $columnName);
             }
             else {
-                $this->assertLessThan(0, $value);
+                $this->assertLessThan(0, $value, $columnName);
             }
         }
     }
@@ -60,27 +61,27 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     {
         return [
             [
-                RadioTable::COLUMN_FREQUENCY,
-                RadioTable::COLUMN_NAME,
-                RadioTable::COLUMN_RADIO_GROUP,
-                RadioTable::COLUMN_LOCATION,
-                RadioTable::COLUMN_TYPE,
-                RadioTable::COLUMN_QUALITY,
-                RadioTable::COLUMN_RDS,
+                Column::FREQUENCY,
+                Column::NAME,
+                Column::RADIO_GROUP,
+                Column::LOCATION,
+                Column::TYPE,
+                Column::QUALITY,
+                Column::RDS,
             ],
             [
-                RadioTable::COLUMN_PRIVATE_NUMBER,
-                RadioTable::COLUMN_FREQUENCY,
-                RadioTable::COLUMN_NAME,
-                RadioTable::COLUMN_RADIO_GROUP,
-                RadioTable::COLUMN_COUNTRY,
-                RadioTable::COLUMN_LOCATION,
-                RadioTable::COLUMN_POWER,
-                RadioTable::COLUMN_POLARIZATION,
-                RadioTable::COLUMN_TYPE,
-                RadioTable::COLUMN_QUALITY,
-                RadioTable::COLUMN_RDS,
-                RadioTable::COLUMN_COMMENT,
+                Column::PRIVATE_NUMBER->value,
+                Column::FREQUENCY->value,
+                Column::NAME->value,
+                Column::RADIO_GROUP->value,
+                Column::COUNTRY->value,
+                Column::LOCATION->value,
+                Column::POWER->value,
+                Column::POLARIZATION->value,
+                Column::TYPE->value,
+                Column::QUALITY->value,
+                Column::RDS->value,
+                Column::COMMENT->value,
             ],
         ];
     }

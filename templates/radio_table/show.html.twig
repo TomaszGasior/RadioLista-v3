@@ -11,20 +11,20 @@
     {% set custom_css = custom_css ~ '.customizable-background { background: %s }'|format(appearance.backgroundColor) %}
 {% endif %}
 
-{% if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %}
+{% if appearance.widthType == constant('CUSTOM', appearance.widthType) %}
     {% set custom_css = custom_css ~ '.custom-width .site-width { max-width: %spx }'|format(appearance.customWidth) %}
 {% endif %}
 
 {% block html_classes %}
     {%- if custom_css %}customized-radio-table{% endif -%}
-    {%- if appearance.widthType == constant('WIDTH_FULL', appearance) %} full-width{% endif -%}
-    {%- if appearance.widthType == constant('WIDTH_CUSTOM', appearance) %} custom-width{% endif -%}
+    {%- if appearance.widthType == constant('FULL', appearance.widthType) %} full-width{% endif -%}
+    {%- if appearance.widthType == constant('CUSTOM', appearance.widthType) %} custom-width{% endif -%}
 {% endblock %}
 
 {% block page_title %}{{ radio_table.name }}{% endblock %}
 
 {% block head_closing %}
-    {% if radio_table.status != constant('STATUS_PUBLIC', radio_table) %}
+    {% if radio_table.status != constant('PUBLIC', radio_table.status) %}
         <meta name="robots" content="noindex, noarchive">
     {% endif %}
 
@@ -61,31 +61,31 @@
 
                 {%- block heading_cell_attr -%}
                     {%- set columns_sorting = {
-                        (constant('COLUMN_DISTANCE', radio_table)): 'N',
-                        (constant('COLUMN_FREQUENCY', radio_table)): 'N',
-                        (constant('COLUMN_MAX_SIGNAL_LEVEL', radio_table)): 'N',
-                        (constant('COLUMN_POWER', radio_table)): 'N',
-                        (constant('COLUMN_PRIVATE_NUMBER', radio_table)): 'N',
-                        (constant('COLUMN_QUALITY', radio_table)): 'N',
-                        (constant('COLUMN_COUNTRY', radio_table)): 'T',
-                        (constant('COLUMN_FIRST_LOG_DATE', radio_table)): 'T',
-                        (constant('COLUMN_LOCATION', radio_table)): 'T',
-                        (constant('COLUMN_NAME', radio_table)): 'T',
-                        (constant('COLUMN_POLARIZATION', radio_table)): 'T',
-                        (constant('COLUMN_MULTIPLEX', radio_table)): 'T',
-                        (constant('COLUMN_DAB_CHANNEL', radio_table)): 'T',
-                        (constant('COLUMN_RADIO_GROUP', radio_table)): 'T',
-                        (constant('COLUMN_RECEPTION', radio_table)): 'T',
-                        (constant('COLUMN_RDS_PI', radio_table)): 'T',
-                        (constant('COLUMN_TYPE', radio_table)): 'T',
-                        (constant('COLUMN_REGION', radio_table)): 'T',
+                        'distance': 'N',
+                        'frequency': 'N',
+                        'maxSignalLevel': 'N',
+                        'power': 'N',
+                        'privateNumber': 'N',
+                        'quality': 'N',
+                        'country': 'T',
+                        'firstLogDate': 'T',
+                        'location': 'T',
+                        'name': 'T',
+                        'polarization': 'T',
+                        'multiplex': 'T',
+                        'dabChannel': 'T',
+                        'radioGroup': 'T',
+                        'reception': 'T',
+                        'rdsPi': 'T',
+                        'type': 'T',
+                        'region': 'T',
                     } -%}
-                    {%- if columns_sorting[column] is defined %} data-sort="{{ columns_sorting[column] }}"{% endif -%}
+                    {%- if columns_sorting[column.value] is defined %} data-sort="{{ columns_sorting[column.value] }}"{% endif -%}
                     {{- parent() -}}
                 {%- endblock -%}
 
                 {%- block heading_cell -%}
-                    {%- if column == constant('COLUMN_COMMENT', radio_table) and radio_table.appearance.collapsedComments -%}
+                    {%- if column == 'comment' and radio_table.appearance.collapsedComments -%}
                         {{- 'heading.comment.short'|trans({}, 'radio_table') -}}
                     {%- else -%}
                         {{- parent() -}}

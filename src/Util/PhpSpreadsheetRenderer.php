@@ -2,6 +2,7 @@
 
 namespace App\Util;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
 use App\Util\RadioStationRdsTrait;
@@ -15,16 +16,6 @@ class PhpSpreadsheetRenderer
 {
     use RadioTableLabelsTrait;
     use RadioStationRdsTrait;
-
-    private const COLUMN_NUMBER_FORMATTING = [
-        RadioTable::COLUMN_FREQUENCY => '0.000',
-        RadioTable::COLUMN_POWER => '0.000',
-        RadioTable::COLUMN_QUALITY => '0',
-        RadioTable::COLUMN_DISTANCE => '0',
-        RadioTable::COLUMN_MAX_SIGNAL_LEVEL => '0',
-        RadioTable::COLUMN_PRIVATE_NUMBER => '0',
-    ];
-    private const DEFAULT_NUMBER_FORMATTING = '@';
 
     public function __construct(private Factory $phpSpreadsheetFactory, private TranslatorInterface $translator) {}
 
@@ -76,7 +67,7 @@ class PhpSpreadsheetRenderer
             $worksheet
                 ->getStyle($coordinate)
                 ->getNumberFormat()
-                ->setFormatCode(self::COLUMN_NUMBER_FORMATTING[$column] ?? self::DEFAULT_NUMBER_FORMATTING)
+                ->setFormatCode($this->getColumnFormatting($column))
             ;
         }
 
@@ -89,24 +80,24 @@ class PhpSpreadsheetRenderer
 
         foreach ($radioTable->getColumns() as $column) {
             switch ($column) {
-                case RadioTable::COLUMN_FREQUENCY:
+                case Column::FREQUENCY:
                     $value = $this->getFrequencyLabel($radioTable->getFrequencyUnit());
                     break;
 
-                case RadioTable::COLUMN_POWER:
+                case Column::POWER:
                     $value = $this->getPowerLabel();
                     break;
 
-                case RadioTable::COLUMN_DISTANCE:
+                case Column::DISTANCE:
                     $value = $this->getDistanceLabel();
                     break;
 
-                case RadioTable::COLUMN_MAX_SIGNAL_LEVEL:
+                case Column::MAX_SIGNAL_LEVEL:
                     $value = $this->getMaxSignalLevelLabel($radioTable->getMaxSignalLevelUnit());
                     break;
 
                 default:
-                    $value = $this->translate('heading.' . $column);
+                    $value = $this->translate('heading.' . $column->value);
             }
 
             $headings[] = $value;
@@ -126,24 +117,28 @@ class PhpSpreadsheetRenderer
             $row = [];
 
             foreach ($radioTable->getColumns() as $column) {
-                $value = $radioStation->{'get' . $column}();
+                $value = $radioStation->{'get' . $column->value}();
 
                 switch ($column) {
-                    case RadioTable::COLUMN_TYPE:
-                    case RadioTable::COLUMN_RECEPTION:
-                        $value = $this->translate($column . '.' . $value);
+                    case Column::TYPE:
+                    case Column::RECEPTION:
+                        $value = $this->translate($column->value . '.' . $value->value);
                         break;
 
-                    case RadioTable::COLUMN_POLARIZATION:
+                    case Column::QUALITY:
+                        $value = $this->getQualityLabel($value);
+                        break;
+
+                    case Column::POLARIZATION:
                         $value = $value ? $this->getPolarizationLabel($value) : '';
                         break;
 
-                    case RadioTable::COLUMN_COMMENT:
+                    case Column::COMMENT:
                         // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
                         $value = str_replace("\r", '', $value);
                         break;
 
-                    case RadioTable::COLUMN_RDS:
+                    case Column::RDS:
                         $rds = $value;
 
                         $value = $rds->getPs()[0][0] ?? '';
@@ -160,6 +155,19 @@ class PhpSpreadsheetRenderer
         }
 
         return $data;
+    }
+
+    private function getColumnFormatting(Column $column): string
+    {
+        return match ($column) {
+            Column::FREQUENCY => '0.000',
+            Column::POWER => '0.000',
+            Column::QUALITY => '0',
+            Column::DISTANCE => '0',
+            Column::MAX_SIGNAL_LEVEL => '0',
+            Column::PRIVATE_NUMBER => '0',
+            default => '@',
+        };
     }
 
     private function translate(string $id): string

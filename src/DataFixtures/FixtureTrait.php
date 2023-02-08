@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Util\Data\DabChannelsTrait;
 use App\Util\ReflectionUtilsTrait;
+use BackedEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -157,6 +158,11 @@ trait FixtureTrait
                 $paragraphs = $this->generator->paragraphs(3);
 
                 return '<p>' . implode('</p><p>', $paragraphs) . '</p>';
+            }
+
+            public function randomEnum(string $enumFqcn): BackedEnum
+            {
+                return $this->randomElement($enumFqcn::cases());
             }
 
             public function randomConstantFromClass($class, $prefix): mixed

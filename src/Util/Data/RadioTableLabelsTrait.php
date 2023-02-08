@@ -2,17 +2,19 @@
 
 namespace App\Util\Data;
 
-use App\Entity\RadioStation;
-use App\Entity\RadioTable;
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioTable\FrequencyUnit;
+use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
 
 trait RadioTableLabelsTrait
 {
-    protected function getFrequencyLabel(string $unit): string
+    protected function getFrequencyLabel(FrequencyUnit $frequencyUnit): string
     {
-        return [
-            RadioTable::FREQUENCY_MHZ => 'MHz',
-            RadioTable::FREQUENCY_KHZ => 'kHz',
-        ][$unit];
+        return match ($frequencyUnit) {
+            FrequencyUnit::MHZ => 'MHz',
+            FrequencyUnit::KHZ => 'kHz',
+        };
     }
 
     protected function getPowerLabel(): string
@@ -25,35 +27,34 @@ trait RadioTableLabelsTrait
         return 'km';
     }
 
-    protected function getMaxSignalLevelLabel(string $unit): string
+    protected function getMaxSignalLevelLabel(MaxSignalLevelUnit $maxSignalLevelUnit): string
     {
-        return [
-            RadioTable::MAX_SIGNAL_LEVEL_DB => 'dB',
-            RadioTable::MAX_SIGNAL_LEVEL_DBF => 'dBf',
-            RadioTable::MAX_SIGNAL_LEVEL_DBUV => 'dBµV',
-            RadioTable::MAX_SIGNAL_LEVEL_DBM => 'dBm',
-        ][$unit];
+        return match ($maxSignalLevelUnit) {
+            MaxSignalLevelUnit::DB => 'dB',
+            MaxSignalLevelUnit::DBF => 'dBf',
+            MaxSignalLevelUnit::DBUV => 'dBµV',
+            MaxSignalLevelUnit::DBM => 'dBm',
+        };
     }
 
-    protected function getPolarizationLabel(string $type): string
+    protected function getPolarizationLabel(Polarization $polarization): string
     {
-        return [
-            RadioStation::POLARIZATION_HORIZONTAL => 'H',
-            RadioStation::POLARIZATION_VERTICAL => 'V',
-            RadioStation::POLARIZATION_CIRCULAR => 'C',
-            RadioStation::POLARIZATION_VARIOUS => 'M',
-            RadioStation::POLARIZATION_NONE => '',
-        ][$type];
+        return match ($polarization) {
+            Polarization::HORIZONTAL => 'H',
+            Polarization::VERTICAL => 'V',
+            Polarization::CIRCULAR => 'C',
+            Polarization::VARIOUS => 'M',
+        };
     }
 
-    protected function getQualityLabel(string $type): string
+    protected function getQualityLabel(Quality $quality): string
     {
-        return [
-            RadioStation::QUALITY_VERY_GOOD => '5',
-            RadioStation::QUALITY_GOOD => '4',
-            RadioStation::QUALITY_MIDDLE => '3',
-            RadioStation::QUALITY_BAD => '2',
-            RadioStation::QUALITY_VERY_BAD => '1',
-        ][$type];
+        return match ($quality) {
+            Quality::VERY_GOOD => '5',
+            Quality::GOOD => '4',
+            Quality::MIDDLE => '3',
+            Quality::BAD => '2',
+            Quality::VERY_BAD => '1',
+        };
     }
 }

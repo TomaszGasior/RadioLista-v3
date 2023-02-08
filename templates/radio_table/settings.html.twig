@@ -95,7 +95,7 @@
             <div class="form-columns">
                 {{ form_row(form.appearanceWidthType, {attr: {
                     'class': 'radio-table-width-type',
-                    'data-custom-width-value': constant('WIDTH_CUSTOM', radio_table.appearance),
+                    'data-custom-width-value': constant('CUSTOM', radio_table.appearance.widthType).value,
                 }}) }}
 
                 {{ form_row(form.appearanceCustomWidth, {

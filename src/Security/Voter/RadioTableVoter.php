@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use RuntimeException;
@@ -32,7 +33,7 @@ class RadioTableVoter extends Voter
 
         switch ($attribute) {
             case 'RADIO_TABLE_SHOW':
-                if (in_array($radioTable->getStatus(), [RadioTable::STATUS_PUBLIC, RadioTable::STATUS_UNLISTED])) {
+                if (in_array($radioTable->getStatus(), [Status::PUBLIC, Status::UNLISTED])) {
                     return true;
                 }
                 // Don't break.

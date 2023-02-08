@@ -13,7 +13,7 @@
                 <dl>
                     {% if show_visibility %}
                         <dt>{{ 'radio_table.detail.status'|trans }}</dt>
-                        <dd>{{ ('radio_table.detail.status.state.' ~ radio_table.status)|trans }}</dd>
+                        <dd>{{ ('radio_table.detail.status.state.' ~ radio_table.status.value)|trans }}</dd>
                     {% endif %}
 
                     {% if show_owner and radio_table.owner.publicProfile %}

@@ -2,27 +2,18 @@
 
 namespace App\Entity\Embeddable\RadioStation;
 
-use App\Validator\ClassConstantsChoice;
+use App\Entity\Enum\RadioStation\Background;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Embeddable
  */
 class Appearance
 {
-    public const BACKGROUND_NONE = null;
-    public const BACKGROUND_RED = 1;
-    public const BACKGROUND_GREEN = 2;
-    public const BACKGROUND_BLUE = 3;
-    public const BACKGROUND_YELLOW = 4;
-    public const BACKGROUND_PINK = 5;
-
     /**
-     * @ORM\Column(type="smallint", nullable=true)
-     * @ClassConstantsChoice(class=Appearance::class, prefix="BACKGROUND_")
+     * @ORM\Column(type="smallint", enumType=Background::class, nullable=true)
      */
-    private $background = null;
+    private ?Background $background = null;
 
     /**
      * @ORM\Column(type="boolean")
@@ -39,12 +30,12 @@ class Appearance
      */
     private bool $strikethrough = false;
 
-    public function getBackground(): ?int
+    public function getBackground(): ?Background
     {
         return $this->background;
     }
 
-    public function setBackground(?int $background): self
+    public function setBackground(?Background $background): self
     {
         $this->background = $background;
 

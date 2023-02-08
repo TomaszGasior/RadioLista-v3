@@ -2,7 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Embeddable\RadioTable\Appearance;
+use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\FrequencyUnit;
+use App\Entity\Enum\RadioTable\Status;
+use App\Entity\Enum\RadioTable\Width;
 use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Generator;
@@ -25,7 +28,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
             }
             else {
                 $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, $i < 6 ? 2 : 3));
-                $radioTable->setStatus(RadioTable::STATUS_PRIVATE);
+                $radioTable->setStatus(Status::PRIVATE);
             }
 
             $this->setPrivateFieldOfObject($radioTable, 'creationTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
@@ -38,7 +41,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class));
         $radioTable->setDescription($faker->optional()->HTMLDescription);
         if ($faker->boolean(25)) {
-            $radioTable->setFrequencyUnit(RadioTable::FREQUENCY_KHZ);
+            $radioTable->setFrequencyUnit(FrequencyUnit::KHZ);
         }
 
         $this->setPrivateFieldOfObject($radioTable, 'creationTime', $faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
@@ -49,24 +52,18 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         }
 
         if ($faker->boolean(40)) {
-            $radioTable->setStatus(
-                $faker->randomConstantFromClass(RadioTable::class, 'STATUS_')
-            );
+            $radioTable->setStatus($faker->randomEnum(Status::class));
         }
-        $radioTable->setSorting($faker->randomElement([
-            $faker->randomConstantFromClass(RadioTable::class, 'SORTING_')
-        ]));
+        $radioTable->setSorting($faker->randomElement(Column::getSortable()));
         $radioTable->setColumns(
             array_unique(array_merge(
-                [RadioTable::COLUMN_FREQUENCY, RadioTable::COLUMN_NAME],
-                $faker->randomConstantsFromClass(RadioTable::class, 'COLUMN_')
+                [Column::FREQUENCY, Column::NAME],
+                $faker->randomEnum(Column::class)
             ))
         );
 
         $appearance = $radioTable->getAppearance();
-        $appearance->setWidthType(
-            $faker->randomConstantFromClass(Appearance::class, 'WIDTH_')
-        );
+        $appearance->setWidthType($faker->randomEnum(Width::class));
         if ($faker->boolean) {
             $appearance->setBackgroundColor($faker->hexcolor);
             $appearance->setTextColor($faker->hexcolor);

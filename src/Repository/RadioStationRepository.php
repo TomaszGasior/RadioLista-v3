@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -36,11 +37,11 @@ class RadioStationRepository extends ServiceEntityRepository
         ;
 
         switch ($radioTable->getSorting()) {
-            case RadioTable::SORTING_NAME:
+            case Column::NAME:
                 $query->addOrderBy('radioStation.name', 'ASC');
                 break;
 
-            case RadioTable::SORTING_PRIVATE_NUMBER:
+            case Column::PRIVATE_NUMBER:
                 $query
                     ->addSelect(
                         // Move radio stations without private number to the end of the radio table.
@@ -57,28 +58,28 @@ class RadioStationRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function findColumnAllValuesForRadioTable(RadioTable $radioTable, string $column): array
+    public function findColumnAllValuesForRadioTable(RadioTable $radioTable, Column $column): array
     {
         switch ($column) {
-            case RadioTable::COLUMN_NAME:
-            case RadioTable::COLUMN_LOCATION:
-            case RadioTable::COLUMN_RADIO_GROUP:
-            case RadioTable::COLUMN_COUNTRY:
-            case RadioTable::COLUMN_REGION:
-            case RadioTable::COLUMN_MULTIPLEX:
+            case Column::NAME:
+            case Column::LOCATION:
+            case Column::RADIO_GROUP:
+            case Column::COUNTRY:
+            case Column::REGION:
+            case Column::MULTIPLEX:
                 return $this->createQueryBuilder('radioStation')
-                    ->select('DISTINCT radioStation.'.$column)
+                    ->select('DISTINCT radioStation.'.$column->value)
                     ->andWhere('radioStation.radioTable = :radioTable')
                     ->setParameter('radioTable', $radioTable)
-                    ->andWhere('radioStation.'.$column.' IS NOT NULL')
-                    ->andWhere('radioStation.'.$column.' != \'\'')
-                    ->addOrderBy('radioStation.'.$column, 'ASC')
+                    ->andWhere('radioStation.'.$column->value.' IS NOT NULL')
+                    ->andWhere('radioStation.'.$column->value.' != \'\'')
+                    ->addOrderBy('radioStation.'.$column->value, 'ASC')
                     ->getQuery()
                     ->getSingleColumnResult()
                 ;
 
             default:
-                throw new RuntimeException(sprintf('Column "%s" is not supported.', $column));
+                throw new RuntimeException(sprintf('Column "%s" is not supported.', $column->value));
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Form\DataTransformer;
 
-use App\Entity\RadioTable;
+use App\Entity\Enum\RadioTable\Column;
 use App\Util\ReflectionUtilsTrait;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -25,13 +25,17 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
 
     public function transform(mixed $value): array
     {
-        $enabledColumns  = is_array($value) ? $value : [];
-        $disabledColumns = array_diff($this->getAllPossibleColumnsNames(), $enabledColumns);
+        $enabledColumnNames = is_array($value)
+            ? array_map(function(Column $column){ return $column->value; }, $value)
+            : [];
+
+        $allColumnNames = array_column(Column::cases(), 'value');
+        $disabledColumns = array_diff($allColumnNames, $enabledColumnNames);
 
         $orderNumber = 1;
         $mergedColumns = [];
 
-        foreach ($enabledColumns as $columnName) {
+        foreach ($enabledColumnNames as $columnName) {
             $mergedColumns[$columnName] = $orderNumber++;
         }
         foreach ($disabledColumns as $columnName) {
@@ -43,21 +47,14 @@ class RadioTableColumnsTransformer implements DataTransformerInterface
 
     public function reverseTransform(mixed $value): array
     {
-        $mergedColumns = is_array($value) ? $value : [];
+        $mergedColumnNames = is_array($value) ? $value : [];
 
-        $enabledColumns = array_flip(array_filter(
-            $mergedColumns,
+        $enabledColumnNames = array_flip(array_filter(
+            $mergedColumnNames,
             function($orderNumber){ return $orderNumber > 0; }
         ));
-        ksort($enabledColumns);
+        ksort($enabledColumnNames);
 
-        return array_values($enabledColumns);
-    }
-
-    private function getAllPossibleColumnsNames(): array
-    {
-        $allColumnsConstants = $this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_');
-
-        return array_values($allColumnsConstants);
+        return array_values(array_map([Column::class, 'from'], $enabledColumnNames));
     }
 }

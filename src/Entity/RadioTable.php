@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Entity\Embeddable\RadioTable\Appearance;
-use App\Validator\ClassConstantsChoice;
+use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\FrequencyUnit;
+use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
+use App\Entity\Enum\RadioTable\Status;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,46 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RadioTable
 {
-    // Keep these constants and its values in sync with RadioStation's field names.
-    // Order of them affects order in disabled columns in radio table settings page. :)
-    public const COLUMN_FREQUENCY = 'frequency';
-    public const COLUMN_NAME = 'name';
-    public const COLUMN_LOCATION = 'location';
-    public const COLUMN_POWER = 'power';
-    public const COLUMN_POLARIZATION = 'polarization';
-    public const COLUMN_MULTIPLEX = 'multiplex';
-    public const COLUMN_DAB_CHANNEL = 'dabChannel';
-    public const COLUMN_COUNTRY = 'country';
-    public const COLUMN_REGION = 'region';
-    public const COLUMN_QUALITY = 'quality';
-    public const COLUMN_RDS = 'rds';
-    public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
-    public const COLUMN_RECEPTION = 'reception';
-    public const COLUMN_DISTANCE = 'distance';
-    public const COLUMN_MAX_SIGNAL_LEVEL = 'maxSignalLevel';
-    public const COLUMN_RDS_PI = 'rdsPi';
-    public const COLUMN_RADIO_GROUP = 'radioGroup';
-    public const COLUMN_TYPE = 'type';
-    public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
-    public const COLUMN_COMMENT = 'comment';
-    public const COLUMN_EXTERNAL_ANCHOR = 'externalAnchor';
-
-    public const SORTING_FREQUENCY = self::COLUMN_FREQUENCY;
-    public const SORTING_NAME = self::COLUMN_NAME;
-    public const SORTING_PRIVATE_NUMBER = self::COLUMN_PRIVATE_NUMBER;
-
-    public const STATUS_PUBLIC = 1;
-    public const STATUS_UNLISTED = 0;
-    public const STATUS_PRIVATE = -1;
-
-    public const FREQUENCY_MHZ = 1;
-    public const FREQUENCY_KHZ = 2;
-
-    public const MAX_SIGNAL_LEVEL_DB = 1;
-    public const MAX_SIGNAL_LEVEL_DBF = 2;
-    public const MAX_SIGNAL_LEVEL_DBUV = 3;
-    public const MAX_SIGNAL_LEVEL_DBM = 4;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -81,35 +44,32 @@ class RadioTable
     private ?string $name = null;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="STATUS_")
+     * @ORM\Column(type="smallint", enumType=Status::class)
      */
-    private int $status = self::STATUS_PUBLIC;
+    private Status $status = Status::PUBLIC;
 
     /**
-     * @ORM\Column(type="array")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="COLUMN_", multiple=true)
+     * @ORM\Column(type="array", enumType=Column::class)
      * @Assert\Expression(
      *     "frequency in value && name in value",
-     *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME}
+     *     values={"frequency"=Column::FREQUENCY, "name"=Column::NAME}
      * )
      */
     private array $columns = [
-        self::COLUMN_FREQUENCY,
-        self::COLUMN_NAME,
-        self::COLUMN_LOCATION,
-        self::COLUMN_POWER,
-        self::COLUMN_POLARIZATION,
-        self::COLUMN_COUNTRY,
-        self::COLUMN_QUALITY,
-        self::COLUMN_RDS,
+        Column::FREQUENCY,
+        Column::NAME,
+        Column::LOCATION,
+        Column::POWER,
+        Column::POLARIZATION,
+        Column::COUNTRY,
+        Column::QUALITY,
+        Column::RDS,
     ];
 
     /**
-     * @ORM\Column(type="string", length=15)
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="SORTING_")
+     * @ORM\Column(type="string", length=15, enumType=Column::class)
      */
-    private string $sorting = self::SORTING_FREQUENCY;
+    private Column $sorting = Column::FREQUENCY;
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
@@ -134,16 +94,14 @@ class RadioTable
     private DateTime $lastUpdateTime;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
+     * @ORM\Column(type="smallint", enumType=FrequencyUnit::class)
      */
-    private int $frequencyUnit = self::FREQUENCY_MHZ;
+    private FrequencyUnit $frequencyUnit = FrequencyUnit::MHZ;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="MAX_SIGNAL_LEVEL_")
+     * @ORM\Column(type="smallint", enumType=MaxSignalLevelUnit::class)
      */
-    private int $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
+    private MaxSignalLevelUnit $maxSignalLevelUnit = MaxSignalLevelUnit::DBF;
 
     /**
      * @ORM\Column(type="integer")
@@ -191,23 +149,29 @@ class RadioTable
         return $this;
     }
 
-    public function getStatus(): int
+    public function getStatus(): Status
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(Status $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
+    /**
+     * @return Column[]
+     */
     public function getColumns(): array
     {
         return $this->columns;
     }
 
+    /**
+     * @param Column[] $columns
+     */
     public function setColumns(array $columns): self
     {
         $this->columns = $columns;
@@ -215,12 +179,12 @@ class RadioTable
         return $this;
     }
 
-    public function getSorting(): string
+    public function getSorting(): Column
     {
         return $this->sorting;
     }
 
-    public function setSorting(string $sorting): self
+    public function setSorting(Column $sorting): self
     {
         $this->sorting = $sorting;
 
@@ -264,24 +228,24 @@ class RadioTable
         return $this;
     }
 
-    public function getFrequencyUnit(): int
+    public function getFrequencyUnit(): FrequencyUnit
     {
         return $this->frequencyUnit;
     }
 
-    public function setFrequencyUnit(int $frequencyUnit): self
+    public function setFrequencyUnit(FrequencyUnit $frequencyUnit): self
     {
         $this->frequencyUnit = $frequencyUnit;
 
         return $this;
     }
 
-    public function getMaxSignalLevelUnit(): int
+    public function getMaxSignalLevelUnit(): MaxSignalLevelUnit
     {
         return $this->maxSignalLevelUnit;
     }
 
-    public function setMaxSignalLevelUnit(int $maxSignalLevelUnit): self
+    public function setMaxSignalLevelUnit(MaxSignalLevelUnit $maxSignalLevelUnit): self
     {
         $this->maxSignalLevelUnit = $maxSignalLevelUnit;
 
