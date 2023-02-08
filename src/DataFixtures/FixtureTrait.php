@@ -27,7 +27,6 @@ trait FixtureTrait
         $faker->addProvider(new class($faker) extends Base
         {
             use DabChannelsTrait;
-            use ReflectionUtilsTrait;
 
             public function radioStation(): string
             {
@@ -163,21 +162,6 @@ trait FixtureTrait
             public function randomEnum(string $enumFqcn): BackedEnum
             {
                 return $this->randomElement($enumFqcn::cases());
-            }
-
-            public function randomConstantFromClass($class, $prefix): mixed
-            {
-                return $this->randomConstantsFromClass($class, $prefix)[0];
-            }
-
-            public function randomConstantsFromClass($class, $prefix): array
-            {
-                $values = $this->getPrefixedConstantsOfClass($class, $prefix);
-
-                return $this->randomElements(
-                    $values,
-                    rand(ceil(count($values) * 0.25), count($values))
-                );
             }
         });
     }

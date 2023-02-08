@@ -18,7 +18,6 @@ class ReflectionUtilsTraitTest extends TestCase
             use ReflectionUtilsTrait {
                 getPrivateFieldOfObject as public;
                 setPrivateFieldOfObject as public;
-                getPrefixedConstantsOfClass as public;
             }
         };
 
@@ -51,17 +50,5 @@ class ReflectionUtilsTraitTest extends TestCase
         $this->reflectionUtils->setPrivateFieldOfObject($this->instance, 'privateField', 'CHANGED');
 
         $this->assertEquals('CHANGED', $this->instance->getValueOfPrivateField());
-    }
-
-    public function test_util_reads_constants_with_specified_prefix_from_class(): void
-    {
-        $constants = [
-            'PREFIXED_CONST_FIRST' => 'value_1',
-            'PREFIXED_CONST_SECOND' => 'value_2',
-            'PREFIXED_CONST_THIRD' => 'value_3',
-        ];
-        $result = $this->reflectionUtils->getPrefixedConstantsOfClass(get_class($this->instance), 'PREFIXED_');
-
-        $this->assertEquals($constants, $result);
     }
 }

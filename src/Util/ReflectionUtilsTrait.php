@@ -2,7 +2,6 @@
 
 namespace App\Util;
 
-use ReflectionClass;
 use ReflectionProperty;
 
 trait ReflectionUtilsTrait
@@ -22,22 +21,5 @@ trait ReflectionUtilsTrait
 
         $reflection->setAccessible(true);
         $reflection->setValue($object, $value);
-    }
-
-    /**
-     * Returns array with constant names as keys and constant values as values.
-     */
-    protected function getPrefixedConstantsOfClass(string $className, string $prefix): array
-    {
-        $reflection = new ReflectionClass($className);
-        $constants = $reflection->getConstants();
-
-        return array_filter(
-            $constants,
-            function ($constantName) use ($prefix){
-                return 0 === strpos($constantName, $prefix);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
     }
 }
