@@ -133,6 +133,10 @@ class PhpSpreadsheetRenderer
                         $value = $value ? $this->getPolarizationLabel($value) : '';
                         break;
 
+                    case Column::DAB_CHANNEL:
+                        $value = $value ? $value->value : '';
+                        break;
+
                     case Column::COMMENT:
                         // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
                         $value = str_replace("\r", '', $value);

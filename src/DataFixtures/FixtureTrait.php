@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Util\Data\DabChannelsTrait;
 use App\Util\ReflectionUtilsTrait;
 use BackedEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -26,8 +25,6 @@ trait FixtureTrait
 
         $faker->addProvider(new class($faker) extends Base
         {
-            use DabChannelsTrait;
-
             public function radioStation(): string
             {
                 return $this->randomElement([
@@ -137,19 +134,6 @@ trait FixtureTrait
                     'MUX-R1',
                     'MUX-R2',
                 ]);
-            }
-
-            public function dabChannelWithFrequency(): array
-            {
-                $dabChannels = $this->getDabChannelsWithFrequencies();
-
-                return $this->randomElement(
-                    array_map(
-                        function($key, $value) { return [$key, $value]; },
-                        array_keys($dabChannels),
-                        $dabChannels
-                    )
-                );
             }
 
             public function HTMLDescription(): string

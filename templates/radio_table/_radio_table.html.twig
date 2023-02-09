@@ -83,6 +83,9 @@
                                     {{- get_polarization_label(radio_station.polarization) -}}
                                 </abbr>
 
+                            {%- elseif column.value == 'dabChannel' -%}
+                                {{- radio_station.dabChannel.value -}}
+
                             {%- elseif column.value == 'quality' -%}
                                 <span class="quality quality-{{ radio_station.quality.value }}"
                                       title="{{ ('quality.' ~ radio_station.quality.value)|trans }}">

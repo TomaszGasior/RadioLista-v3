@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Enum\RadioStation\Background;
+use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Reception;
@@ -14,7 +15,6 @@ use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
-use App\Util\Data\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -27,8 +27,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RadioStationEditType extends AbstractType
 {
-    use DabChannelsTrait;
-
     public function __construct(
         private RadioStationRdsPsFrameTransformer $rdsPsTransformer,
         private RadioStationRdsRtFrameTransformer $rdsRtTransformer,
@@ -75,23 +73,25 @@ class RadioStationEditType extends AbstractType
             ->add('multiplex', RadioStationCompletionTextType::class, [
                 'required' => false,
             ])
-            ->add('dabChannel', ChoiceType::class, [
+            ->add('dabChannel', EnumType::class, [
                 'required' => false,
-                'choices' => array_merge([null], $this->getDabChannels()),
-                'choice_label' => function(?string $choice): ?string {
-                    if ($choice) {
-                        return $choice;
+                'class' => DabChannel::class,
+                'choices' => array_merge([null], DabChannel::cases()),
+                'choice_label' => function(?DabChannel $dabChannel): ?string {
+                    if ($dabChannel) {
+                        return $dabChannel->value;
                     }
-                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.'.$choice);
+                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.');
                 },
                 'choice_translation_domain' => false,
-
-                // These settings are needed for frontend JS script of radio station edit/add page.
-                'choice_value' => function ($choice) {
-                    return $choice;
-                },
                 'attr' => [
-                    'data-dab-channel-frequencies' => json_encode($this->getDabChannelsWithFrequencies()),
+                    'data-dab-channel-frequencies' => json_encode(array_reduce(
+                        DabChannel::cases(),
+                        function(array $data, DabChannel $dabChannel): array {
+                            return array_merge($data, [$dabChannel->value => $dabChannel->getFrequency()]);
+                        },
+                        []
+                    )),
                 ],
             ])
             ->add('type', EnumType::class, [

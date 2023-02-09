@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
+use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
-use App\Validator\DabChannel;
+use App\Validator\DabChannel as DabChannelValid;
 use App\Validator\YearMonthDate;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -94,10 +95,10 @@ class RadioStation
     private ?string $multiplex = null;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=true)
-     * @DabChannel()
+     * @ORM\Column(type="string", length=5, enumType=DabChannel::class, nullable=true)
+     * @DabChannelValid()
      */
-    private ?string $dabChannel = null;
+    private ?DabChannel $dabChannel = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -300,12 +301,12 @@ class RadioStation
         return $this;
     }
 
-    public function getDabChannel(): ?string
+    public function getDabChannel(): ?DabChannel
     {
         return $this->dabChannel;
     }
 
-    public function setDabChannel(?string $dabChannel): self
+    public function setDabChannel(?DabChannel $dabChannel): self
     {
         $this->dabChannel = $dabChannel;
 

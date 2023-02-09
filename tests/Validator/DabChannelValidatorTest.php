@@ -2,6 +2,7 @@
 
 namespace App\Tests\Validator;
 
+use App\Entity\Enum\RadioStation\DabChannel as DabChannelEnum;
 use App\Entity\RadioStation;
 use App\Validator\DabChannel;
 use App\Validator\DabChannelValidator;
@@ -16,59 +17,42 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         return new DabChannelValidator;
     }
 
-    public function validProvider(): iterable
+    public function validRadioStationProvider(): iterable
     {
-        $dabChannelToFrequency = [
-            '6B' => '183.648',
-            '11A' => '216.928',
+        $frequencyToDabChannel = [
+            '183.648' => DabChannelEnum::CHANNEL_6B,
+            '216.928' => DabChannelEnum::CHANNEL_11A,
         ];
 
-        foreach ($dabChannelToFrequency as $dabChannel => $frequency) {
+        foreach ($frequencyToDabChannel as $frequency => $dabChannel) {
             $radioStation = (new RadioStation)
                 ->setFrequency($frequency)
                 ->setDabChannel($dabChannel)
             ;
 
-            yield $dabChannel => [$radioStation];
+            yield $dabChannel->value => [$radioStation];
         }
     }
 
-    public function invalidFrequencyProvider(): iterable
+    public function invalidRadioStationProvider(): iterable
     {
-        $dabChannelToFrequency = [
-            '6B' => '239.200',
-            '11A' => '174.928',
+        $frequencyToDabChannel = [
+            '239.200' => DabChannelEnum::CHANNEL_6B,
+            '174.928' => DabChannelEnum::CHANNEL_11A,
         ];
 
-        foreach ($dabChannelToFrequency as $dabChannel => $frequency) {
+        foreach ($frequencyToDabChannel as $frequency => $dabChannel) {
             $radioStation = (new RadioStation)
                 ->setFrequency($frequency)
                 ->setDabChannel($dabChannel)
             ;
 
-            yield $dabChannel => [$radioStation];
-        }
-    }
-
-    public function unknownDabChannelProvider(): iterable
-    {
-        $dabChannelToFrequency = [
-            '99X' => '183.648',
-            'NNN' => '216.928',
-        ];
-
-        foreach ($dabChannelToFrequency as $dabChannel => $frequency) {
-            $radioStation = (new RadioStation)
-                ->setFrequency($frequency)
-                ->setDabChannel($dabChannel)
-            ;
-
-            yield $dabChannel => [$radioStation];
+            yield $dabChannel->value => [$radioStation];
         }
     }
 
     /**
-     * @dataProvider validProvider
+     * @dataProvider validRadioStationProvider
      */
     public function test_validator_accepts_dab_channel_with_valid_frequency(RadioStation $radioStation): void
     {
@@ -82,7 +66,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
     }
 
     /**
-     * @dataProvider invalidFrequencyProvider
+     * @dataProvider invalidRadioStationProvider
      */
     public function test_validator_rejects_dab_channel_with_invalid_frequency(RadioStation $radioStation): void
     {
@@ -93,24 +77,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($value, $constraint);
 
         $this->buildViolation($constraint->message)
-            ->setParameter('{{ value }}', $value)
-            ->assertRaised()
-        ;
-    }
-
-    /**
-     * @dataProvider unknownDabChannelProvider
-     */
-    public function test_validator_rejects_unknown_dab_channel(RadioStation $radioStation): void
-    {
-        $this->setObject($radioStation);
-        $value = $radioStation->getDabChannel();
-
-        $constraint = new DabChannel;
-        $this->validator->validate($value, $constraint);
-
-        $this->buildViolation($constraint->message)
-            ->setParameter('{{ value }}', $value)
+            ->setParameter('{{ value }}', $value->value)
             ->assertRaised()
         ;
     }

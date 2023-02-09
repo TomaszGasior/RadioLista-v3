@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Enum\RadioStation\Background;
+use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Type;
@@ -46,10 +47,10 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
         $radioStation->setReception($faker->randomEnum(Reception::class));
 
         if ($faker->boolean(75)) {
-            [$dabChannel, $frequency] = $faker->dabChannelWithFrequency;
+            $dabChannel = $faker->randomEnum(DabChannel::class);
             $radioStation
                 ->setDabChannel($dabChannel)
-                ->setFrequency($frequency)
+                ->setFrequency($dabChannel->getFrequency())
             ;
         }
         if ($faker->boolean(75)) {

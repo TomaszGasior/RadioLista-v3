@@ -2,8 +2,8 @@
 
 namespace App\Validator;
 
+use App\Entity\Enum\RadioStation\DabChannel as DabChannelEnum;
 use App\Entity\RadioStation;
-use App\Util\Data\DabChannelsTrait;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -11,8 +11,6 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class DabChannelValidator extends ConstraintValidator
 {
-    use DabChannelsTrait;
-
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof DabChannel) {
@@ -24,26 +22,23 @@ class DabChannelValidator extends ConstraintValidator
             throw new UnexpectedTypeException($radioStation, RadioStation::class);
         }
 
-        if (null === $value || '' === $value) {
+        if (null === $value) {
             return;
         }
 
-        if (!is_scalar($value) && !(is_object($value) && method_exists($value, '__toString'))) {
-            throw new UnexpectedValueException($value, 'string');
+        if (!$value instanceof DabChannelEnum) {
+            throw new UnexpectedValueException($value, DabChannelEnum::class);
         }
 
-        $value = (string) $value;
-        $dabChannels = $this->getDabChannelsWithFrequencies();
+        $dabChannel = $value;
 
-        $dabChannelIsKnown = isset($dabChannels[$value]);
-        $dabChannelMatchesFrequency = ($dabChannels[$value] ?? false) === (string) $radioStation->getFrequency();
-
-        if ($dabChannelIsKnown && $dabChannelMatchesFrequency) {
+        $dabChannelMatchesFrequency = $dabChannel->getFrequency() === $radioStation->getFrequency();
+        if ($dabChannelMatchesFrequency) {
             return;
         }
 
         $this->context->buildViolation($constraint->message)
-            ->setParameter('{{ value }}', $value)
+            ->setParameter('{{ value }}', $dabChannel->value)
             ->addViolation()
         ;
     }
