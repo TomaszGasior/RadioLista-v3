@@ -10,19 +10,17 @@ use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioTableController extends AbstractController
 {
-    /**
-     * @Route({"pl": "/wykaz/{id}", "en": "/list/{id}"}, name="radio_table.show")
-     * @IsGranted("RADIO_TABLE_SHOW", subject="radioTable", statusCode=404)
-     */
+    #[Route(['pl' => '/wykaz/{id}', 'en' => '/list/{id}'], name: 'radio_table.show')]
+    #[IsGranted('RADIO_TABLE_SHOW', subject: 'radioTable', statusCode: 404)]
     public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
     {
         $radioStations = $radioStationRepository->findForRadioTable($radioTable);
@@ -33,10 +31,8 @@ class RadioTableController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/utworz-wykaz", "en": "create-list"}, name="radio_table.create")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     */
+    #[Route(['pl' => '/utworz-wykaz', 'en' => 'create-list'], name: 'radio_table.create')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $radioTable = new RadioTable;
@@ -59,11 +55,9 @@ class RadioTableController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/wykaz/{id}/ustawienia", "en": "/list/{id}/settings"}, name="radio_table.settings")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
-     */
+    #[Route(['pl' => '/wykaz/{id}/ustawienia', 'en' => '/list/{id}/settings'], name: 'radio_table.settings')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function settings(RadioTable $radioTable, Request $request,
                              EntityManagerInterface $entityManager): Response
     {
@@ -82,11 +76,9 @@ class RadioTableController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/wykaz/{id}/kolumny", "en": "/list/{id}/columns"}, name="radio_table.columns")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
-     */
+    #[Route(['pl' => '/wykaz/{id}/kolumny', 'en' => '/list/{id}/columns'], name: 'radio_table.columns')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function columns(RadioTable $radioTable, Request $request,
                             EntityManagerInterface $entityManager): Response
     {
@@ -105,14 +97,12 @@ class RadioTableController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route(
-     *     {"pl": "/wykaz/{id}/eksport/{_format}", "en": "/list/{id}/export/{_format}"},
-     *     name="radio_table.download", requirements={"_format": "csv|ods|xlsx|html|pdf"}
-     * )
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
-     */
+    #[Route(
+        ['pl' => '/wykaz/{id}/eksport/{_format}', 'en' => '/list/{id}/export/{_format}'],
+        name: 'radio_table.download', requirements: ['_format' => 'csv|ods|xlsx|html|pdf']
+    )]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function download(RadioTable $radioTable, string $_format,
                              RadioStationRepository $radioStationRepository,
                              RadioTableExporterProvider $radioTableExporterProvider): Response
@@ -132,11 +122,9 @@ class RadioTableController extends AbstractController
         return $response;
     }
 
-    /**
-     * @Route({"pl": "/wykaz/{id}/eksport", "en": "/list/{id}/export"}, name="radio_table.export")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
-     */
+    #[Route(['pl' => '/wykaz/{id}/eksport', 'en' => '/list/{id}/export'], name: 'radio_table.export')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function export(RadioTable $radioTable): Response
     {
         return $this->render('radio_table/export.html.twig', [
@@ -144,11 +132,9 @@ class RadioTableController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/wykaz/{id}/usun", "en": "/list/{id}/delete"}, methods={"POST"}, name="radio_table.remove")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     * @IsGranted("RADIO_TABLE_MODIFY", subject="radioTable", statusCode=404)
-     */
+    #[Route(['pl' => '/wykaz/{id}/usun', 'en' => '/list/{id}/delete'], methods: ['POST'], name: 'radio_table.remove')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function remove(RadioTable $radioTable, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($radioTable);

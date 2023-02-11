@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Doctrine\EntityListener\UserListener;
+use App\Repository\UserRepository;
 use DateTime;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,73 +15,51 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\EntityListeners({"App\Doctrine\EntityListener\UserListener"})
- * @UniqueEntity("name", groups={"Default", "RedefinePassword"}, message="user.name_not_unique")
- * @ORM\Cache("NONSTRICT_READ_WRITE")
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\EntityListeners([UserListener::class])]
+#[UniqueEntity('name', groups: ['Default', 'RedefinePassword'], message: 'user.name_not_unique')]
+#[ORM\Cache('NONSTRICT_READ_WRITE')]
 class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, unique=true)
-     * @Assert\NotBlank(groups={"Default", "RedefinePassword"})
-     * @Assert\Length(max=50, groups={"Default", "RedefinePassword"})
-     * @Assert\Regex(
-     *     "/^[a-zA-Z0-9_\.\-]*$/", groups={"Default", "RedefinePassword"},
-     *     message="user.name_invalid_chars"
-     * )
-     */
+    #[ORM\Column(type: Types::STRING, length: 50, unique: true)]
+    #[Assert\NotBlank(groups: ['Default', 'RedefinePassword'])]
+    #[Assert\Length(max: 50, groups: ['Default', 'RedefinePassword'])]
+    #[Assert\Regex(
+        '/^[a-zA-Z0-9_\.\-]*$/', groups: ['Default', 'RedefinePassword'],
+        message: 'user.name_invalid_chars'
+    )]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(groups={"Default"})
-     */
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank(groups: ['Default'])]
     private ?string $password = null;
 
-    /**
-     * @Assert\NotBlank(groups={"RedefinePassword"})
-     * @Assert\Length(max=100, groups={"RedefinePassword"})
-     */
+    #[Assert\NotBlank(groups: ['RedefinePassword'])]
+    #[Assert\Length(max: 100, groups: ['RedefinePassword'])]
     private ?string $plainPassword = null;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private DateTime $lastActivityDate;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private DateTime $registerDate;
 
-    /**
-     * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000, groups={"Default", "RedefinePassword"})
-     */
+    #[ORM\Column(type: Types::STRING, length: 2000, nullable: true)]
+    #[Assert\Length(max: 2000, groups: ['Default', 'RedefinePassword'])]
     private ?string $aboutMe = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $publicProfile = false;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: Types::INTEGER)]
     private int $radioTablesCount = 0;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $admin = false;
 
     public function __construct()

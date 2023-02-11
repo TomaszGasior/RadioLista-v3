@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Doctrine\EntityListener\RadioStationListener;
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Entity\Enum\RadioStation\DabChannel;
@@ -9,159 +10,111 @@ use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
+use App\Repository\RadioStationRepository;
 use App\Validator\DabChannel as DabChannelValid;
 use App\Validator\YearMonthDate;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(indexes={
- *     @ORM\Index(name="idx_sort_frequency", columns={"radioTableId", "frequency"}),
- *     @ORM\Index(name="idx_sort_name", columns={"radioTableId", "name", "frequency"}),
- * })
- * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
- * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioStationListener"})
- */
+#[ORM\Entity(repositoryClass: RadioStationRepository::class)]
+#[ORM\EntityListeners([RadioStationListener::class])]
+#[ORM\Index(name: 'idx_sort_frequency', columns: ['radioTableId', 'frequency'])]
+#[ORM\Index(name: 'idx_sort_name', columns: ['radioTableId', 'name', 'frequency'])]
 class RadioStation
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable")
-     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
-     */
+    #[ORM\ManyToOne(targetEntity: RadioTable::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private RadioTable $radioTable;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=100)
-     */
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
-     */
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 50)]
     private ?string $radioGroup = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
-     */
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 50)]
     private ?string $country = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=50)
-     */
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    #[Assert\Length(max: 50)]
     private ?string $region = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=8, scale=3)
-     * @Assert\NotBlank()
-     * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
-     */
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 3)]
+    #[Assert\NotBlank]
+    #[Assert\Type('numeric')]
+    #[Assert\GreaterThan(0)]
     private ?string $frequency = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=100)
-     */
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    #[Assert\Length(max: 100)]
     private ?string $location = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
-     * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
-     */
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 3, nullable: true)]
+    #[Assert\Type('numeric')]
+    #[Assert\GreaterThan(0)]
     private ?string $power = null;
 
-    /**
-     * @ORM\Column(type="string", length=1, enumType=Polarization::class, nullable=true)
-     */
+    #[ORM\Column(type: Types::STRING, length: 1, enumType: Polarization::class, nullable: true)]
     private ?Polarization $polarization = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=100)
-     */
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 100)]
     private ?string $multiplex = null;
 
-    /**
-     * @ORM\Column(type="string", length=5, enumType=DabChannel::class, nullable=true)
-     * @DabChannelValid()
-     */
+    #[ORM\Column(type: Types::STRING, length: 5, enumType: DabChannel::class, nullable: true)]
+    #[DabChannelValid]
     private ?DabChannel $dabChannel = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0)
-     */
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\GreaterThan(0)]
     private ?int $distance = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $maxSignalLevel = null;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=Reception::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: Reception::class)]
     private Reception $reception = Reception::REGULAR;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type("int")
-     * @Assert\GreaterThan(0)
-     */
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\Type('int')]
+    #[Assert\GreaterThan(0)]
     private ?int $privateNumber = null;
 
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     * @YearMonthDate()
-     */
+    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
+    #[YearMonthDate]
     private ?string $firstLogDate = null;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=Quality::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: Quality::class)]
     private Quality $quality = Quality::VERY_GOOD;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=Type::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: Type::class)]
     private Type $type = Type::MUSIC;
 
-    /**
-     * @ORM\Embedded(class=Rds::class)
-     * @Assert\Valid
-     */
+    #[ORM\Embedded(class: Rds::class)]
+    #[Assert\Valid]
     private Rds $rds;
 
-    /**
-     * @ORM\Column(type="string", length=500, nullable=true)
-     * @Assert\Length(max=500)
-     */
+    #[ORM\Column(type: Types::STRING, length: 500, nullable: true)]
+    #[Assert\Length(max: 500)]
     private ?string $comment = null;
 
-    /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\Length(max=500)
-     * @Assert\Url()
-     */
+    #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
+    #[Assert\Length(max: 500)]
+    #[Assert\Url]
     private ?string $externalAnchor = null;
 
-    /**
-     * @ORM\Embedded(class=Appearance::class)
-     * @Assert\Valid
-     */
+    #[ORM\Embedded(class: Appearance::class)]
+    #[Assert\Valid]
     private Appearance $appearance;
 
     public function __construct()

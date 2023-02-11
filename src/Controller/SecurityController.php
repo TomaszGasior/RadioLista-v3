@@ -11,9 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route({"pl": "/logowanie", "en": "/login"}, name="security.login")
-     */
+    #[Route(['pl' => '/logowanie', 'en' => '/login'], name: 'security.login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if (null !== $this->getUser()) {
@@ -39,9 +37,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/wyloguj", "en": "/logout"}, name="security.logout")
-     */
+    #[Route(['pl' => '/wyloguj', 'en' => '/logout'], name: 'security.logout')]
     public function logout(): Response
     {
         throw new \Exception;

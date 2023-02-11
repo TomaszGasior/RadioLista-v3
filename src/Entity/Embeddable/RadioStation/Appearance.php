@@ -3,31 +3,22 @@
 namespace App\Entity\Embeddable\RadioStation;
 
 use App\Entity\Enum\RadioStation\Background;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Embeddable
- */
+#[ORM\Embeddable]
 class Appearance
 {
-    /**
-     * @ORM\Column(type="smallint", enumType=Background::class, nullable=true)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: Background::class, nullable: true)]
     private ?Background $background = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $bold = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $italic = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $strikethrough = false;
 
     public function getBackground(): ?Background

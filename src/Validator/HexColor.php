@@ -2,11 +2,10 @@
 
 namespace App\Validator;
 
+use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @Annotation
- */
+#[Attribute]
 class HexColor extends Constraint
 {
     public $message = 'radio_table.color_invalid_format';

@@ -14,10 +14,8 @@ class RadioTableListener
 
     public function __construct(private bool $enableDateTimeRefresh) {}
 
-    /**
-     * @PreFlush
-     * @PreRemove
-     */
+    #[PreFlush]
+    #[PreRemove]
     public function refreshLastActivityDateOfUser(RadioTable $radioTable, EventArgs $args): void
     {
         if (false === $this->enableDateTimeRefresh) {
@@ -30,9 +28,7 @@ class RadioTableListener
         $this->forceEntityUpdate($user, $args);
     }
 
-    /**
-     * @PrePersist
-     */
+    #[PrePersist]
     public function increaseRadioTablesCountOfUser(RadioTable $radioTable, EventArgs $args): void
     {
         $user = $radioTable->getOwner();
@@ -41,9 +37,7 @@ class RadioTableListener
         $this->forceEntityUpdate($user, $args);
     }
 
-    /**
-     * @PreRemove
-     */
+    #[PreRemove]
     public function decreaseRadioTablesCountOfUser(RadioTable $radioTable, EventArgs $args): void
     {
         $user = $radioTable->getOwner();

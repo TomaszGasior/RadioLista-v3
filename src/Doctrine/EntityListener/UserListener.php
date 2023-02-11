@@ -15,9 +15,7 @@ class UserListener
         private bool $enableDateTimeRefresh
     ) {}
 
-    /**
-     * @PreUpdate
-     */
+    #[PreUpdate]
     public function refreshLastActivityDate(User $user, PreUpdateEventArgs $args): void
     {
         if (false === $this->enableDateTimeRefresh) {
@@ -29,9 +27,7 @@ class UserListener
         }
     }
 
-    /**
-     * @PreFlush
-     */
+    #[PreFlush]
     public function encodePlainPassword(User $user): void
     {
         if ($user->getPlainPassword()) {

@@ -2,59 +2,48 @@
 
 namespace App\Entity;
 
+use App\Doctrine\EntityListener\RadioTableListener;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
 use App\Entity\Enum\RadioTable\Status;
+use App\Repository\RadioTableRepository;
 use DateTime;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(indexes={
- *     @ORM\Index(name="idx_status", columns={"status"}),
- *     @ORM\Index(name="idx_search_term", columns={"name", "description"}, flags={"fulltext"}),
- * })
- * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
- * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioTableListener"})
- * @ORM\Cache("NONSTRICT_READ_WRITE")
- */
+#[ORM\Entity(repositoryClass: RadioTableRepository::class)]
+#[ORM\EntityListeners([RadioTableListener::class])]
+#[ORM\Cache('NONSTRICT_READ_WRITE')]
+#[ORM\Index(name: 'idx_status', columns: ['status'])]
+#[ORM\Index(name: 'idx_search_term', columns: ['name', 'description'], flags: ['fulltext'])]
 class RadioTable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private ?User $owner = null;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=100)
-     */
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=Status::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: Status::class)]
     private Status $status = Status::PUBLIC;
 
-    /**
-     * @ORM\Column(type="array", enumType=Column::class)
-     * @Assert\Expression(
-     *     "frequency in value && name in value",
-     *     values={"frequency"=Column::FREQUENCY, "name"=Column::NAME}
-     * )
-     */
+    #[ORM\Column(type: Types::ARRAY, enumType: Column::class)]
+    #[Assert\Expression(
+        'frequency in value && name in value',
+        values: ['frequency' => Column::FREQUENCY, 'name' => Column::NAME]
+    )]
     private array $columns = [
         Column::FREQUENCY,
         Column::NAME,
@@ -66,46 +55,30 @@ class RadioTable
         Column::RDS,
     ];
 
-    /**
-     * @ORM\Column(type="string", length=15, enumType=Column::class)
-     */
+    #[ORM\Column(type: Types::STRING, length: 15, enumType: Column::class)]
     private Column $sorting = Column::FREQUENCY;
 
-    /**
-     * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000)
-     */
+    #[ORM\Column(type: Types::STRING, length: 2000, nullable: true)]
+    #[Assert\Length(max: 2000)]
     private ?string $description = null;
 
-    /**
-     * @ORM\Embedded(class=Appearance::class)
-     * @Assert\Valid
-     */
+    #[ORM\Embedded(class: Appearance::class)]
+    #[Assert\Valid]
     private Appearance $appearance;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $creationTime;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private DateTime $lastUpdateTime;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=FrequencyUnit::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: FrequencyUnit::class)]
     private FrequencyUnit $frequencyUnit = FrequencyUnit::MHZ;
 
-    /**
-     * @ORM\Column(type="smallint", enumType=MaxSignalLevelUnit::class)
-     */
+    #[ORM\Column(type: Types::SMALLINT, enumType: MaxSignalLevelUnit::class)]
     private MaxSignalLevelUnit $maxSignalLevelUnit = MaxSignalLevelUnit::DBF;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: Types::INTEGER)]
     private int $radioStationsCount = 0;
 
     public function __construct()

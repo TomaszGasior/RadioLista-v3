@@ -2,11 +2,10 @@
 
 namespace App\Validator;
 
+use Attribute;
 use Symfony\Component\Validator\Constraints\Date;
 
-/**
- * @Annotation
- */
+#[Attribute]
 class YearMonthDate extends Date
 {
     public function __construct(...$args)
