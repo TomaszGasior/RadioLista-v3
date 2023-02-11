@@ -13,13 +13,13 @@
                 >
                     {%- block heading_cell -%}
                         {%- if column.value == 'frequency' -%}
-                            {{- get_frequency_label(radio_table.frequencyUnit) -}}
+                            {{- radio_table.frequencyUnit.label -}}
                         {%- elseif column.value == 'power' -%}
                             {{- get_power_label() -}}
                         {%- elseif column.value == 'distance' -%}
                             {{- get_distance_label() -}}
                         {%- elseif column.value == 'maxSignalLevel' -%}
-                            {{- get_max_signal_level_label(radio_table.maxSignalLevelUnit) -}}
+                            {{- radio_table.maxSignalLevelUnit.label -}}
                         {%- else -%}
                             {{- ('heading.' ~ column.value)|trans -}}
                         {%- endif -%}
@@ -80,7 +80,7 @@
 
                             {%- elseif column.value == 'polarization' -%}
                                 <abbr title="{{ ('polarization.' ~ radio_station.polarization.value)|trans }}">
-                                    {{- get_polarization_label(radio_station.polarization) -}}
+                                    {{- radio_station.polarization.label -}}
                                 </abbr>
 
                             {%- elseif column.value == 'dabChannel' -%}
@@ -89,7 +89,7 @@
                             {%- elseif column.value == 'quality' -%}
                                 <span class="quality quality-{{ radio_station.quality.value }}"
                                       title="{{ ('quality.' ~ radio_station.quality.value)|trans }}">
-                                    <span class="raw">{{- get_quality_label(radio_station.quality) -}}</span>
+                                    <span class="raw">{{- radio_station.quality.label -}}</span>
                                     <span class="dots" aria-hidden="true"></span>
                                 </span>
 

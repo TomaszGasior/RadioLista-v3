@@ -8,4 +8,14 @@ enum MaxSignalLevelUnit: int
     case DBF = 2;
     case DBUV = 3;
     case DBM = 4;
+
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::DB => 'dB',
+            self::DBF => 'dBf',
+            self::DBUV => 'dBµV',
+            self::DBM => 'dBm',
+        };
+    }
 }

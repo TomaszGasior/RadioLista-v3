@@ -81,7 +81,7 @@ class PhpSpreadsheetRenderer
         foreach ($radioTable->getColumns() as $column) {
             switch ($column) {
                 case Column::FREQUENCY:
-                    $value = $this->getFrequencyLabel($radioTable->getFrequencyUnit());
+                    $value = $radioTable->getFrequencyUnit()->getLabel();
                     break;
 
                 case Column::POWER:
@@ -93,7 +93,7 @@ class PhpSpreadsheetRenderer
                     break;
 
                 case Column::MAX_SIGNAL_LEVEL:
-                    $value = $this->getMaxSignalLevelLabel($radioTable->getMaxSignalLevelUnit());
+                    $value = $radioTable->getMaxSignalLevelUnit()->getLabel();
                     break;
 
                 default:
@@ -126,11 +126,11 @@ class PhpSpreadsheetRenderer
                         break;
 
                     case Column::QUALITY:
-                        $value = $this->getQualityLabel($value);
+                        $value = $value->getLabel();
                         break;
 
                     case Column::POLARIZATION:
-                        $value = $value ? $this->getPolarizationLabel($value) : '';
+                        $value = $value ? $value->getLabel() : '';
                         break;
 
                     case Column::DAB_CHANNEL:

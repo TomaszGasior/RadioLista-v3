@@ -9,7 +9,6 @@ use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
 use App\Entity\Enum\RadioTable\Width;
 use App\Entity\RadioTable;
 use App\Form\Type\IntegerUnitType;
-use App\Util\Data\RadioTableLabelsTrait;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,8 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class RadioTableSettingsType extends RadioTableCreateType
 {
-    use RadioTableLabelsTrait;
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -34,14 +31,14 @@ class RadioTableSettingsType extends RadioTableCreateType
             ->add('frequencyUnit', EnumType::class, [
                 'class' => FrequencyUnit::class,
                 'choice_label' => function (FrequencyUnit $frequencyUnit): string {
-                    return $this->getFrequencyLabel($frequencyUnit);
+                    return $frequencyUnit->getLabel();
                 },
                 'choice_translation_domain' => false,
             ])
             ->add('maxSignalLevelUnit', EnumType::class, [
                 'class' => MaxSignalLevelUnit::class,
                 'choice_label' => function (MaxSignalLevelUnit $maxSignalLevelUnit): string {
-                    return $this->getMaxSignalLevelLabel($maxSignalLevelUnit);
+                    return $maxSignalLevelUnit->getLabel();
                 },
                 'choice_translation_domain' => false,
             ])
