@@ -2,53 +2,38 @@
 
 namespace App\Entity\Embeddable\RadioTable;
 
+use App\Entity\Enum\RadioTable\Width;
 use App\Validator\ClassConstantsChoice;
 use App\Validator\HexColor;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Embeddable
- */
+#[ORM\Embeddable]
 class Appearance
 {
-    const WIDTH_STANDARD = 1;
-    const WIDTH_FULL = 2;
-    const WIDTH_CUSTOM = 3;
+    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
+    #[HexColor]
+    private ?string $textColor;
 
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     * @HexColor()
-     */
-    private $textColor;
+    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
+    #[HexColor]
+    private ?string $backgroundColor;
 
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     * @HexColor()
-     */
-    private $backgroundColor;
+    #[ORM\Column(type: Types::SMALLINT, enumType: Width::class)]
+    private Width $widthType = Width::STANDARD;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=Appearance::class, prefix="WIDTH_")
-     */
-    private $widthType = self::WIDTH_STANDARD;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\GreaterThanOrEqual(900, message: 'radio_table.appearance_width_min_value')]
+    #[Assert\Expression(
+        'value || this.getWidthType() !== width_custom',
+        values: ['width_custom' => Width::CUSTOM],
+        message: 'This value should not be blank.'
+    )]
+    private ?int $customWidth;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThanOrEqual(900, message="radio_table.appearance_width_min_value")
-     * @Assert\Expression(
-     *     "value || this.getWidthType() !== width_custom",
-     *     values={"width_custom": Appearance::WIDTH_CUSTOM},
-     *     message="This value should not be blank."
-     * )
-     */
-    private $customWidth;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $collapsedComments = false;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $collapsedComments = false;
 
     public function getTextColor(): ?string
     {
@@ -74,12 +59,12 @@ class Appearance
         return $this;
     }
 
-    public function getWidthType(): ?int
+    public function getWidthType(): Width
     {
         return $this->widthType;
     }
 
-    public function setWidthType(int $widthType): self
+    public function setWidthType(Width $widthType): self
     {
         $this->widthType = $widthType;
 

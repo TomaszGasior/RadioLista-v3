@@ -3,18 +3,23 @@
 namespace App\Form;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
+use App\Entity\Enum\RadioStation\Background;
+use App\Entity\Enum\RadioStation\DabChannel;
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioStation\Reception;
+use App\Entity\Enum\RadioStation\Type;
 use App\Entity\RadioStation;
 use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
-use App\Util\Data\DabChannelsTrait;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,20 +27,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RadioStationEditType extends AbstractType
 {
-    use DabChannelsTrait;
-
-    private $rdsPsTransformer;
-    private $rdsRtTransformer;
-    private $translator;
-
-    public function __construct(RadioStationRdsPsFrameTransformer $rdsPsTransformer,
-                                RadioStationRdsRtFrameTransformer $rdsRtTransformer,
-                                TranslatorInterface $translator)
-    {
-        $this->rdsPsTransformer = $rdsPsTransformer;
-        $this->rdsRtTransformer = $rdsRtTransformer;
-        $this->translator = $translator;
-    }
+    public function __construct(
+        private RadioStationRdsPsFrameTransformer $rdsPsTransformer,
+        private RadioStationRdsRtFrameTransformer $rdsRtTransformer,
+        private TranslatorInterface $translator,
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -62,54 +58,46 @@ class RadioStationEditType extends AbstractType
                 'scale' => 3,
                 'required' => false,
             ])
-            ->add('polarization', ChoiceType::class, [
-                'choices' => [
-                    RadioStation::POLARIZATION_NONE,
-                    RadioStation::POLARIZATION_HORIZONTAL,
-                    RadioStation::POLARIZATION_VERTICAL,
-                    RadioStation::POLARIZATION_CIRCULAR,
-                    RadioStation::POLARIZATION_VARIOUS,
-                ],
-                'choice_label' => function ($choice) {
-                    if ($choice) {
-                        return $this->translator->trans('polarization.'.$choice, [], 'radio_table');
+            ->add('polarization', EnumType::class, [
+                'required' => false,
+                'class' => Polarization::class,
+                'choices' => array_merge([null], Polarization::cases()),
+                'choice_label' => function (?Polarization $polarization): string {
+                    if ($polarization) {
+                        return $this->translator->trans('polarization.'.$polarization->value, [], 'radio_table');
                     }
-                    return $this->translator->trans('radio_station.edit.form.polarization.choice.'.$choice);
+                    return $this->translator->trans('radio_station.edit.form.polarization.choice.');
                 },
                 'choice_translation_domain' => false,
             ])
             ->add('multiplex', RadioStationCompletionTextType::class, [
                 'required' => false,
             ])
-            ->add('dabChannel', ChoiceType::class, [
+            ->add('dabChannel', EnumType::class, [
                 'required' => false,
-                'choices' => array_merge([null], $this->getDabChannels()),
-                'choice_label' => function ($choice) {
-                    if ($choice) {
-                        return $choice;
+                'class' => DabChannel::class,
+                'choices' => array_merge([null], DabChannel::cases()),
+                'choice_label' => function(?DabChannel $dabChannel): ?string {
+                    if ($dabChannel) {
+                        return $dabChannel->value;
                     }
-                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.'.$choice);
+                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.');
                 },
                 'choice_translation_domain' => false,
-
-                // These settings are needed for frontend JS script of radio station edit/add page.
-                'choice_value' => function ($choice) {
-                    return $choice;
-                },
                 'attr' => [
-                    'data-dab-channel-frequencies' => json_encode($this->getDabChannelsWithFrequencies()),
+                    'data-dab-channel-frequencies' => json_encode(array_reduce(
+                        DabChannel::cases(),
+                        function(array $data, DabChannel $dabChannel): array {
+                            return array_merge($data, [$dabChannel->value => $dabChannel->getFrequency()]);
+                        },
+                        []
+                    )),
                 ],
             ])
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    RadioStation::TYPE_MUSIC,
-                    RadioStation::TYPE_UNIVERSAL,
-                    RadioStation::TYPE_INFORMATION,
-                    RadioStation::TYPE_RELIGIOUS,
-                    RadioStation::TYPE_OTHER,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'type.'.$choice;
+            ->add('type', EnumType::class, [
+                'class' => Type::class,
+                'choice_label' => function (Type $type): string {
+                    return 'type.'.$type->value;
                 },
             ])
             ->add('distance', IntegerUnitType::class, [
@@ -119,27 +107,16 @@ class RadioStationEditType extends AbstractType
             ->add('maxSignalLevel', IntegerUnitType::class, [
                 'required' => false,
             ])
-            ->add('reception', ChoiceType::class, [
-                'choices' => [
-                    RadioStation::RECEPTION_REGULAR,
-                    RadioStation::RECEPTION_TROPO,
-                    RadioStation::RECEPTION_SCATTER,
-                    RadioStation::RECEPTION_SPORADIC_E,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'reception.'.$choice;
+            ->add('reception', EnumType::class, [
+                'class' => Reception::class,
+                'choice_label' => function (Reception $reception) {
+                    return 'reception.'.$reception->value;
                 },
             ])
-            ->add('quality', ChoiceType::class, [
-                'choices' => [
-                    RadioStation::QUALITY_VERY_GOOD,
-                    RadioStation::QUALITY_GOOD,
-                    RadioStation::QUALITY_MIDDLE,
-                    RadioStation::QUALITY_BAD,
-                    RadioStation::QUALITY_VERY_BAD,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'quality.'.$choice;
+            ->add('quality', EnumType::class, [
+                'class' => Quality::class,
+                'choice_label' => function (Quality $quality) {
+                    return 'quality.'.$quality->value;
                 },
             ])
             ->add('firstLogDate', null, [
@@ -196,21 +173,16 @@ class RadioStationEditType extends AbstractType
                 'translation_domain' => 'messages',
                 'attr' => ['maxlength' => '4'],
             ])
-            ->add('appearanceBackground', ChoiceType::class, [
+            ->add('appearanceBackground', EnumType::class, [
                 'property_path' => 'appearance.background',
 
+                'required' => false,
                 'label' => 'radio_station.edit.form.appearanceBackground',
-                'choices' => [
-                    Appearance::BACKGROUND_NONE,
-                    Appearance::BACKGROUND_RED,
-                    Appearance::BACKGROUND_GREEN,
-                    Appearance::BACKGROUND_BLUE,
-                    Appearance::BACKGROUND_YELLOW,
-                    Appearance::BACKGROUND_PINK,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'radio_station.edit.form.appearanceBackground.choice.'.$choice;
+                'class' => Background::class,
+                'choice_label' => function (Background $background) {
+                    return 'radio_station.edit.form.appearanceBackground.choice.'.$background->value;
                 },
+                'placeholder' => 'radio_station.edit.form.appearanceBackground.choice.',
                 'translation_domain' => 'messages',
             ])
             ->add('appearanceBold', CheckboxType::class, [

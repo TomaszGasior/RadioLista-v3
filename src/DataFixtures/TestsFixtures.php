@@ -2,6 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
@@ -12,7 +15,7 @@ class TestsFixtures extends Fixture
 {
     use FixtureTrait;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user = (new User)
             ->setName('test_user')
@@ -35,11 +38,9 @@ class TestsFixtures extends Fixture
         $radioTable = (new RadioTable)
             ->setOwner($user)
             ->setName('test_radio_table_name')
-            ->setStatus(RadioTable::STATUS_PUBLIC)
+            ->setStatus(Status::PUBLIC)
             ->setDescription('test_radio_table_description')
-            ->setColumns(
-                array_values($this->getPrefixedConstantsOfClass(RadioTable::class, 'COLUMN_'))
-            )
+            ->setColumns(Column::cases())
         ;
         $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new \DateTime('2018-05-01'));
 
@@ -47,14 +48,14 @@ class TestsFixtures extends Fixture
             ->setRadioTable($radioTable)
             ->setName('test_radio_station_name')
             ->setFrequency(100.95)
-            ->setPolarization(RadioStation::POLARIZATION_HORIZONTAL)
+            ->setPolarization(Polarization::HORIZONTAL)
         ;
 
         $secondRadioStation = (new RadioStation)
             ->setRadioTable($radioTable)
             ->setName('test_second_radio_station_name')
             ->setFrequency(91.20)
-            ->setPolarization(RadioStation::POLARIZATION_VERTICAL)
+            ->setPolarization(Polarization::VERTICAL)
         ;
 
         $thirdRadioStation = (new RadioStation)

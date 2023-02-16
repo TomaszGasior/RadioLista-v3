@@ -7,18 +7,16 @@ use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route({"pl": "/profil/{name}", "en": "/profile/{name}"}, name="user.public_profile")
-     * @IsGranted("USER_PUBLIC_PROFILE", subject="user", statusCode=404)
-     */
+    #[Route(['pl' => '/profil/{name}', 'en' => '/profile/{name}'], name: 'user.public_profile')]
+    #[IsGranted('USER_PUBLIC_PROFILE', subject: 'user', statusCode: 404)]
     public function publicProfile(User $user, RadioTableRepository $radioTableRepository): Response
     {
         $radioTables = $radioTableRepository->findPublicOwnedByUser($user);
@@ -29,10 +27,8 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/moje-wykazy", "en": "/my-lists"}, name="user.my_radio_tables")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     */
+    #[Route(['pl' => '/moje-wykazy', 'en' => '/my-lists'], name: 'user.my_radio_tables')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function myRadioTables(RadioTableRepository $radioTableRepository): Response
     {
         $radioTables = $radioTableRepository->findAllOwnedByUser($this->getUser());
@@ -42,10 +38,8 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/ustawienia-konta", "en": "/account-settings"}, name="user.my_account_settings")
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
-     */
+    #[Route(['pl' => '/ustawienia-konta', 'en' => '/account-settings'], name: 'user.my_account_settings')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function myAccountSettings(EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(UserSettingsType::class, $this->getUser());
@@ -67,9 +61,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route({"pl": "/rejestracja", "en": "register"}, name="user.register")
-     */
+    #[Route(['pl' => '/rejestracja', 'en' => 'register'], name: 'user.register')]
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
         if (null !== $this->getUser()) {

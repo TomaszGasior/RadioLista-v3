@@ -10,9 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SitemapController extends AbstractController
 {
-    /**
-     * @Route("/sitemap.{_format<xml>}")
-     */
+    #[Route('/sitemap.{_format<xml>}')]
     public function sitemap(RadioTableRepository $radioTableRepository,
                             UserRepository $userRepository): Response
     {

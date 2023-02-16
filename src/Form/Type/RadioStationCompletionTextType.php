@@ -4,18 +4,14 @@ namespace App\Form\Type;
 
 use App\Entity\RadioStation;
 use App\Repository\RadioStationRepository;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 class RadioStationCompletionTextType extends AbstractType
 {
-    private $radioStationRepository;
-
-    public function __construct(RadioStationRepository $radioStationRepository)
-    {
-        $this->radioStationRepository = $radioStationRepository;
-    }
+    public function __construct(private RadioStationRepository $radioStationRepository) {}
 
     public function getParent(): string
     {
@@ -28,7 +24,7 @@ class RadioStationCompletionTextType extends AbstractType
         $radioStation = $form->getRoot()->getData();
 
         if (false === $radioStation instanceof RadioStation) {
-            return;
+            throw new RuntimeException;
         }
 
         $radioTable = $radioStation->getRadioTable();

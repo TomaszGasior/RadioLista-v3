@@ -1,4 +1,4 @@
-FROM httpd:2.4.48-alpine3.13
+FROM httpd:2.4.54-alpine3.17
 
 COPY php-fpm.conf conf/extra/
 

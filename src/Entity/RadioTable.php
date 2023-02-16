@@ -2,157 +2,90 @@
 
 namespace App\Entity;
 
+use App\Doctrine\EntityListener\RadioTableListener;
 use App\Entity\Embeddable\RadioTable\Appearance;
-use App\Validator\ClassConstantsChoice;
+use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\FrequencyUnit;
+use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
+use App\Entity\Enum\RadioTable\Status;
+use App\Repository\RadioTableRepository;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(indexes={
- *     @ORM\Index(name="idx_status", columns={"status"}),
- *     @ORM\Index(name="idx_search_term", columns={"name", "description"}, flags={"fulltext"}),
- * })
- * @ORM\Entity(repositoryClass="App\Repository\RadioTableRepository")
- * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioTableListener"})
- * @ORM\Cache("NONSTRICT_READ_WRITE")
- */
+#[ORM\Entity(repositoryClass: RadioTableRepository::class)]
+#[ORM\EntityListeners([RadioTableListener::class])]
+#[ORM\Cache('NONSTRICT_READ_WRITE')]
+#[ORM\Index(name: 'idx_status', columns: ['status'])]
+#[ORM\Index(name: 'idx_search_term', columns: ['name', 'description'], flags: ['fulltext'])]
 class RadioTable
 {
-    // Keep these constants and its values in sync with RadioStation's field names.
-    // Order of them affects order in disabled columns in radio table settings page. :)
-    public const COLUMN_FREQUENCY = 'frequency';
-    public const COLUMN_NAME = 'name';
-    public const COLUMN_LOCATION = 'location';
-    public const COLUMN_POWER = 'power';
-    public const COLUMN_POLARIZATION = 'polarization';
-    public const COLUMN_MULTIPLEX = 'multiplex';
-    public const COLUMN_DAB_CHANNEL = 'dabChannel';
-    public const COLUMN_COUNTRY = 'country';
-    public const COLUMN_REGION = 'region';
-    public const COLUMN_QUALITY = 'quality';
-    public const COLUMN_RDS = 'rds';
-    public const COLUMN_FIRST_LOG_DATE = 'firstLogDate';
-    public const COLUMN_RECEPTION = 'reception';
-    public const COLUMN_DISTANCE = 'distance';
-    public const COLUMN_MAX_SIGNAL_LEVEL = 'maxSignalLevel';
-    public const COLUMN_RDS_PI = 'rdsPi';
-    public const COLUMN_RADIO_GROUP = 'radioGroup';
-    public const COLUMN_TYPE = 'type';
-    public const COLUMN_PRIVATE_NUMBER = 'privateNumber';
-    public const COLUMN_COMMENT = 'comment';
-    public const COLUMN_EXTERNAL_ANCHOR = 'externalAnchor';
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    public const SORTING_FREQUENCY = self::COLUMN_FREQUENCY;
-    public const SORTING_NAME = self::COLUMN_NAME;
-    public const SORTING_PRIVATE_NUMBER = self::COLUMN_PRIVATE_NUMBER;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
+    private ?User $owner = null;
 
-    public const STATUS_PUBLIC = 1;
-    public const STATUS_UNLISTED = 0;
-    public const STATUS_PRIVATE = -1;
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
+    private ?string $name = null;
 
-    public const FREQUENCY_MHZ = 1;
-    public const FREQUENCY_KHZ = 2;
+    #[ORM\Column(type: Types::SMALLINT, enumType: Status::class)]
+    private Status $status = Status::PUBLIC;
 
-    public const MAX_SIGNAL_LEVEL_DB = 1;
-    public const MAX_SIGNAL_LEVEL_DBF = 2;
-    public const MAX_SIGNAL_LEVEL_DBUV = 3;
-    public const MAX_SIGNAL_LEVEL_DBM = 4;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
-     */
-    private $owner;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=100)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="STATUS_")
-     */
-    private $status = self::STATUS_PUBLIC;
-
-    /**
-     * @ORM\Column(type="array")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="COLUMN_", multiple=true)
-     * @Assert\Expression(
-     *     "frequency in value && name in value",
-     *     values={"frequency"=RadioTable::COLUMN_FREQUENCY, "name"=RadioTable::COLUMN_NAME}
-     * )
-     */
-    private $columns = [
-        self::COLUMN_FREQUENCY,
-        self::COLUMN_NAME,
-        self::COLUMN_LOCATION,
-        self::COLUMN_POWER,
-        self::COLUMN_POLARIZATION,
-        self::COLUMN_COUNTRY,
-        self::COLUMN_QUALITY,
-        self::COLUMN_RDS,
+    #[ORM\Column(type: Types::ARRAY, enumType: Column::class)]
+    #[Assert\Expression(
+        'frequency in value && name in value',
+        values: ['frequency' => Column::FREQUENCY, 'name' => Column::NAME]
+    )]
+    private array $columns = [
+        Column::FREQUENCY,
+        Column::NAME,
+        Column::LOCATION,
+        Column::POWER,
+        Column::POLARIZATION,
+        Column::COUNTRY,
+        Column::QUALITY,
+        Column::RDS,
     ];
 
-    /**
-     * @ORM\Column(type="string", length=15)
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="SORTING_")
-     */
-    private $sorting = self::SORTING_FREQUENCY;
+    #[ORM\Column(type: Types::STRING, length: 15, enumType: Column::class)]
+    private Column $sorting = Column::FREQUENCY;
 
-    /**
-     * @ORM\Column(type="string", length=2000, nullable=true)
-     * @Assert\Length(max=2000)
-     */
-    private $description;
+    #[ORM\Column(type: Types::STRING, length: 2000, nullable: true)]
+    #[Assert\Length(max: 2000)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Embedded(class=Appearance::class)
-     * @Assert\Valid
-     */
-    private $appearance;
+    #[ORM\Embedded(class: Appearance::class)]
+    #[Assert\Valid]
+    private Appearance $appearance;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $creationTime;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $creationTime;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $lastUpdateTime;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private DateTime $lastUpdateTime;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="FREQUENCY_")
-     */
-    private $frequencyUnit = self::FREQUENCY_MHZ;
+    #[ORM\Column(type: Types::SMALLINT, enumType: FrequencyUnit::class)]
+    private FrequencyUnit $frequencyUnit = FrequencyUnit::MHZ;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioTable::class, prefix="MAX_SIGNAL_LEVEL_")
-     */
-    private $maxSignalLevelUnit = self::MAX_SIGNAL_LEVEL_DBF;
+    #[ORM\Column(type: Types::SMALLINT, enumType: MaxSignalLevelUnit::class)]
+    private MaxSignalLevelUnit $maxSignalLevelUnit = MaxSignalLevelUnit::DBF;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $radioStationsCount = 0;
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $radioStationsCount = 0;
 
     public function __construct()
     {
         $this->appearance = new Appearance;
-        $this->creationTime = new \DateTime;
-        $this->lastUpdateTime = new \DateTime;
+        $this->creationTime = new DateTime;
+        $this->lastUpdateTime = new DateTime;
     }
 
     public function __clone()
@@ -189,23 +122,29 @@ class RadioTable
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): Status
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(Status $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function getColumns(): ?array
+    /**
+     * @return Column[]
+     */
+    public function getColumns(): array
     {
         return $this->columns;
     }
 
+    /**
+     * @param Column[] $columns
+     */
     public function setColumns(array $columns): self
     {
         $this->columns = $columns;
@@ -213,12 +152,12 @@ class RadioTable
         return $this;
     }
 
-    public function getSorting(): ?string
+    public function getSorting(): Column
     {
         return $this->sorting;
     }
 
-    public function setSorting(string $sorting): self
+    public function setSorting(Column $sorting): self
     {
         $this->sorting = $sorting;
 
@@ -245,48 +184,48 @@ class RadioTable
     /**
      * Nullable for backward compatibility. Added in 3.14 version.
      */
-    public function getCreationTime(): ?\DateTimeInterface
+    public function getCreationTime(): ?DateTimeInterface
     {
         return $this->creationTime;
     }
 
-    public function getLastUpdateTime(): \DateTimeInterface
+    public function getLastUpdateTime(): DateTimeInterface
     {
         return $this->lastUpdateTime;
     }
 
     public function refreshLastUpdateTime(): self
     {
-        $this->lastUpdateTime = new \DateTime;
+        $this->lastUpdateTime = new DateTime;
 
         return $this;
     }
 
-    public function getFrequencyUnit(): ?int
+    public function getFrequencyUnit(): FrequencyUnit
     {
         return $this->frequencyUnit;
     }
 
-    public function setFrequencyUnit(int $frequencyUnit): self
+    public function setFrequencyUnit(FrequencyUnit $frequencyUnit): self
     {
         $this->frequencyUnit = $frequencyUnit;
 
         return $this;
     }
 
-    public function getMaxSignalLevelUnit(): ?int
+    public function getMaxSignalLevelUnit(): MaxSignalLevelUnit
     {
         return $this->maxSignalLevelUnit;
     }
 
-    public function setMaxSignalLevelUnit(int $maxSignalLevelUnit): self
+    public function setMaxSignalLevelUnit(MaxSignalLevelUnit $maxSignalLevelUnit): self
     {
         $this->maxSignalLevelUnit = $maxSignalLevelUnit;
 
         return $this;
     }
 
-    public function getRadioStationsCount(): ?int
+    public function getRadioStationsCount(): int
     {
         return $this->radioStationsCount;
     }

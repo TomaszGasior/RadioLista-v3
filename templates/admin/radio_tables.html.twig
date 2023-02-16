@@ -5,12 +5,6 @@
         <h1>Panel administracyjny — lista wykazów</h1>
     </header>
 
-    {% set status_labels = {
-        (constant('App\\Entity\\RadioTable::STATUS_PUBLIC')): 'publiczny',
-        (constant('App\\Entity\\RadioTable::STATUS_PRIVATE')): 'prywatny',
-        (constant('App\\Entity\\RadioTable::STATUS_UNLISTED')): 'niepubliczny',
-    } %}
-
     <table class="sortable">
         <thead>
             <tr>
@@ -28,7 +22,15 @@
                 <tr>
                     <td>{{ radio_table.id }}</td>
                     <td>{{ radio_table.owner.name }}</td>
-                    <td>{{ status_labels[radio_table.status] }}</td>
+                    <td>
+                        {% if radio_table.status == constant('PUBLIC', radio_table.status) %}
+                            publiczny
+                        {% elseif radio_table.status == constant('PRIVATE', radio_table.status) %}
+                            prywatny
+                        {% elseif radio_table.status == constant('UNLISTED', radio_table.status) %}
+                            niepubliczny
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                             {{ radio_table.name }}

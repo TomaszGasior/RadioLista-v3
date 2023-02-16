@@ -5,11 +5,11 @@ namespace App\Tests\EventSubscriber;
 use App\EventSubscriber\MaintenanceModeSubscriber;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
 class MaintenanceModeSubscriberTest extends TestCase

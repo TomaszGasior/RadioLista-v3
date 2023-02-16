@@ -9,9 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RLv2CompatController extends AbstractController
 {
-    /**
-     * @Route("/wykaz")
-     */
+    #[Route('/wykaz')]
     public function radioTable(Request $request): Response
     {
         $radioTableId = $request->query->get('id');
@@ -23,9 +21,7 @@ class RLv2CompatController extends AbstractController
         return $this->redirectToRoute('radio_table.show', ['id' => $radioTableId], 301);
     }
 
-    /**
-     * @Route("/profil")
-     */
+    #[Route('/profil')]
     public function userPublicProfile(Request $request): Response
     {
         $username = $request->query->get('u');
@@ -37,9 +33,7 @@ class RLv2CompatController extends AbstractController
         return $this->redirectToRoute('user.public_profile', ['name' => $username], 301);
     }
 
-    /**
-     * @Route("/wszystkie-wykazy", condition="request.query.get('a') != ''")
-     */
+    #[Route('/wszystkie-wykazy', condition: "request.query.get('a') != ''", priority: 1)]
     public function allRadioTables(Request $request): Response
     {
         $sorting = $request->query->get('a');
@@ -51,10 +45,8 @@ class RLv2CompatController extends AbstractController
         return $this->redirectToRoute('all_radio_tables', ['sorting' => $sorting], 301);
     }
 
-    /**
-     * @Route("/strona-glowna")
-     */
-    public function homepage()
+    #[Route('/strona-glowna')]
+    public function homepage(): Response
     {
         return $this->redirectToRoute('homepage');
     }

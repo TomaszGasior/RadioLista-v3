@@ -8,14 +8,7 @@ use Knp\Snappy\Pdf;
 
 class PdfExporter implements ExporterInterface
 {
-    private $snappyPdfGenerator;
-    private $htmlExporter;
-
-    public function __construct(Pdf $snappyPdfGenerator, HtmlExporter $htmlExporter)
-    {
-        $this->snappyPdfGenerator = $snappyPdfGenerator;
-        $this->htmlExporter = $htmlExporter;
-    }
+    public function __construct(private Pdf $snappyPdfGenerator, private HtmlExporter $htmlExporter) {}
 
     /**
      * @param RadioStation[] $radioStations

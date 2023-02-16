@@ -5,23 +5,23 @@
         <tr>
             {%- for column in radio_table.columns -%}
                 {%- set column_heading = block('heading_cell') -%}
-                {%- set column_name = ('column.' ~ column)|trans -%}
+                {%- set column_title = ('column.' ~ column.value)|trans -%}
                 <th
                     {%- block heading_cell_attr -%}
-                        {%- if column_heading != column_name %} title="{{ column_name }}"{% endif -%}
+                        {%- if column_heading != column_title %} title="{{ column_title }}"{% endif -%}
                     {%- endblock -%}
                 >
                     {%- block heading_cell -%}
-                        {%- if column == 'frequency' -%}
-                            {{- get_frequency_label(radio_table.frequencyUnit) -}}
-                        {%- elseif column == 'power' -%}
+                        {%- if column.value == 'frequency' -%}
+                            {{- radio_table.frequencyUnit.label -}}
+                        {%- elseif column.value == 'power' -%}
                             {{- get_power_label() -}}
-                        {%- elseif column == 'distance' -%}
+                        {%- elseif column.value == 'distance' -%}
                             {{- get_distance_label() -}}
-                        {%- elseif column == 'maxSignalLevel' -%}
-                            {{- get_max_signal_level_label(radio_table.maxSignalLevelUnit) -}}
+                        {%- elseif column.value == 'maxSignalLevel' -%}
+                            {{- radio_table.maxSignalLevelUnit.label -}}
                         {%- else -%}
-                            {{- ('heading.' ~ column)|trans -}}
+                            {{- ('heading.' ~ column.value)|trans -}}
                         {%- endif -%}
                     {%- endblock -%}
                 </th>
@@ -35,7 +35,7 @@
             {%- set row_class = '' -%}
 
             {%- if appearance.background -%}
-                {%- set row_class = row_class ~ 'background-' ~ appearance.background -%}
+                {%- set row_class = row_class ~ 'background-' ~ appearance.background.value -%}
             {%- endif -%}
 
             {%- if appearance.bold -%}
@@ -53,60 +53,63 @@
             <tr {% if row_class %}class="{{ row_class }}"{% endif %}>
                 {%- for column in radio_table.columns -%}
                     <td>
-                        {%- if attribute(radio_station, column) is not null -%}
-                            {%- if column == 'name' -%}
+                        {%- if attribute(radio_station, column.value) is not null -%}
+                            {%- if column.value == 'name' -%}
                                 {%- block body_cell_name radio_station.name -%}
 
-                            {%- elseif column == 'privateNumber' -%}
+                            {%- elseif column.value == 'privateNumber' -%}
                                 <span data-number-indent="private-number">
                                     {{- radio_station.privateNumber -}}
                                 </span>
 
-                            {%- elseif column == 'frequency' -%}
+                            {%- elseif column.value == 'frequency' -%}
                                 <span data-number-indent="frequency">
                                     {{- radio_station.frequency|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
                                 </span>
 
-                            {%- elseif column == 'power' -%}
+                            {%- elseif column.value == 'power' -%}
                                 <span data-number-indent="power">
                                     {{- radio_station.power|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
                                 </span>
 
-                            {%- elseif column == 'type' -%}
-                                {{- ('type.' ~ radio_station.type)|trans -}}
+                            {%- elseif column.value == 'type' -%}
+                                {{- ('type.' ~ radio_station.type.value)|trans -}}
 
-                            {%- elseif column == 'reception' -%}
-                                {{- ('reception.' ~ radio_station.reception)|trans -}}
+                            {%- elseif column.value == 'reception' -%}
+                                {{- ('reception.' ~ radio_station.reception.value)|trans -}}
 
-                            {%- elseif column == 'polarization' -%}
-                                <abbr title="{{ ('polarization.' ~ radio_station.polarization)|trans }}">
-                                    {{- get_polarization_label(radio_station.polarization) -}}
+                            {%- elseif column.value == 'polarization' -%}
+                                <abbr title="{{ ('polarization.' ~ radio_station.polarization.value)|trans }}">
+                                    {{- radio_station.polarization.label -}}
                                 </abbr>
 
-                            {%- elseif column == 'quality' -%}
-                                <span class="quality quality-{{ radio_station.quality }}"
-                                      title="{{ ('quality.' ~ radio_station.quality)|trans }}">
-                                    <span class="raw">{{- get_quality_label(radio_station.quality) -}}</span>
+                            {%- elseif column.value == 'dabChannel' -%}
+                                {{- radio_station.dabChannel.value -}}
+
+                            {%- elseif column.value == 'quality' -%}
+                                <span class="quality quality-{{ radio_station.quality.value }}"
+                                      title="{{ ('quality.' ~ radio_station.quality.value)|trans }}">
+                                    <span class="raw">{{- radio_station.quality.label -}}</span>
                                     <span class="dots" aria-hidden="true"></span>
                                 </span>
 
-                            {%- elseif column == 'distance' -%}
+                            {%- elseif column.value == 'distance' -%}
                                 <span data-number-indent="distance">
                                     {{- radio_station.distance -}}
                                 </span>
 
-                            {%- elseif column == 'maxSignalLevel' -%}
+                            {%- elseif column.value == 'maxSignalLevel' -%}
                                 <span data-number-indent="max-signal-level">
                                     {{- radio_station.maxSignalLevel -}}
                                 </span>
 
-                            {%- elseif column == 'firstLogDate' -%}
+                            {%- elseif column.value == 'firstLogDate' -%}
                                 <time>{{ radio_station.firstLogDate }}</time>
 
-                            {%- elseif column == 'comment' -%}
+                            {%- elseif column.value == 'comment' -%}
                                 {%- block body_cell_comment radio_station.comment|nl2br(false) -%}
 
-                            {%- elseif column == 'externalAnchor' -%}
+                            {%- elseif column.value == 'externalAnchor' -%}
                                 <a class="external" href="{{ radio_station.externalAnchor }}" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30"><path d="M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z"/></svg>
                                     <span class="sr-only">
@@ -114,7 +117,7 @@
                                     </span>
                                 </a>
 
-                            {%- elseif column == 'rds' -%}
+                            {%- elseif column.value == 'rds' -%}
                                 {%- if radio_station.rds.ps|first and radio_station.rds.ps|first|first|trim -%}
                                     {%- block body_cell_rds -%}
                                         <span class="rds">
@@ -124,7 +127,7 @@
                                 {%- endif -%}
 
                             {%- else -%}
-                                {{- attribute(radio_station, column) -}}
+                                {{- attribute(radio_station, column.value) -}}
                             {%- endif -%}
                         {%- endif -%}
                     </td>

@@ -2,17 +2,14 @@
 
 namespace App\Export;
 
+use RuntimeException;
+
 class RadioTableExporterProvider
 {
     /**
-     * @var ExporterInterface[]
+     * @param ExporterInterface[] $exporters
      */
-    private $exporters;
-
-    public function __construct(iterable $exporters)
-    {
-        $this->exporters = $exporters;
-    }
+    public function __construct(private iterable $exporters) {}
 
     public function getExporterForFileExtension(string $fileExtension): ExporterInterface
     {
@@ -26,6 +23,6 @@ class RadioTableExporterProvider
             }
         }
 
-        throw new \RuntimeException(sprintf('Cannot find radio table exporter for "%s" file type.', $fileExtension));
+        throw new RuntimeException(sprintf('Cannot find radio table exporter for "%s" file type.', $fileExtension));
     }
 }

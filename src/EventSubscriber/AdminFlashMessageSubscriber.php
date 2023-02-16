@@ -4,26 +4,26 @@ namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 class AdminFlashMessageSubscriber implements EventSubscriberInterface
 {
-    private $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
+    public function __construct(private RequestStack $requestStack) {}
 
     public function onRestrictedAdminAccess(): void
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        /** @var Session */
+        if (!$request) {
+            return;
+        }
+
         $session = $request->getSession();
 
-        // This triggers warning about untranslated string.
-        $session->getFlashBag()->add('notice', 'Przeglądasz prywatny zasób jako administrator.');
+        if ($session instanceof FlashBagAwareSessionInterface) {
+            // This triggers warning about untranslated string.
+            $session->getFlashBag()->add('notice', 'Przeglądasz prywatny zasób jako administrator.');
+        }
     }
 
     /**

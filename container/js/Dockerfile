@@ -1,4 +1,4 @@
-FROM node:14.15.5-alpine3.13
+FROM node:14.21.2-alpine3.17
 
 RUN apk --no-cache add su-exec entr
 

@@ -23,9 +23,7 @@ class AppExtension extends AbstractExtension
 
     public function formatDateHTML(Environment $twig, $date, ?string $dateFormat = 'long', ...$args): string
     {
-        /** @var IntlExtension */
         $intlExtension = $twig->getExtension(IntlExtension::class);
-
         $date = twig_date_converter($twig, $date);
 
         return sprintf(

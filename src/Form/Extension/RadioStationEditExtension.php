@@ -2,9 +2,10 @@
 
 namespace App\Form\Extension;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
-use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
+use RuntimeException;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -34,16 +35,21 @@ class RadioStationEditExtension extends AbstractTypeExtension
      * and require special handling of property path.
      */
     private const PROPERTY_PATH_TO_COLUMN = [
-        'rds.pi' => RadioTable::COLUMN_RDS_PI,
-        'rds.ps' => RadioTable::COLUMN_RDS,
-        'rds.pty' => RadioTable::COLUMN_RDS,
-        'rds.rt' => RadioTable::COLUMN_RDS,
+        'rds.pi' => Column::RDS_PI,
+        'rds.ps' => Column::RDS,
+        'rds.pty' => Column::RDS,
+        'rds.rt' => Column::RDS,
     ];
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        /** @var RadioStation */
         $radioStation = $form->getData();
+
+        if (false === $radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
+
+        /** @var RadioStation $radioStation */
 
         $visibleColumns = $radioStation->getRadioTable()->getColumns();
         $formChildrenToHide = [];
@@ -51,20 +57,21 @@ class RadioStationEditExtension extends AbstractTypeExtension
         /** @var FormInterface[] $form */
         foreach ($form as $childName => $child) {
             $propertyPath = (string) $child->getPropertyPath();
-            $columnName = self::PROPERTY_PATH_TO_COLUMN[$propertyPath] ?? $propertyPath;
 
-            if (in_array($columnName, self::PROPERTY_PATH_NON_COLUMNS)) {
+            if (in_array($propertyPath, self::PROPERTY_PATH_NON_COLUMNS)) {
                 continue;
             }
 
-            if (false === in_array($columnName, $visibleColumns)) {
+            $column = self::PROPERTY_PATH_TO_COLUMN[$propertyPath] ?? Column::from($propertyPath);
+
+            if (false === in_array($column, $visibleColumns)) {
                 $formChildrenToHide[] = $childName;
             }
         }
 
+        /** @var FormView[] $form */
         foreach ($view as $childName => $child) {
-            $child->vars['disabled_radio_table_column'] =
-                in_array($childName, $formChildrenToHide);
+            $child->vars['disabled_radio_table_column'] = in_array($childName, $formChildrenToHide);
         }
     }
 

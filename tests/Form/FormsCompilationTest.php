@@ -17,20 +17,34 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class FormsCompilationTest extends KernelTestCase
 {
+    /** @var FormFactoryInterface */
+    private $factory;
+
+    /** @var RequestInterface */
+    private $request;
+
     public function setUp(): void
     {
-        self::bootKernel();
+        $this->factory = self::getContainer()->get(FormFactoryInterface::class);
+        $this->request = new Request;
 
-        $this->factory = self::$container->get(FormFactoryInterface::class);
+        /** @var RequestStack */
+        $requestStack = self::getContainer()->get(RequestStack::class);
+
+        // This is required for CSRF form extension.
+        $this->request->setSession(new Session(new MockArraySessionStorage));
+        $requestStack->push($this->request);
     }
 
     public function formTypeAndEntityProvider(): iterable
     {
-        self::bootKernel();
-        $entityManager = self::$container->get(EntityManagerInterface::class);
+        $entityManager = self::getContainer()->get(EntityManagerInterface::class);
 
         $radioTable = $entityManager->find(RadioTable::class, 1);
         $radioStation = $entityManager->find(RadioStation::class, 1);
@@ -56,7 +70,7 @@ class FormsCompilationTest extends KernelTestCase
     {
         $form = $this->factory->create($formClass, $data, $options);
 
-        $form->handleRequest(new Request);
+        $form->handleRequest($this->request);
         $form->createView();
     }
 }

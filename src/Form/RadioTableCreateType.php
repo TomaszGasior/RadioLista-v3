@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioTable;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -18,15 +19,11 @@ class RadioTableCreateType extends AbstractType
             ->add('name', null, [
                 'help' => 'radio_table.settings.form.name.help',
             ])
-            ->add('status', ChoiceType::class, [
+            ->add('status', EnumType::class, [
                 'expanded' => true,
-                'choices' => [
-                    RadioTable::STATUS_PUBLIC,
-                    RadioTable::STATUS_UNLISTED,
-                    RadioTable::STATUS_PRIVATE,
-                ],
-                'choice_label' => function ($choice) {
-                    return 'radio_table.settings.form.status.choice.'.$choice;
+                'class' => Status::class,
+                'choice_label' => function (Status $status) {
+                    return 'radio_table.settings.form.status.choice.'.$status->value;
                 },
             ])
         ;

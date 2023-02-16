@@ -3,23 +3,14 @@
 namespace App\Twig;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TrackerExtension extends AbstractExtension
 {
-    private $domain;
-    private $siteId;
-    private $security;
-
-    public function __construct(string $domain, int $siteId, Security $security)
-    {
-        $this->domain = $domain;
-        $this->siteId = $siteId;
-        $this->security = $security;
-    }
+    public function __construct(private string $domain, private int $siteId, private Security $security) {}
 
     /**
      * @codeCoverageIgnore

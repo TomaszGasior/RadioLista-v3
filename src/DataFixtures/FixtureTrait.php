@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Util\Data\DabChannelsTrait;
 use App\Util\ReflectionUtilsTrait;
+use BackedEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -16,7 +16,7 @@ trait FixtureTrait
 
     static private $faker;
 
-    private function setupFaker()
+    private function setupFaker(): void
     {
         if (self::$faker) {
             return;
@@ -25,9 +25,6 @@ trait FixtureTrait
 
         $faker->addProvider(new class($faker) extends Base
         {
-            use DabChannelsTrait;
-            use ReflectionUtilsTrait;
-
             public function radioStation(): string
             {
                 return $this->randomElement([
@@ -139,38 +136,16 @@ trait FixtureTrait
                 ]);
             }
 
-            public function dabChannelWithFrequency(): array
-            {
-                $dabChannels = $this->getDabChannelsWithFrequencies();
-
-                return $this->randomElement(
-                    array_map(
-                        function($key, $value) { return [$key, $value]; },
-                        array_keys($dabChannels),
-                        $dabChannels
-                    )
-                );
-            }
-
             public function HTMLDescription(): string
             {
                 $paragraphs = $this->generator->paragraphs(3);
+
                 return '<p>' . implode('</p><p>', $paragraphs) . '</p>';
             }
 
-            public function randomConstantFromClass($class, $prefix)
+            public function randomEnum(string $enumFqcn): BackedEnum
             {
-                return $this->randomConstantsFromClass($class, $prefix)[0];
-            }
-
-            public function randomConstantsFromClass($class, $prefix): array
-            {
-                $values = $this->getPrefixedConstantsOfClass($class, $prefix);
-
-                return $this->randomElements(
-                    $values,
-                    rand(ceil(count($values) * 0.25), count($values))
-                );
+                return $this->randomElement($enumFqcn::cases());
             }
         });
     }

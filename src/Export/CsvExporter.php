@@ -7,12 +7,7 @@ use App\Util\PhpSpreadsheetRenderer;
 
 class CsvExporter implements ExporterInterface
 {
-    private $phpSpreadsheetRenderer;
-
-    public function __construct(PhpSpreadsheetRenderer $phpSpreadsheetRenderer)
-    {
-        $this->phpSpreadsheetRenderer = $phpSpreadsheetRenderer;
-    }
+    public function __construct(private PhpSpreadsheetRenderer $phpSpreadsheetRenderer) {}
 
     /**
      * @param RadioStation[] $radioStations

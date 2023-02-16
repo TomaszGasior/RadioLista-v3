@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -40,7 +41,7 @@ class RadioTableRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('radioTable')
             ->andWhere('radioTable.status = :status')
-            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->setParameter('status', Status::PUBLIC)
             ->andWhere('radioTable.radioStationsCount > 0')
             ->orderBy('radioTable.'.$orderBy, 'DESC')
         ;
@@ -71,7 +72,7 @@ class RadioTableRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('radioTable')
             ->andWhere('radioTable.status = :status')
-            ->setParameter('status', RadioTable::STATUS_PUBLIC)
+            ->setParameter('status', Status::PUBLIC)
             ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm) > 0.0')
             ->setParameter('searchTerm', $searchTerm)
             ->innerJoin('radioTable.owner', 'user')->addSelect('user')
@@ -83,7 +84,7 @@ class RadioTableRepository extends ServiceEntityRepository
     public function findPublicOwnedByUser(User $user): array
     {
         return $this->findBy(
-            ['owner' => $user, 'status' => RadioTable::STATUS_PUBLIC],
+            ['owner' => $user, 'status' => Status::PUBLIC],
             ['lastUpdateTime' => 'DESC']
         );
     }

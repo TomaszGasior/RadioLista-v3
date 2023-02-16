@@ -2,47 +2,42 @@
 
 namespace App\Entity\Embeddable\RadioStation;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Embeddable
- */
+#[ORM\Embeddable]
 class Rds
 {
     /**
      * Programme Service
-     *
-     * @ORM\Column(type="array")
-     * @Assert\All({
-     *     @Assert\Type("array"),
-     *     @Assert\All({@Assert\Type("string")}),
-     * })
      */
+    #[ORM\Column(type: Types::ARRAY)]
+    #[Assert\All([
+        new Assert\Type('array'),
+        new Assert\All([new Assert\Type('string')]),
+    ])]
     private $ps = [];
 
     /**
      * Radio Text
-     *
-     * @ORM\Column(type="array")
-     * @Assert\All({@Assert\Type("string")})
      */
+    #[ORM\Column(type: Types::ARRAY)]
+    #[Assert\All([new Assert\Type('string')])]
     private $rt = [];
 
     /**
      * Programme Type
-
-     * @ORM\Column(type="string", length=25, nullable=true)
-     * @Assert\Length(max=25)
      */
+    #[ORM\Column(type: Types::STRING, length: 25, nullable: true)]
+    #[Assert\Length(max: 25)]
     private $pty;
 
     /**
      * Programme Identification
-     *
-     * @ORM\Column(type="string", length=4, nullable=true)
-     * @Assert\Length(max=4)
      */
+    #[ORM\Column(type: Types::STRING, length: 4, nullable: true)]
+    #[Assert\Length(max: 4)]
     private $pi;
 
     public function getPs(): array

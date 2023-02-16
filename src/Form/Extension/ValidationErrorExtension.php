@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 /**
  * This extension applies user experience tweaks when validation error occurs.
@@ -24,12 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class ValidationErrorExtension extends AbstractTypeExtension
 {
-    private $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
+    public function __construct(private RequestStack $requestStack) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -37,10 +33,11 @@ class ValidationErrorExtension extends AbstractTypeExtension
             $form = $event->getForm();
 
             if ($form->isRoot() && false === $form->isValid()) {
-                /** @var Session */
                 $session = $this->requestStack->getCurrentRequest()->getSession();
 
-                $session->getFlashBag()->add('error', 'common.notification.invalid_form');
+                if ($session instanceof FlashBagAwareSessionInterface) {
+                    $session->getFlashBag()->add('error', 'common.notification.invalid_form');
+                }
             }
         });
     }

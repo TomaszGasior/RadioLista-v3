@@ -12,17 +12,10 @@ class RadioStationListener
 {
     use EntityListenerTrait;
 
-    private $enableDateTimeRefresh;
+    public function __construct(private bool $enableDateTimeRefresh) {}
 
-    public function __construct(bool $enableDateTimeRefresh)
-    {
-        $this->enableDateTimeRefresh = $enableDateTimeRefresh;
-    }
-
-    /**
-     * @PreFlush
-     * @PreRemove
-     */
+    #[PreFlush]
+    #[PreRemove]
     public function refreshLastUpdateTimeOfRadioTable(RadioStation $radioStation, EventArgs $args): void
     {
         if (false === $this->enableDateTimeRefresh) {
@@ -35,9 +28,7 @@ class RadioStationListener
         $this->forceEntityUpdate($radioTable, $args);
     }
 
-    /**
-     * @PrePersist
-     */
+    #[PrePersist]
     public function increaseRadioStationsCountOfRadioTable(RadioStation $radioStation, EventArgs $args): void
     {
         $radioTable = $radioStation->getRadioTable();
@@ -46,9 +37,7 @@ class RadioStationListener
         $this->forceEntityUpdate($radioTable, $args);
     }
 
-    /**
-     * @PreRemove
-     */
+    #[PreRemove]
     public function decreaseRadioStationsCountOfRadioTable(RadioStation $radioStation, EventArgs $args): void
     {
         $radioTable = $radioStation->getRadioTable();

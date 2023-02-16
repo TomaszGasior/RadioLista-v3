@@ -2,190 +2,120 @@
 
 namespace App\Entity;
 
+use App\Doctrine\EntityListener\RadioStationListener;
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
-use App\Validator\ClassConstantsChoice;
-use App\Validator\DabChannel;
+use App\Entity\Enum\RadioStation\DabChannel;
+use App\Entity\Enum\RadioStation\Polarization;
+use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioStation\Reception;
+use App\Entity\Enum\RadioStation\Type;
+use App\Repository\RadioStationRepository;
+use App\Validator\DabChannel as DabChannelValid;
 use App\Validator\YearMonthDate;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(indexes={
- *     @ORM\Index(name="idx_sort_frequency", columns={"radioTableId", "frequency"}),
- *     @ORM\Index(name="idx_sort_name", columns={"radioTableId", "name", "frequency"}),
- * })
- * @ORM\Entity(repositoryClass="App\Repository\RadioStationRepository")
- * @ORM\EntityListeners({"App\Doctrine\EntityListener\RadioStationListener"})
- */
+#[ORM\Entity(repositoryClass: RadioStationRepository::class)]
+#[ORM\EntityListeners([RadioStationListener::class])]
+#[ORM\Index(name: 'idx_sort_frequency', columns: ['radioTableId', 'frequency'])]
+#[ORM\Index(name: 'idx_sort_name', columns: ['radioTableId', 'name', 'frequency'])]
 class RadioStation
 {
-    public const POLARIZATION_HORIZONTAL = 'H';
-    public const POLARIZATION_VERTICAL = 'V';
-    public const POLARIZATION_CIRCULAR = 'C';
-    public const POLARIZATION_VARIOUS = 'M';
-    public const POLARIZATION_NONE = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    public const RECEPTION_REGULAR = 0;
-    public const RECEPTION_TROPO = 1;
-    public const RECEPTION_SCATTER = 2;
-    public const RECEPTION_SPORADIC_E = 3;
+    #[ORM\ManyToOne(targetEntity: RadioTable::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
+    private RadioTable $radioTable;
 
-    public const QUALITY_VERY_GOOD = 5;
-    public const QUALITY_GOOD = 4;
-    public const QUALITY_MIDDLE = 3;
-    public const QUALITY_BAD = 2;
-    public const QUALITY_VERY_BAD = 1;
+    #[ORM\Column(type: Types::STRING, length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
+    private ?string $name = null;
 
-    public const TYPE_MUSIC = 1;
-    public const TYPE_INFORMATION = 2;
-    public const TYPE_UNIVERSAL = 3;
-    public const TYPE_RELIGIOUS = 4;
-    public const TYPE_OTHER = 0;
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 50)]
+    private ?string $radioGroup = null;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 50)]
+    private ?string $country = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\RadioTable")
-     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
-     */
-    private $radioTable;
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    #[Assert\Length(max: 50)]
+    private ?string $region = null;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=100)
-     */
-    private $name;
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 3)]
+    #[Assert\NotBlank]
+    #[Assert\Type('numeric')]
+    #[Assert\GreaterThan(0)]
+    private ?string $frequency = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
-     */
-    private $radioGroup;
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    #[Assert\Length(max: 100)]
+    private ?string $location = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=50)
-     */
-    private $country;
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 3, nullable: true)]
+    #[Assert\Type('numeric')]
+    #[Assert\GreaterThan(0)]
+    private ?string $power = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=50)
-     */
-    private $region;
+    #[ORM\Column(type: Types::STRING, length: 1, enumType: Polarization::class, nullable: true)]
+    private ?Polarization $polarization = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=8, scale=3)
-     * @Assert\NotBlank()
-     * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
-     */
-    private $frequency;
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 100)]
+    private ?string $multiplex = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max=100)
-     */
-    private $location;
+    #[ORM\Column(type: Types::STRING, length: 5, enumType: DabChannel::class, nullable: true)]
+    #[DabChannelValid]
+    private ?DabChannel $dabChannel = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=8, scale=3, nullable=true)
-     * @Assert\Type("numeric")
-     * @Assert\GreaterThan(0)
-     */
-    private $power;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\GreaterThan(0)]
+    private ?int $distance = null;
 
-    /**
-     * @ORM\Column(type="string", length=1, nullable=true)
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="POLARIZATION_")
-     */
-    private $polarization = self::POLARIZATION_NONE;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $maxSignalLevel = null;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(max=100)
-     */
-    private $multiplex;
+    #[ORM\Column(type: Types::SMALLINT, enumType: Reception::class)]
+    private Reception $reception = Reception::REGULAR;
 
-    /**
-     * @ORM\Column(type="string", length=5, nullable=true)
-     * @DabChannel()
-     */
-    private $dabChannel;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\Type('int')]
+    #[Assert\GreaterThan(0)]
+    private ?int $privateNumber = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\GreaterThan(0)
-     */
-    private $distance;
+    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
+    #[YearMonthDate]
+    private ?string $firstLogDate = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $maxSignalLevel;
+    #[ORM\Column(type: Types::SMALLINT, enumType: Quality::class)]
+    private Quality $quality = Quality::VERY_GOOD;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="RECEPTION_")
-     */
-    private $reception = self::RECEPTION_REGULAR;
+    #[ORM\Column(type: Types::SMALLINT, enumType: Type::class)]
+    private Type $type = Type::MUSIC;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type("int")
-     * @Assert\GreaterThan(0)
-     */
-    private $privateNumber;
+    #[ORM\Embedded(class: Rds::class)]
+    #[Assert\Valid]
+    private Rds $rds;
 
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     * @YearMonthDate()
-     */
-    private $firstLogDate;
+    #[ORM\Column(type: Types::STRING, length: 500, nullable: true)]
+    #[Assert\Length(max: 500)]
+    private ?string $comment = null;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="QUALITY_")
-     */
-    private $quality = self::QUALITY_VERY_GOOD;
+    #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
+    #[Assert\Length(max: 500)]
+    #[Assert\Url]
+    private ?string $externalAnchor = null;
 
-    /**
-     * @ORM\Column(type="smallint")
-     * @ClassConstantsChoice(class=RadioStation::class, prefix="TYPE_")
-     */
-    private $type = self::TYPE_MUSIC;
-
-    /**
-     * @ORM\Embedded(class=Rds::class)
-     * @Assert\Valid
-     */
-    private $rds;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=true)
-     * @Assert\Length(max=500)
-     */
-    private $comment;
-
-    /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\Length(max=500)
-     * @Assert\Url()
-     */
-    private $externalAnchor;
-
-    /**
-     * @ORM\Embedded(class=Appearance::class)
-     * @Assert\Valid
-     */
-    private $appearance;
+    #[ORM\Embedded(class: Appearance::class)]
+    #[Assert\Valid]
+    private Appearance $appearance;
 
     public function __construct()
     {
@@ -264,12 +194,12 @@ class RadioStation
         return $this;
     }
 
-    public function getFrequency()
+    public function getFrequency(): ?string
     {
         return $this->frequency;
     }
 
-    public function setFrequency($frequency): self
+    public function setFrequency(?string $frequency): self
     {
         $this->frequency = $frequency;
 
@@ -288,24 +218,24 @@ class RadioStation
         return $this;
     }
 
-    public function getPower()
+    public function getPower(): ?string
     {
         return $this->power;
     }
 
-    public function setPower($power): self
+    public function setPower(?string $power): self
     {
         $this->power = $power;
 
         return $this;
     }
 
-    public function getPolarization(): ?string
+    public function getPolarization(): ?Polarization
     {
         return $this->polarization;
     }
 
-    public function setPolarization(?string $polarization): self
+    public function setPolarization(?Polarization $polarization): self
     {
         $this->polarization = $polarization;
 
@@ -324,12 +254,12 @@ class RadioStation
         return $this;
     }
 
-    public function getDabChannel(): ?string
+    public function getDabChannel(): ?DabChannel
     {
         return $this->dabChannel;
     }
 
-    public function setDabChannel(?string $dabChannel): self
+    public function setDabChannel(?DabChannel $dabChannel): self
     {
         $this->dabChannel = $dabChannel;
 
@@ -360,12 +290,12 @@ class RadioStation
         return $this;
     }
 
-    public function getReception(): ?int
+    public function getReception(): Reception
     {
         return $this->reception;
     }
 
-    public function setReception(?int $reception): self
+    public function setReception(Reception $reception): self
     {
         $this->reception = $reception;
 
@@ -396,24 +326,24 @@ class RadioStation
         return $this;
     }
 
-    public function getQuality(): ?int
+    public function getQuality(): Quality
     {
         return $this->quality;
     }
 
-    public function setQuality(?int $quality): self
+    public function setQuality(Quality $quality): self
     {
         $this->quality = $quality;
 
         return $this;
     }
 
-    public function getType(): ?int
+    public function getType(): Type
     {
         return $this->type;
     }
 
-    public function setType(?int $type): self
+    public function setType(Type $type): self
     {
         $this->type = $type;
 

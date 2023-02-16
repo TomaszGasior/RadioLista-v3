@@ -20,7 +20,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/Tests/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -43,9 +42,6 @@ services:
             $translator: '@translator.default'
             $debug: '%kernel.debug%'
             $locales: '%app.locales%'
-
-    App\Doctrine\EventSubscriber\SqliteForeignKeySubscriber:
-        tags: ['doctrine.event_subscriber']
 
     App\EventSubscriber\HttpSecuritySubscriber:
         arguments:
