@@ -52,7 +52,11 @@ class UserSettingsType extends AbstractType
             'data_class' => User::class,
             'label_format' => 'user.settings.form.%name%',
             'validation_groups' => function(FormInterface $form): string|array {
-                if ($form->get('currentPassword')->getData() || $form->get('plainPassword')->getData()) {
+                // Don't handle password change when current password is filled in
+                // and new password is not. Current password may be filled in
+                // automatically by web browser. In this case we should not
+                // expect from the user he wants to change his password.
+                if ($form->get('plainPassword')->getData()) {
                     return ['ChangingPasswordTab', 'RedefinePassword'];
                 }
 
