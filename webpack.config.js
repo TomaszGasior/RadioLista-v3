@@ -11,7 +11,7 @@ Encore
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
-    // only needed for CDN's or subdirectory deploy
+    // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
     /*
@@ -63,16 +63,15 @@ Encore
 
     .copyFiles({ from: './assets/public' })
 
-    // configure Babel
     // .configureBabel((config) => {
-    //     config.plugins.push('@babel/a-babel-plugin');
+    //     config.plugins.push('@babel/plugin-proposal-class-properties');
     // })
 
-    // enables and configure @babel/preset-env polyfills
-    //.configureBabelPresetEnv((config) => {
-    //    config.useBuiltIns = 'usage';
-    //    config.corejs = '3.23';
-    //})
+    // enables @babel/preset-env polyfills
+    // .configureBabelPresetEnv((config) => {
+    //     config.useBuiltIns = 'usage';
+    //     config.corejs = 3;
+    // })
 
     // enables Sass/SCSS support
     //.enableSassLoader()
