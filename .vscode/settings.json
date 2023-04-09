@@ -27,4 +27,7 @@
 	},
 
 	"intelephense.environment.phpVersion": "8.1.0",
+	"intelephense.references.exclude": [
+		"var",
+	],
 }
