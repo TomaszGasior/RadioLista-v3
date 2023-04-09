@@ -11,26 +11,19 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ChangeUserPassCommand extends Command
 {
-    private $entityManager;
-    private $userRepository;
-    private $validator;
-    private $passwordGenerator;
-
-    public function __construct(EntityManagerInterface $entityManager,
-                                UserRepository $userRepository,
-                                ValidatorInterface $validator,
-                                PasswordGenerator $passwordGenerator)
-    {
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private UserRepository $userRepository,
+        private UserPasswordHasherInterface $passwordEncoder,
+        private ValidatorInterface $validator,
+        private PasswordGenerator $passwordGenerator,
+    ) {
         parent::__construct();
-
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
-        $this->validator = $validator;
-        $this->passwordGenerator = $passwordGenerator;
     }
 
     protected function configure(): void
@@ -46,29 +39,30 @@ class ChangeUserPassCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $name = $io->ask('Username');
-        if (! $user = $this->userRepository->findOneByName($name)) {
+        $user = $this->userRepository->findOneByName($name);
+        if (!$user) {
             $io->error('There is no such user.');
             return 1;
         }
 
         $newPassword = $io->ask('New password', $this->passwordGenerator->getRandomPassword());
-        if (! $newPassword) {
+        if (!$newPassword) {
             $io->error('Password cannot be empty.');
             return 1;
         }
 
         $oldPasswordHash = $user->getPassword();
+        $newPasswordHash = $this->passwordEncoder->hashPassword($user, $newPassword);
 
-        $user->setPlainPassword($newPassword);
-        $errors = $this->validator->validate($user, null, 'RedefinePassword');
+        $user->setPassword($newPasswordHash);
+
+        $errors = $this->validator->validate($user);
         if ($errors->count() > 0) {
             $io->error((string) $errors);
             return 1;
         }
 
         $this->entityManager->flush();
-
-        $newPasswordHash = $user->getPassword();
 
         $io->success([
             'Password changed.',

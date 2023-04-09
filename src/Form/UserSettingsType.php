@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserSettingsType extends AbstractType
 {
@@ -31,16 +32,19 @@ class UserSettingsType extends AbstractType
                 'help' => 'user.settings.form.currentPassword.help',
                 'constraints' => [
                     new SecurityAssert\UserPassword([
-                        'groups' => 'ChangingPasswordTab',
+                        'groups' => 'ChangingPassword',
                         'message' => 'user.incorrect_password',
                     ]),
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
+                'mapped' => false,
                 'required' => false,
                 'label_format' => 'user.settings.form.plainPassword.%name%',
-
+                'type' => PasswordType::class,
+                'options' => [
+                    'hash_property_path' => 'password',
+                ],
                 'invalid_message' => 'user.passwords_dont_match',
             ])
         ;
@@ -57,7 +61,7 @@ class UserSettingsType extends AbstractType
                 // automatically by web browser. In this case we should not
                 // expect from the user he wants to change his password.
                 if ($form->get('plainPassword')->getData()) {
-                    return ['ChangingPasswordTab', 'RedefinePassword'];
+                    return ['Default', 'ChangingPassword'];
                 }
 
                 return 'Default';

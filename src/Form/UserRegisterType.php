@@ -20,9 +20,15 @@ class UserRegisterType extends AbstractType
                 'help' => 'user.register.form.name.help',
             ])
             ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
+                'mapped' => false,
                 'label_format' => 'user.register.form.plainPassword.%name%',
-
+                'type' => PasswordType::class,
+                'options' => [
+                    'hash_property_path' => 'password',
+                ],
+                'constraints' => [
+                    new Assert\NotBlank,
+                ],
                 'invalid_message' => 'user.passwords_dont_match',
             ])
             ->add('acceptServiceTerms', CheckboxType::class, [
@@ -30,7 +36,6 @@ class UserRegisterType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Assert\IsTrue([
-                        'groups' => 'Registration',
                         'message' => 'user.service_terms_required',
                     ]),
                 ],
@@ -43,7 +48,6 @@ class UserRegisterType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'label_format' => 'user.register.form.%name%',
-            'validation_groups' => ['Registration', 'RedefinePassword'],
         ]);
     }
 }

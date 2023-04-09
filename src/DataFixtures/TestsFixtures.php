@@ -11,29 +11,32 @@ use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestsFixtures extends Fixture
 {
     use FixtureTrait;
 
+    public function __construct(private UserPasswordHasherInterface $passwordEncoder) {}
+
     public function load(ObjectManager $manager): void
     {
         $user = (new User)
             ->setName('test_user')
-            ->setPlainPassword('test_password_user')
             ->setPublicProfile(true)
             ->setAboutMe('test_user_about_me')
         ;
+        $user->setPassword($this->passwordEncoder->hashPassword($user, 'test_password_user'));
 
         $secondUser = (new User)
             ->setName('test_user_second')
-            ->setPlainPassword('test_password_user_second')
         ;
+        $secondUser->setPassword($this->passwordEncoder->hashPassword($secondUser, 'test_password_user_second'));
 
         $adminUser = (new User)
             ->setName('test_user_admin')
-            ->setPlainPassword('test_password_user_admin')
         ;
+        $adminUser->setPassword($this->passwordEncoder->hashPassword($adminUser, 'test_password_user_admin'));
         $this->setPrivateFieldOfObject($adminUser, 'admin', true);
 
         $radioTable = (new RadioTable)

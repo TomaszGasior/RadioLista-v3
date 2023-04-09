@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\EntityListeners([UserListener::class])]
-#[UniqueEntity('name', groups: ['Default', 'RedefinePassword'], message: 'user.name_not_unique')]
+#[UniqueEntity('name', message: 'user.name_not_unique')]
 #[ORM\Cache('NONSTRICT_READ_WRITE')]
 class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, PasswordAuthenticatedUserInterface
 {
@@ -27,21 +27,13 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 50, unique: true)]
-    #[Assert\NotBlank(groups: ['Default', 'RedefinePassword'])]
-    #[Assert\Length(max: 50, groups: ['Default', 'RedefinePassword'])]
-    #[Assert\Regex(
-        '/^[a-zA-Z0-9_\.\-]*$/', groups: ['Default', 'RedefinePassword'],
-        message: 'user.name_invalid_chars'
-    )]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 50)]
+    #[Assert\Regex('/^[a-zA-Z0-9_\.\-]*$/', message: 'user.name_invalid_chars')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    #[Assert\NotBlank(groups: ['Default'])]
     private ?string $password = null;
-
-    #[Assert\NotBlank(groups: ['RedefinePassword'])]
-    #[Assert\Length(max: 100, groups: ['RedefinePassword'])]
-    private ?string $plainPassword = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private DateTime $lastActivityDate;
@@ -50,7 +42,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     private DateTime $registerDate;
 
     #[ORM\Column(type: Types::STRING, length: 2000, nullable: true)]
-    #[Assert\Length(max: 2000, groups: ['Default', 'RedefinePassword'])]
+    #[Assert\Length(max: 2000)]
     private ?string $aboutMe = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
@@ -85,11 +77,17 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         return $this;
     }
 
-    public function setPasswordHash(string $passwordHash): self
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
     {
-        $this->password = $passwordHash;
+        return $this->password;
+    }
 
-        return $this;
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
     public function getLastActivityDate(): DateTimeInterface
@@ -153,24 +151,6 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     }
 
     /**
-     * Not persisted.
-     */
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * Not persisted. Used by entity listener for password encoding.
-     */
-    public function setPlainPassword(?string $plainPassword): self
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getUserIdentifier(): string
@@ -180,14 +160,6 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         }
 
         return $this->name;
-    }
-
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
     }
 
     /**
@@ -222,6 +194,5 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      */
     public function eraseCredentials(): void
     {
-        $this->plainPassword = null;
     }
 }
