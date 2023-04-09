@@ -2,6 +2,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
 use App\Repository\RadioStationRepository;
 use RuntimeException;
@@ -20,24 +21,27 @@ class RadioStationCompletionTextType extends AbstractType
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        /** @var RadioStation */
         $radioStation = $form->getRoot()->getData();
 
-        if (false === $radioStation instanceof RadioStation) {
+        if (!$radioStation instanceof RadioStation) {
             throw new RuntimeException;
         }
 
         $radioTable = $radioStation->getRadioTable();
-        $columnName = $form->getName();
+        $column = Column::tryFrom($form->getName());
 
-        $isColumnEnabled = in_array($columnName, $radioTable->getColumns());
+        if (!$column) {
+            return;
+        }
 
-        if (false === $isColumnEnabled) {
+        $isColumnEnabled = in_array($column, $radioTable->getColumns());
+
+        if (!$isColumnEnabled) {
             return;
         }
 
         $view->vars['hints'] = $this->radioStationRepository
-            ->findColumnAllValuesForRadioTable($radioTable, $columnName);
+            ->findColumnAllValuesForRadioTable($radioTable, $column);
 
         // Disable autocompletion from browser's cache,
         // use only completions defined by this application.
