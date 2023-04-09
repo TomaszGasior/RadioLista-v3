@@ -16,21 +16,19 @@ trait EntityListenerTrait
      * It's because associations are not tracked consistently inside Doctrine's
      * events.
      *
-     * @param LifecycleEventArgs|PreFlushEventArgs|PreFlushEventArgs $args
+     * @param LifecycleEventArgs|PreFlushEventArgs|PostFlushEventArgs $args
      */
     private function forceEntityUpdate(object $entity, EventArgs $args): void
     {
         $entityManager = $args->getObjectManager();
 
-        if (false === $entityManager instanceof EntityManagerInterface) {
+        if (!$entityManager instanceof EntityManagerInterface) {
             return;
         }
 
-        /** @var EntityManagerInterface $entityManager */
-
-        // Don't try to enforce update if entity is not managed by Doctrine
-        // (this happens when associated entity was removed right now).
-        if (false === $entityManager->contains($entity)) {
+        // Don't try to enforce update if entity is not managed by Doctrine.
+        // This happens when associated entity was removed right now.
+        if (!$entityManager->contains($entity)) {
             return;
         }
 
