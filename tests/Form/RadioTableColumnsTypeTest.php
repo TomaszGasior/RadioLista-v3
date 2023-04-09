@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Form\Type;
+namespace App\Tests\Form;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
-use App\Form\Type\RadioTableColumnsType;
+use App\Form\RadioTableColumnsType;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -26,10 +26,11 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     {
         [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
-        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
+        $radioTable = (new RadioTable)->setColumns($visibleColumns);
+        $form = $this->factory->create(RadioTableColumnsType::class, $radioTable);
 
         $view = $form->createView();
-        $children = $view->children;
+        $children = $view->children['columns'];
 
         foreach ($allColumnNames as $columnName) {
             $this->assertArrayHasKey($columnName, $children);
@@ -40,10 +41,11 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     {
         [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
-        $form = $this->factory->create(RadioTableColumnsType::class, $visibleColumns);
+        $radioTable = (new RadioTable)->setColumns($visibleColumns);
+        $form = $this->factory->create(RadioTableColumnsType::class, $radioTable);
 
         $view = $form->createView();
-        $children = $view->children;
+        $children = $view->children['columns'];
 
         foreach ($allColumnNames as $columnName) {
             $value = $children[$columnName]->vars['value'];

@@ -7,6 +7,11 @@
     {{ encore_entry_script_tags('radio-table-columns') }}
 {% endblock %}
 
+{% form_theme form _self %}
+{% block _radio_table_columns_columns_row %}
+    {{ block('form_rows') }}
+{% endblock %}
+
 {% block context_menu %}
     <li>
         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
