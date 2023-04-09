@@ -5,6 +5,7 @@ namespace App\Tests\Controller;
 use App\Entity\RadioStation;
 use App\Tests\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Field\ChoiceFormField;
 
 class RadioStationControllerTest extends WebTestCase
@@ -57,6 +58,47 @@ class RadioStationControllerTest extends WebTestCase
         $this->client->request('GET', '/wykaz/1');
         $content = $this->client->getResponse()->getContent();
         $this->assertStringContainsString('COPIED_RADIO_STATION_NAME', $content);
+    }
+
+    public function test_all_text_fields_are_empty_when_adding_radio_station(): void
+    {
+        $crawler = $this->client->request('GET', '/wykaz/1/dodaj-stacje');
+
+        $textFields = $crawler->filter('form input:not([type="hidden"]):not([type="checkbox"]), form textarea');
+        $values = $textFields->each(function(Crawler $field) {
+            return 'textarea' == $field->nodeName() ? $field->innerText() : $field->attr('value');
+        });
+
+        $nonEmptyValues = array_filter($values, function($value) { return null !== $value && '' !== $value; });
+        $this->assertEmpty($nonEmptyValues);
+    }
+
+    public function test_not_all_text_fields_are_empty_when_copying_radio_station(): void
+    {
+        $crawler = $this->client->request('GET', '/wykaz/1/kopiuj-stacje/1');
+
+        $textFields = $crawler->filter('form input:not([type="hidden"]):not([type="checkbox"]), form textarea');
+        $values = $textFields->each(function(Crawler $field) {
+            return 'textarea' == $field->nodeName() ? $field->innerText() : $field->attr('value');
+        });
+
+        $nonEmptyValues = array_filter($values, function($value) { return null !== $value && '' !== $value; });
+        $this->assertNotEmpty($nonEmptyValues);
+    }
+
+    public function test_only_name_and_frequency_are_required_by_HTML_form_when_adding_radio_station(): void
+    {
+        $crawler = $this->client->request('GET', '/wykaz/1/dodaj-stacje');
+
+        $fields = $crawler->filter('form input, form textarea, form select');
+        $fields->each(function(Crawler $field) {
+            $isRequired = $field->getNode(0)->hasAttribute('required');
+
+            if (in_array($field->attr('name'), ['radio_station_edit[frequency]', 'radio_station_edit[name]'])) {
+                return;
+            }
+            $this->assertFalse($isRequired, $field->attr('name'));
+        });
     }
 
     public function test_user_can_remove_one_radio_station(): void

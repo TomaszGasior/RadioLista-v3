@@ -44,6 +44,7 @@ class FormsCompilationTest extends KernelTestCase
 
     public function formTypeAndEntityProvider(): iterable
     {
+        /** @var EntityManagerInterface */
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);
 
         $radioTable = $entityManager->find(RadioTable::class, 1);

@@ -8,6 +8,7 @@ use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -19,19 +20,19 @@ class TestsFixtures extends Fixture
     {
         $user = (new User)
             ->setName('test_user')
-            ->setPlainPassword('test_user')
+            ->setPlainPassword('test_password_user')
             ->setPublicProfile(true)
             ->setAboutMe('test_user_about_me')
         ;
 
         $secondUser = (new User)
             ->setName('test_user_second')
-            ->setPlainPassword('test_user_second')
+            ->setPlainPassword('test_password_user_second')
         ;
 
         $adminUser = (new User)
             ->setName('test_user_admin')
-            ->setPlainPassword('test_user_admin')
+            ->setPlainPassword('test_password_user_admin')
         ;
         $this->setPrivateFieldOfObject($adminUser, 'admin', true);
 
@@ -42,13 +43,16 @@ class TestsFixtures extends Fixture
             ->setDescription('test_radio_table_description')
             ->setColumns(Column::cases())
         ;
-        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new \DateTime('2018-05-01'));
+        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new DateTime('2018-05-01'));
 
         $radioStation = (new RadioStation)
             ->setRadioTable($radioTable)
             ->setName('test_radio_station_name')
             ->setFrequency(100.95)
             ->setPolarization(Polarization::HORIZONTAL)
+        ;
+        $radioStation->getRds()
+            ->setRt(['test radio station'])
         ;
 
         $secondRadioStation = (new RadioStation)

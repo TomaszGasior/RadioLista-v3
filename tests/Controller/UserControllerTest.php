@@ -67,7 +67,7 @@ class UserControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $form = $crawler->filter('form')->form();
-        $form['user_settings[currentPassword]'] = 'test_user';
+        $form['user_settings[currentPassword]'] = 'test_password_user';
         $form['user_settings[plainPassword][first]'] = $newPassword;
         $form['user_settings[plainPassword][second]'] = $newPassword;
         $this->client->submit($form);
@@ -81,7 +81,7 @@ class UserControllerTest extends WebTestCase
 
         $this->client->restart();
 
-        $this->loginUserThroughForm('test_user', 'test_user!');
+        $this->loginUserThroughForm('test_user', 'test_password_user');
         $this->client->request('GET', '/ustawienia-konta');
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
@@ -113,7 +113,7 @@ class UserControllerTest extends WebTestCase
 
         $this->client->restart();
 
-        $this->loginUserThroughForm('test_user', 'test_user');
+        $this->loginUserThroughForm('test_user', 'test_password_user');
         $this->client->request('GET', '/ustawienia-konta');
         $response = $this->client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
