@@ -8,6 +8,7 @@ use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Util\ReflectionUtilsTrait;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -15,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestsFixtures extends Fixture
 {
-    use FixtureTrait;
+    use ReflectionUtilsTrait;
 
     public function __construct(private UserPasswordHasherInterface $passwordEncoder) {}
 

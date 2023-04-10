@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Enum\RadioStation\Background;
 use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
@@ -11,15 +10,15 @@ use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\RadioStation;
-use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Faker\Generator;
 
 class RadioStationFixtures extends AbstractEntityFixture implements DependentFixtureInterface
 {
     protected const ENTITIES_NUMBER = 5000;
 
-    protected function createEntity(Generator $faker, int $i): object
+    public function __construct(private Faker $faker) {}
+
+    protected function createEntity(int $i): object
     {
         $radioStation = new RadioStation;
 
@@ -30,81 +29,81 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
 
         $radioStation->setFrequency(
             FrequencyUnit::KHZ === $radioStation->getRadioTable()->getFrequencyUnit()
-            ? $faker->randomFloat(1, 100, 9999)
-            : $faker->randomFloat(1, 87.5, 108)
+            ? $this->faker->randomFloat(1, 100, 9999)
+            : $this->faker->randomFloat(1, 87.5, 108)
         );
-        $radioStation->setPower($faker->randomFloat(2, 0, 1000));
-        $radioStation->setPrivateNumber($faker->numberBetween(1, 100));
+        $radioStation->setPower($this->faker->randomFloat(2, 0, 1000));
+        $radioStation->setPrivateNumber($this->faker->numberBetween(1, 100));
 
-        $radioStation->setName($faker->radioStation);
-        $radioStation->setRadioGroup($faker->optional()->radioGroup);
-        $radioStation->setCountry($faker->optional()->country);
-        $radioStation->setLocation($faker->optional()->city);
-        $radioStation->setMultiplex($faker->optional()->multiplex);
+        $radioStation->setName($this->faker->radioStation());
+        $radioStation->setRadioGroup($this->faker->optional()->radioGroup());
+        $radioStation->setCountry($this->faker->optional()->country());
+        $radioStation->setLocation($this->faker->optional()->city());
+        $radioStation->setMultiplex($this->faker->optional()->multiplex());
 
-        $radioStation->setPolarization($faker->optional->randomEnum(Polarization::class));
-        $radioStation->setQuality($faker->randomEnum(Quality::class));
-        $radioStation->setType($faker->randomEnum(Type::class));
-        $radioStation->setReception($faker->randomEnum(Reception::class));
+        $radioStation->setPolarization($this->faker->optional()->randomEnum(Polarization::class));
+        $radioStation->setQuality($this->faker->randomEnum(Quality::class));
+        $radioStation->setType($this->faker->randomEnum(Type::class));
+        $radioStation->setReception($this->faker->randomEnum(Reception::class));
 
-        if ($faker->boolean(75)) {
-            $dabChannel = $faker->randomEnum(DabChannel::class);
+        if ($this->faker->boolean(75)) {
+            $dabChannel = $this->faker->randomEnum(DabChannel::class);
             $radioStation
                 ->setDabChannel($dabChannel)
                 ->setFrequency($dabChannel->getFrequency())
             ;
         }
-        if ($faker->boolean(75)) {
-            $radioStation->setDistance($faker->numberBetween(1, 999));
+        if ($this->faker->boolean(75)) {
+            $radioStation->setDistance($this->faker->numberBetween(1, 999));
         }
-        if ($faker->boolean(75)) {
-            $radioStation->setMaxSignalLevel($faker->numberBetween(1, 999));
+        if ($this->faker->boolean(75)) {
+            $radioStation->setMaxSignalLevel($this->faker->numberBetween(1, 999));
         }
-        if ($faker->boolean(75)) {
-            $firstLogDate = $faker->dateTimeBetween('-25 years', 'now')->format('Y-m-d');
-            if ($faker->boolean) {
+        if ($this->faker->boolean(75)) {
+            $firstLogDate = $this->faker->dateTimeBetween('-25 years', 'now')->format('Y-m-d');
+            if ($this->faker->boolean()) {
                 $firstLogDate = substr($firstLogDate, 0, -3);
-                if ($faker->boolean) {
+                if ($this->faker->boolean()) {
                     $firstLogDate = substr($firstLogDate, 0, -3);
                 }
             }
             $radioStation->setFirstLogDate($firstLogDate);
         }
-        if ($faker->boolean) {
+        if ($this->faker->boolean()) {
             $radioStation->setRegion(
-                $faker->boolean ? $faker->city : $faker->state
+                $this->faker->boolean() ? $this->faker->city() : $this->faker->state()
             );
         }
-        if ($faker->boolean(25)) {
+        if ($this->faker->boolean(25)) {
             ($radioStation->getAppearance())
-                ->setBackground($faker->randomEnum(Background::class))
+                ->setBackground($this->faker->randomEnum(Background::class))
             ;
         }
-        if ($faker->boolean(25)) {
+        if ($this->faker->boolean(25)) {
             ($radioStation->getAppearance())
-                ->setBold($faker->boolean)
-                ->setItalic($faker->boolean)
-                ->setStrikethrough($faker->boolean)
+                ->setBold($this->faker->boolean())
+                ->setItalic($this->faker->boolean())
+                ->setStrikethrough($this->faker->boolean())
             ;
         }
-        if ($faker->boolean) {
+        if ($this->faker->boolean()) {
             ($radioStation->getRds())
                 ->setPs(
-                    $faker->boolean(40) ? [$faker->words(rand(1, 7))] :
-                                          [$faker->words(rand(1, 7)), $faker->words(rand(1, 7))]
+                    $this->faker->boolean(40) ? [$this->faker->words(rand(1, 7))] :
+                                          [$this->faker->words(rand(1, 7)), $this->faker->words(rand(1, 7))]
                 )
-                ->setRt($faker->optional(40, [])->sentences())
-                ->setPty($faker->optional()->randomElement(
+                ->setRt($this->faker->optional(0.4, [])->sentences())
+                ->setPty($this->faker->optional()->randomElement(
                     ['NEWS', 'INFO', 'SPORT', 'CULTURE', 'POP M', 'ROCK M', 'LIGHT M', 'CLASSIC', 'OTHER M']
                 ))
                 ->setPi(rand(1000, 9999))
             ;
         }
-        if ($faker->boolean(40)) {
-            $radioStation->setExternalAnchor($faker->url);
+        if ($this->faker->boolean(40)) {
+            $radioStation->setExternalAnchor($this->faker->url());
         }
-        if ($faker->boolean) {
-            $radioStation->setComment($faker->sentences(2, true));
+        if ($this->faker->boolean()) {
+            $radioStation->setComment($this->faker->sentences(2, true));
         }
 
         return $radioStation;
