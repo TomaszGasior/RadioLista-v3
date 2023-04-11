@@ -19,6 +19,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioTableController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $entityManager) {}
+
     #[Route(['pl' => '/wykaz/{id}', 'en' => '/list/{id}'], name: 'radio_table.show')]
     #[IsGranted('RADIO_TABLE_SHOW', subject: 'radioTable', statusCode: 404)]
     public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
@@ -33,7 +35,7 @@ class RadioTableController extends AbstractController
 
     #[Route(['pl' => '/utworz-wykaz', 'en' => 'create-list'], name: 'radio_table.create')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request): Response
     {
         $radioTable = new RadioTable;
 
@@ -43,8 +45,8 @@ class RadioTableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $radioTable->setOwner($this->getUser());
 
-            $entityManager->persist($radioTable);
-            $entityManager->flush();
+            $this->entityManager->persist($radioTable);
+            $this->entityManager->flush();
 
             $this->addFlash('notice', 'radio_table.create.notification.created');
             return $this->redirectToRoute('radio_table.show', ['id' => $radioTable->getId()]);
@@ -58,14 +60,13 @@ class RadioTableController extends AbstractController
     #[Route(['pl' => '/wykaz/{id}/ustawienia', 'en' => '/list/{id}/settings'], name: 'radio_table.settings')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
-    public function settings(RadioTable $radioTable, Request $request,
-                             EntityManagerInterface $entityManager): Response
+    public function settings(RadioTable $radioTable, Request $request): Response
     {
         $form = $this->createForm(RadioTableSettingsType::class, $radioTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             $this->addFlash('notice', 'common.notification.saved_changes');
         }
@@ -79,14 +80,13 @@ class RadioTableController extends AbstractController
     #[Route(['pl' => '/wykaz/{id}/kolumny', 'en' => '/list/{id}/columns'], name: 'radio_table.columns')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
-    public function columns(RadioTable $radioTable, Request $request,
-                            EntityManagerInterface $entityManager): Response
+    public function columns(RadioTable $radioTable, Request $request): Response
     {
         $form = $this->createForm(RadioTableColumnsType::class, $radioTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             $this->addFlash('notice', 'common.notification.saved_changes');
         }
@@ -135,10 +135,10 @@ class RadioTableController extends AbstractController
     #[Route(['pl' => '/wykaz/{id}/usun', 'en' => '/list/{id}/delete'], methods: ['POST'], name: 'radio_table.remove')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
-    public function remove(RadioTable $radioTable, EntityManagerInterface $entityManager): Response
+    public function remove(RadioTable $radioTable): Response
     {
-        $entityManager->remove($radioTable);
-        $entityManager->flush();
+        $this->entityManager->remove($radioTable);
+        $this->entityManager->flush();
 
         $this->addFlash('notice', 'radio_table.remove.notification.removed');
 

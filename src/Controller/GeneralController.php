@@ -11,15 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GeneralController extends AbstractController
 {
+    public function __construct(private RadioTableRepository $radioTableRepository) {}
+
     #[Route(['pl' => '', 'en' => '/en'], name: 'homepage')]
-    public function homepage(RadioTableRepository $radioTableRepository): Response
+    public function homepage(): Response
     {
         $form = $this->createForm(RadioTableSearchType::class, null, [
             'action' => $this->generateUrl('search_radio_tables'),
         ]);
 
         return $this->render('general/homepage.html.twig', [
-            'last_updated_radio_tables' => $radioTableRepository->findPublicOrderedByLastUpdateTime(12),
+            'last_updated_radio_tables' => $this->radioTableRepository->findPublicOrderedByLastUpdateTime(12),
             'search_form' => $form->createView(),
         ]);
     }
@@ -46,13 +48,12 @@ class GeneralController extends AbstractController
         ['pl' => '/wszystkie-wykazy/{sorting}', 'en' => '/all-lists/{sorting}'],
         name: 'all_radio_tables', defaults: ['sorting' => 1]
     )]
-    public function allRadioTables(RadioTableRepository $radioTableRepository,
-                                   RadioTableListSorting $sorting): Response
+    public function allRadioTables(RadioTableListSorting $sorting): Response
     {
         $radioTables = match ($sorting) {
-            RadioTableListSorting::COUNT => $radioTableRepository->findPublicOrderedByRadioStationsCount(),
-            RadioTableListSorting::LAST_UPDATE_TIME => $radioTableRepository->findPublicOrderedByLastUpdateTime(),
-            RadioTableListSorting::FREQUENCY_UNIT => $radioTableRepository->findPublicOrderedByFrequencyUnit(),
+            RadioTableListSorting::COUNT => $this->radioTableRepository->findPublicOrderedByRadioStationsCount(),
+            RadioTableListSorting::LAST_UPDATE_TIME => $this->radioTableRepository->findPublicOrderedByLastUpdateTime(),
+            RadioTableListSorting::FREQUENCY_UNIT => $this->radioTableRepository->findPublicOrderedByFrequencyUnit(),
         };
 
         return $this->render('general/all_radio_tables.html.twig', [
@@ -61,7 +62,7 @@ class GeneralController extends AbstractController
     }
 
     #[Route(['pl' => '/szukaj', 'en' => '/search'], name: 'search_radio_tables')]
-    public function searchRadioTables(RadioTableRepository $radioTableRepository, Request $request): Response
+    public function searchRadioTables(Request $request): Response
     {
         $form = $this->createForm(RadioTableSearchType::class);
         $form->handleRequest($request);
@@ -72,7 +73,7 @@ class GeneralController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $radioTables = $radioTableRepository->findPublicBySearchTerm($searchTerm);
+        $radioTables = $this->radioTableRepository->findPublicBySearchTerm($searchTerm);
 
         return $this->render('general/search_radio_tables.html.twig', [
             'radio_tables' => $radioTables,

@@ -16,6 +16,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioStationController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $entityManager) {}
+
     #[Route(
         ['pl' => '/wykaz/{radioTableId}/dodaj-stacje', 'en' => '/list/{radioTableId}/add-station'],
         name: 'radio_station.add'
@@ -24,7 +26,7 @@ class RadioStationController extends AbstractController
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function add(#[MapEntity(id: 'radioTableId')] RadioTable $radioTable,
                         #[MapEntity(disabled: true)] RadioStation $template = null,
-                        Request $request, EntityManagerInterface $entityManager): Response
+                        Request $request): Response
     {
         $radioStation = $template ? $template : new RadioStation;
         $radioStation->setRadioTable($radioTable);
@@ -33,8 +35,8 @@ class RadioStationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($radioStation);
-            $entityManager->flush();
+            $this->entityManager->persist($radioStation);
+            $this->entityManager->flush();
 
             $this->addFlash('notice', 'radio_station.add.notification.added');
             return $this->redirectToRoute('radio_station.edit', [
@@ -55,14 +57,13 @@ class RadioStationController extends AbstractController
     )]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioStation', statusCode: 404)]
-    public function edit(RadioStation $radioStation, Request $request,
-                         EntityManagerInterface $entityManager): Response
+    public function edit(RadioStation $radioStation, Request $request): Response
     {
         $form = $this->createForm(RadioStationEditType::class, $radioStation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             $this->addFlash('notice', 'common.notification.saved_changes');
         }
@@ -98,10 +99,10 @@ class RadioStationController extends AbstractController
     )]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioStation', statusCode: 404)]
-    public function remove(RadioStation $radioStation, EntityManagerInterface $entityManager): Response
+    public function remove(RadioStation $radioStation): Response
     {
-        $entityManager->remove($radioStation);
-        $entityManager->flush();
+        $this->entityManager->remove($radioStation);
+        $this->entityManager->flush();
 
         $this->addFlash('notice', 'radio_station.remove.notification.removed');
 
@@ -116,7 +117,7 @@ class RadioStationController extends AbstractController
     )]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
-    public function bulkRemove(RadioTable $radioTable, Request $request, EntityManagerInterface $entityManager): Response
+    public function bulkRemove(RadioTable $radioTable, Request $request): Response
     {
         $form = $this->createForm(RadioStationBulkRemoveType::class, null, ['radio_table' => $radioTable]);
         $form->handleRequest($request);
@@ -126,9 +127,9 @@ class RadioStationController extends AbstractController
 
             if (count($chosenToRemove) > 0) {
                 foreach ($chosenToRemove as $radioStation) {
-                    $entityManager->remove($radioStation);
+                    $this->entityManager->remove($radioStation);
                 }
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
 

@@ -10,12 +10,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SitemapController extends AbstractController
 {
+    public function __construct(
+        private RadioTableRepository $radioTableRepository,
+        private UserRepository $userRepository,
+    ) {}
+
     #[Route('/sitemap.{_format<xml>}')]
-    public function sitemap(RadioTableRepository $radioTableRepository,
-                            UserRepository $userRepository): Response
+    public function sitemap(): Response
     {
-        $radioTables = $radioTableRepository->findPublicOrderedByLastUpdateTime();
-        $users = $userRepository->findAllWithPublicProfile();
+        $radioTables = $this->radioTableRepository->findPublicOrderedByLastUpdateTime();
+        $users = $this->userRepository->findAllWithPublicProfile();
 
         return $this->render('sitemap.xml.twig', [
             'radio_tables' => $radioTables,
