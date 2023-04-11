@@ -17,20 +17,18 @@ use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class RadioStationEditType extends AbstractType
 {
     public function __construct(
         private RadioStationRdsPsFrameTransformer $rdsPsTransformer,
         private RadioStationRdsRtFrameTransformer $rdsRtTransformer,
-        private TranslatorInterface $translator,
     ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -61,14 +59,10 @@ class RadioStationEditType extends AbstractType
             ->add('polarization', EnumType::class, [
                 'required' => false,
                 'class' => Polarization::class,
-                'choices' => array_merge([null], Polarization::cases()),
-                'choice_label' => function (?Polarization $polarization): string {
-                    if ($polarization) {
-                        return $this->translator->trans('polarization.'.$polarization->value, [], 'radio_table');
-                    }
-                    return $this->translator->trans('radio_station.edit.form.polarization.choice.');
+                'choice_label' => function (Polarization $polarization): string {
+                    return 'polarization.'.$polarization->value;
                 },
-                'choice_translation_domain' => false,
+                'placeholder' => new TranslatableMessage('radio_station.edit.form.polarization.choice.'),
             ])
             ->add('multiplex', RadioStationCompletionTextType::class, [
                 'required' => false,
@@ -76,14 +70,11 @@ class RadioStationEditType extends AbstractType
             ->add('dabChannel', EnumType::class, [
                 'required' => false,
                 'class' => DabChannel::class,
-                'choices' => array_merge([null], DabChannel::cases()),
-                'choice_label' => function(?DabChannel $dabChannel): ?string {
-                    if ($dabChannel) {
-                        return $dabChannel->value;
-                    }
-                    return $this->translator->trans('radio_station.edit.form.dabChannel.choice.');
+                'choice_label' => function(DabChannel $dabChannel): string {
+                    return $dabChannel->value;
                 },
                 'choice_translation_domain' => false,
+                'placeholder' => new TranslatableMessage('radio_station.edit.form.dabChannel.choice.'),
                 'attr' => [
                     'data-dab-channel-frequencies' => json_encode(array_reduce(
                         DabChannel::cases(),
@@ -120,24 +111,22 @@ class RadioStationEditType extends AbstractType
                 },
             ])
             ->add('firstLogDate', null, [
-                'label' => $this->translator->trans('column.firstLogDate', [], 'radio_table'),
+                'label' => 'column.firstLogDate',
                 'attr' => [
-                    'placeholder' => $this->translator->trans('radio_station.edit.form.firstLogDate.help'),
+                    'placeholder' => new TranslatableMessage('radio_station.edit.form.firstLogDate.help'),
                     'pattern' => '[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?',
                 ],
-                'translation_domain' => false,
             ])
             ->add('privateNumber', null, [
                 'attr' => ['min' => '1'],
             ])
             ->add('externalAnchor', UrlType::class, [
                 'required' => false,
-                'label' => $this->translator->trans('column.externalAnchor', [], 'radio_table'),
+                'label' => 'column.externalAnchor',
                 'default_protocol' => null,
                 'attr' => [
-                    'placeholder' => $this->translator->trans('radio_station.edit.form.externalAnchor.help'),
+                    'placeholder' => new TranslatableMessage('radio_station.edit.form.externalAnchor.help'),
                 ],
-                'translation_domain' => false,
             ])
             ->add('comment', TextareaType::class, [
                 'required' => false,
@@ -145,66 +134,58 @@ class RadioStationEditType extends AbstractType
             ->add('rdsPs', TextareaType::class, [
                 'property_path' => 'rds.ps',
 
-                'label' => 'radio_station.edit.form.rdsPs',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.rdsPs'),
                 'required' => false,
                 'trim' => false,
-                'attr' => ['placeholder' => 'radio_station.edit.form.rdsPs.help'],
+                'attr' => ['placeholder' => new TranslatableMessage('radio_station.edit.form.rdsPs.help')],
             ])
             ->add('rdsRt', TextareaType::class, [
                 'property_path' => 'rds.rt',
 
-                'label' => 'radio_station.edit.form.rdsRt',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.rdsRt'),
                 'required' => false,
                 'trim' => false,
-                'attr' => ['placeholder' => 'radio_station.edit.form.rdsRt.help'],
+                'attr' => ['placeholder' => new TranslatableMessage('radio_station.edit.form.rdsRt.help')],
             ])
             ->add('rdsPty', null, [
                 'property_path' => 'rds.pty',
 
-                'label' => 'radio_station.edit.form.rdsPty',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.rdsPty'),
             ])
             ->add('rdsPi', null, [
                 'property_path' => 'rds.pi',
 
-                'label' => 'radio_station.edit.form.rdsPi',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.rdsPi'),
                 'attr' => ['maxlength' => '4'],
             ])
             ->add('appearanceBackground', EnumType::class, [
                 'property_path' => 'appearance.background',
 
                 'required' => false,
-                'label' => 'radio_station.edit.form.appearanceBackground',
+                'label' => new TranslatableMessage('radio_station.edit.form.appearanceBackground'),
                 'class' => Background::class,
-                'choice_label' => function (Background $background) {
-                    return 'radio_station.edit.form.appearanceBackground.choice.'.$background->value;
+                'choice_label' => function (Background $background): TranslatableMessage {
+                    return new TranslatableMessage('radio_station.edit.form.appearanceBackground.choice.'.$background->value);
                 },
-                'placeholder' => 'radio_station.edit.form.appearanceBackground.choice.',
-                'translation_domain' => 'messages',
+                'placeholder' => new TranslatableMessage('radio_station.edit.form.appearanceBackground.choice.'),
             ])
             ->add('appearanceBold', CheckboxType::class, [
                 'property_path' => 'appearance.bold',
 
                 'required' => false,
-                'label' => 'radio_station.edit.form.appearanceBold',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.appearanceBold'),
             ])
             ->add('appearanceItalic', CheckboxType::class, [
                 'property_path' => 'appearance.italic',
 
                 'required' => false,
-                'label' => 'radio_station.edit.form.appearanceItalic',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.appearanceItalic'),
             ])
             ->add('appearanceStrikethrough', CheckboxType::class, [
                 'property_path' => 'appearance.strikethrough',
 
                 'required' => false,
-                'label' => 'radio_station.edit.form.appearanceStrikethrough',
-                'translation_domain' => 'messages',
+                'label' => new TranslatableMessage('radio_station.edit.form.appearanceStrikethrough'),
             ])
         ;
 
