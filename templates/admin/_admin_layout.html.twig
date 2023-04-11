@@ -1,3 +1,5 @@
+{%- trans_default_domain 'admin' -%}
+
 {% extends 'layout.html.twig' %}
 
 {% block head_closing %}
@@ -5,17 +7,17 @@
     {{ encore_entry_script_tags('admin') }}
 {% endblock %}
 
-{% block page_title %}Panel administracyjny{% endblock %}
+{% block page_title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block context_menu %}
     <li>
         <a href="{{ path('admin.radio_tables') }}">
-            Lista wykazów
+            {{ 'radio_tables.title'|trans }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin.users') }}">
-            Lista użytkowników
+            {{ 'users.title'|trans }}
         </a>
     </li>
 {% endblock %}

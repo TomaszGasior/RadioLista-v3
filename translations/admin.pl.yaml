@@ -1,0 +1,48 @@
+layout:
+    title: 'Panel administracyjny'
+
+common:
+    notification:
+        showing_private_content_as_administrator: 'Przeglądasz prywatny zasób jako administrator.'
+
+radio_tables:
+    title: 'Lista wykazów'
+
+    heading:
+        id: 'ID'
+        owner_name: 'Autor'
+        status: 'Widoczność'
+        name: 'Nazwa'
+        radio_stations_count: 'L. stacji'
+        last_update_time: 'Data modyf.'
+        creation_time: 'Data utworz.'
+
+    status:
+        '1': 'publiczny'
+        '0': 'niepubliczny'
+        '-1': 'prywatny'
+
+    text:
+        all_items: 'Liczba wszystkich wykazów: %count%'
+
+users:
+    title: 'Lista użytkowników'
+
+    heading:
+        id: 'ID'
+        name: 'Nazwa'
+        radio_tables_count: 'L. wykazów'
+        public_profile: 'Profil pub.'
+        last_activity_date: 'Data aktywności'
+        register_date: 'Data rejestracji'
+        password_hashing: 'Kompat. hasła'
+
+    public_profile:
+        '1': 'włączony'
+        '': 'wyłączony'
+
+    password_hashing:
+        legacy: 'RL v1'
+
+    text:
+        all_items: 'Liczba wszystkich użytkowników: %count%'

@@ -1,20 +1,22 @@
+{%- trans_default_domain 'admin' -%}
+
 {% extends 'admin/_admin_layout.html.twig' %}
 
 {% block page_content %}
     <header>
-        <h1>Panel administracyjny — lista użytkowników</h1>
+        <h1>{{ 'layout.title'|trans }} — {{ 'users.title'|trans }}</h1>
     </header>
 
     <table class="sortable">
         <thead>
             <tr>
-                <th data-sort="N">ID</th>
-                <th data-sort="T">Nazwa</th>
-                <th data-sort="N">L. wykazów</th>
-                <th data-sort="T">Profil pub.</th>
-                <th data-sort="T">Data aktywności</th>
-                <th data-sort="T">Data rejestracji</th>
-                <th data-sort="T">Kompat. hasła</th>
+                <th data-sort="N">{{ 'users.heading.id'|trans }}</th>
+                <th data-sort="T">{{ 'users.heading.name'|trans }}</th>
+                <th data-sort="N">{{ 'users.heading.radio_tables_count'|trans }}</th>
+                <th data-sort="T">{{ 'users.heading.public_profile'|trans }}</th>
+                <th data-sort="T">{{ 'users.heading.last_activity_date'|trans }}</th>
+                <th data-sort="T">{{ 'users.heading.register_date'|trans }}</th>
+                <th data-sort="T">{{ 'users.heading.password_hashing'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -27,14 +29,14 @@
                         </a>
                     </td>
                     <td>{{ user.radioTablesCount }}</td>
-                    <td>{{ user.publicProfile ? 'włączony' : 'wyłączony' }}</td>
+                    <td>{{ ('users.public_profile.' ~ user.publicProfile)|trans }}</td>
                     <td>{{ user.lastActivityDate|date('Y-m-d') }}</td>
                     <td>{{ user.registerDate|date('Y-m-d') }}</td>
                     <td>
                         {% if user.password[0:1] == '$' %}
                             —
                         {% else %}
-                            RL v1
+                            {{ 'users.password_hashing.legacy'|trans }}
                         {% endif %}
                     </td>
                 </tr>
@@ -42,5 +44,5 @@
         </tbody>
     </table>
 
-    <p>Liczba wszystkich użytkowników: {{ users|length }}</p>
+    <p>{{ 'users.text.all_items'|trans({'%count%': users|length}) }}</p>
 {% endblock %}

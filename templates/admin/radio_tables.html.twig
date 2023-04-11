@@ -1,20 +1,22 @@
+{%- trans_default_domain 'admin' -%}
+
 {% extends 'admin/_admin_layout.html.twig' %}
 
 {% block page_content %}
     <header>
-        <h1>Panel administracyjny — lista wykazów</h1>
+        <h1>{{ 'layout.title'|trans }} — {{ 'radio_tables.title'|trans }}</h1>
     </header>
 
     <table class="sortable">
         <thead>
             <tr>
-                <th data-sort="N">ID</th>
-                <th data-sort="T">Autor</th>
-                <th data-sort="T">Widoczność</th>
-                <th data-sort="T">Nazwa</th>
-                <th data-sort="N">L. stacji</th>
-                <th data-sort="T">Data modyf.</th>
-                <th data-sort="T">Data utworz.</th>
+                <th data-sort="N">{{ 'radio_tables.heading.id'|trans }}</th>
+                <th data-sort="T">{{ 'radio_tables.heading.owner_name'|trans }}</th>
+                <th data-sort="T">{{ 'radio_tables.heading.status'|trans }}</th>
+                <th data-sort="T">{{ 'radio_tables.heading.name'|trans }}</th>
+                <th data-sort="N">{{ 'radio_tables.heading.radio_stations_count'|trans }}</th>
+                <th data-sort="T">{{ 'radio_tables.heading.last_update_time'|trans }}</th>
+                <th data-sort="T">{{ 'radio_tables.heading.creation_time'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -22,15 +24,7 @@
                 <tr>
                     <td>{{ radio_table.id }}</td>
                     <td>{{ radio_table.owner.name }}</td>
-                    <td>
-                        {% if radio_table.status == constant('PUBLIC', radio_table.status) %}
-                            publiczny
-                        {% elseif radio_table.status == constant('PRIVATE', radio_table.status) %}
-                            prywatny
-                        {% elseif radio_table.status == constant('UNLISTED', radio_table.status) %}
-                            niepubliczny
-                        {% endif %}
-                    </td>
+                    <td>{{ ('radio_tables.status.' ~ radio_table.status.value)|trans }}</td>
                     <td>
                         <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
                             {{ radio_table.name }}
@@ -48,5 +42,5 @@
         </tbody>
     </table>
 
-    <p>Liczba wszystkich wykazów: {{ radio_tables|length }}</p>
+    <p>{{ 'radio_tables.text.all_items'|trans({'%count%': radio_tables|length}) }}</p>
 {% endblock %}
