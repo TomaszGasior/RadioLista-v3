@@ -15,9 +15,9 @@
                         {%- if column.value == 'frequency' -%}
                             {{- radio_table.frequencyUnit.label -}}
                         {%- elseif column.value == 'power' -%}
-                            {{- get_power_label() -}}
+                            {{- radio_table.powerUnit.label -}}
                         {%- elseif column.value == 'distance' -%}
-                            {{- get_distance_label() -}}
+                            {{- radio_table.distanceUnit.label -}}
                         {%- elseif column.value == 'maxSignalLevel' -%}
                             {{- radio_table.maxSignalLevelUnit.label -}}
                         {%- else -%}

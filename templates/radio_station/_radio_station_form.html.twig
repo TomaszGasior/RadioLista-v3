@@ -33,7 +33,7 @@
 
     <div class="ui-block-content">
         <div class="form-columns form-columns-with-number-first">
-            {{ form_row(form.power, {'unit_label': 'kW'}) }}
+            {{ form_row(form.power, {'unit_label': radio_station.radioTable.powerUnit.label}) }}
             {{ form_row(form.location) }}
         </div>
 
@@ -52,7 +52,7 @@
 
     <div class="ui-block-content">
         <div class="form-columns">
-            {{ form_row(form.distance, {'unit_label': 'km'}) }}
+            {{ form_row(form.distance, {'unit_label': radio_station.radioTable.distanceUnit.label}) }}
             {{ form_row(form.maxSignalLevel, {'unit_label': radio_station.radioTable.maxSignalLevelUnit.label}) }}
             {{ form_row(form.quality) }}
         </div>

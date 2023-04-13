@@ -6,7 +6,6 @@ use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
 use App\Util\RadioStationRdsTrait;
-use App\Util\Data\RadioTableLabelsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -14,7 +13,6 @@ use Yectep\PhpSpreadsheetBundle\Factory;
 
 class PhpSpreadsheetRenderer
 {
-    use RadioTableLabelsTrait;
     use RadioStationRdsTrait;
 
     public function __construct(private Factory $phpSpreadsheetFactory, private TranslatorInterface $translator) {}
@@ -81,8 +79,8 @@ class PhpSpreadsheetRenderer
         foreach ($radioTable->getColumns() as $column) {
             $headings[] = match ($column) {
                 Column::FREQUENCY => $radioTable->getFrequencyUnit()->getLabel(),
-                Column::POWER => $this->getPowerLabel(),
-                Column::DISTANCE => $this->getDistanceLabel(),
+                Column::POWER => $radioTable->getPowerUnit()->getLabel(),
+                Column::DISTANCE => $radioTable->getDistanceUnit()->getLabel(),
                 Column::MAX_SIGNAL_LEVEL => $radioTable->getMaxSignalLevelUnit()->getLabel(),
                 default => $this->translate('heading.' . $column->value),
             };

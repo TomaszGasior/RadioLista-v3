@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Doctrine\EntityListener\RadioTableListener;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\DistanceUnit;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
+use App\Entity\Enum\RadioTable\PowerUnit;
 use App\Entity\Enum\RadioTable\Status;
 use App\Repository\RadioTableRepository;
 use DateTime;
@@ -242,5 +244,15 @@ class RadioTable
         --$this->radioStationsCount;
 
         return $this;
+    }
+
+    public function getPowerUnit(): PowerUnit
+    {
+        return PowerUnit::KW;
+    }
+
+    public function getDistanceUnit(): DistanceUnit
+    {
+        return DistanceUnit::KM;
     }
 }
