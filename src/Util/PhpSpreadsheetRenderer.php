@@ -79,28 +79,13 @@ class PhpSpreadsheetRenderer
         $headings = [];
 
         foreach ($radioTable->getColumns() as $column) {
-            switch ($column) {
-                case Column::FREQUENCY:
-                    $value = $radioTable->getFrequencyUnit()->getLabel();
-                    break;
-
-                case Column::POWER:
-                    $value = $this->getPowerLabel();
-                    break;
-
-                case Column::DISTANCE:
-                    $value = $this->getDistanceLabel();
-                    break;
-
-                case Column::MAX_SIGNAL_LEVEL:
-                    $value = $radioTable->getMaxSignalLevelUnit()->getLabel();
-                    break;
-
-                default:
-                    $value = $this->translate('heading.' . $column->value);
-            }
-
-            $headings[] = $value;
+            $headings[] = match ($column) {
+                Column::FREQUENCY => $radioTable->getFrequencyUnit()->getLabel(),
+                Column::POWER => $this->getPowerLabel(),
+                Column::DISTANCE => $this->getDistanceLabel(),
+                Column::MAX_SIGNAL_LEVEL => $radioTable->getMaxSignalLevelUnit()->getLabel(),
+                default => $this->translate('heading.' . $column->value),
+            };
         }
 
         return $headings;
@@ -117,42 +102,25 @@ class PhpSpreadsheetRenderer
             $row = [];
 
             foreach ($radioTable->getColumns() as $column) {
-                $value = $radioStation->{'get' . $column->value}();
-
-                switch ($column) {
-                    case Column::TYPE:
-                    case Column::RECEPTION:
-                        $value = $this->translate($column->value . '.' . $value->value);
-                        break;
-
-                    case Column::QUALITY:
-                        $value = $value->getLabel();
-                        break;
-
-                    case Column::POLARIZATION:
-                        $value = $value ? $value->getLabel() : '';
-                        break;
-
-                    case Column::DAB_CHANNEL:
-                        $value = $value ? $value->value : '';
-                        break;
-
-                    case Column::COMMENT:
+                $row[] = match ($column) {
+                    Column::TYPE =>
+                        $this->translate('type.' . $radioStation->getType()->value),
+                    Column::RECEPTION =>
+                        $this->translate('reception.' . $radioStation->getReception()->value),
+                    Column::POLARIZATION =>
+                        $radioStation->getPolarization()?->getLabel() ?: '',
+                    Column::QUALITY =>
+                        $radioStation->getQuality()->getLabel(),
+                    Column::DAB_CHANNEL =>
+                        $radioStation->getDabChannel()->value ?? '',
+                    Column::COMMENT =>
                         // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
-                        $value = str_replace("\r", '', $value);
-                        break;
-
-                    case Column::RDS:
-                        $rds = $value;
-
-                        $value = $rds->getPs()[0][0] ?? '';
-                        if ($value) {
-                            $value = str_replace(' ', '_', $this->alignRDSFrame($value));
-                        }
-                        break;
-                }
-
-                $row[] = $value;
+                        str_replace("\r", '', $radioStation->getComment()),
+                    Column::RDS =>
+                        str_replace(' ', '_', $this->alignRDSFrame($radioStation->getRds()->getPs()[0][0] ?? '')),
+                    default =>
+                        $radioStation->{'get' . $column->value}(),
+                };
             }
 
             $data[] = $row;
