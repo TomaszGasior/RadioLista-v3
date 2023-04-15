@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteRule ^index\.php(?:/(.*)|$) /$1 [R=301,END]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [END]
+RewriteRule ^ /index.php [END]
