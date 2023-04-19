@@ -4,6 +4,7 @@ namespace App\Tests\Form;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use App\Form\RadioTableColumnsType;
 use Symfony\Component\Form\PreloadedExtension;
@@ -26,7 +27,9 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     {
         [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
-        $radioTable = (new RadioTable)->setColumns($visibleColumns);
+        $radioTable = (new RadioTable('Name', new User('Name')))
+            ->setColumns($visibleColumns)
+        ;
         $form = $this->factory->create(RadioTableColumnsType::class, $radioTable);
 
         $view = $form->createView();
@@ -41,7 +44,9 @@ class RadioTableColumnsTypeTest extends TypeTestCase
     {
         [$visibleColumns, $allColumnNames] = $this->getVisibleColumnsAndAllColumns();
 
-        $radioTable = (new RadioTable)->setColumns($visibleColumns);
+        $radioTable = (new RadioTable('Name', new User('Name')))
+            ->setColumns($visibleColumns)
+        ;
         $form = $this->factory->create(RadioTableColumnsType::class, $radioTable);
 
         $view = $form->createView();

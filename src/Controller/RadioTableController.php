@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Export\RadioTableExporterProvider;
 use App\Form\RadioTableColumnsType;
 use App\Form\RadioTableCreateType;
@@ -10,11 +11,13 @@ use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
 use App\Repository\RadioStationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioTableController extends AbstractController
@@ -35,15 +38,17 @@ class RadioTableController extends AbstractController
 
     #[Route(['pl' => '/utworz-wykaz', 'en' => 'create-list'], name: 'radio_table.create')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function create(Request $request): Response
+    public function create(Request $request, #[CurrentUser] User $user): Response
     {
-        $radioTable = new RadioTable;
-
-        $form = $this->createForm(RadioTableCreateType::class, $radioTable);
+        $form = $this->createForm(RadioTableCreateType::class, null, ['owner' => $user]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $radioTable->setOwner($this->getUser());
+            $radioTable = $form->getData();
+
+            if (!$radioTable instanceof RadioTable) {
+                throw new RuntimeException;
+            }
 
             $this->entityManager->persist($radioTable);
             $this->entityManager->flush();

@@ -8,7 +8,6 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -30,10 +29,10 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     #[Assert\NotBlank]
     #[Assert\Length(max: 50)]
     #[Assert\Regex('/^[a-zA-Z0-9_\.\-]*$/', message: 'user.name_invalid_chars')]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $password = null;
+    private string $password;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private DateTime $lastActivityDate;
@@ -54,8 +53,10 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $admin = false;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        $this->name = $name;
+
         $this->lastActivityDate = new DateTime;
         $this->registerDate = new DateTime;
     }
@@ -65,27 +66,22 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     /**
+     * Throws an exception if setPassword() wasn't called yet.
+     *
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
@@ -155,10 +151,6 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
      */
     public function getUserIdentifier(): string
     {
-        if (!$this->name) {
-            throw new RuntimeException;
-        }
-
         return $this->name;
     }
 

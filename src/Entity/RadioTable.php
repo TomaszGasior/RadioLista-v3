@@ -31,12 +31,12 @@ class RadioTable
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
-    private ?User $owner = null;
+    private User $owner;
 
     #[ORM\Column(type: Types::STRING, length: 100)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 100)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::SMALLINT, enumType: Status::class)]
     private Status $status = Status::PUBLIC;
@@ -83,8 +83,11 @@ class RadioTable
     #[ORM\Column(type: Types::INTEGER)]
     private int $radioStationsCount = 0;
 
-    public function __construct()
+    public function __construct(string $name, User $owner)
     {
+        $this->name = $name;
+        $this->owner = $owner;
+
         $this->appearance = new Appearance;
         $this->creationTime = new DateTime;
         $this->lastUpdateTime = new DateTime;
@@ -100,24 +103,17 @@ class RadioTable
         return $this->id;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): User
     {
         return $this->owner;
     }
 
-    public function setOwner(User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 

@@ -35,7 +35,7 @@ class RadioStation
     #[ORM\Column(type: Types::STRING, length: 100)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 100)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
     #[Assert\Length(max: 50)]
@@ -53,7 +53,7 @@ class RadioStation
     #[Assert\NotBlank]
     #[Assert\Type('numeric')]
     #[Assert\GreaterThan(0)]
-    private ?string $frequency = null;
+    private string $frequency;
 
     #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
     #[Assert\Length(max: 100)]
@@ -117,8 +117,12 @@ class RadioStation
     #[Assert\Valid]
     private Appearance $appearance;
 
-    public function __construct()
+    public function __construct(string $frequency, string $name, RadioTable $radioTable)
     {
+        $this->frequency = $frequency;
+        $this->name = $name;
+        $this->radioTable = $radioTable;
+
         $this->rds = new Rds;
         $this->appearance = new Appearance;
     }
@@ -134,24 +138,17 @@ class RadioStation
         return $this->id;
     }
 
-    public function getRadioTable(): ?RadioTable
+    public function getRadioTable(): RadioTable
     {
         return $this->radioTable;
     }
 
-    public function setRadioTable(RadioTable $radioTable): self
-    {
-        $this->radioTable = $radioTable;
-
-        return $this;
-    }
-
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -194,12 +191,12 @@ class RadioStation
         return $this;
     }
 
-    public function getFrequency(): ?string
+    public function getFrequency(): string
     {
         return $this->frequency;
     }
 
-    public function setFrequency(?string $frequency): self
+    public function setFrequency(string $frequency): self
     {
         $this->frequency = $frequency;
 

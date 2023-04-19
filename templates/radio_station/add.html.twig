@@ -9,12 +9,12 @@
 
 {% block context_menu %}
     <li>
-        <a href="{{ path('radio_table.show', {id: radio_station.radioTable.id}) }}">
+        <a href="{{ path('radio_table.show', {id: radio_table.id}) }}">
             {{ 'radio_table.show.title'|trans }}
         </a>
     </li>
     <li>
-        <a href="{{ path('radio_table.settings', {id: radio_station.radioTable.id}) }}">
+        <a href="{{ path('radio_table.settings', {id: radio_table.id}) }}">
             {{ 'radio_table.settings.title'|trans }}
         </a>
     </li>
@@ -26,7 +26,7 @@
             <span>{{ 'radio_station.add.title_long'|trans }}</span>
             <span class="additional">
                 <span class="sr-only"> {{ 'common.text.in_radio_table_a11y_subheading_prefix'|trans }} </span>
-                {{ radio_station.radioTable.name }}
+                {{ radio_table.name }}
             </span>
         </h1>
     </header>

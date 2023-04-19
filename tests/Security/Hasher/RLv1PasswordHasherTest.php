@@ -43,7 +43,7 @@ class RLv1PasswordHasherTest extends TestCase
             }
         );
 
-        $user = new User;
+        $user = new User('Name');
         $user->setPassword(self::PASSWORD_HASH);
 
         $this->setPrivateFieldOfObject($user, 'registerDate', new DateTime(self::USER_REGISTER_DATE));

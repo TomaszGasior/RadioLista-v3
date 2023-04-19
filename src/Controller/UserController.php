@@ -7,6 +7,7 @@ use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
 use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,12 +74,16 @@ class UserController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $user = new User;
-
-        $form = $this->createForm(UserRegisterType::class, $user);
+        $form = $this->createForm(UserRegisterType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            if (!$user instanceof User) {
+                throw new RuntimeException;
+            }
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 

@@ -4,6 +4,8 @@ namespace App\Tests\Validator;
 
 use App\Entity\Enum\RadioStation\DabChannel as DabChannelEnum;
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Validator\DabChannel;
 use App\Validator\DabChannelValidator;
 use App\Validator\HexColor;
@@ -25,7 +27,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         ];
 
         foreach ($frequencyToDabChannel as $frequency => $dabChannel) {
-            $radioStation = (new RadioStation)
+            $radioStation = (new RadioStation('91.00', 'Name', new RadioTable('Name', new User('Name'))))
                 ->setFrequency($frequency)
                 ->setDabChannel($dabChannel)
             ;
@@ -42,7 +44,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         ];
 
         foreach ($frequencyToDabChannel as $frequency => $dabChannel) {
-            $radioStation = (new RadioStation)
+            $radioStation = (new RadioStation('91.00', 'Name', new RadioTable('Name', new User('Name'))))
                 ->setFrequency($frequency)
                 ->setDabChannel($dabChannel)
             ;

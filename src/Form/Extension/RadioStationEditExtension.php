@@ -4,6 +4,7 @@ namespace App\Form\Extension;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use App\Form\RadioStationEditType;
 use RuntimeException;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -43,15 +44,9 @@ class RadioStationEditExtension extends AbstractTypeExtension
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        $radioStation = $form->getData();
+        $radioTable = $this->getRadioTable($form);
 
-        if (false === $radioStation instanceof RadioStation) {
-            throw new RuntimeException;
-        }
-
-        /** @var RadioStation $radioStation */
-
-        $visibleColumns = $radioStation->getRadioTable()->getColumns();
+        $visibleColumns = $radioTable->getColumns();
         $formChildrenToHide = [];
 
         /** @var FormInterface[] $form */
@@ -73,6 +68,17 @@ class RadioStationEditExtension extends AbstractTypeExtension
         foreach ($view as $childName => $child) {
             $child->vars['disabled_radio_table_column'] = in_array($childName, $formChildrenToHide);
         }
+    }
+
+    private function getRadioTable(FormInterface $form): RadioTable
+    {
+        $radioStation = $form->getData();
+
+        if (!$radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
+
+        return $radioStation->getRadioTable();
     }
 
     static public function getExtendedTypes(): array

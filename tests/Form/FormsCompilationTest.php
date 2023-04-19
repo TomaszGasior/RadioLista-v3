@@ -5,6 +5,7 @@ namespace App\Tests\Form;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Form\RadioStationAddType;
 use App\Form\RadioStationEditType;
 use App\Form\RadioStationBulkRemoveType;
 use App\Form\RadioTableCreateType;
@@ -53,13 +54,14 @@ class FormsCompilationTest extends KernelTestCase
 
         self::ensureKernelShutdown();
 
+        yield 'RadioStationAddType' => [RadioStationAddType::class, null, ['radio_table' => $radioTable]];
         yield 'RadioStationEditType' => [RadioStationEditType::class, $radioStation];
         yield 'RadioStationBulkRemoveType' => [RadioStationBulkRemoveType::class, null, ['radio_table' => $radioTable]];
-        yield 'RadioTableCreateType' => [RadioTableCreateType::class, $radioTable];
+        yield 'RadioTableCreateType' => [RadioTableCreateType::class, null, ['owner' => $user]];
         yield 'RadioTableSearchType' => [RadioTableSearchType::class];
         yield 'RadioTableSettingsType' => [RadioTableSettingsType::class, $radioTable];
         yield 'SecurityLoginType' => [SecurityLoginType::class];
-        yield 'UserRegisterType' => [UserRegisterType::class, new User];
+        yield 'UserRegisterType' => [UserRegisterType::class];
         yield 'UserSettingsType' => [UserSettingsType::class, $user];
     }
 

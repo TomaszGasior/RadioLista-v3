@@ -20,29 +20,17 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
 
     protected function createEntity(int $i): object
     {
-        $radioTable = new RadioTable;
+        $radioTable = new RadioTable(
+            name: match ($i) {
+                1, 2, 3, 4, 5 => 'Wykaz radiowy #' . $i,
+                default => $this->faker->words(rand(3, 8), true),
+            },
+            owner: match ($i) {
+                1, 2, 3, 4, 5 => $this->getReferenceFrom(UserFixtures::class, 1),
+                default => $this->getReferenceFrom(UserFixtures::class),
+            },
+        );
 
-        // Radio tables for hardcoded users.
-        if ($i <= 6) {
-            $radioTable->setName('Wykaz radiowy #' . $i);
-            $radioTable->setDescription($this->faker->HTMLDescription());
-
-            if ($i <= 3) {
-                $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, 1));
-            }
-            else {
-                $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class, $i < 6 ? 2 : 3));
-                $radioTable->setStatus(Status::PRIVATE);
-            }
-
-            $this->setPrivateFieldOfObject($radioTable, 'creationTime', $this->faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
-            $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $this->faker->dateTimeBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
-
-            return $radioTable;
-        }
-
-        $radioTable->setName($this->faker->words(rand(3, 8), true));
-        $radioTable->setOwner($this->getReferenceFrom(UserFixtures::class));
         $radioTable->setDescription($this->faker->optional()->HTMLDescription());
         if ($this->faker->boolean(25)) {
             $radioTable->setFrequencyUnit(FrequencyUnit::KHZ);

@@ -25,8 +25,8 @@ class RadioStationControllerTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/wykaz/1/dodaj-stacje');
         $form = $crawler->filter('form')->form();
-        $form['radio_station_edit[frequency]'] = '91.25';
-        $form['radio_station_edit[name]'] = 'EXAMPLE_RADIO_STATION_NAME_9125';
+        $form['radio_station_add[frequency]'] = '91.25';
+        $form['radio_station_add[name]'] = 'EXAMPLE_RADIO_STATION_NAME_9125';
         $this->client->submit($form);
 
         $this->client->request('GET', '/wykaz/1');
@@ -94,7 +94,7 @@ class RadioStationControllerTest extends WebTestCase
         $fields->each(function(Crawler $field) {
             $isRequired = $field->getNode(0)->hasAttribute('required');
 
-            if (in_array($field->attr('name'), ['radio_station_edit[frequency]', 'radio_station_edit[name]'])) {
+            if (in_array($field->attr('name'), ['radio_station_add[frequency]', 'radio_station_add[name]'])) {
                 return;
             }
             $this->assertFalse($isRequired, $field->attr('name'));

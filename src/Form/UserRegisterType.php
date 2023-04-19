@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,8 +16,13 @@ class UserRegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $builder->setEmptyData(function (FormInterface $form): User {
+            return new User($form->get('name')->getData());
+        });
+
         $builder
             ->add('name', null, [
+                'empty_data' => '',
                 'help' => 'user.register.form.name.help',
             ])
             ->add('plainPassword', RepeatedType::class, [

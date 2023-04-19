@@ -16,15 +16,17 @@ class UserFixtures extends AbstractEntityFixture
 
     protected function createEntity(int $i): object
     {
-        $user = new User;
+        $user = new User(
+            name: match ($i) {
+                1 => 'radiolista',
+                default => $this->faker->unique()->username(),
+            },
+        );
 
-        $user->setName($this->faker->unique()->username());
         $user->setPublicProfile($this->faker->boolean(75));
 
         if (1 === $i) {
-            $user->setName('radiolista');
             $user->setPublicProfile(true);
-
             $this->setPrivateFieldOfObject($user, 'admin', true);
         }
 

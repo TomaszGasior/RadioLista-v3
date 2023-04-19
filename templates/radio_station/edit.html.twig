@@ -42,7 +42,7 @@
 
     {{ form_start(form) }}
 
-    {% include 'radio_station/_radio_station_form.html.twig' %}
+    {% include 'radio_station/_radio_station_form.html.twig' with {radio_table: radio_station.radioTable} %}
 
     <div class="form-action-button">
         <button>{{ 'radio_station.edit.action.save'|trans }}</button>

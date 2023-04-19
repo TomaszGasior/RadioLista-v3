@@ -9,7 +9,7 @@
         <div class="form-columns form-columns-with-number-first">
             {{ form_row(form.frequency, {
                 attr: { 'class': 'frequency-input' },
-                'unit_label': radio_station.radioTable.frequencyUnit.label,
+                'unit_label': radio_table.frequencyUnit.label,
             }) }}
             {{ form_row(form.name) }}
         </div>
@@ -33,7 +33,7 @@
 
     <div class="ui-block-content">
         <div class="form-columns form-columns-with-number-first">
-            {{ form_row(form.power, {'unit_label': radio_station.radioTable.powerUnit.label}) }}
+            {{ form_row(form.power, {'unit_label': radio_table.powerUnit.label}) }}
             {{ form_row(form.location) }}
         </div>
 
@@ -52,8 +52,8 @@
 
     <div class="ui-block-content">
         <div class="form-columns">
-            {{ form_row(form.distance, {'unit_label': radio_station.radioTable.distanceUnit.label}) }}
-            {{ form_row(form.maxSignalLevel, {'unit_label': radio_station.radioTable.maxSignalLevelUnit.label}) }}
+            {{ form_row(form.distance, {'unit_label': radio_table.distanceUnit.label}) }}
+            {{ form_row(form.maxSignalLevel, {'unit_label': radio_table.maxSignalLevelUnit.label}) }}
             {{ form_row(form.quality) }}
         </div>
 

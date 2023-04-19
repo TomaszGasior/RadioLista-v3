@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use App\Repository\RadioStationRepository;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
@@ -21,13 +22,7 @@ class RadioStationCompletionTextType extends AbstractType
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        $radioStation = $form->getRoot()->getData();
-
-        if (!$radioStation instanceof RadioStation) {
-            throw new RuntimeException;
-        }
-
-        $radioTable = $radioStation->getRadioTable();
+        $radioTable = $this->getRadioTable($form->getRoot());
         $column = Column::tryFrom($form->getName());
 
         if (!$column) {
@@ -46,5 +41,16 @@ class RadioStationCompletionTextType extends AbstractType
         // Disable autocompletion from browser's cache,
         // use only completions defined by this application.
         $view->vars['attr']['autocomplete'] = 'off';
+    }
+
+    private function getRadioTable(FormInterface $form): RadioTable
+    {
+        $radioStation = $form->getData();
+
+        if (!$radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
+
+        return $radioStation->getRadioTable();
     }
 }

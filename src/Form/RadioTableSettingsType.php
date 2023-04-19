@@ -2,28 +2,38 @@
 
 namespace App\Form;
 
-use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
+use App\Entity\Enum\RadioTable\Status;
 use App\Entity\Enum\RadioTable\Width;
 use App\Entity\RadioTable;
 use App\Form\Type\IntegerUnitType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RadioTableSettingsType extends RadioTableCreateType
+class RadioTableSettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        parent::buildForm($builder, $options);
-
         $builder
+            ->add('name', null, [
+                'help' => 'radio_table.settings.form.name.help',
+            ])
+            ->add('status', EnumType::class, [
+                'expanded' => true,
+                'class' => Status::class,
+                'choice_label' => function (Status $status) {
+                    return 'radio_table.settings.form.status.choice.'.$status->value;
+                },
+            ])
             ->add('description', CKEditorType::class, [
                 'required' => false,
                 'sanitize_html' => true,
@@ -80,5 +90,20 @@ class RadioTableSettingsType extends RadioTableCreateType
                 'required' => false,
             ])
         ;
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options): void
+    {
+        foreach ($view['status'] as $children) {
+            $children->vars['help'] = 'radio_table.settings.form.status.choice.'.$children->vars['value'].'.help';
+        }
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => RadioTable::class,
+            'label_format' => 'radio_table.settings.form.%name%',
+        ]);
     }
 }

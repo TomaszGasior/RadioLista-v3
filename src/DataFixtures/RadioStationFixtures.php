@@ -20,22 +20,20 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
 
     protected function createEntity(int $i): object
     {
-        $radioStation = new RadioStation;
+        $radioTable = $this->getReferenceFrom(RadioTableFixtures::class);
 
-        // Radio tables for hardcoded users.
-        $radioStation->setRadioTable(
-            $this->getReferenceFrom(RadioTableFixtures::class, $i < 40 ? rand(1, 3) : null)
+        $radioStation = new RadioStation(
+            frequency: match ($radioTable->getFrequencyUnit()) {
+                FrequencyUnit::MHZ => $this->faker->randomFloat(1, 87.5, 108),
+                FrequencyUnit::KHZ => $this->faker->randomFloat(1, 100, 9999),
+            },
+            name: $this->faker->radioStation(),
+            radioTable: $radioTable,
         );
 
-        $radioStation->setFrequency(
-            FrequencyUnit::KHZ === $radioStation->getRadioTable()->getFrequencyUnit()
-            ? $this->faker->randomFloat(1, 100, 9999)
-            : $this->faker->randomFloat(1, 87.5, 108)
-        );
         $radioStation->setPower($this->faker->randomFloat(2, 0, 1000));
         $radioStation->setPrivateNumber($this->faker->numberBetween(1, 100));
 
-        $radioStation->setName($this->faker->radioStation());
         $radioStation->setRadioGroup($this->faker->optional()->radioGroup());
         $radioStation->setCountry($this->faker->optional()->country());
         $radioStation->setLocation($this->faker->optional()->city());

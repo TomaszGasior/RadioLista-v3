@@ -37,8 +37,11 @@ class RadioStationEditType extends AbstractType
             ->add('frequency', DecimalUnitType::class, [
                 'step' => 0.001,
                 'scale' => 3,
+                'empty_data' => '0',
             ])
-            ->add('name', RadioStationCompletionTextType::class)
+            ->add('name', RadioStationCompletionTextType::class, [
+                'empty_data' => '',
+            ])
             ->add('radioGroup', RadioStationCompletionTextType::class, [
                 'required' => false,
             ])

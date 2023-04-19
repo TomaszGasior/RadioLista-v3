@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
+use App\Form\RadioStationAddType;
 use App\Form\RadioStationEditType;
 use App\Form\RadioStationBulkRemoveType;
 use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,13 +30,19 @@ class RadioStationController extends AbstractController
                         #[MapEntity(disabled: true)] RadioStation $template = null,
                         Request $request): Response
     {
-        $radioStation = $template ? $template : new RadioStation;
-        $radioStation->setRadioTable($radioTable);
-
-        $form = $this->createForm(RadioStationEditType::class, $radioStation);
+        $form = match ($template) {
+            null => $this->createForm(RadioStationAddType::class, null, ['radio_table' => $radioTable]),
+            default => $this->createForm(RadioStationEditType::class, clone $template),
+        };
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $radioStation = $form->getData();
+
+            if (!$radioStation instanceof RadioStation) {
+                throw new RuntimeException;
+            }
+
             $this->entityManager->persist($radioStation);
             $this->entityManager->flush();
 
@@ -47,7 +55,7 @@ class RadioStationController extends AbstractController
 
         return $this->render('radio_station/add.html.twig', [
             'form' => $form->createView(),
-            'radio_station' => $radioStation,
+            'radio_table' => $radioTable,
         ]);
     }
 
@@ -82,13 +90,11 @@ class RadioStationController extends AbstractController
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioStation', statusCode: 404)]
     public function copy(RadioStation $radioStation): Response
     {
-        $template = clone $radioStation;
-
         $this->addFlash('notice', 'radio_station.add.notification.copied');
 
         return $this->forward(__CLASS__ . '::add', [
             'radioTableId' => $radioStation->getRadioTable()->getId(),
-            'template' => $template,
+            'template' => $radioStation,
         ]);
     }
 
