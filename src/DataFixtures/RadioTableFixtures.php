@@ -14,7 +14,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
 {
     use ReflectionUtilsTrait;
 
-    protected const ENTITIES_NUMBER = 120;
+    protected const ENTITIES_NUMBER = 180;
 
     public function __construct(private Faker $faker) {}
 

@@ -10,7 +10,7 @@ class UserFixtures extends AbstractEntityFixture
 {
     use ReflectionUtilsTrait;
 
-    protected const ENTITIES_NUMBER = 30;
+    protected const ENTITIES_NUMBER = 100;
 
     public function __construct(private Faker $faker, private UserPasswordHasherInterface $passwordEncoder) {}
 

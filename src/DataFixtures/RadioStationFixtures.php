@@ -14,7 +14,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class RadioStationFixtures extends AbstractEntityFixture implements DependentFixtureInterface
 {
-    protected const ENTITIES_NUMBER = 5000;
+    protected const ENTITIES_NUMBER = 16000;
 
     public function __construct(private Faker $faker) {}
 
