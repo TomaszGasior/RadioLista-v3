@@ -5,7 +5,7 @@ namespace App\Tests\Securty\Hasher;
 use App\Entity\User;
 use App\Security\Hasher\RLv1PasswordHasher;
 use App\Util\ReflectionUtilsTrait;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
@@ -46,7 +46,7 @@ class RLv1PasswordHasherTest extends TestCase
         $user = new User('Name');
         $user->setPassword(self::PASSWORD_HASH);
 
-        $this->setPrivateFieldOfObject($user, 'registerDate', new DateTime(self::USER_REGISTER_DATE));
+        $this->setPrivateFieldOfObject($user, 'registerDate', new DateTimeImmutable(self::USER_REGISTER_DATE));
 
         return $userPasswordHasher->isPasswordValid($user, $password);
     }

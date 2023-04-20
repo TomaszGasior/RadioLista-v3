@@ -33,9 +33,9 @@ class UserFixtures extends AbstractEntityFixture
         $user->setPassword($this->passwordEncoder->hashPassword($user, $user->getName()));
         $user->setAboutMe($this->faker->optional()->HTMLDescription());
 
-        $registerDate = $this->faker->dateTimeBetween('2012-07-01', '-1 year');
+        $registerDate = $this->faker->dateTimeImmutableBetween('2012-07-01', '-1 year');
         $this->setPrivateFieldOfObject($user, 'registerDate', $registerDate);
-        $this->setPrivateFieldOfObject($user, 'lastActivityDate', $this->faker->dateTimeBetween($registerDate, 'now'));
+        $this->setPrivateFieldOfObject($user, 'lastActivityDate', $this->faker->dateTimeImmutableBetween($registerDate, 'now'));
 
         return $user;
     }

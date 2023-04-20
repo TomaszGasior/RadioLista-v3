@@ -11,7 +11,7 @@ use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
 use App\Entity\Enum\RadioTable\PowerUnit;
 use App\Entity\Enum\RadioTable\Status;
 use App\Repository\RadioTableRepository;
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,11 +68,11 @@ class RadioTable
     #[Assert\Valid]
     private Appearance $appearance;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $creationTime;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $creationTime;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private DateTime $lastUpdateTime;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private DateTimeImmutable $lastUpdateTime;
 
     #[ORM\Column(type: Types::SMALLINT, enumType: FrequencyUnit::class)]
     private FrequencyUnit $frequencyUnit = FrequencyUnit::MHZ;
@@ -89,8 +89,8 @@ class RadioTable
         $this->owner = $owner;
 
         $this->appearance = new Appearance;
-        $this->creationTime = new DateTime;
-        $this->lastUpdateTime = new DateTime;
+        $this->creationTime = new DateTimeImmutable;
+        $this->lastUpdateTime = new DateTimeImmutable;
     }
 
     public function __clone()
@@ -180,7 +180,7 @@ class RadioTable
     }
 
     /**
-     * Nullable for backward compatibility. Added in 3.14 version.
+     * Nullable for backward compatibility. Added in v3.14.
      */
     public function getCreationTime(): ?DateTimeInterface
     {
@@ -194,7 +194,7 @@ class RadioTable
 
     public function refreshLastUpdateTime(): self
     {
-        $this->lastUpdateTime = new DateTime;
+        $this->lastUpdateTime = new DateTimeImmutable;
 
         return $this;
     }

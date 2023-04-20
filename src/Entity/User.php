@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Doctrine\EntityListener\UserListener;
 use App\Repository\UserRepository;
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,11 +34,11 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $password;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private DateTime $lastActivityDate;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private DateTimeImmutable $lastActivityDate;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private DateTime $registerDate;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private DateTimeImmutable $registerDate;
 
     #[ORM\Column(type: Types::STRING, length: 2000, nullable: true)]
     #[Assert\Length(max: 2000)]
@@ -57,8 +57,8 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     {
         $this->name = $name;
 
-        $this->lastActivityDate = new DateTime;
-        $this->registerDate = new DateTime;
+        $this->lastActivityDate = new DateTimeImmutable;
+        $this->registerDate = new DateTimeImmutable;
     }
 
     public function getId(): ?int
@@ -93,7 +93,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
 
     public function refreshLastActivityDate(): self
     {
-        $this->lastActivityDate = new DateTime;
+        $this->lastActivityDate = new DateTimeImmutable;
 
         return $this;
     }

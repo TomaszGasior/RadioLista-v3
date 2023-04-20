@@ -36,8 +36,8 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
             $radioTable->setFrequencyUnit(FrequencyUnit::KHZ);
         }
 
-        $this->setPrivateFieldOfObject($radioTable, 'creationTime', $this->faker->dateTimeBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
-        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $this->faker->dateTimeBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
+        $this->setPrivateFieldOfObject($radioTable, 'creationTime', $this->faker->dateTimeImmutableBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
+        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $this->faker->dateTimeImmutableBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
 
         if ($this->faker->boolean(20)) {
             $this->setPrivateFieldOfObject($radioTable, 'creationTime', null);

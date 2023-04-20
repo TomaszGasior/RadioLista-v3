@@ -4,6 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Enum\RadioTable\Column;
 use BackedEnum;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Faker\Factory;
 use Faker\Generator;
 
@@ -29,6 +32,19 @@ class Faker extends Generator
     public function randomEnum(string $enumFqcn): BackedEnum
     {
         return $this->randomElement($enumFqcn::cases());
+    }
+
+    public function dateTimeImmutableBetween(string|DateTimeInterface $startDate = '-30 years',
+                                             string|DateTimeInterface $endDate = 'now'): DateTimeImmutable
+    {
+        if ($startDate instanceof DateTimeImmutable) {
+            $startDate = DateTime::createFromImmutable($startDate);
+        }
+        if ($endDate instanceof DateTimeImmutable) {
+            $endDate = DateTime::createFromImmutable($endDate);
+        }
+
+        return DateTimeImmutable::createFromMutable($this->dateTimeBetween($startDate, $endDate));
     }
 
     public function radioStation(): string

@@ -9,7 +9,7 @@ use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -40,7 +40,7 @@ class TestsFixtures extends Fixture
             ->setDescription('test_radio_table_description')
             ->setColumns(Column::cases())
         ;
-        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new DateTime('2018-05-01'));
+        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new DateTimeImmutable('2018-05-01'));
 
         $radioStation = (new RadioStation('100.95', 'test_radio_station_name', $radioTable))
             ->setPolarization(Polarization::HORIZONTAL)
