@@ -29,8 +29,8 @@ class RadioStationControllerTest extends WebTestCase
         $form['radio_station_add[name]'] = 'EXAMPLE_RADIO_STATION_NAME_9125';
         $this->client->submit($form);
 
-        $this->client->request('GET', '/wykaz/1');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/wykaz/1');
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString('EXAMPLE_RADIO_STATION_NAME_9125', $content);
     }
 
@@ -41,8 +41,8 @@ class RadioStationControllerTest extends WebTestCase
         $form['radio_station_edit[name]'] = 'CHANGED_RADIO_STATION_NAME';
         $this->client->submit($form);
 
-        $this->client->request('GET', '/wykaz/1');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/wykaz/1');
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString('CHANGED_RADIO_STATION_NAME', $content);
         $this->assertStringNotContainsString('test_radio_station_name', $content);
     }
@@ -55,8 +55,8 @@ class RadioStationControllerTest extends WebTestCase
         $form['radio_station_edit[name]'] = 'COPIED_RADIO_STATION_NAME';
         $this->client->submit($form);
 
-        $this->client->request('GET', '/wykaz/1');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/wykaz/1');
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString('COPIED_RADIO_STATION_NAME', $content);
     }
 
@@ -107,8 +107,8 @@ class RadioStationControllerTest extends WebTestCase
         $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();
         $this->client->submit($form);
 
-        $this->client->request('GET', '/wykaz/1');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/wykaz/1');
+        $content = $crawler->filter('main')->html();
         $this->assertStringNotContainsString('test_radio_station_name', $content);
         $this->assertStringContainsString('test_second_radio_station_name', $content);
         $this->assertStringContainsString('test_third_radio_station_name', $content);
@@ -126,8 +126,8 @@ class RadioStationControllerTest extends WebTestCase
         }
         $this->client->submit($form);
 
-        $this->client->request('GET', '/wykaz/1');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/wykaz/1');
+        $content = $crawler->filter('main')->html();
         $this->assertStringNotContainsString('test_radio_station_name', $content);
         $this->assertStringNotContainsString('test_second_radio_station_name', $content);
         $this->assertStringContainsString('test_third_radio_station_name', $content);

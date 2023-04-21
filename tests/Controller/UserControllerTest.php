@@ -28,7 +28,7 @@ class UserControllerTest extends WebTestCase
         $this->client->submit($form);
 
         $crawler = $this->client->request('GET', '/profil/test_user');
-        $content = $crawler->html();
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString($exampleContent, $content);
     }
 

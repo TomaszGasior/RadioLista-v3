@@ -48,8 +48,8 @@ class RadioTableControllerTest extends WebTestCase
         $form['radio_table_create[name]'] = 'EXAMPLE_RADIO_TABLE_NAME';
         $this->client->submit($form);
 
-        $this->client->request('GET', '/moje-wykazy');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/moje-wykazy');
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString('EXAMPLE_RADIO_TABLE_NAME', $content);
     }
 
@@ -60,8 +60,8 @@ class RadioTableControllerTest extends WebTestCase
         $form['radio_table_settings[name]'] = 'CHANGED_RADIO_TABLE_NAME';
         $this->client->submit($form);
 
-        $this->client->request('GET', '/moje-wykazy');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/moje-wykazy');
+        $content = $crawler->filter('main')->html();
         $this->assertStringContainsString('CHANGED_RADIO_TABLE_NAME', $content);
         $this->assertStringNotContainsString('test_radio_table_name', $content);
     }
@@ -72,8 +72,8 @@ class RadioTableControllerTest extends WebTestCase
         $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();
         $this->client->submit($form);
 
-        $this->client->request('GET', '/moje-wykazy');
-        $content = $this->client->getResponse()->getContent();
+        $crawler = $this->client->request('GET', '/moje-wykazy');
+        $content = $crawler->filter('main')->html();
         $this->assertStringNotContainsString('test_radio_table_name', $content);
     }
 }

@@ -53,8 +53,9 @@ class ChangeUserPassCommandTest extends WebTestCase
 
         $crawler = $this->client->request('GET', '/moje-wykazy');
         $response = $this->client->getResponse();
+        $content = $crawler->filter('main')->html();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertStringContainsString('test_radio_table_name', $response->getContent());
+        $this->assertStringContainsString('test_radio_table_name', $content);
     }
 }
