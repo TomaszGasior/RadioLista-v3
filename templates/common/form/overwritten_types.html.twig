@@ -1,7 +1,11 @@
 {% block form_row %}
     {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
-    <div class="form-item">
+    {% set row_attr = row_attr|merge({
+        class: ('form-item ' ~ row_attr.class ?? '')|trim,
+    }) %}
+
+    <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         <div>
             {{ form_label(form) }}
         </div>
@@ -14,7 +18,11 @@
 {% block checkbox_row %}
     {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
-    <div class="form-item form-item-checkbox">
+    {% set row_attr = row_attr|merge({
+        class: ('form-item form-item-checkbox ' ~ row_attr.class ?? '')|trim,
+    }) %}
+
+    <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         <div>
             {{ form_widget(form, {attr: {'aria-describedby': aria_describedby|trim}}) }}
             {{ form_label(form) }}

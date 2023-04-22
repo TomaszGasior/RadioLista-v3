@@ -1,27 +1,12 @@
-{% use 'form_div_layout.html.twig' %}
 {% use 'common/form/overwritten_types.html.twig' %}
-{% use 'common/form/custom_types.html.twig' %}
 
-{% block form_label %}
+{% block form_row %}
     {% if disabled_radio_table_column %}
-        <div class="radio-station-disabled-column" title="{{ 'radio_station.edit.text.disabled_radio_table_column'|trans }}">
+        {% set row_attr = row_attr|merge({
+            class: 'radio-station-disabled-column',
+            title: 'radio_station.edit.text.disabled_radio_table_column'|trans
+        }) %}
     {% endif %}
 
     {{ parent() }}
-
-    {% if disabled_radio_table_column %}
-        </div>
-    {% endif %}
-{% endblock %}
-
-{% block form_widget %}
-    {% if disabled_radio_table_column %}
-        <div class="radio-station-disabled-column" title="{{ 'radio_station.edit.text.disabled_radio_table_column'|trans }}">
-    {% endif %}
-
-    {{ parent() }}
-
-    {% if disabled_radio_table_column %}
-        </div>
-    {% endif %}
 {% endblock %}
