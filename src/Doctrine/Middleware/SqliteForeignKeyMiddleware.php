@@ -8,6 +8,15 @@ use Doctrine\DBAL\Driver\Middleware;
 use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 
+/**
+ * The following middleware enables foreign keys when using SQLite database.
+ * This makes SQLite behavior in testing and development environment consistent
+ * with MySQL database used in production or containerized environment.
+ *
+ * This class has been copy-pasted from Doctrine DBAL.
+ *
+ * @see \Doctrine\DBAL\Driver\AbstractSQLiteDriver\Middleware\EnableForeignKeys
+ */
 class SqliteForeignKeyMiddleware implements Middleware
 {
     public function wrap(Driver $driver): Driver
