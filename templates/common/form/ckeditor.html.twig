@@ -1,7 +1,7 @@
 {% use '@FOSCKEditor/Form/ckeditor_widget.html.twig' %}
 
 {% block ckeditor_widget %}
-    {% set attr = attr|merge({ class: 'ckeditor' }) %}
+    {% set attr = attr|merge({ class: 'with-ckeditor' }) %}
     {{ parent() }}
 
     <script>
