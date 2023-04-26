@@ -1,5 +1,7 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 fos_ck_editor:
+    base_path: "build/ckeditor"
+    js_path:   "build/ckeditor/ckeditor.js"
     configs:
         main:
             height: 200
