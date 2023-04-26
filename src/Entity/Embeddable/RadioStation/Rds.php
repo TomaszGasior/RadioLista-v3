@@ -12,7 +12,7 @@ class Rds
     /**
      * Programme Service
      */
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
     #[Assert\All([
         new Assert\Type('array'),
         new Assert\All([new Assert\Type('string')]),
@@ -22,7 +22,7 @@ class Rds
     /**
      * Radio Text
      */
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
     #[Assert\All([new Assert\Type('string')])]
     private $rt = [];
 

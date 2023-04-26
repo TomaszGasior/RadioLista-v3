@@ -39,7 +39,7 @@ class RadioTable
     #[ORM\Column(type: Types::SMALLINT, enumType: Status::class)]
     private Status $status = Status::PUBLIC;
 
-    #[ORM\Column(type: Types::ARRAY, enumType: Column::class)]
+    #[ORM\Column(type: Types::JSON, enumType: Column::class)]
     #[Assert\Expression(
         'frequency in value && name in value',
         values: ['frequency' => Column::FREQUENCY, 'name' => Column::NAME]
