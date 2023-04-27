@@ -7,6 +7,7 @@ use App\Entity\Enum\RadioStation\Background;
 use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
+use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\RadioStation;

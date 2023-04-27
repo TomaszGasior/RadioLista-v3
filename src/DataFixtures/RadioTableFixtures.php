@@ -55,12 +55,7 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
             $radioTable->setStatus($faker->randomEnum(Status::class));
         }
         $radioTable->setSorting($faker->randomElement(Column::getSortable()));
-        $radioTable->setColumns(
-            array_unique(array_merge(
-                [Column::FREQUENCY, Column::NAME],
-                $faker->randomEnum(Column::class)
-            ))
-        );
+        $radioTable->setColumns($faker->columns());
 
         $appearance = $radioTable->getAppearance();
         $appearance->setWidthType($faker->randomEnum(Width::class));

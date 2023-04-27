@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Enum\RadioTable\Column;
 use App\Util\ReflectionUtilsTrait;
 use BackedEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -146,6 +147,20 @@ trait FixtureTrait
             public function randomEnum(string $enumFqcn): BackedEnum
             {
                 return $this->randomElement($enumFqcn::cases());
+            }
+
+            public function columns(): array
+            {
+                $columns = $this->randomElements(Column::cases(), $this->numberBetween(2, count(Column::cases())));
+
+                if (!in_array(Column::FREQUENCY, $columns)) {
+                    $columns[] = Column::FREQUENCY;
+                }
+                if (!in_array(Column::NAME, $columns)) {
+                    $columns[] = Column::NAME;
+                }
+
+                return $this->shuffleArray($columns);
             }
         });
     }
