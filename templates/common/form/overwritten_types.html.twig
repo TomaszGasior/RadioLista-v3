@@ -56,12 +56,11 @@
         <fieldset class="form-group">
             <legend class="sr-only">{{ form_label(form)|striptags }}</legend>
 
+            {{ form_errors(form) }}
+
             {% for child in form %}
                 {{ form_row(child, {attr: {'aria-describedby': aria_describedby|trim}}) }}
             {% endfor %}
-
-            {{ form_errors(form) }}
-            {{ form_help(form) }}
         </fieldset>
     {% else %}
         {{ form_row(form) }}

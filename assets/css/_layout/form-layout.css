@@ -45,6 +45,11 @@
     margin: 7px 0 0;
     font-weight: bold;
 }
+.form-group .form-error-message {
+    /* keep in sync with .form-item margin */
+    margin: 0 0 20px;
+}
+
 .form-help-message {
     font-size: 0.9em;
     font-style: italic;
