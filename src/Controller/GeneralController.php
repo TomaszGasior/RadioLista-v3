@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dto\RadioTableSearchDto;
 use App\Form\RadioTableSearchType;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,20 +65,18 @@ class GeneralController extends AbstractController
     #[Route(['pl' => '/szukaj', 'en' => '/search'], name: 'search_radio_tables')]
     public function searchRadioTables(Request $request): Response
     {
-        $form = $this->createForm(RadioTableSearchType::class);
+        $data = new RadioTableSearchDto;
+
+        $form = $this->createForm(RadioTableSearchType::class, $data);
         $form->handleRequest($request);
 
-        $searchTerm = $form->get('s')->getData();
-
-        if (!$searchTerm) {
-            return $this->redirectToRoute('homepage');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $radioTables = $this->radioTableRepository->findPublicBySearchTerm($data->searchTerm);
         }
 
-        $radioTables = $this->radioTableRepository->findPublicBySearchTerm($searchTerm);
-
         return $this->render('general/search_radio_tables.html.twig', [
-            'radio_tables' => $radioTables,
-            'search_term' => $searchTerm,
+            'radio_tables' => $radioTables ?? [],
+            'search_term' => $data->searchTerm,
             'search_form' => $form->createView(),
         ]);
     }

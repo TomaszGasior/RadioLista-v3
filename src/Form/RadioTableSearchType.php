@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Dto\RadioTableSearchDto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +14,7 @@ class RadioTableSearchType extends AbstractType
     {
         $builder
             ->add('s', SearchType::class, [
+                'property_path' => 'searchTerm',
                 'attr' => [
                     'placeholder' => 'common.search_form.form.s.help',
                 ],
@@ -29,8 +31,10 @@ class RadioTableSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'data_class' => RadioTableSearchDto::class,
             'label_format' => 'common.search_form.form.%name%',
             'csrf_protection' => false,
+            'validation_error_generic_notification' => false,
         ]);
     }
 }

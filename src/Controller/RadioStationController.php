@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dto\RadioStationBulkRemoveDto;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Form\RadioStationAddType;
@@ -125,25 +126,23 @@ class RadioStationController extends AbstractController
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function bulkRemove(RadioTable $radioTable, Request $request): Response
     {
-        $form = $this->createForm(RadioStationBulkRemoveType::class, null, ['radio_table' => $radioTable]);
+        $data = new RadioStationBulkRemoveDto;
+
+        $form = $this->createForm(RadioStationBulkRemoveType::class, $data, ['radio_table' => $radioTable]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $chosenToRemove = $form->getData()['chosenToRemove'];
-
-            if (count($chosenToRemove) > 0) {
-                foreach ($chosenToRemove as $radioStation) {
-                    $this->entityManager->remove($radioStation);
-                }
-                $this->entityManager->flush();
-
-                $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
-
-                // Form needs to be reloaded to not display removed radio stations.
-                return $this->redirectToRoute('radio_station.bulk_remove', [
-                    'id' => $radioTable->getId(),
-                ]);
+            foreach ($data->radioStationsToRemove as $radioStation) {
+                $this->entityManager->remove($radioStation);
             }
+            $this->entityManager->flush();
+
+            $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
+
+            // Form needs to be reloaded to not display removed radio stations.
+            return $this->redirectToRoute('radio_station.bulk_remove', [
+                'id' => $radioTable->getId(),
+            ]);
         }
 
         return $this->render('radio_station/bulk_remove.html.twig', [

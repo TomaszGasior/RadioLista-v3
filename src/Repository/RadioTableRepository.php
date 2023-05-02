@@ -60,11 +60,6 @@ class RadioTableRepository extends ServiceEntityRepository
 
     public function findPublicBySearchTerm(string $searchTerm): array
     {
-        // Search term equal to "*" causes MySQL error.
-        if ('*' === $searchTerm) {
-            return [];
-        }
-
         // MATCH AGAINST keyword works only with MySQL-like databases.
         if (!($this->getEntityManager()->getConnection()->getDatabasePlatform() instanceof MySqlPlatform)) {
             return [];

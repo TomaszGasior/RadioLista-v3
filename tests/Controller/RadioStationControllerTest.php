@@ -121,7 +121,7 @@ class RadioStationControllerTest extends WebTestCase
         foreach ([0, 1] as $i) {
             // In DomCrawler checkbox is chosen by order, not by input's "value".
             /** @var ChoiceFormField */
-            $checkbox = $form['radio_station_bulk_remove[chosenToRemove]['.$i.']'];
+            $checkbox = $form['radio_station_bulk_remove[radioStationsToRemove]['.$i.']'];
             $checkbox->tick();
         }
         $this->client->submit($form);
