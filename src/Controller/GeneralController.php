@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Dto\RadioTableSearchDto;
+use App\Enum\RadioTableListSorting;
 use App\Form\RadioTableSearchType;
 use App\Repository\RadioTableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,7 @@ class GeneralController extends AbstractController
         ['pl' => '/wszystkie-wykazy/{sorting}', 'en' => '/all-lists/{sorting}'],
         name: 'all_radio_tables', defaults: ['sorting' => 1]
     )]
-    public function allRadioTables(RadioTableListSorting $sorting): Response
+    public function allRadioTables(RadioTableListSorting $sorting = RadioTableListSorting::COUNT): Response
     {
         $radioTables = match ($sorting) {
             RadioTableListSorting::COUNT => $this->radioTableRepository->findPublicOrderedByRadioStationsCount(),
@@ -59,6 +60,8 @@ class GeneralController extends AbstractController
 
         return $this->render('general/all_radio_tables.html.twig', [
             'radio_tables' => $radioTables,
+            'all_sortings' => RadioTableListSorting::cases(),
+            'current_sorting' => $sorting,
         ]);
     }
 
@@ -80,11 +83,4 @@ class GeneralController extends AbstractController
             'search_form' => $form->createView(),
         ]);
     }
-}
-
-enum RadioTableListSorting: int
-{
-    case COUNT = 1;
-    case LAST_UPDATE_TIME = 2;
-    case FREQUENCY_UNIT = 3;
 }

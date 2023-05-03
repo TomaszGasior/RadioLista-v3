@@ -11,11 +11,11 @@
         <h1>{{ 'general.all_radio_tables.title_long'|trans }}</h1>
 
         <ul class="all-radio-tables-navigation">
-            {% for id in [1, 2, 3] %}
+            {% for sorting in all_sortings %}
                 <li>
-                    <a {{ app.request.get('sorting') == id ? 'class="selected"' : '' }}
-                        href="{{ path('all_radio_tables', {'sorting': id}) }}">
-                        {{ ('general.all_radio_tables.sorting.' ~ id)|trans }}
+                    <a {{ current_sorting == sorting ? 'class="selected"' : '' }}
+                        href="{{ path('all_radio_tables', {'sorting': sorting.value}) }}">
+                        {{ ('general.all_radio_tables.sorting.' ~ sorting.value)|trans }}
                     </a>
                 </li>
             {% endfor %}
