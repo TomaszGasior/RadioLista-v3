@@ -6,7 +6,6 @@ use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use RuntimeException;
 
@@ -25,24 +24,18 @@ class RadioStationRepository extends ServiceEntityRepository
 
     public function findForRadioTable(RadioTable $radioTable): array
     {
-        return $this->getQueryBuilderForRadioTable($radioTable)
-            ->getQuery()->getResult();
-    }
-
-    public function getQueryBuilderForRadioTable(RadioTable $radioTable): QueryBuilder
-    {
-        $query = $this->createQueryBuilder('radioStation')
+        $queryBuilder = $this->createQueryBuilder('radioStation')
             ->andWhere('radioStation.radioTable = :radioTable')
             ->setParameter('radioTable', $radioTable)
         ;
 
         switch ($radioTable->getSorting()) {
             case Column::NAME:
-                $query->addOrderBy('radioStation.name', 'ASC');
+                $queryBuilder->addOrderBy('radioStation.name', 'ASC');
                 break;
 
             case Column::PRIVATE_NUMBER:
-                $query
+                $queryBuilder
                     ->addSelect(
                         // Move radio stations without private number to the end of the radio table.
                         'CASE WHEN radioStation.privateNumber IS NULL THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
@@ -53,9 +46,9 @@ class RadioStationRepository extends ServiceEntityRepository
                 break;
         }
 
-        $query->addOrderBy('radioStation.frequency', 'ASC');
+        $queryBuilder->addOrderBy('radioStation.frequency', 'ASC');
 
-        return $query;
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function findColumnAllValuesForRadioTable(RadioTable $radioTable, Column $column): array
