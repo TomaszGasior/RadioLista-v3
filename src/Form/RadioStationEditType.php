@@ -9,18 +9,22 @@ use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
+use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
 use App\Form\DataTransformer\RadioStationRdsPsFrameTransformer;
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
 use App\Form\Type\DecimalUnitType;
 use App\Form\Type\IntegerUnitType;
 use App\Form\Type\RadioStationCompletionTextType;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 
@@ -200,6 +204,25 @@ class RadioStationEditType extends AbstractType
             ->get('rdsRt')
             ->addViewTransformer($this->rdsRtTransformer)
         ;
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options): void
+    {
+        $radioStation = $form->getData();
+        if (!$radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
+
+        $radioTable = $radioStation->getRadioTable();
+
+        foreach ($form->all() as $child) {
+            $column = Column::getByRadioStationPropertyPath((string) $child->getPropertyPath());
+
+            if ($column) {
+                $isColumnEnabled = in_array($column, $radioTable->getColumns());
+                $view[$child->getName()]->vars['disabled_radio_table_column'] = !$isColumnEnabled;
+            }
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

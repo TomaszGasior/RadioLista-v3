@@ -1,7 +1,7 @@
 {% use 'common/form/overwritten_types.html.twig' %}
 
 {% block form_row %}
-    {% if disabled_radio_table_column %}
+    {% if disabled_radio_table_column|default(false) %}
         {% set row_attr = row_attr|merge({
             class: 'radio-station-disabled-column',
             title: 'radio_station.edit.text.disabled_radio_table_column'|trans
