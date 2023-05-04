@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TextHintsType extends AbstractType
+class CompletionTextType extends AbstractType
 {
     public function getParent(): string
     {
@@ -17,13 +17,14 @@ class TextHintsType extends AbstractType
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        $view->vars['hints'] = $options['hints'];
+        $view->vars['completions'] = $options['completions'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'hints' => [],
-        ]);
+        $resolver
+            ->setRequired('completions')
+            ->setAllowedTypes('completions', 'string[]')
+        ;
     }
 }

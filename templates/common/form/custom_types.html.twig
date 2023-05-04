@@ -21,13 +21,13 @@
     {{ block('integer_unit_widget') }}
 {% endblock %}
 
-{% block text_hints_widget %}
-    {% set hints_list_id = id ~ '_hints' %}
-    {% set attr = attr|merge({'list': hints_list_id}) %}
+{% block completion_text_widget %}
+    {% set completions_list_id = id ~ '_completions' %}
+    {% set attr = attr|merge({'list': completions_list_id}) %}
 
-    <datalist id="{{ hints_list_id }}">
-        {% for hint in hints %}
-            <option>{{ hint }}</option>
+    <datalist id="{{ completions_list_id }}">
+        {% for completion in completions %}
+            <option>{{ completion }}</option>
         {% endfor %}
     </datalist>
 

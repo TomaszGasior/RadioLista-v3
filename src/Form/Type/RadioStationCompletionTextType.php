@@ -4,38 +4,45 @@ namespace App\Form\Type;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioStation;
-use App\Entity\RadioTable;
 use App\Repository\RadioStationRepository;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * The following form type is designed for RadioStationEditType.
+ */
 class RadioStationCompletionTextType extends AbstractType
 {
     public function __construct(private RadioStationRepository $radioStationRepository) {}
 
     public function getParent(): string
     {
-        return TextHintsType::class;
+        return CompletionTextType::class;
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        $radioTable = $this->getRadioTable($form->getRoot());
-        $column = Column::tryFrom($form->getName());
+        $radioStation = $form->getRoot()->getData();
+        if (!$radioStation instanceof RadioStation) {
+            throw new RuntimeException;
+        }
 
+        $radioTable = $radioStation->getRadioTable();
+
+        $column = Column::getByRadioStationPropertyPath((string) $form->getPropertyPath());
         if (!$column) {
             return;
         }
 
         $isColumnEnabled = in_array($column, $radioTable->getColumns());
-
         if (!$isColumnEnabled) {
             return;
         }
 
-        $view->vars['hints'] = $this->radioStationRepository
+        $view->vars['completions'] = $this->radioStationRepository
             ->findColumnAllValuesForRadioTable($radioTable, $column);
 
         // Disable autocompletion from browser's cache,
@@ -43,14 +50,8 @@ class RadioStationCompletionTextType extends AbstractType
         $view->vars['attr']['autocomplete'] = 'off';
     }
 
-    private function getRadioTable(FormInterface $form): RadioTable
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $radioStation = $form->getData();
-
-        if (!$radioStation instanceof RadioStation) {
-            throw new RuntimeException;
-        }
-
-        return $radioStation->getRadioTable();
+        $resolver->setDefault('completions', []);
     }
 }
