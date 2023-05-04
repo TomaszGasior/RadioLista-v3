@@ -46,4 +46,15 @@ enum Column: string
             Column::PRIVATE_NUMBER,
         ];
     }
+
+    static public function getByRadioStationPropertyPath(string $propertyPath): ?Column
+    {
+        return match ($propertyPath) {
+            'rds.pi' => Column::RDS_PI,
+            'rds.ps' => Column::RDS,
+            'rds.pty' => Column::RDS,
+            'rds.rt' => Column::RDS,
+            default => self::tryFrom($propertyPath),
+        };
+    }
 }
