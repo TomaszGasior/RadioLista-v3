@@ -138,11 +138,6 @@ class RadioStationController extends AbstractController
             $this->entityManager->flush();
 
             $this->addFlash('notice', 'radio_station.bulk_remove.notification.bulk_removed');
-
-            // Form needs to be reloaded to not display removed radio stations.
-            return $this->redirectToRoute('radio_station.bulk_remove', [
-                'id' => $radioTable->getId(),
-            ]);
         }
 
         return $this->render('radio_station/bulk_remove.html.twig', [

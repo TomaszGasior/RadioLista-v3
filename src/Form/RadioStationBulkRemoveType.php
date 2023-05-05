@@ -6,8 +6,10 @@ use App\Dto\RadioStationBulkRemoveDto;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Repository\RadioStationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -16,14 +18,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RadioStationBulkRemoveType extends AbstractType
 {
-    public function __construct(private RadioStationRepository $radioStationRepository) {}
+    public function __construct(
+        private RadioStationRepository $radioStationRepository,
+        private EntityManagerInterface $entityManager,
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('radioStationsToRemove', ChoiceType::class, [
                 'choices' => $this->radioStationRepository->findForRadioTable($options['radio_table']),
-                'choice_label' => 'name',
+                'choice_value' => 'id',
                 'translation_domain' => false,
                 'expanded' => true,
                 'multiple' => true,
@@ -33,19 +38,27 @@ class RadioStationBulkRemoveType extends AbstractType
 
     public function finishView(FormView $view, FormInterface $form, array $options): void
     {
-        $choices = $form->get('radioStationsToRemove')->getConfig()->getAttribute('choice_list')->getChoices();
+        $choiceList = $form->get('radioStationsToRemove')->getConfig()->getAttribute('choice_list');
 
-        foreach ($view['radioStationsToRemove']->children as $name => $childrenView) {
-            $radioStation = $choices[$name] ?? null;
+        if (!$choiceList instanceof ChoiceListInterface) {
+            throw new RuntimeException;
+        }
 
-            if ($radioStation && false === $radioStation instanceof RadioStation) {
+        foreach ($view['radioStationsToRemove']->children as $i => $childView) {
+            $radioStation = $choiceList->getChoicesForValues([$childView->vars['value']])[0];
+
+            if (!$radioStation instanceof RadioStation) {
                 throw new RuntimeException;
             }
 
-            /** @var RadioStation|null $radioStation */
+            // Don't render checkboxes for already removed radio stations.
+            // This is needed because choices are fetched before flushing entity removal to database.
+            if (!$this->entityManager->contains($radioStation)) {
+                unset($view['radioStationsToRemove']->children[$i]);
+                continue;
+            }
 
-            $childrenView->vars['frequency'] = $radioStation ? $radioStation->getFrequency() : null;
-            $childrenView->vars['frequency_unit'] = $options['radio_table']->getFrequencyUnit();
+            $childView->vars['radio_station'] = $radioStation;
         }
     }
 
