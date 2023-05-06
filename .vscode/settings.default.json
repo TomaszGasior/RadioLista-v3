@@ -1,0 +1,26 @@
+{
+    "editor.rulers": [80, 120],
+    "files.trimFinalNewlines": true,
+    "intelephense.environment.phpVersion": "8.1.0",
+
+    "files.exclude": {
+        ".github": true,
+        ".hidden": true,
+        ".phpunit.result.cache": true,
+        ".vscode": true,
+        "*{.lock,-lock.json}": true,
+        "assets/{images,public,fonts}": true,
+        "bin": true,
+        "public/{build,bundles}": true,
+        "var": true,
+    },
+
+    "search.exclude": {
+        "node_modules": true,
+        "vendor": true,
+    },
+
+    "intelephense.references.exclude": [
+        "var",
+    ],
+}

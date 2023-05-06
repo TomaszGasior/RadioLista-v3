@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "EditorConfig.EditorConfig",
+
+        // This extension is not available in https://open-vsx.org/.
+        // If you are using VSCodium please download it from here:
+        // https://marketplace.visualstudio.com/items?itemName=spadin.config-defaults
+        "spadin.config-defaults",
+    ],
+}

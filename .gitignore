@@ -1,4 +1,9 @@
+.vscode/*
+!.vscode/**/*.default.*
+!.vscode/extensions.json
+
 deploy.yaml
+docker-compose.override.yaml
 version
 
 ###> symfony/framework-bundle ###

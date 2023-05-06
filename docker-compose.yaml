@@ -3,8 +3,6 @@ version: '3.3'
 services:
     http:
         build: 'container/http'
-        ports:
-            - '2012:80'
         volumes:
             - '.:/srv:z'
 
@@ -12,7 +10,7 @@ services:
         build: 'container/app'
         environment:
             DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
-            XDEBUG_CONFIG: 'client_port=2014'
+            XDEBUG_CONFIG: 'client_port=2014 client_host=host.containers.internal'
         volumes:
             - '.:/srv:z'
 
@@ -23,8 +21,6 @@ services:
 
     db:
         image: 'mysql:8.0.28'
-        ports:
-            - '2013:3306'
         environment:
             MYSQL_ROOT_PASSWORD: 'toor'
         volumes:
