@@ -13,6 +13,10 @@ abstract class AbstractEntityFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // This is required for data fixtures with big amount of entities,
+        // like radio station fixtures.
+        ini_set('memory_limit', '600M');
+
         foreach (range(1, static::ENTITIES_NUMBER) as $i) {
             $entity = $this->createEntity($i);
 
