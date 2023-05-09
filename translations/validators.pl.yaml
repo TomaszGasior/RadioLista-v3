@@ -4,7 +4,6 @@ radio_table:
 radio_station:
     dab_channel_invalid_for_frequency: "Kanał DAB nie zgadza się z\u00A0częstotliwością."
     first_log_date_invalid_format: 'Format daty jest niepoprawny.'
-    color_invalid_format: 'Kolor w zapisie HEX jest niepoprawny.'
     at_least_one_selected: 'Należy zaznaczyć co najmniej jedną stację.'
 
 user:
