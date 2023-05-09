@@ -1,8 +1,0 @@
-@import '~huebee/huebee.css';
-
-
-/* color picker input */
-
-input.color[style] {
-    box-shadow: none;
-}

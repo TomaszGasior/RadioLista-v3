@@ -3,8 +3,6 @@
 namespace App\Entity\Embeddable\RadioTable;
 
 use App\Entity\Enum\RadioTable\Width;
-use App\Validator\ClassConstantsChoice;
-use App\Validator\HexColor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,14 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Embeddable]
 class Appearance
 {
-    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
-    #[HexColor]
-    private ?string $textColor;
-
-    #[ORM\Column(type: Types::STRING, length: 10, nullable: true)]
-    #[HexColor]
-    private ?string $backgroundColor;
-
     #[ORM\Column(type: Types::SMALLINT, enumType: Width::class)]
     private Width $widthType = Width::STANDARD;
 
@@ -34,30 +24,6 @@ class Appearance
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $collapsedComments = false;
-
-    public function getTextColor(): ?string
-    {
-        return $this->textColor;
-    }
-
-    public function setTextColor(?string $textColor): self
-    {
-        $this->textColor = $textColor;
-
-        return $this;
-    }
-
-    public function getBackgroundColor(): ?string
-    {
-        return $this->backgroundColor;
-    }
-
-    public function setBackgroundColor(?string $backgroundColor): self
-    {
-        $this->backgroundColor = $backgroundColor;
-
-        return $this;
-    }
 
     public function getWidthType(): Width
     {

@@ -1,24 +1,8 @@
 {% extends 'layout.html.twig' %}
 
-{% set appearance = radio_table.appearance %}
-{% set custom_css = '' %}
-
-{% if appearance.textColor %}
-    {% set custom_css = custom_css ~ '.customizable-color { color: %s }'|format(appearance.textColor) %}
-{% endif %}
-
-{% if appearance.backgroundColor %}
-    {% set custom_css = custom_css ~ '.customizable-background { background: %s }'|format(appearance.backgroundColor) %}
-{% endif %}
-
-{% if appearance.widthType == constant('CUSTOM', appearance.widthType) %}
-    {% set custom_css = custom_css ~ '.custom-width .site-width { max-width: %spx }'|format(appearance.customWidth) %}
-{% endif %}
-
 {% block html_classes %}
-    {%- if custom_css %}customized-radio-table{% endif -%}
-    {%- if appearance.widthType == constant('FULL', appearance.widthType) %} full-width{% endif -%}
-    {%- if appearance.widthType == constant('CUSTOM', appearance.widthType) %} custom-width{% endif -%}
+    {%- if radio_table.appearance.widthType == constant('FULL', radio_table.appearance.widthType) %} full-width{% endif -%}
+    {%- if radio_table.appearance.widthType == constant('CUSTOM', radio_table.appearance.widthType) %} custom-width{% endif -%}
 {% endblock %}
 
 {% block page_title %}{{ radio_table.name }}{% endblock %}
@@ -31,7 +15,9 @@
     {{ encore_entry_link_tags('radio-table-show') }}
     {{ encore_entry_script_tags('radio-table-show') }}
 
-    {% if custom_css %}<style>{{ custom_css|raw }}</style>{% endif %}
+    {% if radio_table.appearance.widthType == constant('CUSTOM', radio_table.appearance.widthType) %}
+        <style>{{ '.custom-width .site-width { max-width: %dpx }'|format(radio_table.appearance.customWidth) }}</style>
+    {% endif %}
 {% endblock %}
 
 {% block context_menu %}
@@ -50,12 +36,12 @@
 {% endblock %}
 
 {% block page_content %}
-    <header class="customizable-color">
+    <header>
         <h1>{{ radio_table.name }}</h1>
     </header>
 
     {% if radio_table.radioStationsCount > 0 %}
-        <div class="radio-table-container customizable-color">
+        <div class="radio-table-container">
             {% embed 'radio_table/_radio_table.html.twig' %}
                 {%- block table_class 'radio-table sortable' -%}
 
@@ -162,7 +148,7 @@
             </template>
         </div>
 
-        <div class="radio-table-details customizable-color">
+        <div class="radio-table-details">
             <h3 class="sr-only">{{ 'radio_table.show.heading.details'|trans }}</h3>
 
             {{ radio_table.description|raw }}

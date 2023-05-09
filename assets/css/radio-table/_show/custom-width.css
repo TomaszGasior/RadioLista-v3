@@ -1,0 +1,11 @@
+.full-width .site-width {
+    max-width: 100%;
+}
+
+@media (min-width: 900px)
+{
+    .full-width .site-width, .custom-width .site-width {
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+}

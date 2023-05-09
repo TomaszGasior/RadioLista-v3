@@ -97,8 +97,6 @@ radio_table:
                 '-1': 'Prywatny'
                 '-1.help': 'Wykaz możesz zobaczyć tylko ty.'
             sorting: 'Domyślne sortowanie'
-            appearanceBackgroundColor: 'Kolor tła'
-            appearanceColor: 'Kolor tekstu'
             appearanceWidthType: 'Rozmiar'
             appearanceWidthType.choice:
                 '1': 'rozmiar domyślny'

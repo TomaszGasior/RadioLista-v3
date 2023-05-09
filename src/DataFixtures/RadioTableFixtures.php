@@ -57,10 +57,6 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
         if (Width::CUSTOM === $appearance->getWidthType()) {
             $appearance->setCustomWidth($this->faker->numberBetween(900, 2000));
         }
-        if ($this->faker->boolean()) {
-            $appearance->setBackgroundColor($this->faker->hexcolor());
-            $appearance->setTextColor($this->faker->hexcolor());
-        }
         $appearance->setCollapsedComments($this->faker->boolean());
 
         return $radioTable;

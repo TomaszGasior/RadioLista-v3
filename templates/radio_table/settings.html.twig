@@ -82,17 +82,6 @@
 
         <div class="ui-block-content">
             <div class="form-columns">
-                {{ form_row(form.appearanceBackgroundColor, {attr: {
-                    'class': 'color radio-table-appearance-color',
-                    'autocomplete': 'off',
-                }}) }}
-                {{ form_row(form.appearanceColor, {attr: {
-                    'class': 'color radio-table-appearance-color',
-                    'autocomplete': 'off',
-                }}) }}
-            </div>
-
-            <div class="form-columns">
                 {{ form_row(form.appearanceWidthType, {attr: {
                     'class': 'radio-table-width-type',
                     'data-custom-width-value': constant('CUSTOM', radio_table.appearance.widthType).value,

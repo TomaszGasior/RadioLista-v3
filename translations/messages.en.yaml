@@ -97,8 +97,6 @@ radio_table:
                 '-1': 'Private'
                 '-1.help': 'Your list is available only for you.'
             sorting: 'Default sorting'
-            appearanceBackgroundColor: 'Background color'
-            appearanceColor: 'Text color'
             appearanceWidthType: 'Size'
             appearanceWidthType.choice:
                 '1': 'default size'

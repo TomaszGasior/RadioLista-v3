@@ -13,7 +13,6 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -60,16 +59,6 @@ class RadioTableSettingsType extends AbstractType
                     return 'column.'.$column->value;
                 },
                 'choice_translation_domain' => 'radio_table',
-            ])
-            ->add('appearanceBackgroundColor', TextType::class, [
-                'property_path' => 'appearance.backgroundColor',
-
-                'required' => false,
-            ])
-            ->add('appearanceColor', TextType::class, [
-                'property_path' => 'appearance.textColor',
-
-                'required' => false,
             ])
             ->add('appearanceWidthType', EnumType::class, [
                 'property_path' => 'appearance.widthType',
