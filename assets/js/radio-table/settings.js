@@ -1,5 +1,3 @@
-import '../../css/radio-table/settings.css';
-
 import { RemoveDialogManager } from '../common/RemoveDialogManager.js';
 
 function setupCustomWidthInput()
