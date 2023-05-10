@@ -68,7 +68,7 @@ class RadioStation
     private ?Polarization $polarization = null;
 
     #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
-    #[Assert\Length(max: 100)]
+    #[Assert\Length(max: 50)]
     private ?string $multiplex = null;
 
     #[ORM\Column(type: Types::STRING, length: 5, enumType: DabChannel::class, nullable: true)]
