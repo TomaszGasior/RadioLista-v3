@@ -9,12 +9,15 @@
 }
 
 .rds-popup {
-    background: #fff;
-    color: #000;
-    border: 1px solid #cacaca;
+    --background-color: var(--view-background-color);
+    --border-color: var(--detail-border-color);
+    --shadow-color: rgba(0,0,0, 0.14);
+
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
     border-radius: 7px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0, 0.14);
+    box-shadow: 0 0 10px var(--shadow-color);
     width: 430px;
 
     animation-name: rds_popup_show;
@@ -25,8 +28,11 @@
 }
 
 .rds-popup h2 {
-    background: #eee;
-    color: #555;
+    --background-color: #eee;
+    --text-color: #555;
+
+    background: var(--background-color);
+    color: var(--text-color);
     font-size: 0.9em;
     text-transform: uppercase;
     text-align: center;
@@ -66,7 +72,7 @@
     margin-right: 8px;
 
     white-space: pre;
-    background: rgba(160,160,160, 0.2);
+    background: var(--radio-table-rds-text-background-color);
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
 }
 .rds-popup dd.rds-wrap span {

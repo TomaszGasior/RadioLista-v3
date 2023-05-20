@@ -8,10 +8,9 @@
 }
 
 .main-content > header h1 {
-    color: #E76A00;
+    color: var(--heading-primary-text-color);
     margin: 18px 0 30px;
     font-size: 34px;
-    text-shadow: 0 0 2px #eee;
 
     font-weight: normal;
 }
@@ -20,9 +19,10 @@
     flex-direction: column-reverse;
 }
 .main-content > header h1 .additional {
+    --text-color: #666;
+
     font-size: 15px;
-    color: #000;
-    opacity: 0.55;
+    color: var(--text-color);
     padding-left: 2px;
     padding-top: 5px;
 }
@@ -30,7 +30,6 @@
 .main-content h2, .main-content .h2 {
     font-size: 27px;
     margin: 17px 0;
-    text-shadow: 0 0 2px #eee;
 
     font-weight: normal;
 }

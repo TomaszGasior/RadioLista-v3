@@ -1,6 +1,9 @@
 .site-header {
-    background-color: #fff;
-    border-bottom: 1px solid #dfdfdf;
+    --background-color: var(--view-background-color);
+    --border-color: var(--layout-border-color);
+
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
     padding-top: 9px;
     padding-bottom: 9px;
 
@@ -9,7 +12,9 @@
     z-index: 1000;
 }
 .site-header.develop {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='a' viewBox='0 0 8 8' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Cpath fill='rgba%28255%2C0%2C0%2C0.06%29' d='M0 0h4L0 4zm0 8l8-8v4L4 8z'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url%28%23a%29' d='M0 0h24v24H0z'/%3E%3C/svg%3E");
+    --background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='a' viewBox='0 0 8 8' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Cpath fill='rgba%28255%2C0%2C0%2C0.06%29' d='M0 0h4L0 4zm0 8l8-8v4L4 8z'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath fill='url%28%23a%29' d='M0 0h24v24H0z'/%3E%3C/svg%3E");
+
+    background-image: var(--background-image);
     background-size: 30px;
 }
 .site-header > div {

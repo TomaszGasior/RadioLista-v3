@@ -6,13 +6,15 @@
 }
 
 .search-form input {
-    background: #fff;
-    box-shadow: 0 2px 14px rgba(0,0,0, 0.09);
+    /* https://www.iconfinder.com/icons/298865/search_icon */
+    --background-image: url("data:image/svg+xml,%3Csvg fill='%23777' height='1024' width='973.125' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M960 832L710.875 582.875C746.438 524.812 768 457.156 768 384 768 171.969 596 0 384 0 171.969 0 0 171.969 0 384c0 212 171.969 384 384 384 73.156 0 140.812-21.562 198.875-57L832 960c17.5 17.5 46.5 17.375 64 0l64-64c17.5-17.5 17.5-46.5 0-64zM384 640c-141.375 0-256-114.625-256-256s114.625-256 256-256 256 114.625 256 256-114.625 256-256 256z'/%3E%3C/svg%3E");
+
+    background: var(--ui-block-background-color);
+    box-shadow: 0 2px 14px var(--ui-block-shadow-color);
     font-size: 1.3em;
     padding: 10px 12px 10px 45px;
 
-    /* https://www.iconfinder.com/icons/298865/search_icon */
-    background-image: url("data:image/svg+xml,%3Csvg fill='%23777' height='1024' width='973.125' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M960 832L710.875 582.875C746.438 524.812 768 457.156 768 384 768 171.969 596 0 384 0 171.969 0 0 171.969 0 384c0 212 171.969 384 384 384 73.156 0 140.812-21.562 198.875-57L832 960c17.5 17.5 46.5 17.375 64 0l64-64c17.5-17.5 17.5-46.5 0-64zM384 640c-141.375 0-256-114.625-256-256s114.625-256 256-256 256 114.625 256 256-114.625 256-256 256z'/%3E%3C/svg%3E");
+    background-image: var(--background-image);
 
     background-size: 25px auto;
     background-position: 12px 11px;

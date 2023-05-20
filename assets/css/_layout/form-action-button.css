@@ -24,8 +24,7 @@
     transform: translateX(100%);
 }
 .form-action-button, .form-action-button::before, .form-action-button::after {
-    /* keep color in sync with body background */
-    background: linear-gradient(rgba(255,255,255, 0), #f7f6f5 40%);
+    background: linear-gradient(rgba(255,255,255, 0), var(--site-background-color) 40%);
 }
 .form-action-button button {
     margin: 0 auto;

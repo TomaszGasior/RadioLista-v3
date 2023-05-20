@@ -41,7 +41,9 @@
 }
 
 .form-error-message {
-    color: #ff0000;
+    --text-color: #ff0000;
+
+    color: var(--text-color);
     margin: 7px 0 0;
     font-weight: bold;
 }

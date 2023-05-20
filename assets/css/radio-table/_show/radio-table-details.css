@@ -13,7 +13,7 @@
     align-items: center;
     width: 100%;
 
-    border-top: 1px solid rgba(0,0,0, 0.05);
+    border-top: 1px solid var(--radio-table-horizontal-line-color);
     font-size: 0.9em;
     margin-top: 25px;
     padding: 14px 34px 0 34px;
@@ -39,7 +39,7 @@
 }
 .radio-table-details dd {
     text-align: left;
-    border-right: 1px solid rgba(0,0,0, 0.05);
+    border-right: 1px solid var(--radio-table-horizontal-line-color);
 }
 .radio-table-details dd:last-child {
     border-right: none;

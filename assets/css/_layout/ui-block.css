@@ -1,12 +1,18 @@
+:root {
+    --ui-block-background-color: var(--view-background-color);
+    --ui-block-border-color: var(--layout-border-color);
+    --ui-block-shadow-color: rgba(0,0,0, 0.09);
+}
+
 .ui-block + .ui-block {
     margin-top: 40px;
 }
 
 .ui-block-content {
-    background: #fff;
-    border: 1px solid #dfdfdf;
+    background: var(--ui-block-background-color);
+    border: 1px solid var(--ui-block-border-color);
     border-radius: 7px;
-    box-shadow: 0 4px 22px rgba(0,0,0, 0.09);
+    box-shadow: 0 4px 22px var(--ui-block-shadow-color);
     padding: 26px 22px;
 }
 .ui-block-heading {

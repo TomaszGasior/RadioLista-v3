@@ -1,11 +1,14 @@
 .information {
+    --background-color: rgba(180,240,255, 0.2);
+    --shadow-color: rgba(0,0,0, 0.07);
+
     border-radius: 7px;
-    box-shadow: 0 4px 22px rgba(0,0,0, 0.07);
+    box-shadow: 0 4px 22px var(--shadow-color);
     padding: 34px;
-    background-color: rgba(180,240,255, 0.2);
+    background-color: var(--background-color);
 }
 .information a {
-    color: #0076AB;
+    --text-color: #0076AB;
 }
 
 @media (max-width: 767px)

@@ -1,6 +1,9 @@
 .site-footer {
-    background: #bb5400;
-    color: #fff;
+    --background-color: #bb5400;
+    --text-color: #fff;
+
+    background: var(--background-color);
+    color: var(--text-color);
 
     padding-top: 30px;
     padding-bottom: 30px;

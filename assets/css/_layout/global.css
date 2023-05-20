@@ -23,11 +23,30 @@
     src: url('../../fonts/Inconsolata.woff2');
 }
 
+:root {
+    --site-background-color: #f7f6f5;
+    --view-background-color: #fff;
+
+    --focus-border-color: #f07f1f;
+    --focus-outline-color: rgb(240,127,31, 0.6);
+
+    --anchor-primary-text-color: #a84c00;
+    --anchor-secondary-text-color: #477e2d;
+
+    --heading-primary-text-color: #D66200;
+    --heading-secondary-text-color: #487631;
+
+    --layout-border-color: #dfdfdf;
+    --detail-border-color: #cacaca;
+}
+
 body {
+    --text-color: #000;
+
     font: 17px "LatoLatinWeb", "Liberation Sans", "Arial", sans-serif;
-    color: #000;
+    color: var(--text-color);
     text-rendering: optimizeLegibility;
-    background: #f7f6f5;
+    background: var(--site-background-color);
 
     cursor: default;
     overflow-y: scroll;
@@ -43,7 +62,11 @@ html {
 }
 
 a {
-    color: #b85200;
+    --text-color: var(--anchor-primary-text-color);
+    --text-color-hover: #0084FF;
+    --text-color-active: #64BE00;
+
+    color: var(--text-color);
     transition: linear 0.1s color;
 
     text-decoration: none;
@@ -52,17 +75,17 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    color: #0084FF;
+    color: var(--text-color-hover);
     outline: none;
 }
 a:active {
-    color: #64BE00;
+    color: var(--text-color-active);
     outline: none;
 }
 
 *:focus-visible {
     outline-offset: 3px;
-    outline: 2px solid rgb(240,127,31, 0.6);
+    outline: 2px solid var(--focus-outline-color);
 }
 
 .sr-only {
@@ -81,7 +104,7 @@ a:active {
     top: 40px;
     transform: translateX(-200%);
 
-    background: #fff;
+    background: var(--view-background-color);
     padding: 15px;
     line-height: 1;
     border: 3px solid currentColor;

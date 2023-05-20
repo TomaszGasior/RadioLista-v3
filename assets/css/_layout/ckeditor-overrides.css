@@ -4,29 +4,34 @@ textarea.with-ckeditor {
 
 .cke_chrome {
     border-radius: 7px !important;
-    border: 1px solid #cacaca !important;
-    background: #f7f7f7 !important;
+    border: 1px solid var(--form-widget-border-color) !important;
+    background: var(--form-widget-background-color) !important;
     outline: 0 solid transparent !important;
     transition: linear 0.1s outline !important;
 
     box-shadow: none !important;
 }
 .cke_chrome:focus-within {
-    outline: 2px solid rgb(240,127,31, 0.6) !important;
-    border-color: #F07F1F !important;
+    outline: 2px solid var(--form-widget-outline-color-focus) !important;
+    border-color: var(--form-widget-border-color-focus) !important;
 }
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a {
     font-family: inherit !important;
 }
 .cke_toolgroup {
-    background: #fff !important;
+    --background-color: #fff;
+
+    background: var(--background-color) !important;
+}
+.cke_toolgroup .cke_button {
+    --background-color-hover: #eaeaea;
+    --background-color-enabled: #cdcdcd;
 }
 .cke_toolgroup .cke_button:hover, .cke_toolgroup .cke_button:focus {
-    background: #eaeaea !important;
+    background: var(--background-color-hover) !important;
 }
 .cke_toolgroup .cke_button_on {
-    background: #cdcdcd !important;
-
+    background: var(--background-color-enabled) !important;
     box-shadow: none !important;
 }
 
@@ -34,10 +39,12 @@ textarea.with-ckeditor {
     background: transparent !important;
 }
 .cke_chrome .cke_wysiwyg_div {
+    --background-color: #fff;
+
     padding: 2px 11px !important;
-    background: #fff !important;
-    border-top: 1px solid #cacaca !important;
-    border-bottom: 1px solid #cacaca !important;
+    background: var(--background-color) !important;
+    border-top: 1px solid var(--form-widget-border-color) !important;
+    border-bottom: 1px solid var(--form-widget-border-color) !important;
 }
 .cke_chrome span.cke_top, .cke_chrome span.cke_bottom {
     box-shadow: none !important;
@@ -57,7 +64,9 @@ textarea.with-ckeditor {
 }
 
 .cke_dialog_body {
-    box-shadow: 0 0 6px #222 !important;
+    --shadow-color: #222;
+
+    box-shadow: 0 0 6px var(--shadow-color) !important;
 }
 .cke_dialog_body .cke_resizer {
     display: none !important;

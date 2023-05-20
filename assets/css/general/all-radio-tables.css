@@ -8,7 +8,7 @@
     margin: 0 10px;
 }
 .all-radio-tables-navigation li a {
-    color: #5D9A3F;
+    --text-color: var(--anchor-secondary-text-color);
 }
 .all-radio-tables-navigation li a.selected {
     font-weight: bold;

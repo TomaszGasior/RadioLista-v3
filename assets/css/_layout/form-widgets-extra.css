@@ -17,10 +17,9 @@
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
 
-    /* keep in sync with input's border color */
-    border-left: 1px solid #cacaca;
+    border-left: 1px solid var(--form-widget-border-color);
 
-    background: #f8f6f6;
+    background: var(--form-widget-background-color);
     width: 70px;
 
     display: flex;

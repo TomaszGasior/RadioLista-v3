@@ -1,3 +1,9 @@
+:root {
+    --radio-table-horizontal-line-color: rgba(0,0,0, 0.05);
+    --radio-table-rds-text-background-color: rgba(160,160,160, 0.2);
+    --radio-table-underline-color: #c3c3c3;
+}
+
 .radio-table {
     width: 100%;
     border-collapse: collapse;
@@ -11,19 +17,21 @@
 }
 .radio-table th {
     padding-bottom: 10px;
-    color: #477E2D;
+    color: var(--anchor-secondary-text-color);
     font-weight: normal;
     white-space: nowrap;
 }
 .radio-table td {
-    border-top: 1px solid rgba(0,0,0, 0.05);
+    border-top: 1px solid var(--radio-table-horizontal-line-color);
 }
 
 .radio-table tbody tr {
+    --background-color-hover-focus: rgba(250,230,205, 0.8);
+
     transition: background 0.1s;
 }
 .radio-table tbody tr:hover, .radio-table tbody tr:focus-within {
-    background: rgba(250,230,205, 0.8);
+    background: var(--background-color-hover-focus);
 }
 
 .radio-table tr.text-bold {
@@ -35,20 +43,27 @@
 .radio-table tr.text-strikethrough {
     text-decoration: line-through;
 }
+.radio-table tr {
+    --background-color-1: rgba(253,198,198, 0.45);
+    --background-color-2: rgba(175,255,150, 0.4);
+    --background-color-3: rgba(156,230,255, 0.35);
+    --background-color-4: rgba(255,255,120, 0.3);
+    --background-color-5: rgba(255,177,255, 0.3);
+}
 .radio-table tr.background-1 {
-    background: rgba(253,198,198, 0.45) !important;
+    background: var(--background-color-1) !important;
 }
 .radio-table tr.background-2 {
-    background: rgba(175,255,150, 0.4) !important;
+    background: var(--background-color-2) !important;
 }
 .radio-table tr.background-3 {
-    background: rgba(156,230,255, 0.35) !important;
+    background: var(--background-color-3) !important;
 }
 .radio-table tr.background-4 {
-    background: rgba(255,255,120, 0.3) !important;
+    background: var(--background-color-4) !important;
 }
 .radio-table tr.background-5 {
-    background: rgba(255,177,255, 0.3) !important;
+    background: var(--background-color-5) !important;
 }
 
 .radio-table .quality {
@@ -61,37 +76,46 @@
 .radio-table .quality .raw::selection {
     opacity: 0;
 }
+.radio-table .quality .dots {
+    --text-color-quality-5: #0BB300;
+    --text-color-quality-4: #A8D300;
+    --text-color-quality-3: #BDAC00;
+    --text-color-quality-2: #FF5E00;
+    --text-color-quality-1: #FF0017;
+}
 .radio-table .quality .dots::before {
-    text-shadow: 0 0 2px #CCC;
     margin-right: -10px;
     letter-spacing: 2px;
 }
 .radio-table .quality.quality-5 .dots::before {
-    color: #0BB300;
+    color: var(--text-color-quality-5);
     content: "●●●●●";
 }
 .radio-table .quality.quality-4 .dots::before {
-    color: #A8D300;
+    color: var(--text-color-quality-4);
     content: "●●●●";
 }
 .radio-table .quality.quality-3 .dots::before {
-    color: #BDAC00;
+    color: var(--text-color-quality-3);
     content: "●●●";
 }
 .radio-table .quality.quality-2 .dots::before {
-    color: #FF5E00;
+    color: var(--text-color-quality-2);
     content: "●●";
 }
 .radio-table .quality.quality-1 .dots::before {
-    color: #FF0017;
+    color: var(--text-color-quality-1);
     content: "●";
 }
 
 .radio-table .rds {
+    --background-color: var(--radio-table-rds-text-background-color);
+    --background-color-focus: rgba(0,0,0, 0.7);
+    --text-color-focus: #fff;
+
     white-space: pre;
-    background: rgba(160,160,160, 0.2);
+    background: var(--background-color);
     font-family: "Inconsolata", "Consolas", "Source Code Pro", "Lucida Console", monospace;
-    color: black;
     padding: 1px 3px;
     transition: background 0.2s, color 0.2s;
 
@@ -101,8 +125,8 @@
     text-decoration: none;
 }
 .radio-table .rds[tabindex]:hover, .radio-table .rds:focus {
-    background: rgba(0,0,0, 0.7);
-    color: #fff;
+    background: var(--background-color-focus);
+    color: var(--text-color-focus);
     outline: none;
 }
 
@@ -111,18 +135,14 @@
     vertical-align: 2px;
 }
 .radio-table abbr {
-    text-decoration: none;
-    border-bottom: 1px dotted #ccc;
+    text-decoration: underline dotted var(--radio-table-underline-color) 1px;
 }
 .radio-table time {
     white-space: nowrap;
 }
 
 .radio-table a:not(:hover) {
-    color: #a84c00;
-    text-decoration: underline;
-    text-decoration-style: dotted;
-    text-decoration-color: rgba(0,0,0, 0.2);
+    text-decoration: underline dotted var(--radio-table-underline-color) 1px;
 }
 
 .radio-table a.external {

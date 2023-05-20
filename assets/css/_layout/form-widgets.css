@@ -1,8 +1,17 @@
+:root {
+    --form-widget-background-color: #f9f9f9;
+    --form-widget-border-color: var(--detail-border-color);
+
+    --form-widget-background-color-focus: var(--ui-block-background-color);
+    --form-widget-border-color-focus: var(--focus-border-color);
+    --form-widget-outline-color-focus: var(--focus-outline-color);
+}
+
 input, textarea, select, button, a.button {
     width: 100%;
     padding: 6px 11px;
-    background: #f9f9f9;
-    border: 1px solid #cacaca;
+    background: var(--form-widget-background-color);
+    border: 1px solid var(--form-widget-border-color);
     border-radius: 7px;
 
     outline: 0 solid transparent;
@@ -13,9 +22,9 @@ input, textarea, select, button, a.button {
     box-sizing: border-box;
 }
 input:focus, textarea:focus, select:focus, button:focus, a.button:focus {
-    outline: 2px solid rgb(240,127,31, 0.6);
-    border-color: #F07F1F;
-    background-color: #fff;
+    outline: 2px solid var(--form-widget-outline-color-focus);
+    border-color: var(--form-widget-border-color-focus);
+    background-color: var(--form-widget-background-color-focus);
 
     /* needed for WebKit/Blink */
     outline-offset: 0px;
@@ -55,34 +64,43 @@ input[type="number"] {
 }
 
 select {
+    --background-image: url("data:image/svg+xml,%3Csvg height='16px' width='45px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+
     /* hide default select arrow */
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
 
-    background-image: url("data:image/svg+xml,%3Csvg height='16px' width='45px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23999' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+    background-image: var(--background-image);
     background-position: center right;
     background-repeat: no-repeat;
     background-size: 30px;
 }
 
 button, a.button {
+    --background-color: #f8f8f8;
+    --background-color-hover: #e9e9e9;
+    --background-color-focus: var(--background-color);
+    --border-color: #ddd;
+    --shadow-color: rgba(0,0,0, 0.17);
+
     display: inline-block;
     width: auto;
     padding-left: 20px;
     padding-right: 20px;
 
-    background: #f8f8f8;
-    color: #ba5400;
+    color: var(--anchor-primary-text-color);
+
+    background: var(--background-color);
     font-weight: bold;
-    border-color: #ddd;
-    box-shadow: 0 0 2px rgba(0,0,0, 0.17);
+    border-color: var(--border-color);
+    box-shadow: 0 0 2px var(--shadow-color);
 }
 button:hover:not(:disabled), a.button:hover {
-    background-color: #e9e9e9;
+    background-color: var(--background-color-hover);
 }
 button:focus, a.button:focus {
-    background-color: #f8f8f8;
+    background-color: var(--background-color-focus);
 }
 button:active, a.button:active {
     opacity: 0.7;
@@ -123,18 +141,20 @@ input[type="checkbox"], input[type="radio"] {
     background-repeat: no-repeat;
     background-size: 9px 9px;
 }
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+    background-image: var(--background-image-checked);
+}
+input[type="checkbox"] {
+    --background-image-checked: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1 1'%3E%3Crect fill='%23FF7500' rx='0.25' x='0' y='0' width='1' height='1'/%3E%3C/svg%3E");
+}
 input[type="radio"] {
+    --background-image-checked: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1 1'%3E%3Crect fill='%23FF7500' rx='1' x='0' y='0' width='1' height='1'/%3E%3C/svg%3E");
+
     border-radius: 10px;
-}
-input[type="checkbox"]:checked {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1 1'%3E%3Crect fill='%23FF7500' rx='0.25' x='0' y='0' width='1' height='1'/%3E%3C/svg%3E");
-}
-input[type="radio"]:checked {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 1 1'%3E%3Crect fill='%23FF7500' rx='1' x='0' y='0' width='1' height='1'/%3E%3C/svg%3E");
 }
 
 input[type="checkbox"]:focus-visible + label, input[type="radio"]:focus-visible + label {
     /* keep in sync with *:focus-visible */
     outline-offset: 3px;
-    outline: 2px solid rgb(240,127,31, 0.6);
+    outline: 2px solid var(--form-widget-outline-color-focus);
 }

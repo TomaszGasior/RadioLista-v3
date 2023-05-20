@@ -13,7 +13,6 @@
 .radio-station-disabled-column label, .radio-station-disabled-column .unit-label {
     opacity: 0.65;
     text-decoration: line-through;
-    text-decoration-color: rgba(0,0,0, 0.5);
 }
 
 .radio-station-rds input, .radio-station-rds textarea {

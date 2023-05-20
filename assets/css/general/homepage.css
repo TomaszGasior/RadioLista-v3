@@ -10,7 +10,7 @@
 }
 .homepage-section h2 {
     font-size: 1.6em;
-    color: #4A673C;
+    color: var(--heading-secondary-text-color);
     margin-bottom: 30px;
 }
 
@@ -46,22 +46,22 @@
     box-sizing: border-box;
     overflow-x: hidden;
 
-    background: #fff;
-    border: 1px solid #dfdfdf;
+    background: var(--radio-tables-list-item-background-color);
+    border: 1px solid var(--radio-tables-list-item-border-color);
     border-radius: 7px;
-    box-shadow: 0 0 6px rgba(0,0,0, 0.09);
+    box-shadow: 0 0 6px var(--radio-tables-list-item-shadow-color);
     padding: 15px 15px;
 
     outline: 0 solid transparent;
     transition: linear 0.1s outline;
 }
 .homepage-radio-tables-list li:hover {
-    background: #fcfcfc;
-    border-color: #e6d1be;
+    background: var(--radio-tables-list-item-background-color-hover);
+    border-color: var(--radio-tables-list-item-border-color-hover);
 }
 .homepage-radio-tables-list li:focus-within {
-    outline: 2px solid rgb(240,127,31, 0.6);
-    border-color: #F07F1F;
+    outline: 2px solid var(--radio-tables-list-item-outline-color);
+    border-color: var(--radio-tables-list-item-border-color-focus);
 }
 .homepage-radio-tables-list a {
     display: block;
@@ -71,7 +71,6 @@
 }
 .homepage-radio-tables-list .date {
     display: block;
-    color: #000;
     opacity: 0.9;
     margin-top: 8px;
     font-size: 0.8em;

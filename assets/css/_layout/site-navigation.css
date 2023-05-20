@@ -14,18 +14,15 @@
     margin-right: 0;
 }
 .site-navigation a {
-    color: #477E2D;
+    --text-color: var(--anchor-secondary-text-color);
+    --text-color-hover: #EE6D00;
 
     display: inline-block;
     padding: 6px 0;
 }
-.site-navigation a:hover {
-    color: #EE6D00;
-}
-.site-navigation li.user-item {
-    color: #111;
-}
 .site-navigation li.user-item::before {
+    --background-color: var(--detail-border-color);
+
     content: '';
     display: inline-block;
     vertical-align: -3px;
@@ -33,14 +30,14 @@
     height: 18px;
     margin-left: -3px;
     margin-right: 17px;
-    background: rgba(0,0,0, 0.16);
+    background: var(--background-color);
 }
 .site-navigation li.user-item + li.user-item::before,
 .site-navigation li.user-item:first-child::before {
     display: none;
 }
 .site-navigation li.user-item a {
-    color: inherit;
+    --text-color: inherit;
 }
 
 @media (min-width: 768px)
@@ -49,16 +46,22 @@
         position: relative;
     }
     .site-navigation li.user-submenu > span {
+        --background-image: url("data:image/svg+xml,%3Csvg height='16px' width='25px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23555' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+
         padding-top: 6px;
         padding-bottom: 6px;
         padding-right: 23px;
 
-        background-image: url("data:image/svg+xml,%3Csvg height='16px' width='25px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon fill='%23555' points='23.303,-0.002 12.467,10.834 1.63,-0.002 -0.454,2.082 12.467,15.002 14.551,12.918 25.387,2.082'/%3E%3C/svg%3E");
+        background-image: var(--background-image);
         background-position: top 54% right;
         background-repeat: no-repeat;
         background-size: 15px;
     }
     .site-navigation li.user-submenu ul {
+        --background-color: var(--view-background-color);
+        --border-color: var(--detail-border-color);
+        --shadow-color: rgba(0,0,0, 0.14);
+
         position: absolute;
         right: 0;
 
@@ -67,10 +70,10 @@
 
         padding: 12px 20px;
         text-align: left;
-        background: #fff;
-        border: 1px solid #cacaca;
+        background: var(--background-color);
+        border: 1px solid var(--border-color);
         border-radius: 7px;
-        box-shadow: 0 0 10px rgba(0,0,0, 0.14);
+        box-shadow: 0 0 10px var(--shadow-color);
 
         /* keep in sync with ::before height */
         margin-top: 10px;
