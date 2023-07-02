@@ -25,6 +25,7 @@ class RadioTableSettingsType extends AbstractType
     {
         $builder
             ->add('name', null, [
+                'empty_data' => '',
                 'help' => 'radio_table.settings.form.name.help',
             ])
             ->add('status', EnumType::class, [
