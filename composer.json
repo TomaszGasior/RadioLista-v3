@@ -17,7 +17,7 @@
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/expression-language": "6.3.*",
-        "symfony/flex": "^1.0",
+        "symfony/flex": "^2.0",
         "symfony/form": "6.3.*",
         "symfony/framework-bundle": "6.3.*",
         "symfony/html-sanitizer": "6.3.*",
@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "dama/doctrine-test-bundle": "^6.0",
+        "dama/doctrine-test-bundle": "^7.0",
         "deployer/deployer": "^7.0",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/browser-kit": "6.3.*",
