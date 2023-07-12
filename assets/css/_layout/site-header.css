@@ -23,6 +23,15 @@
     align-items: center;
 }
 
+@supports (backdrop-filter: blur(1px)) and (color: color-mix(in srgb, white, rgba(255,255,255, 0) 1%))
+{
+    .site-header {
+        --background-color: color-mix(in srgb, var(--view-background-color), rgba(255,255,255, 0) 11%);
+
+        backdrop-filter: blur(6px);
+    }
+}
+
 .site-header .site-logo {
     background: url('../../images/logo.svg') no-repeat;
     background-size: contain;
