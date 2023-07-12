@@ -19,3 +19,13 @@
         background-image: none;
     }
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .information {
+        --background-color: rgba(47,154,180, 0.2);
+    }
+    .information a {
+        --text-color: #5dc1f0;
+    }
+}

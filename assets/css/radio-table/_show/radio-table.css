@@ -162,3 +162,37 @@
     padding: 0 2px;
     fill: currentColor;
 }
+
+@media (prefers-color-scheme: dark)
+{
+    :root {
+        --radio-table-horizontal-line-color: rgba(255,255,255, 0.06);
+        --radio-table-rds-text-background-color: rgba(160,160,160, 0.2);
+        --radio-table-underline-color: #888888;
+    }
+
+    .radio-table tbody tr {
+        --background-color-hover-focus: rgba(102, 65, 20, 0.8);
+    }
+
+    .radio-table tr {
+        --background-color-1: hsla(0, 86%, 20%, 0.5);
+        --background-color-2: hsla(106, 86%, 20%, 0.5);
+        --background-color-3: hsla(199, 86%, 20%, 0.5);
+        --background-color-4: hsla(60, 86%, 20%, 0.5);
+        --background-color-5: hsla(300, 86%, 20%, 0.5);
+    }
+
+    .radio-table .quality .dots {
+        --text-color-quality-5: #0BB300;
+        --text-color-quality-4: #A8D300;
+        --text-color-quality-3: #BDAC00;
+        --text-color-quality-2: #FF5E00;
+        --text-color-quality-1: #FF0017;
+    }
+
+    .radio-table .rds {
+        --background-color-focus: rgba(0,0,0, 0.7);
+        --text-color-focus: #fff;
+    }
+}

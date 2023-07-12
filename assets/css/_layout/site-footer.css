@@ -78,3 +78,11 @@
         margin-left: 20px;
     }
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .site-footer {
+        --background-color: #863c00;
+        --text-color: #f0dbca;
+    }
+}

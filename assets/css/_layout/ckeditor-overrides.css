@@ -18,10 +18,13 @@ textarea.with-ckeditor {
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a {
     font-family: inherit !important;
 }
+
 .cke_toolgroup {
     --background-color: #fff;
 
     background: var(--background-color) !important;
+    border-color: var(--form-widget-border-color) !important;
+    box-shadow: none !important;
 }
 .cke_toolgroup .cke_button {
     --background-color-hover: #eaeaea;
@@ -51,6 +54,10 @@ textarea.with-ckeditor {
     background: none !important;
     border: none !important;
 }
+
+.cke_chrome .cke_bottom.cke_reset_all, .cke_chrome .cke_bottom.cke_reset_all * {
+    color: unset !important;
+}
 .cke_chrome .cke_wordcount {
     text-transform: lowercase;
     padding: 1px 12px 0 0;
@@ -78,4 +85,22 @@ select.cke_dialog_ui_input_select {
     -moz-appearance: menulist;
     -webkit-appearance: menulist;
     background-image: none;
+}
+
+@media (prefers-color-scheme: dark)
+{
+    .cke_toolgroup {
+        --background-color: #444444;
+    }
+    .cke_toolgroup .cke_button {
+        --background-color-hover: #5f5f5f;
+        --background-color-enabled: #1b1b1b;
+    }
+    .cke_toolgroup .cke_button .cke_button_icon {
+        filter: brightness(0.8) invert(1);
+    }
+
+    .cke_chrome .cke_wysiwyg_div {
+        --background-color: #2b2b2b;
+    }
 }

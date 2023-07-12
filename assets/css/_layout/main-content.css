@@ -45,3 +45,10 @@
         font-size: 29px;
     }
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .main-content > header h1 .additional {
+        --text-color: #9c9c9c;
+    }
+}

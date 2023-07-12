@@ -58,3 +58,10 @@
     margin: 7px 0 0;
     opacity: 0.8;
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .form-error-message {
+        --text-color: #ff8181;
+    }
+}

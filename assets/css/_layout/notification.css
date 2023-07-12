@@ -87,3 +87,17 @@
         animation-duration: 0s, 0s;
     }
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .notification {
+        --background-color: rgba(78, 77, 54, 0.9);
+        --border-color: #818181;
+    }
+
+    .notification.error {
+        --background-color: rgba(182,15,15, 0.8);
+        --text-color: #FFF;
+        --border-color: transparent;
+    }
+}

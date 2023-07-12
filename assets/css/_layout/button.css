@@ -54,3 +54,11 @@ a.button {
 
     margin: 0;
 }
+
+@media (prefers-color-scheme: dark)
+{
+    button, a.button {
+        --background-color-hover: #505050;
+        --border-color: #505050;
+    }
+}

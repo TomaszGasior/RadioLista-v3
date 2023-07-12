@@ -73,3 +73,11 @@
 .radio-tables-list-details dt:not(:first-child) {
     margin-left: 20px;
 }
+
+@media (prefers-color-scheme: dark)
+{
+    :root {
+        --radio-tables-list-item-background-color-hover: #423f3c;
+        --radio-tables-list-item-border-color-hover: #5a4634;
+    }
+}

@@ -52,6 +52,8 @@ body {
     overflow-y: scroll;
     margin: 0;
     padding: 0;
+
+    color-scheme: light;
 }
 
 html {
@@ -135,5 +137,36 @@ a:active {
         /* override style from .custom-width and .full-width */
         min-width: 320px !important;
         box-sizing: border-box;
+    }
+}
+
+@media (prefers-color-scheme: dark)
+{
+    :root {
+        --site-background-color: #2c2c2c;
+        --view-background-color: #3a3a3a;
+
+        --focus-border-color: #f07f1f;
+        --focus-outline-color: rgb(240,127,31, 0.6);
+
+        --anchor-primary-text-color: #ffb981;
+        --anchor-secondary-text-color: #b2e499;
+
+        --heading-primary-text-color: #f29c31;
+        --heading-secondary-text-color: #81c260;
+
+        --layout-border-color: #494949;
+        --detail-border-color: #585858;
+    }
+
+    body {
+        --text-color: #eee;
+
+        color-scheme: dark;
+    }
+
+    a {
+        --text-color-hover: #59afff;
+        --text-color-active: #9eeb47;
     }
 }

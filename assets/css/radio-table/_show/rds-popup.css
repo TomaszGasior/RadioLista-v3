@@ -81,3 +81,11 @@
 .rds-popup dd div {
     margin: 5px 0;
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .rds-popup h2 {
+        --background-color: #464646;
+        --text-color: #c0c0c0;
+    }
+}

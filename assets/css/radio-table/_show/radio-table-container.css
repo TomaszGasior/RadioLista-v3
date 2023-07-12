@@ -35,3 +35,10 @@
         margin-right: -5vw;
     }
 }
+
+@media (prefers-color-scheme: dark)
+{
+    .radio-table-container {
+        --overflow-color: rgba(83,70,52, 0.4);
+    }
+}
