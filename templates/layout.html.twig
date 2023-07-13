@@ -21,6 +21,7 @@
         <link rel="icon" href="{{ asset('build/icon.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('build/icon.png') }}">
         {{ encore_entry_link_tags('layout') }}
+        {{ encore_entry_script_tags('layout') }}
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
@@ -143,25 +144,51 @@
                     </div>
                 </div>
 
-                <div>
-                    {% if route_is_multilang %}
+                <div class="switch-group-container">
+                    <div>
                         <div aria-hidden="true" class="secondary-line">
-                            Languages
+                            {{ 'layout.theme_change_title'|trans }}
                         </div>
 
-                        <ul>
-                            {% for locale in locales %}
-                                <li lang="{{ locale }}">
-                                    <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
-                                        aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"
-                                        {% if locale == current_locale %} aria-hidden="true" tabindex="-1" {% endif %}
-                                    >
-                                        {{ locale|language_name(locale=locale)|capitalize }}
-                                    </a>
-                                </li>
-                            {% endfor %}
+                        <ul class="switch-group color-scheme-switches">
+                            <li>
+                                <span tabindex="0" role="button" class="switch-group-item color-scheme-switch" data-color-scheme="light"
+                                    aria-label="{{ 'layout.change_theme_to'|trans({'%theme%': 'layout.theme_light_name'|trans}) }}"
+                                >
+                                    {{ 'layout.theme_light_name'|trans }}
+                                </span>
+                            </li>
+
+                            <li>
+                                <span tabindex="0" role="button" class="switch-group-item color-scheme-switch" data-color-scheme="dark"
+                                    aria-label="{{ 'layout.change_theme_to'|trans({'%theme%': 'layout.theme_dark_name'|trans}) }}"
+                                >
+                                    {{ 'layout.theme_dark_name'|trans }}
+                                </span>
+                            </li>
                         </ul>
-                    {% endif %}
+                    </div>
+
+                    <div>
+                        {% if route_is_multilang %}
+                            <div aria-hidden="true" class="secondary-line">
+                                {{ 'layout.language_change_title'|trans }}
+                            </div>
+
+                            <ul class="switch-group">
+                                {% for locale in locales %}
+                                    <li>
+                                        <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
+                                            aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"
+                                            class="switch-group-item {% if locale == current_locale %}selected{% endif %}"
+                                        >
+                                            {{ locale|language_name(locale=locale)|capitalize }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </footer>
