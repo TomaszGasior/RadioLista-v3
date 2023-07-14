@@ -1,19 +1,6 @@
-/* colors */
-
-body {
-    background: #ededed;
+.main-content > header h1 {
+    color: unset;
 }
-
-a, .main-content > header h1, .site-navigation a {
-    color: #D20000;
-}
-button {
-    background: #fff;
-    color: #D20000;
-}
-
-
-/* hide global elements */
 
 .site-footer ul {
     display: none;
@@ -22,15 +9,12 @@ button {
     visibility: hidden;
 }
 
-
-/* tables */
-
 table {
     width: 100%;
     border-collapse: collapse;
 }
 table tbody tr:hover {
-    background: #ddd;
+    background: var(--view-background-color);
 }
 table td, table th {
     padding: 4px 10px;
@@ -40,7 +24,7 @@ table th {
     white-space: nowrap;
 }
 table td {
-    border-top: 1px solid #dedede;
+    border-top: 1px solid var(--layout-border-color);
 }
 table td.nowrap {
     white-space: nowrap;
