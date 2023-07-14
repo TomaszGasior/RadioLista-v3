@@ -61,7 +61,10 @@ Encore
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
-    .copyFiles({ from: './assets/public' })
+    .copyFiles([
+        { from: './assets/public', pattern: /^(?!ckeditor).*/ },
+        { from: './assets/public', pattern: /ckeditor.*/, to: '[path][name].[ext]' },
+    ])
 
     // .configureBabel((config) => {
     //     config.plugins.push('@babel/plugin-proposal-class-properties');
