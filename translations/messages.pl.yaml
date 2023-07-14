@@ -308,6 +308,7 @@ general:
         text:
             about: "W serwisie RadioLista osoby interesujące się mediami mogą\u00A0publikować różnorodne wykazy radiowe i\u00A0telewi\u00ADzyjne — bandscany, regularne wykazy odbieranych stacji czy\u00A0też prywatne listy ulubionych programów."
             radio_table_updated_at: 'ostatnio zaktualizowano'
+            radio_table_stations_count: '%count% stacja|%count% stacje|%count% stacji'
 
     all_radio_tables:
         title: 'Wszystkie wykazy'

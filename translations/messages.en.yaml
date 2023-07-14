@@ -307,6 +307,7 @@ general:
         text:
             about: "RadioLista is a place in the Web where people interested in the media and the radio can publish various radio and TV lists — bandscans, regular lists of received stations, as well as private lists of favorite broadcasters."
             radio_table_updated_at: 'last updated at'
+            radio_table_stations_count: '%count% station|%count% stations'
 
     all_radio_tables:
         title: 'All lists'

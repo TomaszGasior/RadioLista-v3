@@ -69,11 +69,14 @@
     white-space: nowrap;
     overflow-x: hidden;
 }
-.homepage-radio-tables-list .date {
+.homepage-radio-tables-list .extra-info {
     display: block;
     opacity: 0.9;
     margin-top: 8px;
     font-size: 0.8em;
+}
+.homepage-radio-tables-list .extra-info-item + .extra-info-item {
+    margin-left: 8px;
 }
 
 .search-form {

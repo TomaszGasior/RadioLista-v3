@@ -50,11 +50,19 @@
                         </a>
                     </div>
 
-                    <div class="date">
-                        <span class="sr-only">
-                            — {{ 'general.homepage.text.radio_table_updated_at'|trans }}:
+                    <div class="extra-info">
+                        <span class="extra-info-item">
+                            <span class="sr-only">
+                                {{ 'general.homepage.text.radio_table_updated_at'|trans }}:
+                            </span>
+                            {{ _self.print_date(radio_table.lastUpdateTime) }}
                         </span>
-                        {{ _self.print_date(radio_table.lastUpdateTime) }}
+
+                        <span class="extra-info-item">
+                            {{ 'general.homepage.text.radio_table_stations_count'|trans({
+                                '%count%': radio_table.radioStationsCount,
+                            }) }}
+                        </span>
                     </div>
                 </li>
             {% endfor %}
