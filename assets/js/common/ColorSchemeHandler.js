@@ -8,6 +8,8 @@ export class ColorSchemeHandler
         this.collectMediaRules();
         this.restoreSavedOverridenColorScheme();
 
+        container.querySelector('.color-scheme-switches').hidden = false;
+
         container.querySelectorAll('.color-scheme-switch').forEach(node => {
             node.addEventListener('click', this.onChangeButtonClick.bind(this));
         });
