@@ -47,7 +47,7 @@ services:
     App\EventSubscriber\HttpSecuritySubscriber:
         arguments:
             $cspExtraDomains:
-                - '%env(TRACKER_DOMAIN)%'
+                - '%env(default::key:url:json:TRACKER_SETTINGS)%'
 
     App\EventSubscriber\MaintenanceModeSubscriber:
         arguments:
@@ -62,8 +62,7 @@ services:
 
     App\Twig\TrackerExtension:
         arguments:
-            $domain: '%env(TRACKER_DOMAIN)%'
-            $siteId: '%env(TRACKER_SITE_ID)%'
+            $settings: '%env(json:TRACKER_SETTINGS)%'
 
     App\Twig\VersionExtension:
         arguments:

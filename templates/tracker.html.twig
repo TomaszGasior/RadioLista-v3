@@ -1,12 +1,21 @@
 <script>
     var _paq = window._paq = window._paq || [];
-    {% if user_id %}
-        _paq.push(['setUserId', '{{ user_id }}']);
+
+    {% if user_session_dimension_id %}
+        {%- if is_granted('IS_AUTHENTICATED_REMEMBERED') -%}
+            _paq.push(['setCustomDimension', {{ user_session_dimension_id }}, 'logged in']);
+        {%- else -%}
+            _paq.push(['setCustomDimension', {{ user_session_dimension_id }}, 'anonymous']);
+        {%- endif -%}
     {% endif %}
+
+    _paq.push(["disableCookies"]);
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
+    _paq.push(['enableHeartBeatTimer']);
+
     (function() {
-        var u="//{{ domain }}/";
+        var u="{{ url }}/";
         _paq.push(['setTrackerUrl', u+'matomo.php']);
         _paq.push(['setSiteId', '{{ site_id }}']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -15,5 +24,5 @@
 </script>
 
 <noscript>
-    <img src="//{{ domain }}/matomo.php?idsite={{ site_id }}&amp;rec=1" style="border:0" alt="">
+    <img src="{{ url }}/matomo.php?idsite={{ site_id }}&amp;rec=1" style="border:0" alt="">
 </noscript>

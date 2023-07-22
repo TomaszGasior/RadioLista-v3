@@ -2,15 +2,13 @@
 
 namespace App\Twig;
 
-use App\Entity\User;
-use Symfony\Bundle\SecurityBundle\Security;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TrackerExtension extends AbstractExtension
 {
-    public function __construct(private string $domain, private int $siteId, private Security $security) {}
+    public function __construct(private array $settings) {}
 
     /**
      * @codeCoverageIgnore
@@ -27,12 +25,14 @@ class TrackerExtension extends AbstractExtension
 
     public function printTrackerCode(Environment $twig): string
     {
-        $user = $this->security->getUser();
+        if (empty($this->settings['url']) || empty($this->settings['site_id'])) {
+            return '';
+        }
 
         return $twig->render('tracker.html.twig', [
-            'domain' => $this->domain,
-            'site_id' => $this->siteId,
-            'user_id' => $user instanceof User ? $user->getId() : null,
+            'url' => $this->settings['url'],
+            'site_id' => $this->settings['site_id'],
+            'user_session_dimension_id' => $this->settings['user_session_dimension_id'] ?? null,
         ]);
     }
 }
