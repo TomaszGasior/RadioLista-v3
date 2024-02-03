@@ -54,12 +54,12 @@ class ValidationErrorExtension extends AbstractTypeExtension
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('validation_error_generic_notification', true);
     }
 
-    static public function getExtendedTypes(): array
+    static public function getExtendedTypes(): iterable
     {
         return [FormType::class];
     }

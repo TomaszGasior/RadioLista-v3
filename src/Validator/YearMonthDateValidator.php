@@ -11,7 +11,7 @@ class YearMonthDateValidator extends DateValidator
 {
     public const ALTERNATIVE_PATTERN = '/^(\d{4})(-(0[1-9]|10|11|12))?$/';
 
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof YearMonthDate) {
             throw new UnexpectedTypeException($constraint, YearMonthDate::class);

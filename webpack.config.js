@@ -39,9 +39,6 @@ Encore
     .addStyleEntry('all-radio-tables', './assets/css/general/all-radio-tables.css')
     .addStyleEntry('static-page', './assets/css/general/static-page.css')
 
-    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    // .enableStimulusBridge('./assets/controllers.json')
-
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
