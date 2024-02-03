@@ -3,22 +3,15 @@ framework:
     secret: '%env(APP_SECRET)%'
     error_controller: App\Controller\DarkErrorController::showError
     #csrf_protection: true
-    annotations: false
-    http_method_override: false
-    handle_all_throwables: true
 
-    # Enables session support. Note that the session will ONLY be started if you read or write from it.
-    # Remove or comment this section to explicitly disable session support.
+    # Note that the session will be started ONLY if you read or write from it.
     session:
+        enabled: true
         handler_id: session.handler.native_file
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
-        cookie_secure: auto
-        cookie_samesite: lax
 
     #esi: true
     #fragments: true
-    php_errors:
-        log: true
 
     request:
         formats:
