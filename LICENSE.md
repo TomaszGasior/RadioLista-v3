@@ -1,7 +1,7 @@
 RadioLista-v3 — licencja
 ===
 
-Tomasz Gąsior 2018-2021
+Tomasz Gąsior 2018-2024
 
 - Nikomu nie udzielam żadnych uprawnień do kodu projektu `RadioLista-v3` —
   za wyjątkiem zapisów niniejszej licencji, a także regulaminu hostingu
@@ -18,7 +18,7 @@ Tomasz Gąsior 2018-2021
 RadioLista-v3 — license
 ===
 
-Tomasz Gąsior 2018-2021
+Tomasz Gąsior 2018-2024
 
 English version:
 
