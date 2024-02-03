@@ -13,7 +13,7 @@ RUN apk --no-cache add libstdc++ libx11 libxrender libxext libssl1.1 \
 COPY --from=wkhtmltopdf /bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
 
 RUN apk --no-cache add ttf-inconsolata unzip \
-    && wget http://latofonts.com/download/Lato2OFL.zip -O - > /tmp/lato.zip \
+    && wget https://www.latofonts.com/files/Lato2OFL.zip -O - > /tmp/lato.zip \
     && unzip /tmp/lato.zip -x "__MACOSX/*" -d /usr/share/fonts \
     && fc-cache /usr/share/fonts \
     && rm /tmp/lato.zip \
