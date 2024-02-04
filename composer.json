@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
-        "beberlei/doctrineextensions": "^1.1",
+        "beberlei/doctrineextensions": "dev-master",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.6",
         "fakerphp/faker": "^1.13",

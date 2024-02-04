@@ -4,34 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21e29942afb8119f2d9e7098a499ad81",
+    "content-hash": "4db76bd3c269a2519fe2080923e2d33d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
-            "version": "v1.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "008f162f191584a6c37c03a803f718802ba9dd9a"
+                "reference": "f856052d968a14b4a9d2c32f98d5994fd1d8d6e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/008f162f191584a6c37c03a803f718802ba9dd9a",
-                "reference": "008f162f191584a6c37c03a803f718802ba9dd9a",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/f856052d968a14b4a9d2c32f98d5994fd1d8d6e0",
+                "reference": "f856052d968a14b4a9d2c32f98d5994fd1d8d6e0",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^2.7",
+                "doctrine/orm": "^2.15",
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
+                "doctrine/cache": "^1.11",
                 "friendsofphp/php-cs-fixer": "^2.14",
                 "nesbot/carbon": "*",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
-                "symfony/yaml": "^4.2 || ^5.0",
+                "symfony/yaml": "^4.4 || ^5.3 || ^6.0",
                 "zf1/zend-date": "^1.12",
                 "zf1/zend-registry": "^1.12"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -59,9 +61,9 @@
                 "orm"
             ],
             "support": {
-                "source": "https://github.com/beberlei/DoctrineExtensions/tree/v1.3.0"
+                "source": "https://github.com/beberlei/DoctrineExtensions/tree/master"
             },
-            "time": "2020-11-29T07:37:23+00:00"
+            "time": "2024-01-27T21:17:37+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -8602,7 +8604,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "beberlei/doctrineextensions": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
