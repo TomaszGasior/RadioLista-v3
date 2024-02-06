@@ -65,13 +65,19 @@ class RadioTableRepository extends ServiceEntityRepository
             return [];
         }
 
-        return $this->createQueryBuilder('radioTable')
-            ->andWhere('radioTable.status = :status')
+        $resultSetMapper = $this->createResultSetMappingBuilder('radioTable');
+        $tableName = $this->getClassMetadata()->getTableName();
+
+        $sql = <<< SQL
+            SELECT {$resultSetMapper->generateSelectClause()} FROM {$tableName} as radioTable
+            WHERE radioTable.Status = :status
+            AND MATCH (radioTable.name, radioTable.description) AGAINST (:searchTerm) > 0.0
+        SQL;
+
+        return $this->getEntityManager()
+            ->createNativeQuery($sql, $resultSetMapper)
             ->setParameter('status', Status::PUBLIC)
-            ->andWhere('MATCH(radioTable.name, radioTable.description) AGAINST(:searchTerm) > 0.0')
             ->setParameter('searchTerm', $searchTerm)
-            ->innerJoin('radioTable.owner', 'user')->addSelect('user')
-            ->getQuery()
             ->getResult()
         ;
     }

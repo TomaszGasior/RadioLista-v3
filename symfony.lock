@@ -1,7 +1,4 @@
 {
-    "beberlei/doctrineextensions": {
-        "version": "v1.1.5"
-    },
     "dama/doctrine-test-bundle": {
         "version": "7.3",
         "recipe": {
