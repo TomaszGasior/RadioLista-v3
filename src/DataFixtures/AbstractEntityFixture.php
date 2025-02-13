@@ -21,18 +21,22 @@ abstract class AbstractEntityFixture extends Fixture
             $entity = $this->createEntity($i);
 
             $manager->persist($entity);
-            $this->addReference(static::class . $i, $entity);
+            $this->referenceRepository->addReference('_'.$i, $entity);
         }
 
         $manager->flush();
     }
 
-    protected function getReferenceFrom(string $fixtureClass, int $i = null): object
+    /**
+     * @template T of object
+     * @param class-string<T> $entityClass
+     * @return T
+     */
+    protected function getEntity(string $entityClass, int $i = null): object
     {
-        if (null === $i) {
-            $i = random_int(1, $fixtureClass::ENTITIES_NUMBER);
-        }
+        $references = $this->referenceRepository->getReferencesByClass()[$entityClass];
+        $key = null === $i ? array_rand($references) : ('_'.$i);
 
-        return $this->getReference($fixtureClass . $i);
+        return $this->referenceRepository->getReference($key, $entityClass);
     }
 }

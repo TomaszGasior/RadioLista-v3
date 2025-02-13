@@ -10,6 +10,7 @@ use App\Entity\Enum\RadioStation\Reception;
 use App\Entity\Enum\RadioStation\Type;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\RadioStation;
+use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class RadioStationFixtures extends AbstractEntityFixture implements DependentFixtureInterface
@@ -20,7 +21,7 @@ class RadioStationFixtures extends AbstractEntityFixture implements DependentFix
 
     protected function createEntity(int $i): object
     {
-        $radioTable = $this->getReferenceFrom(RadioTableFixtures::class);
+        $radioTable = $this->getEntity(RadioTable::class);
 
         $radioStation = new RadioStation(
             frequency: match ($radioTable->getFrequencyUnit()) {

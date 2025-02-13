@@ -7,6 +7,7 @@ use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\Enum\RadioTable\Status;
 use App\Entity\Enum\RadioTable\Width;
 use App\Entity\RadioTable;
+use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -26,8 +27,8 @@ class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtu
                 default => $this->faker->words(rand(3, 8), true),
             },
             owner: match ($i) {
-                1, 2, 3, 4, 5 => $this->getReferenceFrom(UserFixtures::class, 1),
-                default => $this->getReferenceFrom(UserFixtures::class),
+                1, 2, 3, 4, 5 => $this->getEntity(User::class, 1),
+                default => $this->getEntity(User::class),
             },
         );
 
