@@ -22,8 +22,7 @@ RUN apk --no-cache add ttf-inconsolata unzip \
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY "php.ini" "$PHP_INI_DIR/conf.d/99-local.ini"
 
-RUN apk --no-cache add su-exec \
-    && curl -sS https://getcomposer.org/installer \
+RUN curl -sS https://getcomposer.org/installer \
     | php -- --install-dir=/usr/local/bin --filename=composer --version 2.5.5
 
 COPY entrypoint.sh /usr/local/bin/custom-entrypoint

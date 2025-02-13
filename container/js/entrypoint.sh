@@ -1,8 +1,7 @@
 #!/bin/sh -e
 
-# Make it easier to run the application first time. :)
 if [[ ! -d node_modules ]]; then
-    su-exec $(stat -c '%u:%g' .) npm install
+    npm clean-install
 fi
 
-echo webpack.config.js | su-exec $(stat -c '%u:%g' .) entr -rn npm run watch
+echo webpack.config.js | entr -rn npm run watch
