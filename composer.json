@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "dama/doctrine-test-bundle": "^8.0",
+        "dama/doctrine-test-bundle": "8.2.*",
         "deployer/deployer": "^7.0",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "fakerphp/faker": "^1.23",
