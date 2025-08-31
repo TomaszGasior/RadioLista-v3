@@ -27,7 +27,7 @@ class RadioTableRepository extends ServiceEntityRepository
         return $this->findAllPublic('radioStationsCount', null);
     }
 
-    public function findPublicOrderedByLastUpdateTime(int $limit = null): array
+    public function findPublicOrderedByLastUpdateTime(?int $limit = null): array
     {
         return $this->findAllPublic('lastUpdateTime', $limit);
     }

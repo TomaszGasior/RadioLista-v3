@@ -28,8 +28,8 @@ class RadioStationController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function add(#[MapEntity(id: 'radioTableId')] RadioTable $radioTable,
-                        #[MapEntity(disabled: true)] RadioStation $template = null,
-                        Request $request): Response
+                        Request $request,
+                        #[MapEntity(disabled: true)] ?RadioStation $template = null): Response
     {
         $form = match ($template) {
             null => $this->createForm(RadioStationAddType::class, null, ['radio_table' => $radioTable]),

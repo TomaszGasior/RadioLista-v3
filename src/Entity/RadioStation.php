@@ -110,7 +110,7 @@ class RadioStation
 
     #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
     #[Assert\Length(max: 500)]
-    #[Assert\Url]
+    #[Assert\Url(requireTld: false)]
     private ?string $externalAnchor = null;
 
     #[ORM\Embedded(class: Appearance::class)]

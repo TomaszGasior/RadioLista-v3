@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Extension\CoreExtension;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\TwigFilter;
 
@@ -24,7 +25,9 @@ class AppExtension extends AbstractExtension
     public function formatDateHTML(Environment $twig, $date, ?string $dateFormat = 'long', ...$args): string
     {
         $intlExtension = $twig->getExtension(IntlExtension::class);
-        $date = twig_date_converter($twig, $date);
+        $coreExtension = $twig->getExtension(CoreExtension::class);
+
+        $date = $coreExtension->convertDate($date);
 
         return sprintf(
             '<time datetime="%s">%s</time>',

@@ -32,7 +32,7 @@ abstract class AbstractEntityFixture extends Fixture
      * @param class-string<T> $entityClass
      * @return T
      */
-    protected function getEntity(string $entityClass, int $i = null): object
+    protected function getEntity(string $entityClass, ?int $i = null): object
     {
         $references = $this->referenceRepository->getReferencesByClass()[$entityClass];
         $key = null === $i ? array_rand($references) : ('_'.$i);
