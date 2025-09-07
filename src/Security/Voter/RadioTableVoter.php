@@ -7,6 +7,7 @@ use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class RadioTableVoter extends Voter
@@ -17,7 +18,7 @@ class RadioTableVoter extends Voter
                && ($subject instanceof RadioTable || $subject instanceof RadioStation);
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
     {
         $user = $token->getUser();
 
