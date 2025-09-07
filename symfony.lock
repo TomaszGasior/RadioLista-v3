@@ -14,14 +14,8 @@
     "deployer/deployer": {
         "version": "v6.7.3"
     },
-    "doctrine/cache": {
-        "version": "v1.7.1"
-    },
     "doctrine/collections": {
         "version": "v1.5.0"
-    },
-    "doctrine/common": {
-        "version": "v2.9.0"
     },
     "doctrine/data-fixtures": {
         "version": "v1.3.1"
@@ -355,14 +349,8 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
     },
-    "symfony/polyfill-php72": {
-        "version": "v1.23.0"
-    },
     "symfony/polyfill-php73": {
         "version": "v1.11.0"
-    },
-    "symfony/polyfill-php80": {
-        "version": "v1.17.0"
     },
     "symfony/process": {
         "version": "v4.1.3"
