@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-putenv('SYMFONY_PHPUNIT_DIR='.__DIR__.'/../vendor/.phpunit');
 ini_set('memory_limit', -1);
 
 if (!ini_get('date.timezone')) {
