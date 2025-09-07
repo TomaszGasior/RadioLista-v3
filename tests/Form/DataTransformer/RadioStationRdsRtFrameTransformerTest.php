@@ -3,6 +3,7 @@
 namespace App\Tests\Form\DataTransformer;
 
 use App\Form\DataTransformer\RadioStationRdsRtFrameTransformer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RadioStationRdsRtFrameTransformerTest extends TestCase
@@ -53,9 +54,7 @@ class RadioStationRdsRtFrameTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function test_transforms_from_internal_structure_to_user_input(array $data, string $transformedString): void
     {
         $transformer = new RadioStationRdsRtFrameTransformer;
@@ -63,10 +62,8 @@ class RadioStationRdsRtFrameTransformerTest extends TestCase
         $this->assertEquals($transformedString, $transformer->transform($data));
     }
 
-    /**
-     * @dataProvider dataProvider
-     * @dataProvider dataWithExtraWhitespaceProvider
-     */
+    #[DataProvider('dataProvider')]
+    #[DataProvider('dataWithExtraWhitespaceProvider')]
     public function test_transforms_from_user_input_to_internal_structure(array $data, string $transformedString): void
     {
         $transformer = new RadioStationRdsRtFrameTransformer;

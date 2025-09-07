@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Tests\KernelBrowser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminControllerTest extends WebTestCase
@@ -28,9 +29,7 @@ class AdminControllerTest extends WebTestCase
         }
     }
 
-    /**
-     * @dataProvider urlProvider
-     */
+    #[DataProvider('urlProvider')]
     public function test_admin_panel_seems_to_work($url): void
     {
         $this->client->loginUserByName('test_user_admin');
@@ -38,9 +37,7 @@ class AdminControllerTest extends WebTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-    /**
-     * @dataProvider urlProvider
-     */
+    #[DataProvider('urlProvider')]
     public function test_admin_panel_is_not_available_for_non_administrator_user($url): void
     {
         $this->client->request('GET', $url);

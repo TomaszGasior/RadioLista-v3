@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Tests\KernelBrowser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -59,10 +60,8 @@ class SecurityPermissionTest extends WebTestCase
         }
     }
 
-    /**
-     * @dataProvider onlyForLoggedInUrlProvider
-     * @dataProvider ownedByTestUserUrlProvider
-     */
+    #[DataProvider('onlyForLoggedInUrlProvider')]
+    #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_anonymous_user_cannot_access_restricted_page(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);
@@ -77,10 +76,8 @@ class SecurityPermissionTest extends WebTestCase
         $this->assertSame('http://localhost/logowanie', $response->getTargetUrl());
     }
 
-    /**
-     * @dataProvider onlyForLoggedInUrlProvider
-     * @dataProvider ownedByTestUserUrlProvider
-     */
+    #[DataProvider('onlyForLoggedInUrlProvider')]
+    #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_logged_in_user_can_access_restricted_page(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);
@@ -101,9 +98,7 @@ class SecurityPermissionTest extends WebTestCase
         $this->assertSame(200, $response->getStatusCode());
     }
 
-    /**
-     * @dataProvider ownedByTestUserUrlProvider
-     */
+    #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_one_user_cannot_access_page_of_another_user(string $url, string $method = 'GET'): void
     {
         $this->skipPdfGenerator($url);

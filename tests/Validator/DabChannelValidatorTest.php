@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Validator\DabChannel;
 use App\Validator\DabChannelValidator;
 use App\Validator\HexColor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
@@ -53,9 +54,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    /**
-     * @dataProvider validRadioStationProvider
-     */
+    #[DataProvider('validRadioStationProvider')]
     public function test_validator_accepts_dab_channel_with_valid_frequency(RadioStation $radioStation): void
     {
         $this->setObject($radioStation);
@@ -67,9 +66,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @dataProvider invalidRadioStationProvider
-     */
+    #[DataProvider('invalidRadioStationProvider')]
     public function test_validator_rejects_dab_channel_with_invalid_frequency(RadioStation $radioStation): void
     {
         $this->setObject($radioStation);

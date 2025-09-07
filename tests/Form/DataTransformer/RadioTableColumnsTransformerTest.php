@@ -5,6 +5,7 @@ namespace App\Tests\Form\DataTransformer;
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RadioTableColumnsTransformerTest extends TestCase
@@ -89,9 +90,7 @@ class RadioTableColumnsTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function test_transforms_from_internal_structure_to_user_input(array $visibleColumns, array $sortedColumns): void
     {
         $transformer = new RadioTableColumnsTransformer;
@@ -99,9 +98,7 @@ class RadioTableColumnsTransformerTest extends TestCase
         $this->assertEquals($sortedColumns, $transformer->transform($visibleColumns));
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function test_transforms_from_user_input_to_internal_structure(array $visibleColumns, array $sortedColumns): void
     {
         $transformer = new RadioTableColumnsTransformer;

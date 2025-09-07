@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Tests\KernelBrowser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,9 +69,7 @@ class BasicApplicationTest extends WebTestCase
         }
     }
 
-    /**
-     * @dataProvider publicUrlsProvider
-     */
+    #[DataProvider('publicUrlsProvider')]
     public function test_public_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->request($method, $url);
@@ -79,9 +78,7 @@ class BasicApplicationTest extends WebTestCase
         $this->assertResponse($response, $redirectUrl);
     }
 
-    /**
-     * @dataProvider authenticatedUrlsProvider
-     */
+    #[DataProvider('authenticatedUrlsProvider')]
     public function test_authenticated_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->loginUserByName('test_user');
