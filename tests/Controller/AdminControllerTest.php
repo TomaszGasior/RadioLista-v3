@@ -15,7 +15,7 @@ class AdminControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function urlProvider(): iterable
+    static public function urlProvider(): iterable
     {
         $urls = [
             '/admin',

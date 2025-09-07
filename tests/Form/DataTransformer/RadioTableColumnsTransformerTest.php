@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class RadioTableColumnsTransformerTest extends TestCase
 {
-    public function dataProvider(): array
+    static public function dataProvider(): array
     {
         return [
             'case #1' => [

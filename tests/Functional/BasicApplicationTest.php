@@ -17,7 +17,7 @@ class BasicApplicationTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function publicUrlsProvider(): iterable
+    static public function publicUrlsProvider(): iterable
     {
         $urls = [
             ['/'],
@@ -46,7 +46,7 @@ class BasicApplicationTest extends WebTestCase
         }
     }
 
-    public function authenticatedUrlsProvider(): iterable
+    static public function authenticatedUrlsProvider(): iterable
     {
         $urls = [
             ['/utworz-wykaz'],

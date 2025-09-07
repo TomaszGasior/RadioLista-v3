@@ -43,7 +43,7 @@ class FormsCompilationTest extends KernelTestCase
         $requestStack->push($this->request);
     }
 
-    public function formTypeAndEntityProvider(): iterable
+    static public function formTypeAndEntityProvider(): iterable
     {
         /** @var EntityManagerInterface */
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);

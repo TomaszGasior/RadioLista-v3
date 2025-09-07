@@ -9,7 +9,7 @@ use Twig\Environment;
 
 class RadioTableExtensionTest extends TestCase
 {
-    public function rdsFramesProvider(): iterable
+    static public function rdsFramesProvider(): iterable
     {
         $frames = [
             'POLSKIE' => 'POLSKIE ',

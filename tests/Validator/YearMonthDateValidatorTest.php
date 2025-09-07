@@ -14,7 +14,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         return new YearMonthDateValidator;
     }
 
-    public function validDateProvider(): iterable
+    static public function validDateProvider(): iterable
     {
         $values = [
             '1991',
@@ -27,7 +27,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    public function invalidDateProvider(): iterable
+    static public function invalidDateProvider(): iterable
     {
         $valuesWithErrorCode = [
             ['2015-13', YearMonthDate::INVALID_FORMAT_ERROR],

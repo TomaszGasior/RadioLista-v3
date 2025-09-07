@@ -16,7 +16,7 @@ class SecurityPermissionTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function onlyForLoggedInUrlProvider(): iterable
+    static public function onlyForLoggedInUrlProvider(): iterable
     {
         $urls = [
             '/utworz-wykaz',
@@ -29,7 +29,7 @@ class SecurityPermissionTest extends WebTestCase
         }
     }
 
-    public function ownedByTestUserUrlProvider(): iterable
+    static public function ownedByTestUserUrlProvider(): iterable
     {
         $urls = [
             '/wykaz/1/dodaj-stacje',

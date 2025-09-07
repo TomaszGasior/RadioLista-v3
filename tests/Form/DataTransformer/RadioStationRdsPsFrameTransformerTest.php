@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class RadioStationRdsPsFrameTransformerTest extends TestCase
 {
-    public function dataProvider(): array
+    static public function dataProvider(): array
     {
         return [
             'one line' => [
@@ -28,7 +28,7 @@ class RadioStationRdsPsFrameTransformerTest extends TestCase
         ];
     }
 
-    public function dataWithExtraWhitespaceProvider(): array
+    static public function dataWithExtraWhitespaceProvider(): array
     {
         return [
             'Windows newline char' => [

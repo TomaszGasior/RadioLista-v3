@@ -19,7 +19,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         return new DabChannelValidator;
     }
 
-    public function validRadioStationProvider(): iterable
+    static public function validRadioStationProvider(): iterable
     {
         $frequencyToDabChannel = [
             '183.648' => DabChannelEnum::CHANNEL_6B,
@@ -36,7 +36,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    public function invalidRadioStationProvider(): iterable
+    static public function invalidRadioStationProvider(): iterable
     {
         $frequencyToDabChannel = [
             '239.200' => DabChannelEnum::CHANNEL_6B,

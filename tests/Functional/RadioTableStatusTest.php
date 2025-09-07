@@ -16,17 +16,17 @@ class RadioTableStatusTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function publicStatusProvider(): iterable
+    static public function publicStatusProvider(): iterable
     {
         yield 'status: public' => [Status::PUBLIC];
     }
 
-    public function unlistedStatusProvider(): iterable
+    static public function unlistedStatusProvider(): iterable
     {
         yield 'status: unlisted' => [Status::UNLISTED];
     }
 
-    public function privateStatusProvider(): iterable
+    static public function privateStatusProvider(): iterable
     {
         yield 'status: private' => [Status::PRIVATE];
     }
