@@ -28,12 +28,14 @@ class VersionExtension extends AbstractExtension
             return $this->version;
         }
 
+        $version = 'version';
+
         try {
-            $version = trim(file_get_contents($this->versionFilePath, false, null, 0, 10));
+            if (is_file($this->versionFilePath)) {
+                $version = trim(file_get_contents($this->versionFilePath, false, null, 0, 10));
+            }
         }
-        catch (Throwable $e) {
-            $version = 'version';
-        }
+        catch (Throwable $e) {}
 
         return $this->version = $version;
     }
