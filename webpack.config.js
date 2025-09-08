@@ -54,6 +54,10 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .cleanupOutputBeforeBuild()
+
+    // Displays build status system notifications to the user
+    // .enableBuildNotifications()
+
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
@@ -67,10 +71,10 @@ Encore
     //     config.plugins.push('@babel/plugin-proposal-class-properties');
     // })
 
-    // enables @babel/preset-env polyfills
+    // enables and configure @babel/preset-env polyfills
     // .configureBabelPresetEnv((config) => {
     //     config.useBuiltIns = 'usage';
-    //     config.corejs = 3;
+    //     config.corejs = '3.38';
     // })
 
     // enables Sass/SCSS support
