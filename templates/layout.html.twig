@@ -7,7 +7,7 @@
 
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
-        <!-- {{ app_version() }} -->
+        <!-- {{ version }} -->
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
         <meta name="language" content="{{ current_locale }}">
@@ -141,7 +141,7 @@
                     <div class="secondary-line">
                         &copy; RadioLista
                         <span class="sr-only">{{ 'layout.app_version'|trans }}</span>
-                        <span title="{{ 'layout.app_version'|trans }}">{{ app_version() }}</span>
+                        <span title="{{ 'layout.app_version'|trans }}">{{ version }}</span>
                         2012-2024
                     </div>
                 </div>

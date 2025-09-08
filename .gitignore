@@ -4,7 +4,6 @@
 
 deploy.yaml
 compose.override.yaml
-version
 
 ###> symfony/framework-bundle ###
 /.env.local

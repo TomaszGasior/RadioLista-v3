@@ -21,8 +21,8 @@ after('deploy:symlink', 'deploy:clear_paths');
 
 desc('Save version name');
 task('deploy:version', function() {
-    $version = runLocally('git describe master --abbrev=0') === get('target') ? get('target') : get('release_revision');
-    run("echo '$version' > {{release_path}}/version");
+    $version = substr(runLocally('git describe master --abbrev=0') === get('target') ? get('target') : get('release_revision'), 0, 7);
+    run("sed -i -e 's#__VER__#$version#' {{release_path}}/config/services.yaml");
 });
 after('deploy:update_code', 'deploy:version');
 
