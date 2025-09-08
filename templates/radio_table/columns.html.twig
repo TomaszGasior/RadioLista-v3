@@ -3,8 +3,8 @@
 {% block page_title %}{{ 'radio_table.columns.title'|trans }}{% endblock %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('radio-table-columns') }}
-    {{ encore_entry_script_tags('radio-table-columns') }}
+    <link rel="stylesheet" href="{{ asset('css/radio-table/columns.css') }}">
+    <script type="module" src="{{ asset('js/radio-table/columns.js') }}"></script>
 {% endblock %}
 
 {% form_theme form _self %}

@@ -18,12 +18,12 @@
             {% endfor %}
         {% endif %}
 
-        <link rel="icon" href="{{ asset('build/icon.png') }}">
-        <link rel="apple-touch-icon" href="{{ asset('build/icon.png') }}">
+        <link rel="icon" href="{{ asset('images/icon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}">
         <meta name="darkreader-lock">
 
-        {{ encore_entry_link_tags('layout') }}
-        {{ encore_entry_script_tags('layout') }}
+        <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+        <script type="module" src="{{ asset('js/layout.js') }}"></script>
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>

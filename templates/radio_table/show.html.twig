@@ -12,8 +12,8 @@
         <meta name="robots" content="noindex, noarchive">
     {% endif %}
 
-    {{ encore_entry_link_tags('radio-table-show') }}
-    {{ encore_entry_script_tags('radio-table-show') }}
+    <link rel="stylesheet" href="{{ asset('css/radio-table/show.css') }}">
+    <script type="module" src="{{ asset('js/radio-table/show.js') }}"></script>
 
     {% if radio_table.appearance.widthType == constant('CUSTOM', radio_table.appearance.widthType) %}
         <style>{{ '.custom-width .site-width { max-width: %dpx }'|format(radio_table.appearance.customWidth) }}</style>

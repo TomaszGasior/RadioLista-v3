@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('static-page') }}
+    <link rel="stylesheet" href="{{ asset('css/general/static-page.css') }}">
 {% endblock %}
 
 {% block page_title %}{{ 'general.static_page.about_service'|trans }}{% endblock %}

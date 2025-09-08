@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('user-login-register') }}
+    <link rel="stylesheet" href="{{ asset('css/user/login-register.css') }}">
 {% endblock %}
 
 {% block page_title %}{{ 'session.login.title'|trans }}{% endblock %}

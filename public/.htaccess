@@ -1,5 +1,7 @@
 RewriteEngine on
 
+RewriteRule ^assets/[^/]+/(.+)$ /assets-src/$1 [END]
+
 RewriteRule ^index\.php(?:/(.*)|$) /$1 [R=301,END]
 
 RewriteCond %{REQUEST_FILENAME} !-f
