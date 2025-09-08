@@ -26,13 +26,6 @@ task('deploy:version', function() {
 });
 after('deploy:update_code', 'deploy:version');
 
-desc('Build assets');
-task('deploy:build_assets', function() {
-    cd('{{release_path}}');
-    run('{{bin/npm}} clean-install; {{bin/npm}} run build');
-});
-after('deploy:vendors', 'deploy:build_assets');
-
 desc('Clear PHP opcache');
 task('deploy:clear_opcache', function() {
     cd('{{release_path}}');

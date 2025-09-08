@@ -12,11 +12,6 @@ services:
         volumes:
             - '.:/srv:z'
 
-    js:
-        build: 'container/js'
-        volumes:
-            - '.:/srv:z'
-
     db:
         image: 'mysql:8.0.28'
         environment:
