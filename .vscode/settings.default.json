@@ -8,10 +8,10 @@
         ".hidden": true,
         ".phpunit.cache": true,
         ".vscode": true,
-        "*{.lock,-lock.json}": true,
-        "assets/{images,public,fonts}": true,
+        "*.lock": true,
+        "assets/{images,fonts,ckeditor}": true,
         "bin": true,
-        "public/{build,bundles}": true,
+        "public/{assets-src,bundles}": true,
         "var": true,
     },
 
