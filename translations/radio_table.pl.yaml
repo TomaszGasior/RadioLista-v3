@@ -51,7 +51,7 @@ reception:
     '0': 'regularny'
     '1': 'tropo'
     '2': 'scatter'
-    '3': 'sporadic-E'
+    '3': 'sporadic‑E'
 
 type:
     '0': 'inny'
