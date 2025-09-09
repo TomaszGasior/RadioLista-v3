@@ -4,34 +4,34 @@
     {% for page in ['homepage', 'all_radio_tables', 'about_service', 'contact'] %}
         <url>
             <loc>{{ url(page, {_locale: 'pl'}) }}</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.5</priority>
             {% for locale in locales %}
                 <xhtml:link rel="alternate" href="{{ url(page, {_locale: locale}) }}" hreflang="{{ locale }}" />
             {% endfor %}
-            <changefreq>monthly</changefreq>
-            <priority>0.5</priority>
         </url>
     {% endfor %}
 
     {% for radio_table in radio_tables %}
         <url>
             <loc>{{ url('radio_table.show', {id: radio_table.id, _locale: 'pl'}) }}</loc>
-            {% for locale in locales %}
-                <xhtml:link rel="alternate" href="{{ url('radio_table.show', {id: radio_table.id, _locale: locale}) }}" hreflang="{{ locale }}" />
-            {% endfor %}
             <lastmod>{{ radio_table.lastUpdateTime|date('c') }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
+            {% for locale in locales %}
+                <xhtml:link rel="alternate" href="{{ url('radio_table.show', {id: radio_table.id, _locale: locale}) }}" hreflang="{{ locale }}" />
+            {% endfor %}
         </url>
     {% endfor %}
 
     {% for user in users %}
         <url>
             <loc>{{ url('user.public_profile', {name: user.name, _locale: 'pl'}) }}</loc>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
             {% for locale in locales %}
                 <xhtml:link rel="alternate" href="{{ url('user.public_profile', {name: user.name, _locale: locale}) }}" hreflang="{{ locale }}" />
             {% endfor %}
-            <changefreq>monthly</changefreq>
-            <priority>0.7</priority>
         </url>
     {% endfor %}
 </urlset>
