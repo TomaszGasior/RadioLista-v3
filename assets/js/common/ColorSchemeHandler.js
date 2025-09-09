@@ -48,11 +48,25 @@ export class ColorSchemeHandler
 
     collectMediaRules()
     {
-        let mediaRules = Array.from(document.styleSheets)
-            .map(styleSheet => Array.from(styleSheet.cssRules))
-            .flat()
-            .filter(rule => rule instanceof CSSMediaRule)
-        ;
+        let findMediaRules = cssRules => {
+            let result = [];
+
+            Array.from(cssRules).forEach(rule => {
+                if (rule instanceof CSSMediaRule) {
+                    result.push(rule);
+                }
+
+                if (rule instanceof CSSImportRule) {
+                    result = result.concat(findMediaRules(rule.styleSheet.cssRules));
+                }
+            });
+
+            return result;
+        };
+
+        let mediaRules = findMediaRules(
+            Array.from(document.styleSheets).flatMap(styleSheet => Array.from(styleSheet.cssRules))
+        );
 
         ['light', 'dark'].forEach(colorScheme => {
             this.mediaRulesByColorScheme[colorScheme] = mediaRules.filter(
