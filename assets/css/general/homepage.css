@@ -59,7 +59,7 @@
     background: var(--radio-tables-list-item-background-color-hover);
     border-color: var(--radio-tables-list-item-border-color-hover);
 }
-.homepage-radio-tables-list li:focus-within {
+.homepage-radio-tables-list li:focus-within:has(:focus-visible) {
     outline: 2px solid var(--radio-tables-list-item-outline-color);
     border-color: var(--radio-tables-list-item-border-color-focus);
 }

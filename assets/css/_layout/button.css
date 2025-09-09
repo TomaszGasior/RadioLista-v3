@@ -30,7 +30,7 @@ button, a.button {
 button:hover:not(:disabled), a.button:hover {
     background-color: var(--background-color-hover);
 }
-button:focus, a.button:focus {
+button:focus-visible, a.button:focus-visible {
     background-color: var(--background-color-focus);
 
     outline: 2px solid var(--form-widget-outline-color-focus);
