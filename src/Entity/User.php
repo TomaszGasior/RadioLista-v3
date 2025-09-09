@@ -184,6 +184,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, P
     /**
      * @see UserInterface
      */
+    #[\Deprecated]
     public function eraseCredentials(): void
     {
     }

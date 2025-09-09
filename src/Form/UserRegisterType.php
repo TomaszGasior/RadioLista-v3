@@ -41,9 +41,7 @@ class UserRegisterType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
-                    new Assert\IsTrue([
-                        'message' => 'user.service_terms_required',
-                    ]),
+                    new Assert\IsTrue(message: 'user.service_terms_required'),
                 ],
             ])
         ;

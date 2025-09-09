@@ -3,13 +3,14 @@
 namespace App\Tests\Twig;
 
 use App\Twig\RadioTableExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 
 class RadioTableExtensionTest extends TestCase
 {
-    public function rdsFramesProvider(): iterable
+    static public function rdsFramesProvider(): iterable
     {
         $frames = [
             'POLSKIE' => 'POLSKIE ',
@@ -33,9 +34,7 @@ class RadioTableExtensionTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider rdsFramesProvider
-     */
+    #[DataProvider('rdsFramesProvider')]
     public function test_frame_is_properly_aligned_to_center(string $frame, string $expectedFrame): void
     {
         $extension = new RadioTableExtension;

@@ -12,7 +12,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class RadioTableColumnsTypeTest extends TypeTestCase
 {
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         $radioTableColumnsType = new RadioTableColumnsType(
             new RadioTableColumnsTransformer

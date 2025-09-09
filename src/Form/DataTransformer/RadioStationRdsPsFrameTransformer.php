@@ -36,6 +36,8 @@ class RadioStationRdsPsFrameTransformer implements DataTransformerInterface
 
     public function reverseTransform(mixed $value): array
     {
+        $value = (string) $value;
+
         // Normalize whitespace chars.
         $value = str_replace(["\r", "\t"], '', $value);
 

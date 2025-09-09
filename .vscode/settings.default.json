@@ -1,12 +1,12 @@
 {
     "editor.rulers": [80, 120],
     "files.trimFinalNewlines": true,
-    "intelephense.environment.phpVersion": "8.1.0",
+    "intelephense.environment.phpVersion": "8.4.0",
 
     "files.exclude": {
         ".github": true,
         ".hidden": true,
-        ".phpunit.result.cache": true,
+        ".phpunit.cache": true,
         ".vscode": true,
         "*{.lock,-lock.json}": true,
         "assets/{images,public,fonts}": true,

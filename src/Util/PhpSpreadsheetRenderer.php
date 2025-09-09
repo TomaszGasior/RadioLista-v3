@@ -113,7 +113,7 @@ class PhpSpreadsheetRenderer
                         $radioStation->getDabChannel()->value ?? '',
                     Column::COMMENT =>
                         // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
-                        str_replace("\r", '', $radioStation->getComment()),
+                        str_replace("\r", '', (string) $radioStation->getComment()),
                     Column::RDS =>
                         str_replace(' ', '_', $this->alignRDSFrame($radioStation->getRds()->getPs()[0][0] ?? '')),
                     default =>

@@ -4,6 +4,7 @@ namespace App\Tests\Validator;
 
 use App\Validator\YearMonthDate;
 use App\Validator\YearMonthDateValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
@@ -14,7 +15,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         return new YearMonthDateValidator;
     }
 
-    public function validDateProvider(): iterable
+    static public function validDateProvider(): iterable
     {
         $values = [
             '1991',
@@ -27,7 +28,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    public function invalidDateProvider(): iterable
+    static public function invalidDateProvider(): iterable
     {
         $valuesWithErrorCode = [
             ['2015-13', YearMonthDate::INVALID_FORMAT_ERROR],
@@ -40,9 +41,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    /**
-     * @dataProvider validDateProvider
-     */
+    #[DataProvider('validDateProvider')]
     public function test_validator_accepts_correct_date(string $value): void
     {
         $constraint = new YearMonthDate;
@@ -51,9 +50,7 @@ class YearMonthDateValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @dataProvider invalidDateProvider
-     */
+    #[DataProvider('invalidDateProvider')]
     public function test_validator_rejects_incorrect_date(string $value, string $errorCode): void
     {
         $constraint = new YearMonthDate;

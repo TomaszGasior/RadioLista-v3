@@ -2,7 +2,7 @@
     {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
     {% set row_attr = row_attr|merge({
-        class: ('form-item ' ~ row_attr.class ?? '')|trim,
+        class: ('form-item ' ~ (row_attr.class ?? ''))|trim,
     }) %}
 
     <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
@@ -19,7 +19,7 @@
     {%- set aria_describedby = (attr['aria-describedby'] ?? '') ~ (errors|length > 0 ? ' ' ~ id ~ '_error') ~ (help ? ' ' ~ id ~ '_help') -%}
 
     {% set row_attr = row_attr|merge({
-        class: ('form-item form-item-checkbox ' ~ row_attr.class ?? '')|trim,
+        class: ('form-item form-item-checkbox ' ~ (row_attr.class ?? ''))|trim,
     }) %}
 
     <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>

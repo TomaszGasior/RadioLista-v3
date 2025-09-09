@@ -15,6 +15,8 @@ use App\Form\SecurityLoginType;
 use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +45,7 @@ class FormsCompilationTest extends KernelTestCase
         $requestStack->push($this->request);
     }
 
-    public function formTypeAndEntityProvider(): iterable
+    static public function formTypeAndEntityProvider(): iterable
     {
         /** @var EntityManagerInterface */
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);
@@ -65,10 +67,8 @@ class FormsCompilationTest extends KernelTestCase
         yield 'UserSettingsType' => [UserSettingsType::class, $user];
     }
 
-    /**
-     * @dataProvider formTypeAndEntityProvider
-     * @doesNotPerformAssertions
-     */
+    #[DataProvider('formTypeAndEntityProvider')]
+    #[DoesNotPerformAssertions]
     public function test_form_compiles_without_errors(string $formClass, $data = null, array $options = []): void
     {
         $form = $this->factory->create($formClass, $data, $options);

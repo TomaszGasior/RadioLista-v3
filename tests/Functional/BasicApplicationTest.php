@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Tests\KernelBrowser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class BasicApplicationTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function publicUrlsProvider(): iterable
+    static public function publicUrlsProvider(): iterable
     {
         $urls = [
             ['/'],
@@ -46,7 +47,7 @@ class BasicApplicationTest extends WebTestCase
         }
     }
 
-    public function authenticatedUrlsProvider(): iterable
+    static public function authenticatedUrlsProvider(): iterable
     {
         $urls = [
             ['/utworz-wykaz'],
@@ -68,10 +69,8 @@ class BasicApplicationTest extends WebTestCase
         }
     }
 
-    /**
-     * @dataProvider publicUrlsProvider
-     */
-    public function test_public_page_seems_to_be_working(string $url, string $redirectUrl = null, string $method = 'GET'): void
+    #[DataProvider('publicUrlsProvider')]
+    public function test_public_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->request($method, $url);
 
@@ -79,10 +78,8 @@ class BasicApplicationTest extends WebTestCase
         $this->assertResponse($response, $redirectUrl);
     }
 
-    /**
-     * @dataProvider authenticatedUrlsProvider
-     */
-    public function test_authenticated_page_seems_to_be_working(string $url, string $redirectUrl = null, string $method = 'GET'): void
+    #[DataProvider('authenticatedUrlsProvider')]
+    public function test_authenticated_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
     {
         $this->client->loginUserByName('test_user');
         $this->client->request($method, $url);
@@ -91,7 +88,7 @@ class BasicApplicationTest extends WebTestCase
         $this->assertResponse($response, $redirectUrl);
     }
 
-    private function assertResponse(Response $response, string $redirectUrl = null): void
+    private function assertResponse(Response $response, ?string $redirectUrl = null): void
     {
         if ($redirectUrl) {
             /** @var RedirectResponse $response */

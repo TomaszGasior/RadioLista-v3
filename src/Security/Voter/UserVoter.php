@@ -5,6 +5,7 @@ namespace App\Security\Voter;
 use App\Entity\User;
 use RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class UserVoter extends Voter
@@ -15,7 +16,7 @@ class UserVoter extends Voter
                && $subject instanceof User;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
     {
         if ($subject instanceof User) {
             $user = $subject;

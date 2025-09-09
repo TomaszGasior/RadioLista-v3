@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Validator\DabChannel;
 use App\Validator\DabChannelValidator;
 use App\Validator\HexColor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
@@ -19,7 +20,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         return new DabChannelValidator;
     }
 
-    public function validRadioStationProvider(): iterable
+    static public function validRadioStationProvider(): iterable
     {
         $frequencyToDabChannel = [
             '183.648' => DabChannelEnum::CHANNEL_6B,
@@ -36,7 +37,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    public function invalidRadioStationProvider(): iterable
+    static public function invalidRadioStationProvider(): iterable
     {
         $frequencyToDabChannel = [
             '239.200' => DabChannelEnum::CHANNEL_6B,
@@ -53,9 +54,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         }
     }
 
-    /**
-     * @dataProvider validRadioStationProvider
-     */
+    #[DataProvider('validRadioStationProvider')]
     public function test_validator_accepts_dab_channel_with_valid_frequency(RadioStation $radioStation): void
     {
         $this->setObject($radioStation);
@@ -67,9 +66,7 @@ class DabChannelValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @dataProvider invalidRadioStationProvider
-     */
+    #[DataProvider('invalidRadioStationProvider')]
     public function test_validator_rejects_dab_channel_with_invalid_frequency(RadioStation $radioStation): void
     {
         $this->setObject($radioStation);
