@@ -7,7 +7,7 @@
 
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
-        <!-- {{ app_version() }} -->
+        <!-- {{ version }} -->
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
         <meta name="language" content="{{ current_locale }}">
@@ -18,12 +18,12 @@
             {% endfor %}
         {% endif %}
 
-        <link rel="icon" href="{{ asset('build/icon.png') }}">
-        <link rel="apple-touch-icon" href="{{ asset('build/icon.png') }}">
+        <link rel="icon" href="{{ asset('images/icon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}">
         <meta name="darkreader-lock">
 
-        {{ encore_entry_link_tags('layout') }}
-        {{ encore_entry_script_tags('layout') }}
+        <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+        <script type="module" src="{{ asset('js/layout.js') }}"></script>
 
         {% if block('page_title') %}
             <title>{% block page_title %}{% endblock %} — RadioLista</title>
@@ -141,7 +141,7 @@
                     <div class="secondary-line">
                         &copy; RadioLista
                         <span class="sr-only">{{ 'layout.app_version'|trans }}</span>
-                        <span title="{{ 'layout.app_version'|trans }}">{{ app_version() }}</span>
+                        <span title="{{ 'layout.app_version'|trans }}">{{ version }}</span>
                         2012-2024
                     </div>
                 </div>

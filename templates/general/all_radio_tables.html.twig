@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('all-radio-tables') }}
+    <link rel="stylesheet" href="{{ asset('css/general/all-radio-tables.css') }}">
 {% endblock %}
 
 {% block page_title %}{{ 'general.all_radio_tables.title'|trans }}{% endblock %}

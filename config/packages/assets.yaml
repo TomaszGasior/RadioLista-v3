@@ -1,0 +1,5 @@
+framework:
+    assets:
+        base_path: '/assets/'
+        version_format: '%%2$s/%%1$s'
+        version: '%app.version%'

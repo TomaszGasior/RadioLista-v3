@@ -1,5 +1,3 @@
-import '../css/admin.css';
-
 import { SortableTable } from './common/SortableTable.js';
 
 document.addEventListener('DOMContentLoaded', () => {

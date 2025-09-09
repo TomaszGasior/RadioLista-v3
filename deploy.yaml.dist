@@ -2,7 +2,6 @@ config:
     repository: 'git@github.com:TomaszGasior/RadioLista-v3.git'
     remote_user: 'username'
     bin/php: 'php'
-    bin/npm: 'npm'
     deploy_path: '/home/{{remote_user}}/domains/{{domain}}'
     public_dir: '{{deploy_path}}/public_html'
     http_user: '{{remote_user}}'

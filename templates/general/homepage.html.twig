@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('homepage') }}
+    <link rel="stylesheet" href="{{ asset('css/general/homepage.css') }}">
 {% endblock %}
 
 {% macro print_date(date) %}

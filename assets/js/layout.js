@@ -1,5 +1,3 @@
-import '../css/layout.css';
-
 import { ColorSchemeHandler } from './common/ColorSchemeHandler.js';
 
 document.addEventListener('DOMContentLoaded', () => {

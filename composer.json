@@ -27,7 +27,6 @@
         "symfony/twig-bundle": "7.3.*",
         "symfony/validator": "7.3.*",
         "symfony/var-dumper": "7.3.*",
-        "symfony/webpack-encore-bundle": "^2.3",
         "symfony/yaml": "7.3.*",
         "twig/extra-bundle": "^3.21",
         "twig/intl-extra": "^3.21",

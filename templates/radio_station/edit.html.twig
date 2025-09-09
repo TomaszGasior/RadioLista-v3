@@ -3,8 +3,8 @@
 {% block page_title %}{{ 'radio_station.edit.title'|trans }}{% endblock %}
 
 {% block head_closing %}
-    {{ encore_entry_link_tags('radio-station-edit-add') }}
-    {{ encore_entry_script_tags('radio-station-edit-add') }}
+    <link rel="stylesheet" href="{{ asset('css/radio-station/edit-add.css') }}">
+    <script type="module" src="{{ asset('js/radio-station/edit-add.js') }}"></script>
 {% endblock %}
 
 {% block context_menu %}

@@ -1,5 +1,3 @@
-import '../../css/radio-table/show.css';
-
 import { NumberIndentManager } from '../common/NumberIndentManager.js';
 import { OverflowStylesManager } from '../common/OverflowStylesManager.js';
 import { RDSPopupManager } from '../common/RDSPopupManager.js';

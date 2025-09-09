@@ -4,7 +4,6 @@
 
 deploy.yaml
 compose.override.yaml
-version
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -15,13 +14,6 @@ version
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml
