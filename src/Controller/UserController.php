@@ -21,7 +21,7 @@ class UserController extends AbstractController
         private RadioTableRepository $radioTableRepository,
     ) {}
 
-    #[Route(['pl' => '/profil/{name:user}', 'en' => '/profile/{name}'], name: 'user.public_profile')]
+    #[Route(['pl' => '/profil/{name:user}', 'en' => '/profile/{name:user}'], name: 'user.public_profile')]
     #[IsGranted('USER_PUBLIC_PROFILE', subject: 'user', statusCode: 404)]
     public function publicProfile(User $user): Response
     {
