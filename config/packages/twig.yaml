@@ -4,9 +4,9 @@ twig:
         - 'common/form/overwritten_types.html.twig'
         - 'common/form/custom_types.html.twig'
     globals:
-        version: '%app.version%'
-        locales: '%app.locales%'
-        development: '%env(default::bool:DEVELOPMENT_WARNING)%'
+        app_version: '%app.version%'
+        app_locales: '%app.locales%'
+        app_development: '%env(default::bool:DEVELOPMENT_WARNING)%'
 
 when@test:
     twig:

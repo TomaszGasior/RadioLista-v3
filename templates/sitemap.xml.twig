@@ -6,7 +6,7 @@
             <loc>{{ url(page, {_locale: 'pl'}) }}</loc>
             <changefreq>monthly</changefreq>
             <priority>0.5</priority>
-            {% for locale in locales %}
+            {% for locale in app_locales %}
                 <xhtml:link rel="alternate" href="{{ url(page, {_locale: locale}) }}" hreflang="{{ locale }}" />
             {% endfor %}
         </url>
@@ -18,7 +18,7 @@
             <lastmod>{{ radio_table.lastUpdateTime|date('c') }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
-            {% for locale in locales %}
+            {% for locale in app_locales %}
                 <xhtml:link rel="alternate" href="{{ url('radio_table.show', {id: radio_table.id, _locale: locale}) }}" hreflang="{{ locale }}" />
             {% endfor %}
         </url>
@@ -29,7 +29,7 @@
             <loc>{{ url('user.public_profile', {name: user.name, _locale: 'pl'}) }}</loc>
             <changefreq>monthly</changefreq>
             <priority>0.7</priority>
-            {% for locale in locales %}
+            {% for locale in app_locales %}
                 <xhtml:link rel="alternate" href="{{ url('user.public_profile', {name: user.name, _locale: locale}) }}" hreflang="{{ locale }}" />
             {% endfor %}
         </url>

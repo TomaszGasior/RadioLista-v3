@@ -7,13 +7,13 @@
 
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
-        <!-- {{ version }} -->
+        <!-- {{ app_version }} -->
         <meta name="viewport" content="initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
         <meta name="language" content="{{ current_locale }}">
 
         {% if route_is_multilang %}
-            {% for locale in locales %}
+            {% for locale in app_locales %}
                 <link rel="alternate" href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
             {% endfor %}
         {% endif %}
@@ -39,7 +39,7 @@
             {{ 'layout.skip_to_content'|trans }}
         </a>
 
-        <header class="site-header {{ development ? 'develop' : '' }}">
+        <header class="site-header {{ app_development ? 'develop' : '' }}">
             <div class="site-width">
                 <a href="{{ path('homepage') }}" class="site-logo" aria-label="{{ 'general.homepage.title'|trans }}">RadioLista</a>
 
@@ -141,7 +141,7 @@
                     <div class="secondary-line">
                         &copy; RadioLista
                         <span class="sr-only">{{ 'layout.app_version'|trans }}</span>
-                        <span title="{{ 'layout.app_version'|trans }}">{{ version }}</span>
+                        <span title="{{ 'layout.app_version'|trans }}">{{ app_version }}</span>
                         2012-2024
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                             </div>
 
                             <ul class="switch-group">
-                                {% for locale in locales %}
+                                {% for locale in app_locales %}
                                     <li>
                                         <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
                                             aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"
