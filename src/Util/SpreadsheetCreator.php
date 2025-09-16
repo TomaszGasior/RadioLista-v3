@@ -9,36 +9,17 @@ use App\Util\RadioStationRdsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yectep\PhpSpreadsheetBundle\Factory;
 
-class PhpSpreadsheetRenderer
+class SpreadsheetCreator
 {
     use RadioStationRdsTrait;
 
-    public function __construct(private Factory $phpSpreadsheetFactory, private TranslatorInterface $translator) {}
+    public function __construct(private TranslatorInterface $translator) {}
 
     /**
      * @param RadioStation[] $radioStations
      */
-    public function render(string $phpSpreadsheetWriterType, RadioTable $radioTable, array $radioStations): string
-    {
-        $spreadsheet = $this->getSpreadsheet($radioTable, $radioStations);
-
-        $writer = $this->phpSpreadsheetFactory->createWriter(
-            $spreadsheet,
-            $phpSpreadsheetWriterType
-        );
-
-        ob_start();
-        $writer->save('php://output');
-
-        return ob_get_clean();
-    }
-
-    /**
-     * @param RadioStation[] $radioStations
-     */
-    private function getSpreadsheet(RadioTable $radioTable, array $radioStations): Spreadsheet
+    public function createSpreadsheet(RadioTable $radioTable, array $radioStations): Spreadsheet
     {
         $spreadsheet = new Spreadsheet;
         $worksheet = $spreadsheet->getActiveSheet();

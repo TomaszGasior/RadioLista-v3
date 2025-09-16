@@ -11,6 +11,7 @@
         "friendsofsymfony/ckeditor-bundle": "^2.6",
         "knplabs/knp-snappy-bundle": "^1.10",
         "knplabs/knp-time-bundle": "^2.4",
+        "phpoffice/phpspreadsheet": "~1.16",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
@@ -29,8 +30,7 @@
         "symfony/var-dumper": "7.3.*",
         "symfony/yaml": "7.3.*",
         "twig/extra-bundle": "^3.21",
-        "twig/intl-extra": "^3.21",
-        "yectep/phpspreadsheet-bundle": "^1.1"
+        "twig/intl-extra": "^3.21"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",

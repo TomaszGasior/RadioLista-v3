@@ -82,9 +82,6 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
-    "ezyang/htmlpurifier": {
-        "version": "v4.13.0"
-    },
     "fakerphp/faker": {
         "version": "v1.13.0"
     },
@@ -115,15 +112,6 @@
     "knplabs/knp-time-bundle": {
         "version": "v1.11.0"
     },
-    "maennchen/zipstream-php": {
-        "version": "2.1.0"
-    },
-    "markbaker/complex": {
-        "version": "2.0.3"
-    },
-    "markbaker/matrix": {
-        "version": "2.1.3"
-    },
     "masterminds/html5": {
         "version": "2.6.0"
     },
@@ -135,9 +123,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.0.3"
-    },
-    "phpoffice/phpspreadsheet": {
-        "version": "1.18.0"
     },
     "phpunit/phpunit": {
         "version": "12.3",
@@ -163,9 +148,6 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
-    "psr/http-client": {
-        "version": "1.0.1"
-    },
     "psr/http-factory": {
         "version": "1.0.1"
     },
@@ -174,9 +156,6 @@
     },
     "psr/log": {
         "version": "1.0.2"
-    },
-    "psr/simple-cache": {
-        "version": "1.0.1"
     },
     "symfony/asset": {
         "version": "v4.1.3"
@@ -512,8 +491,5 @@
     },
     "twig/twig": {
         "version": "v2.5.0"
-    },
-    "yectep/phpspreadsheet-bundle": {
-        "version": "v0.2.0"
     }
 }

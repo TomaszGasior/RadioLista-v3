@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05e656138727b144153105f58209aa26",
+    "content-hash": "46972889c2b0b456210285ffc3ca9cd7",
     "packages": [
         {
             "name": "composer/pcre",
@@ -7536,48 +7536,6 @@
                 }
             ],
             "time": "2025-05-03T07:21:55+00:00"
-        },
-        {
-            "name": "yectep/phpspreadsheet-bundle",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/eightyknots/phpspreadsheet-bundle.git",
-                "reference": "dd30dbbcbf955fad75fc732c0b77684eacb08084"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/eightyknots/phpspreadsheet-bundle/zipball/dd30dbbcbf955fad75fc732c0b77684eacb08084",
-                "reference": "dd30dbbcbf955fad75fc732c0b77684eacb08084",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "phpoffice/phpspreadsheet": "~1.16",
-                "symfony/framework-bundle": "^4.0|^5.0|^6.0|^7.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Yectep\\PhpSpreadsheetBundle\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chester Li",
-                    "email": "yectep@gmail.com"
-                }
-            ],
-            "description": "A Symfony bundle to integrate with PHPOffice's PhpSpreadsheet library",
-            "support": {
-                "issues": "https://github.com/eightyknots/phpspreadsheet-bundle/issues",
-                "source": "https://github.com/eightyknots/phpspreadsheet-bundle/tree/v1.1.0"
-            },
-            "time": "2023-12-04T21:57:40+00:00"
         }
     ],
     "packages-dev": [

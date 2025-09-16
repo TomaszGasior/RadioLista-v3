@@ -15,5 +15,4 @@ return [
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
-    Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle::class => ['all' => true],
 ];
