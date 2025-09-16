@@ -4,11 +4,18 @@ namespace App\Export;
 
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
+use App\Util\PdfMetadataPatcher;
 use Knp\Snappy\Pdf;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class PdfExporter implements ExporterInterface
 {
-    public function __construct(private Pdf $snappyPdfGenerator, private HtmlExporter $htmlExporter) {}
+    public function __construct(
+        private HtmlExporter $htmlExporter,
+        private Pdf $snappyPdfGenerator,
+        private PdfMetadataPatcher $pdfMetadataPatcher,
+        #[Autowire('%app.version%')] private string $version,
+    ) {}
 
     /**
      * @param RadioStation[] $radioStations
@@ -17,7 +24,7 @@ class PdfExporter implements ExporterInterface
     {
         $html = $this->htmlExporter->render($radioTable, $radioStations);
 
-        return $this->snappyPdfGenerator->getOutputFromHtml($html, [
+        $pdf = $this->snappyPdfGenerator->getOutputFromHtml($html, [
             'orientation' => 'Landscape',
             'margin-left' => 0,
             'margin-top' => 9,
@@ -25,5 +32,7 @@ class PdfExporter implements ExporterInterface
             'margin-right' => 0,
             'zoom' => 1.15,
         ]);
+
+        return $this->pdfMetadataPatcher->replaceCreatorMetadata($pdf, 'RadioLista ' . $this->version);
     }
 }
