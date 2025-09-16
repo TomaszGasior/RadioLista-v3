@@ -34,7 +34,7 @@ class MaintenanceModeSubscriberTest extends TestCase
         /** @var HttpKernelInterface|MockObject */
         $kernel = $this->createMock(HttpKernelInterface::class);
 
-        $this->event = new RequestEvent($kernel, new Request, null);
+        $this->event = new RequestEvent($kernel, new Request, HttpKernelInterface::MAIN_REQUEST);
     }
 
     public function test_does_not_interrupt_response_when_maintenance_mode_is_disabled(): void

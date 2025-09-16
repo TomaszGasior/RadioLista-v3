@@ -9,10 +9,6 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Exception\RuntimeException as SecurityException;
 use Twig\Environment;
 
-/**
- * Don't enable maintenance mode on development environment.
- * It breaks Symfony debug toolbar and profiler.
- */
 class MaintenanceModeSubscriber implements EventSubscriberInterface
 {
     public function __construct(
@@ -27,6 +23,13 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if (
+            $event->getRequest()->attributes->getBoolean('ignore_maintenance_mode', false)
+            || !$event->isMainRequest()
+        ) {
+            return;
+        }
+
         try {
             if ($this->security->isGranted('ROLE_ADMIN')) {
                 return;
@@ -37,6 +40,7 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
             $this->twig->render('dark-error.html.twig', ['message' => 'MaintenanceMode']),
             503
         );
+
         $event->setResponse($response);
     }
 
@@ -46,7 +50,7 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
     static public function getSubscribedEvents(): array
     {
         return [
-            RequestEvent::class => 'onKernelRequest',
+            RequestEvent::class => ['onKernelRequest', -1],
         ];
     }
 }
