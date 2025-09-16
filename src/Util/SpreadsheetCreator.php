@@ -8,13 +8,17 @@ use App\Entity\RadioStation;
 use App\Util\RadioStationRdsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SpreadsheetCreator
 {
     use RadioStationRdsTrait;
 
-    public function __construct(private TranslatorInterface $translator) {}
+    public function __construct(
+        private TranslatorInterface $translator,
+        #[Autowire('%app.version%')] private string $version,
+    ) {}
 
     /**
      * @param RadioStation[] $radioStations
@@ -30,6 +34,7 @@ class SpreadsheetCreator
             ->setAutoFilter($worksheet->calculateWorksheetDimension())
             ->freezePane('A2')
         ;
+
         $worksheet
             ->getStyle('1')
             ->getFont()
@@ -46,9 +51,24 @@ class SpreadsheetCreator
             $worksheet
                 ->getStyle($coordinate)
                 ->getNumberFormat()
-                ->setFormatCode($this->getColumnFormatting($column))
+                ->setFormatCode(match ($column) {
+                    Column::FREQUENCY => '0.000',
+                    Column::POWER => '0.000',
+                    Column::QUALITY => '0',
+                    Column::DISTANCE => '0',
+                    Column::MAX_SIGNAL_LEVEL => '0',
+                    Column::PRIVATE_NUMBER => '0',
+                    default => '@',
+                })
             ;
         }
+
+        $spreadsheet
+            ->getProperties()
+            ->setTitle($radioTable->getName())
+            ->setCreator('RadioLista ' . $this->version)
+            ->setLastModifiedBy('')
+        ;
 
         return $spreadsheet;
     }
@@ -106,19 +126,6 @@ class SpreadsheetCreator
         }
 
         return $data;
-    }
-
-    private function getColumnFormatting(Column $column): string
-    {
-        return match ($column) {
-            Column::FREQUENCY => '0.000',
-            Column::POWER => '0.000',
-            Column::QUALITY => '0',
-            Column::DISTANCE => '0',
-            Column::MAX_SIGNAL_LEVEL => '0',
-            Column::PRIVATE_NUMBER => '0',
-            default => '@',
-        };
     }
 
     private function translate(string $id): string
