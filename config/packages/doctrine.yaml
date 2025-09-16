@@ -69,3 +69,9 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+
+when@dev:
+    doctrine:
+        orm:
+            second_level_cache:
+                region_lifetime: 10

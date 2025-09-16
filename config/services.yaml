@@ -18,10 +18,7 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
             - '../src/Dto/'
-            - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -64,3 +61,18 @@ services:
     App\Twig\TrackerExtension:
         arguments:
             $settings: '%env(json:TRACKER_SETTINGS)%'
+
+when@test:
+    services:
+        App\DataFixtures\:
+            resource: '../src/DataFixtures'
+            autoconfigure: false
+
+        App\DataFixtures\TestsFixtures:
+            autoconfigure: true
+            autowire: true
+
+        test.client:
+            class: App\Tests\KernelBrowser
+            autowire: true
+            public: true

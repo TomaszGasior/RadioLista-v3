@@ -1,4 +1,0 @@
-doctrine:
-    orm:
-        second_level_cache:
-            region_lifetime: 10
