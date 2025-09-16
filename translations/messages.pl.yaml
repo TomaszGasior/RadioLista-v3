@@ -12,7 +12,6 @@ layout:
     language_change_title: 'Język'
     change_language_to: 'Zmień język na %lang%'
     app_version: 'Wersja aplikacji'
-    ie_alert: 'Serwis RadioLista nie działa w przeglądarce Internet Explorer. Proszę, przełącz się na przeglądarkę Microsoft Edge. Wciśnij skrót Ctrl+Shift+E na klawiaturze lub wyszukaj Microsoft Edge w menu Start.'
 
 common:
     action:

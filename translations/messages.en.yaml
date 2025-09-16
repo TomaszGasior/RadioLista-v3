@@ -12,7 +12,6 @@ layout:
     language_change_title: 'Language'
     change_language_to: 'Change language to %lang%'
     app_version: 'Application version'
-    ie_alert: 'This website does not work in Internet Explorer. Please switch to Microsoft Edge. Press Ctrl+Shift+E on the keyboard or search for Microsoft Edge in Start Menu.'
 
 common:
     action:
