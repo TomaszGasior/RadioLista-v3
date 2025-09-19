@@ -8,13 +8,12 @@
 <html class="{% block html_classes %}{% endblock %}" lang="{{ current_locale }}">
     <head>
         <!-- {{ app_version }} -->
-        <meta name="viewport" content="initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
-        <meta name="language" content="{{ current_locale }}">
 
         {% if route_is_multilang %}
             {% for locale in app_locales %}
-                <link rel="alternate" href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
+                <link rel="alternate" href="{{ url(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
             {% endfor %}
         {% endif %}
 
