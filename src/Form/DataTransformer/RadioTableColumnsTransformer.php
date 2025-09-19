@@ -3,7 +3,6 @@
 namespace App\Form\DataTransformer;
 
 use App\Entity\Enum\RadioTable\Column;
-use App\Util\ReflectionUtilsTrait;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -21,8 +20,6 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RadioTableColumnsTransformer implements DataTransformerInterface
 {
-    use ReflectionUtilsTrait;
-
     public function transform(mixed $value): array
     {
         $enabledColumnNames = is_array($value)
