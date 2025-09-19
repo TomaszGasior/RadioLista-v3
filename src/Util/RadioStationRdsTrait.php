@@ -12,7 +12,7 @@ trait RadioStationRdsTrait
             $frame = str_repeat(' ', floor($emptyChars/2)) . $frame . str_repeat(' ', ceil($emptyChars/2));
         }
         elseif ($emptyChars < 0) {
-            $frame = substr($frame, 0, 8);
+            $frame = mb_substr($frame, 0, 8);
         }
 
         return $frame;
