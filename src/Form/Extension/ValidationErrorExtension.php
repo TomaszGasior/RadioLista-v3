@@ -2,6 +2,7 @@
 
 namespace App\Form\Extension;
 
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * * Generic notification about "invalid form below" is shown to the user.
  *   Here it's needed to make sure it's only one to show it only once.
  */
+#[AutoconfigureTag('form.type_extension', ['priority' => -100])]
 class ValidationErrorExtension extends AbstractTypeExtension
 {
     public function __construct(private RequestStack $requestStack) {}

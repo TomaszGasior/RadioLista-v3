@@ -4,8 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
+use Symfony\Component\DependencyInjection\Attribute\When;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+#[When('dev')]
 class UserFixtures extends AbstractEntityFixture
 {
     use ReflectionUtilsTrait;

@@ -2,13 +2,16 @@
 
 namespace App\Twig;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TrackerExtension extends AbstractExtension
 {
-    public function __construct(private array $settings) {}
+    public function __construct(
+        #[Autowire('%env(json:TRACKER_SETTINGS)%')] private array $settings,
+    ) {}
 
     /**
      * @codeCoverageIgnore

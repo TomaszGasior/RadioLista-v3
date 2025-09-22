@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -12,7 +13,9 @@ use Twig\Environment;
 class MaintenanceModeSubscriber implements EventSubscriberInterface
 {
     public function __construct(
+        #[Autowire('%kernel.project_dir%/var/lock/maintenance.lock')]
         private string $lockFilePath,
+
         private Security $security,
         private Environment $twig,
     ) {}

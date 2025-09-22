@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
@@ -10,7 +11,10 @@ class HttpSecuritySubscriber implements EventSubscriberInterface
     /**
      * @param string[] $cspExtraDomains
      */
-    public function __construct(private array $cspExtraDomains = []) {}
+    public function __construct(
+        #[Autowire('@=[ env("default::key:url:json:TRACKER_SETTINGS") ]')]
+        private array $cspExtraDomains,
+    ) {}
 
     public function onKernelResponse(ResponseEvent $event): void
     {

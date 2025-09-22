@@ -2,8 +2,10 @@
 
 namespace App\Dto;
 
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[Exclude]
 class RadioTableSearchDto
 {
     // Search term equal to "*" causes MySQL error.

@@ -3,16 +3,22 @@
 namespace App\Doctrine\EntityListener;
 
 use App\Entity\RadioStation;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\Common\EventArgs;
 use Doctrine\ORM\Mapping\PreFlush;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreRemove;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
+#[AsEntityListener]
 class RadioStationListener
 {
     use EntityListenerTrait;
 
-    public function __construct(private bool $enableDateTimeRefresh) {}
+    public function __construct(
+        #[Autowire('@=null !== service("request_stack").getCurrentRequest()')]
+        private bool $enableDateTimeRefresh,
+    ) {}
 
     #[PreFlush]
     #[PreRemove]

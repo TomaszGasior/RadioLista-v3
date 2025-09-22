@@ -3,13 +3,16 @@
 namespace App\Export;
 
 use RuntimeException;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class RadioTableExporterProvider
 {
     /**
      * @param ExporterInterface[] $exporters
      */
-    public function __construct(private iterable $exporters) {}
+    public function __construct(
+        #[AutowireIterator(ExporterInterface::class)] private iterable $exporters,
+    ) {}
 
     public function getExporterForFileExtension(string $fileExtension): ExporterInterface
     {

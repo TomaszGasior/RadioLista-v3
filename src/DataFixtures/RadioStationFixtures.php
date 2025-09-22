@@ -12,7 +12,9 @@ use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\DependencyInjection\Attribute\When;
 
+#[When('dev')]
 class RadioStationFixtures extends AbstractEntityFixture implements DependentFixtureInterface
 {
     protected const ENTITIES_NUMBER = 16000;

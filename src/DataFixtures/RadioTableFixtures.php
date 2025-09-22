@@ -10,7 +10,9 @@ use App\Entity\RadioTable;
 use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\DependencyInjection\Attribute\When;
 
+#[When('dev')]
 class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtureInterface
 {
     use ReflectionUtilsTrait;

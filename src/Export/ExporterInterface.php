@@ -4,7 +4,9 @@ namespace App\Export;
 
 use App\Entity\RadioTable;
 use App\Entity\RadioStation;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag]
 interface ExporterInterface
 {
     /**

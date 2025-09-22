@@ -12,8 +12,10 @@ use App\Util\ReflectionUtilsTrait;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Attribute\When;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+#[When('test')]
 class TestsFixtures extends Fixture
 {
     use ReflectionUtilsTrait;

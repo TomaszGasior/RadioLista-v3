@@ -17,61 +17,12 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
-        exclude:
-            - '../src/Dto/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    _instanceof:
-        App\Export\ExporterInterface:
-            tags: ['app.radio_table_exporter']
-
-    App\Doctrine\EntityListener\:
-        resource: '../src/Doctrine/EntityListener'
-        tags: [{ name: 'doctrine.orm.entity_listener', lazy: true }]
-        arguments:
-            $enableDateTimeRefresh: "@=null !== service('request_stack').getCurrentRequest()"
-
-    App\DataFixtures\TestsFixtures:
-        autoconfigure: false
-
-    App\Controller\DarkErrorController:
-        arguments:
-            $errorController: '@error_controller'
-            $translator: '@translator.default'
-            $debug: '%kernel.debug%'
-            $locales: '%app.locales%'
-
-    App\EventSubscriber\HttpSecuritySubscriber:
-        arguments:
-            $cspExtraDomains:
-                - '%env(default::key:url:json:TRACKER_SETTINGS)%'
-
-    App\EventSubscriber\MaintenanceModeSubscriber:
-        arguments:
-            $lockFilePath: '%kernel.project_dir%/var/lock/maintenance.lock'
-
-    App\Export\RadioTableExporterProvider:
-        arguments:
-            $exporters: !tagged_iterator app.radio_table_exporter
-
-    App\Form\Extension\ValidationErrorExtension:
-        tags: [{ name: form.type_extension, priority: -100 }]
-
-    App\Twig\TrackerExtension:
-        arguments:
-            $settings: '%env(json:TRACKER_SETTINGS)%'
 
 when@test:
     services:
-        App\DataFixtures\:
-            resource: '../src/DataFixtures'
-            autoconfigure: false
-
-        App\DataFixtures\TestsFixtures:
-            autoconfigure: true
-            autowire: true
-
         test.client:
             class: App\Tests\KernelBrowser
             autowire: true
