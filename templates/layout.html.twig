@@ -12,7 +12,7 @@
         <meta name="description" content="RadioLista — {{ 'layout.description'|trans }}.">
 
         {% if route_is_multilang %}
-            {% for locale in app_locales %}
+            {% for locale in app.enabled_locales %}
                 <link rel="alternate" href="{{ url(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}">
             {% endfor %}
         {% endif %}
@@ -177,7 +177,7 @@
                             </div>
 
                             <ul class="switch-group">
-                                {% for locale in app_locales %}
+                                {% for locale in app.enabled_locales %}
                                     <li>
                                         <a href="{{ path(route_name, route_params|merge({'_locale': locale})) }}" hreflang="{{ locale }}" lang="{{ locale }}"
                                             aria-label="{{ 'layout.change_language_to'|trans({'%lang%': locale|language_name(locale=locale)}, locale=locale) }}"

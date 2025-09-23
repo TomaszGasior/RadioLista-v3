@@ -5,7 +5,6 @@ twig:
         - 'common/form/custom_types.html.twig'
     globals:
         app_version: '%app.version%'
-        app_locales: '%app.locales%'
         app_development: '%env(default::bool:DEVELOPMENT_WARNING)%'
 
 when@test:
