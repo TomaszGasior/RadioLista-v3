@@ -12,5 +12,7 @@ interface ExporterInterface
     /**
      * @param RadioStation[] $radioStations
      */
-    public function render(RadioTable $radioTable, array $radioStations): string;
+    public function render(string $format, RadioTable $radioTable, array $radioStations): string;
+
+    public function supports(string $format): bool;
 }

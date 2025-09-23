@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use App\Entity\User;
-use App\Export\RadioTableExporterProvider;
+use App\Export\RadioTableExporter;
 use App\Form\RadioTableColumnsType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
@@ -109,15 +109,10 @@ class RadioTableController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     public function download(RadioTable $radioTable, string $_format,
-                             RadioStationRepository $radioStationRepository,
-                             RadioTableExporterProvider $radioTableExporterProvider): Response
+                             RadioTableExporter $radioTableExporter): Response
     {
-        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
-        $exporter = $radioTableExporterProvider->getExporterForFileExtension($_format);
+        $response = new Response($radioTableExporter->render($_format, $radioTable));
 
-        $response = new Response(
-            $exporter->render($radioTable, $radioStations)
-        );
         $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             str_replace(['/', '\\'], '', $radioTable->getName()) . '.' . $_format,
