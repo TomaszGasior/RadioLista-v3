@@ -11,7 +11,6 @@ set('branch', function() {
 set('env', ['APP_ENV' => 'prod']);
 set('shared_dirs', ['var/log', 'var/sessions', 'var/lock']);
 set('shared_files', ['.env.local.php']);
-set('clear_paths', ['node_modules']);
 set('keep_releases', -1);
 
 import('deploy.yaml');
