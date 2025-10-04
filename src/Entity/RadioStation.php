@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Doctrine\EntityListener\RadioStationListener;
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
 use App\Entity\Enum\RadioStation\DabChannel;
@@ -18,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RadioStationRepository::class)]
-#[ORM\EntityListeners([RadioStationListener::class])]
 #[ORM\Index(name: 'idx_sort_frequency', columns: ['radioTableId', 'frequency'])]
 #[ORM\Index(name: 'idx_sort_name', columns: ['radioTableId', 'name', 'frequency'])]
 class RadioStation

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Doctrine\EntityListener\RadioTableListener;
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\Enum\RadioTable\DistanceUnit;
@@ -18,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RadioTableRepository::class)]
-#[ORM\EntityListeners([RadioTableListener::class])]
 #[ORM\Cache('NONSTRICT_READ_WRITE')]
 #[ORM\Index(name: 'idx_status', columns: ['status'])]
 #[ORM\Index(name: 'idx_search_term', columns: ['name', 'description'], flags: ['fulltext'])]

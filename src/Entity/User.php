@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Doctrine\EntityListener\UserListener;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -15,7 +14,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\EntityListeners([UserListener::class])]
 #[UniqueEntity('name', message: 'user.name_not_unique')]
 #[ORM\Cache('NONSTRICT_READ_WRITE')]
 class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, PasswordAuthenticatedUserInterface
