@@ -5,12 +5,12 @@ namespace App\Security\Voter;
 use App\Entity\Enum\RadioTable\Status;
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Event\AdminRestrictedAccessEvent;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Contracts\EventDispatcher\Event;
 
 class AdminVoter extends Voter
 {
@@ -55,7 +55,7 @@ class AdminVoter extends Voter
         // but this whole logic is needed to show flash message when site administrator
         // browses users private contents. Take a look at AdminFlashMessage class.
         if ($result) {
-            $this->eventDispatcher->dispatch(new Event, 'app.restricted_admin_access');
+            $this->eventDispatcher->dispatch(new AdminRestrictedAccessEvent);
         }
 
         return $result;

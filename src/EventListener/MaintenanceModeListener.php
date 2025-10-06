@@ -1,16 +1,16 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventListener;
 
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Exception\RuntimeException as SecurityException;
 use Twig\Environment;
 
-class MaintenanceModeSubscriber implements EventSubscriberInterface
+class MaintenanceModeListener
 {
     public function __construct(
         #[Autowire('%kernel.project_dir%/var/lock/maintenance.lock')]
@@ -20,6 +20,7 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
         private Environment $twig,
     ) {}
 
+    #[AsEventListener(priority: -1)]
     public function onKernelRequest(RequestEvent $event): void
     {
         if (false === file_exists($this->lockFilePath)) {
@@ -45,15 +46,5 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
         );
 
         $event->setResponse($response);
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    static public function getSubscribedEvents(): array
-    {
-        return [
-            RequestEvent::class => ['onKernelRequest', -1],
-        ];
     }
 }

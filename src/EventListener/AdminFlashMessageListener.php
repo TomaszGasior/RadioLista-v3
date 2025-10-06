@@ -1,16 +1,18 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Event\AdminRestrictedAccessEvent;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class AdminFlashMessageSubscriber implements EventSubscriberInterface
+class AdminFlashMessageListener
 {
     public function __construct(private RequestStack $requestStack) {}
 
+    #[AsEventListener(AdminRestrictedAccessEvent::class)]
     public function onRestrictedAdminAccess(): void
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -29,15 +31,5 @@ class AdminFlashMessageSubscriber implements EventSubscriberInterface
             'error',
             new TranslatableMessage('common.notification.showing_private_content_as_administrator', [], 'admin')
         );
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    static public function getSubscribedEvents(): array
-    {
-        return [
-            'app.restricted_admin_access' => 'onRestrictedAdminAccess',
-        ];
     }
 }

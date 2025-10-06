@@ -1,12 +1,12 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventListener;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
-class HttpSecuritySubscriber implements EventSubscriberInterface
+class HttpSecurityListener
 {
     /**
      * @param string[] $cspExtraDomains
@@ -16,6 +16,7 @@ class HttpSecuritySubscriber implements EventSubscriberInterface
         private array $cspExtraDomains,
     ) {}
 
+    #[AsEventListener]
     public function onKernelResponse(ResponseEvent $event): void
     {
         $response = $event->getResponse();
@@ -30,15 +31,5 @@ class HttpSecuritySubscriber implements EventSubscriberInterface
         $response->headers->set('Strict-Transport-Security', 'max-age=2592000');
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            ResponseEvent::class => 'onKernelResponse',
-        ];
     }
 }

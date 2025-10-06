@@ -1,9 +1,9 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventListener;
 
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Security\Core\Authentication\Token\RememberMeToken;
@@ -11,10 +11,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
 
-class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
+class SecurityFlashNoticeListener
 {
     public function __construct(private Security $security) {}
 
+    #[AsEventListener]
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         if ($event->getAuthenticationToken() instanceof RememberMeToken) {
@@ -28,6 +29,7 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
         }
     }
 
+    #[AsEventListener(priority: 10)]
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
@@ -47,6 +49,7 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
         }
     }
 
+    #[AsEventListener]
     public function onSecurityLogout(LogoutEvent $event): void
     {
         $request = $event->getRequest();
@@ -56,17 +59,5 @@ class SecurityFlashNoticeSubscriber implements EventSubscriberInterface
         if ($session instanceof FlashBagAwareSessionInterface) {
             $session->getFlashBag()->add('notice', 'session.notification.logged_out');
         }
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    static public function getSubscribedEvents(): array
-    {
-        return [
-            InteractiveLoginEvent::class => 'onSecurityInteractiveLogin',
-            ExceptionEvent::class => ['onKernelException', 10],
-            LogoutEvent::class => 'onSecurityLogout',
-        ];
     }
 }
