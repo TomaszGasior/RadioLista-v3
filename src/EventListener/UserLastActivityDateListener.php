@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use App\Entity\User;
 use App\Event\RadioStationCreated;
 use App\Event\RadioStationRemoved;
 use App\Event\RadioStationUpdated;
@@ -9,24 +10,21 @@ use App\Event\RadioTableCreated;
 use App\Event\RadioTableRemoved;
 use App\Event\RadioTableUpdated;
 use App\Event\UserUpdated;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 class UserLastActivityDateListener
 {
-    public function __construct(
-        #[Autowire('@=null !== service("request_stack").getCurrentRequest()')]
-        private bool $enableDateTimeRefresh,
-    ) {}
+    public function __construct(private Security $security) {}
 
     #[AsEventListener]
     public function onUserUpdated(UserUpdated $event): void
     {
-        if (!$this->enableDateTimeRefresh) {
+        $user = $event->user;
+
+        if (!$this->isCurrentUser($user)) {
             return;
         }
-
-        $user = $event->user;
 
         if (in_array('aboutMe', $event->changedFields) || in_array('publicProfile', $event->changedFields)) {
             $user->refreshLastActivityDate();
@@ -38,11 +36,11 @@ class UserLastActivityDateListener
     #[AsEventListener(RadioTableRemoved::class)]
     public function onRadioTableChanged(RadioTableCreated|RadioTableUpdated|RadioTableRemoved $event): void
     {
-        if (!$this->enableDateTimeRefresh) {
+        $user = $event->radioTable->getOwner();
+
+        if (!$this->isCurrentUser($user)) {
             return;
         }
-
-        $user = $event->radioTable->getOwner();
 
         $user->refreshLastActivityDate();
     }
@@ -52,12 +50,17 @@ class UserLastActivityDateListener
     #[AsEventListener(RadioStationRemoved::class)]
     public function onRadioStationChanged(RadioStationCreated|RadioStationUpdated|RadioStationRemoved $event): void
     {
-        if (!$this->enableDateTimeRefresh) {
+        $user = $event->radioStation->getRadioTable()->getOwner();
+
+        if (!$this->isCurrentUser($user)) {
             return;
         }
 
-        $user = $event->radioStation->getRadioTable()->getOwner();
-
         $user->refreshLastActivityDate();
+    }
+
+    private function isCurrentUser(User $user): bool
+    {
+        return $user === $this->security->getUser();
     }
 }

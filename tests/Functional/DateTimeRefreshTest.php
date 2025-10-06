@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\RadioStation;
+use App\Tests\KernelBrowser;
 use App\Util\ReflectionUtilsTrait;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,6 +100,7 @@ class DateTimeRefreshTest extends WebTestCase
 
     private function executeThroughWebRequest(callable $callback): void
     {
+        /** @var KernelBrowser */
         $client = static::createClient();
 
         /** @var Router */
@@ -115,6 +117,7 @@ class DateTimeRefreshTest extends WebTestCase
             }])
         );
 
+        $client->loginUserByName('test_user');
         $client->request('GET', '/test_route');
 
         self::ensureKernelShutdown();
