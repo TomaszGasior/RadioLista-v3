@@ -11,8 +11,9 @@
                 background: #fff;
                 color: #000;
                 cursor: default;
-                font: 16px 'Lato', 'Cantarell', 'SF Pro Display', 'Ubuntu', 'Droid Sans', 'Source Sans Pro', 'Segoe UI', 'Tahoma', sans-serif;
-                {# Needed for Cantarell and number indentation. -#}
+                {# "Lato" is used for generating PDF files. -#}
+                font: 16px 'Lato', system-ui, sans-serif;
+                {# Some fonts may default to variable numbers width. -#}
                 font-variant-numeric: tabular-nums;
             }
             .sr-only {
