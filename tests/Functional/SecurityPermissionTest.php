@@ -2,15 +2,17 @@
 
 namespace App\Tests\Functional;
 
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityPermissionTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
+    use LoginUserTrait;
+
+    private KernelBrowser $client;
 
     public function setUp(): void
     {
@@ -82,7 +84,7 @@ class SecurityPermissionTest extends WebTestCase
     {
         $this->skipPdfGenerator($url);
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $this->client->request($method, $url);
 
         // POST-only endpoints always redirect to another page.
@@ -103,7 +105,7 @@ class SecurityPermissionTest extends WebTestCase
     {
         $this->skipPdfGenerator($url);
 
-        $this->client->loginUserByName('test_user_second');
+        $this->loginUserByName($this->client, 'test_user_second');
         $this->client->request($method, $url);
 
         $response = $this->client->getResponse();

@@ -3,7 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\RadioStation;
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
 use App\Util\ReflectionUtilsTrait;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 class DateTimeRefreshTest extends WebTestCase
 {
     use ReflectionUtilsTrait;
+    use LoginUserTrait;
 
     public function test_radio_table_last_update_time_is_refreshed_when_modifying_radio_station_through_web_page(): void
     {
@@ -100,7 +101,6 @@ class DateTimeRefreshTest extends WebTestCase
 
     private function executeThroughWebRequest(callable $callback): void
     {
-        /** @var KernelBrowser */
         $client = static::createClient();
 
         /** @var Router */
@@ -117,7 +117,7 @@ class DateTimeRefreshTest extends WebTestCase
             }])
         );
 
-        $client->loginUserByName('test_user');
+        $this->loginUserByName($client, 'test_user');
         $client->request('GET', '/test_route');
 
         self::ensureKernelShutdown();

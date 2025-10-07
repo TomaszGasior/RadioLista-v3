@@ -3,14 +3,16 @@
 namespace App\Tests\Functional;
 
 use App\Entity\Enum\RadioTable\Status;
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableStatusTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
+    use LoginUserTrait;
+
+    private KernelBrowser $client;
 
     public function setUp(): void
     {
@@ -59,7 +61,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->loginUserByName('test_user_second');
+        $this->loginUserByName($this->client, 'test_user_second');
         $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -70,7 +72,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->loginUserByName('test_user_second');
+        $this->loginUserByName($this->client, 'test_user_second');
         $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
@@ -106,7 +108,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -119,7 +121,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
-        $this->client->loginUserByName('test_user_admin');
+        $this->loginUserByName($this->client, 'test_user_admin');
         $this->client->request('GET', '/wykaz/1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -173,7 +175,7 @@ class RadioTableStatusTest extends WebTestCase
 
     private function setRadioTableStatus(Status $newStatus): void
     {
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $crawler = $this->client->request('GET', '/wykaz/1/ustawienia');
 
         $form = $crawler->filter('form')->form();

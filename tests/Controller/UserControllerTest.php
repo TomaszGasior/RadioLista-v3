@@ -2,13 +2,15 @@
 
 namespace App\Tests\Controller;
 
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
+    use LoginUserTrait;
+
+    private KernelBrowser $client;
 
     public function setUp(): void
     {
@@ -17,7 +19,7 @@ class UserControllerTest extends WebTestCase
 
     public function test_user_can_update_description_in_his_public_profile(): void
     {
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $exampleContent = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>';
@@ -35,7 +37,7 @@ class UserControllerTest extends WebTestCase
     public function test_user_can_enable_and_disable_his_public_profile(): void
     {
         $setPublicProfile = function(bool $enabled): void {
-            $this->client->loginUserByName('test_user');
+            $this->loginUserByName($this->client, 'test_user');
 
             $crawler = $this->client->request('GET', '/ustawienia-konta');
 
@@ -63,7 +65,7 @@ class UserControllerTest extends WebTestCase
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $form = $crawler->filter('form')->form();
@@ -93,7 +95,7 @@ class UserControllerTest extends WebTestCase
     {
         $newPassword = 'MEEEEEEEEEEEEEEEEEEEEEEEEH';
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
         $crawler = $this->client->request('GET', '/ustawienia-konta');
 
         $form = $crawler->filter('form')->form();

@@ -2,23 +2,23 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\RadioStation;
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Field\ChoiceFormField;
 
 class RadioStationControllerTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
+    use LoginUserTrait;
+
+    private KernelBrowser $client;
 
     public function setUp(): void
     {
-        /** @var KernelBrowser */
         $this->client = static::createClient();
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
     }
 
     public function test_user_can_add_radio_station(): void

@@ -2,21 +2,22 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\RadioTable;
-use App\Tests\KernelBrowser;
+use App\Tests\LoginUserTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RadioTableControllerTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
+    use LoginUserTrait;
+
+    private KernelBrowser $client;
 
     public function setUp(): void
     {
         /** @var KernelBrowser */
         $this->client = static::createClient();
 
-        $this->client->loginUserByName('test_user');
+        $this->loginUserByName($this->client, 'test_user');
     }
 
     public function test_radio_table_is_properly_rendered_and_contains_stations(): void
