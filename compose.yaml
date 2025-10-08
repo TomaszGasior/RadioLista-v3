@@ -13,7 +13,7 @@ services:
             - '.:/srv:z'
 
     db:
-        image: 'mysql:8.0.28'
+        image: 'docker.io/mysql:8.0.39'
         environment:
             MYSQL_ROOT_PASSWORD: 'toor'
         volumes:

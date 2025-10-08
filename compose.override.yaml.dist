@@ -1,4 +1,9 @@
 services:
+    app:
+        # Set your host user id here (like "1000"). You can read it from "id" command.
+        # If using rootless Podman: set to "0".
+        user: '0'
+
     http:
         ports:
             - '2012:80'

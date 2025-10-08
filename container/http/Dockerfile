@@ -1,4 +1,4 @@
-FROM httpd:2.4.58-alpine3.18
+FROM docker.io/httpd:2.4.58-alpine3.18
 
 COPY php-fpm.conf conf/extra/
 
@@ -10,6 +10,6 @@ RUN echo "Include conf/extra/php-fpm.conf" >> conf/httpd.conf \
     -e 's/^#\(LoadModule .*mod_rewrite.so\)/\1/' \
     -e 's/AllowOverride None/AllowOverride All/'
 
-COPY entrypoint.sh /usr/local/bin/custom-entrypoint
+COPY --chmod=755 entrypoint.sh /usr/local/bin/custom-entrypoint
 ENTRYPOINT ["/usr/local/bin/custom-entrypoint"]
 CMD ["httpd-foreground"]
