@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^8.4",
+        "php": "8.4.*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
@@ -51,9 +51,6 @@
             "*": "dist"
         },
         "sort-packages": true,
-        "platform": {
-            "php": "8.4"
-        },
         "allow-plugins": {
             "symfony/flex": true,
             "symfony/runtime": true
