@@ -9,19 +9,24 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Faker\Factory;
 use Faker\Generator;
+use Symfony\Component\DependencyInjection\Attribute\When;
 
 /**
+ * This class makes Faker accessible through dependency injection
+ * and makes custom methods available in IDE autocompletion.
+ *
  * @method self optional()
  */
+#[When('dev')]
 class Faker extends Generator
 {
     public function __construct()
     {
-        // The way how this class is implemented is not correct in context of Faker's design
-        // but it's simpler to maintain and makes IDE autocompletion working.
-        $this->providers = Factory::create('pl_PL')->getProviders();
-
         parent::__construct();
+
+        // Fill in providers in custom instance of Faker using
+        // providers from instance created by Faker's factory class.
+        $this->providers = Factory::create('pl_PL')->providers;
     }
 
     /**
