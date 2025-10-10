@@ -5,10 +5,17 @@
     {{ parent() }}
 
     <script>
-        {# Dirty fix for wordcount CKEditor plugin. Remove "HTML" word from UI message. #}
-        CKEDITOR.instances.{{ id }}.on('langLoaded', function(){
-            let lang = CKEDITOR.lang[CKEDITOR.instances.{{ id }}.config.language];
+        {# Remove "HTML" word from wordcount plugin UI message. #}
+        CKEDITOR.instances.{{ id }}.on('langLoaded', function(event) {
+            let lang = CKEDITOR.lang[event.editor.config.language];
             lang.wordcount.CharCountWithHTML = lang.wordcount.CharCount;
+        });
+
+        {# Remove URL protocols other than "http://" and "https://". #}
+        CKEDITOR.on('dialogDefinition', function(event) {
+            if (event.data.name == 'link') {
+                event.data.definition.getContents('info').get('protocol')['items'].splice(2, 3);
+            }
         });
     </script>
 {% endblock %}
