@@ -104,19 +104,19 @@
                 {%- block body_cell_rds -%}
                     {%- set rds_rt = [] -%}
                     {%- for frame in radio_station.rds.rt -%}
-                        {%- set rds_rt = rds_rt|merge([frame|replace({'_':' '})|escape]) -%}
+                        {%- set rds_rt = rds_rt|merge([frame|replace({'_':' '})]) -%}
                     {%- endfor -%}
 
                     {%- set rds_ps_groups = [] -%}
                     {%- for group_key in radio_station.rds.ps|keys -%}
                         {%- set group = [] -%}
                         {%- for frame in radio_station.rds.ps[group_key] -%}
-                            {%- set group = group|merge([frame|replace({'_':' '})|align_rds_frame|escape]) -%}
+                            {%- set group = group|merge([frame|replace({'_':' '})|align_rds_frame]) -%}
                         {%- endfor -%}
                         {%- set rds_ps_groups = rds_ps_groups|merge([group]) -%}
                     {%- endfor -%}
 
-                    {%- set rds_pty = radio_station.rds.pty|escape -%}
+                    {%- set rds_pty = radio_station.rds.pty -%}
 
                     <span data-pty="{{ rds_pty|json_encode|escape('html_attr') }}"
                           data-rt="{{ rds_rt|json_encode|escape('html_attr') }}"

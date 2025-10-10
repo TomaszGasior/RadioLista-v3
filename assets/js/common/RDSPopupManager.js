@@ -70,25 +70,19 @@ export class RDSPopupManager
         let PTY = JSON.parse(item.dataset.pty);
 
         if (PS.length > 0) {
-            PS.forEach(function(group, key){
-               PS[key] = `<span>${group.join('</span> <span>')}</span>`;
-            });
             this.rows.PS.hidden = false;
-            this.values.PS.innerHTML = `<div>${PS.join('</div> <div>')}</div>`;
+            this.updatePopupRowValueContents(this.values.PS, PS);
         }
         if (RT.length > 0) {
             this.rows.RT.hidden = false;
-            this.values.RT.innerHTML = `<div><span>${RT.join('</span></div> <div><span>')}</span></div>`;
+            this.updatePopupRowValueContents(this.values.RT, RT.map(item => [item]));
         }
         if (PTY) {
             this.rows.PTY.hidden = false;
-            this.values.PTY.innerHTML = `<div><span>${PTY}</span></div>`;
+            this.updatePopupRowValueContents(this.values.PTY, [[PTY]]);
         }
 
-        if (PS || RT || PTY) {
-            this.popup.hidden = false;
-        }
-
+        this.popup.hidden = false;
         this.updatePopupPositionForItem(item);
     }
 
@@ -103,6 +97,24 @@ export class RDSPopupManager
         if (pxOutOfScreen > 0) {
             this.popup.style.top = (rect.top - pxOutOfScreen) + 'px';
         }
+    }
+
+    updatePopupRowValueContents(node, data)
+    {
+        node.textContent = '';
+
+        data.forEach(group => {
+            let div = document.createElement('div');
+
+            group.forEach(item => {
+                let span = document.createElement('span');
+                span.textContent = item;
+
+                div.appendChild(span);
+            });
+
+            node.appendChild(div);
+        });
     }
 
     hidePopup()
