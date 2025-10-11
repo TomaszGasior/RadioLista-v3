@@ -2,26 +2,14 @@
 
 namespace App\Twig;
 
+use Twig\Attribute\AsTwigFilter;
 use Twig\Environment;
-use Twig\Extension\AbstractExtension;
 use Twig\Extension\CoreExtension;
 use Twig\Extra\Intl\IntlExtension;
-use Twig\TwigFilter;
 
-class AppExtension extends AbstractExtension
+class AppExtension
 {
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('format_date_html', [$this, 'formatDateHTML'], [
-                'needs_environment' => true, 'is_safe' => ['html']
-            ]),
-        ];
-    }
-
+    #[AsTwigFilter('format_date_html', isSafe: ['html'])]
     public function formatDateHTML(Environment $twig, $date, ?string $dateFormat = 'long', ...$args): string
     {
         $intlExtension = $twig->getExtension(IntlExtension::class);

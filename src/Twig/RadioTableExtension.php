@@ -3,22 +3,17 @@
 namespace App\Twig;
 
 use App\Util\RadioStationRdsTrait;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
+use Twig\Attribute\AsTwigFilter;
 
-class RadioTableExtension extends AbstractExtension
+class RadioTableExtension
 {
     use RadioStationRdsTrait {
-        alignRDSFrame as public;
+        alignRDSFrame as doAlignRDSFrame;
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getFilters(): array
+    #[AsTwigFilter('align_rds_frame')]
+    public function alignRDSFrame(string $frame): string
     {
-        return [
-            new TwigFilter('align_rds_frame', [$this, 'alignRDSFrame']),
-        ];
+        return $this->doAlignRDSFrame($frame);
     }
 }

@@ -3,29 +3,16 @@
 namespace App\Twig;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Twig\Attribute\AsTwigFunction;
 use Twig\Environment;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class TrackerExtension extends AbstractExtension
+class TrackerExtension
 {
     public function __construct(
         #[Autowire('%env(json:TRACKER_SETTINGS)%')] private array $settings,
     ) {}
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('tracker_code', [$this, 'printTrackerCode'], [
-                'needs_environment' => true,
-                'is_safe' => ['html'],
-            ]),
-        ];
-    }
-
+    #[AsTwigFunction('tracker_code', isSafe: ['html'])]
     public function printTrackerCode(Environment $twig): string
     {
         if (empty($this->settings['url']) || empty($this->settings['site_id'])) {
