@@ -1,0 +1,14 @@
+.editorconfig  export-ignore
+.env*  export-ignore
+.git*  export-ignore
+.hidden  export-ignore
+.vscode  export-ignore
+*.md  export-ignore
+bin/dep  export-ignore
+bin/phpunit  export-ignore
+bin/release  export-ignore
+compose*.yaml*  export-ignore
+container  export-ignore
+deploy.yaml  export-ignore
+phpunit*.xml*  export-ignore
+tests  export-ignore
