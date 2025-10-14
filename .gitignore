@@ -2,7 +2,6 @@
 !.vscode/**/*.default.*
 !.vscode/extensions.json
 
-deploy.yaml
 compose.override.yaml
 
 ###> symfony/framework-bundle ###

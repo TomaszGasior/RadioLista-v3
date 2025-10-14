@@ -1,0 +1,50 @@
+import:
+    - recipe/composer.php
+
+config:
+    repository: 'git@github.com:TomaszGasior/RadioLista-v3.git'
+    bin/php: 'php84'
+    deploy_path: '~/domains/{{alias}}'
+    keep_releases: 3
+    env:
+        APP_ENV: 'prod'
+    shared_dirs:
+        - 'var/log'
+        - 'var/sessions'
+        - 'var/lock'
+    shared_files:
+        - '.env.local.php'
+
+hosts:
+    dev.radiolista.pl:
+        hostname: 's5.mydevil.net'
+
+    radiolista.pl:
+        hostname: 's5.mydevil.net'
+
+tasks:
+    deploy:check_target:
+        # "bin/dep deploy" cannot be used without "--tag …" or "--branch …"
+        - run: '[ "{{target}}" != "HEAD" ] || exit 1'
+
+    deploy:version:
+        - cd: '{{release_path}}'
+        - run: 'sed -i -e "s#__VER__#$(git -C {{deploy_path}}/.dep/repo describe --abbrev=3 {{target}})#" config/services.yaml'
+
+    deploy:clear_opcache:
+        - cd: '{{release_path}}'
+        - run: 'cachetool opcache:reset'
+
+    maintenance:enable:
+        - run: 'touch {{current_path}}/var/lock/maintenance.lock'
+
+    maintenance:disable:
+        - run: 'rm -f {{current_path}}/var/lock/maintenance.lock'
+
+after:
+    deploy:setup: deploy:check_target
+    deploy:update_code: deploy:version
+    deploy:symlink: deploy:clear_opcache
+    rollback: deploy:clear_opcache
+
+    deploy:failed: deploy:unlock

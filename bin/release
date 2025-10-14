@@ -15,3 +15,4 @@ echo
 echo 'What to do now:'
 echo '    git push origin '$tag
 echo '    git push'
+echo '    bin/dep deploy --tag '$tag
