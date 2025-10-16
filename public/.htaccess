@@ -1,5 +1,9 @@
 AddType application/x-httpd-php84 .php
 
+<Files ~ "\.(css|js|png|svg|gif|jpg|jpeg|woff|woff2|ttf|ico)$">
+   Header set Cache-Control "public, max-age=31536000"
+</Files>
+
 RewriteEngine on
 
 RewriteRule ^assets/[^/]+/(.+)$ /assets-src/$1 [END]
