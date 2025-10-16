@@ -8,6 +8,7 @@ RUN echo "Include conf/extra/php-fpm.conf" >> conf/httpd.conf \
     -e 's/^#\(LoadModule .*mod_proxy.so\)/\1/' \
     -e 's/^#\(LoadModule .*mod_proxy_fcgi.so\)/\1/' \
     -e 's/^#\(LoadModule .*mod_rewrite.so\)/\1/' \
+    -e 's/^#\(LoadModule .*mod_actions.so\)/\1/' \
     -e 's/AllowOverride None/AllowOverride All/'
 
 COPY --chmod=755 entrypoint.sh /usr/local/bin/custom-entrypoint

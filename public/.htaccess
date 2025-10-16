@@ -1,3 +1,5 @@
+AddType application/x-httpd-php84 .php
+
 RewriteEngine on
 
 RewriteRule ^assets/[^/]+/(.+)$ /assets-src/$1 [END]
