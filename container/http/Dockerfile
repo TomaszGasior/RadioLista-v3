@@ -1,9 +1,9 @@
 FROM docker.io/httpd:2.4.58-alpine3.18
 
-COPY php-fpm.conf conf/extra/
+COPY *.conf conf/custom/
 
-RUN echo "Include conf/extra/php-fpm.conf" >> conf/httpd.conf \
-    && sed -i conf/httpd.conf \
+RUN sed -i conf/httpd.conf \
+    -e '$aInclude conf/custom/*.conf' \
     -e 's#/usr/local/apache2/htdocs#/srv/public#' \
     -e 's/^#\(LoadModule .*mod_proxy.so\)/\1/' \
     -e 's/^#\(LoadModule .*mod_proxy_fcgi.so\)/\1/' \
