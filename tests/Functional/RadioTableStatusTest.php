@@ -95,6 +95,7 @@ class RadioTableStatusTest extends WebTestCase
     {
         $this->setRadioTableStatus($status);
 
+        $this->loginUserByName($this->client, 'test_user');
         $crawler = $this->client->request('GET', '/wykaz/1');
 
         $robotsTag = $crawler->filter('meta[name="robots"]');
