@@ -2,6 +2,7 @@
 
 namespace App\Doctrine\Middleware;
 
+use Doctrine\DBAL\Connection\StaticServerVersionProvider;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\Middleware;
@@ -21,7 +22,7 @@ class SqliteForeignKeyMiddleware implements Middleware
 {
     public function wrap(Driver $driver): Driver
     {
-        if (false === $driver->getDatabasePlatform() instanceof SqlitePlatform) {
+        if (false === $driver->getDatabasePlatform(new StaticServerVersionProvider('')) instanceof SqlitePlatform) {
             return $driver;
         }
 
