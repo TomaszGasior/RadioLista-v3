@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Enum\ExportFormat;
 use App\Export\PdfExporter;
 use App\Export\RadioTableExporter;
 use App\Form\RadioTableColumnsType;
@@ -105,19 +106,19 @@ class RadioTableController extends AbstractController
 
     #[Route(
         ['pl' => '/wykaz/{id}/eksport/{_format}', 'en' => '/list/{id}/export/{_format}'],
-        name: 'radio_table.download', requirements: ['_format' => 'csv|ods|xlsx|html|pdf']
+        name: 'radio_table.download'
     )]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
-    public function download(RadioTable $radioTable, string $_format,
+    public function download(RadioTable $radioTable, ExportFormat $_format,
                              RadioTableExporter $radioTableExporter): Response
     {
         $response = new Response($radioTableExporter->render($_format, $radioTable));
 
         $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            str_replace(['/', '\\'], '', $radioTable->getName()) . '.' . $_format,
-            date('Y-m-d_H-i-s') . '.' . $_format
+            str_replace(['/', '\\'], '', $radioTable->getName()) . '.' . $_format->value,
+            date('Y-m-d_H-i-s') . '.' . $_format->value
         ));
 
         return $response;
@@ -130,6 +131,7 @@ class RadioTableController extends AbstractController
     {
         return $this->render('radio_table/export.html.twig', [
             'radio_table' => $radioTable,
+            'format_enum' => ExportFormat::class,
             'pdf_format_radio_stations_max_count' => PdfExporter::RADIO_STATIONS_MAX_COUNT,
         ]);
     }

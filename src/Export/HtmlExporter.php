@@ -3,13 +3,14 @@
 namespace App\Export;
 
 use App\Entity\RadioTable;
+use App\Enum\ExportFormat;
 use Twig\Environment;
 
 class HtmlExporter implements ExporterInterface
 {
     public function __construct(private Environment $twig) {}
 
-    public function render(string $format, RadioTable $radioTable, array $radioStations): string
+    public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
     {
         return $this->twig->render('radio_table/standalone.html.twig', [
             'radio_table' => $radioTable,
@@ -17,8 +18,8 @@ class HtmlExporter implements ExporterInterface
         ]);
     }
 
-    public function supports(string $format): bool
+    public function supports(ExportFormat $format): bool
     {
-        return 'html' === $format;
+        return ExportFormat::HTML === $format;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Export;
 
 use App\Entity\RadioTable;
+use App\Enum\ExportFormat;
 use App\Repository\RadioStationRepository;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
@@ -17,7 +18,7 @@ class RadioTableExporter
         private RadioStationRepository $radioStationRepository,
     ) {}
 
-    public function render(string $format, RadioTable $radioTable): string
+    public function render(ExportFormat $format, RadioTable $radioTable): string
     {
         $radioStations = $this->radioStationRepository->findForRadioTable($radioTable);
 
@@ -27,6 +28,6 @@ class RadioTableExporter
             }
         }
 
-        throw new RuntimeException(sprintf('Format "%s" is not supported.', $format));
+        throw new RuntimeException(sprintf('Format "%s" is not supported.', $format->value));
     }
 }

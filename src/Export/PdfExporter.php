@@ -3,6 +3,7 @@
 namespace App\Export;
 
 use App\Entity\RadioTable;
+use App\Enum\ExportFormat;
 use App\Util\DompdfFactory;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
@@ -16,13 +17,13 @@ class PdfExporter implements ExporterInterface
         #[Autowire('%app.version%')] private string $version,
     ) {}
 
-    public function render(string $format, RadioTable $radioTable, array $radioStations): string
+    public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
     {
         // Dompdf's performance is very bad when rendering documents containing long tables.
         // Limit the number of rows to avoid exceeding PHP's memory limit or execution timeout.
         $radioStations = array_slice($radioStations, 0, self::RADIO_STATIONS_MAX_COUNT);
 
-        $html = $this->htmlExporter->render('html', $radioTable, $radioStations);
+        $html = $this->htmlExporter->render(ExportFormat::HTML, $radioTable, $radioStations);
 
         $dompdf = $this->dompdfFactory->getDompdf();
 
@@ -36,8 +37,8 @@ class PdfExporter implements ExporterInterface
         return $dompdf->output();
     }
 
-    public function supports(string $format): bool
+    public function supports(ExportFormat $format): bool
     {
-        return 'pdf' === $format;
+        return ExportFormat::PDF === $format;
     }
 }

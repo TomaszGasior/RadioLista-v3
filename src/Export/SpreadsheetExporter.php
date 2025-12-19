@@ -3,6 +3,7 @@
 namespace App\Export;
 
 use App\Entity\RadioTable;
+use App\Enum\ExportFormat;
 use App\Util\SpreadsheetCreator;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -10,19 +11,17 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class SpreadsheetExporter implements ExporterInterface
 {
-    private const array WRITERS = [
-        'ods' => Ods::class,
-        'xlsx' => Xlsx::class,
-        'csv' => Csv::class,
-    ];
-
     public function __construct(private SpreadsheetCreator $spreadsheetCreator) {}
 
-    public function render(string $format, RadioTable $radioTable, array $radioStations): string
+    public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
     {
         $spreadsheet = $this->spreadsheetCreator->createSpreadsheet($radioTable, $radioStations);
 
-        $writer = new (self::WRITERS[$format])($spreadsheet);
+        $writer = match ($format) {
+            ExportFormat::CSV => new Csv($spreadsheet),
+            ExportFormat::ODS => new Ods($spreadsheet),
+            ExportFormat::XLSX => new Xlsx($spreadsheet),
+        };
 
         ob_start();
         $writer->save('php://output');
@@ -30,8 +29,8 @@ class SpreadsheetExporter implements ExporterInterface
         return ob_get_clean();
     }
 
-    public function supports(string $format): bool
+    public function supports(ExportFormat $format): bool
     {
-        return in_array($format, array_keys(self::WRITERS));
+        return in_array($format, [ExportFormat::CSV, ExportFormat::ODS, ExportFormat::XLSX]);
     }
 }

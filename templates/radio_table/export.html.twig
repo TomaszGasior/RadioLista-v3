@@ -38,25 +38,25 @@
 
                 <ul class="radio-table-export-list">
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'xlsx'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: enum(format_enum).XLSX.value}) }}" class="button">
                             {{ 'radio_table.export.action.download_xlsx'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_xlsx'|trans }}
                     </li>
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'ods'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: enum(format_enum).ODS.value}) }}" class="button">
                             {{ 'radio_table.export.action.download_ods'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_ods'|trans }}
                     </li>
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'csv'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: enum(format_enum).CSV.value}) }}" class="button">
                             {{ 'radio_table.export.action.download_csv'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_csv'|trans }}
                     </li>
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'pdf'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: enum(format_enum).PDF.value}) }}" class="button">
                             {{ 'radio_table.export.action.download_pdf'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_pdf'|trans }}
@@ -66,7 +66,7 @@
                         {% endif %}
                     </li>
                     <li>
-                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">
+                        <a href="{{ path('radio_table.download', {id: radio_table.id, _format: enum(format_enum).HTML.value}) }}" class="button">
                             {{ 'radio_table.export.action.download_html'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_html'|trans }}
