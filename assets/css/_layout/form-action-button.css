@@ -32,22 +32,6 @@
     padding-right: 30px;
 }
 
-@supports (-webkit-nbsp-mode: initial)
-{
-    /* workaround for WebKit where transparency is black */
-    .form-action-button, .form-action-button::before, .form-action-button::after {
-        padding-top: 15px;
-        background: var(--site-background-color);
-    }
-
-    @supports (color: color-mix(in srgb, white, rgba(255,255,255, 0) 1%))
-    {
-        .form-action-button, .form-action-button::before, .form-action-button::after {
-            background: color-mix(in srgb, var(--site-background-color), rgba(255,255,255, 0) 25%);
-        }
-    }
-}
-
 @media (max-width: 767px)
 {
     /* keep in sync with .site-width padding */

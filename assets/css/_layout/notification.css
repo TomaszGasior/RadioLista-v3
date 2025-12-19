@@ -81,14 +81,6 @@
     }
 }
 
-@supports (-webkit-nbsp-mode: initial)
-{
-    /* disable show animation in WebKit, it's buggy */
-    .notification {
-        animation-duration: 0s, 0.8s;
-    }
-}
-
 @media (prefers-reduced-motion)
 {
     .notification {
