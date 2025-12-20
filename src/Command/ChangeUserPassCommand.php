@@ -2,10 +2,10 @@
 
 namespace App\Command;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Util\PasswordGenerator;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,6 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AsCommand('app:change-user-pass', "Change user's password")]
 class ChangeUserPassCommand extends Command
 {
     public function __construct(
@@ -26,20 +27,12 @@ class ChangeUserPassCommand extends Command
         parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this
-            ->setName('app:change-user-pass')
-            ->setDescription('Change user\'s password')
-        ;
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         $name = $io->ask('Username');
-        $user = $this->userRepository->findOneByName($name);
+        $user = $this->userRepository->findOneBy(['name' => $name]);
         if (!$user) {
             $io->error('There is no such user.');
             return 1;
