@@ -7,9 +7,11 @@ use App\Entity\RadioTable;
 use App\Entity\User;
 use App\Form\DataTransformer\RadioTableColumnsTransformer;
 use App\Form\RadioTableColumnsType;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 class RadioTableColumnsTypeTest extends TypeTestCase
 {
     protected function getExtensions(): array

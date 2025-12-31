@@ -4,6 +4,7 @@ namespace App\Tests\Validator;
 
 use App\Validator\YearMonthDate;
 use App\Validator\YearMonthDateValidator;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;

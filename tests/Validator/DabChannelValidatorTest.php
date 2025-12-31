@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Validator\DabChannel;
 use App\Validator\DabChannelValidator;
 use App\Validator\HexColor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;

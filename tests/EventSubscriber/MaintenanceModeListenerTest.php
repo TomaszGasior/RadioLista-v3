@@ -3,7 +3,7 @@
 namespace App\Tests\EventSubscriber;
 
 use App\EventListener\MaintenanceModeListener;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,23 +16,19 @@ class MaintenanceModeListenerTest extends TestCase
 {
     private $lockFilePath;
 
-    /** @var Security|MockObject */
     private $security;
 
-    /** @var Environment|MockObject */
     private $twig;
 
-    /** @var RequestEvent|MockObject */
     private $event;
 
     public function setUp(): void
     {
         $this->lockFilePath = tempnam(sys_get_temp_dir(), 'rltest');
-        $this->security = $this->createMock(Security::class);
-        $this->twig = $this->createMock(Environment::class);
+        $this->security = $this->createStub(Security::class);
+        $this->twig = $this->createStub(Environment::class);
 
-        /** @var HttpKernelInterface|MockObject */
-        $kernel = $this->createMock(HttpKernelInterface::class);
+        $kernel = $this->createStub(HttpKernelInterface::class);
 
         $this->event = new RequestEvent($kernel, new Request, HttpKernelInterface::MAIN_REQUEST);
     }
@@ -57,7 +53,6 @@ class MaintenanceModeListenerTest extends TestCase
     public function test_interrupts_response_when_maintenance_mode_is_enabled(): void
     {
         $this->security
-            ->expects($this->once())
             ->method('isGranted')
             ->with('ROLE_ADMIN')
             ->willReturn(false)
@@ -79,7 +74,6 @@ class MaintenanceModeListenerTest extends TestCase
     public function test_does_not_interrupt_response_when_maintenance_mode_is_enabled_but_user_is_administrator(): void
     {
         $this->security
-            ->expects($this->once())
             ->method('isGranted')
             ->with('ROLE_ADMIN')
             ->willReturn(true)

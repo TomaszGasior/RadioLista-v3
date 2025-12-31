@@ -133,7 +133,7 @@ class DateTimeRefreshTest extends WebTestCase
         });
 
         $application = new Application(static::$kernel);
-        $application->add($command);
+        $application->addCommand($command);
         $application->setAutoExit(false);
 
         $commandTester = new CommandTester($command);

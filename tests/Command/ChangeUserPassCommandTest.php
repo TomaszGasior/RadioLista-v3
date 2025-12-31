@@ -22,7 +22,7 @@ class ChangeUserPassCommandTest extends WebTestCase
         $application = new Application(static::$kernel);
 
         // Make test faster by skipping cache:clear command.
-        $application->add(new Command('cache:clear'));
+        $application->addCommand(new Command('cache:clear'));
         $application->setAutoExit(false);
 
         $command = $application->find('app:change-user-pass');
