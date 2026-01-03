@@ -66,8 +66,6 @@ class SecurityPermissionTest extends WebTestCase
     #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_anonymous_user_cannot_access_restricted_page(string $url, string $method = 'GET'): void
     {
-        $this->skipPdfGenerator($url);
-
         $this->client->request($method, $url);
 
         /** @var RedirectResponse */
@@ -82,8 +80,6 @@ class SecurityPermissionTest extends WebTestCase
     #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_logged_in_user_can_access_restricted_page(string $url, string $method = 'GET'): void
     {
-        $this->skipPdfGenerator($url);
-
         $this->loginUserByName($this->client, 'test_user');
         $this->client->request($method, $url);
 
@@ -103,23 +99,11 @@ class SecurityPermissionTest extends WebTestCase
     #[DataProvider('ownedByTestUserUrlProvider')]
     public function test_one_user_cannot_access_page_of_another_user(string $url, string $method = 'GET'): void
     {
-        $this->skipPdfGenerator($url);
-
         $this->loginUserByName($this->client, 'test_user_second');
         $this->client->request($method, $url);
 
         $response = $this->client->getResponse();
 
         $this->assertSame(404, $response->getStatusCode());
-    }
-
-    /**
-     * Skip PDF-related test if wkhtmltopdf is not installed.
-     */
-    private function skipPdfGenerator(string $url): void
-    {
-        if ('/wykaz/1/eksport/pdf' === $url && false === file_exists($_SERVER['WKHTMLTOPDF_PATH'])) {
-            $this->markTestSkipped('wkhtmltopdf is not installed');
-        }
     }
 }
