@@ -30,6 +30,16 @@
     </thead>
 
     <tbody>
+        {%- set number_indent_max_digits = {} -%}
+
+        {%- for column in radio_table.columns -%}
+            {%- if column.value in ['frequency', 'power', 'distance', 'maxSignalLevel', 'privateNumber'] -%}
+                {%- set number_indent_max_digits = number_indent_max_digits + {
+                    (column.value): (max(radio_stations|map(radio_station => attribute(radio_station, column.value))) // 1)|length,
+                } -%}
+            {%- endif -%}
+        {%- endfor -%}
+
         {%- for radio_station in radio_stations -%}
             {%- set appearance = radio_station.appearance -%}
             {%- set row_class = '' -%}
@@ -57,19 +67,14 @@
                             {%- if column.value == 'name' -%}
                                 {%- block body_cell_name radio_station.name -%}
 
-                            {%- elseif column.value == 'privateNumber' -%}
-                                <span data-number-indent="private-number">
-                                    {{- radio_station.privateNumber -}}
+                            {%- elseif column.value in ['frequency', 'power'] -%}
+                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(radio_station, column.value) // 1)|length }}">
+                                    {{- attribute(radio_station, column.value)|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
                                 </span>
 
-                            {%- elseif column.value == 'frequency' -%}
-                                <span data-number-indent="frequency">
-                                    {{- radio_station.frequency|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
-                                </span>
-
-                            {%- elseif column.value == 'power' -%}
-                                <span data-number-indent="power">
-                                    {{- radio_station.power|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
+                            {%- elseif column.value in ['distance', 'maxSignalLevel', 'privateNumber'] -%}
+                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(radio_station, column.value) // 1)|length }}">
+                                    {{- attribute(radio_station, column.value) -}}
                                 </span>
 
                             {%- elseif column.value == 'type' -%}
@@ -91,16 +96,6 @@
                                       title="{{ ('quality.' ~ radio_station.quality.value)|trans }}">
                                     <span class="raw">{{- radio_station.quality.label -}}</span>
                                     <span class="dots" aria-hidden="true"></span>
-                                </span>
-
-                            {%- elseif column.value == 'distance' -%}
-                                <span data-number-indent="distance">
-                                    {{- radio_station.distance -}}
-                                </span>
-
-                            {%- elseif column.value == 'maxSignalLevel' -%}
-                                <span data-number-indent="max-signal-level">
-                                    {{- radio_station.maxSignalLevel -}}
                                 </span>
 
                             {%- elseif column.value == 'firstLogDate' -%}

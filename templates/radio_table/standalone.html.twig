@@ -195,47 +195,5 @@
                 })|raw }}
             </p>
         </footer>
-
-        <script>
-        {#  Keep this script in sync with original code in NumberIndentManager. -#}
-        {#- This script is reorganized because wkhtmltopdf uses WebKit from 2011. :( -#}
-        (function(table){
-            NodeList.prototype.forEach = Array.prototype.forEach;
-
-            var itemsGroups = [];
-
-            table.querySelectorAll('[data-number-indent]').forEach(function(item){
-                var groupName = item.dataset.numberIndent;
-
-                if (undefined === itemsGroups[groupName]) {
-                    itemsGroups[groupName] = [];
-                }
-                itemsGroups[groupName].push(item);
-            });
-            itemsGroups = Object.keys(itemsGroups).map(function(key){
-                return itemsGroups[key];
-            });
-
-            itemsGroups.forEach(function(items){
-                var numbers = items.map(function(item){
-                    return parseInt(item.textContent);
-                });
-                var maxNumber = numbers.reduce(function(prev, value){
-                    return (prev > value ? prev : value);
-                });
-                var maxDigits = maxNumber.toString().length;
-
-                items.forEach(function(item){
-                    var number = parseInt(item.textContent);
-                    var digits = number.toString().length;
-                    var digitsDifference = maxDigits - digits;
-
-                    if (digitsDifference) {
-                        item.classList.add('number-indent-' + digitsDifference);
-                    }
-                });
-            });
-        })(document.querySelector('table'));
-        </script>
     </body>
 </html>
