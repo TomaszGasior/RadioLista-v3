@@ -10,7 +10,6 @@
         "doctrine/orm": "^3.6.0",
         "dompdf/dompdf": "^3.1",
         "friendsofsymfony/ckeditor-bundle": "^2.8.0",
-        "knplabs/knp-snappy-bundle": "^1.10.5",
         "knplabs/knp-time-bundle": "^2.5",
         "phpoffice/phpspreadsheet": "^5.3",
         "symfony/asset": "7.4.*",
