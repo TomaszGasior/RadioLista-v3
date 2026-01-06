@@ -7,7 +7,7 @@ services:
     app:
         build: 'container/app'
         environment:
-            DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=5.7'
+            DATABASE_URL: 'mysql://root:toor@db:3306/radiolista-v3?server_version=8.0'
             XDEBUG_CONFIG: 'client_port=2014 client_host=host.containers.internal'
         volumes:
             - '.:/srv:z'
