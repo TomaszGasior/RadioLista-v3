@@ -60,6 +60,10 @@
                             {{ 'radio_table.export.action.download_pdf'|trans }}
                         </a>
                         {{ 'radio_table.export.text.about_pdf'|trans }}
+
+                        {% if radio_table.radioStationsCount > pdf_format_radio_stations_max_count %}
+                            {{ 'radio_table.export.text.about_pdf_extra_max_count'|trans({'%count%': pdf_format_radio_stations_max_count}) }}
+                        {% endif %}
                     </li>
                     <li>
                         <a href="{{ path('radio_table.download', {id: radio_table.id, _format: 'html'}) }}" class="button">

@@ -134,6 +134,7 @@ radio_table:
 
         text:
             about_pdf: 'PDF — standard document for reading and printing'
+            about_pdf_extra_max_count: '(only the first %count% stations)'
             about_csv: 'CSV — dataset for importing into spreadsheet'
             about_html: 'HTML — web page file for internet browsers'
             about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'

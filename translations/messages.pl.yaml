@@ -135,6 +135,7 @@ radio_table:
 
         text:
             about_pdf: "PDF — dokument elektroniczny do przeglądania i\u00A0druku"
+            about_pdf_extra_max_count: '(tylko pierwsze %count% stacji)'
             about_csv: "CSV — zestaw danych do zaimportowania i\u00A0edycji w\u00A0arkuszu kalkulacyjnym"
             about_html: "HTML — plik strony internetowej otwierany w\u00A0przeglądarce"
             about_xlsx: "XLSX — arkusz kalkulacyjny programu Microsoft Excel\u00A02007"

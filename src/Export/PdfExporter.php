@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class PdfExporter implements ExporterInterface
 {
+    public const int RADIO_STATIONS_MAX_COUNT = 500;
+
     public function __construct(
         private HtmlExporter $htmlExporter,
         private DompdfFactory $dompdfFactory,
@@ -16,6 +18,10 @@ class PdfExporter implements ExporterInterface
 
     public function render(string $format, RadioTable $radioTable, array $radioStations): string
     {
+        // Dompdf's performance is very bad when rendering documents containing long tables.
+        // Limit the number of rows to avoid exceeding PHP's memory limit or execution timeout.
+        $radioStations = array_slice($radioStations, 0, self::RADIO_STATIONS_MAX_COUNT);
+
         $html = $this->htmlExporter->render('html', $radioTable, $radioStations);
 
         $dompdf = $this->dompdfFactory->getDompdf();
