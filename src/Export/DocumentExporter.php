@@ -5,7 +5,6 @@ namespace App\Export;
 use App\Entity\RadioTable;
 use App\Enum\ExportFormat;
 use App\Util\DompdfFactory;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Twig\Environment;
 
 class DocumentExporter implements ExporterInterface
@@ -15,7 +14,6 @@ class DocumentExporter implements ExporterInterface
     public function __construct(
         private Environment $twig,
         private DompdfFactory $dompdfFactory,
-        #[Autowire('%app.version%')] private string $version,
     ) {}
 
     public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
@@ -36,8 +34,6 @@ class DocumentExporter implements ExporterInterface
 
             $dompdf->getOptions()->setDpi(110);
             $dompdf->setPaper('A4', 'landscape');
-            $dompdf->addInfo('Creator', 'RadioLista ' . $this->version);
-
             $dompdf->loadHtml($html);
             $dompdf->render();
 

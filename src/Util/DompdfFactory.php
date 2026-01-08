@@ -44,6 +44,16 @@ class DompdfFactory
             {
                 parent::render();
 
+                foreach ($this->getDom()->getElementsByTagName("meta") as $meta) {
+                    $name = mb_strtolower($meta->getAttribute("name"));
+                    $value = trim($meta->getAttribute("content"));
+
+                    if ($name === 'generator') {
+                        // Copy <meta name="generator"> to "Creator" field in PDF metadata.
+                        $this->getCanvas()->add_info('Creator', $value);
+                    }
+                }
+
                 $canvas = $this->getCanvas();
                 if ($canvas instanceof CPDF) {
                     $cpdf = $canvas->get_cpdf();
