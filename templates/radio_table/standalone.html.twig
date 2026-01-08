@@ -6,14 +6,17 @@
         <meta name="generator" content="RadioLista {{ app_version }} — {{ app.request.schemeAndHttpHost }}">
         <title>{{ radio_table.name }} — RadioLista</title>
         <style>
+            @page {
+                margin: 35px 0;
+            }
             body {
-                margin: 0.1em 3% 2em 3%;
+                margin: 0 3% 0 3%;
                 background: #fff;
                 color: #000;
                 cursor: default;
                 {# "Lato" is used for generating PDF files. -#}
                 font: 16px 'Lato', system-ui, sans-serif;
-                {# Some fonts may default to variable numbers width. -#}
+                {# Some fonts may use non-tabular numbers by default. -#}
                 font-variant-numeric: tabular-nums;
             }
             .sr-only {
@@ -30,9 +33,7 @@
             h1 {
                 font-weight: normal;
                 text-align: center;
-                {# Weird combination of margin and padding needed for wkhtmltopdf. -#}
-                margin: 0.5em 0 0.1em;
-                padding: 0.3em 0 0.75em;
+                margin: 0.8em 0 0.85em;
             }
             table {
                 width: 100%;
@@ -57,12 +58,16 @@
             table time {
                 white-space: nowrap;
             }
+            .quality {
+                {# Required for compatibility with Dompdf. -#}
+                display: inline-block;
+            }
             .quality .raw {
                 color: rgba(0,0,0, 0);
                 position: absolute;
             }
             .quality .dots::before {
-                margin-right: -10px;
+                margin-right: -5px;
                 letter-spacing: 2px;
                 color: #222;
             }
@@ -116,66 +121,45 @@
                 text-decoration: none;
             }
             .number-indent-1::before {
-                content: "0";
-                opacity: 0;
+                {# Avoid using "ch" CSS unit for compatibility with Dompdf. -#}
+                content: "\2007";
             }
             .number-indent-2::before {
-                content: "00";
-                opacity: 0;
+                content: "\2007\2007";
             }
             .number-indent-3::before {
-                content: "000";
-                opacity: 0;
+                content: "\2007\2007\2007";
             }
             .number-indent-4::before {
-                content: "0000";
-                opacity: 0;
+                content: "\2007\2007\2007\2007";
             }
             .number-indent-5::before {
-                content: "00000";
-                opacity: 0;
+                content: "\2007\2007\2007\2007\2007";
             }
-            @supports (padding-left: 1ch)
-            {
-                {#- Zeros-based implementation for wkhtmltopdf and WebKit from 2011. :( -#}
-                .number-indent-1::before, .number-indent-2::before, .number-indent-3::before, .number-indent-4::before, .number-indent-5::before {
-                    display: none;
-                }
-                .number-indent-1 {
-                    padding-left: 1ch;
-                }
-                .number-indent-2 {
-                    padding-left: 2ch;
-                }
-                .number-indent-3 {
-                    padding-left: 3ch;
-                }
-                .number-indent-4 {
-                    padding-left: 4ch;
-                }
-                .number-indent-5 {
-                    padding-left: 5ch;
-                }
+            .number-indent-1::before, .number-indent-2::before, .number-indent-3::before, .number-indent-4::before, .number-indent-5::before {
+                visibility: hidden;
+            }
+            .number-indent-1, .number-indent-2, .number-indent-3, .number-indent-4, .number-indent-5 {
+                white-space: nowrap;
             }
             a.external {
                 border-bottom: none;
                 color: inherit;
+
+                {# Required for compatibility with Dompdf. -#}
+                display: inline-block;
             }
-            a.external svg {
-                vertical-align: -2px;
-                padding: 0 1px;
-                fill: currentColor;
-                {# Needed for wkhtmltopdf. -#}
-                width: 1.1em;
+            a.external img {
+                height: 1em;
+                padding: 2px 1px 0 1px;
+                vertical-align: top;
             }
             footer {
                 font-size: 0.85em;
                 text-align: center;
-                margin-top: 1.8em;
             }
-            table, tr, td, th, tbody, thead, tfoot {
-                {# Needed for wkhtmltopdf to avoid broken table rows. -#}
-                page-break-inside: avoid !important;
+            footer p {
+                margin: 1.8em 0 2.3em;
             }
         </style>
     </head>
@@ -185,7 +169,12 @@
             <h1>{{ radio_table.name }}</h1>
         </header>
 
-        {% include 'radio_table/_radio_table.html.twig' %}
+        {% embed 'radio_table/_radio_table.html.twig' %}
+            {%- block body_cell_external_anchor_icon -%}
+                {#- SVG tag replaced with an image for compatibility with Dompdf. -#}
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath fill='%23000' d='M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z'/%3E%3C/svg%3E">
+            {%- endblock -%}
+        {% endembed %}
 
         <footer>
             <p>

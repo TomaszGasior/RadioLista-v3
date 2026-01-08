@@ -3,33 +3,37 @@
 namespace App\Export;
 
 use App\Entity\RadioTable;
-use App\Util\PdfMetadataPatcher;
-use Knp\Snappy\Pdf;
+use App\Util\DompdfFactory;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class PdfExporter implements ExporterInterface
 {
+    public const int RADIO_STATIONS_MAX_COUNT = 500;
+
     public function __construct(
         private HtmlExporter $htmlExporter,
-        private Pdf $snappyPdfGenerator,
-        private PdfMetadataPatcher $pdfMetadataPatcher,
+        private DompdfFactory $dompdfFactory,
         #[Autowire('%app.version%')] private string $version,
     ) {}
 
     public function render(string $format, RadioTable $radioTable, array $radioStations): string
     {
+        // Dompdf's performance is very bad when rendering documents containing long tables.
+        // Limit the number of rows to avoid exceeding PHP's memory limit or execution timeout.
+        $radioStations = array_slice($radioStations, 0, self::RADIO_STATIONS_MAX_COUNT);
+
         $html = $this->htmlExporter->render('html', $radioTable, $radioStations);
 
-        $pdf = $this->snappyPdfGenerator->getOutputFromHtml($html, [
-            'orientation' => 'Landscape',
-            'margin-left' => 0,
-            'margin-top' => 9,
-            'margin-bottom' => 8,
-            'margin-right' => 0,
-            'zoom' => 1.15,
-        ]);
+        $dompdf = $this->dompdfFactory->getDompdf();
 
-        return $this->pdfMetadataPatcher->replaceCreatorMetadata($pdf, 'RadioLista ' . $this->version);
+        $dompdf->getOptions()->setDpi(110);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->addInfo('Creator', 'RadioLista ' . $this->version);
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+
+        return $dompdf->output();
     }
 
     public function supports(string $format): bool

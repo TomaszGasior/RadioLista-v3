@@ -9,7 +9,7 @@
         ".phpunit.cache": true,
         ".vscode": true,
         "*.lock": true,
-        "assets/{images,fonts,ckeditor}": true,
+        "assets/{images,fonts,ckeditor,pdf}": true,
         "bin": true,
         "public/{assets-src,bundles}": true,
         "var": true,

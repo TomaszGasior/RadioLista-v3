@@ -1276,22 +1276,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     role_hierarchy?: array<string, string|list<scalar|null|Param>>,
  * }
- * @psalm-type KnpSnappyConfig = array{
- *     temporary_folder?: scalar|null|Param,
- *     process_timeout?: int|Param, // Generator process timeout in seconds.
- *     pdf?: array{
- *         enabled?: bool|Param, // Default: true
- *         binary?: scalar|null|Param, // Default: "wkhtmltopdf"
- *         options?: array<string, scalar|null|Param>,
- *         env?: list<scalar|null|Param>,
- *     },
- *     image?: array{
- *         enabled?: bool|Param, // Default: true
- *         binary?: scalar|null|Param, // Default: "wkhtmltoimage"
- *         options?: array<string, scalar|null|Param>,
- *         env?: list<scalar|null|Param>,
- *     },
- * }
  * @psalm-type MonologConfig = array{
  *     use_microseconds?: scalar|null|Param, // Default: true
  *     channels?: list<scalar|null|Param>,
@@ -1571,7 +1555,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     doctrine?: DoctrineConfig,
  *     twig?: TwigConfig,
  *     security?: SecurityConfig,
- *     knp_snappy?: KnpSnappyConfig,
  *     monolog?: MonologConfig,
  *     fos_ck_editor?: FosCkEditorConfig,
  *     twig_extra?: TwigExtraConfig,
@@ -1585,7 +1568,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig?: TwigConfig,
  *         web_profiler?: WebProfilerConfig,
  *         security?: SecurityConfig,
- *         knp_snappy?: KnpSnappyConfig,
  *         monolog?: MonologConfig,
  *         debug?: DebugConfig,
  *         fos_ck_editor?: FosCkEditorConfig,
@@ -1599,7 +1581,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         twig?: TwigConfig,
  *         security?: SecurityConfig,
- *         knp_snappy?: KnpSnappyConfig,
  *         monolog?: MonologConfig,
  *         fos_ck_editor?: FosCkEditorConfig,
  *         twig_extra?: TwigExtraConfig,
@@ -1613,7 +1594,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig?: TwigConfig,
  *         web_profiler?: WebProfilerConfig,
  *         security?: SecurityConfig,
- *         knp_snappy?: KnpSnappyConfig,
  *         monolog?: MonologConfig,
  *         debug?: DebugConfig,
  *         dama_doctrine_test?: DamaDoctrineTestConfig,

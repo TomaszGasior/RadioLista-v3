@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Export\PdfExporter;
 use App\Export\RadioTableExporter;
 use App\Form\RadioTableColumnsType;
 use App\Form\RadioTableCreateType;
@@ -129,6 +130,7 @@ class RadioTableController extends AbstractController
     {
         return $this->render('radio_table/export.html.twig', [
             'radio_table' => $radioTable,
+            'pdf_format_radio_stations_max_count' => PdfExporter::RADIO_STATIONS_MAX_COUNT,
         ]);
     }
 

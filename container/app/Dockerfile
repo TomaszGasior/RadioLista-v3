@@ -1,4 +1,3 @@
-FROM docker.io/surnet/alpine-wkhtmltopdf:3.22.0-0.12.6-small AS wkhtmltopdf
 FROM docker.io/php:8.4.12-fpm-alpine3.22
 
 RUN sh -ex <<EOF
@@ -7,14 +6,10 @@ RUN sh -ex <<EOF
 
     MAKEFLAGS="-j $(nproc)" pecl install -D 'enable-apcu-debug="no"' apcu-5.1.27 xdebug-3.4.6
     docker-php-ext-enable apcu xdebug opcache
-    docker-php-ext-install -j $(nproc) gd pdo_mysql intl zip
+    docker-php-ext-install -j $(nproc) pdo_mysql intl zip
 
     apk del build-deps
 EOF
-
-RUN apk --no-cache add libstdc++ libx11 libxrender libxext libssl3 ca-certificates fontconfig freetype
-COPY --from=wkhtmltopdf /bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
-ADD pdf-fonts.tar.xz /usr/local/share/fonts/
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY "php.ini" "$PHP_INI_DIR/conf.d/99-local.ini"

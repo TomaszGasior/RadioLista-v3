@@ -1,0 +1,14 @@
+{
+    "lato": {
+        "normal": "Lato-Regular",
+        "bold": "Lato-Bold",
+        "italic": "Lato-Italic",
+        "bold_italic": "Lato-BoldItalic"
+    },
+    "inconsolata": {
+        "normal": "Inconsolata-Regular",
+        "bold": "Inconsolata-Regular",
+        "italic": "Inconsolata-Regular",
+        "bold_italic": "Inconsolata-Regular"
+    }
+}
