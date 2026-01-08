@@ -9,6 +9,7 @@ use App\Util\RadioStationRdsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SpreadsheetCreator
@@ -18,6 +19,7 @@ class SpreadsheetCreator
     public function __construct(
         private TranslatorInterface $translator,
         #[Autowire('%app.version%')] private string $version,
+        private RequestStack $requestStack,
     ) {}
 
     /**
@@ -66,7 +68,7 @@ class SpreadsheetCreator
         $spreadsheet
             ->getProperties()
             ->setTitle($radioTable->getName())
-            ->setCreator('RadioLista ' . $this->version)
+            ->setCreator($this->getCreatorMetadata())
             ->setLastModifiedBy('')
         ;
 
@@ -131,5 +133,14 @@ class SpreadsheetCreator
     private function translate(string $id): string
     {
         return $this->translator->trans($id, [], 'radio_table');
+    }
+
+    private function getCreatorMetadata(): string
+    {
+        return sprintf(
+            'RadioLista %s — %s',
+            $this->version,
+            $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost()
+        );
     }
 }
