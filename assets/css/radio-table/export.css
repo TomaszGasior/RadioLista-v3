@@ -10,11 +10,11 @@
 }
 .radio-table-export-list a.button {
     margin-right: 12px;
-    width: 250px;
+    width: 270px;
     vertical-align: baseline;
 }
 
-@media (max-width: 1000px)
+@media (max-width: 1050px)
 {
     .radio-table-export-list a.button {
         margin: 15px 0 10px 0;

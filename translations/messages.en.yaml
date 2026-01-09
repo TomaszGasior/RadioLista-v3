@@ -128,7 +128,7 @@ radio_table:
         action:
             download_pdf: 'Download PDF document'
             download_csv: 'Download CSV sheet'
-            download_html: 'Download HTML page'
+            download_html: 'Download HTML document'
             download_xlsx: 'Download XLSX sheet'
             download_ods: 'Download ODS sheet'
 
@@ -136,7 +136,7 @@ radio_table:
             about_pdf: 'PDF — standard document for reading and printing'
             about_pdf_extra_max_count: '(only the first %count% stations)'
             about_csv: 'CSV — dataset for importing into spreadsheet'
-            about_html: 'HTML — web page file for internet browsers'
+            about_html: 'HTML — document for web browsers, for reading and printing'
             about_xlsx: 'XLSX — spreadsheet document for Microsoft Excel 2007'
             about_ods: 'ODS — spreadsheet document for LibreOffice and Apache OpenOffice'
 
