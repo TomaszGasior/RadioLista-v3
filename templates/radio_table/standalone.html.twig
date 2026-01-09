@@ -7,10 +7,12 @@
         <title>{{ radio_table.name }} — RadioLista</title>
         <style>
             @page {
-                margin: 35px 0;
+                {# Don't add "size: A4 landscape" there, as this disables -#}
+                {# advanced settings in browsers' printing dialogs. -#}
+                margin: 35px 39px;
             }
             body {
-                margin: 0 3% 0 3%;
+                margin: 0 3%;
                 background: #fff;
                 color: #000;
                 cursor: default;
@@ -18,6 +20,11 @@
                 font: 16px 'Lato', system-ui, sans-serif;
                 {# Some fonts may use non-tabular numbers by default. -#}
                 font-variant-numeric: tabular-nums;
+            }
+            @media print {
+                body {
+                    margin: 0;
+                }
             }
             .sr-only {
                 position: absolute !important;

@@ -33,6 +33,7 @@ class DocumentExporter implements ExporterInterface
             $dompdf = $this->dompdfFactory->getDompdf();
 
             $dompdf->getOptions()->setDpi(110);
+            $dompdf->getOptions()->setDefaultMediaType('print');
             $dompdf->setPaper('A4', 'landscape');
             $dompdf->loadHtml($html);
             $dompdf->render();
