@@ -16,7 +16,7 @@
     <script type="module" src="{{ asset('js/radio-table/show.js') }}"></script>
 
     {% if radio_table.appearance.widthType == constant('CUSTOM', radio_table.appearance.widthType) %}
-        <style>{{ '.custom-width .site-width { max-width: %dpx }'|format(radio_table.appearance.customWidth) }}</style>
+        <style nonce="{{ csp_nonce('style-src') }}">{{ '.custom-width .site-width { max-width: %dpx }'|format(radio_table.appearance.customWidth) }}</style>
     {% endif %}
 {% endblock %}
 

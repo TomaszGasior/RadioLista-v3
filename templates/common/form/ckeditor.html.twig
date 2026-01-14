@@ -18,4 +18,7 @@
             }
         });
     </script>
+
+    {# This is required for CKEditor 4 to function at all. #}
+    {% do csp_directive("'unsafe-inline'", 'style-src', 'script-src') %}
 {% endblock %}

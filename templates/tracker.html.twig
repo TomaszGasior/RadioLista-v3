@@ -1,4 +1,4 @@
-<script>
+<script nonce="{{ csp_nonce('script-src') }}">
     var _paq = window._paq = window._paq || [];
 
     {% if user_session_dimension_id %}
@@ -24,5 +24,7 @@
 </script>
 
 <noscript>
-    <img src="{{ url }}/matomo.php?idsite={{ site_id }}&amp;rec=1" style="border:0" alt="">
+    <img src="{{ url }}/matomo.php?idsite={{ site_id }}&amp;rec=1" alt="">
 </noscript>
+
+{% do csp_directive(url, 'script-src', 'img-src') %}
