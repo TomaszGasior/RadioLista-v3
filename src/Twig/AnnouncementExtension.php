@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -11,13 +12,10 @@ use Twig\Attribute\AsTwigFunction;
 
 class AnnouncementExtension
 {
-    private const string REPOSITORY_NAME = 'TomaszGasior';
-    private const string REPOSITORY_OWNER = 'RadioLista-v3';
-    private const string ANNOUNCEMENTS_CATEGORY_ID = 'MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyOTg1NjAz';
-
     public function __construct(
         private CacheInterface $cache,
-        private HttpClientInterface $githubClient,
+        private HttpClientInterface $httpClient,
+        #[Autowire('%env(ANNOUNCEMENTS_FEED_URL)%')] private string $feedUrl,
         private LocaleSwitcher $localeSwitcher,
     ) {}
 
@@ -42,45 +40,41 @@ class AnnouncementExtension
      */
     private function fetchAnnouncement(): ?array
     {
-        $response = $this->githubClient->request('POST', '/graphql', [
-            'json' => [
-                'query' => <<<'GRAPHQL'
-                    query($owner:String!, $repository:String!, $categoryId:ID!) {
-                        repository(owner: $owner, name: $repository) {
-                            discussions(first: 1, categoryId: $categoryId, orderBy: {field: CREATED_AT, direction: DESC}) {
-                                nodes{title, url, createdAt}
-                            }
-                        }
-                    }
-                GRAPHQL,
-                'variables' => [
-                    'owner' => self::REPOSITORY_NAME,
-                    'repository' => self::REPOSITORY_OWNER,
-                    'categoryId' => self::ANNOUNCEMENTS_CATEGORY_ID,
-                ],
-            ],
-        ]);
+        $response = $this->httpClient->request('GET', $this->feedUrl);
 
         try {
-            $data = $response->toArray();
+            $data = $response->getContent();
         }
         catch (HttpClientExceptionInterface $e) {
             return null;
         }
 
-        $data = $data['data']['repository']['discussions']['nodes'][0] ?? null;
-        if (!$data || !($data['title'] ?? null) || !($data['url'] ?? null) || !($data['createdAt'] ?? null)) {
+        $xml = simplexml_load_string($data, options: LIBXML_NOWARNING | LIBXML_NOERROR | LIBXML_NONET);
+        if (false === $xml) {
             return null;
         }
 
-        if (strtotime($data['createdAt']) < strtotime('now - 7 days')) {
+        $entry = $xml->entry[0] ?? null;
+        if (!$entry) {
+            return null;
+        }
+
+        $title = trim((string) ($entry->title ?? null));
+        $url = trim((string) ($entry->link[0]['href'] ?? null));
+        $date = trim((string) ($entry->published ?? null));
+
+        if (!$title || !$url || !$date) {
+            return null;
+        }
+
+        if (strtotime($date) < strtotime('now - 7 days')) {
             return null;
         }
 
         return [
-            'title' => $data['title'],
-            'url' => $data['url'],
-            'date' => $data['createdAt'],
+            'title' => $title,
+            'url' => $url,
+            'date' => $date,
         ];
     }
 

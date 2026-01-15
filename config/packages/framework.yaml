@@ -24,12 +24,6 @@ framework:
             default:
                 allow_elements: { a: '*', b: '*', br: '*', div: '*', em: '*', i: '*', p: '*', span: '*', strong: '*', sub: '*', sup: '*', u: '*', ul: '*', ol: '*', li: '*' }
 
-    http_client:
-        scoped_clients:
-            github.client:
-                base_uri: 'https://api.github.com'
-                auth_bearer: '%env(GITHUB_API_TOKEN)%'
-
 when@test:
     framework:
         test: true
