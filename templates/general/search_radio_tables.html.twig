@@ -3,6 +3,8 @@
 {% block page_title %}{{ 'general.search_radio_tables.title'|trans }}{% endblock %}
 
 {% block page_content %}
+    {% include 'common/announcement.html.twig' %}
+
     <header>
         <h1 class="sr-only">
             {{ 'general.search_radio_tables.title'|trans }}
