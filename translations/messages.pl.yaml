@@ -36,6 +36,9 @@ common:
         saved_changes: 'Zmiany zostały zapisane.'
         invalid_form: 'Wystąpił błąd w formularzu poniżej.'
 
+    announcement:
+        title: 'Ogłoszenie'
+
     text:
         in_radio_table_a11y_subheading_prefix: 'w wykazie'
 

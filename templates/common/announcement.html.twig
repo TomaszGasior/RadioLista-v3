@@ -1,0 +1,9 @@
+{% set announcement = current_announcement() %}
+
+{% if announcement %}
+    <div class="announcement">
+        <span class="announcement-title">{{ 'common.announcement.title'|trans }}:</span>
+        <a href="{{ announcement.url }}" target="_blank">{{ announcement.title }}</a>
+        <span class="announcement-date">{{ announcement.date|ago }}</span>
+    </div>
+{% endif %}

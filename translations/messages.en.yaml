@@ -36,6 +36,9 @@ common:
         saved_changes: 'Changes have been saved.'
         invalid_form: 'There is a problem in the form below.'
 
+    announcement:
+        title: 'Announcement'
+
     text:
         in_radio_table_a11y_subheading_prefix: 'in list'
 

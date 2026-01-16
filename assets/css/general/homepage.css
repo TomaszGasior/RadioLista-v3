@@ -156,4 +156,8 @@
             animation: none;
         }
     }
+
+    .announcement {
+        margin-bottom: 52px;
+    }
 }

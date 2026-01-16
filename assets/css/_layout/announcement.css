@@ -1,0 +1,41 @@
+.announcement {
+    --background-color: #fffef6;
+    --egde-bar-color: var(--heading-primary-text-color);
+    --shadow-color: rgba(0,0,0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 13px 20px;
+    background-color: var(--background-color);
+    border-radius: 7px;
+    margin: 5px 0 28px;
+    border-left: 5px solid var(--egde-bar-color);
+    box-shadow: 0 0 6px var(--shadow-color);
+}
+.announcement-title {
+    opacity: 0.5;
+}
+.announcement-date {
+    opacity: 0.6;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px)
+{
+    .announcement {
+        flex-direction: row;
+        gap: 7px;
+        align-items: baseline;
+    }
+}
+
+@media (prefers-color-scheme: dark)
+{
+    .announcement {
+        --background-color: #413f38;
+        --shadow-color: rgba(0,0,0, 0.2);
+    }
+}

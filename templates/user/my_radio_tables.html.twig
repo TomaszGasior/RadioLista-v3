@@ -11,6 +11,8 @@
 {% endblock %}
 
 {% block page_content %}
+    {% include 'common/announcement.html.twig' %}
+
     <header>
         <h1>{{ 'user.my_radio_tables.title'|trans }}</h1>
     </header>
@@ -27,4 +29,3 @@
         </p>
     {% endif %}
 {% endblock %}
-
