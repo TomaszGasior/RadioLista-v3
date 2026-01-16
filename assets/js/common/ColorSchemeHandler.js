@@ -107,10 +107,9 @@ export class ColorSchemeHandler
 
     disableAllTransitionsForMoment()
     {
-        let style = document.createElement('style');
-        style.innerText = '* { transition: none !important; }';
+        let nodes = document.querySelectorAll('*');
 
-        document.head.appendChild(style);
-        window.setTimeout(() => { document.head.removeChild(style); }, 100);
+        nodes.forEach(node => node.style.transition = 'none');
+        window.setTimeout(() => { nodes.forEach(node => node.style.transition = ''); }, 100);
     }
 }
