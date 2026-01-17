@@ -27,4 +27,4 @@
     <img src="{{ url }}/matomo.php?idsite={{ site_id }}&amp;rec=1" alt="">
 </noscript>
 
-{% do csp_directive(url, 'script-src', 'img-src') %}
+{% do csp_directive(url, 'script-src', 'img-src', 'connect-src') %}
