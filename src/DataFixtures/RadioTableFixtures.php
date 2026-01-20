@@ -4,65 +4,58 @@ namespace App\DataFixtures;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
+use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
 use App\Entity\Enum\RadioTable\Status;
 use App\Entity\Enum\RadioTable\Width;
 use App\Entity\RadioTable;
 use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
+use DateTimeImmutable;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
 #[When('dev')]
-class RadioTableFixtures extends AbstractEntityFixture implements DependentFixtureInterface
+class RadioTableFixtures extends Fixture implements DependentFixtureInterface
 {
     use ReflectionUtilsTrait;
 
-    protected const ENTITIES_NUMBER = 180;
+    public function __construct(
+        #[Autowire('%kernel.project_dir%/fixtures/radio_table.php')] private string $source,
+    ) {}
 
-    public function __construct(private Faker $faker) {}
-
-    protected function createEntity(int $i): object
+    public function load(ObjectManager $manager): void
     {
-        $radioTable = new RadioTable(
-            name: match ($i) {
-                1, 2, 3, 4, 5 => 'Wykaz radiowy #' . $i,
-                default => $this->faker->words(rand(3, 8), true),
-            },
-            owner: match ($i) {
-                1, 2, 3, 4, 5 => $this->getEntity(User::class, 1),
-                default => $this->getEntity(User::class),
-            },
-        );
+        foreach (include $this->source as $id => $data) {
+            [$name, $status, $columns, $sorting, $description, $lastUpdateTime, $creationTime, $ownerId, $frequencyUnit, $maxSignalLevelUnit, $appearanceWidthType, $appearanceCustomWidth, $appearanceCollapsedComments] = $data;
 
-        $radioTable->setDescription($this->faker->optional()->HTMLDescription());
-        if ($this->faker->boolean(25)) {
-            $radioTable->setFrequencyUnit(FrequencyUnit::KHZ);
+            $owner = $this->getReference(User::class . $ownerId, User::class);
+
+            $radioTable = (new RadioTable($name, $owner))
+                ->setStatus(Status::from($status))
+                ->setColumns(array_map(fn(string $column) => Column::from($column), $columns))
+                ->setSorting(Column::from($sorting))
+                ->setDescription($description)
+                ->setFrequencyUnit(FrequencyUnit::from($frequencyUnit))
+                ->setMaxSignalLevelUnit(MaxSignalLevelUnit::from($maxSignalLevelUnit))
+            ;
+
+            $radioTable->getAppearance()
+                ->setWidthType(Width::from($appearanceWidthType))
+                ->setCustomWidth($appearanceCustomWidth)
+                ->setCollapsedComments($appearanceCollapsedComments)
+            ;
+
+            $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', new DateTimeImmutable($lastUpdateTime));
+            $this->setPrivateFieldOfObject($radioTable, 'creationTime', $creationTime ? new DateTimeImmutable($creationTime) : $creationTime);
+
+            $this->addReference(RadioTable::class . $id, $radioTable);
+            $manager->persist($radioTable);
         }
 
-        $this->setPrivateFieldOfObject($radioTable, 'creationTime', $this->faker->dateTimeImmutableBetween($radioTable->getOwner()->getRegisterDate(), $radioTable->getOwner()->getLastActivityDate()));
-        $this->setPrivateFieldOfObject($radioTable, 'lastUpdateTime', $this->faker->dateTimeImmutableBetween($radioTable->getCreationTime(), $radioTable->getOwner()->getLastActivityDate()));
-
-        if ($this->faker->boolean(20)) {
-            $this->setPrivateFieldOfObject($radioTable, 'creationTime', null);
-        }
-
-        if ($this->faker->boolean(40)) {
-            $radioTable->setStatus($this->faker->randomEnum(Status::class));
-        }
-        $radioTable->setSorting($this->faker->randomElement(Column::getSortable()));
-
-        if ($this->faker->boolean()) {
-            $radioTable->setColumns($this->faker->columns());
-        }
-
-        $appearance = $radioTable->getAppearance();
-        $appearance->setWidthType($this->faker->randomEnum(Width::class));
-        if (Width::CUSTOM === $appearance->getWidthType()) {
-            $appearance->setCustomWidth($this->faker->numberBetween(900, 2000));
-        }
-        $appearance->setCollapsedComments($this->faker->boolean());
-
-        return $radioTable;
+        $manager->flush();
     }
 
     public function getDependencies(): array

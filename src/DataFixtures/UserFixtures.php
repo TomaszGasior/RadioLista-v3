@@ -4,41 +4,50 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Util\ReflectionUtilsTrait;
+use DateTimeImmutable;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\Attribute\When;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[When('dev')]
-class UserFixtures extends AbstractEntityFixture
+class UserFixtures extends Fixture
 {
     use ReflectionUtilsTrait;
 
-    protected const ENTITIES_NUMBER = 100;
+    public function __construct(
+        #[Autowire('%kernel.project_dir%/fixtures/user.php')] private string $source,
+        private UserPasswordHasherInterface $passwordEncoder,
+    ) {}
 
-    public function __construct(private Faker $faker, private UserPasswordHasherInterface $passwordEncoder) {}
-
-    protected function createEntity(int $i): object
+    public function load(ObjectManager $manager): void
     {
-        $user = new User(
-            name: match ($i) {
-                1 => 'radiolista',
-                default => $this->faker->unique()->username(),
-            },
-        );
+        foreach (include $this->source as $id => $data) {
+            [$name, $publicProfile, $aboutMe, $registerDate, $lastActivityDate] = $data;
 
-        $user->setPublicProfile($this->faker->boolean(75));
+            if ($id === 1) {
+                $name = 'radiolista';
+            }
 
-        if (1 === $i) {
-            $user->setPublicProfile(true);
-            $this->setPrivateFieldOfObject($user, 'admin', true);
+            $user = (new User($name))
+                ->setPublicProfile($publicProfile)
+                ->setAboutMe($aboutMe)
+            ;
+
+            $user->setPassword($this->passwordEncoder->hashPassword($user, $name));
+
+            $this->setPrivateFieldOfObject($user, 'registerDate', new DateTimeImmutable($registerDate));
+            $this->setPrivateFieldOfObject($user, 'lastActivityDate', new DateTimeImmutable($lastActivityDate));
+
+            if ($id === 1) {
+                $this->setPrivateFieldOfObject($user, 'admin', true);
+            }
+
+            $this->addReference(User::class . $id, $user);
+            $manager->persist($user);
         }
 
-        $user->setPassword($this->passwordEncoder->hashPassword($user, $user->getName()));
-        $user->setAboutMe($this->faker->optional()->HTMLDescription());
-
-        $registerDate = $this->faker->dateTimeImmutableBetween('2012-07-01', '-1 year');
-        $this->setPrivateFieldOfObject($user, 'registerDate', $registerDate);
-        $this->setPrivateFieldOfObject($user, 'lastActivityDate', $this->faker->dateTimeImmutableBetween($registerDate, 'now'));
-
-        return $user;
+        $manager->flush();
     }
 }
