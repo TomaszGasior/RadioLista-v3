@@ -37,7 +37,6 @@
         "ext-pdo_sqlite": "*",
         "dama/doctrine-test-bundle": "^8.4.1",
         "doctrine/doctrine-fixtures-bundle": "^4.3.1",
-        "fakerphp/faker": "^1.24.1",
         "phpunit/phpunit": "^12.5.6",
         "symfony/browser-kit": "7.4.*",
         "symfony/css-selector": "7.4.*",
