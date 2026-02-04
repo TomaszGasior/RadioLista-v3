@@ -6,7 +6,7 @@ RUN sh -ex <<EOF
 
     MAKEFLAGS="-j $(nproc)" pecl install -D 'enable-apcu-debug="no"' apcu-5.1.27 xdebug-3.4.6
     docker-php-ext-enable apcu xdebug opcache
-    docker-php-ext-install -j $(nproc) pdo_mysql intl zip
+    docker-php-ext-install -j $(nproc) gd pdo_mysql intl zip
 
     apk del build-deps
 EOF
