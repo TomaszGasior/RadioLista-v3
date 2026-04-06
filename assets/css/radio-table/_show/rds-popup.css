@@ -13,12 +13,23 @@
     --border-color: var(--detail-border-color);
     --shadow-color: rgba(0,0,0, 0.14);
 
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    padding: 0;
+
+    position-area: span-left bottom;
+    position-try-fallbacks: flip-inline, flip-block, flip-block flip-inline;
+
     background: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 7px;
     overflow: hidden;
     box-shadow: 0 0 10px var(--shadow-color);
+
     width: 430px;
+    max-width: 90vw;
+    margin-top: 5px;
 
     animation-name: rds_popup_show;
     animation-duration: 0.2s;
@@ -48,10 +59,6 @@
     display: flex;
     flex: 1;
     width: 100%;
-}
-.rds-popup dl > div[hidden] {
-    /* weird fix of weird bug */
-    display: none;
 }
 .rds-popup dt {
     min-width: 12%;

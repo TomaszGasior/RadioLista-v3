@@ -124,10 +124,18 @@
     font-style: normal;
     text-decoration: none;
 }
-.radio-table .rds[tabindex]:hover, .radio-table .rds:focus {
+.radio-table .rds-popup-button, .radio-table .rds-popup-button:hover {
+    /* reset styles from button */
+    all: unset;
+}
+.radio-table .rds-popup-button:focus-visible {
+    outline-offset: 3px;
+    outline: 2px solid var(--focus-outline-color);
+}
+.radio-table .rds-popup-button:hover .rds, .radio-table .rds-popup-button:has(+ :popover-open) .rds {
     background: var(--background-color-focus);
     color: var(--text-color-focus);
-    outline: none;
+    cursor: pointer;
 }
 
 .radio-table small {

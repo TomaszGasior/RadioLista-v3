@@ -1,5 +1,4 @@
 import { OverflowStylesManager } from '../common/OverflowStylesManager.js';
-import { RDSPopupManager } from '../common/RDSPopupManager.js';
 import { SortableTable } from '../common/SortableTable.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     new OverflowStylesManager(container);
-    new RDSPopupManager(container);
-
     new SortableTable(container.querySelector('table.sortable'));
 });

@@ -102,50 +102,56 @@
                 {%- endblock -%}
 
                 {%- block body_cell_rds -%}
-                    {%- set rds_rt = [] -%}
-                    {%- for frame in radio_station.rds.rt -%}
-                        {%- set rds_rt = rds_rt|merge([frame|replace({'_':' '})]) -%}
-                    {%- endfor -%}
+                    {%- set is_popup_enabled = radio_station.rds.ps|length > 1 or radio_station.rds.ps|first|length > 1 or radio_station.rds.rt|length > 0 or radio_station.rds.pty -%}
 
-                    {%- set rds_ps_groups = [] -%}
-                    {%- for group_key in radio_station.rds.ps|keys -%}
-                        {%- set group = [] -%}
-                        {%- for frame in radio_station.rds.ps[group_key] -%}
-                            {%- set group = group|merge([frame|replace({'_':' '})|align_rds_frame]) -%}
-                        {%- endfor -%}
-                        {%- set rds_ps_groups = rds_ps_groups|merge([group]) -%}
-                    {%- endfor -%}
+                    {%- if is_popup_enabled -%}
+                        <button popovertarget="rds-popup-{{ radio_station.id }}" class="rds-popup-button">
+                            {{- parent() -}}
+                        </button>
 
-                    {%- set rds_pty = radio_station.rds.pty -%}
+                        <div popover class="rds-popup" id="rds-popup-{{ radio_station.id }}">
+                            <h2>{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
 
-                    <span data-pty="{{ rds_pty|json_encode|escape('html_attr') }}"
-                          data-rt="{{ rds_rt|json_encode|escape('html_attr') }}"
-                          data-ps="{{ rds_ps_groups|json_encode|escape('html_attr') }}"
-                          class="rds rds-popup-enabled">
-                        {{- radio_station.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
-                    </span>
+                            <dl>
+                                {%- if radio_station.rds.ps|length > 0 -%}
+                                    <div>
+                                        <dt>{{- 'radio_table.show.rds_popup.ps'|trans -}}</dt>
+                                        <dd>
+                                            {%- for group in radio_station.rds.ps -%}
+                                                <div>
+                                                    {%- for frame in group -%}
+                                                        <span>{{- frame|replace({'_':' '})|align_rds_frame -}}</span>
+                                                    {%- endfor -%}
+                                                </div>
+                                            {%- endfor -%}
+                                        </dd>
+                                    </div>
+                                {%- endif -%}
+
+                                {%- if radio_station.rds.rt|length > 0 -%}
+                                    <div>
+                                        <dt>{{- 'radio_table.show.rds_popup.rt'|trans -}}</dt>
+                                        <dd class="rds-wrap">
+                                            {%- for text in radio_station.rds.rt -%}
+                                                <div><span>{{- text|replace({'_':' '}) -}}</span></div>
+                                            {%- endfor -%}
+                                        </dd>
+                                    </div>
+                                {%- endif -%}
+
+                                {%- if radio_station.rds.pty -%}
+                                    <div>
+                                        <dt>{{- 'radio_table.show.rds_popup.pty'|trans -}}</dt>
+                                        <dd><div><span>{{- radio_station.rds.pty -}}</span></div></dd>
+                                    </div>
+                                {%- endif -%}
+                            </dl>
+                        </div>
+                    {%- else -%}
+                        {{- parent() -}}
+                    {%- endif -%}
                 {%- endblock -%}
             {% endembed %}
-
-            <template class="rds-popup-template">
-                <div class="rds-popup" role="alert">
-                    <h2>{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
-                    <dl>
-                        <div class="rds-popup-ps-row">
-                            <dt>{{ 'radio_table.show.rds_popup.ps'|trans }}</dt>
-                            <dd class="rds-popup-ps-value"></dd>
-                        </div>
-                        <div class="rds-popup-rt-row">
-                            <dt>{{ 'radio_table.show.rds_popup.rt'|trans }}</dt>
-                            <dd class="rds-popup-rt-value rds-wrap"></dd>
-                        </div>
-                        <div class="rds-popup-pty-row">
-                            <dt>{{ 'radio_table.show.rds_popup.pty'|trans }}</dt>
-                            <dd class="rds-popup-pty-value"></dd>
-                        </div>
-                    </dl>
-                </div>
-            </template>
         </div>
 
         <div class="radio-table-details">
