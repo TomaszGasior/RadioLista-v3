@@ -30,7 +30,7 @@
 
     transition: background 0.1s;
 }
-.radio-table tbody tr:hover, .radio-table tbody tr:focus-within {
+.radio-table tbody tr:hover, .radio-table tbody tr:has(:focus-visible) {
     background: var(--background-color-hover-focus);
 }
 
