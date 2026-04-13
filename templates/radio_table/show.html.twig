@@ -105,45 +105,39 @@
                     {%- set is_popup_enabled = radio_station.rds.ps|length > 1 or radio_station.rds.ps|first|length > 1 or radio_station.rds.rt|length > 0 or radio_station.rds.pty -%}
 
                     {%- if is_popup_enabled -%}
-                        <button popovertarget="rds-popup-{{ radio_station.id }}" class="rds-popup-button">
+                        <button popovertarget="rds-popup-{{ radio_station.id }}" class="popup-button">
                             {{- parent() -}}
                         </button>
 
-                        <div popover class="rds-popup" id="rds-popup-{{ radio_station.id }}">
-                            <h2>{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
+                        <div popover class="popup rds-popup" id="rds-popup-{{ radio_station.id }}">
+                            <h2 class="sr-only">{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
 
                             <dl>
                                 {%- if radio_station.rds.ps|length > 0 -%}
-                                    <div>
-                                        <dt>{{- 'radio_table.show.rds_popup.ps'|trans -}}</dt>
-                                        <dd>
-                                            {%- for group in radio_station.rds.ps -%}
-                                                <div>
-                                                    {%- for frame in group -%}
-                                                        <span>{{- frame|replace({'_':' '})|align_rds_frame -}}</span>
-                                                    {%- endfor -%}
-                                                </div>
-                                            {%- endfor -%}
-                                        </dd>
-                                    </div>
+                                    <dt>{{- 'radio_table.show.rds_popup.ps'|trans -}}</dt>
+                                    <dd>
+                                        {%- for group in radio_station.rds.ps -%}
+                                            <div>
+                                                {%- for frame in group -%}
+                                                    <span>{{- frame|replace({'_':' '})|align_rds_frame -}}</span>
+                                                {%- endfor -%}
+                                            </div>
+                                        {%- endfor -%}
+                                    </dd>
                                 {%- endif -%}
 
                                 {%- if radio_station.rds.rt|length > 0 -%}
-                                    <div>
-                                        <dt>{{- 'radio_table.show.rds_popup.rt'|trans -}}</dt>
-                                        <dd class="rds-wrap">
-                                            {%- for text in radio_station.rds.rt -%}
-                                                <div><span>{{- text|replace({'_':' '}) -}}</span></div>
-                                            {%- endfor -%}
-                                        </dd>
-                                    </div>
+                                    <dt>{{- 'radio_table.show.rds_popup.rt'|trans -}}</dt>
+                                    <dd class="rds-wrap">
+                                        {%- for text in radio_station.rds.rt -%}
+                                            <div><span>{{- text|replace({'_':' '}) -}}</span></div>
+                                        {%- endfor -%}
+                                    </dd>
                                 {%- endif -%}
 
                                 {%- if radio_station.rds.pty -%}
-                                    <div>
-                                        <dt>{{- 'radio_table.show.rds_popup.pty'|trans -}}</dt>
-                                        <dd><div><span>{{- radio_station.rds.pty -}}</span></div></dd>
-                                    </div>
+                                    <dt>{{- 'radio_table.show.rds_popup.pty'|trans -}}</dt>
+                                    <dd><div><span>{{- radio_station.rds.pty -}}</span></div></dd>
                                 {%- endif -%}
                             </dl>
                         </div>

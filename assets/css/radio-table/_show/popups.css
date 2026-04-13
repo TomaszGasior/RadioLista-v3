@@ -1,4 +1,4 @@
-@keyframes rds_popup_show
+@keyframes popup_show
 {
     from {
         opacity: 0;
@@ -8,7 +8,7 @@
     }
 }
 
-.rds-popup {
+.popup {
     --background-color: var(--view-background-color);
     --border-color: var(--detail-border-color);
     --shadow-color: rgba(0,0,0, 0.14);
@@ -20,58 +20,39 @@
 
     position-area: span-left bottom;
     position-try-fallbacks: flip-inline, flip-block, flip-block flip-inline;
+    margin-top: 5px;
+    max-width: 500px;
 
     background: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 7px;
     overflow: hidden;
     box-shadow: 0 0 10px var(--shadow-color);
+    font-size: 0.8em;
+    padding: 15px 20px;
 
-    width: 430px;
-    max-width: 90vw;
-    margin-top: 5px;
-
-    animation-name: rds_popup_show;
+    animation-name: popup_show;
     animation-duration: 0.2s;
     animation-timing-function: ease-out;
     animation-delay: 0.15s;
     animation-fill-mode: both;
 }
 
-.rds-popup h2 {
-    --background-color: #eee;
-    --text-color: #555;
-
-    background: var(--background-color);
-    color: var(--text-color);
-    font-size: 0.9em;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 5px 0;
-    margin: 0;
-}
-
 .rds-popup dl {
-    font-size: 0.8em;
-    margin: 15px 20px;
-}
-.rds-popup dl > div {
-    display: flex;
-    flex: 1;
-    width: 100%;
+    display: grid;
+    grid-template-columns: min-content auto;
+    gap: 10px 18px;
+    margin: 5px 0;
 }
 .rds-popup dt {
-    min-width: 12%;
     font-weight: bold;
-
-    /* keep in sync with div's margin */
-    padding: 5px 0;
 }
 .rds-popup dt::after {
     content: ":";
 }
 .rds-popup dd {
     margin-left: 0;
+    margin-right: -8px;
 }
 
 .rds-popup dd span {
@@ -85,14 +66,19 @@
 .rds-popup dd.rds-wrap span {
     white-space: pre-wrap;
 }
-.rds-popup dd div {
-    margin: 5px 0;
+.rds-popup dd div + div {
+    margin-top: 5px;
 }
 
-@media (prefers-color-scheme: dark)
-{
-    .rds-popup h2 {
-        --background-color: #464646;
-        --text-color: #c0c0c0;
-    }
+.popup-button, .popup-button:hover {
+    /* reset styles from button */
+    all: unset;
+    background: none !important;
+}
+.popup-button:hover {
+    cursor: pointer;
+}
+.popup-button:focus-visible {
+    outline-offset: 3px;
+    outline: 2px solid var(--focus-outline-color);
 }
