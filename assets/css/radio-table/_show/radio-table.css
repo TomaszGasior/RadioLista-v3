@@ -161,6 +161,9 @@
     padding: 0 2px;
     fill: currentColor;
 }
+.radio-table .comment-collapsed:hover svg, .radio-table .comment-collapsed:has(+ :popover-open) svg {
+    fill: var(--anchor-primary-text-color);
+}
 
 @media (prefers-color-scheme: dark)
 {
