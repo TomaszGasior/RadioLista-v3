@@ -71,7 +71,7 @@
                 {%- endblock -%}
 
                 {%- block heading_cell -%}
-                    {%- if column == 'comment' and radio_table.appearance.collapsedComments -%}
+                    {%- if column.value == 'comment' and radio_table.appearance.collapsedComments -%}
                         {{- 'heading.comment.short'|trans({}, 'radio_table') -}}
                     {%- else -%}
                         {{- parent() -}}
