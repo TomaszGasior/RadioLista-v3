@@ -210,9 +210,6 @@ radio_station:
             appearanceItalic: 'Pochylony tekst'
             appearanceStrikethrough: 'Przekreślony tekst'
 
-        information:
-            rds_popup: "Aby zobaczyć wyskakujące okno z\u00A0informacjami o\u00A0RDS, włącz JavaScript w\u00A0przeglądarce."
-
         text:
             disabled_radio_table_column: 'Ta kolumna jest niewidoczna w wykazie.'
 

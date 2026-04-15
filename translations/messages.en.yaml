@@ -209,9 +209,6 @@ radio_station:
             appearanceItalic: 'Italic text'
             appearanceStrikethrough: 'Strike through text'
 
-        information:
-            rds_popup: 'Please enable JavaScript in your browser to be able to use pop-up with extra RDS information.'
-
         text:
             disabled_radio_table_column: 'This column is currently not visible in the list.'
 
