@@ -36,9 +36,11 @@
     font-weight: 700;
 }
 
-.remove-dialog .form-item-checkbox {
-    display: inline-block;
-    margin-top: 15px;
+.remove-dialog-checkbox {
+    margin-top: 25px;
+}
+.remove-dialog-checkbox .form-item-checkbox {
+    display: inline;
 }
 
 .remove-dialog button {
