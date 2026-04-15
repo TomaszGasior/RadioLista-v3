@@ -1,6 +1,4 @@
-{% set no_js_fallback = app.request.query.has('remove') %}
-
-<dialog {{ no_js_fallback ? 'open' }} class="remove-dialog {{ no_js_fallback ? 'no-JS-fallback' }}">
+<dialog class="remove-dialog" id="remove-dialog">
     <div class="remove-dialog-question">
         {{ remove_question }}
     </div>
@@ -17,15 +15,9 @@
             </div>
         {% endif %}
 
-        {% if no_js_fallback %}
-            <button formnovalidate formmethod="get" formaction="{{ cancel_fallback_url }}">
-                {{ 'common.remove_dialog.action.cancel'|trans }}
-            </button>
-        {% else %}
-            <button formnovalidate autofocus>
-                {{ 'common.remove_dialog.action.cancel'|trans }}
-            </button>
-        {% endif %}
+        <button formnovalidate autofocus>
+            {{ 'common.remove_dialog.action.cancel'|trans }}
+        </button>
 
         <button formmethod="post" formaction="{{ remove_post_url }}" class="remove">
             {{ 'common.remove_dialog.action.remove'|trans }}

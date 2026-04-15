@@ -99,9 +99,9 @@
     <div class="form-action-button">
         <button>{{ 'common.action.save'|trans }}</button>
 
-        <a class="button remove-button" href="{{ path('radio_table.settings', {id: radio_table.id, remove: true}) }}">
+        <button type="button" class="remove-button" command="show-modal" commandfor="remove-dialog">
             {{ 'radio_table.remove.title'|trans }}
-        </a>
+        </button>
     </div>
 
     {{ form_end(form) }}
@@ -109,6 +109,5 @@
     {% include 'common/remove_dialog.html.twig' with {
         remove_question: 'radio_table.remove.text.confirmation'|trans({ '%name%': radio_table.name }),
         remove_post_url: path('radio_table.remove', {id: radio_table.id}),
-        cancel_fallback_url: path('radio_table.settings', {id: radio_table.id})
     } %}
 {% endblock %}

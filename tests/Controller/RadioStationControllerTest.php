@@ -103,8 +103,8 @@ class RadioStationControllerTest extends WebTestCase
 
     public function test_user_can_remove_one_radio_station(): void
     {
-        $crawler = $this->client->request('GET', '/wykaz/1/edytuj-stacje/1?remove=1');
-        $form = $crawler->filter('.remove-dialog.no-JS-fallback form')->selectButton('Usuń')->form();
+        $crawler = $this->client->request('GET', '/wykaz/1/edytuj-stacje/1');
+        $form = $crawler->filter('.remove-dialog form')->selectButton('Usuń')->form();
         $this->client->submit($form);
 
         $crawler = $this->client->request('GET', '/wykaz/1');

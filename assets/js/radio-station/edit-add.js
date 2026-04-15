@@ -1,5 +1,3 @@
-import { RemoveDialogManager } from '../common/RemoveDialogManager.js';
-
 function setupFrequencyWithDabChannelSync()
 {
     let dabChannelInput = document.querySelector('.dab-channel-input');
@@ -18,6 +16,4 @@ function setupFrequencyWithDabChannelSync()
 
 document.addEventListener('DOMContentLoaded', () => {
     setupFrequencyWithDabChannelSync();
-
-    new RemoveDialogManager(document);
 });

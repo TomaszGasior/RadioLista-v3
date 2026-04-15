@@ -1,5 +1,3 @@
-import { RemoveDialogManager } from '../common/RemoveDialogManager.js';
-
 function setupCustomWidthInput()
 {
     let widthTypeInput = document.querySelector('.radio-table-width-type');
@@ -21,6 +19,4 @@ function setupCustomWidthInput()
 
 document.addEventListener('DOMContentLoaded', () => {
     setupCustomWidthInput();
-
-    new RemoveDialogManager(document);
 });
