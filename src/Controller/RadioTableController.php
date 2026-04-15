@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioTableController extends AbstractController
@@ -139,6 +140,7 @@ class RadioTableController extends AbstractController
     #[Route(['pl' => '/wykaz/{id}/usun', 'en' => '/list/{id}/delete'], methods: ['POST'], name: 'radio_table.remove')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
+    #[IsCsrfTokenValid('remove-dialog')]
     public function remove(RadioTable $radioTable): Response
     {
         $this->entityManager->remove($radioTable);

@@ -22,5 +22,7 @@
         <button formmethod="post" formaction="{{ remove_post_url }}" class="remove">
             {{ 'common.remove_dialog.action.remove'|trans }}
         </button>
+
+        <input type="hidden" name="_token" value="{{ csrf_token('remove-dialog') }}">
     </form>
 </dialog>

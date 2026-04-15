@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\CsrfTokenTrait;
 use App\Tests\LoginUserTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -12,12 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 class BasicApplicationTest extends WebTestCase
 {
     use LoginUserTrait;
+    use CsrfTokenTrait;
 
     private KernelBrowser $client;
 
     public function setUp(): void
     {
         $this->client = static::createClient();
+        $this->stubCsrfTokenManager();
     }
 
     static public function publicUrlsProvider(): iterable
@@ -107,8 +110,8 @@ class BasicApplicationTest extends WebTestCase
             ['/wykaz/1/kopiuj-stacje/1'],
             ['/list/1/copy-station/1'],
 
-            ['/wykaz/1/usun-stacje/1', '/wykaz/1', 'POST'],
-            ['/list/1/delete-station/1', '/list/1', 'POST'],
+            ['/wykaz/1/usun-stacje/1', '/wykaz/1', 'POST', ['_token' => 'token']],
+            ['/list/1/delete-station/1', '/list/1', 'POST', ['_token' => 'token']],
 
             ['/wykaz/1/ustawienia'],
             ['/list/1/settings'],
@@ -119,8 +122,8 @@ class BasicApplicationTest extends WebTestCase
             ['/wykaz/1/eksport'],
             ['/list/1/export'],
 
-            ['/wykaz/1/usun', '/moje-wykazy', 'POST'],
-            ['/list/1/delete', '/my-lists', 'POST'],
+            ['/wykaz/1/usun', '/moje-wykazy', 'POST', ['_token' => 'token']],
+            ['/list/1/delete', '/my-lists', 'POST', ['_token' => 'token']],
         ];
 
         foreach ($urls as $data) {
@@ -130,19 +133,19 @@ class BasicApplicationTest extends WebTestCase
 
     #[DataProvider('publicUrlsProvider')]
     #[DataProvider('rlv2PublicUrlsProvider')]
-    public function test_public_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
+    public function test_public_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET', array $parameters = []): void
     {
-        $this->client->request($method, $url);
+        $this->client->request($method, $url, $parameters);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, $redirectUrl);
     }
 
     #[DataProvider('authenticatedUrlsProvider')]
-    public function test_authenticated_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET'): void
+    public function test_authenticated_page_seems_to_be_working(string $url, ?string $redirectUrl = null, string $method = 'GET', array $parameters = []): void
     {
         $this->loginUserByName($this->client, 'test_user');
-        $this->client->request($method, $url);
+        $this->client->request($method, $url, $parameters);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, $redirectUrl);

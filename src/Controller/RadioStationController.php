@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RadioStationController extends AbstractController
@@ -106,6 +107,7 @@ class RadioStationController extends AbstractController
     )]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioStation', statusCode: 404)]
+    #[IsCsrfTokenValid('remove-dialog')]
     public function remove(RadioStation $radioStation): Response
     {
         $this->entityManager->remove($radioStation);

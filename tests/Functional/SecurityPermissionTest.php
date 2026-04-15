@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\CsrfTokenTrait;
 use App\Tests\LoginUserTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -11,12 +12,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class SecurityPermissionTest extends WebTestCase
 {
     use LoginUserTrait;
+    use CsrfTokenTrait;
 
     private KernelBrowser $client;
 
     public function setUp(): void
     {
         $this->client = static::createClient();
+        $this->stubCsrfTokenManager();
     }
 
     static public function onlyForLoggedInUrlProvider(): iterable
@@ -58,15 +61,15 @@ class SecurityPermissionTest extends WebTestCase
         ];
 
         foreach ($postUrls as $url) {
-            yield $url => [$url, 'POST'];
+            yield $url => [$url, 'POST', ['_token' => 'token']];
         }
     }
 
     #[DataProvider('onlyForLoggedInUrlProvider')]
     #[DataProvider('ownedByTestUserUrlProvider')]
-    public function test_anonymous_user_cannot_access_restricted_page(string $url, string $method = 'GET'): void
+    public function test_anonymous_user_cannot_access_restricted_page(string $url, string $method = 'GET', array $parameters = []): void
     {
-        $this->client->request($method, $url);
+        $this->client->request($method, $url, $parameters);
 
         /** @var RedirectResponse */
         $response = $this->client->getResponse();
@@ -78,10 +81,10 @@ class SecurityPermissionTest extends WebTestCase
 
     #[DataProvider('onlyForLoggedInUrlProvider')]
     #[DataProvider('ownedByTestUserUrlProvider')]
-    public function test_logged_in_user_can_access_restricted_page(string $url, string $method = 'GET'): void
+    public function test_logged_in_user_can_access_restricted_page(string $url, string $method = 'GET', array $parameters = []): void
     {
         $this->loginUserByName($this->client, 'test_user');
-        $this->client->request($method, $url);
+        $this->client->request($method, $url, $parameters);
 
         // POST-only endpoints always redirect to another page.
         if ('POST' === $method) {
@@ -97,10 +100,10 @@ class SecurityPermissionTest extends WebTestCase
     }
 
     #[DataProvider('ownedByTestUserUrlProvider')]
-    public function test_one_user_cannot_access_page_of_another_user(string $url, string $method = 'GET'): void
+    public function test_one_user_cannot_access_page_of_another_user(string $url, string $method = 'GET', array $parameters = []): void
     {
         $this->loginUserByName($this->client, 'test_user_second');
-        $this->client->request($method, $url);
+        $this->client->request($method, $url, $parameters);
 
         $response = $this->client->getResponse();
 
