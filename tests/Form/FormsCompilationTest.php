@@ -14,40 +14,20 @@ use App\Form\RadioTableSettingsType;
 use App\Form\SecurityLoginType;
 use App\Form\UserRegisterType;
 use App\Form\UserSettingsType;
+use App\Tests\CsrfTokenTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class FormsCompilationTest extends KernelTestCase
 {
-    /** @var FormFactoryInterface */
-    private $factory;
-
-    /** @var RequestInterface */
-    private $request;
-
-    public function setUp(): void
-    {
-        $this->factory = self::getContainer()->get(FormFactoryInterface::class);
-        $this->request = new Request;
-
-        /** @var RequestStack */
-        $requestStack = self::getContainer()->get(RequestStack::class);
-
-        // This is required for CSRF form extension.
-        $this->request->setSession(new Session(new MockArraySessionStorage));
-        $requestStack->push($this->request);
-    }
+    use CsrfTokenTrait;
 
     static public function formTypeAndEntityProvider(): iterable
     {
-        /** @var EntityManagerInterface */
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);
 
         $radioTable = $entityManager->find(RadioTable::class, 1);
@@ -71,9 +51,12 @@ class FormsCompilationTest extends KernelTestCase
     #[DoesNotPerformAssertions]
     public function test_form_compiles_without_errors(string $formClass, $data = null, array $options = []): void
     {
-        $form = $this->factory->create($formClass, $data, $options);
+        $factory = self::getContainer()->get(FormFactoryInterface::class);
+        $this->stubCsrfTokenManager();
 
-        $form->handleRequest($this->request);
+        $form = $factory->create($formClass, $data, $options);
+
+        $form->handleRequest(new Request);
         $form->createView();
     }
 }
