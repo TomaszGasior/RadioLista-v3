@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserController extends AbstractController
@@ -35,9 +36,9 @@ class UserController extends AbstractController
 
     #[Route(['pl' => '/moje-wykazy', 'en' => '/my-lists'], name: 'user.my_radio_tables')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function myRadioTables(): Response
+    public function myRadioTables(#[CurrentUser] User $user): Response
     {
-        $radioTables = $this->radioTableRepository->findAllOwnedByUser($this->getUser());
+        $radioTables = $this->radioTableRepository->findAllOwnedByUser($user);
 
         return $this->render('user/my_radio_tables.html.twig', [
             'radio_tables' => $radioTables,
@@ -46,9 +47,9 @@ class UserController extends AbstractController
 
     #[Route(['pl' => '/ustawienia-konta', 'en' => '/account-settings'], name: 'user.my_account_settings')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function myAccountSettings(Request $request): Response
+    public function myAccountSettings(Request $request, #[CurrentUser] User $user): Response
     {
-        $form = $this->createForm(UserSettingsType::class, $this->getUser());
+        $form = $this->createForm(UserSettingsType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,9 +69,9 @@ class UserController extends AbstractController
     }
 
     #[Route(['pl' => '/rejestracja', 'en' => 'register'], name: 'user.register')]
-    public function register(Request $request): Response
+    public function register(Request $request, #[CurrentUser] ?User $currentUser): Response
     {
-        if (null !== $this->getUser()) {
+        if (null !== $currentUser) {
             return $this->redirectToRoute('homepage');
         }
 

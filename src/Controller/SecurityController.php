@@ -2,19 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\SecurityLoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     #[Route(['pl' => '/logowanie', 'en' => '/login'], name: 'security.login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, #[CurrentUser] ?User $currentUser): Response
     {
-        if (null !== $this->getUser()) {
+        if (null !== $currentUser) {
             return $this->redirectToRoute('homepage');
         }
 
