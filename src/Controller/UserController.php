@@ -9,10 +9,12 @@ use App\Repository\RadioTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserController extends AbstractController
@@ -95,5 +97,27 @@ class UserController extends AbstractController
         return $this->render('user/register.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route(['pl' => '/ustawienia-konta/usun', 'en' => '/account-settings/delete'], methods: ['POST'], name: 'user.remove')]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsCsrfTokenValid('remove-dialog')]
+    public function remove(Security $security, #[CurrentUser] User $user): Response
+    {
+        $radioTables = $this->radioTableRepository->findAllOwnedByUser($user);
+
+        $this->entityManager->remove($user);
+
+        foreach ($radioTables as $radioTable) {
+            // This is only required to update Doctrine's second level cache.
+            $this->entityManager->remove($radioTable);
+        }
+
+        $this->entityManager->flush();
+        $security->logout(false);
+
+        $this->addFlash('notice', 'user.remove.notification.removed');
+
+        return $this->redirectToRoute('homepage');
     }
 }

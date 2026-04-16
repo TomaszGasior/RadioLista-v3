@@ -291,6 +291,15 @@ user:
         information:
             no_radio_tables: "This user didn't create any list yet."
 
+    remove:
+        title: 'Delete account'
+
+        notification:
+            removed: 'Your account has been permanently deleted.'
+
+        text:
+            confirmation: "Are you sure you want to permanently delete your account and all\u00A0your lists? This cannot be undone."
+
 general:
     homepage:
         title: 'Homepage'

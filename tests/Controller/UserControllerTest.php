@@ -145,6 +145,24 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(200, $response->getStatusCode());
     }
 
+    public function test_user_can_delete_his_account(): void
+    {
+        $this->loginUserByName($this->client, 'test_user');
+
+        $crawler = $this->client->request('GET', '/ustawienia-konta');
+        $form = $crawler->filter('.remove-dialog form')->selectButton('Usuń')->form();
+        $this->client->submit($form);
+
+        $this->loginUserThroughForm('test_user', 'test_password_user');
+
+        $crawler = $this->client->request('GET', '/moje-wykazy');
+        $response = $this->client->getResponse();
+        $content = $crawler->html();
+
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertStringNotContainsString('test_radio_table_name', $content);
+    }
+
     private function loginUserThroughForm(string $username, $password): void
     {
         $crawler = $this->client->request('GET', '/logowanie');

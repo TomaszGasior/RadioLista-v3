@@ -292,6 +292,15 @@ user:
         information:
             no_radio_tables: 'Ten użytkownik nie utworzył jeszcze żadnego wykazu.'
 
+    remove:
+        title: 'Usuń konto'
+
+        notification:
+            removed: 'Twoje konto zostało bezpowrotnie usunięte.'
+
+        text:
+            confirmation: "Czy na pewno chcesz bezpowrotnie usunąć swoje konto wraz ze\u00A0wszystkimi wykazami? Tej\u00A0czynności nie można cofnąć."
+
 general:
     homepage:
         title: 'Strona główna'

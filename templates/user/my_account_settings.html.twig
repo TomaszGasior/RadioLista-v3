@@ -33,7 +33,16 @@
 
     <div class="form-action-button">
         <button>{{ 'common.action.save'|trans }}</button>
+
+        <button type="button" class="remove-button" command="show-modal" commandfor="remove-dialog">
+            {{ 'user.remove.title'|trans }}
+        </button>
     </div>
 
     {{ form_end(form) }}
+
+    {% include 'common/remove_dialog.html.twig' with {
+        remove_question: 'user.remove.text.confirmation'|trans,
+        remove_post_url: path('user.remove'),
+    } %}
 {% endblock %}
