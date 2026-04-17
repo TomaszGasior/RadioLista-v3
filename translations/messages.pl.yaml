@@ -31,6 +31,7 @@ common:
             remove: 'Usuń'
         text:
             confirm_checkbox: 'Potwierdzam bezpowrotne usuwanie'
+            full_authentication_missing: "Aby kontynuować, wyloguj się i\u00A0zaloguj\u00A0się ponownie."
 
     notification:
         saved_changes: 'Zmiany zostały zapisane.'

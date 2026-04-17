@@ -31,6 +31,7 @@ common:
             remove: 'Delete'
         text:
             confirm_checkbox: 'I confirm a permanent deletion'
+            full_authentication_missing: 'Please log out and log in again to proceed.'
 
     notification:
         saved_changes: 'Changes have been saved.'

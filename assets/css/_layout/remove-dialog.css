@@ -43,6 +43,11 @@
     display: inline;
 }
 
+.remove-dialog .information {
+    box-shadow: none;
+    margin-bottom: 30px;
+}
+
 .remove-dialog button {
     display: inline-block;
     margin: 30px 7px 0 7px;

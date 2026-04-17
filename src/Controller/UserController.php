@@ -100,7 +100,7 @@ class UserController extends AbstractController
     }
 
     #[Route(['pl' => '/ustawienia-konta/usun', 'en' => '/account-settings/delete'], methods: ['POST'], name: 'user.remove')]
-    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[IsCsrfTokenValid('remove-dialog')]
     public function remove(Security $security, #[CurrentUser] User $user): Response
     {

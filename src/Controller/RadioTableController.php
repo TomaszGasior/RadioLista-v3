@@ -138,7 +138,7 @@ class RadioTableController extends AbstractController
     }
 
     #[Route(['pl' => '/wykaz/{id}/usun', 'en' => '/list/{id}/delete'], methods: ['POST'], name: 'radio_table.remove')]
-    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[IsGranted('RADIO_TABLE_MODIFY', subject: 'radioTable', statusCode: 404)]
     #[IsCsrfTokenValid('remove-dialog')]
     public function remove(RadioTable $radioTable): Response

@@ -1,13 +1,22 @@
+{% set confirmation_required = confirmation_required|default(true) %}
+{% set full_authentication_missing = confirmation_required and not is_granted('IS_AUTHENTICATED_FULLY') %}
+
 <dialog class="remove-dialog" id="remove-dialog" closedby="any">
+    {% if full_authentication_missing %}
+        <div class="information">
+            {{ 'common.remove_dialog.text.full_authentication_missing'|trans }}
+        </div>
+    {% endif %}
+
     <div class="remove-dialog-question">
         {{ remove_question }}
     </div>
 
     <form method="dialog">
-        {% if confirm_checkbox ?? true %}
+        {% if confirmation_required %}
             <div class="remove-dialog-checkbox">
                 <div class="form-item form-item-checkbox">
-                    <input required type="checkbox" id="remove-dialog-confirm-checkbox">
+                    <input required type="checkbox" id="remove-dialog-confirm-checkbox" {% if full_authentication_missing %}disabled{% endif %}>
                     <label for="remove-dialog-confirm-checkbox">
                         {{ 'common.remove_dialog.text.confirm_checkbox'|trans }}
                     </label>
@@ -19,7 +28,7 @@
             {{ 'common.remove_dialog.action.cancel'|trans }}
         </button>
 
-        <button formmethod="post" formaction="{{ remove_post_url }}" class="remove">
+        <button formmethod="post" formaction="{{ remove_post_url }}" class="remove" {% if full_authentication_missing %}disabled{% endif %}>
             {{ 'common.remove_dialog.action.remove'|trans }}
         </button>
 
