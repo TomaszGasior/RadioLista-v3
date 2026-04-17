@@ -42,6 +42,8 @@
     display: block;
     text-indent: -9999px;
     overflow: hidden;
+
+    view-transition-name: site-header-logo;
 }
 
 @media (max-width: 767px)

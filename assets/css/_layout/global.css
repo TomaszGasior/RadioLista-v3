@@ -23,6 +23,13 @@
     src: url('../../fonts/Inconsolata.woff2');
 }
 
+@view-transition {
+    navigation: auto;
+}
+::view-transition-group(root) {
+    animation-duration: 0.1s;
+}
+
 :root {
     --site-background-color: #f7f6f5;
     --view-background-color: #fff;
@@ -137,6 +144,13 @@ a:active {
         /* override style from .custom-width and .full-width */
         min-width: 320px !important;
         box-sizing: border-box;
+    }
+}
+
+@media (prefers-reduced-motion)
+{
+    @view-transition {
+        navigation: none;
     }
 }
 

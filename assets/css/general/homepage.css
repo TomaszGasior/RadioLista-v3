@@ -87,6 +87,8 @@
 {
     .site-header .site-logo {
         visibility: hidden;
+
+        view-transition-name: none;
     }
 
     .homepage-radio-tables-list {
@@ -97,6 +99,8 @@
         display: block;
         height: 80px;
         margin: 40px auto 0;
+
+        view-transition-name: site-header-logo;
     }
     .homepage-logo .line-1, .homepage-logo .line-2, .homepage-logo .line-3 {
         animation: logo-line-fade 6s;

@@ -1,0 +1,3 @@
+.main-content > header h1 span {
+    view-transition-name: radio-table-name;
+}
