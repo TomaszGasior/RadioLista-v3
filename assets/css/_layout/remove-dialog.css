@@ -53,7 +53,10 @@
     margin: 30px 7px 0 7px;
 }
 .remove-dialog button.remove {
+    border-width: 2px;
+    border-color: var(--remove-action-color);
     color: var(--remove-action-color);
+    outline-offset: 2px;
 }
 
 @keyframes dialog_show
