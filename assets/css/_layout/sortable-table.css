@@ -1,19 +1,16 @@
-table.sortable th[data-sort] {
+table.sortable th[data-sort] > span {
     cursor: pointer;
 }
-table.sortable th[data-sort]:focus-visible {
-    outline-offset: -3px;
-}
 
-table.sortable th[data-sort]::after {
+table.sortable th[data-sort] > span::after {
     position: absolute;
     padding-left: 2px;
     opacity: 0.8;
     text-decoration: none !important;
 }
-table.sortable th[data-sort].sorted-asc::after {
+table.sortable th[data-sort].sorted-asc > span::after {
     content: "↓";
 }
-table.sortable th[data-sort].sorted-desc::after {
+table.sortable th[data-sort].sorted-desc > span::after {
     content: "↑";
 }

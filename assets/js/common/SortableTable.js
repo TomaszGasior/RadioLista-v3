@@ -20,18 +20,30 @@ export class SortableTable
         });
 
         this.headers.forEach(header => {
-            if (header.dataset.sort) {
-                header.addEventListener('click', this.onHeaderClick.bind(this));
-                header.addEventListener('keydown', this.onHeaderKeydown.bind(this));
-                header.role = 'button';
-                header.tabIndex = 0;
+            if (!header.dataset.sort) {
+                return;
             }
+
+            let span = document.createElement('span');
+
+            // Don't set role="button" directly to th.
+            // This breaks columns title handling in screen readers.
+            span.role = 'button';
+
+            span.tabIndex = 0;
+            span.innerHTML = header.innerHTML;
+
+            header.innerHTML = '';
+            header.appendChild(span);
+
+            span.addEventListener('click', this.onHeaderClick.bind(this));
+            span.addEventListener('keydown', this.onHeaderKeydown.bind(this));
         });
     }
 
     onHeaderClick(event)
     {
-        let header = event.target;
+        let header = event.target.parentNode;
         let columnIndex = header.cellIndex;
         let sortingType = header.dataset.sort;
 
@@ -59,11 +71,11 @@ export class SortableTable
             return;
         }
 
-        let header = event.target;
+        let node = event.target;
 
         event.preventDefault();
-        header.dispatchEvent(new Event('click'));
-        header.focus();
+        node.dispatchEvent(new Event('click'));
+        node.focus();
     }
 
     compareRows(columnIndex, sortingType, row1, row2)
