@@ -31,9 +31,7 @@ class UserLastActivityDateListener
         }
     }
 
-    #[AsEventListener(RadioTableCreated::class)]
-    #[AsEventListener(RadioTableUpdated::class)]
-    #[AsEventListener(RadioTableRemoved::class)]
+    #[AsEventListener]
     public function onRadioTableChanged(RadioTableCreated|RadioTableUpdated|RadioTableRemoved $event): void
     {
         $user = $event->radioTable->getOwner();
@@ -45,9 +43,7 @@ class UserLastActivityDateListener
         $user->refreshLastActivityDate();
     }
 
-    #[AsEventListener(RadioStationCreated::class)]
-    #[AsEventListener(RadioStationUpdated::class)]
-    #[AsEventListener(RadioStationRemoved::class)]
+    #[AsEventListener]
     public function onRadioStationChanged(RadioStationCreated|RadioStationUpdated|RadioStationRemoved $event): void
     {
         $user = $event->radioStation->getRadioTable()->getOwner();

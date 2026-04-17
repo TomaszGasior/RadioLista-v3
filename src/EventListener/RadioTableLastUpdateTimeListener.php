@@ -13,9 +13,7 @@ class RadioTableLastUpdateTimeListener
 {
     public function __construct(private Security $security) {}
 
-    #[AsEventListener(RadioStationCreated::class)]
-    #[AsEventListener(RadioStationUpdated::class)]
-    #[AsEventListener(RadioStationRemoved::class)]
+    #[AsEventListener]
     public function onRadioStationChanged(RadioStationCreated|RadioStationUpdated|RadioStationRemoved $event): void
     {
         $radioTable = $event->radioStation->getRadioTable();
