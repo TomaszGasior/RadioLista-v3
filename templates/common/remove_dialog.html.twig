@@ -1,4 +1,4 @@
-{% set confirmation_required = confirmation_required|default(true) %}
+{% set confirmation_required = confirmation_required ?? true %}
 {% set full_authentication_missing = confirmation_required and not is_granted('IS_AUTHENTICATED_FULLY') %}
 
 <dialog class="remove-dialog" id="remove-dialog" closedby="any">
