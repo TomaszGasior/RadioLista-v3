@@ -4,7 +4,7 @@ namespace App\Util;
 
 use App\Entity\Enum\RadioTable\Column;
 use App\Entity\RadioTable;
-use App\Entity\RadioStation;
+use App\Model\Row;
 use App\Util\RadioStationRdsTrait;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -23,16 +23,16 @@ class SpreadsheetCreator
     ) {}
 
     /**
-     * @param RadioStation[] $radioStations
+     * @param Row[] $rows
      */
-    public function createSpreadsheet(RadioTable $radioTable, array $radioStations): Spreadsheet
+    public function createSpreadsheet(RadioTable $radioTable, array $rows): Spreadsheet
     {
         $spreadsheet = new Spreadsheet;
         $worksheet = $spreadsheet->getActiveSheet();
 
         $worksheet
             ->fromArray($this->getHeadings($radioTable))
-            ->fromArray($this->getRows($radioTable, $radioStations), null, 'A2')
+            ->fromArray($this->getRows($radioTable, $rows), null, 'A2')
             ->setAutoFilter($worksheet->calculateWorksheetDimension())
             ->freezePane('A2')
         ;
@@ -93,38 +93,38 @@ class SpreadsheetCreator
     }
 
     /**
-     * @param RadioStation[] $radioStations
+     * @param Row[] $rows
      */
-    private function getRows(RadioTable $radioTable, array $radioStations): array
+    private function getRows(RadioTable $radioTable, array $rows): array
     {
         $data = [];
 
-        foreach ($radioStations as $radioStation) {
-            $row = [];
+        foreach ($rows as $row) {
+            $result = [];
 
             foreach ($radioTable->getColumns() as $column) {
-                $row[] = match ($column) {
+                $result[] = match ($column) {
                     Column::TYPE =>
-                        $this->translate('type.' . $radioStation->getType()->value),
+                        $this->translate('type.' . $row->type->value),
                     Column::RECEPTION =>
-                        $this->translate('reception.' . $radioStation->getReception()->value),
+                        $this->translate('reception.' . $row->reception->value),
                     Column::POLARIZATION =>
-                        $radioStation->getPolarization()?->getLabel() ?: '',
+                        $row->polarization?->getLabel() ?: '',
                     Column::QUALITY =>
-                        $radioStation->getQuality()->getLabel(),
+                        $row->quality->getLabel(),
                     Column::DAB_CHANNEL =>
-                        $radioStation->getDabChannel()->value ?? '',
+                        $row->dabChannel->value ?? '',
                     Column::COMMENT =>
                         // Remove \r. It comes from <textarea> and breaks some apps like iWork Numbers in CSV format.
-                        str_replace("\r", '', (string) $radioStation->getComment()),
+                        str_replace("\r", '', (string) $row->comment),
                     Column::RDS =>
-                        str_replace(' ', '_', $this->alignRDSFrame($radioStation->getRds()->getPs()[0][0] ?? '')),
+                        str_replace(' ', '_', $this->alignRDSFrame($row->rds->getPs()[0][0] ?? '')),
                     default =>
-                        $radioStation->{'get' . $column->value}(),
+                        $row->{$column->value},
                 };
             }
 
-            $data[] = $row;
+            $data[] = $result;
         }
 
         return $data;

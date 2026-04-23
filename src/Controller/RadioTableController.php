@@ -11,7 +11,7 @@ use App\Form\RadioTableColumnsType;
 use App\Form\RadioTableCreateType;
 use App\Form\RadioTableRemoveType;
 use App\Form\RadioTableSettingsType;
-use App\Repository\RadioStationRepository;
+use App\Repository\RadioTableRowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,13 +29,13 @@ class RadioTableController extends AbstractController
 
     #[Route(['pl' => '/wykaz/{id}', 'en' => '/list/{id}'], name: 'radio_table.show')]
     #[IsGranted('RADIO_TABLE_SHOW', subject: 'radioTable', statusCode: 404)]
-    public function show(RadioTable $radioTable, RadioStationRepository $radioStationRepository): Response
+    public function show(RadioTable $radioTable, RadioTableRowRepository $radioTableRowRepository): Response
     {
-        $radioStations = $radioStationRepository->findForRadioTable($radioTable);
+        $rows = $radioTableRowRepository->findForRadioTable($radioTable);
 
         return $this->render('radio_table/show.html.twig', [
             'radio_table' => $radioTable,
-            'radio_stations' => $radioStations,
+            'rows' => $rows,
         ]);
     }
 

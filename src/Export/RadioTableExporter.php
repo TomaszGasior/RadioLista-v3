@@ -4,7 +4,7 @@ namespace App\Export;
 
 use App\Entity\RadioTable;
 use App\Enum\ExportFormat;
-use App\Repository\RadioStationRepository;
+use App\Repository\RadioTableRowRepository;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
@@ -15,16 +15,16 @@ class RadioTableExporter
      */
     public function __construct(
         #[AutowireIterator(ExporterInterface::class)] private iterable $exporters,
-        private RadioStationRepository $radioStationRepository,
+        private RadioTableRowRepository $radioTableRowRepository,
     ) {}
 
     public function render(ExportFormat $format, RadioTable $radioTable): string
     {
-        $radioStations = $this->radioStationRepository->findForRadioTable($radioTable);
+        $rows = $this->radioTableRowRepository->findForRadioTable($radioTable);
 
         foreach ($this->exporters as $exporter) {
             if ($exporter->supports($format)) {
-                return $exporter->render($format, $radioTable, $radioStations);
+                return $exporter->render($format, $radioTable, $rows);
             }
         }
 

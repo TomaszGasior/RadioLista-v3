@@ -16,17 +16,17 @@ class DocumentExporter implements ExporterInterface
         private DompdfFactory $dompdfFactory,
     ) {}
 
-    public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
+    public function render(ExportFormat $format, RadioTable $radioTable, array $rows): string
     {
         if ($format === ExportFormat::PDF) {
             // Dompdf's performance is very bad when rendering documents containing long tables.
             // Limit the number of rows to avoid exceeding PHP's memory limit or execution timeout.
-            $radioStations = array_slice($radioStations, 0, self::PDF_FORMAT_RADIO_STATIONS_MAX_COUNT);
+            $rows = array_slice($rows, 0, self::PDF_FORMAT_RADIO_STATIONS_MAX_COUNT);
         }
 
         $html = $this->twig->render('radio_table/standalone.html.twig', [
             'radio_table' => $radioTable,
-            'radio_stations' => $radioStations,
+            'rows' => $rows,
         ]);
 
         if ($format === ExportFormat::PDF) {

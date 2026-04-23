@@ -13,9 +13,9 @@ class SpreadsheetExporter implements ExporterInterface
 {
     public function __construct(private SpreadsheetCreator $spreadsheetCreator) {}
 
-    public function render(ExportFormat $format, RadioTable $radioTable, array $radioStations): string
+    public function render(ExportFormat $format, RadioTable $radioTable, array $rows): string
     {
-        $spreadsheet = $this->spreadsheetCreator->createSpreadsheet($radioTable, $radioStations);
+        $spreadsheet = $this->spreadsheetCreator->createSpreadsheet($radioTable, $rows);
 
         $writer = match ($format) {
             ExportFormat::CSV => new Csv($spreadsheet),

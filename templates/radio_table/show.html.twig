@@ -83,7 +83,7 @@
 
                 {%- block body_cell_name -%}
                     {%- if is_granted -%}
-                        <a href="{{ path('radio_station.edit', {id: radio_station.id, radioTableId: radio_station.radioTable.id}) }}">
+                        <a href="{{ path(row.rowEditRoute.name, row.rowEditRoute.parameters) }}">
                             {{- parent() -}}
                         </a>
                     {%- else -%}
@@ -93,12 +93,12 @@
 
                 {%- block body_cell_comment -%}
                     {%- if radio_table.appearance.collapsedComments -%}
-                        <button popovertarget="comment-popup-{{ radio_station.id }}" class="popup-button comment-collapsed">
+                        <button popovertarget="comment-popup-{{ row_index }}" class="popup-button comment-collapsed">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30" aria-hidden="true"><path d="M15 30a15 15 0 110-30 15 15 0 010 30zm0-3a12 12 0 100-24 12 12 0 000 24zm0-13.5a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-3 0v-6a1.5 1.5 0 011.5-1.5zm0-6a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
                             <span class="sr-only">{{- 'heading.comment'|trans({}, 'radio_table') -}}</span>
                         </button>
 
-                        <div popover class="popup" id="comment-popup-{{ radio_station.id }}">
+                        <div popover class="popup" id="comment-popup-{{ row_index }}">
                             {{- parent() -}}
                         </div>
                     {%- else -%}
@@ -107,21 +107,21 @@
                 {%- endblock -%}
 
                 {%- block body_cell_rds -%}
-                    {%- set is_popup_enabled = radio_station.rds.ps|length > 1 or radio_station.rds.ps|first|length > 1 or radio_station.rds.rt|length > 0 or radio_station.rds.pty -%}
+                    {%- set is_popup_enabled = row.rds.ps|length > 1 or row.rds.ps|first|length > 1 or row.rds.rt|length > 0 or row.rds.pty -%}
 
                     {%- if is_popup_enabled -%}
-                        <button popovertarget="rds-popup-{{ radio_station.id }}" class="popup-button">
+                        <button popovertarget="rds-popup-{{ row_index }}" class="popup-button">
                             {{- parent() -}}
                         </button>
 
-                        <div popover class="popup rds-popup" id="rds-popup-{{ radio_station.id }}">
+                        <div popover class="popup rds-popup" id="rds-popup-{{ row_index }}">
                             <h2 class="sr-only">{{ 'radio_table.show.rds_popup.title'|trans }}</h2>
 
                             <dl>
-                                {%- if radio_station.rds.ps|length > 0 -%}
+                                {%- if row.rds.ps|length > 0 -%}
                                     <dt>{{- 'radio_table.show.rds_popup.ps'|trans -}}</dt>
                                     <dd>
-                                        {%- for group in radio_station.rds.ps -%}
+                                        {%- for group in row.rds.ps -%}
                                             <div>
                                                 {%- for frame in group -%}
                                                     <span>{{- frame|replace({'_':' '})|align_rds_frame -}}</span>
@@ -131,18 +131,18 @@
                                     </dd>
                                 {%- endif -%}
 
-                                {%- if radio_station.rds.rt|length > 0 -%}
+                                {%- if row.rds.rt|length > 0 -%}
                                     <dt>{{- 'radio_table.show.rds_popup.rt'|trans -}}</dt>
                                     <dd class="rds-wrap">
-                                        {%- for text in radio_station.rds.rt -%}
+                                        {%- for text in row.rds.rt -%}
                                             <div><span>{{- text|replace({'_':' '}) -}}</span></div>
                                         {%- endfor -%}
                                     </dd>
                                 {%- endif -%}
 
-                                {%- if radio_station.rds.pty -%}
+                                {%- if row.rds.pty -%}
                                     <dt>{{- 'radio_table.show.rds_popup.pty'|trans -}}</dt>
-                                    <dd><div><span>{{- radio_station.rds.pty -}}</span></div></dd>
+                                    <dd><div><span>{{- row.rds.pty -}}</span></div></dd>
                                 {%- endif -%}
                             </dl>
                         </div>

@@ -35,13 +35,15 @@
         {%- for column in radio_table.columns -%}
             {%- if column.value in ['frequency', 'power', 'distance', 'maxSignalLevel', 'privateNumber'] -%}
                 {%- set number_indent_max_digits = number_indent_max_digits + {
-                    (column.value): (max(radio_stations|map(radio_station => attribute(radio_station, column.value))) // 1)|length,
+                    (column.value): (max(rows|map(row => attribute(row, column.value))) // 1)|length,
                 } -%}
             {%- endif -%}
         {%- endfor -%}
 
-        {%- for radio_station in radio_stations -%}
-            {%- set appearance = radio_station.appearance -%}
+        {%- for row in rows -%}
+            {%- set row_index = loop.index -%}
+
+            {%- set appearance = row.appearance -%}
             {%- set row_class = '' -%}
 
             {%- if appearance.background -%}
@@ -63,68 +65,68 @@
             <tr {% if row_class %}class="{{ row_class }}"{% endif %}>
                 {%- for column in radio_table.columns -%}
                     <td>
-                        {%- if attribute(radio_station, column.value) is not null -%}
+                        {%- if attribute(row, column.value) is not null -%}
                             {%- if column.value == 'name' -%}
-                                {%- block body_cell_name radio_station.name -%}
+                                {%- block body_cell_name row.name -%}
 
                             {%- elseif column.value in ['frequency', 'power'] -%}
-                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(radio_station, column.value) // 1)|length }}">
-                                    {{- attribute(radio_station, column.value)|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
+                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(row, column.value) // 1)|length }}">
+                                    {{- attribute(row, column.value)|format_number({min_fraction_digit: 2, grouping_used: false}) -}}
                                 </span>
 
                             {%- elseif column.value in ['distance', 'maxSignalLevel', 'privateNumber'] -%}
-                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(radio_station, column.value) // 1)|length }}">
-                                    {{- attribute(radio_station, column.value) -}}
+                                <span class="number-indent-{{ number_indent_max_digits[column.value] - (attribute(row, column.value) // 1)|length }}">
+                                    {{- attribute(row, column.value) -}}
                                 </span>
 
                             {%- elseif column.value == 'type' -%}
-                                {{- ('type.' ~ radio_station.type.value)|trans -}}
+                                {{- ('type.' ~ row.type.value)|trans -}}
 
                             {%- elseif column.value == 'reception' -%}
-                                {{- ('reception.' ~ radio_station.reception.value)|trans -}}
+                                {{- ('reception.' ~ row.reception.value)|trans -}}
 
                             {%- elseif column.value == 'polarization' -%}
-                                <abbr title="{{ ('polarization.' ~ radio_station.polarization.value)|trans }}">
-                                    {{- radio_station.polarization.label -}}
+                                <abbr title="{{ ('polarization.' ~ row.polarization.value)|trans }}">
+                                    {{- row.polarization.label -}}
                                 </abbr>
 
                             {%- elseif column.value == 'dabChannel' -%}
-                                {{- radio_station.dabChannel.value -}}
+                                {{- row.dabChannel.value -}}
 
                             {%- elseif column.value == 'quality' -%}
-                                <span class="quality quality-{{ radio_station.quality.value }}"
-                                      title="{{ ('quality.' ~ radio_station.quality.value)|trans }}">
-                                    <span class="raw">{{- radio_station.quality.label -}}</span>
+                                <span class="quality quality-{{ row.quality.value }}"
+                                      title="{{ ('quality.' ~ row.quality.value)|trans }}">
+                                    <span class="raw">{{- row.quality.label -}}</span>
                                     <span class="dots" aria-hidden="true"></span>
                                 </span>
 
                             {%- elseif column.value == 'firstLogDate' -%}
-                                <time>{{ radio_station.firstLogDate }}</time>
+                                <time>{{ row.firstLogDate }}</time>
 
                             {%- elseif column.value == 'comment' -%}
-                                {%- block body_cell_comment radio_station.comment|nl2br(false) -%}
+                                {%- block body_cell_comment row.comment|nl2br(false) -%}
 
                             {%- elseif column.value == 'externalAnchor' -%}
-                                <a class="external" href="{{ radio_station.externalAnchor }}" target="_blank">
+                                <a class="external" href="{{ row.externalAnchor }}" target="_blank">
                                     {%- block body_cell_external_anchor_icon -%}
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 30 30"><path d="M25 25H5V5.075L10 5V0H0v30h30V17.5h-5zM15 0l5 5-7.5 7.5 5 5L25 10l5 5V0z"/></svg>
                                     {%- endblock -%}
                                     <span class="sr-only">
-                                        {{- 'external_anchor.text'|trans({'%name%': radio_station.name}) -}}
+                                        {{- 'external_anchor.text'|trans({'%name%': row.name}) -}}
                                     </span>
                                 </a>
 
                             {%- elseif column.value == 'rds' -%}
-                                {%- if radio_station.rds.ps|first and radio_station.rds.ps|first|first|trim -%}
+                                {%- if row.rds.ps|first and row.rds.ps|first|first|trim -%}
                                     {%- block body_cell_rds -%}
                                         <span class="rds">
-                                            {{- radio_station.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
+                                            {{- row.rds.ps|first|first|replace({'_':' '})|align_rds_frame -}}
                                         </span>
                                     {%- endblock -%}
                                 {%- endif -%}
 
                             {%- else -%}
-                                {{- attribute(radio_station, column.value) -}}
+                                {{- attribute(row, column.value) -}}
                             {%- endif -%}
                         {%- endif -%}
                     </td>
