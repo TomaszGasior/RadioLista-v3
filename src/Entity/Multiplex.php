@@ -3,18 +3,13 @@
 namespace App\Entity;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
-use App\Entity\Embeddable\RadioStation\Rds;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
-#[ORM\Index(name: 'idx_sort_frequency', columns: ['radioTableId', 'frequency'])]
-#[ORM\Index(name: 'idx_sort_name', columns: ['radioTableId', 'name', 'frequency'])]
-class RadioStation
+class Multiplex
 {
     use NameableTrait;
-    use RadioStationTrait;
     use BroadcastableTrait;
 
     #[ORM\Id]
@@ -26,29 +21,13 @@ class RadioStation
     #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private RadioTable $radioTable;
 
-    #[ORM\Embedded(class: Rds::class)]
-    #[Assert\Valid]
-    private Rds $rds;
-
     public function __construct(string $frequency, string $name, RadioTable $radioTable)
     {
         $this->frequency = $frequency;
         $this->name = $name;
         $this->radioTable = $radioTable;
 
-        $this->rds = new Rds;
         $this->appearance = new Appearance;
-    }
-
-    public function __clone()
-    {
-        $this->rds = clone $this->rds;
-        $this->appearance = clone $this->appearance;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getRadioTable(): RadioTable
@@ -56,8 +35,8 @@ class RadioStation
         return $this->radioTable;
     }
 
-    public function getRds(): Rds
+    public function getId(): ?int
     {
-        return $this->rds;
+        return $this->id;
     }
 }
