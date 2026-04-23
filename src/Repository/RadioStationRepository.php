@@ -22,33 +22,12 @@ class RadioStationRepository extends ServiceEntityRepository
         parent::__construct($registry, RadioStation::class);
     }
 
+    /**
+     * @return RadioStation[]
+     */
     public function findForRadioTable(RadioTable $radioTable): array
     {
-        $queryBuilder = $this->createQueryBuilder('radioStation')
-            ->andWhere('radioStation.radioTable = :radioTable')
-            ->setParameter('radioTable', $radioTable)
-        ;
-
-        switch ($radioTable->getSorting()) {
-            case Column::NAME:
-                $queryBuilder->addOrderBy('radioStation.name', 'ASC');
-                break;
-
-            case Column::PRIVATE_NUMBER:
-                $queryBuilder
-                    ->addSelect(
-                        // Move radio stations without private number to the end of the radio table.
-                        'CASE WHEN radioStation.privateNumber IS NULL THEN 1 ELSE 0 END AS HIDDEN privateNumberEmpty'
-                    )
-                    ->addOrderBy('privateNumberEmpty', 'ASC')
-                    ->addOrderBy('radioStation.privateNumber', 'ASC')
-                ;
-                break;
-        }
-
-        $queryBuilder->addOrderBy('radioStation.frequency', 'ASC');
-
-        return $queryBuilder->getQuery()->getResult();
+        return $this->findBy(['radioTable' => $radioTable]);
     }
 
     public function findColumnAllValuesForRadioTable(RadioTable $radioTable, Column $column): array

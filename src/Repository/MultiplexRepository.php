@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Multiplex;
+use App\Entity\RadioTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,5 +18,13 @@ class MultiplexRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Multiplex::class);
+    }
+
+    /**
+     * @return Multiplex[]
+     */
+    public function findForRadioTable(RadioTable $radioTable): array
+    {
+        return $this->findBy(['radioTable' => $radioTable]);
     }
 }
