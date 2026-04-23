@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Embeddable\RadioTable\Appearance;
 use App\Entity\Enum\RadioTable\Column;
+use App\Entity\Enum\RadioTable\DigitalType;
 use App\Entity\Enum\RadioTable\DistanceUnit;
 use App\Entity\Enum\RadioTable\FrequencyUnit;
 use App\Entity\Enum\RadioTable\MaxSignalLevelUnit;
@@ -38,6 +39,9 @@ class RadioTable
 
     #[ORM\Column(type: Types::SMALLINT, enumType: Status::class)]
     private Status $status = Status::PUBLIC;
+
+    #[ORM\Column(type: Types::SMALLINT, enumType: DigitalType::class)]
+    private DigitalType $digitalType = DigitalType::DISABLED;
 
     #[ORM\Column(type: Types::JSON, enumType: Column::class)]
     #[Assert\Expression(
@@ -126,6 +130,18 @@ class RadioTable
     public function setStatus(Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDigitalType(): DigitalType
+    {
+        return $this->digitalType;
+    }
+
+    public function setDigitalType(DigitalType $digitalType): self
+    {
+        $this->digitalType = $digitalType;
 
         return $this;
     }
