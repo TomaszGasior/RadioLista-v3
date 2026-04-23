@@ -8,7 +8,9 @@ class RLv2NamingStrategy extends DefaultNamingStrategy
 {
     public function classToTableName($className): string
     {
-        return parent::classToTableName($className) . 's';
+        $tableName = parent::classToTableName($className);
+
+        return $tableName . ($tableName[-1] === 'x' ? 'es' : 's');
     }
 
     public function joinColumnName($propertyName, $className = null): string
