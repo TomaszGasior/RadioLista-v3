@@ -3,52 +3,44 @@
 namespace App\Tests\Entity\Enum\RadioTable;
 
 use App\Entity\Enum\RadioTable\Column;
-use App\Entity\RadioStation;
+use App\Model\Row;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use ReflectionMethod;
+use ReflectionProperty;
 
 class ColumnTest extends TestCase
 {
-    private const RADIO_STATION_GETTERS_FOR_NO_COLUMNS = [
-        'getId',
-        'getRadioTable',
-        'getAppearance',
+    private const ROW_PROPERTIES_FOR_NO_COLUMNS = [
+        'appearance',
+        'rowEditRoute',
     ];
 
-    public function test_enum_values_match_to_getters_of_radiostation_entity(): void
+    public function test_enum_values_match_properties_of_row_model(): void
     {
         foreach (Column::cases() as $column) {
-            $methodName = 'get' . ucfirst($column->value);
-
             $this->assertTrue(
-                method_exists(RadioStation::class, $methodName),
-                sprintf('Missing getter %s() for %s enum.', $methodName, $column->name)
+                property_exists(Row::class, $column->value),
+                sprintf('Missing property $%s for %s enum.', $column->value, $column->name)
             );
         }
     }
 
-    public function test_getters_of_radiostation_entity_match_to_enum_values(): void
+    public function test_properties_of_row_model_match_enum_values(): void
     {
-        $reflection = new ReflectionClass(RadioStation::class);
+        $reflection = new ReflectionClass(Row::class);
 
-        $methodNames = array_diff(
-            array_filter(
-                array_map(
-                    function (ReflectionMethod $method) { return $method->getName(); },
-                    $reflection->getMethods(ReflectionMethod::IS_PUBLIC)
-                ),
-                function (string $methodName) { return str_starts_with($methodName, 'get'); }
+        $propertyNames = array_diff(
+            array_map(
+                function (ReflectionProperty $property) { return $property->getName(); },
+                $reflection->getProperties(ReflectionProperty::IS_PUBLIC)
             ),
-            self::RADIO_STATION_GETTERS_FOR_NO_COLUMNS
+            self::ROW_PROPERTIES_FOR_NO_COLUMNS
         );
 
-        foreach ($methodNames as $methodName) {
-            $enumValue = lcfirst(substr($methodName, strlen('get')));
-
+        foreach ($propertyNames as $propertyName) {
             $this->assertNotEmpty(
-                Column::tryFrom($enumValue),
-                sprintf('Missing enum value "%s" for getter %s().', $enumValue, $methodName)
+                Column::tryFrom($propertyName),
+                sprintf('Missing enum value "%s" for property $%s.', $propertyName, $propertyName)
             );
         }
     }
