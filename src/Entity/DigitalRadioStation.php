@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DigitalMigration\EntityTrait\DigitalPropertiesSetterMigrationTrait;
 use App\Entity\Embeddable\RadioStation\Appearance;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,7 @@ class DigitalRadioStation
 {
     use NameableTrait;
     use RadioStationTrait;
+    use DigitalPropertiesSetterMigrationTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
