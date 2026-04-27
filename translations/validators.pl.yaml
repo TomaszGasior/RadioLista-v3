@@ -2,7 +2,6 @@ radio_table:
     appearance_width_min_value: 'Szerokość musi mieć minimum {{ compared_value }} pikseli.'
 
 radio_station:
-    dab_channel_invalid_for_frequency: "Kanał DAB nie zgadza się z\u00A0częstotliwością."
     first_log_date_invalid_format: 'Format daty jest niepoprawny.'
     at_least_one_selected: 'Należy zaznaczyć co najmniej jedną stację.'
 

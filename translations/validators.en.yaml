@@ -2,7 +2,6 @@ radio_table:
     appearance_width_min_value: 'Width must be at least {{ compared_value }} pixels.'
 
 radio_station:
-    dab_channel_invalid_for_frequency: 'DAB channel does not match the frequency.'
     first_log_date_invalid_format: 'Date format is incorrect.'
     at_least_one_selected: 'At least one station needs to be selected.'
 
