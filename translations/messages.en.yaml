@@ -188,8 +188,6 @@ radio_station:
         form:
             polarization.choice:
                 '': '(no information)'
-            dabChannel.choice:
-                '': '(no information)'
             firstLogDate.help: 'for example: 2013, 2011-06, 2016-05-04'
             externalAnchor.help: 'for example: https://example.com/something'
             rdsPs: 'Programme Service'

@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Enum\RadioStation\Background;
-use App\Entity\Enum\RadioStation\DabChannel;
 use App\Entity\Enum\RadioStation\Polarization;
 use App\Entity\Enum\RadioStation\Quality;
 use App\Entity\Enum\RadioStation\Reception;
@@ -70,27 +69,6 @@ class RadioStationEditType extends AbstractType
                     return 'polarization.'.$polarization->value;
                 },
                 'placeholder' => new TranslatableMessage('radio_station.edit.form.polarization.choice.'),
-            ])
-            ->add('multiplex', RadioStationCompletionTextType::class, [
-                'required' => false,
-            ])
-            ->add('dabChannel', EnumType::class, [
-                'required' => false,
-                'class' => DabChannel::class,
-                'choice_label' => function(DabChannel $dabChannel): string {
-                    return $dabChannel->value;
-                },
-                'choice_translation_domain' => false,
-                'placeholder' => new TranslatableMessage('radio_station.edit.form.dabChannel.choice.'),
-                'attr' => [
-                    'data-dab-channel-frequencies' => json_encode(array_reduce(
-                        DabChannel::cases(),
-                        function(array $data, DabChannel $dabChannel): array {
-                            return array_merge($data, [$dabChannel->value => $dabChannel->getFrequency()]);
-                        },
-                        []
-                    )),
-                ],
             ])
             ->add('type', EnumType::class, [
                 'class' => Type::class,
