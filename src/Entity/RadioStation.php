@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DigitalMigration\RadioStationLegacyDigitalPropertiesTrait;
 use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
 use Doctrine\DBAL\Types\Types;
@@ -16,6 +17,7 @@ class RadioStation
     use NameableTrait;
     use RadioStationTrait;
     use BroadcastableTrait;
+    use RadioStationLegacyDigitalPropertiesTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
