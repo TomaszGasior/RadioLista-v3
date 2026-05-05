@@ -81,6 +81,12 @@ class RadioTable
     #[ORM\Column(type: Types::INTEGER)]
     private int $radioStationsCount = 0;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $digitalRadioStationsCount = 0;
+
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $multiplexesCount = 0;
+
     public function __construct(string $name, User $owner)
     {
         $this->name = $name;
@@ -236,6 +242,44 @@ class RadioTable
     public function decreaseRadioStationsCount(): self
     {
         --$this->radioStationsCount;
+
+        return $this;
+    }
+
+    public function getDigitalRadioStationsCount(): int
+    {
+        return $this->digitalRadioStationsCount;
+    }
+
+    public function increaseDigitalRadioStationsCount(): self
+    {
+        ++$this->digitalRadioStationsCount;
+
+        return $this;
+    }
+
+    public function decreaseDigitalRadioStationsCount(): self
+    {
+        --$this->digitalRadioStationsCount;
+
+        return $this;
+    }
+
+    public function getMultiplexesCount(): int
+    {
+        return $this->multiplexesCount;
+    }
+
+    public function increaseMultiplexesCount(): self
+    {
+        ++$this->multiplexesCount;
+
+        return $this;
+    }
+
+    public function decreaseMultiplexesCount(): self
+    {
+        --$this->multiplexesCount;
 
         return $this;
     }

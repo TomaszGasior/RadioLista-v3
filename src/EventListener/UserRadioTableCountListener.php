@@ -6,7 +6,7 @@ use App\Event\RadioTableCreated;
 use App\Event\RadioTableRemoved;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
-class RadioTableCountListener
+class UserRadioTableCountListener
 {
     #[AsEventListener]
     public function onRadioTableCreated(RadioTableCreated $event): void

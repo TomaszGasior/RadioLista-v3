@@ -3,6 +3,12 @@
 namespace App\EventListener;
 
 use App\Entity\User;
+use App\Event\DigitalRadioStationCreated;
+use App\Event\DigitalRadioStationRemoved;
+use App\Event\DigitalRadioStationUpdated;
+use App\Event\MultiplexCreated;
+use App\Event\MultiplexRemoved;
+use App\Event\MultiplexUpdated;
 use App\Event\RadioStationCreated;
 use App\Event\RadioStationRemoved;
 use App\Event\RadioStationUpdated;
@@ -47,6 +53,30 @@ class UserLastActivityDateListener
     public function onRadioStationChanged(RadioStationCreated|RadioStationUpdated|RadioStationRemoved $event): void
     {
         $user = $event->radioStation->getRadioTable()->getOwner();
+
+        if (!$this->isCurrentUser($user)) {
+            return;
+        }
+
+        $user->refreshLastActivityDate();
+    }
+
+    #[AsEventListener]
+    public function onDigitalRadioStationChanged(DigitalRadioStationCreated|DigitalRadioStationUpdated|DigitalRadioStationRemoved $event): void
+    {
+        $user = $event->digitalRadioStation->getMultiplex()->getRadioTable()->getOwner();
+
+        if (!$this->isCurrentUser($user)) {
+            return;
+        }
+
+        $user->refreshLastActivityDate();
+    }
+
+    #[AsEventListener]
+    public function onMultiplexChanged(MultiplexCreated|MultiplexUpdated|MultiplexRemoved $event): void
+    {
+        $user = $event->multiplex->getRadioTable()->getOwner();
 
         if (!$this->isCurrentUser($user)) {
             return;
