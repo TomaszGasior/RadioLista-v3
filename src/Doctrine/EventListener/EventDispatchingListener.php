@@ -2,9 +2,17 @@
 
 namespace App\Doctrine\EventListener;
 
+use App\Entity\DigitalRadioStation;
+use App\Entity\Multiplex;
 use App\Entity\RadioStation;
 use App\Entity\RadioTable;
 use App\Entity\User;
+use App\Event\DigitalRadioStationCreated;
+use App\Event\DigitalRadioStationRemoved;
+use App\Event\DigitalRadioStationUpdated;
+use App\Event\MultiplexCreated;
+use App\Event\MultiplexRemoved;
+use App\Event\MultiplexUpdated;
 use App\Event\RadioStationCreated;
 use App\Event\RadioStationRemoved;
 use App\Event\RadioStationUpdated;
@@ -59,6 +67,8 @@ class EventDispatchingListener
         return match ($entity::class) {
             RadioTable::class => new RadioTableCreated($entity),
             RadioStation::class => new RadioStationCreated($entity),
+            DigitalRadioStation::class => new DigitalRadioStationCreated($entity),
+            Multiplex::class => new MultiplexCreated($entity),
             default => null,
         };
     }
@@ -68,6 +78,8 @@ class EventDispatchingListener
         return match ($entity::class) {
             RadioTable::class => new RadioTableUpdated($entity),
             RadioStation::class => new RadioStationUpdated($entity),
+            DigitalRadioStation::class => new DigitalRadioStationUpdated($entity),
+            Multiplex::class => new MultiplexUpdated($entity),
             User::class => new UserUpdated($entity, array_keys($unitOfWork->getEntityChangeSet($entity))),
             default => null,
         };
@@ -78,6 +90,8 @@ class EventDispatchingListener
         return match ($entity::class) {
             RadioTable::class => new RadioTableRemoved($entity),
             RadioStation::class => new RadioStationRemoved($entity),
+            DigitalRadioStation::class => new DigitalRadioStationRemoved($entity),
+            Multiplex::class => new MultiplexRemoved($entity),
             default => null,
         };
     }
