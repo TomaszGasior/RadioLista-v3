@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\DigitalMigration\EntityTrait\DigitalPropertiesSetterMigrationTrait;
 use App\Entity\Embeddable\RadioStation\Appearance;
+use App\Entity\Embeddable\RadioStation\Rds;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +29,7 @@ class DigitalRadioStation
         $this->name = $name;
         $this->multiplex = $multiplex;
 
+        $this->rds = new Rds;
         $this->appearance = new Appearance;
     }
 

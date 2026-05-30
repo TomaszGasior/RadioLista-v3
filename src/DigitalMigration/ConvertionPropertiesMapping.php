@@ -9,6 +9,8 @@ class ConvertionPropertiesMapping
         'Name',
         'Comment',
         'ExternalAnchor',
+        'RadioGroup',
+        'Region',
         'Country',
         'Location',
         'Power',
@@ -42,6 +44,7 @@ class ConvertionPropertiesMapping
         'Region',
         'PrivateNumber',
         'Type',
+        'Rds',
         'Appearance',
     ];
 

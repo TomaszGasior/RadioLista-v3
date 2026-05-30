@@ -23,6 +23,14 @@ trait NameableTrait
     #[Assert\Url(requireTld: false)]
     private ?string $externalAnchor = null;
 
+    #[ORM\Column(type: Types::STRING, length: 50, nullable: true)]
+    #[Assert\Length(max: 50)]
+    private ?string $radioGroup = null;
+
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    #[Assert\Length(max: 50)]
+    private ?string $region = null;
+
     #[ORM\Embedded(class: Appearance::class)]
     #[Assert\Valid]
     private Appearance $appearance;
@@ -59,6 +67,30 @@ trait NameableTrait
     public function setExternalAnchor(?string $externalAnchor): self
     {
         $this->externalAnchor = $externalAnchor;
+
+        return $this;
+    }
+
+    public function getRadioGroup(): ?string
+    {
+        return $this->radioGroup;
+    }
+
+    public function setRadioGroup(?string $radioGroup): self
+    {
+        $this->radioGroup = $radioGroup;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }

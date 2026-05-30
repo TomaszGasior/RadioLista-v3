@@ -7,7 +7,6 @@ use App\Entity\Embeddable\RadioStation\Appearance;
 use App\Entity\Embeddable\RadioStation\Rds;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Index(name: 'idx_sort_frequency', columns: ['radioTableId', 'frequency'])]
@@ -27,10 +26,6 @@ class RadioStation
     #[ORM\ManyToOne(targetEntity: RadioTable::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private RadioTable $radioTable;
-
-    #[ORM\Embedded(class: Rds::class)]
-    #[Assert\Valid]
-    private Rds $rds;
 
     public function __construct(string $frequency, string $name, RadioTable $radioTable)
     {
@@ -56,10 +51,5 @@ class RadioStation
     public function getRadioTable(): RadioTable
     {
         return $this->radioTable;
-    }
-
-    public function getRds(): Rds
-    {
-        return $this->rds;
     }
 }
