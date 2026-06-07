@@ -30,6 +30,7 @@ tasks:
     deploy:version:
         - cd: '{{release_path}}'
         - run: 'sed -i -e "s#__VER__#$(git -C {{deploy_path}}/.dep/repo describe --abbrev=3 {{target}})#" config/services.yaml'
+        - run: 'mv public/assets/__VER__ "public/assets/$(git -C {{deploy_path}}/.dep/repo describe --abbrev=3 {{target}})"'
 
     deploy:clear_opcache:
         - cd: '{{release_path}}'
